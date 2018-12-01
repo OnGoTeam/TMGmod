@@ -1,6 +1,7 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Misc|Grenadelauncher")]
     public class M72 : Gun
@@ -35,11 +36,11 @@ namespace TMGmod.src
         }
         public override void Update()
         {
-            if (ammo == 4) graphic = new Sprite(GetPath("M72a4"), 0f, 0f);
-            if (ammo == 3) graphic = new Sprite(GetPath("M72a3"), 0f, 0f);
-            if (ammo == 2) graphic = new Sprite(GetPath("M72a2"), 0f, 0f);
-            if (ammo == 1) graphic = new Sprite(GetPath("M72a1"), 0f, 0f);
-            if (ammo == 0) graphic = new Sprite(GetPath("M72a0"), 0f, 0f);
+            if (ammo == 4) graphic = new Sprite(GetPath("M72a4"));
+            if (ammo == 3) graphic = new Sprite(GetPath("M72a3"));
+            if (ammo == 2) graphic = new Sprite(GetPath("M72a2"));
+            if (ammo == 1) graphic = new Sprite(GetPath("M72a1"));
+            if (ammo == 0) graphic = new Sprite(GetPath("M72a0"));
             base.Update();
         }
     }

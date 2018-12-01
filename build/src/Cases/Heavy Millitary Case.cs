@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Custom_Guns;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class hpodarok : Holdable, IPlatform
+    public class Hpodarok : Holdable, IPlatform
     {
         private Type _contains;
 
-        public hpodarok (float xval, float yval)
+        public Hpodarok (float xval, float yval)
           : base(xval, yval)
         {
             graphic = new Sprite(GetPath("HeavyMillitaryCase"));
@@ -26,7 +28,7 @@ namespace TMGmod.src
 
 		public override void Initialize()
 	{
-		List<Type> things = new List<Type>()
+		var things = new List<Type>()
 	    {
         typeof(AKALFA),
         typeof(BarretM98),
@@ -37,7 +39,7 @@ namespace TMGmod.src
         typeof(MG3),	
         typeof(PPSh),	
         typeof(PPShC),
-        typeof(scargl),	
+        typeof(ScarGL),	
         typeof(SNR22),	
         typeof(SV99),	
         typeof(SVU),	
@@ -53,38 +55,30 @@ namespace TMGmod.src
 
 	public override void OnPressAction()
 	{
-		
-		if (owner != null)
-		{
-			Thing o = owner;
-			Duck d = duck;
-			if (d != null)
-			{
-				d.profile.stats.presentsOpened++;
-				duck.ThrowItem(true);
-			}
-			Level.Remove(this);
-			{
-				Initialize();
-			}
-			Holdable newThing = Editor.CreateThing(_contains) as Holdable;
-			if (newThing != null)
-			{
-				if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
-				{
-					(newThing as Gun).infiniteAmmoVal = true;
-					(newThing as Gun).infinite.value = true;
-				}
-				newThing.x = o.x;
-				newThing.y = o.y;
-				Level.Add(newThing);
-				if (d != null)
-				{
-					d.GiveHoldable(newThing);
-					d.resetAction = true;
-				}
-			}
-		}
+	    if (owner == null) return;
+	    var o = owner;
+	    var d = duck;
+	    if (d != null)
+	    {
+	        d.profile.stats.presentsOpened++;
+	        duck.ThrowItem();
+	    }
+	    Level.Remove(this);
+	    {
+	        Initialize();
+	    }
+	    if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
+	    if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
+	    {
+	        (newThing as Gun).infiniteAmmoVal = true;
+	        (newThing as Gun).infinite.value = true;
+	    }
+	    newThing.x = o.x;
+	    newThing.y = o.y;
+	    Level.Add(newThing);
+	    if (d == null) return;
+	    d.GiveHoldable(newThing);
+	    d.resetAction = true;
 	}
     }
 }

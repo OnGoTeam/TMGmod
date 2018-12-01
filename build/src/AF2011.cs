@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
+    // ReSharper disable once InconsistentNaming
     public class AF2011 : Gun
     {
         public AF2011 (float xval, float yval)
@@ -32,10 +34,7 @@ namespace TMGmod.src
             _editorName = "AF-2011";
 			weight = 2.5f;
         }
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
+
         public override void Fire()
         {
             

@@ -1,25 +1,26 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class scargl : Gun
+    // ReSharper disable once InconsistentNaming
+    public class ScarGL : Gun
     {
-        int ammo2;
-        AmmoType _ammoType2;
-        Sprite graphic1;
-        Sprite graphic2;
-        Vec2 _barrelOffsetTL2;
-		string _fireSound2;
-        float loseAccuracy2;
-        float maxAccuracyLost2;
-		bool switched = false;
+        private int _ammo2;
+        private AmmoType _ammoType2;
+        private Sprite _graphic2;
+        private Vec2 _barrelOffsetTl2;
+        private string _fireSound2;
+        private float _loseAccuracy2;
+        private float _maxAccuracyLost2;
+        private bool _switched;
 
-        public scargl (float xval, float yval)
+        public ScarGL (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 20;
-			ammo2 = 1;
+			_ammo2 = 1;
             _ammoType = new ATMagnum
             {
                 range = 900f,
@@ -38,13 +39,12 @@ namespace TMGmod.src
             };
             _type = "gun";
             graphic = new Sprite(GetPath("scargl"));
-            graphic1 = new Sprite(GetPath("scargl1"));
-            graphic2 = new Sprite(GetPath("scargl2"));
+            _graphic2 = new Sprite(GetPath("scargl2"));
             center = new Vec2(16.5f, 5f);
             collisionOffset = new Vec2(-16.5f, -5f);
             collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 3f);
-            _barrelOffsetTL2 = new Vec2(30f, 6.5f);
+            _barrelOffsetTl2 = new Vec2(30f, 6.5f);
             _holdOffset = new Vec2(2f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fireSound2 = "deepMachineGun";
@@ -52,9 +52,9 @@ namespace TMGmod.src
             _fireWait = 1.2f;
             _kickForce = 0.8f;
             loseAccuracy = 0.1f;
-            loseAccuracy2 = 0f;
+            _loseAccuracy2 = 0f;
             maxAccuracyLost = 0.2f;
-            maxAccuracyLost2 = 0f;
+            _maxAccuracyLost2 = 0f;
             _editorName = "SCAR-H With GL";
 			weight = 6f;
 
@@ -65,32 +65,32 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-						if (!switched)
+						if (!_switched)
 						{
-							switched = true;
+							_switched = true;
                             graphic = new Sprite(GetPath("scargl1"));
                         }
-    			        Sprite g2 = graphic2;
-                        graphic2 = graphic;
+    			        var g2 = _graphic2;
+                        _graphic2 = graphic;
                         graphic = g2;
-                        float la2 = loseAccuracy2;
-                        loseAccuracy2 = loseAccuracy;
+                        var la2 = _loseAccuracy2;
+                        _loseAccuracy2 = loseAccuracy;
                         loseAccuracy = la2;
-    			        float mal2 = maxAccuracyLost2;
-                        maxAccuracyLost2 = maxAccuracyLost;
+    			        var mal2 = _maxAccuracyLost2;
+                        _maxAccuracyLost2 = maxAccuracyLost;
                         maxAccuracyLost = mal2;
-                        Vec2 botl2 = _barrelOffsetTL2;
-                        _barrelOffsetTL2 = _barrelOffsetTL;
+                        var botl2 = _barrelOffsetTl2;
+                        _barrelOffsetTl2 = _barrelOffsetTL;
                         _barrelOffsetTL = botl2;
-                        int a2 = ammo2;
-                        ammo2 = ammo;
+                        var a2 = _ammo2;
+                        _ammo2 = ammo;
                         ammo = a2;
-                        AmmoType at2 = _ammoType2;
+                        var at2 = _ammoType2;
                         _ammoType2 = _ammoType;
                         _ammoType = at2;
-						string s2 = _fireSound2;
+						var s2 = _fireSound2;
 						_fireSound2 = _fireSound;
 						_fireSound = s2;
 					}
@@ -102,25 +102,25 @@ namespace TMGmod.src
         {
             if (ammo == 0)
             {
-                Sprite g2 = graphic2;
-                graphic2 = graphic;
+                var g2 = _graphic2;
+                _graphic2 = graphic;
                 graphic = g2;
-                float la2 = loseAccuracy2;
-                loseAccuracy2 = loseAccuracy;
+                var la2 = _loseAccuracy2;
+                _loseAccuracy2 = loseAccuracy;
                 loseAccuracy = la2;
-                float mal2 = maxAccuracyLost2;
-                maxAccuracyLost2 = maxAccuracyLost;
+                var mal2 = _maxAccuracyLost2;
+                _maxAccuracyLost2 = maxAccuracyLost;
                 maxAccuracyLost = mal2;
-                Vec2 botl2 = _barrelOffsetTL2;
-                _barrelOffsetTL2 = _barrelOffsetTL;
+                var botl2 = _barrelOffsetTl2;
+                _barrelOffsetTl2 = _barrelOffsetTL;
                 _barrelOffsetTL = botl2;
-                int a2 = ammo2;
-                ammo2 = ammo;
+                var a2 = _ammo2;
+                _ammo2 = ammo;
                 ammo = a2;
-                AmmoType at2 = _ammoType2;
+                var at2 = _ammoType2;
                 _ammoType2 = _ammoType;
                 _ammoType = at2;
-				string s2 = _fireSound2;
+				var s2 = _fireSound2;
 				_fireSound2 = _fireSound;
 				_fireSound = s2;
             }

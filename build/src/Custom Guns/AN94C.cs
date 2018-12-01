@@ -1,17 +1,18 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
+    // ReSharper disable once InconsistentNaming
     public class AN94C : Gun
     {
 
-        int _burstNumB = 0;
-        int _burstValue;
+        int _burstNumB;
+        readonly int _burstValue;
         float _bw = 5.1f;
-		
-		public EditorProperty<bool> laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+
+        private readonly EditorProperty<bool> _laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public AN94C(float xval, float yval)
             : base(xval, yval)
@@ -69,7 +70,7 @@ namespace TMGmod.src
         {
 			if (!(Level.current is Editor))
             {
-                if (laser.value == true)
+                if (_laser.value)
                 {
                  laserSight = true;
                 }

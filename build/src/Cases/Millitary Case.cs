@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Custom_Guns;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class mpodarok : Holdable, IPlatform
+    public class Mpodarok : Holdable, IPlatform
     {
         private Type _contains;
 
-        public mpodarok (float xval, float yval)
+        public Mpodarok (float xval, float yval)
           : base(xval, yval)
         {
             graphic = new Sprite(GetPath("MillitaryCase"));
@@ -26,12 +28,12 @@ namespace TMGmod.src
 
 		public override void Initialize()
 	{
-		List<Type> things = new List<Type>()
+		var things = new List<Type>()
 	    {
         typeof(AN94),
         typeof(AN94C),
-        typeof(aug),
-        typeof(cz805),	
+        typeof(Aug),
+        typeof(CZ805),	
         typeof(DragoShot),	
         typeof(Glock18),
         typeof(Glock18C),	
@@ -41,8 +43,8 @@ namespace TMGmod.src
         typeof(MG44C),	
         typeof(MP40),	
         typeof(P90),	
-        typeof(ussrgun),	
-        typeof(scarpdw),	
+        typeof(Ussrgun),	
+        typeof(Scarpdw),	
         typeof(SIX12),	
         typeof(SIX12C),	
         typeof(Vag),	
@@ -52,38 +54,30 @@ namespace TMGmod.src
 
 	public override void OnPressAction()
 	{
-		
-		if (owner != null)
-		{
-			Thing o = owner;
-			Duck d = duck;
-			if (d != null)
-			{
-				d.profile.stats.presentsOpened++;
-				duck.ThrowItem(true);
-			}
-			Level.Remove(this);
-			{
-				Initialize();
-			}
-			Holdable newThing = Editor.CreateThing(_contains) as Holdable;
-			if (newThing != null)
-			{
-				if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
-				{
-					(newThing as Gun).infiniteAmmoVal = true;
-					(newThing as Gun).infinite.value = true;
-				}
-				newThing.x = o.x;
-				newThing.y = o.y;
-				Level.Add(newThing);
-				if (d != null)
-				{
-					d.GiveHoldable(newThing);
-					d.resetAction = true;
-				}
-			}
-		}
+	    if (owner == null) return;
+	    var o = owner;
+	    var d = duck;
+	    if (d != null)
+	    {
+	        d.profile.stats.presentsOpened++;
+	        duck.ThrowItem();
+	    }
+	    Level.Remove(this);
+	    {
+	        Initialize();
+	    }
+	    if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
+	    if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
+	    {
+	        (newThing as Gun).infiniteAmmoVal = true;
+	        (newThing as Gun).infinite.value = true;
+	    }
+	    newThing.x = o.x;
+	    newThing.y = o.y;
+	    Level.Add(newThing);
+	    if (d == null) return;
+	    d.GiveHoldable(newThing);
+	    d.resetAction = true;
 	}
     }
 }

@@ -1,12 +1,14 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
+    // ReSharper disable once InconsistentNaming
     public class AKALFA : Gun
     {
-        private SpriteMap _sprite;
-        float stock = 0f;
+        private readonly SpriteMap _sprite;
+        float _stock;
 		
         public AKALFA (float xval, float yval)
           : base(xval, yval)
@@ -53,14 +55,14 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if ((stock > 0f))
+					  if (_stock > 0f)
 					    {
 					        _sprite.SetAnimation("base");
                             _ammoType.accuracy = 1f;
                             loseAccuracy = 0f;
-		                 	stock = 0f;
+		                 	_stock = 0f;
 						    weight = 5.5f;
 					    }
                       else
@@ -68,7 +70,7 @@ namespace TMGmod.src
 					        _sprite.SetAnimation("stock");
                             _ammoType.accuracy = 0.92f;
                             loseAccuracy = 0.045f;
-		                	stock = 1f;
+		                	_stock = 1f;
 						    weight = 3f;
 					    }
 					}

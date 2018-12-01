@@ -1,6 +1,7 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
     public class Deadly44C : Gun
@@ -36,7 +37,7 @@ namespace TMGmod.src
         }
 		public override void Update()
         {
-			if (ammo < 2) graphic = new Sprite(GetPath("44dbnonemore"), 0f, 0f);
+			if (ammo < 2) graphic = new Sprite(GetPath("44dbnonemore"));
             base.Update();
 	    } 
     }

@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Sniper|Custom")]
+    // ReSharper disable once InconsistentNaming
     public class SVUC : Gun
     {
         public SVUC (float xval, float yval)
@@ -30,10 +32,6 @@ namespace TMGmod.src
             _holdOffset = new Vec2(1f, 2f);
             _editorName = "SVU with Low Mag";
 			weight = 5f;
-        }
-        public override void Initialize()
-        {
-            base.Initialize();
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
-    public class augC : Gun
+    public class AugC : Gun
     {
-        public augC (float xval, float yval)
+        public AugC (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 30;

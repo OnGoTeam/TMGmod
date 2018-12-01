@@ -1,11 +1,14 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
+    // ReSharper disable once InconsistentNaming
     public class MAPFire : Gun
     {
-		bool glooshitel = false;
+        private bool _silencer;
 
         public MAPFire (float xval, float yval)
           : base(xval, yval)
@@ -41,9 +44,9 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if (glooshitel)
+					  if (_silencer)
 					    {
 				         graphic = new Sprite(GetPath("uzipro"));
                             _ammoType = new AT9mm
@@ -53,7 +56,7 @@ namespace TMGmod.src
                                 penetration = 3f
                             };
                             _barrelOffsetTL = new Vec2(11f, 3f);	
-						 glooshitel = false;
+						 _silencer = false;
                          _fireSound = GetPath("sounds/smg.wav");
 					    }
                       else
@@ -66,7 +69,7 @@ namespace TMGmod.src
                                 penetration = 2f
                             };
                             _barrelOffsetTL = new Vec2(17f, 3f);			 
-	 					 glooshitel = true;
+	 					 _silencer = true;
                          _fireSound = GetPath("sounds/SilencedPistol.wav");
 					    }
 					}

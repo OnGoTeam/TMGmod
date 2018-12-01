@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
-    public class mk20 : Gun
+    public class Mk20 : Gun
     {
-        public mk20 (float xval, float yval)
+        public Mk20 (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 20;
@@ -30,10 +31,6 @@ namespace TMGmod.src
             maxAccuracyLost = 0.3f;
             _editorName = "SCAR Mk20";
 			weight = 6.5f;
-        }
-        public override void Initialize()
-        {
-            base.Initialize();
         }
     }
 }

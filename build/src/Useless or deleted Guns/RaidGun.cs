@@ -1,6 +1,7 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGMod.src
+namespace TMGmod.Useless_or_deleted_Guns
 {
 
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", true)]
@@ -17,7 +18,7 @@ namespace TMGMod.src
                 range = 250f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("RaidGun"), 0f, 0f);
+            graphic = new Sprite(GetPath("RaidGun"));
             center = new Vec2(12f, 3f);
             collisionOffset = new Vec2(-12f, -3f);
             collisionSize = new Vec2(24f, 6f);

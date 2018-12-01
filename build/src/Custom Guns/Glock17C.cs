@@ -1,6 +1,7 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|AutoPistol|Custom")]
     public class Glock18C : Gun
@@ -31,9 +32,5 @@ namespace TMGmod.src
             _editorName = "Glock 18 with Extended Mag";
 			weight = 2.5f;
         }
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-	}
+    }
 }

@@ -1,13 +1,12 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     public class BarretM98 : Sniper
     {
-		
-		public EditorProperty<bool> shortened = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+        private readonly EditorProperty<bool> _shortened = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
@@ -32,7 +31,7 @@ namespace TMGmod.src
 
         public override void Draw()
         {
-            float ang = angle;
+            var ang = angle;
             if (offDir <= 0)
             {
                 angle = angle + _angleOffset;
@@ -79,11 +78,11 @@ namespace TMGmod.src
                 {
                     if (!Network.isActive)
                     {
-                        SFX.Play("loadSniper", 1f, 0f, 0f, false);
+                        SFX.Play("loadSniper");
                     }
                     else if (isServerForObject)
                     {
-                        _netLoad.Play(1f, 0f);
+                        _netLoad.Play();
                     }
                     Sniper sniper = this;
                     sniper._loadState = sniper._loadState + 1;
@@ -107,7 +106,7 @@ namespace TMGmod.src
                     {
                         Sniper sniper2 = this;
                         sniper2._loadState = sniper2._loadState + 1;
-                        Reload(true);
+                        Reload();
                         loaded = false;
                     }
                 }
@@ -141,7 +140,7 @@ namespace TMGmod.src
         {
 			if (!(Level.current is Editor))
             {
-                if (shortened.value == true)
+                if (_shortened.value)
                 {
                  _ammoType.accuracy = 0.9f;
 			     weight = 6.5f;

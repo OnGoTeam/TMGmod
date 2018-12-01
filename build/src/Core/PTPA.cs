@@ -1,7 +1,8 @@
 ﻿using DuckGame;
 
-namespace TMGMod.src
+namespace TMGmod.Core
 {
+    // ReSharper disable once InconsistentNaming
     public class PTPA : AmmoType
     {
         public PTPA()
@@ -17,7 +18,7 @@ namespace TMGMod.src
         {
             Level.Add(new PistolShell(x, y)
             {
-                hSpeed = (float)dir * (1.5f + Rando.Float(1f))
+                hSpeed = dir * (1.5f + Rando.Float(1f))
             });
         }
     }

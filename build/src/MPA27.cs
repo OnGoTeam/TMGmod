@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
+    // ReSharper disable once InconsistentNaming
     public class MPA27 : Gun
     {
         public MPA27(float xval, float yval)

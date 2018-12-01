@@ -1,18 +1,19 @@
 using System;
 using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
 [EditorGroup("TMG|Shotgun")]
 public class Remington : Gun
 {
-	public sbyte _loadProgress = 100;
+    private sbyte _loadProgress = 100;
 
-	public float _loadAnimation = 1f;
+    private float _loadAnimation = 1f;
 
-	public StateBinding _loadProgressBinding = new StateBinding("_loadProgress", -1, false, false);
+	//public StateBinding _loadProgressBinding = new StateBinding("_loadProgress");
 
-	protected SpriteMap _loaderSprite;
+    private readonly SpriteMap _loaderSprite;
 
 	public Remington(float xval, float yval)
 		: base(xval, yval)
@@ -38,7 +39,7 @@ public class Remington : Gun
         _ammoType.bulletThickness = 0.6f;
 		_manualLoad = true;
         _fireWait = 5f;
-            _loaderSprite = new SpriteMap((GetPath("RemingtonPimp")), 6, 8, false)
+            _loaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
             {
                 center = new Vec2(3f, 4f)
             };
@@ -48,14 +49,14 @@ public class Remington : Gun
 	public override void Update()
 	{
 		base.Update();
-		if (_loadAnimation == -1f)
+		if (Math.Abs(_loadAnimation - (-1f)) < 0.01f)
 		{
-			SFX.Play("shotgunLoad", 1f, 0f, 0f, false);
+			SFX.Play("shotgunLoad");
 			_loadAnimation = 0f;
 		}
 		if (_loadAnimation >= 0f)
 		{
-			if (_loadAnimation == 0.5f && ammo != 0)
+			if (Math.Abs(_loadAnimation - 0.5f) < 0.01f && ammo != 0)
 			{
 				_ammoType.PopShell(x, y, -offDir);
 			}
@@ -103,9 +104,9 @@ public class Remington : Gun
 	public override void Draw()
 	{
 		base.Draw();
-		Vec2 bOffset = new Vec2(18f, -5f);
-		float offset = (float)Math.Sin((double)(_loadAnimation * 3.14f)) * 3f;
-		base.Draw(_loaderSprite, new Vec2(bOffset.x - 8f - offset, bOffset.y + 4f), 1);
+		var bOffset = new Vec2(18f, -5f);
+		var offset = (float)Math.Sin(_loadAnimation * 3.14f) * 3f;
+		base.Draw(_loaderSprite, new Vec2(bOffset.x - 8f - offset, bOffset.y + 4f));
 	}
 }
 }

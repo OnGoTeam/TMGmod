@@ -1,11 +1,13 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
     public class Nellegalja : Gun
     {
-		bool laser = false;
+        private bool _laser;
 		
         public Nellegalja (float xval, float yval)
           : base(xval, yval)
@@ -40,17 +42,17 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if (laser)
+					  if (_laser)
 					    {
                          laserSight = true;
-						 laser = false;
+						 _laser = false;
 					    }
                       else
 					    {
                          laserSight = false;
-						 laser = true;
+						 _laser = true;
 					    }
 					}
 				}

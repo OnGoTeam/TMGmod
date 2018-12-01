@@ -1,8 +1,11 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Useless_or_deleted_Guns
 {
     [BaggedProperty("canSpawn", false)]
+    // ReSharper disable once InconsistentNaming
     public class MAPF : Gun
     {
         public MAPF(float xval, float yval)
@@ -33,20 +36,7 @@ namespace TMGmod.src
             _editorName = "FEUERFREI";
 			weight = 2.5f;
         }
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
 
-        public override void Update()
-        {
-            base.Update();
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
-        }
         /*public override void OnPressAction()
         {
             base.OnPressAction();
@@ -82,10 +72,10 @@ namespace TMGmod.src
                 ApplyKick();
                 if (!receivingPress && isServerForObject)
                 {
-                    Vec2 pos = Offset(barrelOffset);
-                    MF d = new MF(pos.x, pos.y, this, 8);
+                    var pos = Offset(barrelOffset);
+                    var d = new MF(pos.x, pos.y, this);
                     Fondle(d);
-                    Vec2 travelDir = Maths.AngleToVec(barrelAngle);
+                    var travelDir = Maths.AngleToVec(barrelAngle);
                     d.hSpeed = travelDir.x * 14f;
                     d.vSpeed = travelDir.y * 14f;
                     Level.Add(d);

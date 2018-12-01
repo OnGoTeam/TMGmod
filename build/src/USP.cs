@@ -1,13 +1,16 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
-    public class usp : Gun
+    // ReSharper disable once InconsistentNaming
+    public class USP : Gun
     {
-		bool glooshitel = false;
+        private bool _silencer;
 
-        public usp(float xval, float yval)
+        public USP(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 13;
@@ -38,9 +41,9 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if (glooshitel)
+					  if (_silencer)
 					    {
 				         graphic = new Sprite(GetPath("USP"));
                          _fireSound = GetPath("sounds/1.wav");
@@ -50,7 +53,7 @@ namespace TMGmod.src
                                 accuracy = 0.8f
                             };
                             _barrelOffsetTL = new Vec2(15f, 3f);	
-						 glooshitel = false;
+						 _silencer = false;
 					    }
                       else
 					    {
@@ -62,7 +65,7 @@ namespace TMGmod.src
                                 accuracy = 0.9f
                             };
                             _barrelOffsetTL = new Vec2(23f, 3f);			 
-						 glooshitel = true;
+						 _silencer = true;
 					    }
 					}
 				}

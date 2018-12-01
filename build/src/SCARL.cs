@@ -1,12 +1,13 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class scarl : Gun
+    public class Scarl : Gun
     {
 		
-        public scarl (float xval, float yval)
+        public Scarl (float xval, float yval)
           : base(xval, yval)
 		{
             ammo = 30;
@@ -38,7 +39,7 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
 					  if (_fullAuto)
 					    {

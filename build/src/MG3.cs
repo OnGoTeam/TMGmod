@@ -1,11 +1,13 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
+    // ReSharper disable once InconsistentNaming
     public class MG3 : Gun
     {
-		bool bipodes = false;
+        private bool _bipodes;
 		
 		public MG3 (float xval, float yval)
           : base(xval, yval)
@@ -41,7 +43,7 @@ namespace TMGmod.src
 				loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
 				graphic = new Sprite(GetPath("mg3bipods"));
-				bipodes = true;
+				_bipodes = true;
             }
             else
             {
@@ -49,11 +51,11 @@ namespace TMGmod.src
                 loseAccuracy = 0.025f;
                 maxAccuracyLost = 0.1f;
 				graphic = new Sprite(GetPath("mg3"));
-				bipodes = false;
+				_bipodes = false;
             }
             base.Update();
-			if ((ammo == 0) && (bipodes == false)) graphic = new Sprite(GetPath("mg31"), 0f, 0f);
-			if ((ammo == 0) && (bipodes == true)) graphic = new Sprite(GetPath("mg3bipods1"), 0f, 0f);
+			if (ammo == 0 && !_bipodes) graphic = new Sprite(GetPath("mg31"));
+			if (ammo == 0 && _bipodes) graphic = new Sprite(GetPath("mg3bipods1"));
         }
 	}
 }	

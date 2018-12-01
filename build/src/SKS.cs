@@ -1,13 +1,16 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
+    // ReSharper disable once InconsistentNaming
     public class SKS : Gun
     {
-		int patrons = 16;
-		int bullets = 0;
-		bool stick = false;
+        private int _patrons = 16;
+        private int _bullets;
+        private bool _stick;
 		
         public SKS (float xval, float yval)
           : base(xval, yval)
@@ -43,7 +46,7 @@ namespace TMGmod.src
 		    base.Update();
 			if (ammo < 17)
 			{
-			    patrons = ammo;	
+			    _patrons = ammo;	
 			}
             if (owner != null)
             {
@@ -53,11 +56,11 @@ namespace TMGmod.src
 					{
 						 if (ammo < 17)
 						 {
-							patrons = ammo;
-							bullets = patrons + 20;
+							_patrons = ammo;
+							_bullets = _patrons + 20;
 						    ammo += 20;
 						 }
-                        _flare = new SpriteMap((GetPath("takezis")), 4, 4, false)
+                        _flare = new SpriteMap(GetPath("takezis"), 4, 4)
                         {
                             center = new Vec2(0f, 0f)
                         };
@@ -71,20 +74,20 @@ namespace TMGmod.src
                         maxAccuracyLost = 0f;
                         _ammoType.bulletThickness = 0.1f;
                         _kickForce = 0f;
-						stick = true;
+						_stick = true;
 				        Fire();
 					}
                     if (duck.inputProfile.Down("QUACK"))
 					    {
 						_holdOffset = new Vec2(17f, 0f);
-						if (ammo < bullets)
+						if (ammo < _bullets)
 					        {
 								ammo += 1;
 							}
 					    }
                     if (duck.inputProfile.Released("QUACK"))
 					    {
-						ammo = patrons;
+						ammo = _patrons;
                         _ammoType = new AT9mm
                         {
                             range = 900f,
@@ -102,11 +105,11 @@ namespace TMGmod.src
                         maxAccuracyLost = 0.8f;
                         _ammoType.bulletThickness = 1f;
                         _kickForce = 0.6f;
-                        _flare = new SpriteMap("smallFlare", 11, 10, false)
+                        _flare = new SpriteMap("smallFlare", 11, 10)
                         {
                             center = new Vec2(0f, 4f)
                         };
-                        stick = false;
+                        _stick = false;
 					    }
 			    }
 			}
@@ -115,7 +118,7 @@ namespace TMGmod.src
         {
 			if (ammo != 0)
 			{           
-						ammo = patrons;
+						ammo = _patrons;
                 _ammoType = new AT9mm
                 {
                     range = 900f,
@@ -133,12 +136,12 @@ namespace TMGmod.src
                         maxAccuracyLost = 0.8f;
                         _ammoType.bulletThickness = 1f;
                         _kickForce = 0.6f;
-                _flare = new SpriteMap("smallFlare", 11, 10, false)
+                _flare = new SpriteMap("smallFlare", 11, 10)
                 {
                     center = new Vec2(0f, 4f)
                 };
             }
-			if ((stick = true) && (patrons == 0))
+			if (_stick && _patrons == 0)
 			{
 				ammo = 0;
 			}

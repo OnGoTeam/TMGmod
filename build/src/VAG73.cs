@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|AutoPistol")]
     public class Vag : Gun
     {
-		float mode = 1f;
+        private float _mode = 1f;
 		
 		public Vag(float xval, float yval)
           : base(xval, yval)
@@ -40,25 +41,25 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if ((mode > 0f) && (mode < 2f))
+					  if (_mode > 0f && _mode < 2f)
 					    {
 				         graphic = new Sprite(GetPath("VAG732"));
 						 _fireWait = 0.6f;
-						 mode = 2f;
+						 _mode = 2f;
 					    }
-                      else if ((mode > 1f) && (mode < 3f))
+                      else if (_mode > 1f && _mode < 3f)
 					    {
 				         graphic = new Sprite(GetPath("VAG733"));
 						 _fireWait = 0.9f;
-						 mode = 3f;
+						 _mode = 3f;
 					    }
-                      else if ((mode > 2f) && (mode < 4f))
+                      else if (_mode > 2f && _mode < 4f)
 					    {
 				         graphic = new Sprite(GetPath("VAG731"));
 						 _fireWait = 0.3f;
-						 mode = 1f;
+						 _mode = 1f;
 					    }
 					}
 				}

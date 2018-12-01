@@ -1,12 +1,15 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
+    // ReSharper disable once InconsistentNaming
     public class CZ75 : Gun
     {
-		private SpriteMap _sprite;
-        private int fdelay = 0;
+		private readonly SpriteMap _sprite;
+        private int _fdelay;
         public CZ75(float xval, float yval)
           : base(xval, yval)
         {
@@ -18,7 +21,7 @@ namespace TMGmod.src
                 penetration = 0f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("CZ75a"), 12, 8, false);
+            _sprite = new SpriteMap(GetPath("CZ75a"), 12, 8);
             graphic = _sprite;
             center = new Vec2(8f, 3f);
             collisionOffset = new Vec2(-7.5f, -3.5f);
@@ -45,7 +48,7 @@ namespace TMGmod.src
 
         public override void OnPressAction()
         {
-            if (((ammo > 0 && _sprite.currentAnimation == "haventmagaz") || (ammo > 12 && _sprite.currentAnimation == "havemagaz")) && fdelay == 0)
+            if ((ammo > 0 && _sprite.currentAnimation == "haventmagaz" || ammo > 12 && _sprite.currentAnimation == "havemagaz") && _fdelay == 0)
             {
                 Fire();
             }
@@ -65,21 +68,21 @@ namespace TMGmod.src
                     else
                         Level.Add(new Czmag(x - 5, y));
                     _sprite.SetAnimation("haventmagaz");
-                    fdelay = 40;
+                    _fdelay = 40;
                 }
             }            
         }
         public override void Update()
         {
             base.Update();
-            if (fdelay > 1)
+            if (_fdelay > 1)
             {
-                fdelay -= 1;
+                _fdelay -= 1;
             }
-            else if (fdelay == 1)
+            else if (_fdelay == 1)
             {
                 SFX.Play("click");
-                fdelay -= 1;
+                _fdelay -= 1;
             }
         }
     }

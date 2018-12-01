@@ -1,12 +1,13 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
+    // ReSharper disable once InconsistentNaming
     public class SIX12 : Gun
     {
-		
-		public EditorProperty<bool> laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+        private readonly EditorProperty<bool> _laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
 		public SIX12 (float xval, float yval)
           : base(xval, yval)
@@ -42,7 +43,7 @@ namespace TMGmod.src
         {
 			if (!(Level.current is Editor))
             {
-                if (laser.value)
+                if (_laser.value)
                 {
                  laserSight = true;
 				 graphic = new Sprite(GetPath("SIX12laser2"));

@@ -1,7 +1,8 @@
 using DuckGame;
 
-namespace TMGmod.src
+namespace TMGmod.Core
 {
+    // ReSharper disable once InconsistentNaming
     public class AT9mmS : AmmoType
     {
         public AT9mmS()

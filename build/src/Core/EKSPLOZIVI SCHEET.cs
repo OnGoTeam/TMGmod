@@ -1,35 +1,33 @@
 ﻿using DuckGame;
 
-namespace TMGmod.src
+namespace TMGmod.Core
 {
-    public class explode : Bullet
+    public class Explode : Bullet
     {
-        public explode(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)
+        public Explode(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)
             : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
         {
             _tracer = false;
         }
         protected override void OnHit(bool destroyed)
         {
-            if (destroyed)
+            if (!destroyed) return;
+            var ins = new ExplosionPart(x, y);
+            ins.xscale *= 0.7f;
+            ins.yscale *= 0.7f;
+            Level.Add(ins);
+            SFX.Play("magPop", 0.7f, Rando.Float(-0.5f, -0.3f));
+            //Thing bulletOwner = this.owner;
+            var things = Level.CheckCircleAll<MaterialThing>(position, 30f);
+            foreach (var t in things)
             {
-                ExplosionPart ins = new ExplosionPart(x, y, true);
-                ins.xscale *= 0.7f;
-                ins.yscale *= 0.7f;
-                Level.Add(ins);
-                SFX.Play("magPop", 0.7f, Rando.Float(-0.5f, -0.3f), 0f, false);
-                //Thing bulletOwner = this.owner;
-                System.Collections.Generic.IEnumerable<MaterialThing> things = Level.CheckCircleAll<MaterialThing>(position, 30f);
-                foreach (MaterialThing t in things)
-                {
-                    t.Destroy(new DTShot(this));
-                }
+                t.Destroy(new DTShot(this));
             }
         }
 
         protected override void Rebound(Vec2 pos, float dir, float rng)
         {
-            explode bullet = new explode(pos.x, pos.y, ammo, dir, null, rebound, rng, false, false)
+            var bullet = new Explode(pos.x, pos.y, ammo, dir, null, rebound, rng)
             {
                 _teleporter = _teleporter,
                 firedFrom = firedFrom

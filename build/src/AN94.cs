@@ -1,19 +1,20 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
+    // ReSharper disable once InconsistentNaming
     public class AN94 : Gun
     {
-        private SpriteMap _sprite;
+        private readonly SpriteMap _sprite;
 
-        int _burstNumB = 0;
-        int _burstValue;
-        float _bw = 5.1f;
-		
-		bool stock = false;
-		public EditorProperty<bool> laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+        private int _burstNumB;
+        private readonly int _burstValue;
+        private float _bw = 5.1f;
+
+        private bool _stock;
+        private readonly EditorProperty<bool> _laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public AN94(float xval, float yval)
             : base(xval, yval)
@@ -71,15 +72,15 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					    if (stock)
+					    if (_stock)
 					    {
                             loseAccuracy = 0.15f;
 						    weight = 5.5f;
 					        _sprite.SetAnimation("base");
                             maxAccuracyLost = 0.1f;
-						    stock = false;
+						    _stock = false;
 					    }
                         else
 					    {
@@ -87,7 +88,7 @@ namespace TMGmod.src
 				            weight = 2.75f;
 					        _sprite.SetAnimation("stock");
                             maxAccuracyLost = 0.3f;
-						    stock = true;
+						    _stock = true;
 					    }
 					}
 				}
@@ -106,7 +107,7 @@ namespace TMGmod.src
         {
 			if (!(Level.current is Editor))
             {
-                if (laser.value == true)
+                if (_laser.value)
                 {
                  laserSight = true;
                 }

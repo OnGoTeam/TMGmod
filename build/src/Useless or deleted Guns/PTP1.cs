@@ -1,9 +1,13 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
-namespace TMGMod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod.Useless_or_deleted_Guns
 {
     
     [BaggedProperty("isInDemo", true)]
+    // ReSharper disable once InconsistentNaming
 	public class PTP1 : Gun
 	{
 
@@ -13,7 +17,7 @@ namespace TMGMod.src
             ammo = 30;
             _ammoType = new PTPA();
             _type = "gun";
-            graphic = new Sprite(GetPath("PTP1"), 0f, 0f);
+            graphic = new Sprite(GetPath("PTP1"));
             center = new Vec2(8f, 4f);
             collisionOffset = new Vec2(-8f, -2f);
             collisionSize = new Vec2(16f, 8f);

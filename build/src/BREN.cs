@@ -1,13 +1,17 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
-namespace TMGmod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class cz805 : Gun
+    // ReSharper disable once InconsistentNaming
+    public class CZ805 : Gun
     {
-		float silencer = 0f;
+        private bool _silencer;
 		
-        public cz805 (float xval, float yval)
+        public CZ805 (float xval, float yval)
           : base(xval, yval)
 		{
             ammo = 30;
@@ -39,9 +43,9 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					    if ((silencer > 0f))
+					    if (_silencer)
 					    {
 				            graphic = new Sprite(GetPath("CZ805Bren"));
                             _fireSound = "deepMachineGun2";
@@ -53,7 +57,7 @@ namespace TMGmod.src
                             loseAccuracy = 0.025f;
                             maxAccuracyLost = 0.2f;
                             _barrelOffsetTL = new Vec2(39f, 4f);
-			                silencer = 0f;
+			                _silencer = !_silencer;
 					    }
                         else
 					    {
@@ -67,21 +71,21 @@ namespace TMGmod.src
                             loseAccuracy = 0.02f;
                             maxAccuracyLost = 0.18f;
                             _barrelOffsetTL = new Vec2(42.5f, 4f);
-			                silencer = 1f;
+			                _silencer = !_silencer;
 					    }
 					}
 				}
 			}
 		    base.Update();
-			if ((ammo < 28) && (silencer == 0f)) graphic = new Sprite(GetPath("CZ805Bren1"), 0f, 0f);
-			if ((ammo < 20) && (silencer == 0f)) graphic = new Sprite(GetPath("CZ805Bren2"), 0f, 0f);
-			if ((ammo < 12) && (silencer == 0f)) graphic = new Sprite(GetPath("CZ805Bren3"), 0f, 0f);
-			if ((ammo < 5) && (silencer == 0f)) graphic = new Sprite(GetPath("CZ805Bren4"), 0f, 0f);
+			if (ammo < 28 && !_silencer) graphic = new Sprite(GetPath("CZ805Bren1"));
+			if (ammo < 20 && !_silencer) graphic = new Sprite(GetPath("CZ805Bren2"));
+			if (ammo < 12 && !_silencer) graphic = new Sprite(GetPath("CZ805Bren3"));
+			if (ammo < 5 && !_silencer) graphic = new Sprite(GetPath("CZ805Bren4"));
 		//silenced version
-			if ((ammo < 28) && (silencer == 1f)) graphic = new Sprite(GetPath("CZ805BrenS1"), 0f, 0f);
-			if ((ammo < 20) && (silencer == 1f)) graphic = new Sprite(GetPath("CZ805BrenS2"), 0f, 0f);
-			if ((ammo < 12) && (silencer == 1f)) graphic = new Sprite(GetPath("CZ805BrenS3"), 0f, 0f);
-			if ((ammo < 5) && (silencer == 1f)) graphic = new Sprite(GetPath("CZ805BrenS4"), 0f, 0f);
+			if (ammo < 28 && _silencer) graphic = new Sprite(GetPath("CZ805BrenS1"));
+			if (ammo < 20 && _silencer) graphic = new Sprite(GetPath("CZ805BrenS2"));
+			if (ammo < 12 && _silencer) graphic = new Sprite(GetPath("CZ805BrenS3"));
+			if (ammo < 5 && _silencer) graphic = new Sprite(GetPath("CZ805BrenS4"));
 		}			
 	}
 }

@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
+    // ReSharper disable once InconsistentNaming
     public class SIX12C : Gun
     {
 		
@@ -36,9 +38,5 @@ namespace TMGmod.src
             _editorName = "SIX12 with Laser";
 			weight = 4f;
         }
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-	}
+    }
 }

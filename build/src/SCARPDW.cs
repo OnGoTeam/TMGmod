@@ -1,13 +1,14 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class scarpdw : Gun
+    public class Scarpdw : Gun
     {
-		bool upirka = false;
+        private bool _upirka;
 		
-        public scarpdw (float xval, float yval)
+        public Scarpdw (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 30;
@@ -39,15 +40,15 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if (upirka)
+					  if (_upirka)
 					    {
 				         graphic = new Sprite(GetPath("scarpdwstock"));
                          loseAccuracy = 0.1f;
 				         maxAccuracyLost = 0.2f;
 			             weight = 5.5f;
-						 upirka = false;
+						 _upirka = false;
 					    }
                       else
 					    {
@@ -55,7 +56,7 @@ namespace TMGmod.src
                          loseAccuracy = 0.3f;
 				         maxAccuracyLost = 0.5f;
 			             weight = 3f;
-						 upirka = true;
+						 _upirka = true;
 					    }
 					}
 				}

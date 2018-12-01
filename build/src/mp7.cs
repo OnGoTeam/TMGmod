@@ -1,9 +1,12 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    // ReSharper disable once InconsistentNaming
     public class MP7 : Gun
     {
         /*public float _angleOffset;
@@ -30,7 +33,7 @@ namespace TMGmod.src
                 accuracy = 0.9f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("MP7"), 0f, 0f);
+            graphic = new Sprite(GetPath("MP7"));
             center = new Vec2(12f, 4f);
             collisionOffset = new Vec2(-12f, -4f);
             collisionSize = new Vec2(20f, 10f);

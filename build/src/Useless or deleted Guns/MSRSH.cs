@@ -1,38 +1,37 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-
-namespace TMGmod.src
+namespace TMGmod.Useless_or_deleted_Guns
 {
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", false)]
+    // ReSharper disable once InconsistentNaming
     public class MSRC : Sniper
     {
-        int ammo2;
-        AmmoType _ammoType2;
-        Sprite graphic1;
-        Sprite graphic2;
-        Vec2 _barrelOffsetTL2;
-		string _fireSound2;
-        float loseAccuracy2;
-        float maxAccuracyLost2;
-        int _numBulletsPerFire2;
-		bool switched = false;
-		bool _fullAuto2 = false;
-		bool drobovik = false;
-		bool snuper = true;
+        private int _ammo2;
+        private AmmoType _ammoType2;
+        private Sprite _graphic2;
+        private Vec2 _barrelOffsetTl2;
+        private string _fireSound2;
+        private float _loseAccuracy2;
+        private float _maxAccuracyLost2;
+        private int _numBulletsPerFire2;
+        private bool _switched;
+        private bool _fullAuto2;
+        private bool _drobovik;
+        private bool _snuper = true;
 	//Are you see that? This is a sniper rifle with underbarrel shotgun. But it does not work. R.I.P.
     //Wait.. what are you doing here?!	
         public MSRC(float xval, float yval) : base(xval, yval)
         {
             graphic = new Sprite(GetPath("MSRSH"));
-            graphic1 = new Sprite(GetPath("MSRSH1"));
-            graphic2 = new Sprite(GetPath("MSRSH2"));
+            _graphic2 = new Sprite(GetPath("MSRSH2"));
             center = new Vec2(28.5f, 6f);
             collisionOffset = new Vec2(-28.5f, -6f);
             collisionSize = new Vec2(47f, 12f);
             _barrelOffsetTL = new Vec2(48f, 5f);
-            _barrelOffsetTL2 = new Vec2(14f, 6f);
+            _barrelOffsetTl2 = new Vec2(14f, 6f);
             ammo = 5;
-			ammo2 = 4;
+			_ammo2 = 4;
             _ammoType = new ATSniper
             {
                 bulletSpeed = 85f
@@ -54,9 +53,9 @@ namespace TMGmod.src
             _fireWait = 2f;
             laserSight = false;
             loseAccuracy = 0f;
-            loseAccuracy2 = 0f;
+            _loseAccuracy2 = 0f;
             maxAccuracyLost = 0f;
-            maxAccuracyLost2 = 0f;
+            _maxAccuracyLost2 = 0f;
             _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(14f, -1f);
             _editorName = "MSR With SH";
@@ -67,7 +66,7 @@ namespace TMGmod.src
 
         public override void Draw()
         {
-            float ang = angle;
+            var ang = angle;
             if (offDir <= 0)
             {
                 angle = angle + _angleOffset;
@@ -88,7 +87,7 @@ namespace TMGmod.src
                 base.OnPressAction();
                 return;
             }
-            if (ammo > 0 && _loadState == -1 && drobovik == false && snuper == true)
+            if (ammo > 0 && _loadState == -1 && _drobovik == false && _snuper)
             {
                 _loadState = 0;
                 _loadAnimation = 0;
@@ -98,7 +97,7 @@ namespace TMGmod.src
         public override void Update()
         {
             base.Update();
-            if (_loadState > -1 && drobovik == false && snuper == true)
+            if (_loadState > -1 && _drobovik == false && _snuper)
             {
                 if (owner == null)
                 {
@@ -114,11 +113,11 @@ namespace TMGmod.src
                 {
                     if (!Network.isActive)
                     {
-                        SFX.Play("loadSniper", 1f, 0f, 0f, false);
+                        SFX.Play("loadSniper");
                     }
                     else if (isServerForObject)
                     {
-                        _netLoad.Play(1f, 0f);
+                        _netLoad.Play();
                     }
                     Sniper sniper = this;
                     sniper._loadState = sniper._loadState + 1;
@@ -142,7 +141,7 @@ namespace TMGmod.src
                     {
                         Sniper sniper2 = this;
                         sniper2._loadState = sniper2._loadState + 1;
-                        Reload(true);
+                        Reload();
                         loaded = false;
                     }
                 }
@@ -175,43 +174,43 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-						if (!switched)
+						if (!_switched)
 						{
-							switched = true;
+							_switched = true;
                             graphic = new Sprite(GetPath("MSRSH1"));
                         }
-    			        Sprite g2 = graphic2;
-                        graphic2 = graphic;
+    			        var g2 = _graphic2;
+                        _graphic2 = graphic;
                         graphic = g2;
-                        float la2 = loseAccuracy2;
-                        loseAccuracy2 = loseAccuracy;
+                        var la2 = _loseAccuracy2;
+                        _loseAccuracy2 = loseAccuracy;
                         loseAccuracy = la2;
-    			        float mal2 = maxAccuracyLost2;
-                        maxAccuracyLost2 = maxAccuracyLost;
+    			        var mal2 = _maxAccuracyLost2;
+                        _maxAccuracyLost2 = maxAccuracyLost;
                         maxAccuracyLost = mal2;
-    			        int fak = _numBulletsPerFire2;
+    			        var fak = _numBulletsPerFire2;
                         _numBulletsPerFire2 = _numBulletsPerFire;
                         _numBulletsPerFire = fak;
-                        Vec2 botl2 = _barrelOffsetTL2;
-                        _barrelOffsetTL2 = _barrelOffsetTL;
+                        var botl2 = _barrelOffsetTl2;
+                        _barrelOffsetTl2 = _barrelOffsetTL;
                         _barrelOffsetTL = botl2;
-                        int a2 = ammo2;
-                        ammo2 = ammo;
+                        var a2 = _ammo2;
+                        _ammo2 = ammo;
                         ammo = a2;
-                        AmmoType at2 = _ammoType2;
+                        var at2 = _ammoType2;
                         _ammoType2 = _ammoType;
                         _ammoType = at2;
-						string s2 = _fireSound2;
+						var s2 = _fireSound2;
 						_fireSound2 = _fireSound;
 						_fireSound = s2;
-                        bool autonik = _fullAuto2;
+                        var autonik = _fullAuto2;
                         _fullAuto2 = _fullAuto;
                         _fullAuto = autonik;
-                        bool stupidshit = snuper;
-                        snuper = drobovik;
-                        drobovik = stupidshit;
+                        var stupidshit = _snuper;
+                        _snuper = _drobovik;
+                        _drobovik = stupidshit;
 					}
 				}
 			}
@@ -221,36 +220,36 @@ namespace TMGmod.src
         {
             if (ammo == 0)
             {
-                Sprite g2 = graphic2;
-                graphic2 = graphic;
+                var g2 = _graphic2;
+                _graphic2 = graphic;
                 graphic = g2;
-                float la2 = loseAccuracy2;
-                loseAccuracy2 = loseAccuracy;
+                var la2 = _loseAccuracy2;
+                _loseAccuracy2 = loseAccuracy;
                 loseAccuracy = la2;
-                float mal2 = maxAccuracyLost2;
-                maxAccuracyLost2 = maxAccuracyLost;
+                var mal2 = _maxAccuracyLost2;
+                _maxAccuracyLost2 = maxAccuracyLost;
                 maxAccuracyLost = mal2;
-    			int fak = _numBulletsPerFire2;
+    			var fak = _numBulletsPerFire2;
                 _numBulletsPerFire2 = _numBulletsPerFire;
                 _numBulletsPerFire = fak;
-                Vec2 botl2 = _barrelOffsetTL2;
-                _barrelOffsetTL2 = _barrelOffsetTL;
+                var botl2 = _barrelOffsetTl2;
+                _barrelOffsetTl2 = _barrelOffsetTL;
                 _barrelOffsetTL = botl2;
-                int a2 = ammo2;
-                ammo2 = ammo;
+                var a2 = _ammo2;
+                _ammo2 = ammo;
                 ammo = a2;
-                AmmoType at2 = _ammoType2;
+                var at2 = _ammoType2;
                 _ammoType2 = _ammoType;
                 _ammoType = at2;
-				string s2 = _fireSound2;
+				var s2 = _fireSound2;
 				_fireSound2 = _fireSound;
 				_fireSound = s2;
-                bool autonik = _fullAuto2;
+                var autonik = _fullAuto2;
                 _fullAuto2 = _fullAuto;
                 _fullAuto = autonik;
-                bool stupidshit = snuper;
-                snuper = drobovik;
-                drobovik = stupidshit;
+                var stupidshit = _snuper;
+                _snuper = _drobovik;
+                _drobovik = stupidshit;
             }
             base.Thrown();
         }		

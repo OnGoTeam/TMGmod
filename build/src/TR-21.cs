@@ -1,13 +1,15 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
+    // ReSharper disable once InconsistentNaming
     public class TR21 : Gun
     {
   
-     private SpriteMap _sprite;
-     public int teksturka = 1;
+        private readonly SpriteMap _sprite;
+        private readonly int _teksturka;
 		
         public TR21 (float xval, float yval)
           : base(xval, yval)
@@ -22,10 +24,10 @@ namespace TMGmod.src
             _numBulletsPerFire = 4;
             _ammoType.bulletThickness = 0.2f;
             _type = "gun";
-            _sprite = new SpriteMap((GetPath("TR-21p")), 22, 14, false);
-            graphic = (Sprite)_sprite;
-            teksturka = Rando.Int(0, 3);
-            _sprite.frame = teksturka;
+            _sprite = new SpriteMap(GetPath("TR-21p"), 22, 14);
+            graphic = _sprite;
+            _teksturka = Rando.Int(0, 3);
+            _sprite.frame = _teksturka;
             center = new Vec2(11f, 6f);
             collisionOffset = new Vec2(-11f, -6f);
             collisionSize = new Vec2(22f, 14f);
@@ -42,7 +44,7 @@ namespace TMGmod.src
         }
         public override void Draw()
         {
-            _sprite.frame = teksturka;
+            _sprite.frame = _teksturka;
             base.Draw();
         }
     }

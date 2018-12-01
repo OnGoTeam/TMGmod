@@ -1,6 +1,8 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     public class M50 : Gun
@@ -9,7 +11,7 @@ namespace TMGmod.src
           : base(xval, yval)
         {
             ammo = 6;
-            _ammoType = new cal50explode
+            _ammoType = new Cal50Explode
             {
                 range = 1500f,
                 accuracy = 1f,

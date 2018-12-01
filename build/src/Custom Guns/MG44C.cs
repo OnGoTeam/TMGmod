@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|LMG|Custom")]
+    // ReSharper disable once InconsistentNaming
     public class MG44C : Gun
     {
 		
@@ -33,9 +35,5 @@ namespace TMGmod.src
             _editorName = "Magnium with NATO Mag";
 			weight = 6f;
         }
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-	}
+    }
 }

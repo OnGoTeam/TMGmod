@@ -1,6 +1,8 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|AutoPistol")]
@@ -16,7 +18,7 @@ namespace TMGmod.src
                 range = 400f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("haze"), 0f, 0f);
+            graphic = new Sprite(GetPath("haze"));
             center = new Vec2(12f, 3f);
             collisionOffset = new Vec2(-12f, -3f);
             collisionSize = new Vec2(24f, 12f);

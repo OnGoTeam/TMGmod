@@ -1,12 +1,14 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
+    // ReSharper disable once InconsistentNaming
     public class AKwAR : Gun
     {
         int _aammo;
-        int _ammo;
+        readonly int _ammo;
         int _rs;
         bool _isroundsin = true; 
 
@@ -40,12 +42,8 @@ namespace TMGmod.src
 			weight = 5f;
             _bio = "Deprecated, bugs with sprite";
         }
-        
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
+
         public override void OnPressAction()
         {
             if (ammo > 0)
@@ -73,7 +71,7 @@ namespace TMGmod.src
                 }*/
 
 
-                if (_isroundsin == true && ammo == 0)
+                if (_isroundsin && ammo == 0)
                 {
                     SFX.Play("Click");
                     graphic = new Sprite(GetPath("AKwAR"));

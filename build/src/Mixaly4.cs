@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
+    // ReSharper disable once InconsistentNaming
     public class MAP : Gun
     {
         public MAP(float xval, float yval)

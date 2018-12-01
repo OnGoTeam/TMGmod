@@ -1,9 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
+    // ReSharper disable once InconsistentNaming
     public class SV98 : Sniper
     {
         public SV98(float xval, float yval) : base(xval, yval)
@@ -51,12 +52,12 @@ namespace TMGmod.src
 					{
 						if (isServerForObject)
 						{
-							_netLoad.Play(1f, 0f);
+							_netLoad.Play();
 						}
 					}
 					else
 					{
-						SFX.Play("loadSniper", 1f, 0f, 0f, false);
+						SFX.Play("loadSniper");
 					}
 					_loadState++;
 				}
@@ -77,7 +78,7 @@ namespace TMGmod.src
 					if (handOffset.x > 4f)
 					{
 						_loadState++;
-						Reload(true);
+						Reload();
 						loaded = false;
 					}
 				}
@@ -136,7 +137,7 @@ namespace TMGmod.src
 
 		public override void Draw()
 		{
-			float ang = angle;
+			var ang = angle;
 			if (offDir > 0)
 			{
 				angle -= _angleOffset;

@@ -1,19 +1,22 @@
 ﻿using DuckGame;
+using TMGmod.Useless_or_deleted_Guns;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Core
 {
+    // ReSharper disable once InconsistentNaming
     public class MF : PhysicsObject, IPlatform
     {
-        private SpriteMap _sprite;
+        private readonly SpriteMap _sprite;
 
-        private new MAPF _owner;
+        private new readonly MAPF _owner;
 
-        private int _numFlames;
+        private readonly int _numFlames;
 
         public MF(float xpos, float ypos, MAPF owner, int numFlames = 8)
             : base(xpos, ypos)
         {
-            _sprite = new SpriteMap("smallFire", 16, 16, false);
+            _sprite = new SpriteMap("smallFire", 16, 16);
             _sprite.AddAnimation("burn", 0.2f + Rando.Float(0.2f), true, new int[]
 			{
 				0,
@@ -38,16 +41,16 @@ namespace TMGmod.src
             _numFlames = numFlames;
         }
 
-        protected override bool OnDestroy(DestroyType type = null)
+        protected override bool OnDestroy(DestroyType dtype = null)
         {
             if (isServerForObject)
             {
-                for (int i = 0; i < _numFlames; i++)
+                for (var i = 0; i < _numFlames; i++)
                 {
-                    Level.Add(SmallFire.New(x - hSpeed, y - vSpeed, -3f + Rando.Float(6f), -3f + Rando.Float(6f), false, null, true, this, false));
+                    Level.Add(SmallFire.New(x - hSpeed, y - vSpeed, -3f + Rando.Float(6f), -3f + Rando.Float(6f), false, null, true, this));
                 }
             }
-            SFX.Play("flameExplode", 0.9f, -0.1f + Rando.Float(0.2f), 0f, false);
+            SFX.Play("flameExplode", 0.9f, -0.1f + Rando.Float(0.2f));
             Level.Remove(this);
             return true;
         }

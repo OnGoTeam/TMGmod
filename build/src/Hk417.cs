@@ -1,11 +1,13 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
-    public class hk417 : Gun
+    // ReSharper disable once InconsistentNaming
+    public class HK417 : Gun
     {
-        public hk417 (float xval, float yval)
+        public HK417 (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 20;

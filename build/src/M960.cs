@@ -1,13 +1,13 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     public class M960 : Gun
     {
-		
-		public EditorProperty<bool> limited = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+        private readonly EditorProperty<bool> _limited = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public M960(float xval, float yval)
             : base(xval, yval)
@@ -19,7 +19,7 @@ namespace TMGmod.src
                 accuracy = 0.9f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("M960"), 0f, 0f);
+            graphic = new Sprite(GetPath("M960"));
             center = new Vec2(13.5f, 3.5f);
             collisionOffset = new Vec2(-11.5f, -3.5f);
             collisionSize = new Vec2(23f, 7f);
@@ -38,7 +38,7 @@ namespace TMGmod.src
         {
 			if (!(Level.current is Editor))
             {
-                if (limited.value == true)
+                if (_limited.value)
                 {
                  _fireWait = 0.5f;
                  _ammoType.accuracy = 0.95f;

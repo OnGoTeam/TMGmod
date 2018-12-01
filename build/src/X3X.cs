@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
     public class X3X : Gun
     {
-        private SpriteMap _sprite;
+        private readonly SpriteMap _sprite;
         public X3X (float xval, float yval)
           : base(xval, yval)
         {
@@ -19,7 +20,7 @@ namespace TMGmod.src
             };
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
-            _sprite = new SpriteMap(GetPath("X3Xa"), 28, 15, false);
+            _sprite = new SpriteMap(GetPath("X3Xa"), 28, 15);
             graphic = _sprite;
             center = new Vec2(14f, 9f);
             collisionOffset = new Vec2(-11.5f, -9f);

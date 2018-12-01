@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
+    // ReSharper disable once InconsistentNaming
     public class MG44 : Gun
     {
 		
@@ -35,8 +37,8 @@ namespace TMGmod.src
 		public override void Update()
 		{
 		base.Update();
-			if (ammo == 1) graphic = new Sprite(GetPath("mg44req1"), 0f, 0f);
-			if (ammo == 0) graphic = new Sprite(GetPath("mg44req2"), 0f, 0f);
+			if (ammo == 1) graphic = new Sprite(GetPath("mg44req1"));
+			if (ammo == 0) graphic = new Sprite(GetPath("mg44req2"));
 		}
 	}
 }

@@ -1,13 +1,15 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     public class Vintorez : Gun
     {
   
-     private SpriteMap _sprite;
-     public int teksturka = 1;
+        private readonly SpriteMap _sprite;
+        private readonly int _teksturka;
 		
         public Vintorez(float xval, float yval)
           : base(xval, yval)
@@ -23,10 +25,10 @@ namespace TMGmod.src
             _type = "gun";
 			//I AM A GREEN TEXT
             //NO, I AM THE REAL ONE GREEN TEXT
-            _sprite = new SpriteMap((GetPath("Vintorezptr")), 33, 11, false);
-            graphic = (Sprite)_sprite;
-            teksturka = Rando.Int(0, 3);
-            _sprite.frame = teksturka;
+            _sprite = new SpriteMap(GetPath("Vintorezptr"), 33, 11);
+            graphic = _sprite;
+            _teksturka = Rando.Int(0, 3);
+            _sprite.frame = _teksturka;
             center = new Vec2(16.5f, 5.5f);
             collisionOffset = new Vec2(-16.5f, -5.5f);
             collisionSize = new Vec2(33f, 11f);
@@ -43,7 +45,7 @@ namespace TMGmod.src
 		}
         public override void Draw()
         {
-            _sprite.frame = teksturka;
+            _sprite.frame = _teksturka;
             base.Draw();
         }
     }

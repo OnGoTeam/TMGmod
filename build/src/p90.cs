@@ -1,12 +1,12 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     public class P90 : Gun
     {
-		
-		public EditorProperty<bool> elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+        private readonly EditorProperty<bool> _elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public P90(float xval, float yval)
           : base(xval, yval)
@@ -39,7 +39,7 @@ namespace TMGmod.src
         {
 			if (!(Level.current is Editor))
             {
-                if (elongated.value == true)
+                if (_elongated.value)
                 {
                  _ammoType.accuracy = 0.8f;
                  _ammoType.range = 200f;

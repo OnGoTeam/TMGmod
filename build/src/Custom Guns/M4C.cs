@@ -1,6 +1,7 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
     public class M4A1C : Gun
@@ -32,9 +33,5 @@ namespace TMGmod.src
             _editorName = "M4A1 Custom";
 			weight = 4f;
         }
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-	}
+    }
 }

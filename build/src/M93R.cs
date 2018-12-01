@@ -1,25 +1,25 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
     public class M93R : Gun
     {
 
-        int _burstNumB = 0;
-        int _burstValue;
+        int _burstNumB;
+        readonly int _burstValue;
         float _bw = 5.1f;
-		private SpriteMap _sprite;
-        public int teksturka = 1;
+		private readonly SpriteMap _sprite;
+        private readonly int _teksturka;
 
         public M93R(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap((GetPath("M93Rpatterns")), 12, 9, false);
-            graphic = (Sprite)_sprite;
-            teksturka = Rando.Int(0, 4);
-            _sprite.frame = teksturka;
+            _sprite = new SpriteMap(GetPath("M93Rpatterns"), 12, 9);
+            graphic = _sprite;
+            _teksturka = Rando.Int(0, 4);
+            _sprite.frame = _teksturka;
             center = new Vec2(6f, 2f);
             collisionOffset = new Vec2(-6f, -2f);
             collisionSize = new Vec2(12f, 9f);
@@ -70,7 +70,7 @@ namespace TMGmod.src
         }
 		public override void Draw()
         {
-            _sprite.frame = teksturka;
+            _sprite.frame = _teksturka;
             base.Draw();
         }
 	}

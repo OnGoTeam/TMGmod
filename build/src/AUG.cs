@@ -1,15 +1,16 @@
 ﻿using DuckGame;
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class aug : Gun
+    public class Aug : Gun
     {
-        private SpriteMap _sprite;
+        private readonly SpriteMap _sprite;
 
-        bool grip = false;
+        private bool _grip;
 		
-        public aug (float xval, float yval)
+        public Aug (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 42;
@@ -50,16 +51,16 @@ namespace TMGmod.src
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-			    	    if (grip)
+			    	    if (_grip)
 				 	    {
 					        _sprite.SetAnimation("base");
                             _fireWait = 0.8f;
                             loseAccuracy = 0.1f;
 		   		            maxAccuracyLost = 0.2f;
 	   		     			_ammoType.accuracy = 0.91f;
-						    grip = false;
+						    _grip = false;
 					    }
                         else
 					    {
@@ -68,7 +69,7 @@ namespace TMGmod.src
                             loseAccuracy = 0.25f;
 				            maxAccuracyLost = 0.125f;
 						    _ammoType.accuracy = 0.94f;
-						    grip = true;
+						    _grip = true;
 					    }
 					}
 				}
