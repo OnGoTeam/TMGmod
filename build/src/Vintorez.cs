@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
 namespace TMGmod.src
 {
@@ -17,11 +13,13 @@ namespace TMGmod.src
           : base(xval, yval)
         {
             this.ammo = 10;
-            this._ammoType = new AT9mmS();
-            this._ammoType.range = 680f;
-            this._ammoType.accuracy = 0.9f;
-            this._ammoType.penetration = 1.5f;
-            this._ammoType.bulletSpeed = 25f;
+            this._ammoType = new AT9mmS
+            {
+                range = 680f,
+                accuracy = 0.9f,
+                penetration = 1.5f,
+                bulletSpeed = 25f
+            };
             this._type = "gun";
 			//I AM A GREEN TEXT
             //NO, I AM THE REAL ONE GREEN TEXT

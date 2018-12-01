@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
 namespace TMGmod.src
 {
@@ -16,10 +12,12 @@ namespace TMGmod.src
           : base(xval, yval)
         {
             this.ammo = 6;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 225f;
-            this._ammoType.accuracy = 0.87f;
-            this._ammoType.penetration = 1f;
+            this._ammoType = new ATMagnum
+            {
+                range = 225f,
+                accuracy = 0.87f,
+                penetration = 1f
+            };
             this._numBulletsPerFire = 14;
             this._ammoType.bulletThickness = 0.5f;
             this._type = "gun";
