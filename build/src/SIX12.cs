@@ -17,10 +17,10 @@ namespace TMGmod
             {
                 range = 225f,
                 accuracy = 0.87f,
-                penetration = 1f
+                penetration = 1f,
+                bulletThickness = 0.5f
             };
             _numBulletsPerFire = 14;
-            _ammoType.bulletThickness = 0.5f;
             _type = "gun";
             graphic = new Sprite(GetPath("SIX12"));
             center = new Vec2(19.5f, 5f);

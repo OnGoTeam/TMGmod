@@ -14,9 +14,8 @@ namespace TMGmod.Custom_Guns
             collisionOffset = new Vec2(-25f, -10f);
             collisionSize = new Vec2(50f, 13f);
             _barrelOffsetTL = new Vec2(39f, 6f);
-            _ammoType.accuracy = 0.9f;
             ammo = 8;
-            _ammoType = new ATSniper();
+            _ammoType = new ATSniper {accuracy = 0.9f};
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
             _kickForce = 2.5f;

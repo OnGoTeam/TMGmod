@@ -19,13 +19,15 @@ public class Remington : Gun
 		: base(xval, yval)
 	{
 		ammo = 3;
-            _ammoType = new AT9mm
-            {
-                range = 115f,
-                accuracy = 0.57f,
-                penetration = 1f
-            };
-            _type = "gun";
+	    _ammoType = new AT9mm
+	    {
+	        range = 115f,
+	        accuracy = 0.57f,
+	        penetration = 1f,
+	        bulletSpeed = 19f,
+	        bulletThickness = 0.6f
+	    };
+	    _type = "gun";
 		graphic = new Sprite(GetPath("Remington"));
 		center = new Vec2(12f, 4f);
 		collisionOffset = new Vec2(-12f, -4f);
@@ -35,15 +37,13 @@ public class Remington : Gun
 		_fireSound = "shotgunFire2";
 		_kickForce = 2.5f;
 		_numBulletsPerFire = 5;
-        _ammoType.bulletSpeed = 19f;
-        _ammoType.bulletThickness = 0.6f;
 		_manualLoad = true;
         _fireWait = 5f;
-            _loaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
-            {
-                center = new Vec2(3f, 4f)
-            };
-            _editorName = "Remington";
+        _loaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
+        {
+            center = new Vec2(3f, 4f)
+        };
+        _editorName = "Remington";
 	}
 
 	public override void Update()

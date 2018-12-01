@@ -24,14 +24,13 @@ namespace TMGmod.Custom_Guns
             _barrelOffsetTL = new Vec2(34f, 3f);
             _holdOffset = new Vec2(2f, 2f);
             ammo = 30;
-            _ammoType = new ATMagnum();
+            _ammoType = new ATMagnum {range = 310f};
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.1f;
             _kickForce = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
-            _ammoType.range = 310f;
             _editorName = "AN94 Fixed Stock";
             _burstValue = 2;
 			weight = 5f;

@@ -14,10 +14,10 @@ namespace TMGmod
             {
                 range = 160f,
                 accuracy = 0.7f,
-                penetration = 2f
+                penetration = 2f,
+                bulletThickness = 0.8f
             };
             _numBulletsPerFire = 8;
-            _ammoType.bulletThickness = 0.8f;
             _type = "gun";
             graphic = new Sprite(GetPath("DragoShot"));
             center = new Vec2(17f, 7f);

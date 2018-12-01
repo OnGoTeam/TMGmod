@@ -19,10 +19,10 @@ namespace TMGmod.Custom_Guns
             {
                 range = 110f,
                 accuracy = 0.8f,
-                penetration = 1f
+                penetration = 1f,
+                bulletThickness = 0.2f
             };
             _numBulletsPerFire = 4;
-            _ammoType.bulletThickness = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21lmg2p"), 22, 14);
             graphic = _sprite;

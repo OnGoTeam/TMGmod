@@ -15,10 +15,10 @@ namespace TMGmod.Custom_Guns
             {
                 range = 150f,
                 accuracy = 0.2f,
-                penetration = 4f
+                penetration = 4f,
+                bulletThickness = 2f
             };
             _numBulletsPerFire = 44;
-            _ammoType.bulletThickness = 2f;
             _type = "gun";
             graphic = new Sprite(GetPath("44dbonemore"));
             center = new Vec2(16.5f, 5f);

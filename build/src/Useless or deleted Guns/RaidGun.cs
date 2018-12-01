@@ -15,7 +15,8 @@ namespace TMGmod.Useless_or_deleted_Guns
             _ammoType = new ATShotgun
             {
                 accuracy = 0.9f,
-                range = 250f
+                range = 250f,
+                penetration = 5f
             };
             _type = "gun";
             graphic = new Sprite(GetPath("RaidGun"));
@@ -32,7 +33,6 @@ namespace TMGmod.Useless_or_deleted_Guns
             maxAccuracyLost = 0.3f;
             _editorName = "RaidGun";
             _numBulletsPerFire = 5;
-            _ammoType.penetration = 5f;
         }
     }
 }

@@ -19,13 +19,15 @@ public class RemingtonTac : Gun
 		: base(xval, yval)
 	{
 		ammo = 4;
-            _ammoType = new AT9mm
-            {
-                range = 125f,
-                accuracy = 0.69f,
-                penetration = 1f
-            };
-            _type = "gun";
+	    _ammoType = new AT9mm
+	    {
+	        range = 125f,
+	        accuracy = 0.69f,
+	        penetration = 1f,
+	        bulletSpeed = 25f,
+	        bulletThickness = 0.5f
+	    };
+	    _type = "gun";
 		graphic = new Sprite(GetPath("RemingtonStock"));
 		center = new Vec2(12f, 4f);
 		collisionOffset = new Vec2(-12f, -4f);
@@ -35,15 +37,13 @@ public class RemingtonTac : Gun
 		_fireSound = "shotgunFire2";
 		_kickForce = 2f;
 		_numBulletsPerFire = 6;
-        _ammoType.bulletSpeed = 25f;
-        _ammoType.bulletThickness = 0.5f;
 		_manualLoad = true;
         _fireWait = 1f;
-            _loaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
-            {
-                center = new Vec2(3f, 4f)
-            };
-            _laserOffsetTL = new Vec2(22f, 0.5f);
+        _loaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
+        {
+            center = new Vec2(3f, 4f)
+        };
+        _laserOffsetTL = new Vec2(22f, 0.5f);
         laserSight = true;
         _editorName = "Tactical Remington";
 	}

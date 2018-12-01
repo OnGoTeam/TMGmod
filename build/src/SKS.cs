@@ -87,29 +87,29 @@ namespace TMGmod
 					    }
                     if (duck.inputProfile.Released("QUACK"))
 					    {
-						ammo = _patrons;
-                        _ammoType = new AT9mm
-                        {
-                            range = 900f,
-                            accuracy = 0.91f,
-                            penetration = 1f,
-                            bulletSpeed = 75f
-                        };
-                        _fullAuto = false;
-                        _fireWait = 1.3f;
-						_numBulletsPerFire = 1;
-                        _barrelOffsetTL = new Vec2(53f, 3f);
-                        _fireSound = GetPath("sounds/scar.wav");
-                        _holdOffset = new Vec2(11f, 0f);
-                        loseAccuracy = 0.1f;
-                        maxAccuracyLost = 0.8f;
-                        _ammoType.bulletThickness = 1f;
-                        _kickForce = 0.6f;
-                        _flare = new SpriteMap("smallFlare", 11, 10)
-                        {
-                            center = new Vec2(0f, 4f)
-                        };
-                        _stick = false;
+						    ammo = _patrons;
+					        _ammoType = new AT9mm
+					        {
+					            range = 900f,
+					            accuracy = 0.91f,
+					            penetration = 1f,
+					            bulletSpeed = 75f,
+					            bulletThickness = 1f
+					        };
+					        _fullAuto = false;
+                            _fireWait = 1.3f;
+						    _numBulletsPerFire = 1;
+                            _barrelOffsetTL = new Vec2(53f, 3f);
+                            _fireSound = GetPath("sounds/scar.wav");
+                            _holdOffset = new Vec2(11f, 0f);
+                            loseAccuracy = 0.1f;
+                            maxAccuracyLost = 0.8f;
+                            _kickForce = 0.6f;
+                            _flare = new SpriteMap("smallFlare", 11, 10)
+                            {
+                                center = new Vec2(0f, 4f)
+                            };
+                            _stick = false;
 					    }
 			    }
 			}
@@ -119,23 +119,23 @@ namespace TMGmod
 			if (ammo != 0)
 			{           
 						ammo = _patrons;
-                _ammoType = new AT9mm
-                {
-                    range = 900f,
-                    accuracy = 0.91f,
-                    penetration = 1f,
-                    bulletSpeed = 75f
-                };
-                _fullAuto = false;
-                        _fireWait = 1.3f;
-						_numBulletsPerFire = 1;
-                        _barrelOffsetTL = new Vec2(53f, 3f);
-                        _fireSound = GetPath("sounds/scar.wav");
-                        _holdOffset = new Vec2(11f, 0f);
-                        loseAccuracy = 0.1f;
-                        maxAccuracyLost = 0.8f;
-                        _ammoType.bulletThickness = 1f;
-                        _kickForce = 0.6f;
+			    _ammoType = new AT9mm
+			    {
+			        range = 900f,
+			        accuracy = 0.91f,
+			        penetration = 1f,
+			        bulletSpeed = 75f,
+			        bulletThickness = 1f
+			    };
+			    _fullAuto = false;
+                _fireWait = 1.3f;
+				_numBulletsPerFire = 1;
+                _barrelOffsetTL = new Vec2(53f, 3f);
+                _fireSound = GetPath("sounds/scar.wav");
+                _holdOffset = new Vec2(11f, 0f);
+                loseAccuracy = 0.1f;
+                maxAccuracyLost = 0.8f;
+                _kickForce = 0.6f;
                 _flare = new SpriteMap("smallFlare", 11, 10)
                 {
                     center = new Vec2(0f, 4f)
