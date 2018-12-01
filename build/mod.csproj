@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMGmod</RootNamespace>
+    <AssemblyName>TMGmod</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="dglink.csproj" />
+  <ItemGroup>
+    <Compile Include="src\44db.cs" />
+    <Compile Include="src\AF2011.cs" />
+    <Compile Include="src\AKALFA.cs" />
+    <Compile Include="src\AKwAR.cs" />
+    <Compile Include="src\AN94.cs" />
+    <Compile Include="src\AUG.cs" />
+    <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\BREN.cs" />
+    <Compile Include="src\Caliber50.cs" />
+    <Compile Include="src\Cases\Civilian Case.cs" />
+    <Compile Include="src\Cases\Heavy Millitary Case.cs" />
+    <Compile Include="src\Cases\Millitary Case.cs" />
+    <Compile Include="src\Cases\Warriors Case.cs" />
+    <Compile Include="src\Core\AT9mmSilenced.cs" />
+    <Compile Include="src\Core\ATNotBullet.cs" />
+    <Compile Include="src\Core\Cal50Explode.cs" />
+    <Compile Include="src\Core\Czmag.cs" />
+    <Compile Include="src\Core\EKSPLOZIVI SCHEET.cs" />
+    <Compile Include="src\Core\HA.cs" />
+    <Compile Include="src\Core\MF.cs" />
+    <Compile Include="src\Core\Mod.cs" />
+    <Compile Include="src\Core\PTPA.cs" />
+    <Compile Include="src\Custom Guns\44dbC.cs" />
+    <Compile Include="src\Custom Guns\AN94C.cs" />
+    <Compile Include="src\Custom Guns\AUGA3.cs" />
+    <Compile Include="src\Custom Guns\BarretM98C.cs" />
+    <Compile Include="src\Custom Guns\BRENC.cs" />
+    <Compile Include="src\Custom Guns\Glock17C.cs" />
+    <Compile Include="src\Custom Guns\M4C.cs" />
+    <Compile Include="src\Custom Guns\MG44C.cs" />
+    <Compile Include="src\Custom Guns\PPShC.cs" />
+    <Compile Include="src\Custom Guns\SIX12C.cs" />
+    <Compile Include="src\Custom Guns\SVUC.cs" />
+    <Compile Include="src\Custom Guns\TR-21C.cs" />
+    <Compile Include="src\Custom Guns\VintorezC.cs" />
+    <Compile Include="src\CZ75.cs" />
+    <Compile Include="src\DragoShot.cs" />
+    <Compile Include="src\Glock17.cs" />
+    <Compile Include="src\HazeS.cs" />
+    <Compile Include="src\Hk417.cs" />
+    <Compile Include="src\M16 LMG.cs" />
+    <Compile Include="src\M4.cs" />
+    <Compile Include="src\M50.cs" />
+    <Compile Include="src\M72.cs" />
+    <Compile Include="src\M93R.cs" />
+    <Compile Include="src\M960.cs" />
+    <Compile Include="src\MG3.cs" />
+    <Compile Include="src\MG44.cs" />
+    <Compile Include="src\Mixaly4.cs" />
+    <Compile Include="src\Mixaly4Fire.cs" />
+    <Compile Include="src\MP40.cs" />
+    <Compile Include="src\mp7.cs" />
+    <Compile Include="src\MPA27.cs" />
+    <Compile Include="src\MSR.cs" />
+    <Compile Include="src\Nellegalja.cs" />
+    <Compile Include="src\p90.cs" />
+    <Compile Include="src\PMR30.cs" />
+    <Compile Include="src\PMR30SH.cs" />
+    <Compile Include="src\PPSh.cs" />
+    <Compile Include="src\Remington.cs" />
+    <Compile Include="src\RemingtonTactical.cs" />
+    <Compile Include="src\SCARGL.cs" />
+    <Compile Include="src\SCARL.cs" />
+    <Compile Include="src\SCARMk20.cs" />
+    <Compile Include="src\SCARPDW.cs" />
+    <Compile Include="src\SCARSSR.cs" />
+    <Compile Include="src\SIX12.cs" />
+    <Compile Include="src\SKS.cs" />
+    <Compile Include="src\SNR22.cs" />
+    <Compile Include="src\SV98.cs" />
+    <Compile Include="src\SV99.cs" />
+    <Compile Include="src\SVU.cs" />
+    <Compile Include="src\TR-21.cs" />
+    <Compile Include="src\Useless or deleted Guns\MAPF.cs" />
+    <Compile Include="src\Useless or deleted Guns\MSRSH.cs" />
+    <Compile Include="src\Useless or deleted Guns\PTP1.cs" />
+    <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />
+    <Compile Include="src\USP.cs" />
+    <Compile Include="src\VAG73.cs" />
+    <Compile Include="src\Vintorez.cs" />
+    <Compile Include="src\X3X.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
