@@ -16,7 +16,6 @@ namespace TMGmod.src
         int _burstValue;
         float _bw = 5.1f;
 		
-		bool stock = false;
 		public EditorProperty<bool> laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
 
         public AN94C(float xval, float yval)
