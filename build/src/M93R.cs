@@ -29,12 +29,12 @@ namespace TMGmod
             _ammoType = new ATMagnum();
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = true;
-            _ammoType.range = 108f;
+            _ammoType.range = 98f;
             _fireWait = 0.27f;
             _kickForce = 0.24f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.2f;
-            _ammoType.range = 110f;
+            _ammoType.range = 98f;
             _editorName = "M93R";
             _burstValue = 3;
 			weight = 2f;

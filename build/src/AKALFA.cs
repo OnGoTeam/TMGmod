@@ -32,7 +32,7 @@ namespace TMGmod
             _holdOffset = new Vec2(5f, 0f);
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
-            _fireWait = 0.675f;
+            _fireWait = 0.75f;
             _kickForce = 0.65f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.3f;

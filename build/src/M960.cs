@@ -15,8 +15,8 @@ namespace TMGmod
             ammo = 50;
             _ammoType = new AT9mm
             {
-                range = 185f,
-                accuracy = 0.9f
+                range = 85f,
+                accuracy = 0.4f
             };
             _type = "gun";
             graphic = new Sprite(GetPath("M960"));
@@ -32,7 +32,7 @@ namespace TMGmod
             loseAccuracy = 0.01f;
             maxAccuracyLost = 0.05f;
             _editorName = "Calico M960";
-			weight = 1.5f;
+			weight = 1f;
         }
         public override void Initialize()
         {
