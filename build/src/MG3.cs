@@ -6,7 +6,7 @@ using DuckGame;
 
 namespace TMGmod.src
 {
-    [EditorGroup("TMG|Heavy")]
+    [EditorGroup("TMG|LMG")]
     public class MG3 : Gun
     {
 		bool bipodes = false;

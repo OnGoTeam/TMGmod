@@ -6,7 +6,7 @@ using DuckGame;
 
 namespace TMGmod.src
 {
-    [EditorGroup("TMG|Misc|Custom Guns")]
+    [EditorGroup("TMG|Machinegun|Custom")]
     public class bren : Gun
     {
 		float silencer = 0f;

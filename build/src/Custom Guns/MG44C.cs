@@ -6,7 +6,7 @@ using DuckGame;
 
 namespace TMGmod.src
 {
-    [EditorGroup("TMG|Misc|Custom Guns")]
+    [EditorGroup("TMG|LMG|Custom")]
     public class MG44C : Gun
     {
 		

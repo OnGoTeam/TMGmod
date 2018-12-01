@@ -7,7 +7,7 @@ using DuckGame;
 namespace TMGmod.src
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|Misc|Custom Guns")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Custom")]
     public class PPShC : Gun
     {
   

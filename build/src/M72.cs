@@ -6,7 +6,7 @@ using DuckGame;
 
 namespace TMGmod.src
 {
-    [EditorGroup("TMG|Heavy")]
+    [EditorGroup("TMG|Misc|Grenadelauncher")]
     public class M72 : Gun
     {
 

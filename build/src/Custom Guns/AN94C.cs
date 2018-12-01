@@ -8,7 +8,7 @@ using DuckGame;
 
 namespace TMGmod.src
 {
-    [EditorGroup("TMG|Misc|Custom Guns")]
+    [EditorGroup("TMG|Machinegun|Custom")]
     public class AN94C : Gun
     {
 

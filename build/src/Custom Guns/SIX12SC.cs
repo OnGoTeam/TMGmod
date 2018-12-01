@@ -7,21 +7,19 @@ using DuckGame;
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Shotgun|Custom")]
-    public class SIX12C : Gun
+    public class SIX12SC : Gun
     {
 		
-		public SIX12C (float xval, float yval)
+		public SIX12SC (float xval, float yval)
           : base(xval, yval)
         {
             this.ammo = 6;
-            this._ammoType = new ATMagnum();
+            this._ammoType = new AT9mmS();
             this._ammoType.range = 225f;
-            this._ammoType.accuracy = 0.87f;
-            this._ammoType.penetration = 1f;
+            this._ammoType.accuracy = 0.9f;
             this._numBulletsPerFire = 14;
-            this._ammoType.bulletThickness = 0.5f;
             this._type = "gun";
-            this.graphic = new Sprite(GetPath("SIX12laser2"));
+            this.graphic = new Sprite(GetPath("SIX12S"));
             this.center = new Vec2(19.5f, 5f);
             this.collisionOffset = new Vec2(-19.5f, -5f);
             this.collisionSize = new Vec2(29f, 10f);
@@ -35,11 +33,11 @@ namespace TMGmod.src
             this.laserSight = true;
             this._laserOffsetTL = new Vec2(24f, 7f);
             this._holdOffset = new Vec2(2f, 0f);
-            this._editorName = "SIX12 with Laser";
+            this._editorName = "SIX12 Silenced with Laser";
 			this.weight = 4f;
         }
         public override void Initialize()
-        {
+		{
             base.Initialize();
         }
 	}

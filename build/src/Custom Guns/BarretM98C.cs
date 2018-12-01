@@ -8,7 +8,7 @@ using DuckGame;
 
 namespace TMGmod.src
 {
-    [EditorGroup("TMG|Misc|Custom Guns")]
+    [EditorGroup("TMG|Sniper|Custom")]
     public class BarretM98C : Sniper
     {
 		
