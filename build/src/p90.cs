@@ -11,37 +11,39 @@ namespace TMGmod.src
         public P90(float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 50;
-            this._ammoType = new AT9mm();
-            this._ammoType.range = 150f;
-            this._ammoType.accuracy = 0.7f;
-            this._ammoType.penetration = 1f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("P90"));
-            this.center = new Vec2(9.5f, 3f);
-            this.collisionOffset = new Vec2(-8.5f, -3f);
-            this.collisionSize = new Vec2(19f, 6f);
-            this._barrelOffsetTL = new Vec2(19f, 3f);
-            this._fireSound = GetPath("sounds/2.wav");
-            this._fullAuto = true;
-            this._fireWait = 0.2f;
-            this._kickForce = 0.4f;
-            this.loseAccuracy = 0f;
-            this.maxAccuracyLost = 0.1f;
-            this._holdOffset = new Vec2(-3f, 0f);
-            this.handOffset = new Vec2(2f, 0f);
-            this._editorName = "FN P90";
-			this.weight = 1.5f;
+            ammo = 50;
+            _ammoType = new AT9mm
+            {
+                range = 150f,
+                accuracy = 0.7f,
+                penetration = 1f
+            };
+            _type = "gun";
+            graphic = new Sprite(GetPath("P90"));
+            center = new Vec2(9.5f, 3f);
+            collisionOffset = new Vec2(-8.5f, -3f);
+            collisionSize = new Vec2(19f, 6f);
+            _barrelOffsetTL = new Vec2(19f, 3f);
+            _fireSound = GetPath("sounds/2.wav");
+            _fullAuto = true;
+            _fireWait = 0.2f;
+            _kickForce = 0.4f;
+            loseAccuracy = 0f;
+            maxAccuracyLost = 0.1f;
+            _holdOffset = new Vec2(-3f, 0f);
+            handOffset = new Vec2(2f, 0f);
+            _editorName = "FN P90";
+			weight = 1.5f;
         }
         public override void Initialize()
         {
 			if (!(Level.current is Editor))
             {
-                if (this.elongated.value == true)
+                if (elongated.value == true)
                 {
-                 this._ammoType.accuracy = 0.8f;
-                 this._ammoType.range = 200f;
-				 this.graphic = new Sprite(GetPath("p90long2"));
+                 _ammoType.accuracy = 0.8f;
+                 _ammoType.range = 200f;
+				 graphic = new Sprite(GetPath("p90long2"));
                 }
             }
             base.Initialize();

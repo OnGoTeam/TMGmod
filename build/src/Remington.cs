@@ -17,82 +17,86 @@ public class Remington : Gun
 	public Remington(float xval, float yval)
 		: base(xval, yval)
 	{
-		this.ammo = 3;
-		this._ammoType = new AT9mm();
-        this._ammoType.range = 115f;
-        this._ammoType.accuracy = 0.57f;
-        this._ammoType.penetration = 1f;
-		this._type = "gun";
-		this.graphic = new Sprite(GetPath("Remington"));
-		this.center = new Vec2(12f, 4f);
-		this.collisionOffset = new Vec2(-12f, -4f);
-		this.collisionSize = new Vec2(24f, 7f);
-		this._barrelOffsetTL = new Vec2(24f, 1.5f);
-        this._holdOffset = new Vec2(-1f, 2f);
-		this._fireSound = "shotgunFire2";
-		this._kickForce = 2.5f;
-		this._numBulletsPerFire = 5;
-        this._ammoType.bulletSpeed = 19f;
-        this._ammoType.bulletThickness = 0.6f;
-		this._manualLoad = true;
-        this._fireWait = 5f;
-		this._loaderSprite = new SpriteMap((GetPath("RemingtonPimp")), 6, 8, false);
-		this._loaderSprite.center = new Vec2(3f, 4f);
-        this._editorName = "Remington";
+		ammo = 3;
+            _ammoType = new AT9mm
+            {
+                range = 115f,
+                accuracy = 0.57f,
+                penetration = 1f
+            };
+            _type = "gun";
+		graphic = new Sprite(GetPath("Remington"));
+		center = new Vec2(12f, 4f);
+		collisionOffset = new Vec2(-12f, -4f);
+		collisionSize = new Vec2(24f, 7f);
+		_barrelOffsetTL = new Vec2(24f, 1.5f);
+        _holdOffset = new Vec2(-1f, 2f);
+		_fireSound = "shotgunFire2";
+		_kickForce = 2.5f;
+		_numBulletsPerFire = 5;
+        _ammoType.bulletSpeed = 19f;
+        _ammoType.bulletThickness = 0.6f;
+		_manualLoad = true;
+        _fireWait = 5f;
+            _loaderSprite = new SpriteMap((GetPath("RemingtonPimp")), 6, 8, false)
+            {
+                center = new Vec2(3f, 4f)
+            };
+            _editorName = "Remington";
 	}
 
 	public override void Update()
 	{
 		base.Update();
-		if (this._loadAnimation == -1f)
+		if (_loadAnimation == -1f)
 		{
 			SFX.Play("shotgunLoad", 1f, 0f, 0f, false);
-			this._loadAnimation = 0f;
+			_loadAnimation = 0f;
 		}
-		if (this._loadAnimation >= 0f)
+		if (_loadAnimation >= 0f)
 		{
-			if (this._loadAnimation == 0.5f && base.ammo != 0)
+			if (_loadAnimation == 0.5f && ammo != 0)
 			{
-				base._ammoType.PopShell(base.x, base.y, -this.offDir);
+				_ammoType.PopShell(x, y, -offDir);
 			}
-			if (this._loadAnimation < 1f)
+			if (_loadAnimation < 1f)
 			{
-				this._loadAnimation += 0.0625f;
+				_loadAnimation += 0.0625f;
 			}
 			else
 			{
-				this._loadAnimation = 1f;
+				_loadAnimation = 1f;
 			}
 		}
-		if (this._loadProgress >= 0)
+		if (_loadProgress >= 0)
 		{
-			if (this._loadProgress == 50)
+			if (_loadProgress == 50)
 			{
-				this.Reload(false);
+				Reload(false);
 			}
-			if (this._loadProgress < 100)
+			if (_loadProgress < 100)
 			{
-				this._loadProgress += 10;
+				_loadProgress += 10;
 			}
 			else
 			{
-				this._loadProgress = 100;
+				_loadProgress = 100;
 			}
 		}
 	}
 
 	public override void OnPressAction()
 	{
-		if (base.loaded)
+		if (loaded)
 		{
 			base.OnPressAction();
-			this._loadProgress = -1;
-			this._loadAnimation = -0.2f;
+			_loadProgress = -1;
+			_loadAnimation = -0.2f;
 		}
-		else if (this._loadProgress == -1)
+		else if (_loadProgress == -1)
 		{
-			this._loadProgress = 0;
-			this._loadAnimation = -1f;
+			_loadProgress = 0;
+			_loadAnimation = -1f;
 		}
 	}
 
@@ -100,8 +104,8 @@ public class Remington : Gun
 	{
 		base.Draw();
 		Vec2 bOffset = new Vec2(18f, -5f);
-		float offset = (float)Math.Sin((double)(this._loadAnimation * 3.14f)) * 3f;
-		base.Draw(this._loaderSprite, new Vec2(bOffset.x - 8f - offset, bOffset.y + 4f), 1);
+		float offset = (float)Math.Sin((double)(_loadAnimation * 3.14f)) * 3f;
+		base.Draw(_loaderSprite, new Vec2(bOffset.x - 8f - offset, bOffset.y + 4f), 1);
 	}
 }
 }

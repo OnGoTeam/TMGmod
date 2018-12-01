@@ -7,20 +7,20 @@ namespace TMGmod.src
     [EditorGroup("TMG|Misc|Cases")]
     public class mpodarok : Holdable, IPlatform
     {
-        private System.Type _contains;
+        private Type _contains;
 
         public mpodarok (float xval, float yval)
           : base(xval, yval)
         {
-            this.graphic = new Sprite(GetPath("MillitaryCase"));
-		    this.center = new Vec2(7f, 4f);
-            this.collisionOffset = new Vec2(-7f, -4f);
-            this.collisionSize = new Vec2(14f, 8f);
-            this.depth = -0.5f;
-            this.thickness = 0.0f;
-            this.weight = 3f;
-            this.collideSounds.Add("presentLand");
-            this._editorName = "Millitary Container";
+            graphic = new Sprite(GetPath("MillitaryCase"));
+		    center = new Vec2(7f, 4f);
+            collisionOffset = new Vec2(-7f, -4f);
+            collisionSize = new Vec2(14f, 8f);
+            depth = -0.5f;
+            thickness = 0.0f;
+            weight = 3f;
+            collideSounds.Add("presentLand");
+            _editorName = "Millitary Container";
         }
 
 
@@ -47,26 +47,26 @@ namespace TMGmod.src
         typeof(SIX12C),	
         typeof(Vag),	
 		};
-		this._contains = things[Rando.Int(things.Count - 1)];
+		_contains = things[Rando.Int(things.Count - 1)];
 	}
 
 	public override void OnPressAction()
 	{
 		
-		if (this.owner != null)
+		if (owner != null)
 		{
-			Thing o = this.owner;
-			Duck d = base.duck;
+			Thing o = owner;
+			Duck d = duck;
 			if (d != null)
 			{
 				d.profile.stats.presentsOpened++;
-				base.duck.ThrowItem(true);
+				duck.ThrowItem(true);
 			}
 			Level.Remove(this);
 			{
-				this.Initialize();
+				Initialize();
 			}
-			Holdable newThing = Editor.CreateThing(this._contains) as Holdable;
+			Holdable newThing = Editor.CreateThing(_contains) as Holdable;
 			if (newThing != null)
 			{
 				if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())

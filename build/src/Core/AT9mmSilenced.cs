@@ -6,9 +6,9 @@ namespace TMGmod.src
     {
         public AT9mmS()
         {
-			this.bulletLength = 3f;
-            this.combustable = true;
-            this.bulletSpeed = 37f;
+			bulletLength = 3f;
+            combustable = true;
+            bulletSpeed = 37f;
         }
     }
 }

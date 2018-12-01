@@ -8,44 +8,46 @@ namespace TMGmod.src
         public SNR22 (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 5;
-            this._ammoType = new ATSniper();
-            this._ammoType.range = 1200f;
-            this._ammoType.accuracy = 1f;
-            this._ammoType.penetration = 1f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("SNR22"));
-            this.center = new Vec2(14f, 6f);
-            this.collisionOffset = new Vec2(-14.5f, -5f);
-            this.collisionSize = new Vec2(33f, 10f);
-            this._barrelOffsetTL = new Vec2(33f, 4f);
-            this._fireSound = GetPath("sounds/HeavySniper.wav");
-            this._fullAuto = false;
-            this._fireWait = 5f;
-            this._kickForce = 0.8f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.3f;
-            this._holdOffset = new Vec2(0f, 1f);
-            this.laserSight = true;
-            this._laserOffsetTL = new Vec2(22f, 3.5f);
-            this._editorName = "Gepard Lynx";
-			this.weight = 6f;
+            ammo = 5;
+            _ammoType = new ATSniper
+            {
+                range = 1200f,
+                accuracy = 1f,
+                penetration = 1f
+            };
+            _type = "gun";
+            graphic = new Sprite(GetPath("SNR22"));
+            center = new Vec2(14f, 6f);
+            collisionOffset = new Vec2(-14.5f, -5f);
+            collisionSize = new Vec2(33f, 10f);
+            _barrelOffsetTL = new Vec2(33f, 4f);
+            _fireSound = GetPath("sounds/HeavySniper.wav");
+            _fullAuto = false;
+            _fireWait = 5f;
+            _kickForce = 0.8f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            _holdOffset = new Vec2(0f, 1f);
+            laserSight = true;
+            _laserOffsetTL = new Vec2(22f, 3.5f);
+            _editorName = "Gepard Lynx";
+			weight = 6f;
         }
           public override void Update()
         {
-            if (this._owner != null && this._owner.height < 17f)
+            if (_owner != null && _owner.height < 17f)
             {
-                this._kickForce = 0f;
-				this.loseAccuracy = 0f;
-                this.maxAccuracyLost = 0f;
-				this.graphic = new Sprite(GetPath("SNR22bipods"));
+                _kickForce = 0f;
+				loseAccuracy = 0f;
+                maxAccuracyLost = 0f;
+				graphic = new Sprite(GetPath("SNR22bipods"));
             }
             else
             {
-                this._kickForce = 0.8f;
-                this.loseAccuracy = 0.1f;
-                this.maxAccuracyLost = 0.3f;
-				this.graphic = new Sprite(GetPath("SNR22"));
+                _kickForce = 0.8f;
+                loseAccuracy = 0.1f;
+                maxAccuracyLost = 0.3f;
+				graphic = new Sprite(GetPath("SNR22"));
             }
             base.Update();
         }

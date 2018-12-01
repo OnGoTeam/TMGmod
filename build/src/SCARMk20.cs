@@ -8,26 +8,28 @@ namespace TMGmod.src
         public mk20 (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 20;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 800f;
-            this._ammoType.accuracy = 0.87f;
-            this._ammoType.penetration = 1f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("SCARMk1"));
-            this.center = new Vec2(16f, 7f);
-            this.collisionOffset = new Vec2(-16.5f, -7f);
-            this.collisionSize = new Vec2(33f, 14f);
-            this._barrelOffsetTL = new Vec2(33f, 5.5f);
-            this._holdOffset = new Vec2(1f, -1f);
-            this._fireSound = GetPath("sounds/scar.wav");
-            this._fullAuto = false;
-            this._fireWait = 0.95f;
-            this._kickForce = 0.7f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.3f;
-            this._editorName = "SCAR Mk20";
-			this.weight = 6.5f;
+            ammo = 20;
+            _ammoType = new ATMagnum
+            {
+                range = 800f,
+                accuracy = 0.87f,
+                penetration = 1f
+            };
+            _type = "gun";
+            graphic = new Sprite(GetPath("SCARMk1"));
+            center = new Vec2(16f, 7f);
+            collisionOffset = new Vec2(-16.5f, -7f);
+            collisionSize = new Vec2(33f, 14f);
+            _barrelOffsetTL = new Vec2(33f, 5.5f);
+            _holdOffset = new Vec2(1f, -1f);
+            _fireSound = GetPath("sounds/scar.wav");
+            _fullAuto = false;
+            _fireWait = 0.95f;
+            _kickForce = 0.7f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            _editorName = "SCAR Mk20";
+			weight = 6.5f;
         }
         public override void Initialize()
         {

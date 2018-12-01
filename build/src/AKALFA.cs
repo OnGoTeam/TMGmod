@@ -11,63 +11,65 @@ namespace TMGmod.src
         public AKALFA (float xval, float yval)
           : base(xval, yval)
 		{
-            this.ammo = 20;
-            this._ammoType = new AT9mm();
-            this._ammoType.range = 425f;
-            this._ammoType.accuracy = 1f;
-            this._ammoType.penetration = 1.5f;
-            this._ammoType.bulletSpeed = 60f;
-            this._ammoType.bulletThickness = 0.87f;
-            this._type = "gun";
-            this._sprite = new SpriteMap(GetPath("ALFASM"), 38, 9);
-		    this.graphic = this._sprite;
-            this.center = new Vec2(19f, 4.5f);
-            this.collisionOffset = new Vec2(-19f, -4.5f);
-            this.collisionSize = new Vec2(38f, 9f);
-            this._barrelOffsetTL = new Vec2(38f, 2.5f);
-            this._holdOffset = new Vec2(5f, 0f);
-            this._fireSound = "deepMachineGun2";
-            this._fullAuto = true;
-            this._fireWait = 0.675f;
-            this._kickForce = 0.65f;
-            this.loseAccuracy = 0f;
-            this.maxAccuracyLost = 0.3f;
-            this._editorName = "Alfa";
-			this.weight = 5.5f;
-            this._laserOffsetTL = new Vec2(31f, 4f);
-            this.laserSight = true;
-		    this._sprite.AddAnimation("base", 0f, false, new int[]
+            ammo = 20;
+            _ammoType = new AT9mm
+            {
+                range = 425f,
+                accuracy = 1f,
+                penetration = 1.5f,
+                bulletSpeed = 60f,
+                bulletThickness = 0.87f
+            };
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("ALFASM"), 38, 9);
+		    graphic = _sprite;
+            center = new Vec2(19f, 4.5f);
+            collisionOffset = new Vec2(-19f, -4.5f);
+            collisionSize = new Vec2(38f, 9f);
+            _barrelOffsetTL = new Vec2(38f, 2.5f);
+            _holdOffset = new Vec2(5f, 0f);
+            _fireSound = "deepMachineGun2";
+            _fullAuto = true;
+            _fireWait = 0.675f;
+            _kickForce = 0.65f;
+            loseAccuracy = 0f;
+            maxAccuracyLost = 0.3f;
+            _editorName = "Alfa";
+			weight = 5.5f;
+            _laserOffsetTL = new Vec2(31f, 4f);
+            laserSight = true;
+		    _sprite.AddAnimation("base", 0f, false, new int[]
 		    {
 		        0,
 		    });
-		    this._sprite.AddAnimation("stock", 0f, false, new int[]
+		    _sprite.AddAnimation("stock", 0f, false, new int[]
 		    {
 		        1,
 		    });
         }
         public override void Update()
         {
-            if (this.owner != null)
+            if (owner != null)
             {
-                if (base.isServerForObject)
+                if (isServerForObject)
                 {
-                    if (base.duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK", false))
                     {
-					  if ((this.stock > 0f))
+					  if ((stock > 0f))
 					    {
-					        this._sprite.SetAnimation("base");
-                            this._ammoType.accuracy = 1f;
-                            this.loseAccuracy = 0f;
-		                 	this.stock = 0f;
-						    this.weight = 5.5f;
+					        _sprite.SetAnimation("base");
+                            _ammoType.accuracy = 1f;
+                            loseAccuracy = 0f;
+		                 	stock = 0f;
+						    weight = 5.5f;
 					    }
                       else
 					    {
-					        this._sprite.SetAnimation("stock");
-                            this._ammoType.accuracy = 0.92f;
-                            this.loseAccuracy = 0.045f;
-		                	this.stock = 1f;
-						    this.weight = 3f;
+					        _sprite.SetAnimation("stock");
+                            _ammoType.accuracy = 0.92f;
+                            loseAccuracy = 0.045f;
+		                	stock = 1f;
+						    weight = 3f;
 					    }
 					}
 				}

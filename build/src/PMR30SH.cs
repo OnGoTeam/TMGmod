@@ -19,78 +19,82 @@ namespace TMGmod.src
         public PMR(float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 30;
-			this.ammo2 = 1;
-            this._ammoType = new AT9mm();
-            this._ammoType.range = 215f;
-            this._ammoType.accuracy = 0.875f;
-            this._ammoType.penetration = 1f;
-			this._ammoType2 = new AT9mm();
-            this._ammoType2.range = 110f;
-            this._ammoType2.accuracy = 0.35f;
-            this._ammoType2.penetration = 1f;
-			this._ammoType2.bulletSpeed = 50f;
-            this._numBulletsPerFire = 1;
-            this._numBulletsPerFire2 = 16;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("PMR30"));
-            this.graphic1 = new Sprite(GetPath("PMR301"));
-            this.graphic2 = new Sprite(GetPath("PMR302"));
-            this.center = new Vec2(8f, 5f);
-            this.collisionOffset = new Vec2(-8f, -5f);
-            this.collisionSize = new Vec2(16f, 10f);
-            this._barrelOffsetTL = new Vec2(16f, 2.5f);
-            this._barrelOffsetTL2 = new Vec2(14f, 6f);
-            this._holdOffset = new Vec2(0f, 2f);
-            this._fireSound = GetPath("sounds/1.wav");
-            this._fireSound2 = "littleGun";
-            this._fullAuto = false;
-            this._fireWait = 0.5f;
-            this._kickForce = 0.55f;
-            this.loseAccuracy = 0.025f;
-            this.loseAccuracy2 = 0f;
-            this.maxAccuracyLost = 0.15f;
-            this.maxAccuracyLost2 = 0f;
-            this._editorName = "PMR30 With SG";
-			this.weight = 1f;
+            ammo = 30;
+			ammo2 = 1;
+            _ammoType = new AT9mm
+            {
+                range = 215f,
+                accuracy = 0.875f,
+                penetration = 1f
+            };
+            _ammoType2 = new AT9mm
+            {
+                range = 110f,
+                accuracy = 0.35f,
+                penetration = 1f,
+                bulletSpeed = 50f
+            };
+            _numBulletsPerFire = 1;
+            _numBulletsPerFire2 = 16;
+            _type = "gun";
+            graphic = new Sprite(GetPath("PMR30"));
+            graphic1 = new Sprite(GetPath("PMR301"));
+            graphic2 = new Sprite(GetPath("PMR302"));
+            center = new Vec2(8f, 5f);
+            collisionOffset = new Vec2(-8f, -5f);
+            collisionSize = new Vec2(16f, 10f);
+            _barrelOffsetTL = new Vec2(16f, 2.5f);
+            _barrelOffsetTL2 = new Vec2(14f, 6f);
+            _holdOffset = new Vec2(0f, 2f);
+            _fireSound = GetPath("sounds/1.wav");
+            _fireSound2 = "littleGun";
+            _fullAuto = false;
+            _fireWait = 0.5f;
+            _kickForce = 0.55f;
+            loseAccuracy = 0.025f;
+            loseAccuracy2 = 0f;
+            maxAccuracyLost = 0.15f;
+            maxAccuracyLost2 = 0f;
+            _editorName = "PMR30 With SG";
+			weight = 1f;
         }
         public override void Update()
         {
-            if (this.owner != null)
+            if (owner != null)
             {
-                if (base.isServerForObject)
+                if (isServerForObject)
                 {
-                    if (base.duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK", false))
                     {
 						if (!switched)
 						{
 							switched = true;
-                            this.graphic = new Sprite(GetPath("pmr301"));
+                            graphic = new Sprite(GetPath("pmr301"));
                         }
-    			        Sprite g2 = this.graphic2;
-                        this.graphic2 = this.graphic;
-                        this.graphic = g2;
-                        float la2 = this.loseAccuracy2;
-                        this.loseAccuracy2 = this.loseAccuracy;
-                        this.loseAccuracy = la2;
-    			        float mal2 = this.maxAccuracyLost2;
-                        this.maxAccuracyLost2 = this.maxAccuracyLost;
-                        this.maxAccuracyLost = mal2;
-    			        int fak = this._numBulletsPerFire2;
-                        this._numBulletsPerFire2 = this._numBulletsPerFire;
-                        this._numBulletsPerFire = fak;
-                        Vec2 botl2 = this._barrelOffsetTL2;
-                        this._barrelOffsetTL2 = this._barrelOffsetTL;
-                        this._barrelOffsetTL = botl2;
-                        int a2 = this.ammo2;
-                        this.ammo2 = this.ammo;
-                        this.ammo = a2;
-                        AmmoType at2 = this._ammoType2;
-                        this._ammoType2 = this._ammoType;
-                        this._ammoType = at2;
-						string s2 = this._fireSound2;
-						this._fireSound2 = this._fireSound;
-						this._fireSound = s2;
+    			        Sprite g2 = graphic2;
+                        graphic2 = graphic;
+                        graphic = g2;
+                        float la2 = loseAccuracy2;
+                        loseAccuracy2 = loseAccuracy;
+                        loseAccuracy = la2;
+    			        float mal2 = maxAccuracyLost2;
+                        maxAccuracyLost2 = maxAccuracyLost;
+                        maxAccuracyLost = mal2;
+    			        int fak = _numBulletsPerFire2;
+                        _numBulletsPerFire2 = _numBulletsPerFire;
+                        _numBulletsPerFire = fak;
+                        Vec2 botl2 = _barrelOffsetTL2;
+                        _barrelOffsetTL2 = _barrelOffsetTL;
+                        _barrelOffsetTL = botl2;
+                        int a2 = ammo2;
+                        ammo2 = ammo;
+                        ammo = a2;
+                        AmmoType at2 = _ammoType2;
+                        _ammoType2 = _ammoType;
+                        _ammoType = at2;
+						string s2 = _fireSound2;
+						_fireSound2 = _fireSound;
+						_fireSound = s2;
 					}
 				}
 			}
@@ -98,32 +102,32 @@ namespace TMGmod.src
 		}
         public override void Thrown()
         {
-            if (this.ammo == 0)
+            if (ammo == 0)
             {
-                Sprite g2 = this.graphic2;
-                this.graphic2 = this.graphic;
-                this.graphic = g2;
-                float la2 = this.loseAccuracy2;
-                this.loseAccuracy2 = this.loseAccuracy;
-                this.loseAccuracy = la2;
-                float mal2 = this.maxAccuracyLost2;
-                this.maxAccuracyLost2 = this.maxAccuracyLost;
-                this.maxAccuracyLost = mal2;
-    			int fak = this._numBulletsPerFire2;
-                this._numBulletsPerFire2 = this._numBulletsPerFire;
-                this._numBulletsPerFire = fak;
-                Vec2 botl2 = this._barrelOffsetTL2;
-                this._barrelOffsetTL2 = this._barrelOffsetTL;
-                this._barrelOffsetTL = botl2;
-                int a2 = this.ammo2;
-                this.ammo2 = this.ammo;
-                this.ammo = a2;
-                AmmoType at2 = this._ammoType2;
-                this._ammoType2 = this._ammoType;
-                this._ammoType = at2;
-				string s2 = this._fireSound2;
-				this._fireSound2 = this._fireSound;
-				this._fireSound = s2;
+                Sprite g2 = graphic2;
+                graphic2 = graphic;
+                graphic = g2;
+                float la2 = loseAccuracy2;
+                loseAccuracy2 = loseAccuracy;
+                loseAccuracy = la2;
+                float mal2 = maxAccuracyLost2;
+                maxAccuracyLost2 = maxAccuracyLost;
+                maxAccuracyLost = mal2;
+    			int fak = _numBulletsPerFire2;
+                _numBulletsPerFire2 = _numBulletsPerFire;
+                _numBulletsPerFire = fak;
+                Vec2 botl2 = _barrelOffsetTL2;
+                _barrelOffsetTL2 = _barrelOffsetTL;
+                _barrelOffsetTL = botl2;
+                int a2 = ammo2;
+                ammo2 = ammo;
+                ammo = a2;
+                AmmoType at2 = _ammoType2;
+                _ammoType2 = _ammoType;
+                _ammoType = at2;
+				string s2 = _fireSound2;
+				_fireSound2 = _fireSound;
+				_fireSound = s2;
             }
             base.Thrown();
         }		

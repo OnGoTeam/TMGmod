@@ -6,11 +6,11 @@ namespace TMGMod.src
     {
         public PTPA()
         {
-            this.accuracy = 0.9f;
-            this.range = 500f;
-            this.penetration = 5f;
-            this.combustable = true;
-            this.bulletSpeed = 30f;
+            accuracy = 0.9f;
+            range = 500f;
+            penetration = 5f;
+            combustable = true;
+            bulletSpeed = 30f;
         }
 
         public override void PopShell(float x, float y, int dir)

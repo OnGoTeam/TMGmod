@@ -8,28 +8,30 @@ namespace TMGmod.src
         public MAPF(float xval, float yval)
             : base(xval, yval)
         {
-            this.ammo = 20;
-            this._ammoType = new ATMagnum();
-            this._ammoType.combustable = true;
-            this._ammoType.range = 0f;
-            this._ammoType.accuracy = 1f;
-            this._ammoType.penetration = 2f;
-            this._numBulletsPerFire = 2;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("Mixaly4sPistol2"));
-            this.center = new Vec2(7f, 7f);
-            this.collisionOffset = new Vec2(-6.5f, -7f);
-            this.collisionSize = new Vec2(15f, 12f);
-            this._barrelOffsetTL = new Vec2(15f, 3f);
-            this._fireSound = "smg";
-            this._fullAuto = true;
-            this._fireWait = 0.4f;
-            this._kickForce = 0.5f;
-            this.loseAccuracy = 0.5f;
-            this.maxAccuracyLost = 0.8f;
-            this._holdOffset = new Vec2(-2f, 3f);
-            this._editorName = "FEUERFREI";
-			this.weight = 2.5f;
+            ammo = 20;
+            _ammoType = new ATMagnum
+            {
+                combustable = true,
+                range = 0f,
+                accuracy = 1f,
+                penetration = 2f
+            };
+            _numBulletsPerFire = 2;
+            _type = "gun";
+            graphic = new Sprite(GetPath("Mixaly4sPistol2"));
+            center = new Vec2(7f, 7f);
+            collisionOffset = new Vec2(-6.5f, -7f);
+            collisionSize = new Vec2(15f, 12f);
+            _barrelOffsetTL = new Vec2(15f, 3f);
+            _fireSound = "smg";
+            _fullAuto = true;
+            _fireWait = 0.4f;
+            _kickForce = 0.5f;
+            loseAccuracy = 0.5f;
+            maxAccuracyLost = 0.8f;
+            _holdOffset = new Vec2(-2f, 3f);
+            _editorName = "FEUERFREI";
+			weight = 2.5f;
         }
         public override void Initialize()
         {
@@ -74,16 +76,16 @@ namespace TMGmod.src
 
         public override void Fire()
         {
-            if (this.ammo > 0)
+            if (ammo > 0)
             {
                 //this.ammo--;
-                base.ApplyKick();
-                if (!this.receivingPress && base.isServerForObject)
+                ApplyKick();
+                if (!receivingPress && isServerForObject)
                 {
-                    Vec2 pos = this.Offset(base.barrelOffset);
+                    Vec2 pos = Offset(barrelOffset);
                     MF d = new MF(pos.x, pos.y, this, 8);
-                    base.Fondle(d);
-                    Vec2 travelDir = Maths.AngleToVec(base.barrelAngle);
+                    Fondle(d);
+                    Vec2 travelDir = Maths.AngleToVec(barrelAngle);
                     d.hSpeed = travelDir.x * 14f;
                     d.vSpeed = travelDir.y * 14f;
                     Level.Add(d);
