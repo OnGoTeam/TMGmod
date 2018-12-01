@@ -334,3 +334,4 @@ ASALocalRun/
 .localhistory/
 
 build/dglink.csproj
+build/mod.csproj
