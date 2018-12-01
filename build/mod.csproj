@@ -32,8 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DuckGame">
-      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Duck Game\DuckGame.exe</HintPath>
-      <Private>False</Private>
+      <HintPath>G:\SteamLibrary\steamapps\common\Duck Game\DuckGame.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
