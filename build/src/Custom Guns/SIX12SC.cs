@@ -1,8 +1,9 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
     // ReSharper disable once InconsistentNaming

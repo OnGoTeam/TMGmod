@@ -8,8 +8,8 @@ namespace TMGmod
     public class Vixr : Gun
     {
 		private bool _stockngrip;
-        private float vixrstock;
-        private float vixrnostock;
+        private float _vixrstock;
+        private float _vixrnostock;
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -42,8 +42,8 @@ namespace TMGmod
         }
         public override void OnHoldAction()
         {
-            vixrstock = Rando.Float(-0.3f, 0.3f);
-            vixrnostock = Rando.Float(Rando.Float(0.45f, 0.44f), 0.45f);
+            _vixrstock = Rando.Float(-0.3f, 0.3f);
+            _vixrnostock = Rando.Float(Rando.Float(0.45f, 0.44f), 0.45f);
             base.OnHoldAction();
         }
         public override void Update()
@@ -57,14 +57,14 @@ namespace TMGmod
                         if (_stockngrip)
                         {
                             graphic = new Sprite(GetPath("VixrStock"));
-                            handAngle = vixrstock;
+                            handAngle = _vixrstock;
                             _stockngrip = false;
                             weight = 3.9f;
                         }
                         else
                         {
                             graphic = new Sprite(GetPath("VixrNoStock"));
-                            handAngle = vixrnostock;
+                            handAngle = _vixrnostock;
                             loseAccuracy = 0.13f;
                             _stockngrip = true;
                             weight = 2f;

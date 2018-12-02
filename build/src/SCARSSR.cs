@@ -54,7 +54,8 @@ namespace TMGmod
         }
         public override void OnHoldAction()
         {
-            if ((_kickForce != 0f) && (_ammoType.accuracy != 0.1f)) { _ammoType.accuracy -= 0.02f; } else { _ammoType.accuracy -= 0.0005f; };
+            if (_kickForce > 0f && _ammoType.accuracy > 0.1f) { _ammoType.accuracy -= 0.02f; } else { _ammoType.accuracy -= 0.0005f; }
+
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
