@@ -50,25 +50,22 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
+                    if (_stockngrip)
                     {
-                        if (_stockngrip)
-                        {
-                            graphic = new Sprite(GetPath("VixrStock"));
-                            handAngle = _vixrstock;
-                            _stockngrip = false;
-                            weight = 3.9f;
-                        }
-                        else
-                        {
-                            graphic = new Sprite(GetPath("VixrNoStock"));
-                            handAngle = _vixrnostock;
-                            loseAccuracy = 0.13f;
-                            _stockngrip = true;
-                            weight = 2f;
-                        }
+                        graphic = new Sprite(GetPath("VixrStock"));
+                        handAngle = _vixrstock;
+                        _stockngrip = false;
+                        weight = 3.9f;
+                    }
+                    else
+                    {
+                        graphic = new Sprite(GetPath("VixrNoStock"));
+                        handAngle = _vixrnostock;
+                        loseAccuracy = 0.13f;
+                        _stockngrip = true;
+                        weight = 2f;
                     }
                 }
                 if (ammo == 0) handAngle = 0f;

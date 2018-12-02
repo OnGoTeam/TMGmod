@@ -42,36 +42,33 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-					  if (_silencer)
-					    {
-				         graphic = new Sprite(GetPath("uzipro"));
-                            _ammoType = new AT9mm
-                            {
-                                range = 70f,
-                                accuracy = 0.9f,
-                                penetration = 3f
-                            };
-                            _barrelOffsetTL = new Vec2(11f, 3f);	
-						 _silencer = false;
-                         _fireSound = GetPath("sounds/smg.wav");
-					    }
-                      else
-					    {
-				         graphic = new Sprite(GetPath("uzipros"));
-                            _ammoType = new AT9mmS
-                            {
-                                range = 100f,
-                                accuracy = 1f,
-                                penetration = 2f
-                            };
-                            _barrelOffsetTL = new Vec2(17f, 3f);			 
-	 					 _silencer = true;
-                         _fireSound = GetPath("sounds/SilencedPistol.wav");
-					    }
+					if (_silencer)
+					{
+				        graphic = new Sprite(GetPath("uzipro"));
+                        _ammoType = new AT9mm
+                        {
+                            range = 70f,
+                            accuracy = 0.9f,
+                            penetration = 3f
+                        };
+                        _barrelOffsetTL = new Vec2(11f, 3f);	
+						_silencer = false;
+                        _fireSound = GetPath("sounds/smg.wav");
+					}
+                    else
+					{
+				        graphic = new Sprite(GetPath("uzipros"));
+                        _ammoType = new AT9mmS
+                        {
+                            range = 100f,
+                            accuracy = 1f,
+                            penetration = 2f
+                        };
+                        _barrelOffsetTL = new Vec2(17f, 3f);			 
+	 					_silencer = true;
+                        _fireSound = GetPath("sounds/SilencedPistol.wav");
 					}
 				}
 			}

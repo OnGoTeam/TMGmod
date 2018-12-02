@@ -39,28 +39,25 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-					  if (_mode > 0f && _mode < 2f)
-					    {
-				         graphic = new Sprite(GetPath("VAG732"));
-						 _fireWait = 0.6f;
-						 _mode = 2f;
-					    }
-                      else if (_mode > 1f && _mode < 3f)
-					    {
-				         graphic = new Sprite(GetPath("VAG733"));
-						 _fireWait = 0.9f;
-						 _mode = 3f;
-					    }
-                      else if (_mode > 2f && _mode < 4f)
-					    {
-				         graphic = new Sprite(GetPath("VAG731"));
-						 _fireWait = 0.3f;
-						 _mode = 1f;
-					    }
+					if (_mode > 0f && _mode < 2f)
+					{
+				        graphic = new Sprite(GetPath("VAG732"));
+						_fireWait = 0.6f;
+						_mode = 2f;
+					}
+                    else if (_mode > 1f && _mode < 3f)
+					{
+				        graphic = new Sprite(GetPath("VAG733"));
+						_fireWait = 0.9f;
+						_mode = 3f;
+					}
+                    else if (_mode > 2f && _mode < 4f)
+					{
+				        graphic = new Sprite(GetPath("VAG731"));
+						_fireWait = 0.3f;
+						_mode = 1f;
 					}
 				}
 			}

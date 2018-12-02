@@ -70,26 +70,23 @@ namespace TMGmod
 			
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-					    if (_stock)
-					    {
-                            loseAccuracy = 0.15f;
-						    weight = 5.5f;
-					        _sprite.SetAnimation("base");
-                            maxAccuracyLost = 0.1f;
-						    _stock = false;
-					    }
-                        else
-					    {
-                            loseAccuracy = 0.2f;
-				            weight = 2.75f;
-					        _sprite.SetAnimation("stock");
-                            maxAccuracyLost = 0.3f;
-						    _stock = true;
-					    }
+					if (_stock)
+					{
+                        loseAccuracy = 0.15f;
+						weight = 5.5f;
+					    _sprite.SetAnimation("base");
+                        maxAccuracyLost = 0.1f;
+						_stock = false;
+					}
+                    else
+					{
+                        loseAccuracy = 0.2f;
+				        weight = 2.75f;
+					    _sprite.SetAnimation("stock");
+                        maxAccuracyLost = 0.3f;
+						_stock = true;
 					}
 				}
 			}

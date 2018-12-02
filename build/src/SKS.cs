@@ -48,72 +48,69 @@ namespace TMGmod
 			{
 			    _patrons = ammo;	
 			}
-            if (owner != null)
+
+            if (owner == null) return;
+            //else
+            if (duck.inputProfile.Pressed("QUACK"))
             {
-                if (isServerForObject)
+                if (ammo < 17)
                 {
-					if (duck.inputProfile.Pressed("QUACK"))
-					{
-						 if (ammo < 17)
-						 {
-							_patrons = ammo;
-							_bullets = _patrons + 20;
-						    ammo += 20;
-						 }
-                        _flare = new SpriteMap(GetPath("takezis"), 4, 4)
-                        {
-                            center = new Vec2(0f, 0f)
-                        };
-                        _ammoType = new ATNB();
-                        _fullAuto = false;
-                        _fireWait = 0.1f;
-						_numBulletsPerFire = 1;
-                        _barrelOffsetTL = new Vec2(53f, 6f);
-                        _fireSound = "";
-                        loseAccuracy = 0f;
-                        maxAccuracyLost = 0f;
-                        _ammoType.bulletThickness = 0.1f;
-                        _kickForce = 0f;
-						_stick = true;
-				        Fire();
-					}
-                    if (duck.inputProfile.Down("QUACK"))
-					    {
-						_holdOffset = new Vec2(17f, 0f);
-						if (ammo < _bullets)
-					        {
-								ammo += 1;
-							}
-					    }
-                    if (duck.inputProfile.Released("QUACK"))
-					    {
-						    ammo = _patrons;
-					        _ammoType = new AT9mm
-					        {
-					            range = 900f,
-					            accuracy = 0.965f,
-					            penetration = 1f,
-					            bulletSpeed = 95f,
-					            bulletThickness = 1.5f
-					        };
-					        _fullAuto = false;
-                            _fireWait = 1.3f;
-						    _numBulletsPerFire = 1;
-                            _barrelOffsetTL = new Vec2(53f, 3f);
-                            _fireSound = GetPath("sounds/scar.wav");
-                            _holdOffset = new Vec2(11f, 0f);
-                            loseAccuracy = 0.1f;
-                            maxAccuracyLost = 0.8f;
-                            _kickForce = 0.6f;
-                            _flare = new SpriteMap("smallFlare", 11, 10)
-                            {
-                                center = new Vec2(0f, 4f)
-                            };
-                            _stick = false;
-					    }
-			    }
-			}
-		}	
+                    _patrons = ammo;
+                    _bullets = _patrons + 20;
+                    ammo += 20;
+                }
+                _flare = new SpriteMap(GetPath("takezis"), 4, 4)
+                {
+                    center = new Vec2(0f, 0f)
+                };
+                _ammoType = new ATNB();
+                _fullAuto = false;
+                _fireWait = 0.1f;
+                _numBulletsPerFire = 1;
+                _barrelOffsetTL = new Vec2(53f, 6f);
+                _fireSound = "";
+                loseAccuracy = 0f;
+                maxAccuracyLost = 0f;
+                _ammoType.bulletThickness = 0.1f;
+                _kickForce = 0f;
+                _stick = true;
+                Fire();
+            }
+            if (duck.inputProfile.Down("QUACK"))
+            {
+                _holdOffset = new Vec2(17f, 0f);
+                if (ammo < _bullets)
+                {
+                    ammo += 1;
+                }
+            }
+
+            if (!duck.inputProfile.Released("QUACK")) return;
+            //else
+            ammo = _patrons;
+            _ammoType = new AT9mm
+            {
+                range = 900f,
+                accuracy = 0.965f,
+                penetration = 1f,
+                bulletSpeed = 95f,
+                bulletThickness = 1.5f
+            };
+            _fullAuto = false;
+            _fireWait = 1.3f;
+            _numBulletsPerFire = 1;
+            _barrelOffsetTL = new Vec2(53f, 3f);
+            _fireSound = GetPath("sounds/scar.wav");
+            _holdOffset = new Vec2(11f, 0f);
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.8f;
+            _kickForce = 0.6f;
+            _flare = new SpriteMap("smallFlare", 11, 10)
+            {
+                center = new Vec2(0f, 4f)
+            };
+            _stick = false;
+        }	
         public override void Thrown()
         {
 			if (ammo != 0)

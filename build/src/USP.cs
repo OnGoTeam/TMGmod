@@ -39,34 +39,31 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-					  if (_silencer)
-					    {
-				         graphic = new Sprite(GetPath("USP"));
-                         _fireSound = GetPath("sounds/1.wav");
-                            _ammoType = new AT9mm
-                            {
-                                range = 100f,
-                                accuracy = 0.8f
-                            };
-                            _barrelOffsetTL = new Vec2(15f, 3f);	
-						 _silencer = false;
-					    }
-                      else
-					    {
-				         graphic = new Sprite(GetPath("USPS"));
-                         _fireSound = GetPath("sounds/SilencedPistol.wav");
-                            _ammoType = new AT9mmS
-                            {
-                                range = 130f,
-                                accuracy = 0.9f
-                            };
-                            _barrelOffsetTL = new Vec2(23f, 3f);			 
-						 _silencer = true;
-					    }
+					if (_silencer)
+					{
+				        graphic = new Sprite(GetPath("USP"));
+                        _fireSound = GetPath("sounds/1.wav");
+                        _ammoType = new AT9mm
+                        {
+                            range = 100f,
+                            accuracy = 0.8f
+                        };
+                        _barrelOffsetTL = new Vec2(15f, 3f);	
+						_silencer = false;
+					}
+                    else
+					{
+				        graphic = new Sprite(GetPath("USPS"));
+                        _fireSound = GetPath("sounds/SilencedPistol.wav");
+                        _ammoType = new AT9mmS
+                        {
+                            range = 130f,
+                            accuracy = 0.9f
+                        };
+                        _barrelOffsetTL = new Vec2(23f, 3f);			 
+						_silencer = true;
 					}
 				}
 			}

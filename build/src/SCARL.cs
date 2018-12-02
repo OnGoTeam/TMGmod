@@ -37,24 +37,21 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-					  if (_fullAuto)
-					    {
-					     _fullAuto = false;
-				         graphic = new Sprite(GetPath("SCARLsemiauto"));
-				         _fireWait = 1.3f;
-				         maxAccuracyLost = 0.2f;
-					    }
-                      else
-					    {
-						 _fullAuto = true;
-				         graphic = new Sprite(GetPath("SCARLauto"));
-				         _fireWait = 0.9f;
-				         maxAccuracyLost = 0.45f;
-					    }
+					if (_fullAuto)
+					{
+					    _fullAuto = false;
+				        graphic = new Sprite(GetPath("SCARLsemiauto"));
+				        _fireWait = 1.3f;
+				        maxAccuracyLost = 0.2f;
+					}
+                    else
+					{
+						_fullAuto = true;
+				        graphic = new Sprite(GetPath("SCARLauto"));
+				        _fireWait = 0.9f;
+				        maxAccuracyLost = 0.45f;
 					}
 				}
 			}

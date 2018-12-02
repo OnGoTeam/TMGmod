@@ -172,46 +172,43 @@ namespace TMGmod.Useless_or_deleted_Guns
             laserSight = false;
 			            if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-						if (!_switched)
-						{
-							_switched = true;
-                            graphic = new Sprite(GetPath("MSRSH1"));
-                        }
-    			        var g2 = _graphic2;
-                        _graphic2 = graphic;
-                        graphic = g2;
-                        var la2 = _loseAccuracy2;
-                        _loseAccuracy2 = loseAccuracy;
-                        loseAccuracy = la2;
-    			        var mal2 = _maxAccuracyLost2;
-                        _maxAccuracyLost2 = maxAccuracyLost;
-                        maxAccuracyLost = mal2;
-    			        var fak = _numBulletsPerFire2;
-                        _numBulletsPerFire2 = _numBulletsPerFire;
-                        _numBulletsPerFire = fak;
-                        var botl2 = _barrelOffsetTl2;
-                        _barrelOffsetTl2 = _barrelOffsetTL;
-                        _barrelOffsetTL = botl2;
-                        var a2 = _ammo2;
-                        _ammo2 = ammo;
-                        ammo = a2;
-                        var at2 = _ammoType2;
-                        _ammoType2 = _ammoType;
-                        _ammoType = at2;
-						var s2 = _fireSound2;
-						_fireSound2 = _fireSound;
-						_fireSound = s2;
-                        var autonik = _fullAuto2;
-                        _fullAuto2 = _fullAuto;
-                        _fullAuto = autonik;
-                        var stupidshit = _snuper;
-                        _snuper = _drobovik;
-                        _drobovik = stupidshit;
-					}
+					if (!_switched)
+					{
+						_switched = true;
+                        graphic = new Sprite(GetPath("MSRSH1"));
+                    }
+    			    var g2 = _graphic2;
+                    _graphic2 = graphic;
+                    graphic = g2;
+                    var la2 = _loseAccuracy2;
+                    _loseAccuracy2 = loseAccuracy;
+                    loseAccuracy = la2;
+    			    var mal2 = _maxAccuracyLost2;
+                    _maxAccuracyLost2 = maxAccuracyLost;
+                    maxAccuracyLost = mal2;
+    			    var fak = _numBulletsPerFire2;
+                    _numBulletsPerFire2 = _numBulletsPerFire;
+                    _numBulletsPerFire = fak;
+                    var botl2 = _barrelOffsetTl2;
+                    _barrelOffsetTl2 = _barrelOffsetTL;
+                    _barrelOffsetTL = botl2;
+                    var a2 = _ammo2;
+                    _ammo2 = ammo;
+                    ammo = a2;
+                    var at2 = _ammoType2;
+                    _ammoType2 = _ammoType;
+                    _ammoType = at2;
+					var s2 = _fireSound2;
+					_fireSound2 = _fireSound;
+					_fireSound = s2;
+                    var autonik = _fullAuto2;
+                    _fullAuto2 = _fullAuto;
+                    _fullAuto = autonik;
+                    var stupidshit = _snuper;
+                    _snuper = _drobovik;
+                    _drobovik = stupidshit;
 				}
 			}
 		    base.Update();

@@ -38,26 +38,23 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-					  if (_upirka)
-					    {
-				         graphic = new Sprite(GetPath("scarpdwstock"));
-                         loseAccuracy = 0.1f;
-				         maxAccuracyLost = 0.2f;
-			             weight = 5.5f;
-						 _upirka = false;
-					    }
-                      else
-					    {
-				         graphic = new Sprite(GetPath("SCARPDW"));
-                         loseAccuracy = 0.3f;
-				         maxAccuracyLost = 0.41f;
-			             weight = 3f;
-						 _upirka = true;
-					    }
+					if (_upirka)
+					{
+				        graphic = new Sprite(GetPath("scarpdwstock"));
+                        loseAccuracy = 0.1f;
+				        maxAccuracyLost = 0.2f;
+			            weight = 5.5f;
+						_upirka = false;
+					}
+                    else
+					{
+				        graphic = new Sprite(GetPath("SCARPDW"));
+                        loseAccuracy = 0.3f;
+				        maxAccuracyLost = 0.41f;
+			            weight = 3f;
+						_upirka = true;
 					}
 				}
 			}

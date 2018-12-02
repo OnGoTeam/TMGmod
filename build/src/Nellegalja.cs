@@ -40,20 +40,17 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (duck.inputProfile.Pressed("QUACK"))
-                    {
-					  if (_laser)
-					    {
-                         laserSight = true;
-						 _laser = false;
-					    }
-                      else
-					    {
-                         laserSight = false;
-						 _laser = true;
-					    }
+					if (_laser)
+					{
+                        laserSight = true;
+						_laser = false;
+					}
+                    else
+					{
+                        laserSight = false;
+						_laser = true;
 					}
 				}
 			}
