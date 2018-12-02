@@ -9,6 +9,7 @@ namespace TMGmod
     public class USP : Gun
     {
         private bool _silencer;
+        private bool _changed;
 
         public USP(float xval, float yval)
           : base(xval, yval)
@@ -39,33 +40,42 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (duck.inputProfile.Down("QUACK"))
                 {
-					if (_silencer)
-					{
-				        graphic = new Sprite(GetPath("USP"));
-                        _fireSound = GetPath("sounds/1.wav");
-                        _ammoType = new AT9mm
+                    if (!_changed)
+                    {
+                        if (_silencer)
                         {
-                            range = 100f,
-                            accuracy = 0.8f
-                        };
-                        _barrelOffsetTL = new Vec2(15f, 3f);	
-						_silencer = false;
-					}
-                    else
-					{
-				        graphic = new Sprite(GetPath("USPS"));
-                        _fireSound = GetPath("sounds/SilencedPistol.wav");
-                        _ammoType = new AT9mmS
+                            graphic = new Sprite(GetPath("USP"));
+                            _fireSound = GetPath("sounds/1.wav");
+                            _ammoType = new AT9mm
+                            {
+                                range = 100f,
+                                accuracy = 0.8f
+                            };
+                            _barrelOffsetTL = new Vec2(15f, 3f);
+                            _silencer = false;
+                        }
+                        else
                         {
-                            range = 130f,
-                            accuracy = 0.9f
-                        };
-                        _barrelOffsetTL = new Vec2(23f, 3f);			 
-						_silencer = true;
-					}
-				}
+                            graphic = new Sprite(GetPath("USPS"));
+                            _fireSound = GetPath("sounds/SilencedPistol.wav");
+                            _ammoType = new AT9mmS
+                            {
+                                range = 130f,
+                                accuracy = 0.9f
+                            };
+                            _barrelOffsetTL = new Vec2(23f, 3f);
+                            _silencer = true;
+                        }
+
+                        _changed = true;
+                    }
+                }
+                else
+                {
+                    _changed = false;
+                }
 			}
 		    base.Update();
 		}			
