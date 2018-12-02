@@ -50,8 +50,8 @@ namespace TMGmod
         }
         public override void OnHoldAction()
         {
-            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 65f));
-            handAngle = Rando.Float(-0.08f, 0.08f);
+            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 45f));
+            handAngle = Rando.Float(-0.1f, 0.1f);
             base.OnHoldAction();
         }
     }
