@@ -12,7 +12,7 @@ namespace TMGmod
             ammo = 7;
             _ammoType = new ATMagnum
             {
-                range = 250f,
+                range = 140f,
                 accuracy = 1f,
                 penetration = 2f,
                 bulletThickness = 3f
@@ -28,13 +28,11 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 1.6f;
             _kickForce = 1f;
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0f;
+            loseAccuracy = 0.5f;
+            maxAccuracyLost = 1f;
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "Pistol .50";
 			weight = 2.5f;
         }
-
-
     }
 }

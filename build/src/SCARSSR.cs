@@ -12,8 +12,8 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 1400f,
-                accuracy = 0.92f,
+                range = 800f,
+                accuracy = 1f,
                 penetration = 1f
             };
             _type = "gun";
@@ -26,9 +26,9 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.8f;
-            _kickForce = 0.7f;
+            _kickForce = 0.9f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.3f;
+            maxAccuracyLost = 0.45f;
             _editorName = "SCAR SSR";
             laserSight = true;
             _laserOffsetTL = new Vec2(19f, 4f);
@@ -45,12 +45,22 @@ namespace TMGmod
             }
             else
             {
-                _kickForce = 0.7f;
+                _kickForce = 0.9f;
                 loseAccuracy = 0.1f;
-                maxAccuracyLost = 0.3f;
+                maxAccuracyLost = 0.45f;
 				graphic = new Sprite(GetPath("SCAR20SSR"));
             }
             base.Update();
         }
-	}
+        public override void OnHoldAction()
+        {
+            if ((_kickForce != 0f) && (_ammoType.accuracy != 0.1f)) { _ammoType.accuracy -= 0.02f; } else { _ammoType.accuracy -= 0.0005f; };
+            base.OnHoldAction();
+        }
+        public override void OnReleaseAction()
+        {
+            if (_ammoType.accuracy < 1f) _ammoType.accuracy += 0.1f;
+            base.OnReleaseAction();
+        }
+    }
 }

@@ -15,7 +15,7 @@ namespace TMGmod
             {
                 range = 300f,
                 accuracy = 0.8f,
-                penetration = 1.5f
+                penetration = 1f
             };
             _type = "gun";
             graphic = new Sprite(GetPath("M4A1"));
@@ -28,7 +28,7 @@ namespace TMGmod
             _fireWait = 0.745f;
             _kickForce = 0f;
             loseAccuracy = 0.01f;
-            maxAccuracyLost = 0.12f;
+            maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(3f, 1f);
             _editorName = "M4A1";
 			weight = 4.5f;

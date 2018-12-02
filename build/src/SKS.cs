@@ -18,11 +18,11 @@ namespace TMGmod
             ammo = 16;
             _ammoType = new AT9mm
             {
-                range = 900f,
+                range = 1400f,
                 accuracy = 0.965f,
                 penetration = 1f,
-                bulletSpeed = 75f,
-                bulletThickness = 1f
+                bulletSpeed = 95f,
+                bulletThickness = 1.5f
             };
             _type = "gun";
             graphic = new Sprite(GetPath("SKS"));
@@ -91,10 +91,10 @@ namespace TMGmod
 					        _ammoType = new AT9mm
 					        {
 					            range = 900f,
-					            accuracy = 0.91f,
+					            accuracy = 0.965f,
 					            penetration = 1f,
-					            bulletSpeed = 75f,
-					            bulletThickness = 1f
+					            bulletSpeed = 95f,
+					            bulletThickness = 1.5f
 					        };
 					        _fullAuto = false;
                             _fireWait = 1.3f;
@@ -122,10 +122,10 @@ namespace TMGmod
 			    _ammoType = new AT9mm
 			    {
 			        range = 900f,
-			        accuracy = 0.91f,
+			        accuracy = 0.965f,
 			        penetration = 1f,
-			        bulletSpeed = 75f,
-			        bulletThickness = 1f
+			        bulletSpeed = 95f,
+			        bulletThickness = 1.5f
 			    };
 			    _fullAuto = false;
                 _fireWait = 1.3f;

@@ -13,10 +13,14 @@ namespace TMGmod
             base(xval, yval)
         {
             ammo = 36;
-            _ammoType = new HA
+            _ammoType = new AT9mmS
             {
-                range = 400f
-            };
+                accuracy = 0.9f,
+                range = 450f,
+                penetration = 4f,
+                combustable = true,
+                bulletSpeed = 65f
+        };
             _type = "gun";
             graphic = new Sprite(GetPath("haze"));
             center = new Vec2(12f, 3f);
@@ -25,7 +29,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(25f, 2f);
             _fireSound = GetPath("sounds/SilencedPistol.wav");
             _fullAuto = true;
-            _fireWait = 1f;
+            _fireWait = 0.9f;
             _kickForce = 0.5f;
             _holdOffset = new Vec2(1f, 0f);
             loseAccuracy = 0.05f;
@@ -35,7 +39,5 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(16f, 6f);
 			weight = 2f;
         }
-
-
     }
 }

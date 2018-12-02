@@ -17,7 +17,7 @@ namespace TMGmod
             ammo = 30;
 		    _ammoType = new AT9mm
 		    {
-		        range = 800f,
+		        range = 500f,
 		        accuracy = 0.87f,
 		        penetration = 1f
 		    };
@@ -33,7 +33,7 @@ namespace TMGmod
             _fireWait = 0.9f;
             _kickForce = 0.7f;
             loseAccuracy = 0.025f;
-            maxAccuracyLost = 0.2f;
+            maxAccuracyLost = 0.32f;
             _editorName = "CZ-805 BREN";
 			weight = 5f;
         }
@@ -51,11 +51,11 @@ namespace TMGmod
                             _fireSound = "deepMachineGun2";
                             _ammoType = new AT9mm
                             {
-                                range = 800f,
+                                range = 500f,
                                 accuracy = 0.87f
                             };
                             loseAccuracy = 0.025f;
-                            maxAccuracyLost = 0.2f;
+                            maxAccuracyLost = 0.32f;
                             _barrelOffsetTL = new Vec2(39f, 4f);
 			                _silencer = !_silencer;
 					    }
@@ -65,11 +65,11 @@ namespace TMGmod
                             _fireSound = GetPath("sounds/Silenced2.wav");
                             _ammoType = new AT9mmS
                             {
-                                range = 870f,
+                                range = 570f,
                                 accuracy = 0.95f
                             };
                             loseAccuracy = 0.02f;
-                            maxAccuracyLost = 0.18f;
+                            maxAccuracyLost = 0.3f;
                             _barrelOffsetTL = new Vec2(42.5f, 4f);
 			                _silencer = !_silencer;
 					    }

@@ -14,7 +14,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMagnum
             {
-                range = 600f,
+                range = 410f,
                 accuracy = 0.79f,
                 penetration = 1f
             };
@@ -54,7 +54,7 @@ namespace TMGmod
 					    {
 				         graphic = new Sprite(GetPath("SCARPDW"));
                          loseAccuracy = 0.3f;
-				         maxAccuracyLost = 0.5f;
+				         maxAccuracyLost = 0.41f;
 			             weight = 3f;
 						 _upirka = true;
 					    }

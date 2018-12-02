@@ -13,7 +13,7 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new Cal50Explode
             {
-                range = 1500f,
+                range = 1100f,
                 accuracy = 1f,
                 penetration = 1f,
                 bulletThickness = 2.5f

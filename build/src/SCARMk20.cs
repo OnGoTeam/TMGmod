@@ -12,8 +12,8 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 800f,
-                accuracy = 0.87f,
+                range = 950f,
+                accuracy = 0.95f,
                 penetration = 1f
             };
             _type = "gun";
@@ -25,12 +25,12 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, -1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
-            _fireWait = 0.95f;
+            _fireWait = 0.65f;
             _kickForce = 0.7f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.3f;
+            maxAccuracyLost = 0.15f;
             _editorName = "SCAR Mk20";
-			weight = 6.5f;
+			weight = 5.75f;
         }
     }
 }

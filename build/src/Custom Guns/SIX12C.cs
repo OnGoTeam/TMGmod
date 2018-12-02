@@ -30,7 +30,7 @@ namespace TMGmod.Custom_Guns
             _fullAuto = false;
             _fireWait = 1.7f;
             _kickForce = 1.4f;
-            loseAccuracy = 0f;
+            loseAccuracy = 0.5f;
             maxAccuracyLost = 0.5f;
             laserSight = true;
             _laserOffsetTL = new Vec2(24f, 7f);

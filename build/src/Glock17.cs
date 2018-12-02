@@ -27,10 +27,15 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.4f;
             _kickForce = 0.1f;
-            loseAccuracy = 0.1f;
+            loseAccuracy = 0.05f;
             maxAccuracyLost = 0.2f;
             _editorName = "Glock 18";
-			weight = 2f;
+			weight = 1.7f;
         }
-	}
+        public override void OnHoldAction()
+        {
+            handAngle = Rando.Float(-0.08f, 0.08f);
+            base.OnHoldAction();
+        }
+    }
 }

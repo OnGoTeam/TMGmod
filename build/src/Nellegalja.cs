@@ -12,11 +12,11 @@ namespace TMGmod
         public Nellegalja (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 20;
+            ammo = 15;
             _ammoType = new AT9mmS
             {
-                range = 800f,
-                accuracy = 0.95f,
+                range = 624f,
+                accuracy = 0.91f,
                 penetration = 1f
             };
             _type = "gun";
@@ -27,8 +27,8 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(30f, 4f);
             _fireSound = GetPath("sounds/Silenced2.wav");
             _fullAuto = false;
-            _fireWait = 0.8f;
-            _kickForce = 0.7f;
+            _fireWait = 0.88f;
+            _kickForce = 0.9f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             laserSight = true;

@@ -8,6 +8,8 @@ namespace TMGmod
     public class Vixr : Gun
     {
 		private bool _stockngrip;
+        private float vixrstock;
+        private float vixrnostock;
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -16,7 +18,7 @@ namespace TMGmod
             _ammoType = new AT9mmS
             {
                range = 300f,
-               accuracy = 0.78f,
+               accuracy = 0.88f,
                penetration = 1f,
                bulletSpeed = 21f
             };
@@ -26,7 +28,7 @@ namespace TMGmod
             center = new Vec2(16.5f, 4.5f);
             collisionOffset = new Vec2(-16.5f, -4.5f);
             collisionSize = new Vec2(33f, 9f);
-            _barrelOffsetTL = new Vec2(34f, 4f);
+            _barrelOffsetTL = new Vec2(34f, 3.5f);
             _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = true;
@@ -36,7 +38,14 @@ namespace TMGmod
             maxAccuracyLost = 0.17f;
             _editorName = "VIXR";
 			weight = 3.9f;
-		}
+            handAngle = 0f;
+        }
+        public override void OnHoldAction()
+        {
+            vixrstock = Rando.Float(-0.3f, 0.3f);
+            vixrnostock = Rando.Float(Rando.Float(0.45f, 0.44f), 0.45f);
+            base.OnHoldAction();
+        }
         public override void Update()
         {
             if (owner != null)
@@ -45,26 +54,31 @@ namespace TMGmod
                 {
                     if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if (_stockngrip)
-					    {
-				            graphic = new Sprite(GetPath("VixrStock"));
-                            _ammoType.accuracy = 0.78f;
-                            loseAccuracy = 0.099f;
-		                 	_stockngrip = false;
-			                weight = 3.9f;
-					    }
-                      else
-					    {
-			   	            graphic = new Sprite(GetPath("VixrNoStock"));
-                            _ammoType.accuracy = 0.74f;
+                        if (_stockngrip)
+                        {
+                            graphic = new Sprite(GetPath("VixrStock"));
+                            handAngle = vixrstock;
+                            _stockngrip = false;
+                            weight = 3.9f;
+                        }
+                        else
+                        {
+                            graphic = new Sprite(GetPath("VixrNoStock"));
+                            handAngle = vixrnostock;
                             loseAccuracy = 0.13f;
-		                	_stockngrip = true;
-			                weight = 2f;
-					    }
-					}
-				}
+                            _stockngrip = true;
+                            weight = 2f;
+                        }
+                    }
+                }
+                if (ammo == 0) handAngle = 0f;
 			}
 		    base.Update();
-		}			
-	}
+        }
+        public override void OnReleaseAction()
+        {
+            handAngle = 0f;
+            base.OnReleaseAction();
+        }
+    }
 }

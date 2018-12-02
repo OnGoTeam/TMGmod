@@ -27,10 +27,15 @@ namespace TMGmod.Custom_Guns
             _fullAuto = true;
             _fireWait = 0.4f;
             _kickForce = 0.1f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.2f;
+            loseAccuracy = 0.03f;
+            maxAccuracyLost = 0.16f;
             _editorName = "Glock 18 with Extended Mag";
-			weight = 2.5f;
+			weight = 2.1f;
+        }
+        public override void OnHoldAction()
+        {
+            handAngle = Rando.Float(-0.08f, 0.08f);
+            base.OnHoldAction();
         }
     }
 }

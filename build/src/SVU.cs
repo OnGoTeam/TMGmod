@@ -13,8 +13,8 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new ATMagnum
             {
-                range = 700f,
-                accuracy = 0.925f,
+                range = 580f,
+                accuracy = 0.91f,
                 penetration = 1.5f
             };
             _type = "gun";
@@ -28,7 +28,7 @@ namespace TMGmod
             _fireWait = 0.75f;
             _kickForce = 1.5f;
             loseAccuracy = 0.05f;
-            maxAccuracyLost = 0.25f;
+            maxAccuracyLost = 0.45f;
             _holdOffset = new Vec2(1f, 2f);
             _editorName = "SVU";
 			weight = 5f;

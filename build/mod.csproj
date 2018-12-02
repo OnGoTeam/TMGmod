@@ -64,6 +64,7 @@
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
     <Compile Include="src\Custom Guns\SIX12C.cs" />
+    <Compile Include="src\Custom Guns\SIX12SC.cs" />
     <Compile Include="src\Custom Guns\SVUC.cs" />
     <Compile Include="src\Custom Guns\TR-21C.cs" />
     <Compile Include="src\Custom Guns\VintorezC.cs" />

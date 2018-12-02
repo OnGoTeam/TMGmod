@@ -33,7 +33,7 @@ namespace TMGmod
             _fireWait = 1.7f;
             _kickForce = 1.4f;
             loseAccuracy = 0f;
-            maxAccuracyLost = 0.5f;
+            maxAccuracyLost = 0f;
             laserSight = false;
             _laserOffsetTL = new Vec2(24f, 7f);
             _holdOffset = new Vec2(2f, 0f);
@@ -48,6 +48,8 @@ namespace TMGmod
                 {
                  laserSight = true;
 				 graphic = new Sprite(GetPath("SIX12laser2"));
+                 loseAccuracy = 0.5f;
+                 maxAccuracyLost = 0.5f;
                 }
             }
             base.Initialize();

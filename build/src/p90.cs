@@ -15,7 +15,7 @@ namespace TMGmod
             ammo = 50;
             _ammoType = new AT9mm
             {
-                range = 150f,
+                range = 60f,
                 accuracy = 0.7f,
                 penetration = 1f
             };
@@ -29,8 +29,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.2f;
             _kickForce = 0.4f;
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0.1f;
+            loseAccuracy = 0.09f;
+            maxAccuracyLost = 0.55f;
             _holdOffset = new Vec2(-3f, 0f);
             handOffset = new Vec2(2f, 0f);
             _editorName = "FN P90";
@@ -43,7 +43,7 @@ namespace TMGmod
                 if (Elongated.value)
                 {
                  _ammoType.accuracy = 0.8f;
-                 _ammoType.range = 200f;
+                 _ammoType.range = 100f;
 				 graphic = new Sprite(GetPath("p90long2"));
                 }
             }

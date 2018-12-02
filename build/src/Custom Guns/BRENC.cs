@@ -69,7 +69,7 @@ namespace TMGmod.Custom_Guns
                             loseAccuracy = 0.02f;
                             maxAccuracyLost = 0.18f;
                             _barrelOffsetTL = new Vec2(42.5f, 4f);
-			                _silencer = false;
+			                _silencer = true;
 					    }
 					}
 				}
