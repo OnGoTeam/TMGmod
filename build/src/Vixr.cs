@@ -34,7 +34,7 @@ namespace TMGmod
             _kickForce = 0.8f;
             loseAccuracy = 0.099f;
             maxAccuracyLost = 0.17f;
-            _editorName = "Vixr";
+            _editorName = "VIXR";
 			weight = 3.9f;
 		}
         public override void Update()

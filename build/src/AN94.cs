@@ -14,7 +14,8 @@ namespace TMGmod
         private float _bw = 5.1f;
 
         private bool _stock;
-        private readonly EditorProperty<bool> _laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+        // ReSharper disable once MemberCanBePrivate.Global
+        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public AN94(float xval, float yval)
             : base(xval, yval)
@@ -106,7 +107,7 @@ namespace TMGmod
         {
 			if (!(Level.current is Editor))
             {
-                if (_laser.value)
+                if (Laser.value)
                 {
                  laserSight = true;
                 }
