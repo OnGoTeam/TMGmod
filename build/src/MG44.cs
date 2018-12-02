@@ -78,7 +78,7 @@ namespace TMGmod
 		    }
 		    else
 		    {
-		        if (duck.crouch || duck.sliding) _raisestat -= .015f;
+		        if (duck.crouch || duck.sliding) _raisestat -= .005f;
 		        if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
 		        if (!(_raisestat < 0f)) return;
 		        _raisestat = 0f;
@@ -88,8 +88,10 @@ namespace TMGmod
 
         public override void Fire()
         {
+            var wasammo = ammo > 0;
             _ammoType.accuracy = _raisestat < AcclA ? 1f : DefaultAccuracy;
             base.Fire();
+            if (!wasammo) return;
             if (_raisestat < AcclA) _raisestat = AcclB;
             var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
             _raisestat += Rando.Float(0.25f * (_kickForce / weight) * raisek, 0.375f * (_kickForce / weight) * raisek + 0.01f);
