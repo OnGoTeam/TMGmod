@@ -26,7 +26,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(13f, 2f);
             _holdOffset = new Vec2(-2f, 0f);
             ammo = 15;
-            _ammoType = new ATMagnum {range = 98f};
+            _ammoType = new ATMagnum {range = 70f};
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = true;
             _fireWait = 0.27f;

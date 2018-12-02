@@ -10,10 +10,10 @@ namespace TMGmod
         public HK417 (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 20;
+            ammo = 10;
             _ammoType = new ATMagnum
             {
-                range = 700f,
+                range = 600f,
                 accuracy = 0.9f,
                 penetration = 1f
             };

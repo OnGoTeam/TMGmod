@@ -24,7 +24,7 @@ public class Remington : Gun
 	        range = 115f,
 	        accuracy = 0.57f,
 	        penetration = 1f,
-	        bulletSpeed = 19f,
+	        bulletSpeed = 25f,
 	        bulletThickness = 0.6f
 	    };
 	    _type = "gun";

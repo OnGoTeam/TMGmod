@@ -99,6 +99,7 @@
     <Compile Include="src\SCARPDW.cs" />
     <Compile Include="src\SCARSSR.cs" />
     <Compile Include="src\SIX12.cs" />
+    <Compile Include="src\SIX12S.cs" />
     <Compile Include="src\SKS.cs" />
     <Compile Include="src\SNR22.cs" />
     <Compile Include="src\SV98.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="src\USP.cs" />
     <Compile Include="src\VAG73.cs" />
     <Compile Include="src\Vintorez.cs" />
+    <Compile Include="src\Vixr.cs" />
     <Compile Include="src\X3X.cs" />
   </ItemGroup>
   <ItemGroup>

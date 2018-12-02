@@ -24,7 +24,7 @@ public class RemingtonTac : Gun
 	        range = 125f,
 	        accuracy = 0.69f,
 	        penetration = 1f,
-	        bulletSpeed = 25f,
+	        bulletSpeed = 35f,
 	        bulletThickness = 0.5f
 	    };
 	    _type = "gun";

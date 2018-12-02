@@ -14,7 +14,7 @@ namespace TMGmod
             ammo = 95;
             _ammoType = new ATMagnum
             {
-                range = 500f,
+                range = 345f,
                 accuracy = 0.8f,
                 penetration = 1.5f
             };
@@ -29,7 +29,7 @@ namespace TMGmod
             _fireWait = 0.825f;
             _kickForce = 0.33f;
             loseAccuracy = 0.01f;
-            maxAccuracyLost = 0.12f;
+            maxAccuracyLost = 0.1f;
             _holdOffset = new Vec2(5f, 1f);
             _editorName = "M16-LMG";
 			weight = 5.75f;

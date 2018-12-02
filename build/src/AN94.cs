@@ -27,7 +27,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(34f, 3f);
             _holdOffset = new Vec2(2f, 2f);
             ammo = 30;
-            _ammoType = new ATMagnum {range = 310f};
+            _ammoType = new ATMagnum {range = 310f, bulletSpeed = 180f};
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.1f;
