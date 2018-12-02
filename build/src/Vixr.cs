@@ -7,7 +7,7 @@ namespace TMGmod
     [EditorGroup("TMG|Machinegun")]
     public class Vixr : Gun
     {
-		private bool stockngrip;
+		private bool _stockngrip;
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -43,14 +43,14 @@ namespace TMGmod
             {
                 if (isServerForObject)
                 {
-                    if (duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if (stockngrip)
+					  if (_stockngrip)
 					    {
 				            graphic = new Sprite(GetPath("VixrStock"));
                             _ammoType.accuracy = 0.78f;
                             loseAccuracy = 0.099f;
-		                 	stockngrip = false;
+		                 	_stockngrip = false;
 			                weight = 3.9f;
 					    }
                       else
@@ -58,7 +58,7 @@ namespace TMGmod
 			   	            graphic = new Sprite(GetPath("VixrNoStock"));
                             _ammoType.accuracy = 0.74f;
                             loseAccuracy = 0.13f;
-		                	stockngrip = true;
+		                	_stockngrip = true;
 			                weight = 2f;
 					    }
 					}

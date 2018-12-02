@@ -7,7 +7,7 @@ namespace TMGmod
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     public class M960 : Gun
     {
-        private readonly EditorProperty<bool> limited = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+        private readonly EditorProperty<bool> _limited = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public M960(float xval, float yval)
             : base(xval, yval)
@@ -39,7 +39,7 @@ namespace TMGmod
         {
 			if (!(Level.current is Editor))
             {
-                if (limited.value)
+                if (_limited.value)
                 {
                  _fireWait = 2.5f;
                  _ammoType.accuracy = 0.95f;
