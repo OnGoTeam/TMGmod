@@ -54,40 +54,37 @@ namespace TMGmod
             base.Update();
             if (owner != null)
             {
-                if (isServerForObject)
+                if (duck.inputProfile.Down("UP") && !_raised && !duck.inputProfile.Down("QUACK"))
                 {
-                    if (duck.inputProfile.Down("UP") && !_raised && !duck.inputProfile.Down("QUACK"))
+                    if (offDir < 0)
                     {
-                        if (offDir < 0)
-                        {
-                            //this._angleOffset = 0.5f;
-                            handAngle = 0.5f;
-                        }
-                        else
-                        {
-                            //this._angleOffset = -0.5f;
-                            handAngle = -0.5f;
-                        }
-
-                        return;
+                        //this._angleOffset = 0.5f;
+                        handAngle = 0.5f;
+                    }
+                    else
+                    {
+                        //this._angleOffset = -0.5f;
+                        handAngle = -0.5f;
                     }
 
-                    if (duck.inputProfile.Down("DOWN") && !_raised && !duck.inputProfile.Down("QUACK"))
-                    {
-                        if (duck.sliding) return;
-                        if (offDir > 0)
-                        {
-                            //this._angleOffset = 0.5f;
-                            handAngle = 0.5f;
-                        }
-                        else
-                        {
-                            //this._angleOffset = -0.5f;
-                            handAngle = -0.5f;
-                        }
+                    return;
+                }
 
-                        return;
+                if (duck.inputProfile.Down("DOWN") && !_raised && !duck.inputProfile.Down("QUACK"))
+                {
+                    if (duck.sliding) return;
+                    if (offDir > 0)
+                    {
+                        //this._angleOffset = 0.5f;
+                        handAngle = 0.5f;
                     }
+                    else
+                    {
+                        //this._angleOffset = -0.5f;
+                        handAngle = -0.5f;
+                    }
+
+                    return;
                 }
             }
 
