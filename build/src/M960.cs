@@ -41,7 +41,7 @@ namespace TMGmod
             {
                 if (limited.value)
                 {
-                 _fireWait = 0.5f;
+                 _fireWait = 0.6f;
                  _ammoType.accuracy = 0.95f;
                 }
             }
@@ -49,8 +49,8 @@ namespace TMGmod
         }
         public override void OnHoldAction()
         {
-            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 60f));
-            handAngle = Rando.Float(-0.05f, 0.05f);
+            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 65f));
+            handAngle = Rando.Float(-0.08f, 0.08f);
             base.OnHoldAction();
         }
     }
