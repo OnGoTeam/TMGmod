@@ -94,7 +94,7 @@ namespace TMGmod
             if (!wasammo) return;
             if (_raisestat < AcclA) _raisestat = AcclB;
             var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
-            _raisestat += Rando.Float(0.25f * (_kickForce / weight) * raisek, 0.375f * (_kickForce / weight) * raisek + 0.01f);
+            _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
         }
     }
 }
