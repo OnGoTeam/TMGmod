@@ -6,7 +6,8 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper")]
     public class BarretM98 : Sniper
     {
-        private readonly EditorProperty<bool> _shortened = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+        // ReSharper disable once MemberCanBePrivate.Global
+        public readonly EditorProperty<bool> Shortened = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
@@ -140,7 +141,7 @@ namespace TMGmod
         {
 			if (!(Level.current is Editor))
             {
-                if (_shortened.value)
+                if (Shortened.value)
                 {
                  _ammoType.accuracy = 0.9f;
 			     weight = 6.5f;

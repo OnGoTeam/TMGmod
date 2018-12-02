@@ -7,7 +7,8 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SIX12 : Gun
     {
-        private readonly EditorProperty<bool> _laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+        // ReSharper disable once MemberCanBePrivate.Global
+        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
 		public SIX12 (float xval, float yval)
           : base(xval, yval)
@@ -43,7 +44,7 @@ namespace TMGmod
         {
 			if (!(Level.current is Editor))
             {
-                if (_laser.value)
+                if (Laser.value)
                 {
                  laserSight = true;
 				 graphic = new Sprite(GetPath("SIX12laser2"));

@@ -6,7 +6,8 @@ namespace TMGmod
     [EditorGroup("TMG|SMG")]
     public class P90 : Gun
     {
-        private readonly EditorProperty<bool> _elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+        // ReSharper disable once MemberCanBePrivate.Global
+        public readonly EditorProperty<bool> Elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public P90(float xval, float yval)
           : base(xval, yval)
@@ -39,7 +40,7 @@ namespace TMGmod
         {
 			if (!(Level.current is Editor))
             {
-                if (_elongated.value)
+                if (Elongated.value)
                 {
                  _ammoType.accuracy = 0.8f;
                  _ammoType.range = 200f;

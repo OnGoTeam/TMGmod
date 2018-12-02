@@ -7,10 +7,10 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AKwAR : Gun
     {
-        int _aammo;
-        readonly int _ammo;
-        int _rs;
-        bool _isroundsin = true; 
+        private int _aammo;
+        private readonly int _ammo;
+        private int _rs;
+        private bool _isroundsin = true; 
 
 
         public AKwAR(float xval, float yval)

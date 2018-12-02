@@ -12,7 +12,8 @@ namespace TMGmod.Custom_Guns
         readonly int _burstValue;
         float _bw = 5.1f;
 
-        private readonly EditorProperty<bool> _laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+        // ReSharper disable once MemberCanBePrivate.Global
+        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public AN94C(float xval, float yval)
             : base(xval, yval)
@@ -59,17 +60,15 @@ namespace TMGmod.Custom_Guns
         }
         public override void OnPressAction()
         {
-            if (_bw > 1f)
-            {
-                _bw = 0.2f;
-                _burstNumB = _burstValue;
-            }
+            if (!(_bw > 1f)) return;
+            _bw = 0.2f;
+            _burstNumB = _burstValue;
         }
         public override void Initialize()
         {
 			if (!(Level.current is Editor))
             {
-                if (_laser.value)
+                if (Laser.value)
                 {
                  laserSight = true;
                 }

@@ -72,8 +72,9 @@ namespace TMGmod
                         return;
                     }
 
-                    else if (duck.inputProfile.Down("DOWN") && !_raised && !duck.inputProfile.Down("QUACK"))
+                    if (duck.inputProfile.Down("DOWN") && !_raised && !duck.inputProfile.Down("QUACK"))
                     {
+                        if (duck.sliding) return;
                         if (offDir > 0)
                         {
                             //this._angleOffset = 0.5f;
