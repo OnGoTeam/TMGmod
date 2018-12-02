@@ -7,6 +7,14 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MG44 : Gun
     {
+        private const float DefaultAccuracy = .75f;
+        private const float MaxRaise = .6f;
+        private const float EpsilonD = .2f;
+        private const float EpsilonK = .1f;
+        private const float EpsilonX = .8f;
+        private const float EpsilonY = EpsilonK / EpsilonX;
+        private const float AcclA = .045f;
+        private const float AcclB = .225f;
         private float _raisestat;
 
 		public MG44 (float xval, float yval)
@@ -48,10 +56,10 @@ namespace TMGmod
                     break;
             }
 
-		    if (_raisestat > .6f) _raisestat = .6f;
+		    if (_raisestat > MaxRaise) _raisestat = MaxRaise;
 		    if (_raisestat > 0f)
 		    {
-		        var δα = -0.123607f - 0.1f / (_raisestat - 0.809017f);
+		        var δα = -EpsilonY - EpsilonK / (_raisestat - EpsilonX);
 
 		        if (offDir < 0)
 		        {
@@ -71,7 +79,7 @@ namespace TMGmod
 		    else
 		    {
 		        if (duck.crouch || duck.sliding) _raisestat -= .015f;
-		        _raisestat += 0.05f * duck.vSpeed;
+		        if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
 		        if (!(_raisestat < 0f)) return;
 		        _raisestat = 0f;
 		        handAngle = 0f;
@@ -80,7 +88,11 @@ namespace TMGmod
 
         public override void Fire()
         {
-            base.Fire();_raisestat += Rando.Float(0.03f, 0.08f);
+            _ammoType.accuracy = _raisestat < AcclA ? 1f : DefaultAccuracy;
+            base.Fire();
+            if (_raisestat < AcclA) _raisestat = AcclB;
+            var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
+            _raisestat += Rando.Float(0.25f * (_kickForce / weight) * raisek, 0.375f * (_kickForce / weight) * raisek + 0.01f);
         }
     }
 }
