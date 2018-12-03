@@ -8,15 +8,15 @@ namespace TMGmod
     {
         // ReSharper disable once MemberCanBePrivate.Global
         public readonly EditorProperty<bool> Elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
-		
+        
         public P90(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 50;
             _ammoType = new AT9mm
             {
-                range = 60f,
-                accuracy = 0.7f,
+                range = Rando.Float(15f, 60f),
+                accuracy = 0.6f,
                 penetration = 1f
             };
             _type = "gun";
@@ -42,12 +42,24 @@ namespace TMGmod
             {
                 if (Elongated.value)
                 {
-                 _ammoType.accuracy = 0.8f;
-                 _ammoType.range = 100f;
 				 graphic = new Sprite(GetPath("p90long2"));
                 }
             }
             base.Initialize();
         }
-	}
+        public override void OnHoldAction()
+        {
+            if (Elongated.value)
+            {
+                _ammoType.accuracy = 0.7f;
+                _ammoType.range = Rando.Float(-10f, 60f) + 25f;
+            }
+            else
+            {
+                _ammoType.accuracy = 0.6f;
+                _ammoType.range = Rando.Float(15f, 60f);
+            }
+            base.OnHoldAction();
+        }
+    }
 }
