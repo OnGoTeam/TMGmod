@@ -10,7 +10,7 @@ namespace TMGmod
         public M50 (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 6;
+            ammo = 7;
             _ammoType = new Cal50Explode
             {
                 range = 1100f,

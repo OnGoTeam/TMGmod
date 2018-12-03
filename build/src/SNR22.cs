@@ -10,7 +10,7 @@ namespace TMGmod
         public SNR22 (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 5;
+            ammo = 6;
             _ammoType = new ATSniper
             {
                 range = 1200f,

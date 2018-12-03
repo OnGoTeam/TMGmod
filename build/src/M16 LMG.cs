@@ -38,7 +38,7 @@ namespace TMGmod
         {
             if (_owner != null && _owner.height < 17f)
             {
-                _kickForce = 0.05f;
+                _kickForce = 0f;
 				loseAccuracy = 0.005f;
                 maxAccuracyLost = 0.6f;
             }

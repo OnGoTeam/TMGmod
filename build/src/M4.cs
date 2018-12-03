@@ -10,7 +10,7 @@ namespace TMGmod
         private int _ammobefore = 31;
         private int _counter;
         private float _explode;
-        private const double Explodechance = 0.05;
+        private const double Explodechance = 0.00025;
 
         public M4A1 (float xval, float yval)
           : base(xval, yval)

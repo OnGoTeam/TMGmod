@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
@@ -10,14 +11,13 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 7;
-            _ammoType = new ATMagnum
+            _ammoType = new AT50C
             {
                 range = 140f,
                 accuracy = 1f,
                 penetration = 2f,
-                bulletThickness = 3f
+                bulletThickness = 3.5f
             };
-            _numBulletsPerFire = 4;
             _type = "gun";
             graphic = new Sprite(GetPath("pistol50"));
             center = new Vec2(10f, 5f);

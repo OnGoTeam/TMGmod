@@ -48,6 +48,7 @@
     <Compile Include="src\Core\AT9mmSilenced.cs" />
     <Compile Include="src\Core\ATNotBullet.cs" />
     <Compile Include="src\Core\Cal50Explode.cs" />
+    <Compile Include="src\Core\Caliber50Bullet.cs" />
     <Compile Include="src\Core\Czmag.cs" />
     <Compile Include="src\Core\EKSPLOZIVI SCHEET.cs" />
     <Compile Include="src\Core\HA.cs" />
@@ -61,11 +62,13 @@
     <Compile Include="src\Custom Guns\BRENC.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
     <Compile Include="src\Custom Guns\M4C.cs" />
+    <Compile Include="src\Custom Guns\M960C.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
     <Compile Include="src\Custom Guns\SIX12C.cs" />
     <Compile Include="src\Custom Guns\SIX12SC.cs" />
     <Compile Include="src\Custom Guns\SVUC.cs" />
+    <Compile Include="src\Custom Guns\SVUC1.cs" />
     <Compile Include="src\Custom Guns\TR-21C.cs" />
     <Compile Include="src\Custom Guns\VintorezC.cs" />
     <Compile Include="src\CZ75.cs" />
