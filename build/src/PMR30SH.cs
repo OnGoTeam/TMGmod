@@ -14,7 +14,7 @@ namespace TMGmod
         private string _fireSound2;
         private float _loseAccuracy2;
         private float _maxAccuracyLost2;
-        int _numBulletsPerFire2;
+        private int _numBulletsPerFire2;
         private bool _switched;
 
         public PMR(float xval, float yval)
