@@ -8,7 +8,7 @@ namespace TMGmod
     public class M4A1 : Gun
     {
         private int _ammobefore = 31;
-        private int _counter = 0;
+        private int _counter;
         private int _explodechance;
 
         public M4A1 (float xval, float yval)
