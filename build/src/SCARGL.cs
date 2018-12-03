@@ -31,11 +31,10 @@ namespace TMGmod
         };
 
         private readonly Sprite[] _graphicm = {new Sprite(), new Sprite(), new Sprite()};
-        private readonly Vec2[] _barrelOffsetTLm = {new Vec2(16f, 2.5f), new Vec2(14f, 6f)};
-        private readonly string[] _fireSoundm = {"sounds/1.wav", "littleGun"};
-        private readonly float[] _loseAccuracym = {.025f, 0f};
-        private readonly float[] _maxAccuracyLostm = {.15f, 0f};
-        private readonly int[] _numBulletsPerFirem = {1, 16};
+        private readonly Vec2[] _barrelOffsetTLm = {new Vec2(33f, 3f), new Vec2(30f, 6.5f)};
+        private readonly string[] _fireSoundm = {"sounds/1.wav", "deepMachineGun"};
+        private readonly float[] _loseAccuracym = {.01f, 0f};
+        private readonly float[] _maxAccuracyLostm = {.2f, 0f};
         private bool _switched;
         private bool _changed;
 
@@ -43,7 +42,6 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 20;
-			_ammo2 = 1;
             _ammoType = new ATMagnum
             {
                 range = 900f,
@@ -52,99 +50,64 @@ namespace TMGmod
                 bulletSpeed = 35f,
                 barrelAngleDegrees = 0f
             };
-            _ammoType2 = new ATGrenade
-            {
-                range = 2500f,
-                accuracy = 1f,
-                penetration = 1f,
-                bulletSpeed = 18f,
-                barrelAngleDegrees = -7.5f
-            };
             _type = "gun";
-            graphic = new Sprite(GetPath("scargl"));
-            _graphic2 = new Sprite(GetPath("scargl2"));
+            _graphicm[0] = new Sprite(GetPath("scargl1"));
+            _graphicm[1] = new Sprite(GetPath("scargl2"));
+            _graphicm[2] = new Sprite(GetPath("scargl"));
             center = new Vec2(16.5f, 5f);
             collisionOffset = new Vec2(-16.5f, -5f);
             collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 3f);
-            _barrelOffsetTl2 = new Vec2(30f, 6.5f);
             _holdOffset = new Vec2(2f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
-            _fireSound2 = "deepMachineGun";
+            _fireSoundm[0] = _fireSound;
             _fullAuto = true;
             _fireWait = 1.2f;
             _kickForce = 0.8f;
             loseAccuracy = 0.1f;
-            _loseAccuracy2 = 0f;
             maxAccuracyLost = 0.2f;
-            _maxAccuracyLost2 = 0f;
             _editorName = "SCAR-H With GL";
 			weight = 6f;
 
         }
+
+        private void UpdateMode()
+        {
+            graphic = _graphicm[_switched ? _mode : 2];
+            _ammoType = _ammoTypem[_mode];
+            _barrelOffsetTL = _barrelOffsetTLm[_mode];
+            _fireSound = _fireSoundm[_mode];
+            loseAccuracy = _loseAccuracym[_mode];
+            maxAccuracyLost = _maxAccuracyLostm[_mode];
+        }
+
         public override void Update()
         {
             if (owner != null)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (duck.inputProfile.Down("QUACK"))
                 {
-					if (!_switched)
-					{
-						_switched = true;
-                        graphic = new Sprite(GetPath("scargl1"));
+                    if (!_changed)
+                    {
+                        _mode = 1 - _mode;
+                        _changed = true;
+                        _switched = true;
                     }
-    			    var g2 = _graphic2;
-                    _graphic2 = graphic;
-                    graphic = g2;
-                    var la2 = _loseAccuracy2;
-                    _loseAccuracy2 = loseAccuracy;
-                    loseAccuracy = la2;
-    			    var mal2 = _maxAccuracyLost2;
-                    _maxAccuracyLost2 = maxAccuracyLost;
-                    maxAccuracyLost = mal2;
-                    var botl2 = _barrelOffsetTl2;
-                    _barrelOffsetTl2 = _barrelOffsetTL;
-                    _barrelOffsetTL = botl2;
-                    var a2 = _ammo2;
-                    _ammo2 = ammo;
-                    ammo = a2;
-                    var at2 = _ammoType2;
-                    _ammoType2 = _ammoType;
-                    _ammoType = at2;
-					var s2 = _fireSound2;
-					_fireSound2 = _fireSound;
-					_fireSound = s2;
-				}
-			}
-		    base.Update();
-		}
-        public override void Thrown()
-        {
-            if (ammo == 0)
-            {
-                var g2 = _graphic2;
-                _graphic2 = graphic;
-                graphic = g2;
-                var la2 = _loseAccuracy2;
-                _loseAccuracy2 = loseAccuracy;
-                loseAccuracy = la2;
-                var mal2 = _maxAccuracyLost2;
-                _maxAccuracyLost2 = maxAccuracyLost;
-                maxAccuracyLost = mal2;
-                var botl2 = _barrelOffsetTl2;
-                _barrelOffsetTl2 = _barrelOffsetTL;
-                _barrelOffsetTL = botl2;
-                var a2 = _ammo2;
-                _ammo2 = ammo;
-                ammo = a2;
-                var at2 = _ammoType2;
-                _ammoType2 = _ammoType;
-                _ammoType = at2;
-				var s2 = _fireSound2;
-				_fireSound2 = _fireSound;
-				_fireSound = s2;
+                }
+                else
+                {
+                    _changed = false;
+                }
             }
-            base.Thrown();
-        }		
-	}
+            UpdateMode();
+            base.Update();
+        }
+        public override void Fire()
+        {
+            ammo = _ammom[_mode];
+            base.Fire();
+            _ammom[_mode] = ammo;
+            ammo = _ammom[0] + _ammom[1];
+        }
+    }
 }
