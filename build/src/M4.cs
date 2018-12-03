@@ -9,7 +9,8 @@ namespace TMGmod
     {
         private int _ammobefore = 31;
         private int _counter;
-        private int _explodechance;
+        private float _explode;
+        private const double Explodechance = 0.05;
 
         public M4A1 (float xval, float yval)
           : base(xval, yval)
@@ -52,8 +53,8 @@ namespace TMGmod
         }
         public override void Fire()
         {
-            _explodechance = Rando.Int(0,2);
-            if (_explodechance == 0) CreateExplosion(position);
+            _explode = Rando.Float(0,1);
+            if (_explode < Explodechance) CreateExplosion(position);
             base.Fire();
         }
         private void CreateExplosion(Vec2 pos)
