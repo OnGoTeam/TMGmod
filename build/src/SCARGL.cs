@@ -68,7 +68,7 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "SCAR-H With GL";
 			weight = 6f;
-
+            graphic = _graphicm[_switched ? _mode : 2];
         }
 
         private void UpdateMode()
