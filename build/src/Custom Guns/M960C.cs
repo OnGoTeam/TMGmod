@@ -1,7 +1,8 @@
 ﻿using DuckGame;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod
+namespace TMGmod.Custom_Guns
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]

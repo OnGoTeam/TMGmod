@@ -12,20 +12,21 @@ namespace TMGmod.Core
         public override void OnCollide(Vec2 pos, Thing t, bool willBeStopped)
         {
             base.OnCollide(pos, t, willBeStopped);
-            if (t != owner)
+            if (t == owner) return;
+            //else
+            switch (t)
             {
-                if (t is MaterialThing && t is IPlatform)
-                {
-                    ((MaterialThing) t)._hitPoints = 1;
-                    ((MaterialThing) t).Hit(this, pos);
-                }
-                else if (t is MaterialThing && ((MaterialThing) t)._hitPoints > 0f)
-                {
+                case MaterialThing thing when thing is IPlatform:
+                    thing._hitPoints = 1;
+                    thing.Hit(this, pos);
+                    break;
+                case MaterialThing _ when ((MaterialThing) t)._hitPoints > 0f:
                     ((MaterialThing) t)._hitPoints -= 8;
-                }
+                    break;
             }
         }
     }
+    // ReSharper disable once InconsistentNaming
     public class AT50C : AmmoType
     {
         public AT50C()
