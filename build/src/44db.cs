@@ -28,7 +28,7 @@ namespace TMGmod
             _fireSound = "shotgun";
             _fullAuto = false;
             _fireWait = 4f;
-            _kickForce = 1.8f;
+            _kickForce = 3.4f;
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.5f;
             _editorName = "DeadlyGauge";

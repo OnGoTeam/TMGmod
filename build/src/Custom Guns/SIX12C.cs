@@ -29,7 +29,7 @@ namespace TMGmod.Custom_Guns
             _fireSound = "shotgunFire";
             _fullAuto = false;
             _fireWait = 1.7f;
-            _kickForce = 1.4f;
+            _kickForce = 2.5f;
             loseAccuracy = 0.5f;
             maxAccuracyLost = 0.5f;
             laserSight = true;
