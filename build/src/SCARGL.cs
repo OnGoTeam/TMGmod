@@ -7,14 +7,37 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ScarGL : Gun
     {
-        private int _ammo2;
-        private AmmoType _ammoType2;
-        private Sprite _graphic2;
-        private Vec2 _barrelOffsetTl2;
-        private string _fireSound2;
-        private float _loseAccuracy2;
-        private float _maxAccuracyLost2;
+        private int _mode;
+        private readonly int[] _ammom = {20, 1};
+
+        private readonly AmmoType[] _ammoTypem =
+        {
+            new ATMagnum
+            {
+                range = 900f,
+                accuracy = 0.9f,
+                penetration = 1f,
+                bulletSpeed = 35f,
+                barrelAngleDegrees = 0f
+            },
+            new ATGrenade
+            {
+            range = 2500f,
+            accuracy = 1f,
+            penetration = 1f,
+            bulletSpeed = 18f,
+            barrelAngleDegrees = -7.5f
+            }
+        };
+
+        private readonly Sprite[] _graphicm = {new Sprite(), new Sprite(), new Sprite()};
+        private readonly Vec2[] _barrelOffsetTLm = {new Vec2(16f, 2.5f), new Vec2(14f, 6f)};
+        private readonly string[] _fireSoundm = {"sounds/1.wav", "littleGun"};
+        private readonly float[] _loseAccuracym = {.025f, 0f};
+        private readonly float[] _maxAccuracyLostm = {.15f, 0f};
+        private readonly int[] _numBulletsPerFirem = {1, 16};
         private bool _switched;
+        private bool _changed;
 
         public ScarGL (float xval, float yval)
           : base(xval, yval)
