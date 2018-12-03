@@ -29,7 +29,7 @@ namespace TMGmod.Custom_Guns
             _fireSound = "shotgun";
             _fullAuto = false;
             _fireWait = 4f;
-            _kickForce = 1.8f;
+            _kickForce = 9f;
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.5f;
             _editorName = "Deadly One More Gauge";

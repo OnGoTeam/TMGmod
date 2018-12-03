@@ -35,7 +35,7 @@ namespace TMGmod
             _fireSound = "shotgunFire";
             _fullAuto = true;
             _fireWait = 0.7f;
-            _kickForce = 2.8f;
+            _kickForce = 6f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(-5f, 2f);

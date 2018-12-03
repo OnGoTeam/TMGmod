@@ -31,7 +31,7 @@ namespace TMGmod
             _fireSound = "shotgunFire";
             _fullAuto = false;
             _fireWait = 1.7f;
-            _kickForce = 2.5f;
+            _kickForce = 5.5f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
             laserSight = false;
