@@ -115,24 +115,17 @@ namespace TMGmod
 
 		public override void OnPressAction()
 		{
-            if (_owner.velocity != new Vec2(0f, 0f))
-            {
-                _ammoType.accuracy = 0f;
-            }
-            else
-            {
-                _ammoType.accuracy = 1f;
-            }
+            _ammoType.accuracy = (_owner != null || _owner.velocity != new Vec2(0f, 0f)) ? 0f : 1f;
 			if (loaded)
 			{
 				base.OnPressAction();
 				return;
 			}
-			if (ammo > 0 && _loadState == -1)
-			{
-				_loadState = 0;
-				_loadAnimation = 0;
-			}
+
+		    if (ammo <= 0 || _loadState != -1) return;
+            //else
+		    _loadState = 0;
+		    _loadAnimation = 0;
 		}
 
 		public override void Draw()
