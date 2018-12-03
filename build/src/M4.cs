@@ -40,7 +40,7 @@ namespace TMGmod
         }
         public override void OnPressAction()
         {
-            ammo = Rando.Int(0,((_ammobefore / 6)*(1+_counter/2)));
+            ammo = Rando.Int(0, _ammobefore / 6 * (1 + _counter / 2));
             if (ammo > _ammobefore) ammo = _ammobefore;
             _ammobefore -= ammo;
             base.OnPressAction();
@@ -72,7 +72,7 @@ namespace TMGmod
                     cy - (float)(Math.Sin(Maths.DegToRad(dir)) * dist));
                 Level.Add(ins);
             }
-            for (int i = 0; i < 25; i++)
+            for (var i = 0; i < 25; i++)
             {
                 var dir = i * 18f - 5f + Rando.Float(10f);
                 var shrap = new ATShrapnel { range = 20f + Rando.Float(6f) };
