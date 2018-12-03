@@ -8,8 +8,8 @@ namespace TMGmod
     public class PMR : Gun
     {
         private int _mode;
-        private int[] _ammom = {30, 1};
-        private AmmoType[] _ammoTypem =
+        private readonly int[] _ammom = {30, 1};
+        private readonly AmmoType[] _ammoTypem =
         {
             new AT9mm
             {
