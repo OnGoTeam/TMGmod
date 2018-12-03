@@ -115,7 +115,7 @@ namespace TMGmod
 
 		public override void OnPressAction()
 		{
-            _ammoType.accuracy = (_owner != null || _owner.velocity != new Vec2(0f, 0f)) ? 0f : 1f;
+            _ammoType.accuracy = _owner != null || _owner.velocity != new Vec2(0f, 0f) ? 0f : 1f;
 			if (loaded)
 			{
 				base.OnPressAction();
