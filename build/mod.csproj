@@ -106,6 +106,7 @@
     <Compile Include="src\SIX12S.cs" />
     <Compile Include="src\SKS.cs" />
     <Compile Include="src\SNR22.cs" />
+    <Compile Include="src\Stuff\MontagneShield.cs" />
     <Compile Include="src\SV98.cs" />
     <Compile Include="src\SV99.cs" />
     <Compile Include="src\SVU.cs" />
