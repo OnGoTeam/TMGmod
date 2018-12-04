@@ -54,7 +54,7 @@ namespace TMGmod
                 {
                     if (Level.CheckLine<Block>(position, thing.position, thing) != null) continue;
                     //else
-                    var dVec2 = thing.position - position;
+                    var dVec2 = thing.position - position + new Vec2(Rando.Float(-6f, 6f), Rando.Float(-6f, 6f));
                     var l = dVec2.length + 0.1f;
                     var force = dVec2 * (1000f / (l * l * l));
                     //force.y *= 0.8f;
