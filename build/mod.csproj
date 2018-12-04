@@ -76,7 +76,7 @@
     <Compile Include="src\Custom Guns\VintorezC.cs" />
     <Compile Include="src\CZ75.cs" />
     <Compile Include="src\DragoShot.cs" />
-    <Compile Include="src\Glock17.cs" />
+    <Compile Include="src\Glock18.cs" />
     <Compile Include="src\HazeS.cs" />
     <Compile Include="src\Hk417.cs" />
     <Compile Include="src\M16 LMG.cs" />
@@ -88,7 +88,7 @@
     <Compile Include="src\MG3.cs" />
     <Compile Include="src\MG44.cs" />
     <Compile Include="src\Mixaly4.cs" />
-    <Compile Include="src\Mixaly4Fire.cs" />
+    <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
     <Compile Include="src\mp7.cs" />
     <Compile Include="src\MPA27.cs" />

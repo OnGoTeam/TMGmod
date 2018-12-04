@@ -2,7 +2,8 @@
 
 namespace TMGmod.Stuff
 {
-    [EditorGroup("TMG|Misc"), BaggedProperty("canSpawn", true)]
+    [EditorGroup("TMG|Misc")]
+    [BaggedProperty("canSpawn", false)]
     public sealed class C4Skeet : Holdable
     {
         public C4Skeet(float xpos, float ypos) : base(xpos, ypos)
