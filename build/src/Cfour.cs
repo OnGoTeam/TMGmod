@@ -9,6 +9,7 @@ namespace TMGmod
     [EditorGroup("TMG|Misc")]
     public class Cfour : Holdable
     {
+        private float _toexplode = -1f;
         private bool _activated;
         private Duck _activator;
         private MaterialThing _stickThing;
@@ -49,6 +50,17 @@ namespace TMGmod
                 foreach (var window in Level.CheckCircleAll<Window>(position, 40f))
                     if (Level.CheckLine<Block>(position, window.position, window) == null)
                         window.Destroy(new DTImpact(this));
+                foreach (var thing in Level.CheckCircleAll<Thing>(position, 200f))
+                {
+                    if (Level.CheckLine<Block>(position, thing.position, thing) != null) continue;
+                    //else
+                    var dVec2 = thing.position - position;
+                    var l = dVec2.length + 0.1f;
+                    var force = dVec2 * (1000f / (l * l * l));
+                    //force.y *= 0.8f;
+                    //force.x *= 1.1f;
+                    thing.ApplyForce(force);
+                }
                 grenade.bulletFireIndex += 120;
                 if (Network.isActive)
                 {
@@ -64,13 +76,13 @@ namespace TMGmod
 
         public override void UpdateOnFire()
         {
-            Explode();
+            _toexplode = Rando.Float(0f, 1.5f);
             base.UpdateOnFire();
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
-            Explode();
+            _toexplode = Rando.Float(0f, 0.7f);
             return base.Hit(bullet, hitPos);
         }
 
@@ -108,6 +120,7 @@ namespace TMGmod
 
         public override void Update()
         {
+            _toexplode -= 0.1f;
             if (duck != null && duck.holdObject == this && _stickThing != null)
             {
                 _stickThing = null;
@@ -115,13 +128,15 @@ namespace TMGmod
             }
             if (_stickThing != null) position = _stickThing.position + _stickyVec2;
 
-            if (_activator != null && _activator.inputProfile.Down("QUACK")) Explode();
+            if (_activator != null && _activator.inputProfile.Down("QUACK")) _toexplode = Rando.Float(0f, 0.5f);
 
             if (grounded) angle = 0f;
             else if ((duck == null || duck.holdObject != this) && _wasThrown && _stickThing == null)
             {
                 angle += 0.3f * offDir;
             }
+
+            if (-0.5 < _toexplode && _toexplode < 0f) Explode();
 
             base.Update();
         }

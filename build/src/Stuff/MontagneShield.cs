@@ -32,6 +32,8 @@ namespace TMGmod.Stuff
 
         public override void Thrown()
         {
+            if (duck.inputProfile.Down("QUACK")) return;
+            //else
             angleDegrees = 90f * offDir;
             collisionOffset = new Vec2(-11.5f, -2f);
             collisionSize = new Vec2(23f, 4f);
