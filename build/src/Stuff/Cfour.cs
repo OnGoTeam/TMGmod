@@ -4,7 +4,7 @@ using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod
+namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
     public class Cfour : Holdable
@@ -68,6 +68,7 @@ namespace TMGmod
                         NetMessagePriority.ReliableOrdered);
                     grenade.firedBullets.Clear();
                 }
+                AddFire();
             }
 
             Level.Remove(this);
