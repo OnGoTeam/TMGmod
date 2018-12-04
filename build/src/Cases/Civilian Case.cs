@@ -44,7 +44,7 @@ namespace TMGmod.Cases
         typeof(Mk20),	
         typeof(SV98),	
         typeof(USP),	
-        typeof(MAPFire),	
+        typeof(UziPro),	
         typeof(Bren)
 		};
 		_contains = things[Rando.Int(things.Count - 1)];

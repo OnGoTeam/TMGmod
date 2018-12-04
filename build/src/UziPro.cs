@@ -6,11 +6,11 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MAPFire : Gun
+    public class UziPro : Gun
     {
         private bool _silencer;
 
-        public MAPFire (float xval, float yval)
+        public UziPro (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 33;
