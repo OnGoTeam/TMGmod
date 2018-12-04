@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System.Linq;
+using DuckGame;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -21,17 +22,19 @@ namespace TMGmod.Stuff
         public override void OnPressAction()
         {
             if (_ammo <= 0) return;
-            _ammo--;
-            var blocks = Level.CheckLineAll<Block>(position, position + new Vec2(10f * offDir, 0f));
+            if (Level.CheckCircleAll<BarricadeBeta>(position, 64f).ToList().Count > 0) return;
+            var blocks = Level.CheckLineAll<Block>(position, position + new Vec2(16f * offDir, 0f));
             foreach (var block in blocks)
             {
                 Deploy(block.position + new Vec2(0f, -10f));
+                _ammo--;
                 return;
             }
-            blocks = Level.CheckLineAll<Block>(position + new Vec2(0, 10f), position);
+            blocks = Level.CheckLineAll<Block>(position + new Vec2(0, 8f), position + new Vec2(16f * offDir, 0f));
             foreach (var block in blocks)
             {
                 Deploy(block.position + new Vec2(0f, -10f));
+                _ammo--;
                 return;
             }
         }

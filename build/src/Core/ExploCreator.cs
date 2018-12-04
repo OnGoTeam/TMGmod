@@ -3,7 +3,7 @@ using DuckGame;
 
 namespace TMGmod.Core
 {
-    public class ExploCreator
+    public static class ExploCreator
     {
         public static void CreateExplosion(Vec2 pos)
         {

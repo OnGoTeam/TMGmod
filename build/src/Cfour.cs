@@ -33,10 +33,10 @@ namespace TMGmod
             if (isServerForObject)
             {
                 var grenade = new Grenade(x, y);
-                for (var index = 0; index < 120; ++index)
+                for (var index = 0; index < 150; ++index)
                 {
                     var num2 = (float) (index * 18.0 - 5.0) + Rando.Float(10f);
-                    var atShrapnel = new ATShrapnel {range = 60f + Rando.Float(18f)};
+                    var atShrapnel = new ATShrapnel {range = 30f + Rando.Float(0f, Rando.Float(70f))};
                     var bullet = new Bullet(x + (float) (Math.Cos(Maths.DegToRad(num2)) * 6.0),
                         y - (float) (Math.Sin(Maths.DegToRad(num2)) * 6.0), atShrapnel, num2)
                     {
@@ -83,7 +83,7 @@ namespace TMGmod
             _stickyVec2 = position - with.position;
             enablePhysics = false;
             // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (@from)
+            switch (from)
             {
                 case ImpactedFrom.Right:
                     angleDegrees = -90f;

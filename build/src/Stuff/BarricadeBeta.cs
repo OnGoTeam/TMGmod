@@ -12,13 +12,13 @@ namespace TMGmod.Stuff
     {
         private bool _anchored;
         private float _hp;
-        private bool _right;
+        private float _impactSpeed;
         private float _duckcooldown;
         public BarricadeBeta(float x, float y) : base(x, y)
         {
             _anchored = true;
-            _hp = 10;
-            thickness = 3f;
+            _hp = 10f;
+            thickness = 2f;
             physicsMaterial = PhysicsMaterial.Wood;
             center = new Vec2(1f, 2f);
             collisionOffset = new Vec2(-1f, -2f);
@@ -43,40 +43,41 @@ namespace TMGmod.Stuff
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
             SFX.Play("woodHit");
-            Damage();
-            _right = (hitPos - position).x > 0;
+            Damage(bullet.ammo.penetration * (bullet.ammo is ATShrapnel ? 2 : 1));
+            _impactSpeed = bullet.hSpeed;
             return base.Hit(bullet, hitPos);
         }
 
-        private void Damage()
+        private void Damage(float dValue)
         {
             var barricades = Level.CheckCircleAll<BarricadeBeta>(position, 10f);
             foreach (var barricade in barricades)
             {
                 if (barricade != this && barricade._hp >= 1f)
                 {
-                    barricade._hp -= 1f;
+                    barricade._hp -= dValue;
                 }
             }
 
-            _hp -= 1f;
+            _hp -= dValue;
         }
 
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
-            _right = from == ImpactedFrom.Left;
-            if (with is Duck /*duck && duck.inputProfile.Down("SHOOT")*/ && _duckcooldown < 0)
+            if (with is Duck duck && duck.inputProfile.Down("SHOOT") && _duckcooldown < 0)
             {
                 SFX.Play("woodHit");
-                _duckcooldown = 1.0f;
-                _hp -= 2f;
+                _duckcooldown = 2.0f;
+                _hp -= 4f;
             }
             else if (Math.Abs(with.hSpeed) > 5f)
             {
                 SFX.Play("woodHit");
                 _hp -= Math.Abs(with.hSpeed) * 0.2f - 1f;
-                Damage();
+                Damage(Math.Abs(with.hSpeed) * 0.2f);
             }
+
+            _impactSpeed = with.hSpeed * 2f;
             base.OnImpact(with, from);
         }
 
@@ -88,13 +89,14 @@ namespace TMGmod.Stuff
                 SFX.Play("woodHit");
                 var bbp = new BarrBetaPar(x, y)
                 {
-                    hSpeed = (_right ? -4f : 4f) + Rando.Float(-1f, 1f),
+                    hSpeed = _impactSpeed + Rando.Float(-1f, 1f),
                     vSpeed = Rando.Float(-1.5f, 1.5f)
                 };
                 Level.Add(bbp);
                 Level.Remove(this);
             }
             base.Update();
+            thickness = 0.2f * _hp;
         }
     }
 }
