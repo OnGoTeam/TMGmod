@@ -4,7 +4,7 @@
 
 namespace TMGmod.Stuff
 {
-    [EditorGroup("TMM|STUFF")]
+    [EditorGroup("TMG|Misc")]
     public class MontagneShield : Holdable
     {
         private readonly SpriteMap _sprite;

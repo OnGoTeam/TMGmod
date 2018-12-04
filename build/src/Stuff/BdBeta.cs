@@ -1,0 +1,48 @@
+﻿using DuckGame;
+
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod.Stuff
+{
+    [EditorGroup("TMG|Misc")]
+    public class BdBeta : Holdable
+    {
+        private int _ammo;
+
+        public BdBeta(float xpos, float ypos) : base(xpos, ypos)
+        {
+            _ammo = 5;
+            center = new Vec2(8f, 8f);
+            collisionOffset = new Vec2(-8f, -8f);
+            collisionSize = new Vec2(16f, 16f);
+            graphic = new Sprite(GetPath("Molot"));
+        }
+
+        public override void OnPressAction()
+        {
+            if (_ammo <= 0) return;
+            _ammo--;
+            var blocks = Level.CheckLineAll<Block>(position, position + new Vec2(10f * offDir, 0f));
+            foreach (var block in blocks)
+            {
+                Deploy(block.position + new Vec2(0f, -10f));
+                return;
+            }
+            blocks = Level.CheckLineAll<Block>(position + new Vec2(0, 10f), position);
+            foreach (var block in blocks)
+            {
+                Deploy(block.position + new Vec2(0f, -10f));
+                return;
+            }
+        }
+
+        private static void Deploy(Vec2 vec2)
+        {
+            for (var i=0; i<8; ++i)
+            {
+                var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4);
+                Level.Add(barricade);
+            }
+        }
+    }
+}
