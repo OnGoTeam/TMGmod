@@ -21,7 +21,10 @@ namespace TMGmod.Stuff
 
         public override void OnHoldAction()
         {
+            if (!isServerForObject) return;
+            //else
             if (_ammo <= 0) return;
+            //else
             if (Level.CheckCircleAll<BarricadeBeta>(position, 64f).ToList().Count > 0) return;
             var blocks = Level.CheckLineAll<Block>(position, position + new Vec2(16f * offDir, 0f));
             foreach (var block in blocks)
