@@ -10,27 +10,27 @@ namespace TMGmod
         public Scarl (float xval, float yval)
           : base(xval, yval)
 		{
-            ammo = 30;
+            ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 800f,
-                accuracy = 0.87f,
+                range = 650f,
+                accuracy = 0.92f,
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("SCARLsemiauto"));
+            graphic = new Sprite(GetPath("RFBSemi"));
             center = new Vec2(16.5f, 5.5f);
             collisionOffset = new Vec2(-16.5f, -5.5f);
             collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 4f);
-            _holdOffset = new Vec2(2f, 0f);
+            _holdOffset = new Vec2(1f, 1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
-            _fireWait = 1.3f;
+            _fireWait = 0.3f;
             _kickForce = 0.7f;
             loseAccuracy = 0.025f;
             maxAccuracyLost = 0.2f;
-            _editorName = "SCAR-L";
+            _editorName = "RFB";
 			weight = 6f;
         }
         public override void Update()
@@ -42,16 +42,16 @@ namespace TMGmod
 					if (_fullAuto)
 					{
 					    _fullAuto = false;
-				        graphic = new Sprite(GetPath("SCARLsemiauto"));
-				        _fireWait = 1.3f;
+				        graphic = new Sprite(GetPath("RFBSemi"));
+				        _fireWait = 0.3f;
 				        maxAccuracyLost = 0.2f;
 					}
                     else
 					{
 						_fullAuto = true;
-				        graphic = new Sprite(GetPath("SCARLauto"));
-				        _fireWait = 0.9f;
-				        maxAccuracyLost = 0.45f;
+				        graphic = new Sprite(GetPath("RFBauto"));
+				        _fireWait = 0.63f;
+				        maxAccuracyLost = 0.25f;
 					}
 				}
 			}

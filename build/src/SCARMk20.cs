@@ -12,12 +12,12 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 950f,
+                range = 750f,
                 accuracy = 0.95f,
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("SCARMk1"));
+            graphic = new Sprite(GetPath("ARX200"));
             center = new Vec2(16f, 7f);
             collisionOffset = new Vec2(-16.5f, -7f);
             collisionSize = new Vec2(33f, 14f);
@@ -29,7 +29,7 @@ namespace TMGmod
             _kickForce = 0.7f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
-            _editorName = "SCAR Mk20";
+            _editorName = "Beretta ARX-200";
 			weight = 5.75f;
         }
     }
