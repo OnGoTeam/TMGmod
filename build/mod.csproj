@@ -45,6 +45,7 @@
     <Compile Include="src\Cases\Heavy Millitary Case.cs" />
     <Compile Include="src\Cases\Millitary Case.cs" />
     <Compile Include="src\Cases\Warriors Case.cs" />
+    <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
     <Compile Include="src\Core\AT9mmSilenced.cs" />
     <Compile Include="src\Core\ATNotBullet.cs" />

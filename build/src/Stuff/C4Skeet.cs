@@ -23,7 +23,8 @@ namespace TMGmod.Stuff
             var sCfour = new Cfour(x, y)
             {
                 hSpeed = Rando.Float(-7f, 7f),
-                vSpeed = Rando.Float(-5f, 5f) - 15f
+                vSpeed = Rando.Float(-5f, 5f) - 15f,
+                Weak = true
             };
             Level.Add(sCfour);
         }

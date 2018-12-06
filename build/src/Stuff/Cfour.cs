@@ -15,6 +15,7 @@ namespace TMGmod.Stuff
         private MaterialThing _stickThing;
         private Vec2 _stickyVec2;
         private bool _wasThrown;
+        public bool Weak;
 
         public Cfour(float xpos, float ypos) : base(xpos, ypos)
         {
@@ -25,13 +26,15 @@ namespace TMGmod.Stuff
             collisionSize = new Vec2(3f, 3f);
             flammable = 0.9f;
             thickness = 1f;
+            throwSpeedMultiplier = 1.5f;
+            airFrictionMult = 0.05f;
         }
 
         private void Explode()
         {
             ExploCreator.CreateExplosion(position);
             Graphics.FlashScreen();
-            if (isServerForObject)
+            if (isServerForObject && !Weak)
             {
                 var grenade = new Grenade(x, y);
                 for (var index = 0; index < 150; ++index)
