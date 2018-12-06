@@ -105,7 +105,7 @@
     <Compile Include="src\Rfb.cs" />
     <Compile Include="src\Arx200.cs" />
     <Compile Include="src\DaewooK1.cs" />
-    <Compile Include="src\FnScar.cs" />
+    <Compile Include="src\FnFcar.cs" />
     <Compile Include="src\SIX12.cs" />
     <Compile Include="src\SIX12S.cs" />
     <Compile Include="src\SKS.cs" />

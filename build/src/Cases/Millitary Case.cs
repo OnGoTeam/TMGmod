@@ -43,7 +43,7 @@ namespace TMGmod.Cases
         typeof(MG44C),	
         typeof(MP40),	
         typeof(P90),	
-        typeof(FnScar),	
+        typeof(FnFcar),	
         typeof(DaewooK1),	
         typeof(SIX12),	
         typeof(SIX12C),	
