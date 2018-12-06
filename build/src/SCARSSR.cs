@@ -9,7 +9,7 @@ namespace TMGmod
         public Ussrgun (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 20;
+            ammo = 14;
             _ammoType = new ATMagnum
             {
                 range = 800f,
@@ -17,7 +17,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("SCAR20SSR"));
+            graphic = new Sprite(GetPath("FCARNoBipods"));
             center = new Vec2(18f, 7f);
             collisionOffset = new Vec2(-18f, -7f);
             collisionSize = new Vec2(36f, 14f);
@@ -25,11 +25,11 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, -1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
-            _fireWait = 0.8f;
+            _fireWait = 0.775f;
             _kickForce = 0.9f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.45f;
-            _editorName = "SCAR SSR";
+            _editorName = "FN FCAR";
             laserSight = true;
             _laserOffsetTL = new Vec2(19f, 4f);
 			weight = 7f;
@@ -41,14 +41,14 @@ namespace TMGmod
                 _kickForce = 0f;
 				loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
-				graphic = new Sprite(GetPath("SCAR20SSRbipods"));
+				graphic = new Sprite(GetPath("FCARBipods"));
             }
             else
             {
                 _kickForce = 0.9f;
                 loseAccuracy = 0.1f;
                 maxAccuracyLost = 0.45f;
-				graphic = new Sprite(GetPath("SCAR20SSR"));
+				graphic = new Sprite(GetPath("FCARNoBipods"));
             }
             base.Update();
         }
