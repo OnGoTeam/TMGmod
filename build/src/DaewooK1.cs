@@ -4,11 +4,11 @@
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class Scarpdw : Gun
+    public class DaewooK1 : Gun
     {
         private bool _stock;
 		
-        public Scarpdw (float xval, float yval)
+        public DaewooK1 (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 40;

@@ -4,9 +4,9 @@
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class Ussrgun: Gun
+    public class FnScar: Gun
     {
-        public Ussrgun (float xval, float yval)
+        public FnScar (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 14;

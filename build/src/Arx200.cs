@@ -4,9 +4,9 @@
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
-    public class Mk20 : Gun
+    public class Arx200 : Gun
     {
-        public Mk20 (float xval, float yval)
+        public Arx200 (float xval, float yval)
           : base(xval, yval)
         {
             ammo = 20;

@@ -4,10 +4,10 @@
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class Scarl : Gun
+    public class Rfb : Gun
     {
 		
-        public Scarl (float xval, float yval)
+        public Rfb (float xval, float yval)
           : base(xval, yval)
 		{
             ammo = 20;
