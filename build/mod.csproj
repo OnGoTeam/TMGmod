@@ -102,10 +102,10 @@
     <Compile Include="src\Remington.cs" />
     <Compile Include="src\RemingtonTactical.cs" />
     <Compile Include="src\SCARGL.cs" />
-    <Compile Include="src\SCARL.cs" />
-    <Compile Include="src\SCARMk20.cs" />
-    <Compile Include="src\SCARPDW.cs" />
-    <Compile Include="src\SCARSSR.cs" />
+    <Compile Include="src\Rfb.cs" />
+    <Compile Include="src\Arx200.cs" />
+    <Compile Include="src\DaewooK1.cs" />
+    <Compile Include="src\FnScar.cs" />
     <Compile Include="src\SIX12.cs" />
     <Compile Include="src\SIX12S.cs" />
     <Compile Include="src\SKS.cs" />
