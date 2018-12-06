@@ -19,7 +19,7 @@ namespace TMGmod.Stuff
             graphic = new Sprite(GetPath("Molot"));
         }
 
-        public override void OnPressAction()
+        public override void OnHoldAction()
         {
             if (_ammo <= 0) return;
             if (Level.CheckCircleAll<BarricadeBeta>(position, 64f).ToList().Count > 0) return;
