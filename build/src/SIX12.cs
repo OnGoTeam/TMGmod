@@ -30,10 +30,10 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(30f, 4.5f);
             _fireSound = "shotgunFire";
             _fullAuto = false;
-            _fireWait = 1.7f;
+            _fireWait = 1.8f;
             _kickForce = 5.5f;
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0f;
+            loseAccuracy = 0.3f;
+            maxAccuracyLost = 0.4f;
             laserSight = false;
             _laserOffsetTL = new Vec2(24f, 7f);
             _holdOffset = new Vec2(2f, 0f);

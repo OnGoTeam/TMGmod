@@ -14,7 +14,7 @@ namespace TMGmod.Custom_Guns
         public TR21C (float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 30;
+            ammo = 15;
             _ammoType = new ATMagnum
             {
                 range = 110f,

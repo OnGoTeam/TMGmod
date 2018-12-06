@@ -14,7 +14,7 @@ namespace TMGmod
         public TR21 (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 12;
+            ammo = 7;
             _ammoType = new ATMagnum
             {
                 range = 110f,
