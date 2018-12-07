@@ -32,6 +32,7 @@ namespace TMGmod.Stuff
 
         private void Explode()
         {
+            _activator?.Fondle(this);
             ExploCreator.CreateExplosion(position);
             Graphics.FlashScreen();
             if (isServerForObject && !Weak)

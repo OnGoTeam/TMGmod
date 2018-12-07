@@ -27,14 +27,14 @@ namespace TMGmod.Stuff
             var blocks = Level.CheckLineAll<Block>(position, position + new Vec2(16f * offDir, 0f));
             foreach (var block in blocks)
             {
-                Deploy(block.position + new Vec2(0f, -10f), block);
+                Deploy(block.position + new Vec2(0f, -10f));
                 _ammo--;
                 return;
             }
             blocks = Level.CheckLineAll<Block>(position + new Vec2(0, 8f), position + new Vec2(16f * offDir, 0f));
             foreach (var block in blocks)
             {
-                Deploy(block.position + new Vec2(0f, -10f), block);
+                Deploy(block.position + new Vec2(0f, -10f));
                 _ammo--;
                 return;
             }
@@ -42,12 +42,14 @@ namespace TMGmod.Stuff
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Local
-        private void Deploy(Vec2 vec2, Thing block)
+        private void Deploy(Vec2 vec2)
         {
             for (var i = 0; i < 8; ++i)
             {
                 var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4);
-                SuperFondle(barricade, block.connection);
+                Fondle(barricade);
+                if (owner != null)
+                    barricade.responsibleProfile = owner.responsibleProfile;
                 Level.Add(barricade);
             }
         }
