@@ -37,6 +37,7 @@ namespace TMGmod.Stuff
             if (isServerForObject && !Weak)
             {
                 var grenade = new Grenade(x, y);
+                Fondle(grenade);
                 for (var index = 0; index < 150; ++index)
                 {
                     var num2 = (float) (index * 18.0 - 5.0) + Rando.Float(10f);

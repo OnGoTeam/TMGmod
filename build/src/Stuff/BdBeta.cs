@@ -42,12 +42,12 @@ namespace TMGmod.Stuff
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Local
-        private void Deploy(Vec2 vec2, Block block)
+        private void Deploy(Vec2 vec2, Thing block)
         {
             for (var i = 0; i < 8; ++i)
             {
                 var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4);
-                Fondle(barricade);
+                SuperFondle(barricade, block.connection);
                 Level.Add(barricade);
             }
         }
