@@ -124,6 +124,7 @@ namespace TMGmod.Stuff
 
         public override void Update()
         {
+            if (_destroyed) return;
             _toexplode -= 0.1f;
             if (duck != null && duck.holdObject == this && _stickThing != null)
             {
