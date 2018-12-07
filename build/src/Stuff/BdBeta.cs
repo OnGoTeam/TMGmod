@@ -47,13 +47,7 @@ namespace TMGmod.Stuff
             for (var i = 0; i < 8; ++i)
             {
                 var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4);
-                if (Network.isActive && isServerForObject)
-                {
-                    if (duck?.profile.connection != null)
-                    {
-                        barricade.connection = duck.profile.connection;
-                    }
-                }
+                Fondle(barricade);
                 Level.Add(barricade);
             }
         }
