@@ -19,9 +19,8 @@ namespace TMGmod.Stuff
             graphic = new Sprite(GetPath("Molot"));
         }
 
-        public override void OnHoldAction()
+        public override void OnPressAction()
         {
-            base.OnHoldAction();
             if (_ammo <= 0) return;
             //else
             if (Level.CheckCircleAll<BarricadeBeta>(position, 64f).ToList().Count > 0) return;
@@ -39,6 +38,7 @@ namespace TMGmod.Stuff
                 _ammo--;
                 return;
             }
+            base.OnPressAction();
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Local
