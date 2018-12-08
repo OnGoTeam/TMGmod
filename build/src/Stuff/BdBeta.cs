@@ -44,12 +44,14 @@ namespace TMGmod.Stuff
         // ReSharper disable once MemberCanBeMadeStatic.Local
         private void Deploy(Vec2 vec2)
         {
-            if (owner == null) return;
+            if (duck == null) return;
+            duck.Fondle(this);
             for (var i = 0; i < 8; ++i)
             {
-                var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4) {owner = (Duck) owner};
+                var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4) {owner = duck};
                 Fondle(barricade);
                 Level.Add(barricade);
+                barricade.NetworkUpdate();
                 //barricade.responsibleProfile = owner.responsibleProfile;
             }
         }
