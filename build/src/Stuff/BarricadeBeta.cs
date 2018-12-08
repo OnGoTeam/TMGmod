@@ -41,7 +41,7 @@ namespace TMGmod.Stuff
                 if (block is BarricadeBeta && !(block as BarricadeBeta)._anchored) continue;
                 //else
                 _anchored = true;
-                block.Fondle(this);
+                
             }
             blocks = Level.CheckLineAll<Block>(new Vec2(x, y), new Vec2(x, y - 4));
             return _anchored || blocks.Any(block => block != this);
