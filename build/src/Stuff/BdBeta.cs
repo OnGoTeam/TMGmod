@@ -50,7 +50,7 @@ namespace TMGmod.Stuff
                 var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4) {owner = (Duck) owner};
                 Level.Add(barricade);
                 Fondle(barricade);
-                barricade.responsibleProfile = owner.responsibleProfile;
+                //barricade.responsibleProfile = owner.responsibleProfile;
             }
         }
     }
