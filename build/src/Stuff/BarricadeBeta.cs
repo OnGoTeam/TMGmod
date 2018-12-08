@@ -28,8 +28,8 @@ namespace TMGmod.Stuff
             if (owner is Duck duck)
             {
                 duck.clip.Add(this);
+                clip.Add(duck);
             }
-            clip.Add((MaterialThing)owner);
         }
 
         private bool CheckBlocks()
