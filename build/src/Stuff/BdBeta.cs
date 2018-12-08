@@ -47,10 +47,11 @@ namespace TMGmod.Stuff
             for (var i = 0; i < 8; ++i)
             {
                 var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4);
+                Level.Add(barricade);
                 Fondle(barricade);
                 if (owner != null)
                     barricade.responsibleProfile = owner.responsibleProfile;
-                Level.Add(barricade);
+                barricade.clip.Add((MaterialThing) owner);
             }
         }
     }
