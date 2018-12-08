@@ -48,8 +48,8 @@ namespace TMGmod.Stuff
             for (var i = 0; i < 8; ++i)
             {
                 var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4) {owner = (Duck) owner};
-                Level.Add(barricade);
                 Fondle(barricade);
+                Level.Add(barricade);
                 //barricade.responsibleProfile = owner.responsibleProfile;
             }
         }
