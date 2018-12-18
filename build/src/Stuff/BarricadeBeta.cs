@@ -25,9 +25,9 @@ namespace TMGmod.Stuff
             collisionSize = new Vec2(2f, 4f);
             graphic = new Sprite(GetPath("barr"));
             flammable = 0.6f;
-            if (!(owner is Duck duck)) return;
-            duck.clip.Add(this);
-            clip.Add(duck);
+            //if (!(owner is Duck duck)) return;
+            //duck.clip.Add(this);
+            //clip.Add(duck);
         }
 
         private bool CheckBlocks()

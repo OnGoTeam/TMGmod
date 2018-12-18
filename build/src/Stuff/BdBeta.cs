@@ -6,7 +6,7 @@ using DuckGame;
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
-    public class BdBeta : Holdable
+    public class BdBeta : Gun
     {
         private int _ammo;
 
@@ -19,9 +19,15 @@ namespace TMGmod.Stuff
             graphic = new Sprite(GetPath("Molot"));
         }
 
+        public override void Fire()
+        {
+        }
+
         public override void OnPressAction()
         {
             if (_ammo <= 0) return;
+            //else
+            if (receivingPress) return;
             //else
             if (Level.CheckCircleAll<BarricadeBeta>(position, 64f).ToList().Count > 0) return;
             var blocks = Level.CheckLineAll<Block>(position, position + new Vec2(16f * offDir, 0f));
@@ -38,7 +44,6 @@ namespace TMGmod.Stuff
                 _ammo--;
                 return;
             }
-            base.OnPressAction();
         }
 
         // ReSharper disable once MemberCanBeMadeStatic.Local
@@ -49,10 +54,10 @@ namespace TMGmod.Stuff
             for (var i = 0; i < 8; ++i)
             {
                 var barricade = new BarricadeBeta(vec2.x, vec2.y - i * 4) {owner = duck};
-                Fondle(barricade);
                 Level.Add(barricade);
-                barricade.NetworkUpdate();
-                //barricade.responsibleProfile = owner.responsibleProfile;
+                Fondle(barricade);
+                barricade.responsibleProfile = duck.responsibleProfile;
+                barricade.clip.Add(duck);
             }
         }
     }
