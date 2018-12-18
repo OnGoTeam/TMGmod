@@ -21,11 +21,11 @@ namespace TMGmod.Stuff
         }
         public override void Update()
         {
-            var utkaEbutka = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
-            foreach (var utka in utkaEbutka)
+            var probablyduck = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
+            foreach (var realyduck in probablyduck)
             {
-                utka.hSpeed *= 0.9f;
-                utka.vSpeed *= 0.9f;
+                realyduck.hSpeed *= 0.9f;
+                realyduck.vSpeed *= 0.9f;
             }
             base.Update();
         }
