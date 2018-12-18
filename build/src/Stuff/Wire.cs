@@ -21,24 +21,26 @@ namespace TMGmod.Stuff
         }
         public override void Update()
         {
-            var utkaEbutka = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
-            foreach (var utka in utkaEbutka)
+            var probablyduck = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
+            foreach (var realyduck in probablyduck)
             {
-                utka.hSpeed *= 0.65f;
-                utka.vSpeed *= 0.65f;
+                realyduck.hSpeed *= 0.5f * (1f/(26f-_hp));
+                realyduck.vSpeed *= 0.8f * (1f/(26f-_hp));
             }
             base.Update();
         }
-
+        public override bool DoHit(Bullet bullet, Vec2 hitPos)
+        {
+            if ((bullet.ammo.penetration < 1f) || (bullet.ammo.penetration > 95f)) Damage(bullet.ammo);
+            return Hit(bullet, hitPos);
+        }
         private void Damage(AmmoType at)
         {
-            thickness = _hp < 950f ? _hp * 0.01f : 10000f;
-            _hp -= at.penetration * 5f;
+            _hp -= at.penetration * 2f;
             if (_hp > 1f)
             {
                 graphic = new SpriteMap(GetPath("WireYes"), 48, 16);
             }
-
             if (_hp < 1f)
             {
                 graphic = new SpriteMap(GetPath("WireNot"), 48, 16);
