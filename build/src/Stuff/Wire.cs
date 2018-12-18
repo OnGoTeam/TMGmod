@@ -22,14 +22,11 @@ namespace TMGmod.Stuff
         }
         public override void Update()
         {
-            var utkaEbutka = Level.CheckLine<Duck>(position, duck.position, duck);
-            if (utkaEbutka != null)
+            var utkaEbutka = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
+            foreach (var utka in utkaEbutka)
             {
-                while (Math.Abs(duck.hspeed * duck.hspeed + duck.vspeed * duck.vspeed) > 1f)
-                {
-                    duck.hspeed *= 0.9f;
-                    duck.vspeed *= 0.9f;
-                }
+                utka.hSpeed *= 0.9f;
+                utka.vSpeed *= 0.9f;
             }
             base.Update();
         }
