@@ -24,8 +24,8 @@ namespace TMGmod.Stuff
             var utkaEbutka = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
             foreach (var utka in utkaEbutka)
             {
-                utka.hSpeed *= 0.9f;
-                utka.vSpeed *= 0.9f;
+                utka.hSpeed *= 0.65f;
+                utka.vSpeed *= 0.65f;
             }
             base.Update();
         }
