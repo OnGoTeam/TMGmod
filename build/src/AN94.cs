@@ -94,11 +94,9 @@ namespace TMGmod
         }
         public override void OnPressAction()
         {
-            if (_bw > 1f)
-            {
-                _bw = 0.2f;
-                _burstNumB = _burstValue;
-            }
+            if (!(_bw > 1f)) return;
+            _bw = 0.2f;
+            _burstNumB = _burstValue;
         }
         public override void Initialize()
         {
