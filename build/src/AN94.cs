@@ -68,7 +68,7 @@ namespace TMGmod
                 _bw = _bw + 0.1f;
             }
 			
-            if (owner != null)
+            if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
