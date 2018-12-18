@@ -15,7 +15,7 @@ namespace TMGmod.Stuff
             center = new Vec2(24f, 2f);
             collisionOffset = new Vec2(-24f, -2f);
             collisionSize = new Vec2(48f, 16f);
-            thickness = 1f;
+            thickness = 125f;
             weight = 40f;
             throwSpeedMultiplier = 0f;
         }
