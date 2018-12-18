@@ -1,5 +1,4 @@
 using DuckGame;
-using System;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
