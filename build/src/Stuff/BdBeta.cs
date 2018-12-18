@@ -8,11 +8,9 @@ namespace TMGmod.Stuff
     [EditorGroup("TMG|Misc")]
     public class BdBeta : Gun
     {
-        private int _ammo;
-
         public BdBeta(float xpos, float ypos) : base(xpos, ypos)
         {
-            _ammo = 5;
+            ammo = 5;
             center = new Vec2(8f, 8f);
             collisionOffset = new Vec2(-8f, -8f);
             collisionSize = new Vec2(16f, 16f);
@@ -25,7 +23,7 @@ namespace TMGmod.Stuff
 
         public override void OnPressAction()
         {
-            if (_ammo <= 0) return;
+            if (ammo <= 0) return;
             //else
             if (receivingPress) return;
             //else
@@ -34,14 +32,14 @@ namespace TMGmod.Stuff
             foreach (var block in blocks)
             {
                 Deploy(block.position + new Vec2(0f, -10f));
-                _ammo--;
+                ammo--;
                 return;
             }
             blocks = Level.CheckLineAll<Block>(position + new Vec2(0, 8f), position + new Vec2(16f * offDir, 0f));
             foreach (var block in blocks)
             {
                 Deploy(block.position + new Vec2(0f, -10f));
-                _ammo--;
+                ammo--;
                 return;
             }
         }
