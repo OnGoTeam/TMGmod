@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
@@ -39,14 +40,8 @@ namespace TMGmod
             _burstValue = 2;
 			weight = 5.5f;
             _laserOffsetTL = new Vec2(30f, 2.5f);
-            _sprite.AddAnimation("base", 0f, false, new int[]
-            {
-                0,
-            });
-            _sprite.AddAnimation("stock", 0f, false, new int[]
-            {
-                1,
-            });
+            _sprite.AddAnimation("base", 0f, false, 0);
+            _sprite.AddAnimation("stock", 0f, false, 1);
         }
 
         public override void Fire()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Custom_Guns;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Cases
@@ -28,8 +29,8 @@ namespace TMGmod.Cases
 
 		public override void Initialize()
 	{
-		var things = new List<Type>()
-	    {
+		var things = new List<Type>
+		{
         typeof(AKALFA),
         typeof(BarretM98),
         typeof(BarretM98C),

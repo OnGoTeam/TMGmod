@@ -1,5 +1,6 @@
 using System;
 using DuckGame;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod

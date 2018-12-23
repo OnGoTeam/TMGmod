@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Custom_Guns

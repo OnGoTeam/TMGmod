@@ -1,10 +1,12 @@
 ﻿using DuckGame;
+using TMGmod.Core;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class DaewooK1 : Gun
+    public class DaewooK1 : Gun, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
@@ -40,11 +42,7 @@ namespace TMGmod
 			weight = 4.5f;
         }
 
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+        
 
         public override void Update()
         {
@@ -71,6 +69,12 @@ namespace TMGmod
 				}
 			}
 		    base.Update();
-		}			
-	}
+		}
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+    }
 }

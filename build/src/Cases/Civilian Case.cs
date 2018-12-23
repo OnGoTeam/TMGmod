@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Core;
 using TMGmod.Custom_Guns;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -31,8 +32,8 @@ namespace TMGmod.Cases
 
 		public override void Initialize()
 	{
-		var things = new List<Type>()
-	    {
+		var things = new List<Type>
+		{
         typeof(CZ75),
         typeof(AF2011),
         typeof(M93R),	
@@ -52,35 +53,36 @@ namespace TMGmod.Cases
 
 	public override void OnPressAction()
 	{
-		
-		if (owner != null)
-		{
-			var o = owner;
-			var d = duck;
-			if (d != null)
-			{
-				d.profile.stats.presentsOpened++;
-				duck.ThrowItem();
-			}
-			Level.Remove(this);
-			{
-				Initialize();
-			}
-		    if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
-		    if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
-		    {
-		        (newThing as Gun).infiniteAmmoVal = true;
-		        (newThing as Gun).infinite.value = true;
-		    }
-		    newThing.x = o.x;
-		    newThing.y = o.y;
-		    Level.Add(newThing);
-		    if (d != null)
-		    {
-		        d.GiveHoldable(newThing);
-		        d.resetAction = true;
-		    }
-		}
+	    if (owner == null) return;
+        //else
+	    var o = owner;
+	    var d = duck;
+	    if (d != null)
+	    {
+	        d.profile.stats.presentsOpened++;
+	        duck.ThrowItem();
+	    }
+	    Level.Remove(this);
+	    {
+	        Initialize();
+	    }
+	    if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
+	    if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
+	    {
+	        (newThing as Gun).infiniteAmmoVal = true;
+	        (newThing as Gun).infinite.value = true;
+	    }
+	    newThing.x = o.x;
+	    newThing.y = o.y;
+	    if (newThing is IHaveSkin skinThing)
+	    {
+	        skinThing.FrameId = 1;
+	    }
+	    Level.Add(newThing);
+	    if (d == null) return;
+        //else
+	    d.GiveHoldable(newThing);
+	    d.resetAction = true;
 	}
     }
 }

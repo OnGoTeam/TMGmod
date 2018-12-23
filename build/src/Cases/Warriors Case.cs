@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Cases
@@ -29,8 +30,8 @@ namespace TMGmod.Cases
 
 		public override void Initialize()
 	{
-		var things = new List<Type>()
-	    {
+		var things = new List<Type>
+		{
         typeof(USP),
         typeof(M93R),	
         typeof(M4A1),	

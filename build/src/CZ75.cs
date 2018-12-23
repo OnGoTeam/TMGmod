@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
@@ -35,14 +36,8 @@ namespace TMGmod
             maxAccuracyLost = 0.5f;
             _editorName = "CZ-75";
 			weight = 1f;
-            _sprite.AddAnimation("haventmagaz", 0.3f, false, new int[]
-            {
-				1,
-			});
-            _sprite.AddAnimation("havemagaz", 0.3f, false, new int[]
-            {
-				0,
-			});
+            _sprite.AddAnimation("haventmagaz", 0.3f, false, 1);
+            _sprite.AddAnimation("havemagaz", 0.3f, false, 0);
             _sprite.SetAnimation("havemagaz");
         }
 

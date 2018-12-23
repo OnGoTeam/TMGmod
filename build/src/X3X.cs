@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
@@ -37,18 +38,9 @@ namespace TMGmod
             _editorName = "EXsess's X3X";
 			weight = 5.5f;
             _manualLoad = true;
-            _sprite.AddAnimation("idle", 0.3f, false, new int[]
-            {
-				0,
-			});
-            _sprite.AddAnimation("fire", 0.3f, false, new int[]
-            {
-				1,
-			});
-            _sprite.AddAnimation("empty", 1f, true, new int[]
-            {
-                1
-            });
+            _sprite.AddAnimation("idle", 0.3f, false, 0);
+            _sprite.AddAnimation("fire", 0.3f, false, 1);
+            _sprite.AddAnimation("empty", 1f, true, 1);
         }
 
         public override void Fire()

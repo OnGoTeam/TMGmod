@@ -9,7 +9,7 @@ namespace TMGmod
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 2;
-            _ammoType = new ATShotgun()
+            _ammoType = new ATShotgun
             {
                 accuracy = 0.9f,
                 bulletColor = new Color(200, 190, 150),

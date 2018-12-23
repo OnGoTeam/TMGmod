@@ -18,7 +18,7 @@ namespace TMGmod.Custom_Guns
             {
                 range = 225f,
                 accuracy = 0.9f,
-                penetration = 1f,
+                penetration = 1f
             };
             _numBulletsPerFire = 14;
             _type = "gun";

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Custom_Guns;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Cases
@@ -28,8 +29,8 @@ namespace TMGmod.Cases
 
 		public override void Initialize()
 	{
-		var things = new List<Type>()
-	    {
+		var things = new List<Type>
+		{
         typeof(AN94),
         typeof(AN94C),
         typeof(Aug),
@@ -47,7 +48,7 @@ namespace TMGmod.Cases
         typeof(DaewooK1),	
         typeof(SIX12),	
         typeof(SIX12C),	
-        typeof(Vag),	
+        typeof(Vag)	
 		};
 		_contains = things[Rando.Int(things.Count - 1)];
 	}

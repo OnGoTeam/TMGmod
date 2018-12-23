@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+
 // ReSharper disable RedundantOverriddenMember
 
 // The title of your mod, as displayed in menus

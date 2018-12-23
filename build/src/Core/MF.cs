@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Useless_or_deleted_Guns;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Core
@@ -17,14 +18,7 @@ namespace TMGmod.Core
             : base(xpos, ypos)
         {
             _sprite = new SpriteMap("smallFire", 16, 16);
-            _sprite.AddAnimation("burn", 0.2f + Rando.Float(0.2f), true, new int[]
-			{
-				0,
-				1,
-				2,
-				3,
-				4
-			});
+            _sprite.AddAnimation("burn", 0.2f + Rando.Float(0.2f), true, 0, 1, 2, 3, 4);
             _sprite.SetAnimation("burn");
             _sprite.imageIndex = Rando.Int(4);
             graphic = _sprite;
