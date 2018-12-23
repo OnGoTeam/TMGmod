@@ -31,7 +31,7 @@ namespace TMGmod.Stuff
                 r1.hSpeed *= 1f / (_hp / 26f + 1f);
                 r1.vSpeed *= 1f / (_hp / 10f + 1f);
             }
-            var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
+            var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-16f, -3f), position + new Vec2(16f, 3f));
             if (wirelist.Any(wire => wire != this))
             {
                 return;
