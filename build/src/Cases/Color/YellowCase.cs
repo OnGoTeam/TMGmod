@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
+using TMGmod.Custom_Guns;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.Cases.Color
+namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorY : Holdable, IPlatform
