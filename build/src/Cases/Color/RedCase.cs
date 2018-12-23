@@ -9,17 +9,17 @@ using TMGmod.Custom_Guns;
 namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class PodarokColor1 : Holdable, IPlatform
+    public class PodarokColorR : Holdable, IPlatform
     {
         private Type _contains;
         private const int CaseId = 1;
 
-        public PodarokColor1 (float xval, float yval)
+        public PodarokColorR (float xval, float yval)
           : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("CivilianCase"), 14, 8);
+            var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
             graphic = sprite;	
-		    sprite.frame = 1;
+		    sprite.frame = 0;
 		    center = new Vec2(7f, 4f);
             collisionOffset = new Vec2(-7f, -4f);
             collisionSize = new Vec2(14f, 8f);
@@ -47,7 +47,7 @@ namespace TMGmod.Cases
             typeof(SV98),	
             typeof(USP),	
             typeof(UziPro),	
-            typeof(Bren),
+            typeof(SIX12S),
             typeof(DaewooK1)
 		};
 		_contains = things[Rando.Int(things.Count - 1)];

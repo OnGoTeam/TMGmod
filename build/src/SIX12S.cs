@@ -7,10 +7,11 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12S : Gun
+    public class SIX12S : Gun, IHaveSkin
     {
-        // ReSharper disable once MemberCanBePrivate.Global
-        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
 		
 		public SIX12S (float xval, float yval)
           : base(xval, yval)
@@ -24,7 +25,9 @@ namespace TMGmod
             };
             _numBulletsPerFire = 14;
             _type = "gun";
-            graphic = new Sprite(GetPath("SIX12S"));
+            _sprite = new SpriteMap(GetPath("SIX12Spattern"), 29, 10);
+            graphic = _sprite;
+            _sprite.frame = 0;
             center = new Vec2(19.5f, 5f);
             collisionOffset = new Vec2(-19.5f, -5f);
             collisionSize = new Vec2(29f, 10f);
@@ -41,17 +44,10 @@ namespace TMGmod
             _editorName = "SIX12 Silenced";
 			weight = 4f;
         }
-        public override void Initialize()
+        public int FrameId
         {
-			if (!(Level.current is Editor))
-            {
-                if (Laser.value)
-                {
-                    laserSight = true;
-				    graphic = new Sprite(GetPath("SIX12Slaser2"));
-                }
-            }
-            base.Initialize();
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-	}
+    }
 }
