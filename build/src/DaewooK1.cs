@@ -6,6 +6,8 @@ namespace TMGmod
     [EditorGroup("TMG|Machinegun")]
     public class DaewooK1 : Gun
     {
+
+        private readonly SpriteMap sprite;
         private bool _stock;
 		
         public DaewooK1 (float xval, float yval)
@@ -19,7 +21,9 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("DaewooK1Stock"));
+            sprite = new SpriteMap(GetPath("DaewooK1pattern"), 28, 11);
+            graphic = sprite;
+            sprite.frame = 0;
             center = new Vec2(14f, 5f);
             collisionOffset = new Vec2(-14f, -5f);
             collisionSize = new Vec2(28f, 11f);
@@ -41,16 +45,18 @@ namespace TMGmod
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
 					if (_stock)
-					{
-				        graphic = new Sprite(GetPath("DaewooK1Stock"));
+                    {
+                        graphic = sprite;
+                        sprite.frame -= 5;
                         loseAccuracy = 0.1f;
 				        maxAccuracyLost = 0.24f;
 			            weight = 4.5f;
 						_stock = false;
 					}
                     else
-					{
-				        graphic = new Sprite(GetPath("DaewooK1NoStock"));
+                    {
+                        graphic = sprite;
+                        sprite.frame += 5;
                         loseAccuracy = 0.2f;
 				        maxAccuracyLost = 0.36f;
 			            weight = 3f;
