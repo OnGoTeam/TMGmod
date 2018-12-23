@@ -46,10 +46,10 @@ namespace TMGmod
             {
                 if (Laser.value)
                 {
-                 laserSight = true;
-				 graphic = new Sprite(GetPath("SIX12laser2"));
-                 loseAccuracy = 0.5f;
-                 maxAccuracyLost = 0.5f;
+                    laserSight = true;
+				    graphic = new Sprite(GetPath("SIX12laser2"));
+                    loseAccuracy = 0.5f;
+                    maxAccuracyLost = 0.5f;
                 }
             }
             base.Initialize();
