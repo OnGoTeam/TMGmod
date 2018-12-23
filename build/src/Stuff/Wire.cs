@@ -15,32 +15,30 @@ namespace TMGmod.Stuff
             center = new Vec2(24f, 2f);
             collisionOffset = new Vec2(-24f, -2f);
             collisionSize = new Vec2(48f, 16f);
-            thickness = 125f;
+            thickness = 3f;
             weight = 40f;
             throwSpeedMultiplier = 0f;
         }
         public override void Update()
         {
+            if (_hp < 0f) _hp = 0f;
             var probablyduck = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
             foreach (var realyduck in probablyduck)
             {
-                realyduck.hSpeed *= 0.5f * (1f/(26f-_hp));
-                realyduck.vSpeed *= 0.8f * (1f/(26f-_hp));
+                realyduck.hSpeed *= 1f/(_hp + 1);
+                realyduck.vSpeed *= 1f/(_hp + 1);
             }
             base.Update();
         }
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
-            if ((bullet.ammo.penetration < 1f) || (bullet.ammo.penetration > 95f)) Damage(bullet.ammo);
+            if (bullet.ammo.penetration < 10f) Damage(bullet.ammo);
             return Hit(bullet, hitPos);
         }
         private void Damage(AmmoType at)
         {
-            _hp -= at.penetration * 2f;
-            if (_hp > 1f)
-            {
-                graphic = new SpriteMap(GetPath("WireYes"), 48, 16);
-            }
+            if (at.penetration < 1.1f) return;
+            _hp -= at.penetration;
             if (_hp < 1f)
             {
                 graphic = new SpriteMap(GetPath("WireNot"), 48, 16);
