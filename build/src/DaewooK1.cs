@@ -9,7 +9,8 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         private bool _stock;
-		
+        private const int NonSkinFrames = 2;
+
         public DaewooK1 (float xval, float yval)
           : base(xval, yval)
         {
@@ -42,7 +43,7 @@ namespace TMGmod
         public int FrameId
         {
             get => _sprite.frame;
-            set => _sprite.frame = value % 20;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void Update()
