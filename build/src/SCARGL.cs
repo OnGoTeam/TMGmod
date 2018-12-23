@@ -82,6 +82,7 @@ namespace TMGmod
 
         public override void Update()
         {
+            if (infiniteAmmoVal) _ammom[0] = 99;
             if (owner != null)
             {
                 if (duck.inputProfile.Down("QUACK"))
