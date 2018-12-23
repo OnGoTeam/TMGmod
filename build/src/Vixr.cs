@@ -43,7 +43,7 @@ namespace TMGmod
         public override void OnHoldAction()
         {
             _vixrstock = Rando.Float(-0.3f, 0.3f);
-            _vixrnostock = Rando.Float(Rando.Float(0.45f, 0.44f), 0.45f);
+            _vixrnostock = Rando.Float(Rando.Float(-0.45f, -0.44f), 0.45f);
             base.OnHoldAction();
         }
         public override void Update()
