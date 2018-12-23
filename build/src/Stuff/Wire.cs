@@ -39,10 +39,10 @@ namespace TMGmod.Stuff
         {
             if (at.penetration < 1.1f) return;
             _hp -= at.penetration;
-            if (_hp < 1f)
-            {
-                graphic = new Sprite(GetPath("WireNot"));
-            }
+            if (!(_hp < 1f)) return;
+            //else
+            thickness = 0.1f;
+            graphic = new Sprite(GetPath("WireNot"));
         }
     }
 }
