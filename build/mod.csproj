@@ -42,9 +42,11 @@
     <Compile Include="src\BREN.cs" />
     <Compile Include="src\Caliber50.cs" />
     <Compile Include="src\Cases\Civilian Case.cs" />
+    <Compile Include="src\Cases\ExampleCase.cs" />
     <Compile Include="src\Cases\Heavy Millitary Case.cs" />
     <Compile Include="src\Cases\Millitary Case.cs" />
     <Compile Include="src\Cases\Warriors Case.cs" />
+    <Compile Include="src\Core\BaseCase.cs" />
     <Compile Include="src\Core\IHaveSkin.cs" />
     <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
