@@ -28,7 +28,7 @@ namespace TMGmod.Stuff
                 if (!(realyduck is Thing r1)) continue;
                 //else
                 r1.hSpeed *= 1f / (_hp / 26f + 1f);
-                r1.vSpeed *= 1f / (_hp / 26f + 1f);
+                r1.vSpeed *= 1f / (_hp / 10f + 1f);
             }
             base.Update();
         }
