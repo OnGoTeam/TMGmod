@@ -25,8 +25,8 @@ namespace TMGmod.Stuff
             var probablyduck = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
             foreach (var realyduck in probablyduck)
             {
-                realyduck.hSpeed *= 1f/(_hp + 1);
-                realyduck.vSpeed *= 1f/(_hp + 1);
+                realyduck.hSpeed *= 1f/(_hp / 26f + 1f);
+                realyduck.vSpeed *= 1f/(_hp / 87f + 1f);
             }
             base.Update();
         }
