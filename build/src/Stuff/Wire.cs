@@ -1,3 +1,4 @@
+using System.Linq;
 using DuckGame;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -31,10 +32,9 @@ namespace TMGmod.Stuff
                 r1.vSpeed *= 1f / (_hp / 10f + 1f);
             }
             var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
-            foreach (var wire in wirelist)
+            if (wirelist.Any())
             {
-                wire.hSpeed = 0f;
-                wire.vSpeed = 0f;
+                return;
             }
             base.Update();
         }
