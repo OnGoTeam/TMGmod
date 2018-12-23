@@ -26,7 +26,7 @@ namespace TMGmod.Stuff
             foreach (var realyduck in probablyduck)
             {
                 realyduck.hSpeed *= 1f/(_hp / 26f + 1f);
-                realyduck.vSpeed *= 1f/(_hp / 87f + 1f);
+                realyduck.vSpeed *= 1f/(_hp / 26f + 1f);
             }
             base.Update();
         }
