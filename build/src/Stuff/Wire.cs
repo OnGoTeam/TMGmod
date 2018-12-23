@@ -14,7 +14,7 @@ namespace TMGmod.Stuff
             graphic = new Sprite(GetPath("WireYes"));
             center = new Vec2(24f, 2f);
             collisionOffset = new Vec2(-24f, -2f);
-            collisionSize = new Vec2(48f, 8f);
+            collisionSize = new Vec2(48f, 6f);
             thickness = 3f;
             weight = 40f;
             throwSpeedMultiplier = 0f;
