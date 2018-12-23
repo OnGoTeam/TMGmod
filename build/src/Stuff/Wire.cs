@@ -11,10 +11,10 @@ namespace TMGmod.Stuff
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
             _hp = 25f;
-            graphic = new SpriteMap(GetPath("WireYes"), 48, 16);
+            graphic = new Sprite(GetPath("WireYes"));
             center = new Vec2(24f, 2f);
             collisionOffset = new Vec2(-24f, -2f);
-            collisionSize = new Vec2(48f, 16f);
+            collisionSize = new Vec2(48f, 8f);
             thickness = 3f;
             weight = 40f;
             throwSpeedMultiplier = 0f;
@@ -41,7 +41,7 @@ namespace TMGmod.Stuff
             _hp -= at.penetration;
             if (_hp < 1f)
             {
-                graphic = new SpriteMap(GetPath("WireNot"), 48, 16);
+                graphic = new Sprite(GetPath("WireNot"));
             }
         }
     }
