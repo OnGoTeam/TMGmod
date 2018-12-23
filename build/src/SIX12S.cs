@@ -46,8 +46,8 @@ namespace TMGmod
             {
                 if (Laser.value)
                 {
-                 laserSight = true;
-				 graphic = new Sprite(GetPath("SIX12Slaser2"));
+                    laserSight = true;
+				    graphic = new Sprite(GetPath("SIX12Slaser2"));
                 }
             }
             base.Initialize();
