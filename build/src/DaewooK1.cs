@@ -46,7 +46,7 @@ namespace TMGmod
                 {
 					if (_stock)
                     {
-                        _sprite.frame -= 5;
+                        _sprite.frame -= 10;
                         loseAccuracy = 0.1f;
 				        maxAccuracyLost = 0.24f;
 			            weight = 4.5f;
@@ -54,7 +54,7 @@ namespace TMGmod
 					}
                     else
                     {
-                        _sprite.frame += 5;
+                        _sprite.frame += 10;
                         loseAccuracy = 0.2f;
 				        maxAccuracyLost = 0.36f;
 			            weight = 3f;
