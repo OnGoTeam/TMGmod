@@ -8,10 +8,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class PPSh : Gun
     {
-  
-        private readonly SpriteMap _sprite;
-        private readonly int _teksturka;
-
         public PPSh(float xval, float yval)
             : base(xval, yval)
         {
@@ -22,10 +18,9 @@ namespace TMGmod
                 accuracy = 0.9f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPshptr"), 48, 11);
-            graphic = _sprite;
-            _teksturka = Rando.Int(0, 5);
-            _sprite.frame = _teksturka;
+            var sprite = new SpriteMap(GetPath("PPshptr"), 48, 11);
+            graphic = sprite;
+            sprite.frame = Rando.Int(0, 5);
             center = new Vec2(23f, 5.5f);
             collisionOffset = new Vec2(-23f, -4.5f);
             collisionSize = new Vec2(46f, 11f);
@@ -39,11 +34,6 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "PPSh";
 			weight = 5.5f;
-        }
-        public override void Draw()
-        {
-            _sprite.frame = _teksturka;
-            base.Draw();
         }
     }
 }
