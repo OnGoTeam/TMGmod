@@ -4,6 +4,7 @@
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
+    [BaggedProperty("canSpawn", false)]
     // ReSharper disable once InconsistentNaming
     public class AKwAR : Gun
     {
@@ -49,66 +50,38 @@ namespace TMGmod
             if (ammo > 0)
             {
                 Fire();
+                return;
             }
-            else
-            {
+            if (!_isroundsin || ammo != 0) return;
+            //else
+            SFX.Play("Click");
+            graphic = new Sprite(GetPath("AKwAR"));
+            _isroundsin = false;
 
-                /*if (this._isroundsin == false)
-                {
-                    SFX.Play("Click");
-                    this.graphic = new Sprite(GetPath("AKwAR1"));
-                    this._isroundsin = true;
-                    if (this._aammo > this._ammo)
-                    {
-                        this.ammo = this._ammo;
-                        this._aammo = this._aammo - this._ammo;
-                    }
-                    else
-                    {
-                        this.ammo = this._aammo;
-                        this._aammo = 0;
-                    }
-                }*/
-
-
-                if (_isroundsin && ammo == 0)
-                {
-                    SFX.Play("Click");
-                    graphic = new Sprite(GetPath("AKwAR"));
-                    _isroundsin = false;
-                }
-                
-
-                
-            }
-            
         }
 
         public override void Update()
         {
-            if (_isroundsin == false)
-            {
-                _rs = _rs + 1;
-                if (_rs == 10)
-                {
-                    SFX.Play("Click");
-                    graphic = new Sprite(GetPath("AKwAR1"));
-                    _isroundsin = true;
-                    if (_aammo > _ammo)
-                    {
-                        ammo = _ammo;
-                        _aammo = _aammo - _ammo;
-                    }
-                    else
-                    {
-                        ammo = _aammo;
-                        _aammo = 0;
-                    }
-                    _rs = 0;
-                }
-            }
-            
             base.Update();
+            if (_isroundsin) return;
+            //else
+            _rs = _rs + 1;
+            if (_rs != 10) return;
+            //else
+            SFX.Play("Click");
+            graphic = new Sprite(GetPath("AKwAR1"));
+            _isroundsin = true;
+            if (_aammo > _ammo)
+            {
+                ammo = _ammo;
+                _aammo = _aammo - _ammo;
+            }
+            else
+            {
+                ammo = _aammo;
+                _aammo = 0;
+            }
+            _rs = 0;
         }
         /*public override void OnHoldAction()
         {
