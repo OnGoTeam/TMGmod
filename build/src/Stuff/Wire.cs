@@ -22,11 +22,13 @@ namespace TMGmod.Stuff
         public override void Update()
         {
             if (_hp < 0f) _hp = 0f;
-            var probablyduck = Level.CheckRectAll<Duck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
+            var probablyduck = Level.CheckRectAll<IAmADuck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
             foreach (var realyduck in probablyduck)
             {
-                realyduck.hSpeed *= 1f/(_hp / 26f + 1f);
-                realyduck.vSpeed *= 1f/(_hp / 26f + 1f);
+                if (!(realyduck is Thing r1)) continue;
+                //else
+                r1.hSpeed *= 1f / (_hp / 26f + 1f);
+                r1.vSpeed *= 1f / (_hp / 26f + 1f);
             }
             base.Update();
         }
