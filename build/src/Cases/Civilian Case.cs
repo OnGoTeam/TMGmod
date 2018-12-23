@@ -34,19 +34,20 @@ namespace TMGmod.Cases
 	{
 		var things = new List<Type>
 		{
-        typeof(CZ75),
-        typeof(AF2011),
-        typeof(M93R),	
-        typeof(MAP),	
-        typeof(MPA27),	
-        typeof(BigShot),	
-        typeof(Nellegalja),
-        typeof(Rfb),	
-        typeof(Arx200),	
-        typeof(SV98),	
-        typeof(USP),	
-        typeof(UziPro),	
-        typeof(Bren)
+            typeof(CZ75),
+            typeof(AF2011),
+            typeof(M93R),	
+            typeof(MAP),	
+            typeof(MPA27),	
+            typeof(BigShot),	
+            typeof(Nellegalja),
+            typeof(Rfb),	
+            typeof(Arx200),	
+            typeof(SV98),	
+            typeof(USP),	
+            typeof(UziPro),	
+            typeof(Bren),
+            typeof(DaewooK1)
 		};
 		_contains = things[Rando.Int(things.Count - 1)];
 	}
