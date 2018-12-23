@@ -9,16 +9,17 @@ using TMGmod.Custom_Guns;
 namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class Lpodarok : Holdable, IPlatform
+    public class PodarokColor1 : Holdable, IPlatform
     {
         private Type _contains;
+        private const int CaseId = 1;
 
-        public Lpodarok (float xval, float yval)
+        public PodarokColor1 (float xval, float yval)
           : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("CivilianCase"), 14, 8);
             graphic = sprite;	
-		    sprite.frame = Rando.Int(0, 4);
+		    sprite.frame = 1;
 		    center = new Vec2(7f, 4f);
             collisionOffset = new Vec2(-7f, -4f);
             collisionSize = new Vec2(14f, 8f);
@@ -26,7 +27,7 @@ namespace TMGmod.Cases
             thickness = 0.0f;
             weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Civilian Container";
+            _editorName = "Red Container";
         }
 
 
@@ -77,7 +78,7 @@ namespace TMGmod.Cases
 	    newThing.y = o.y;
 	    if (newThing is IHaveSkin skinThing)
 	    {
-	        skinThing.FrameId = 1;
+	        skinThing.FrameId = CaseId;
 	    }
 	    Level.Add(newThing);
 	    if (d == null) return;
