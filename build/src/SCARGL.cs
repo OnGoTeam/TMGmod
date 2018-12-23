@@ -24,7 +24,6 @@ namespace TMGmod
             {
             range = 2500f,
             accuracy = 1f,
-            penetration = 0.35f,
             bulletSpeed = 18f,
             barrelAngleDegrees = -7.5f
             }
