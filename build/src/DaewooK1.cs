@@ -38,6 +38,13 @@ namespace TMGmod
             _editorName = "Daewoo K1";
 			weight = 4.5f;
         }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % 20;
+        }
+
         public override void Update()
         {
             if (owner != null)
@@ -46,7 +53,7 @@ namespace TMGmod
                 {
 					if (_stock)
                     {
-                        _sprite.frame -= 10;
+                        FrameId -= 10;
                         loseAccuracy = 0.1f;
 				        maxAccuracyLost = 0.24f;
 			            weight = 4.5f;
@@ -54,7 +61,7 @@ namespace TMGmod
 					}
                     else
                     {
-                        _sprite.frame += 10;
+                        FrameId += 10;
                         loseAccuracy = 0.2f;
 				        maxAccuracyLost = 0.36f;
 			            weight = 3f;
