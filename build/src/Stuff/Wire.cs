@@ -12,9 +12,9 @@ namespace TMGmod.Stuff
         {
             _hp = 25f;
             graphic = new Sprite(GetPath("WireYes"));
-            center = new Vec2(24f, 2f);
-            collisionOffset = new Vec2(-24f, -4f);
-            collisionSize = new Vec2(48f, 8f);
+            center = new Vec2(24f, 3f);
+            collisionOffset = new Vec2(-24f, -3f);
+            collisionSize = new Vec2(48f, 6f);
             thickness = 3f;
             weight = 40f;
             throwSpeedMultiplier = 0f;
@@ -29,6 +29,12 @@ namespace TMGmod.Stuff
                 //else
                 r1.hSpeed *= 1f / (_hp / 26f + 1f);
                 r1.vSpeed *= 1f / (_hp / 10f + 1f);
+            }
+            var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
+            foreach (var wire in wirelist)
+            {
+                wire.hSpeed = 0f;
+                wire.vSpeed = 0f;
             }
             base.Update();
         }
