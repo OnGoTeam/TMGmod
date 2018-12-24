@@ -6,13 +6,13 @@ using DuckGame;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
-    public class KSG12 : Gun
+    public class Ksg12 : Gun
     {
         private sbyte _loadProgress = 100;
         private float _loadAnimation = 1f;
         private readonly SpriteMap _loaderSprite;
 
-	    public KSG12(float xval, float yval)
+	    public Ksg12(float xval, float yval)
 		    : base(xval, yval)
 	    {
 		    ammo = 15;
