@@ -51,6 +51,15 @@
     <Compile Include="src\Cases\Warriors Case.cs" />
     <Compile Include="src\Core\BaseCase.cs" />
     <Compile Include="src\Core\IHaveSkin.cs" />
+    <Compile Include="src\Core\WClasses\BaseGun.cs" />
+    <Compile Include="src\Core\WClasses\BaseSniper.cs" />
+    <Compile Include="src\Core\WClasses\IAmAr.cs" />
+    <Compile Include="src\Core\WClasses\IAmDmr.cs" />
+    <Compile Include="src\Core\WClasses\IAmHg.cs" />
+    <Compile Include="src\Core\WClasses\IAmLmg.cs" />
+    <Compile Include="src\Core\WClasses\IAmSg.cs" />
+    <Compile Include="src\Core\WClasses\IAmSmg.cs" />
+    <Compile Include="src\Core\WClasses\IAmSr.cs" />
     <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
     <Compile Include="src\Core\AT9mmSilenced.cs" />

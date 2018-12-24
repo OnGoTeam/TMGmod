@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,10 +7,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class AKALFA : Gun
+    public class AKALFA : BaseGun, IAmAr
     {
         private readonly SpriteMap _sprite;
-        float _stock;
+        private float _stock;
 		
         public AKALFA (float xval, float yval)
           : base(xval, yval)
@@ -35,6 +36,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.75f;
             _kickForce = 0.65f;
+		    Kforce1 = 0.05f;
+		    Kforce2 = 0.65f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";
@@ -43,7 +46,7 @@ namespace TMGmod
             laserSight = true;
 		    _sprite.AddAnimation("base", 0f, false, 0);
 		    _sprite.AddAnimation("stock", 0f, false, 1);
-        }
+		}
         public override void Update()
         {
             if (owner != null)
@@ -69,6 +72,9 @@ namespace TMGmod
 				}
 			}
 		    base.Update();
-		}			
-	}
+		}
+
+        public float Kforce1 { get; set; }
+        public float Kforce2 { get; set; }
+    }
 }
