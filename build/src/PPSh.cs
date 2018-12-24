@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -7,8 +8,10 @@ namespace TMGmod
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh : Gun
+    public class PPSh : Gun, IHaveSkin
     {
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
         public PPSh(float xval, float yval)
             : base(xval, yval)
         {
@@ -19,9 +22,9 @@ namespace TMGmod
                 accuracy = 0.9f
             };
             _type = "gun";
-            var sprite = new SpriteMap(GetPath("PPshptr"), 48, 11);
-            graphic = sprite;
-            sprite.frame = Rando.Int(0, 5);
+            _sprite = new SpriteMap(GetPath("PPShpattern"), 48, 16);
+            graphic = _sprite;
+            _sprite.frame = 0;
             center = new Vec2(23f, 5.5f);
             collisionOffset = new Vec2(-23f, -4.5f);
             collisionSize = new Vec2(46f, 11f);
@@ -35,6 +38,12 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "PPSh";
 			weight = 5.5f;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }

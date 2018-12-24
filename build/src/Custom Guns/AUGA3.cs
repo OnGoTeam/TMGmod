@@ -1,15 +1,16 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
-    public class AugC : Gun
+    public class AugC : Gun, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
-        private readonly int _greathole;
+        private const int NonSkinFrames = 1;
 
         public AugC (float xval, float yval)
           : base(xval, yval)
@@ -24,8 +25,7 @@ namespace TMGmod.Custom_Guns
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AUGA3"), 30, 12);
             graphic = _sprite;
-            _greathole = Rando.Int(1, 3);
-            _sprite.frame = _greathole;
+            _sprite.frame = 0;
             center = new Vec2(15f, 6f);
             collisionOffset = new Vec2(-15f, -6f);
             collisionSize = new Vec2(30f, 12f);
@@ -40,10 +40,10 @@ namespace TMGmod.Custom_Guns
             _editorName = "AUG A3";
 			weight = 5.5f;
         }
-        public override void Draw()
+        public int FrameId
         {
-            _sprite.frame = _greathole;
-            base.Draw();
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }

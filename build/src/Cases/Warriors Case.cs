@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Core;
+using TMGmod.Custom_Guns;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class Warriorscase : Holdable, IPlatform
+    public class PodarokWarrior : BaseCase
     {
-        private Type _contains;
 
-        public Warriorscase (float xval, float yval)
-          : base(xval, yval)
+        public PodarokWarrior (float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("WarriorsCase"), 14, 8);
             graphic = sprite;	
@@ -25,74 +25,14 @@ namespace TMGmod.Cases
             weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Warriors Case";
+            Things = new List<Type>
+            {
+                typeof(Arx200),
+                typeof(UziPro),	
+                typeof(PPSh),	
+                typeof(SkeetGun)
+		    };
+            CaseId = 6;
         }
-
-
-		public override void Initialize()
-	{
-		var things = new List<Type>
-		{
-        typeof(USP),
-        typeof(M93R),	
-        typeof(M4A1),	
-        typeof(SV98),
-        typeof(USP),
-        typeof(M93R),	
-        typeof(M4A1),	
-        typeof(SV98),
-        typeof(USP),
-        typeof(M93R),	
-        typeof(M4A1),	
-        typeof(SV98),
-        typeof(USP),
-        typeof(M93R),	
-        typeof(M4A1),	
-        typeof(SV98),	
-        typeof(Vintorez),	
-        typeof(FnFcar),
-        typeof(MG44),	
-        typeof(Vintorez),	
-        typeof(FnFcar),
-        typeof(MG44),	
-        typeof(Vintorez),	
-        typeof(FnFcar),
-        typeof(MG44),	
-        typeof(AN94),	
-        typeof(CZ805),	
-        typeof(AN94),	
-        typeof(CZ805),	
-        typeof(PPSh),	
-        typeof(SVU)
-		};
-		_contains = things[Rando.Int(things.Count - 1)];
-	}
-
-	public override void OnPressAction()
-	{
-	    if (owner == null) return;
-	    var o = owner;
-	    var d = duck;
-	    if (d != null)
-	    {
-	        d.profile.stats.presentsOpened++;
-	        duck.ThrowItem();
-	    }
-	    Level.Remove(this);
-	    {
-	        Initialize();
-	    }
-	    if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
-	    if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
-	    {
-	        (newThing as Gun).infiniteAmmoVal = true;
-	        (newThing as Gun).infinite.value = true;
-	    }
-	    newThing.x = o.x;
-	    newThing.y = o.y;
-	    Level.Add(newThing);
-	    if (d == null) return;
-	    d.GiveHoldable(newThing);
-	    d.resetAction = true;
-	}
     }
 }

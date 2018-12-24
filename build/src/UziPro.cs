@@ -7,8 +7,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class UziPro : Gun
+    public class UziPro : Gun, IHaveSkin
     {
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 2;
         private bool _silencer;
 
         public UziPro (float xval, float yval)
@@ -22,7 +24,9 @@ namespace TMGmod
                 penetration = 3f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("uzipro"));
+            _sprite = new SpriteMap(GetPath("UziProSpattern"), 16, 10);
+            graphic = _sprite;
+            _sprite.frame = 0;
             center = new Vec2(8f, 5f);
             collisionOffset = new Vec2(-8f, -5f);
             collisionSize = new Vec2(16f, 10f);
@@ -47,7 +51,7 @@ namespace TMGmod
                 {
 					if (_silencer)
 					{
-				        graphic = new Sprite(GetPath("uzipro"));
+                        _sprite.frame -= 10;
                         _ammoType = new AT9mm
                         {
                             range = 70f,
@@ -60,7 +64,7 @@ namespace TMGmod
 					}
                     else
 					{
-				        graphic = new Sprite(GetPath("uzipros"));
+                        _sprite.frame += 10;
                         _ammoType = new AT9mmS
                         {
                             range = 100f,
@@ -74,6 +78,12 @@ namespace TMGmod
 				}
 			}
 		    base.Update();
-		}			
-	}
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+    }
 }

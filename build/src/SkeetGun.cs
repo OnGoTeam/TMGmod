@@ -1,23 +1,29 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
     [BaggedProperty("canSpawn", false)]
-    public sealed class SkeetGun:Gun
+    public class SkeetGun:Gun, IHaveSkin
     {
+
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 2;
             _ammoType = new ATShotgun
             {
                 accuracy = 0.9f,
-                bulletColor = new Color(200, 190, 150),
+                bulletColor = new Color(255, 0, 0),
                 range = 500f,
                 bulletSpeed = 50f
             };
             _numBulletsPerFire = 10;
-            graphic = new Sprite(GetPath("SkeetDouble"));
+            _sprite = new SpriteMap(GetPath("SkeetDoublepattern"), 41, 7);
+            graphic = _sprite;
+            _sprite.frame = 0;
             center = new Vec2(20.5f, 3.5f);
             collisionOffset = new Vec2(-20.5f, -3.5f);
             collisionSize = new Vec2(41f, 7f);
@@ -66,6 +72,12 @@ namespace TMGmod
             }
 
             handAngle = 0f;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }
