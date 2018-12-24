@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,8 +7,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : Gun
+    public class MG44 : Gun, IHaveSkin
     {
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 3;
         private const float DefaultAccuracy = .75f;
         private const float MaxRaise = .6f;
         private const float EpsilonD = .2f;
@@ -18,7 +21,7 @@ namespace TMGmod
         private const float AcclB = .225f;
         private float _raisestat;
 
-		public MG44 (float xval, float yval)
+        public MG44(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 80;
@@ -29,7 +32,9 @@ namespace TMGmod
                 penetration = 1.5f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("mg44req"));
+            _sprite = new SpriteMap(GetPath("mg44reqpattern"), 39, 12);
+            graphic = _sprite;
+            _sprite.frame = 0;
             center = new Vec2(19.5f, 6f);
             collisionOffset = new Vec2(-19.5f, -6f);
             collisionSize = new Vec2(39f, 12f);
@@ -42,50 +47,50 @@ namespace TMGmod
             maxAccuracyLost = 0f;
             _holdOffset = new Vec2(4f, 0f);
             _editorName = "Magnium";
-			weight = 7.5f;
+            weight = 7.5f;
         }
-		public override void Update()
-		{
-		    base.Update();
+        public override void Update()
+        {
+            base.Update();
             switch (ammo)
             {
                 case 1:
-                    graphic = new Sprite(GetPath("mg44req1"));
+                    _sprite.frame += 10;
                     break;
                 case 0:
-                    graphic = new Sprite(GetPath("mg44req2"));
+                    _sprite.frame += 10;
                     break;
             }
 
-		    if (_raisestat > MaxRaise) _raisestat = MaxRaise;
-		    if (_raisestat > 0f)
-		    {
-		        var δα = -EpsilonY - EpsilonK / (_raisestat - EpsilonX);
+            if (_raisestat > MaxRaise) _raisestat = MaxRaise;
+            if (_raisestat > 0f)
+            {
+                var δα = -EpsilonY - EpsilonK / (_raisestat - EpsilonX);
 
-		        if (offDir < 0)
-		        {
-		            handAngle = δα;
-		        }
-		        else
-		        {
-		            handAngle = -δα;
-		        }
-		    }
-		    _raisestat -= .015f;
-		    if (duck == null)
-		    {
-		        _raisestat = 0f;
-		        handAngle = 0f;
-		    }
-		    else
-		    {
-		        if (duck.crouch || duck.sliding) _raisestat -= .005f;
-		        if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
-		        if (!(_raisestat < 0f)) return;
-		        _raisestat = 0f;
-		        handAngle = 0f;
-		    }
-		}
+                if (offDir < 0)
+                {
+                    handAngle = δα;
+                }
+                else
+                {
+                    handAngle = -δα;
+                }
+            }
+            _raisestat -= .015f;
+            if (duck == null)
+            {
+                _raisestat = 0f;
+                handAngle = 0f;
+            }
+            else
+            {
+                if (duck.crouch || duck.sliding) _raisestat -= .005f;
+                if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
+                if (!(_raisestat < 0f)) return;
+                _raisestat = 0f;
+                handAngle = 0f;
+            }
+        }
 
         public override void Fire()
         {
@@ -96,6 +101,12 @@ namespace TMGmod
             if (_raisestat < AcclA) _raisestat = AcclB;
             var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
             _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }
