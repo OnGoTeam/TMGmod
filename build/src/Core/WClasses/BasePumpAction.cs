@@ -65,7 +65,7 @@ namespace TMGmod.Core.WClasses
         public override void Draw()
         {
             base.Draw();
-            var num = (float)Math.Sin(LoadAnimation * 3.14000010490417) * Loaddx;
+            var num = (float)Math.Sin(LoadAnimation * 3.1415) * Loaddx;
             Draw(LoaderSprite, new Vec2(LoaderVec2.x - num, LoaderVec2.y));
         }
     }
