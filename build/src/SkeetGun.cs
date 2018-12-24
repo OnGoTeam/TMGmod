@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+// ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {

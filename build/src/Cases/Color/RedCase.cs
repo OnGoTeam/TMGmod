@@ -6,7 +6,7 @@ using TMGmod.Custom_Guns;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.Cases
+namespace TMGmod.Cases.Color
 {
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorR : BaseCase
