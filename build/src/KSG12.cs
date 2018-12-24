@@ -1,4 +1,3 @@
-using System;
 using DuckGame;
 using TMGmod.Core.WClasses;
 
@@ -38,7 +37,9 @@ namespace TMGmod
                 center = new Vec2(3f, 4f)
             };
             _editorName = "KSG-12";
-	        LoaderVec2 = new Vec2(10f, -2f);
-        }
+            LoaderVec2 = new Vec2(10f, -2f);
+	        EpsilonA = 50;
+	        EpsilonB = 100;
+	    }
     }
 }
