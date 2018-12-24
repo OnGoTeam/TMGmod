@@ -2,7 +2,8 @@
 {
     public interface IAmSmg
     {
-        float KforceD { get; }
-        float Kdelay { get; set; }
+        float KforceDSmg { get; }
+        int CurrDelaySmg { get; set; }
+        int MaxDelaySmg { get; set; }
     }
 }

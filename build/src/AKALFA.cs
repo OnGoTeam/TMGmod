@@ -36,8 +36,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.75f;
             _kickForce = 0.65f;
-		    Kforce1 = 0.05f;
-		    Kforce2 = 0.65f;
+		    Kforce1Ar = 0.05f;
+		    Kforce2Ar = 0.65f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";
@@ -74,7 +74,7 @@ namespace TMGmod
 		    base.Update();
 		}
 
-        public float Kforce1 { get; set; }
-        public float Kforce2 { get; set; }
+        public float Kforce1Ar { get; set; }
+        public float Kforce2Ar { get; set; }
     }
 }

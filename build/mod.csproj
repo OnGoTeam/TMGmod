@@ -52,7 +52,7 @@
     <Compile Include="src\Core\BaseCase.cs" />
     <Compile Include="src\Core\IHaveSkin.cs" />
     <Compile Include="src\Core\WClasses\BaseGun.cs" />
-    <Compile Include="src\Core\WClasses\BaseSniper.cs" />
+    <Compile Include="src\Core\WClasses\BaseBolt.cs" />
     <Compile Include="src\Core\WClasses\IAmAr.cs" />
     <Compile Include="src\Core\WClasses\IAmDmr.cs" />
     <Compile Include="src\Core\WClasses\IAmHg.cs" />
