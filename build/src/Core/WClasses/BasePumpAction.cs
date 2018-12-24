@@ -7,7 +7,8 @@ namespace TMGmod.Core.WClasses
     {
         private sbyte _loadProgress = 100;
         private float _loadAnimation = 1f;
-
+        protected sbyte EpsilonA;
+        protected sbyte EpsilonB;
         protected SpriteMap LoaderSprite;
 
         protected BasePumpAction(float xval, float yval) : base(xval, yval)
@@ -33,12 +34,12 @@ namespace TMGmod.Core.WClasses
             }
             if (_loadProgress < 0)
                 return;
-            if (_loadProgress == 50)
+            if (_loadProgress == EpsilonA)
                 Reload(false);
-            if (_loadProgress < 100)
+            if (_loadProgress < EpsilonB)
                 _loadProgress += 10;
             else
-                _loadProgress = 100;
+                _loadProgress = EpsilonB;
         }
 
         public override void OnPressAction()

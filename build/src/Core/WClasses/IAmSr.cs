@@ -3,6 +3,5 @@
 {
     public interface IAmSr
     {
-        float MinAccuracy { get; set; }
     }
 }

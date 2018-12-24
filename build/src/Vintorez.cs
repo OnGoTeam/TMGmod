@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class Vintorez : Gun
+    public class Vintorez : BaseGun, IAmSr, IAmAr
     {
   
         private readonly SpriteMap _sprite;
@@ -43,11 +44,18 @@ namespace TMGmod
             maxAccuracyLost = 0.15f;
             _editorName = "Vintorez";
 			weight = 4.7f;
-		}
+            MinAccuracy = 0f;
+            BaseAccuracy = 0.9f;
+            Kforce1Ar = 0.4f;
+            Kforce2Ar = 0.85f;
+        }
         public override void Draw()
         {
             _sprite.frame = _teksturka;
             base.Draw();
         }
+        
+        public float Kforce1Ar { get; }
+        public float Kforce2Ar { get; }
     }
 }

@@ -8,7 +8,7 @@ namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|AutoPistol")]
-    public class HazeS : BaseGun
+    public class HazeS : BaseGun, IAmHg
     {
         private float _heatval;
 

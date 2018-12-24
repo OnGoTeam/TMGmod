@@ -7,7 +7,5 @@
             BaseAccuracy = 1f;
             MinAccuracy = 0f;
         }
-
-        public float MinAccuracy { get; set; }
     }
 }

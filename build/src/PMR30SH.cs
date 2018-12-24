@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
     // ReSharper disable once InconsistentNaming
-    public class PMR : Gun
+    public class PMR : BaseGun, IAmHg
     {
         private int _mode;
         private readonly int[] _ammom = {30, 1};

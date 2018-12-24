@@ -6,6 +6,7 @@ namespace TMGmod.Core.WClasses
     public abstract class BaseGun:Gun
     {
         protected float BaseAccuracy = 1f;
+        protected float MinAccuracy;
         protected float PrevKforce;
         protected readonly bool ToPrevKforce = true;
         protected BaseGun(float xval, float yval) : base(xval, yval)
@@ -33,8 +34,8 @@ namespace TMGmod.Core.WClasses
 
             switch (this)
             {
-                case IAmSr thisSr:
-                    ammoType.accuracy = (duck != null ? Math.Max(Math.Min(1f, 1f - Math.Abs(duck.hSpeed) - Math.Abs(duck.vSpeed)), 0f) * (1f - thisSr.MinAccuracy) + thisSr.MinAccuracy : 1f) * BaseAccuracy;
+                case IAmSr _:
+                    ammoType.accuracy = (duck != null ? Math.Min(Math.Max(MinAccuracy, BaseAccuracy + 1f - duck.hSpeed / 2 - duck.vSpeed / 2), BaseAccuracy): BaseAccuracy);
                     break;
                 case IFirstPrecise thisFirstPrecise:
                     ammoType.accuracy = thisFirstPrecise.CurrDelay <= 0f ? thisFirstPrecise.MaxAccuracy : BaseAccuracy;

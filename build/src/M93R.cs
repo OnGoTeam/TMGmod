@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
-    public class M93R : Gun
+    public class M93R : BaseGun, IAmHg
     {
 
         int _burstNumB;
