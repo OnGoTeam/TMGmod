@@ -40,6 +40,7 @@ namespace TMGmod
             LoaderVec2 = new Vec2(10f, -2f);
 	        EpsilonA = 50;
 	        EpsilonB = 100;
+	        Loaddx = 3f;
 	    }
     }
 }

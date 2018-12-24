@@ -7,11 +7,11 @@ namespace TMGmod.Core.WClasses
     {
         protected sbyte LoadProgress;
         protected float LoadAnimation = 1f;
-        protected sbyte EpsilonA;
-        protected sbyte EpsilonB;
+        protected sbyte EpsilonA = 50;
+        protected sbyte EpsilonB = 100;
         protected SpriteMap LoaderSprite;
         protected Vec2 LoaderVec2;
-        protected float Loaddx;
+        protected float Loaddx = 3f;
 
         protected BasePumpAction(float xval, float yval) : base(xval, yval)
         {
