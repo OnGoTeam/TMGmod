@@ -4,8 +4,9 @@
     {
         protected BaseBolt(float xval, float yval) : base(xval, yval)
         {
+            BaseAccuracy = 1f;
         }
 
-        public float KfState { get; set; }
+        public float BaseAccuracy { get; set; }
     }
 }

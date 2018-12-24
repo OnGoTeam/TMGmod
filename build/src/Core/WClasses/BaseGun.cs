@@ -24,6 +24,10 @@ namespace TMGmod.Core.WClasses
                 case IAmSmg thisSmg:
                     if (thisSmg.Kdelay <= 0f)
                         _kickForce += thisSmg.KforceD;
+                    thisSmg.Kdelay = 20f;
+                    break;
+                case IAmSr thisSr:
+                    ammoType.accuracy = (duck != null ? Math.Max(Math.Min(1f, 1f - Math.Abs(duck.hSpeed) - Math.Abs(duck.vSpeed)), 0f) : 1f) * thisSr.BaseAccuracy;
                     break;
             }
 
@@ -36,13 +40,9 @@ namespace TMGmod.Core.WClasses
             switch (this)
             {
                 case IAmSmg thisSmg:
-                    thisSmg.Kdelay -= 1f;
+                    thisSmg.Kdelay -= 0.1f;
                     if (thisSmg.Kdelay < 0f)
                         thisSmg.Kdelay = 0f;
-                    break;
-                case IAmSr thisSr:
-                    if (duck != null)
-                        thisSr.KfState = duck.hSpeed + duck.vSpeed;
                     break;
             }
             base.Update();
