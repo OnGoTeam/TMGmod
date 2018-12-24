@@ -5,8 +5,8 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BasePumpAction:BaseGun, IAmSg
     {
-        private sbyte _loadProgress = 100;
-        private float _loadAnimation = 1f;
+        protected sbyte LoadProgress = 100;
+        protected float LoadAnimation = 1f;
         protected sbyte EpsilonA;
         protected sbyte EpsilonB;
         protected SpriteMap LoaderSprite;
@@ -18,28 +18,28 @@ namespace TMGmod.Core.WClasses
         public override void Update()
         {
             base.Update();
-            if (Math.Abs(_loadAnimation - (-1.0)) < 0.02f)
+            if (Math.Abs(LoadAnimation - (-1.0)) < 0.02f)
             {
                 SFX.Play("shotgunLoad");
-                _loadAnimation = 0.0f;
+                LoadAnimation = 0.0f;
             }
-            if (_loadAnimation >= 0.0)
+            if (LoadAnimation >= 0.0)
             {
-                if (Math.Abs(_loadAnimation - 0.5) < 0.02f && ammo != 0)
+                if (Math.Abs(LoadAnimation - 0.5) < 0.02f && ammo != 0)
                     _ammoType.PopShell(x, y, -offDir);
-                if (_loadAnimation < 1.0)
-                    _loadAnimation += 0.1f;
+                if (LoadAnimation < 1.0)
+                    LoadAnimation += 0.1f;
                 else
-                    _loadAnimation = 1f;
+                    LoadAnimation = 1f;
             }
-            if (_loadProgress < 0)
+            if (LoadProgress < 0)
                 return;
-            if (_loadProgress == EpsilonA)
+            if (LoadProgress == EpsilonA)
                 Reload(false);
-            if (_loadProgress < EpsilonB)
-                _loadProgress += 10;
+            if (LoadProgress < EpsilonB)
+                LoadProgress += 10;
             else
-                _loadProgress = EpsilonB;
+                LoadProgress = EpsilonB;
         }
 
         public override void OnPressAction()
@@ -47,15 +47,15 @@ namespace TMGmod.Core.WClasses
             if (loaded)
             {
                 base.OnPressAction();
-                _loadProgress = -1;
-                _loadAnimation = -0.01f;
+                LoadProgress = -1;
+                LoadAnimation = -0.01f;
             }
             else
             {
-                if (_loadProgress != -1)
+                if (LoadProgress != -1)
                     return;
-                _loadProgress = 0;
-                _loadAnimation = -1f;
+                LoadProgress = 0;
+                LoadAnimation = -1f;
             }
         }
 
@@ -63,7 +63,7 @@ namespace TMGmod.Core.WClasses
         {
             base.Draw();
             var vec2 = new Vec2(13f, -2f);
-            var num = (float)Math.Sin(_loadAnimation * 3.14000010490417) * 3f;
+            var num = (float)Math.Sin(LoadAnimation * 3.14000010490417) * 3f;
             Draw(LoaderSprite, new Vec2(vec2.x - 8f - num, vec2.y + 4f));
         }
     }
