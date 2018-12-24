@@ -60,6 +60,7 @@
     <Compile Include="src\Core\WClasses\IAmSg.cs" />
     <Compile Include="src\Core\WClasses\IAmSmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSr.cs" />
+    <Compile Include="src\Core\WClasses\IFirstPrecise.cs" />
     <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
     <Compile Include="src\Core\AT9mmSilenced.cs" />

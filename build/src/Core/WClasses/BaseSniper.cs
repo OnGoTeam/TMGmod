@@ -6,7 +6,5 @@
         {
             BaseAccuracy = 1f;
         }
-
-        public float BaseAccuracy { get; set; }
     }
 }

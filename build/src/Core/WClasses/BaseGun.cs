@@ -5,6 +5,7 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BaseGun:Gun
     {
+        protected float BaseAccuracy;
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
         }
@@ -24,10 +25,18 @@ namespace TMGmod.Core.WClasses
                 case IAmSmg thisSmg:
                     if (thisSmg.Kdelay <= 0f)
                         _kickForce += thisSmg.KforceD;
-                    thisSmg.Kdelay = 20f;
+                    thisSmg.Kdelay = 5f;
                     break;
-                case IAmSr thisSr:
-                    ammoType.accuracy = (duck != null ? Math.Max(Math.Min(1f, 1f - Math.Abs(duck.hSpeed) - Math.Abs(duck.vSpeed)), 0f) : 1f) * thisSr.BaseAccuracy;
+            }
+
+            switch (this)
+            {
+                case IAmSr _:
+                    ammoType.accuracy = (duck != null ? Math.Max(Math.Min(1f, 1f - Math.Abs(duck.hSpeed) - Math.Abs(duck.vSpeed)), 0f) : 1f) * BaseAccuracy;
+                    break;
+                case IFirstPrecise thisFirstPrecise:
+                    ammoType.accuracy = thisFirstPrecise.CurrDelay <= 0f ? thisFirstPrecise.MaxAccuracy : BaseAccuracy;
+                    thisFirstPrecise.CurrDelay = thisFirstPrecise.MaxDelay;
                     break;
             }
 
@@ -43,6 +52,13 @@ namespace TMGmod.Core.WClasses
                     thisSmg.Kdelay -= 0.1f;
                     if (thisSmg.Kdelay < 0f)
                         thisSmg.Kdelay = 0f;
+                    break;
+            }
+
+            switch (this)
+            {
+                case IFirstPrecise thisFirstPrecise:
+                    thisFirstPrecise.CurrDelay -= Math.Max(thisFirstPrecise.CurrDelay - 0.1f, 0f);
                     break;
             }
             base.Update();

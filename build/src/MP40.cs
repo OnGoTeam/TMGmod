@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -7,9 +8,8 @@ namespace TMGmod
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MP40 : Gun
+    public class MP40 : BaseGun, IAmSmg
     {
-
         public MP40(float xval, float yval)
             : base(xval, yval)
         {
@@ -34,8 +34,11 @@ namespace TMGmod
             maxAccuracyLost = 0.5f;
             _editorName = "MP40";
 			weight = 3f;
+            KforceD = 0.5f;
         }
 
 
+        public float KforceD { get; set; }
+        public float Kdelay { get; set; }
     }
 }
