@@ -27,16 +27,7 @@ namespace TMGmod.Cases.Color
             _editorName = "Blue Container";
             Things = new List<Type>
             {
-                typeof(CZ75),
-                typeof(AF2011),
-                typeof(M93R),
-                typeof(MAP),
-                typeof(MPA27),
-                typeof(BigShot),
-                typeof(Nellegalja),
-                typeof(Rfb),
                 typeof(PPSh),
-                typeof(PPShC),
                 typeof(AugC),
                 typeof(SkeetGun),
                 typeof(SIX12S),

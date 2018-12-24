@@ -31,13 +31,13 @@ namespace TMGmod
 		    _fireSound = "shotgunFire2";
 		    _kickForce = 3.75f;
 		    _manualLoad = true;
-            _fireWait = 1.5f;
+            _fireWait = 2.5f;
             LoaderSprite = new SpriteMap(GetPath("KSG12Pimp"), 19, 9)
             {
                 center = new Vec2(3f, 4f)
             };
             _editorName = "KSG-12";
-            LoaderVec2 = new Vec2(3f, 2f);
+            LoaderVec2 = new Vec2(2f, 1f);
 	        EpsilonA = 50;
 	        EpsilonB = 100;
 	        Loaddx = 2f;

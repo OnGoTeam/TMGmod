@@ -58,7 +58,7 @@ namespace TMGmod
                     _sprite.frame += 10;
                     break;
                 case 0:
-                    _sprite.frame += 10;
+                    if (_sprite.frame < 20) _sprite.frame += 10;
                     break;
             }
 

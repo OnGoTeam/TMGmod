@@ -21,7 +21,7 @@ namespace TMGmod
             {
                 range = 70f,
                 accuracy = 0.9f,
-                penetration = 3f
+                penetration = 1f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("UziProSpattern"), 16, 10);
@@ -56,7 +56,7 @@ namespace TMGmod
                         {
                             range = 70f,
                             accuracy = 0.9f,
-                            penetration = 3f
+                            penetration = 1f
                         };
                         _barrelOffsetTL = new Vec2(11f, 3f);	
 						_silencer = false;
@@ -69,7 +69,7 @@ namespace TMGmod
                         {
                             range = 100f,
                             accuracy = 1f,
-                            penetration = 2f
+                            penetration = 0f
                         };
                         _barrelOffsetTL = new Vec2(17f, 3f);			 
 	 					_silencer = true;

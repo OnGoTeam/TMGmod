@@ -23,7 +23,7 @@ namespace TMGmod.Custom_Guns
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("AUGA3"), 30, 12);
+            _sprite = new SpriteMap(GetPath("AUGA3pattern"), 30, 12);
             graphic = _sprite;
             _sprite.frame = 0;
             center = new Vec2(15f, 6f);
