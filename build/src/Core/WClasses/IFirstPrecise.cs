@@ -3,7 +3,7 @@
     public interface IFirstPrecise
     {
         float CurrDelay { get; set; }
-        float MaxDelay { get; set; }
-        float MaxAccuracy { get; set; }
+        float MaxDelay { get; }
+        float MaxAccuracy { get; }
     }
 }

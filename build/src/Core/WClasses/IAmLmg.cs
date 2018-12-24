@@ -2,7 +2,7 @@
 {
     public interface IAmLmg
     {
-        float KforceR1 { get; set; }
-        float KforceR2 { get; set; }
+        float KforceR1 { get; }
+        float KforceR2 { get; }
     }
 }

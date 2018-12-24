@@ -2,7 +2,7 @@
 {
     public interface IAmAr
     {
-        float Kforce1 { get; set; }
-        float Kforce2 { get; set; }
+        float Kforce1 { get; }
+        float Kforce2 { get; }
     }
 }

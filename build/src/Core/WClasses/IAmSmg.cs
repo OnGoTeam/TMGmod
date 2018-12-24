@@ -2,7 +2,7 @@
 {
     public interface IAmSmg
     {
-        float KforceD { get; set; }
+        float KforceD { get; }
         float Kdelay { get; set; }
     }
 }

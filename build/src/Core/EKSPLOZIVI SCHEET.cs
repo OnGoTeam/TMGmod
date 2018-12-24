@@ -4,7 +4,7 @@ namespace TMGmod.Core
 {
     public class Explode : Bullet
     {
-        public Explode(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)
+        private Explode(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)
             : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
         {
             _tracer = false;
