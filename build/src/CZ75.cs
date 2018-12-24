@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -7,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
     // ReSharper disable once InconsistentNaming
-    public class CZ75 : Gun
+    public class CZ75 : BaseGun, IAmHg
     {
 		private readonly SpriteMap _sprite;
         private int _fdelay;
@@ -47,14 +48,12 @@ namespace TMGmod
             {
                 Fire();
             }
-            else if (ammo == 0)
+            else switch (ammo)
             {
-                DoAmmoClick();
-            }
-            else
-            {
-                if (ammo == 12 && _sprite.currentAnimation == "havemagaz")
-                {
+                case 0:
+                    DoAmmoClick();
+                    break;
+                case 12 when _sprite.currentAnimation == "havemagaz":
                     SFX.Play("click");
                     if (_raised)
                         Level.Add(new Czmag(x, y + 1));
@@ -64,7 +63,7 @@ namespace TMGmod
                         Level.Add(new Czmag(x - 5, y));
                     _sprite.SetAnimation("haventmagaz");
                     _fdelay = 40;
-                }
+                    break;
             }            
         }
         public override void Update()

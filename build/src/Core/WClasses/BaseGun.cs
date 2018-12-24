@@ -5,14 +5,16 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BaseGun:Gun
     {
-        protected float BaseAccuracy;
+        protected float BaseAccuracy = 1f;
+        protected float PrevKforce;
+        protected readonly bool ToPrevKforce = true;
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
         }
 
         public override void Fire()
         {
-            var prevKforce = _kickForce;
+            PrevKforce = _kickForce;
             switch (this)
             {
                 case IAmAr thisAr:
@@ -41,7 +43,8 @@ namespace TMGmod.Core.WClasses
             }
 
             base.Fire();
-            _kickForce = prevKforce;
+            if (ToPrevKforce)
+                _kickForce = PrevKforce;
         }
         
         public override void Update()

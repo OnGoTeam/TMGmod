@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -7,7 +8,7 @@ namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|AutoPistol")]
-    public class HazeS : Gun
+    public class HazeS : BaseGun
     {
         private float _heatval;
 
