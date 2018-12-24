@@ -5,10 +5,10 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BasePumpAction:BaseGun, IAmSg
     {
-        protected sbyte LoadProgress;
+        protected int LoadProgress;
         protected float LoadAnimation = 1f;
         protected sbyte EpsilonA = 50;
-        protected sbyte EpsilonB = 100;
+        protected int EpsilonB = 100;
         protected SpriteMap LoaderSprite;
         protected Vec2 LoaderVec2;
         protected float Loaddx = 3f;
