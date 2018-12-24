@@ -10,6 +10,7 @@ namespace TMGmod.Core.WClasses
         protected sbyte EpsilonA;
         protected sbyte EpsilonB;
         protected SpriteMap LoaderSprite;
+        protected Vec2 LoaderVec2;
 
         protected BasePumpAction(float xval, float yval) : base(xval, yval)
         {
@@ -62,9 +63,8 @@ namespace TMGmod.Core.WClasses
         public override void Draw()
         {
             base.Draw();
-            var vec2 = new Vec2(13f, -2f);
             var num = (float)Math.Sin(LoadAnimation * 3.14000010490417) * 3f;
-            Draw(LoaderSprite, new Vec2(vec2.x - 8f - num, vec2.y + 4f));
+            Draw(LoaderSprite, new Vec2(LoaderVec2.x - num, LoaderVec2.y));
         }
     }
 }
