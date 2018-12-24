@@ -5,7 +5,7 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BasePumpAction:BaseGun, IAmSg
     {
-        protected sbyte LoadProgress = 100;
+        protected sbyte LoadProgress;
         protected float LoadAnimation = 1f;
         protected sbyte EpsilonA;
         protected sbyte EpsilonB;
@@ -14,6 +14,7 @@ namespace TMGmod.Core.WClasses
 
         protected BasePumpAction(float xval, float yval) : base(xval, yval)
         {
+            LoadProgress = EpsilonB;
         }
 
         public override void Update()
