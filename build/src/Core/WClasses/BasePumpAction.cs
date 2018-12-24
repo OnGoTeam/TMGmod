@@ -7,8 +7,8 @@ namespace TMGmod.Core.WClasses
     {
         private sbyte _loadProgress = 100;
         private float _loadAnimation = 1f;
-        public StateBinding LoadProgressBinding = new StateBinding(nameof(_loadProgress), -1, false, false);
-        private SpriteMap _loaderSprite;
+
+        protected SpriteMap LoaderSprite;
 
         protected BasePumpAction(float xval, float yval) : base(xval, yval)
         {
@@ -63,7 +63,7 @@ namespace TMGmod.Core.WClasses
             base.Draw();
             var vec2 = new Vec2(13f, -2f);
             var num = (float)Math.Sin(_loadAnimation * 3.14000010490417) * 3f;
-            Draw(_loaderSprite, new Vec2(vec2.x - 8f - num, vec2.y + 4f));
+            Draw(LoaderSprite, new Vec2(vec2.x - 8f - num, vec2.y + 4f));
         }
     }
 }
