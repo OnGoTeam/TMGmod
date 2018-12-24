@@ -42,66 +42,53 @@ namespace TMGmod
             };
             _editorName = "KSG-12";
 	    }
+        public override void Update()
+        {
+            base.Update();
+            if (_loadAnimation == -1.0)
+            {
+                SFX.Play("shotgunLoad", 1f, 0.0f, 0.0f, false);
+                _loadAnimation = 0.0f;
+            }
+            if (_loadAnimation >= 0.0)
+            {
+                if (_loadAnimation == 0.5 && ammo != 0)
+                    _ammoType.PopShell(x, y, -offDir);
+                if (_loadAnimation < 1.0)
+                    _loadAnimation += 0.1f;
+                else
+                    _loadAnimation = 1f;
+            }
+            if (_loadProgress < 0)
+                return;
+            if (_loadProgress == 50)
+                Reload(false);
+            if (_loadProgress < 100)
+                _loadProgress += 10;
+            else
+                _loadProgress = 100;
+        }
 
-	    public override void Update()
-	    {
-		    base.Update();
-		    if (Math.Abs(_loadAnimation - -1f) < 0.01f)
-		    {
-			    SFX.Play("shotgunLoad");
-			    _loadAnimation = 0f;
-		    }
-		    if (_loadAnimation >= 0f)
-		    {
-			    if (Math.Abs(_loadAnimation - 0.5f) < 0.01f && ammo != 0)
-			    {
-				    _ammoType.PopShell(x, y, -offDir);
-			    }
-			    if (_loadAnimation < 1f)
-			    {
-				    _loadAnimation += 0.125f;
-			    }
-			    else
-			    {
-				    _loadAnimation = 1f;
-			    }
-		    }
-		    if (_loadProgress >= 0)
-		    {
-			    if (_loadProgress == 50)
-			    {
-				    Reload(false);
-			    }
-			    if (_loadProgress < 100)
-			    {
-				    _loadProgress += 5;
-			    }
-			    else
-			    {
-				    _loadProgress = 100;
-			    }
-		    }
-	    }
-
-	    public override void OnPressAction()
-	    {
-		    if (loaded)
-		    {
-			    base.OnPressAction();
-			    _loadProgress = -1;
-			    _loadAnimation = -0.1f;
-		    }
-		    else if (_loadProgress == -1)
-		    {
-			    _loadProgress = 0;
-			    _loadAnimation = -1f;
-		    }
-	    }
-
-	    public override void Draw()
+        public override void OnPressAction()
+        {
+            if (loaded)
+            {
+                base.OnPressAction();
+                _loadProgress = -1;
+                _loadAnimation = -0.01f;
+            }
+            else
+            {
+                if (_loadProgress != -1)
+                    return;
+                _loadProgress = 0;
+                _loadAnimation = -1f;
+            }
+        }
+        public override void Draw()
 	    {
 		    base.Draw();
-		    var bOffset = new Vec2(10f, -4.5f);
+		    var bOffset = new Vec2(10f, -2.6f);
 		    var offset = (float)Math.Sin(_loadAnimation * 3.14f) * 3f;
 		    Draw(_loaderSprite, new Vec2(bOffset.x - 8f - offset, bOffset.y + 4f));
 	    }
