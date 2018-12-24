@@ -38,11 +38,7 @@ namespace TMGmod
                 center = new Vec2(3f, 4f)
             };
             _editorName = "KSG-12";
-        }
-        public override void Draw()
-        {
-            base.Draw();
-            var LoaderVec2 = new Vec2(10f, -2f);
+	        LoaderVec2 = new Vec2(10f, -2f);
         }
     }
 }
