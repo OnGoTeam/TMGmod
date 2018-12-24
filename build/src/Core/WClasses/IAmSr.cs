@@ -2,6 +2,6 @@
 {
     public interface IAmSr
     {
-        
+        float KfState { get; set; }
     }
 }

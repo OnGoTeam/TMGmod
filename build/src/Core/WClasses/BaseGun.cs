@@ -40,6 +40,10 @@ namespace TMGmod.Core.WClasses
                     if (thisSmg.Kdelay < 0f)
                         thisSmg.Kdelay = 0f;
                     break;
+                case IAmSr thisSr:
+                    if (duck != null)
+                        thisSr.KfState = duck.hSpeed + duck.vSpeed;
+                    break;
             }
             base.Update();
         }

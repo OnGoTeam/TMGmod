@@ -5,5 +5,7 @@
         protected BaseBolt(float xval, float yval) : base(xval, yval)
         {
         }
+
+        public float KfState { get; set; }
     }
 }
