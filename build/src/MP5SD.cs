@@ -23,22 +23,22 @@ namespace TMGmod
             BaseAccuracy = 0.8f;
             _type = "gun";
             graphic = new Sprite(GetPath("MP5SDBurst"));
-            center = new Vec2(12f, 5f);
-            collisionOffset = new Vec2(-11f, -4f);
-            collisionSize = new Vec2(22f, 14f);
-            _barrelOffsetTL = new Vec2(25f, 2f);
-            _fireSound = "deepMachineGun";
-            _fullAuto = true;
+            center = new Vec2(15.5f, 6f);
+            collisionOffset = new Vec2(-15.5f, -6f);
+            collisionSize = new Vec2(31f, 12f);
+            _barrelOffsetTL = new Vec2(31f, 3f);
+            _fireSound = GetPath("sounds/Silenced2.wav");
+            _fullAuto = false;
             _fireWait = 0.7f;
             _kickForce = 0.5f;
-            _holdOffset = new Vec2(3f, 1f);
-            _editorName = "MP40";
+            _holdOffset = new Vec2(0f, 2f);
+            _editorName = "MP5SD";
 			weight = 3f;
             KforceDSmg = 2f;
             MaxAccuracy = 0.9f;
             MaxDelayFp = 10;
             MaxDelaySmg = 50;
-            DeltaWait = 0.1f;
+            DeltaWait = 0.35f;
             BurstNum = 3;
         }
         public override void Update()
@@ -56,7 +56,7 @@ namespace TMGmod
                     else
                     {
                         BurstNum = 3;
-                        _fireWait = 0.7f;
+                        _fireWait = 1.3f;
                         graphic = new Sprite(GetPath("MP5SDBurst"));
                     }
                 }
