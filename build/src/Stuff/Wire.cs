@@ -8,11 +8,16 @@ namespace TMGmod.Stuff
     [EditorGroup("TMG|Misc")]
     public class Wire : PhysicsObject
     {
+
+        private readonly SpriteMap _sprite;
+        private readonly int _teksturka;
         private float _hp;
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
             _hp = 25f;
-            graphic = new Sprite(GetPath("WireYes"));
+            _sprite = new SpriteMap(GetPath("WireYes"), 48, 6);
+            graphic = _sprite;
+            _teksturka = Rando.Int(0, 3);
             center = new Vec2(24f, 3f);
             collisionOffset = new Vec2(-24f, -3f);
             collisionSize = new Vec2(48f, 6f);
@@ -63,6 +68,11 @@ namespace TMGmod.Stuff
             thickness = 0.1f;
             graphic = new Sprite(GetPath("WireNot"));
             collisionSize = new Vec2(48f, 4f);
+        }
+        public override void Draw()
+        {
+            _sprite.frame = _teksturka;
+            base.Draw();
         }
     }
 }
