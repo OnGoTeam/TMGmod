@@ -13,7 +13,8 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 10;
         private bool _silencer;
-		
+        private bool _changed;
+
         public CZ805 (float xval, float yval)
           : base(xval, yval)
 		{
@@ -46,39 +47,48 @@ namespace TMGmod
         {
             if (duck != null)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (duck.inputProfile.Down("QUACK"))
                 {
-					if (_silencer)
-					{
-                        FrameId -= 50;
-                        _fireSound = "deepMachineGun2";
-                        _ammoType = new AT9mm
+                    if (!_changed)
+                    {
+                        if (_silencer)
                         {
-                            range = 400f,
-                            accuracy = 0.87f
-                        };
-                        loseAccuracy = 0.025f;
-                        maxAccuracyLost = 0.32f;
-                        _barrelOffsetTL = new Vec2(39f, 4f);
-			            _silencer = !_silencer;
-                        _flare = new SpriteMap("smallFlare", 11, 10);
-                    }
-                    else
-					{
-                        FrameId += 50;
-                        _fireSound = GetPath("sounds/Silenced2.wav");
-                        _ammoType = new AT9mmS
+                            FrameId -= 50;
+                            _fireSound = "deepMachineGun2";
+                            _ammoType = new AT9mm
+                            {
+                                range = 400f,
+                                accuracy = 0.87f
+                            };
+                            loseAccuracy = 0.025f;
+                            maxAccuracyLost = 0.32f;
+                            _barrelOffsetTL = new Vec2(39f, 4f);
+                            _silencer = !_silencer;
+                            _flare = new SpriteMap("smallFlare", 11, 10);
+                        }
+                        else
                         {
-                            range = 470f,
-                            accuracy = 0.95f
-                        };
-                        loseAccuracy = 0.02f;
-                        maxAccuracyLost = 0.3f;
-                        _barrelOffsetTL = new Vec2(42.5f, 4f);
-			            _silencer = !_silencer;
-                        _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                            FrameId += 50;
+                            _fireSound = GetPath("sounds/Silenced2.wav");
+                            _ammoType = new AT9mmS
+                            {
+                                range = 470f,
+                                accuracy = 0.95f
+                            };
+                            loseAccuracy = 0.02f;
+                            maxAccuracyLost = 0.3f;
+                            _barrelOffsetTL = new Vec2(42.5f, 4f);
+                            _silencer = !_silencer;
+                            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                        }
+
+                        _changed = true;
                     }
-				}
+                }
+                else
+                {
+                    _changed = false;
+                }
             }
             if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
             if (ammo > 12 && ammo <= 20 && FrameId / 10 % 5 != 2) _sprite.frame += 10;
