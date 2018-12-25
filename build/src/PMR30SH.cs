@@ -11,7 +11,7 @@ namespace TMGmod
     {
         public int Mode;
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));
-        public readonly int[] Ammom = {30, 1};
+        public int[] Ammom = {30, 1};
         public StateBinding AmmomBinding = new StateBinding(nameof(Ammom));
         private readonly AmmoType[] _ammoTypem =
         {
