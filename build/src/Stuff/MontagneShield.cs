@@ -32,6 +32,8 @@ namespace TMGmod.Stuff
 
         public override void Thrown()
         {
+            if (duck == null) return;
+            //else
             if (duck.inputProfile.Down("QUACK")) return;
             //else
             angleDegrees = 90f * offDir;
