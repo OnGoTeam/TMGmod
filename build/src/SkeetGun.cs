@@ -42,7 +42,7 @@ namespace TMGmod
             if (ammo % 2 == 0)
             {
                 _barrelOffsetTL = new Vec2(43f, 1f);
-                ammo = 2;
+                //ammo = 2;
             }
             else
             {
