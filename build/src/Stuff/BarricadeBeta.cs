@@ -98,6 +98,7 @@ namespace TMGmod.Stuff
                     vSpeed = Rando.Float(-1.5f, 1.5f)
                 };
                 Level.Add(bbp);
+                _destroyed = true;
                 Level.Remove(this);
             }
             base.Update();

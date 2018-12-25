@@ -22,19 +22,30 @@ namespace TMGmod.Stuff
         }
         public override void Update()
         {
-            if (_hp < 0f) _hp = 0f;
-            var probablyduck = Level.CheckRectAll<IAmADuck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
-            foreach (var realyduck in probablyduck)
+            if (_hp <= 0f) _hp = 0f;
+            else
             {
-                if (!(realyduck is Thing r1)) continue;
-                //else
-                r1.hSpeed *= 1f / (_hp / 26f + 1f);
-                r1.vSpeed *= 1f / (_hp / 10f + 1f);
-            }
-            var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-16f, -3f), position + new Vec2(16f, 3f));
-            if (wirelist.Any(wire => wire != this))
-            {
-                return;
+                var probablyduck =
+                    Level.CheckRectAll<IAmADuck>(position + new Vec2(-24f, -3f), position + new Vec2(24f, 3f));
+                foreach (var realyduck in probablyduck)
+                {
+                    if (!(realyduck is Thing r1)) continue;
+                    //else
+                    r1.hSpeed *= 1f / (_hp / 26f + 1f);
+                    r1.vSpeed *= 1f / (_hp / 10f + 1f);
+                }
+
+                var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-16f, -3f), position + new Vec2(16f, 3f));
+                if (wirelist.Any(wire => wire != this && wire.sleeping && wire._hp >= 1f && wire.position.y > position.y))
+                {
+                    sleeping = true;
+                    vSpeed = 0f;
+                    hSpeed *= 0.3f;
+                }
+                else
+                {
+                    sleeping = false;
+                }
             }
             base.Update();
         }
@@ -51,6 +62,7 @@ namespace TMGmod.Stuff
             //else
             thickness = 0.1f;
             graphic = new Sprite(GetPath("WireNot"));
+            collisionSize = new Vec2(48f, 4f);
         }
     }
 }

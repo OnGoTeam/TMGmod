@@ -8,9 +8,10 @@ namespace TMGmod.Core.WClasses
         protected float BaseAccuracy = 1f;
         protected float MinAccuracy;
         protected float PrevKforce;
-        protected readonly bool ToPrevKforce = true;
+        protected bool ToPrevKforce;
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
+            ToPrevKforce = true;
         }
 
         public override void Fire()

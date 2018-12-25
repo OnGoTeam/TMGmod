@@ -98,8 +98,9 @@ namespace TMGmod.Stuff
             base.OnImpact(with, from);
             if (!_activated) return;
             _stickThing = with;
+            _stickThing.Fondle(this);
             _stickyVec2 = position - with.position;
-            enablePhysics = false;
+            //enablePhysics = false;
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (from)
             {
@@ -127,13 +128,27 @@ namespace TMGmod.Stuff
         public override void Update()
         {
             if (_destroyed) return;
+            if (_stickThing != null && _stickThing._destroyed)
+            {
+                _stickThing = null;
+            }
+
             _toexplode -= 0.1f;
             if (duck != null && duck.holdObject == this && _stickThing != null)
             {
                 _stickThing = null;
                 _activated = false;
             }
-            if (_stickThing != null) position = _stickThing.position + _stickyVec2;
+
+            if (_stickThing != null)
+            {
+                sleeping = true;
+                position = _stickThing.position + _stickyVec2;
+            }
+            else
+            {
+                sleeping = false;
+            }
 
             if (_activator != null && _activator.inputProfile.Down("QUACK")) _toexplode = Rando.Float(0f, 0.5f);
 
