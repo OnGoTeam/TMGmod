@@ -88,7 +88,7 @@ namespace TMGmod
         }
         public int FrameId
         {
-            get => _sprite.frame;
+            private get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
