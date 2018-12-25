@@ -14,8 +14,8 @@ namespace TMGmod
         private readonly int _burstValue;
         private float _bw = 5.1f;
 
-        private bool _stock;
-        public StateBinding StockBinding = new StateBinding(nameof(_stock));
+        public bool Stock;
+        public StateBinding StockBinding = new StateBinding(nameof(Stock));
         // ReSharper disable once MemberCanBePrivate.Global
         public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
@@ -68,13 +68,13 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_stock)
+                    if (Stock)
                     {
                         loseAccuracy = 0.15f;
                         weight = 5.5f;
                         _sprite.SetAnimation("base");
                         maxAccuracyLost = 0.1f;
-                        _stock = false;
+                        Stock = false;
                     }
                     else
                     {
@@ -82,7 +82,7 @@ namespace TMGmod
                         weight = 2.75f;
                         _sprite.SetAnimation("stock");
                         maxAccuracyLost = 0.3f;
-                        _stock = true;
+                        Stock = true;
                     }
                 }
 			}
