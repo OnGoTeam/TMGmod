@@ -10,7 +10,7 @@ namespace TMGmod.Stuff
     {
 
         private readonly SpriteMap _sprite;
-        public readonly int Teksturka;
+        public int Teksturka;
         public StateBinding TexBinding = new StateBinding(nameof(Teksturka));
         public float Hp;
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
