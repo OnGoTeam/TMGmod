@@ -73,6 +73,7 @@ namespace TMGmod.Stuff
                         NetMessagePriority.ReliableOrdered);
                     grenade.firedBullets.Clear();
                 }
+                
                 AddFire();
             }
 
