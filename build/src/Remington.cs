@@ -31,11 +31,11 @@ namespace TMGmod
 		    _kickForce = 2.75f;
 		    _manualLoad = true;
             _fireWait = 5f;
+            _editorName = "Remington";
             LoaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
             {
                  center = new Vec2(3f, 4f)
             };
-            _editorName = "KSG-12";
             LoaderVec2 = new Vec2(2f, 1f);
             EpsilonA = 50;
             EpsilonB = 100;

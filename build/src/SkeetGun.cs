@@ -32,7 +32,7 @@ namespace TMGmod
             _fireSound = "shotgunFire";
             _barrelOffsetTL = new Vec2(43f, 1f);
             _fireWait = 0.5f;
-            _kickForce = 0f;
+            _kickForce = 4.78f;
             _editorName = "Virtual Double";
             _holdOffset = new Vec2(6f, 2f);
         }
@@ -49,7 +49,7 @@ namespace TMGmod
             {
                 _barrelOffsetTL = new Vec2(43f, 3f);
             }
-            if (duck != null)
+            /*if (duck != null)
             {
                 if (duck.sliding || duck.crouch)
                 {
@@ -71,7 +71,7 @@ namespace TMGmod
 
                     return;
                 }
-            }
+            }*/
 
             handAngle = 0f;
         }

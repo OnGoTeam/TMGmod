@@ -23,12 +23,13 @@ namespace TMGmod.Cases.Color
             thickness = 0.0f;
             weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Blue Container";
+            _editorName = "Yellow Container";
             Things = new List<Type>
             {
-                typeof(UziPro),
                 typeof(SIX12S),
                 typeof(DaewooK1),
+                typeof(UziPro),
+                typeof(MP5),
                 typeof(CZ805)
             };
             CaseId = 4;

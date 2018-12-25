@@ -23,12 +23,13 @@ namespace TMGmod.Cases.Color
             thickness = 0.0f;
             weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Blue Container";
+            _editorName = "Cyan Container";
             Things = new List<Type>
             {
                 typeof(SIX12S),
                 typeof(DaewooK1),
-                typeof(CZ805)
+                typeof(CZ805),
+                typeof(MP5)
             };
             CaseId = 3;
         }

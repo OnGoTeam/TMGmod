@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -8,8 +9,13 @@ namespace TMGmod
 
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MP5 : BaseBurst, IAmSmg
+    public class MP5 : BaseBurst, IAmSmg, IHaveSkin
     {
+        private readonly SpriteMap _sprite;
+        public bool Rate;
+        public StateBinding RateBinding = new StateBinding(nameof(Rate));
+        private const int NonSkinFrames = 2;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public MP5(float xval, float yval)
             : base(xval, yval)
         {
@@ -21,7 +27,9 @@ namespace TMGmod
             };
             BaseAccuracy = 0.7f;
             _type = "gun";
-            graphic = new Sprite(GetPath("MP5Burst"));
+            _sprite = new SpriteMap(GetPath("MP5pattern"), 27, 12);
+            graphic = _sprite;
+            _sprite.frame = 10;
             center = new Vec2(13.5f, 6f);
             collisionOffset = new Vec2(-13.5f, -6f);
             collisionSize = new Vec2(27f, 12f);
@@ -37,7 +45,7 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             MaxDelayFp = 10;
             MaxDelaySmg = 50;
-            DeltaWait = 0.35f;
+            DeltaWait = 0.65f;
             BurstNum = 3;
         }
         public override void Update()
@@ -46,17 +54,19 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (BurstNum == 3)
+                    if (Rate)
                     {
+                        Rate = false;
                         BurstNum = 1;
                         _fireWait = 0.3f;
-                        graphic = new Sprite(GetPath("MP5NonAuto"));
+                        _sprite.frame -= 10;
                     }
                     else
                     {
+                        Rate = true;
                         BurstNum = 3;
                         _fireWait = 1.3f;
-                        graphic = new Sprite(GetPath("MP5Burst"));
+                        _sprite.frame += 10;
                     }
                 }
             }
@@ -68,5 +78,10 @@ namespace TMGmod
         public int MaxDelayFp { get; }
         public int MaxDelaySmg { get; set; }
         public float MaxAccuracy { get; }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
     }
 }

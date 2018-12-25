@@ -27,11 +27,11 @@ namespace TMGmod.Cases.Color
             _editorName = "Blue Container";
             Things = new List<Type>
             {
-                typeof(PPSh),
+                typeof(SIX12S),
+                typeof(DaewooK1),
                 typeof(AugC),
                 typeof(SkeetGun),
-                typeof(SIX12S),
-                typeof(DaewooK1)
+                typeof(PPSh)
             };
             CaseId = 1;
         }
