@@ -44,7 +44,7 @@ namespace TMGmod
         {
             if (duck != null)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (duck.inputProfile.Down("QUACK"))
                 {
                     if (!_changed)
                     {
