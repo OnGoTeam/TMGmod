@@ -109,7 +109,14 @@ namespace TMGmod
         {
             ammo = Ammom[Mode];
             base.Fire();
-            Ammom[Mode] = ammo;
+            if (Mode == 0)
+            {
+                Ammom0 = ammo;
+            }
+            else
+            {
+                Ammom1 = ammo;
+            }
             ammo = Ammom[0] + Ammom[1];
         }		
 	}
