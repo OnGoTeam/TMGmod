@@ -80,10 +80,10 @@ namespace TMGmod
                     }
 				}
             }
-            if (ammo > 20 && ammo <= 26 && !((_sprite.frame >= 10 && _sprite.frame <= 19) || (_sprite.frame >= 60 && _sprite.frame <= 69))) _sprite.frame += 10;
-            if (ammo > 12 && ammo <= 20 && !((_sprite.frame >= 20 && _sprite.frame <= 29) || (_sprite.frame >= 70 && _sprite.frame <= 79))) _sprite.frame += 10;
-            if (ammo > 5 && ammo <= 12 && !((_sprite.frame >= 30 && _sprite.frame <= 39) || (_sprite.frame >= 80 && _sprite.frame <= 89))) _sprite.frame += 10;
-            if (ammo > 0 && ammo <= 5 && !((_sprite.frame >= 40 && _sprite.frame <= 49) || (_sprite.frame >= 90 && _sprite.frame <= 99))) _sprite.frame += 10;
+            if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
+            if (ammo > 12 && ammo <= 20 && FrameId / 10 % 5 != 2) _sprite.frame += 10;
+            if (ammo > 5 && ammo <= 12 && FrameId / 10 % 5 != 3) _sprite.frame += 10;
+            if (ammo > 0 && ammo <= 5 && FrameId / 10 % 5 != 4) _sprite.frame += 10;
             base.Update();
         }
         public int FrameId

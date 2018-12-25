@@ -21,7 +21,7 @@ namespace TMGmod.Core.WClasses
         public override void Update()
         {
             base.Update();
-            if (Math.Abs(LoadAnimation - (-1.0)) < 0.02f)
+            if (Math.Abs(LoadAnimation - -1.0) < 0.02f)
             {
                 SFX.Play("shotgunLoad");
                 LoadAnimation = 0.0f;

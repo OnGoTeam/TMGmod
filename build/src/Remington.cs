@@ -50,7 +50,7 @@ public class Remington : Gun
 	public override void Update()
 	{
 		base.Update();
-		if (Math.Abs(_loadAnimation - (-1f)) < 0.01f)
+		if (Math.Abs(_loadAnimation - -1f) < 0.01f)
 		{
 			SFX.Play("shotgunLoad");
 			_loadAnimation = 0f;
