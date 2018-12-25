@@ -9,7 +9,8 @@ namespace TMGmod
     public class Nellegalja : Gun
     {
         private bool _laser;
-		
+        private bool _changed;
+
         public Nellegalja (float xval, float yval)
           : base(xval, yval)
         {
@@ -43,17 +44,24 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-					if (_laser)
-					{
-                        laserSight = true;
-						_laser = false;
-					}
-                    else
-					{
-                        laserSight = false;
-						_laser = true;
-					}
-				}
+                    if (!_changed)
+                    {
+                        if (_laser)
+                        {
+                            laserSight = true;
+                            _laser = false;
+                        }
+                        else
+                        {
+                            laserSight = false;
+                            _laser = true;
+                        }
+                    }
+                }
+                else
+                {
+                    _changed = true;
+                }
 			}
 		    base.Update();
 		}			
