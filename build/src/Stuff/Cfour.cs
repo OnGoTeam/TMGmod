@@ -9,8 +9,8 @@ namespace TMGmod.Stuff
     [EditorGroup("TMG|Misc")]
     public class Cfour : Holdable
     {
-        public float Toexplode = -1f;
-        public StateBinding ToExplodeBinding = new StateBinding(nameof(Toexplode));
+        public float ToExplode = -1f;
+        public StateBinding ToExplodeBinding = new StateBinding(nameof(ToExplode));
         public bool Activated;
         public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
         public Duck Activator;
@@ -88,13 +88,13 @@ namespace TMGmod.Stuff
 
         public override void UpdateOnFire()
         {
-            Toexplode = Rando.Float(0f, 1.5f);
+            ToExplode = Rando.Float(0f, 1.5f);
             base.UpdateOnFire();
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
-            Toexplode = Rando.Float(0f, 0.7f);
+            ToExplode = Rando.Float(0f, 0.7f);
             return base.Hit(bullet, hitPos);
         }
 
@@ -139,7 +139,7 @@ namespace TMGmod.Stuff
                 StickThing = null;
             }
 
-            Toexplode -= 0.1f;
+            ToExplode -= 0.1f;
             if (duck != null && duck.holdObject == this && StickThing != null)
             {
                 StickThing = null;
@@ -156,7 +156,7 @@ namespace TMGmod.Stuff
                 sleeping = false;
             }
 
-            if (Activator != null && Activator.inputProfile.Down("QUACK")) Toexplode = Rando.Float(0f, 0.5f);
+            if (Activator != null && Activator.inputProfile.Down("QUACK")) ToExplode = Rando.Float(0f, 0.5f);
 
             if (grounded) angle = 0f;
             else if ((duck == null || duck.holdObject != this) && WasThrown && StickThing == null)
@@ -164,7 +164,7 @@ namespace TMGmod.Stuff
                 angle += 0.3f * offDir;
             }
 
-            if (-0.5 < Toexplode && Toexplode < 0f) Explode();
+            if (-0.5 < ToExplode && ToExplode < 0f) Explode();
 
             base.Update();
         }
