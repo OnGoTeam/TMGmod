@@ -8,8 +8,7 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun")]
     public class RemingtonTac : BasePumpAction
     {
-        public RemingtonTac(float xval, float yval)
-        : base(xval, yval)
+        public RemingtonTac(float xval, float yval) : base(xval, yval)
         {
             ammo = 4;
             _ammoType = new AT9mm
@@ -29,7 +28,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(24f, 1.5f);
             _holdOffset = new Vec2(-1f, 2f);
             _fireSound = "shotgunFire2";
-            _kickForce = 2f;
+            _kickForce = 2.3f;
             _manualLoad = true;
             _fireWait = 1f;
             _laserOffsetTL = new Vec2(22f, 0.5f);
