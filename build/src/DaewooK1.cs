@@ -12,6 +12,7 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private bool _stock;
         private const int NonSkinFrames = 2;
+        private bool _changed;
 
         public DaewooK1 (float xval, float yval)
           : base(xval, yval)
@@ -48,25 +49,33 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (duck.inputProfile.Down("QUACK"))
                 {
-					if (_stock)
+                    if (_changed)
                     {
-                        FrameId -= 10;
-                        loseAccuracy = 0.1f;
-				        maxAccuracyLost = 0.24f;
-			            weight = 4.5f;
-						_stock = false;
-					}
-                    else
-                    {
-                        FrameId += 10;
-                        loseAccuracy = 0.2f;
-				        maxAccuracyLost = 0.36f;
-			            weight = 3f;
-						_stock = true;
-					}
-				}
+                        if (_stock)
+                        {
+                            FrameId -= 10;
+                            loseAccuracy = 0.1f;
+                            maxAccuracyLost = 0.24f;
+                            weight = 4.5f;
+                            _stock = false;
+                        }
+                        else
+                        {
+                            FrameId += 10;
+                            loseAccuracy = 0.2f;
+                            maxAccuracyLost = 0.36f;
+                            weight = 3f;
+                            _stock = true;
+                        }
+                        _changed = true;
+                    }
+                }
+                else
+                {
+                    _changed = false;
+                }
 			}
 		    base.Update();
 		}
