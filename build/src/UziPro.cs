@@ -12,6 +12,7 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         private bool _silencer;
+        public StateBinding SilencerBinding = new StateBinding(nameof(_silencer));
 
         public UziPro (float xval, float yval)
           : base(xval, yval)
@@ -45,7 +46,7 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (owner != null)
+            if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
@@ -85,5 +86,7 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        public StateBinding FrameIdBinding => new StateBinding(nameof(FrameId));
     }
 }

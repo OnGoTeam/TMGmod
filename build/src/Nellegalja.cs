@@ -8,8 +8,7 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle")]
     public class Nellegalja : Gun
     {
-        private bool _laser;
-        private bool _changed;
+        public StateBinding LaserSightBinding = new StateBinding(nameof(laserSight));
 
         public Nellegalja (float xval, float yval)
           : base(xval, yval)
@@ -42,27 +41,9 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
-                    {
-                        if (_laser)
-                        {
-                            laserSight = true;
-                            _laser = false;
-                        }
-                        else
-                        {
-                            laserSight = false;
-                            _laser = true;
-                        }
-
-                        _changed = true;
-                    }
-                }
-                else
-                {
-                    _changed = false;
+                    laserSight = !laserSight;
                 }
 			}
 		    base.Update();

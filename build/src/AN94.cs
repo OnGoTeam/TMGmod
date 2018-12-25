@@ -13,9 +13,9 @@ namespace TMGmod
         private int _burstNumB;
         private readonly int _burstValue;
         private float _bw = 5.1f;
-        private bool _changed;
 
         private bool _stock;
+        public StateBinding StockBinding = new StateBinding(nameof(_stock));
         // ReSharper disable once MemberCanBePrivate.Global
         public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
@@ -66,33 +66,24 @@ namespace TMGmod
 			
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
+                    if (_stock)
                     {
-                        if (_stock)
-                        {
-                            loseAccuracy = 0.15f;
-                            weight = 5.5f;
-                            _sprite.SetAnimation("base");
-                            maxAccuracyLost = 0.1f;
-                            _stock = false;
-                        }
-                        else
-                        {
-                            loseAccuracy = 0.2f;
-                            weight = 2.75f;
-                            _sprite.SetAnimation("stock");
-                            maxAccuracyLost = 0.3f;
-                            _stock = true;
-                        }
-
-                        _changed = true;
+                        loseAccuracy = 0.15f;
+                        weight = 5.5f;
+                        _sprite.SetAnimation("base");
+                        maxAccuracyLost = 0.1f;
+                        _stock = false;
                     }
-                }
-                else
-                {
-                    _changed = false;
+                    else
+                    {
+                        loseAccuracy = 0.2f;
+                        weight = 2.75f;
+                        _sprite.SetAnimation("stock");
+                        maxAccuracyLost = 0.3f;
+                        _stock = true;
+                    }
                 }
 			}
             base.Update();

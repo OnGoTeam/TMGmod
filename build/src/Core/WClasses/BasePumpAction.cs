@@ -6,7 +6,8 @@ namespace TMGmod.Core.WClasses
     public abstract class BasePumpAction:BaseGun, IAmSg
     {
         protected int LoadProgress;
-        protected float LoadAnimation = 1f;
+        public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
+        private float _loadAnimation = 1f;
         protected sbyte EpsilonA = 50;
         protected int EpsilonB = 100;
         protected SpriteMap LoaderSprite;
@@ -21,19 +22,19 @@ namespace TMGmod.Core.WClasses
         public override void Update()
         {
             base.Update();
-            if (Math.Abs(LoadAnimation - -1.0) < 0.02f)
+            if (Math.Abs(_loadAnimation - -1.0) < 0.02f)
             {
                 SFX.Play("shotgunLoad");
-                LoadAnimation = 0.0f;
+                _loadAnimation = 0.0f;
             }
-            if (LoadAnimation >= 0.0)
+            if (_loadAnimation >= 0.0)
             {
-                if (Math.Abs(LoadAnimation - 0.5) < 0.02f && ammo != 0)
+                if (Math.Abs(_loadAnimation - 0.5) < 0.02f && ammo != 0)
                     _ammoType.PopShell(x, y, -offDir);
-                if (LoadAnimation < 1.0)
-                    LoadAnimation += 0.1f;
+                if (_loadAnimation < 1.0)
+                    _loadAnimation += 0.1f;
                 else
-                    LoadAnimation = 1f;
+                    _loadAnimation = 1f;
             }
             if (LoadProgress < 0)
                 return;
@@ -51,21 +52,21 @@ namespace TMGmod.Core.WClasses
             {
                 base.OnPressAction();
                 LoadProgress = -1;
-                LoadAnimation = -0.01f;
+                _loadAnimation = -0.01f;
             }
             else
             {
                 if (LoadProgress != -1)
                     return;
                 LoadProgress = 0;
-                LoadAnimation = -1f;
+                _loadAnimation = -1f;
             }
         }
 
         public override void Draw()
         {
             base.Draw();
-            var num = (float)Math.Sin(LoadAnimation * 3.1415) * Loaddx;
+            var num = (float)Math.Sin(_loadAnimation * 3.1415) * Loaddx;
             Draw(LoaderSprite, new Vec2(LoaderVec2.x - num, LoaderVec2.y));
         }
     }

@@ -12,7 +12,8 @@ namespace TMGmod
         private int _patrons = 16;
         private int _bullets;
         private bool _stick;
-		
+        public StateBinding StickBinding = new StateBinding(nameof(_stick));
+
         public SKS (float xval, float yval)
           : base(xval, yval)
         {
@@ -50,7 +51,7 @@ namespace TMGmod
 			    _patrons = ammo;	
 			}
 
-            if (owner == null) return;
+            if (duck == null) return;
             //else
             if (duck.inputProfile.Pressed("QUACK"))
             {

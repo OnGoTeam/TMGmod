@@ -10,7 +10,7 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
 
         private bool _grip;
-        private bool _changed;
+        public StateBinding GripBinding = new StateBinding(nameof(_grip));
 
         public Aug (float xval, float yval)
           : base(xval, yval)
@@ -45,35 +45,26 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
+                    if (_grip)
                     {
-                        if (_grip)
-                        {
-                            _sprite.SetAnimation("base");
-                            _fireWait = 0.8f;
-                            loseAccuracy = 0.1f;
-                            maxAccuracyLost = 0.2f;
-                            _ammoType.accuracy = 0.91f;
-                            _grip = false;
-                        }
-                        else
-                        {
-                            _sprite.SetAnimation("grip");
-                            _fireWait = 1.2f;
-                            loseAccuracy = 0.25f;
-                            maxAccuracyLost = 0.125f;
-                            _ammoType.accuracy = 0.94f;
-                            _grip = true;
-                        }
-
-                        _changed = true;
+                        _sprite.SetAnimation("base");
+                        _fireWait = 0.8f;
+                        loseAccuracy = 0.1f;
+                        maxAccuracyLost = 0.2f;
+                        _ammoType.accuracy = 0.91f;
+                        _grip = false;
                     }
-                }
-                else
-                {
-                    _changed = false;
+                    else
+                    {
+                        _sprite.SetAnimation("grip");
+                        _fireWait = 1.2f;
+                        loseAccuracy = 0.25f;
+                        maxAccuracyLost = 0.125f;
+                        _ammoType.accuracy = 0.94f;
+                        _grip = true;
+                    }
                 }
 			}
 		    base.Update();

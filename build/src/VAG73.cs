@@ -9,8 +9,9 @@ namespace TMGmod
     public class Vag : BaseGun, IAmHg
     {
         private float _mode = 1f;
-		
-		public Vag(float xval, float yval)
+        public StateBinding ModeBinding = new StateBinding(nameof(_mode));
+
+        public Vag(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 48;

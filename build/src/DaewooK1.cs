@@ -11,8 +11,8 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         private bool _stock;
+        public StateBinding StockBinding = new StateBinding(nameof(_stock));
         private const int NonSkinFrames = 2;
-        private bool _changed;
 
         public DaewooK1 (float xval, float yval)
           : base(xval, yval)
@@ -49,32 +49,24 @@ namespace TMGmod
         {
             if (owner != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
+                    if (_stock)
                     {
-                        if (_stock)
-                        {
-                            FrameId -= 10;
-                            loseAccuracy = 0.1f;
-                            maxAccuracyLost = 0.24f;
-                            weight = 4.5f;
-                            _stock = false;
-                        }
-                        else
-                        {
-                            FrameId += 10;
-                            loseAccuracy = 0.2f;
-                            maxAccuracyLost = 0.36f;
-                            weight = 3f;
-                            _stock = true;
-                        }
-                        _changed = true;
+                        FrameId -= 10;
+                        loseAccuracy = 0.1f;
+                        maxAccuracyLost = 0.24f;
+                        weight = 4.5f;
+                        _stock = false;
                     }
-                }
-                else
-                {
-                    _changed = false;
+                    else
+                    {
+                        FrameId += 10;
+                        loseAccuracy = 0.2f;
+                        maxAccuracyLost = 0.36f;
+                        weight = 3f;
+                        _stock = true;
+                    }
                 }
 			}
 		    base.Update();
@@ -85,5 +77,7 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        public StateBinding FrameIdBinding => new StateBinding(nameof(FrameId));
     }
 }

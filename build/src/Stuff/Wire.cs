@@ -11,7 +11,9 @@ namespace TMGmod.Stuff
 
         private readonly SpriteMap _sprite;
         private readonly int _teksturka;
+        public StateBinding TexBinding = new StateBinding(nameof(_teksturka));
         private float _hp;
+        public StateBinding HpBinding = new StateBinding(nameof(_hp));
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
             _hp = 25f;

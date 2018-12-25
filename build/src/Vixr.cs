@@ -9,7 +9,7 @@ namespace TMGmod
     public class Vixr : Gun
     {
 		private bool _stockngrip;
-        private bool _changed;
+        public StateBinding StockBinding = new StateBinding(nameof(_stockngrip));
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -44,33 +44,24 @@ namespace TMGmod
         {
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
+                    if (_stockngrip)
                     {
-                        if (_stockngrip)
-                        {
-                            graphic = new Sprite(GetPath("VixrStock"));
-                            loseAccuracy = 0.099f;
-                            maxAccuracyLost = 0.17f;
-                            _stockngrip = false;
-                            weight = 3.9f;
-                        }
-                        else
-                        {
-                            graphic = new Sprite(GetPath("VixrNoStock"));
-                            loseAccuracy = 0.13f;
-                            maxAccuracyLost = 0.4f;
-                            _stockngrip = true;
-                            weight = 2f;
-                        }
-
-                        _changed = true;
+                        graphic = new Sprite(GetPath("VixrStock"));
+                        loseAccuracy = 0.099f;
+                        maxAccuracyLost = 0.17f;
+                        _stockngrip = false;
+                        weight = 3.9f;
                     }
-                }
-                else
-                {
-                    _changed = false;
+                    else
+                    {
+                        graphic = new Sprite(GetPath("VixrNoStock"));
+                        loseAccuracy = 0.13f;
+                        maxAccuracyLost = 0.4f;
+                        _stockngrip = true;
+                        weight = 2f;
+                    }
                 }
 			}
 		    base.Update();

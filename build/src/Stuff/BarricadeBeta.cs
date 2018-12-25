@@ -12,7 +12,9 @@ namespace TMGmod.Stuff
     {
         private bool _anchored;
         private float _hp;
+        public StateBinding HpBinding = new StateBinding(nameof(_hp));
         private float _impactSpeed;
+        public StateBinding ImpactSpeedBinding = new StateBinding(nameof(_impactSpeed));
         private float _duckcooldown;
         public BarricadeBeta(float x, float y) : base(x, y)
         {

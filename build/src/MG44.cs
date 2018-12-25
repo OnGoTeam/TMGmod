@@ -108,5 +108,7 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        public StateBinding FrameIdBinding => new StateBinding(nameof(FrameId));
     }
 }

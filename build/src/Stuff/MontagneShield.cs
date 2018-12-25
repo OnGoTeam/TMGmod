@@ -9,6 +9,7 @@ namespace TMGmod.Stuff
     {
         private readonly SpriteMap _sprite;
         private float _hp;
+        public StateBinding HpBinding = new StateBinding(nameof(_hp));
         public MontagneShield(float xpos, float ypos) : base(xpos, ypos)
         {
             _hp = 1000f;

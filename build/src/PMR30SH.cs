@@ -10,7 +10,9 @@ namespace TMGmod
     public class PMR : BaseGun, IAmHg
     {
         private int _mode;
+        public StateBinding ModeBinding = new StateBinding(nameof(_mode));
         private readonly int[] _ammom = {30, 1};
+        public StateBinding AmmomBinding = new StateBinding(nameof(_ammom));
         private readonly AmmoType[] _ammoTypem =
         {
             new AT9mm
@@ -35,7 +37,6 @@ namespace TMGmod
         private readonly float[] _maxAccuracyLostm = {.15f, 0f};
         private readonly int[] _numBulletsPerFirem = {1, 16};
         private bool _switched;
-        private bool _changed;
 
         public PMR(float xval, float yval)
           : base(xval, yval)
@@ -85,18 +86,10 @@ namespace TMGmod
         {
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
-                    {
-                        _mode = 1 - _mode;
-                        _changed = true;
-                        _switched = true;
-                    }
-                }
-                else
-                {
-                    _changed = false;
+                    _mode = 1 - _mode;
+                    _switched = true;
                 }
 			}
             UpdateMode();

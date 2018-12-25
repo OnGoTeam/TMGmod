@@ -11,7 +11,7 @@ namespace TMGmod
     public class USP : BaseGun, IAmHg
     {
         private bool _silencer;
-        private bool _changed;
+        public StateBinding SilencerBinding = new StateBinding(nameof(_silencer));
 
         public USP(float xval, float yval)
           : base(xval, yval)
@@ -42,41 +42,32 @@ namespace TMGmod
         {
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
+                    if (_silencer)
                     {
-                        if (_silencer)
+                        graphic = new Sprite(GetPath("USP"));
+                        _fireSound = GetPath("sounds/1.wav");
+                        _ammoType = new AT9mm
                         {
-                            graphic = new Sprite(GetPath("USP"));
-                            _fireSound = GetPath("sounds/1.wav");
-                            _ammoType = new AT9mm
-                            {
-                                range = 100f,
-                                accuracy = 0.8f
-                            };
-                            _barrelOffsetTL = new Vec2(15f, 3f);
-                            _silencer = false;
-                        }
-                        else
-                        {
-                            graphic = new Sprite(GetPath("USPS"));
-                            _fireSound = GetPath("sounds/SilencedPistol.wav");
-                            _ammoType = new AT9mmS
-                            {
-                                range = 130f,
-                                accuracy = 0.9f
-                            };
-                            _barrelOffsetTL = new Vec2(23f, 3f);
-                            _silencer = true;
-                        }
-
-                        _changed = true;
+                            range = 100f,
+                            accuracy = 0.8f
+                        };
+                        _barrelOffsetTL = new Vec2(15f, 3f);
+                        _silencer = false;
                     }
-                }
-                else
-                {
-                    _changed = false;
+                    else
+                    {
+                        graphic = new Sprite(GetPath("USPS"));
+                        _fireSound = GetPath("sounds/SilencedPistol.wav");
+                        _ammoType = new AT9mmS
+                        {
+                            range = 130f,
+                            accuracy = 0.9f
+                        };
+                        _barrelOffsetTL = new Vec2(23f, 3f);
+                        _silencer = true;
+                    }
                 }
 			}
 		    base.Update();

@@ -11,10 +11,14 @@ namespace TMGmod.Stuff
     {
         private float _toexplode = -1f;
         private bool _activated;
+        public StateBinding ActivatedBinding = new StateBinding(nameof(_activated));
         private Duck _activator;
+        public StateBinding ActivatorBinding = new StateBinding(nameof(_activator));
         private MaterialThing _stickThing;
+        public StateBinding StickBinding = new StateBinding(nameof(_stickThing));
         private Vec2 _stickyVec2;
         private bool _wasThrown;
+        public StateBinding WasThrownBinding = new StateBinding(nameof(_wasThrown));
         public bool Weak;
 
         public Cfour(float xpos, float ypos) : base(xpos, ypos)

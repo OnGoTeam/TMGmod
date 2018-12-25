@@ -13,7 +13,7 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 10;
         private bool _silencer;
-        private bool _changed;
+        public StateBinding SilencerBinding = new StateBinding(nameof(_silencer));
 
         public CZ805 (float xval, float yval)
           : base(xval, yval)
@@ -47,47 +47,38 @@ namespace TMGmod
         {
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
+                    if (_silencer)
                     {
-                        if (_silencer)
+                        FrameId -= 50;
+                        _fireSound = "deepMachineGun2";
+                        _ammoType = new AT9mm
                         {
-                            FrameId -= 50;
-                            _fireSound = "deepMachineGun2";
-                            _ammoType = new AT9mm
-                            {
-                                range = 400f,
-                                accuracy = 0.87f
-                            };
-                            loseAccuracy = 0.025f;
-                            maxAccuracyLost = 0.32f;
-                            _barrelOffsetTL = new Vec2(39f, 4f);
-                            _silencer = !_silencer;
-                            _flare = new SpriteMap("smallFlare", 11, 10);
-                        }
-                        else
-                        {
-                            FrameId += 50;
-                            _fireSound = GetPath("sounds/Silenced2.wav");
-                            _ammoType = new AT9mmS
-                            {
-                                range = 470f,
-                                accuracy = 0.95f
-                            };
-                            loseAccuracy = 0.02f;
-                            maxAccuracyLost = 0.3f;
-                            _barrelOffsetTL = new Vec2(42.5f, 4f);
-                            _silencer = !_silencer;
-                            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                        }
-
-                        _changed = true;
+                            range = 400f,
+                            accuracy = 0.87f
+                        };
+                        loseAccuracy = 0.025f;
+                        maxAccuracyLost = 0.32f;
+                        _barrelOffsetTL = new Vec2(39f, 4f);
+                        _silencer = !_silencer;
+                        _flare = new SpriteMap("smallFlare", 11, 10);
                     }
-                }
-                else
-                {
-                    _changed = false;
+                    else
+                    {
+                        FrameId += 50;
+                        _fireSound = GetPath("sounds/Silenced2.wav");
+                        _ammoType = new AT9mmS
+                        {
+                            range = 470f,
+                            accuracy = 0.95f
+                        };
+                        loseAccuracy = 0.02f;
+                        maxAccuracyLost = 0.3f;
+                        _barrelOffsetTL = new Vec2(42.5f, 4f);
+                        _silencer = !_silencer;
+                        _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    }
                 }
             }
             if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
@@ -101,5 +92,7 @@ namespace TMGmod
             private get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        public StateBinding FrameIdBinding => new StateBinding(nameof(FrameId));
     }
 }

@@ -9,8 +9,9 @@ namespace TMGmod
     public class ScarGL : Gun
     {
         private int _mode;
+        public StateBinding ModeBinding = new StateBinding(nameof(_mode));
         private readonly int[] _ammom = {20, 1};
-
+        public StateBinding AmmomBinding = new StateBinding(nameof(_ammom));
         private readonly AmmoType[] _ammoTypem =
         {
             new ATMagnum
@@ -36,7 +37,6 @@ namespace TMGmod
         private readonly float[] _loseAccuracym = {.01f, 0f};
         private readonly float[] _maxAccuracyLostm = {.2f, 0f};
         private bool _switched;
-        private bool _changed;
 
         public ScarGL (float xval, float yval)
           : base(xval, yval)
@@ -84,20 +84,12 @@ namespace TMGmod
         public override void Update()
         {
             if (infiniteAmmoVal) _ammom[0] = 99;
-            if (owner != null)
+            if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (!_changed)
-                    {
-                        _mode = 1 - _mode;
-                        _changed = true;
-                        _switched = true;
-                    }
-                }
-                else
-                {
-                    _changed = false;
+                    _mode = 1 - _mode;
+                    _switched = true;
                 }
             }
             UpdateMode();

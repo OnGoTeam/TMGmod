@@ -1,8 +1,11 @@
-﻿namespace TMGmod.Core.WClasses
+﻿using DuckGame;
+
+namespace TMGmod.Core.WClasses
 {
     public abstract class BaseBurst:BaseGun
     {
         private int _shotsLeft;
+        public StateBinding ShotsBinding = new StateBinding(nameof(_shotsLeft));
         protected float DeltaWait;
         protected int BurstNum;
         protected BaseBurst(float xval, float yval) : base(xval, yval)
