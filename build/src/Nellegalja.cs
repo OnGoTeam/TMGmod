@@ -56,11 +56,13 @@ namespace TMGmod
                             laserSight = false;
                             _laser = true;
                         }
+
+                        _changed = true;
                     }
                 }
                 else
                 {
-                    _changed = true;
+                    _changed = false;
                 }
 			}
 		    base.Update();

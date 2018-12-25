@@ -9,6 +9,7 @@ namespace TMGmod
     public class Vixr : Gun
     {
 		private bool _stockngrip;
+        private bool _changed;
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -41,26 +42,35 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (owner != null)
+            if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_stockngrip)
+                    if (!_changed)
                     {
-                        graphic = new Sprite(GetPath("VixrStock"));
-                        loseAccuracy = 0.099f;
-                        maxAccuracyLost = 0.17f;
-                        _stockngrip = false;
-                        weight = 3.9f;
+                        if (_stockngrip)
+                        {
+                            graphic = new Sprite(GetPath("VixrStock"));
+                            loseAccuracy = 0.099f;
+                            maxAccuracyLost = 0.17f;
+                            _stockngrip = false;
+                            weight = 3.9f;
+                        }
+                        else
+                        {
+                            graphic = new Sprite(GetPath("VixrNoStock"));
+                            loseAccuracy = 0.13f;
+                            maxAccuracyLost = 0.4f;
+                            _stockngrip = true;
+                            weight = 2f;
+                        }
+
+                        _changed = true;
                     }
-                    else
-                    {
-                        graphic = new Sprite(GetPath("VixrNoStock"));
-                        loseAccuracy = 0.13f;
-                        maxAccuracyLost = 0.4f;
-                        _stockngrip = true;
-                        weight = 2f;
-                    }
+                }
+                else
+                {
+                    _changed = false;
                 }
 			}
 		    base.Update();
