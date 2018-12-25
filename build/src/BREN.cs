@@ -50,7 +50,7 @@ namespace TMGmod
                 {
 					if (_silencer)
 					{
-                        _sprite.frame -= 50;
+                        FrameId -= 50;
                         _fireSound = "deepMachineGun2";
                         _ammoType = new AT9mm
                         {
@@ -65,7 +65,7 @@ namespace TMGmod
                     }
                     else
 					{
-                        _sprite.frame += 50;
+                        FrameId += 50;
                         _fireSound = GetPath("sounds/Silenced2.wav");
                         _ammoType = new AT9mmS
                         {
