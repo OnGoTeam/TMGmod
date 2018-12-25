@@ -14,7 +14,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 650f,
+                range = 580f,
                 accuracy = 0.92f,
                 penetration = 1f
             };
@@ -51,7 +51,7 @@ namespace TMGmod
 					{
 						_fullAuto = true;
 				        graphic = new Sprite(GetPath("RFBauto"));
-				        _fireWait = 0.63f;
+				        _fireWait = 0.79f;
 				        maxAccuracyLost = 0.25f;
 					}
 				}
