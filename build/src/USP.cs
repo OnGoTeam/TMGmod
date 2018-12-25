@@ -10,8 +10,8 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class USP : BaseGun, IAmHg
     {
-        private bool _silencer;
-        public StateBinding SilencerBinding = new StateBinding(nameof(_silencer));
+        public bool Silencer;
+        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public USP(float xval, float yval)
           : base(xval, yval)
@@ -44,7 +44,7 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_silencer)
+                    if (Silencer)
                     {
                         graphic = new Sprite(GetPath("USP"));
                         _fireSound = GetPath("sounds/1.wav");
@@ -54,7 +54,7 @@ namespace TMGmod
                             accuracy = 0.8f
                         };
                         _barrelOffsetTL = new Vec2(15f, 3f);
-                        _silencer = false;
+                        Silencer = false;
                     }
                     else
                     {
@@ -66,7 +66,7 @@ namespace TMGmod
                             accuracy = 0.9f
                         };
                         _barrelOffsetTL = new Vec2(23f, 3f);
-                        _silencer = true;
+                        Silencer = true;
                     }
                 }
 			}

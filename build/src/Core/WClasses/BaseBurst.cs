@@ -4,8 +4,8 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BaseBurst:BaseGun
     {
-        private int _shotsLeft;
-        public StateBinding ShotsBinding = new StateBinding(nameof(_shotsLeft));
+        public int ShotsLeft;
+        public StateBinding ShotsBinding = new StateBinding(nameof(ShotsLeft));
         protected float DeltaWait;
         protected int BurstNum;
         protected BaseBurst(float xval, float yval) : base(xval, yval)
@@ -15,19 +15,19 @@ namespace TMGmod.Core.WClasses
 
         public override void Fire()
         {
-            if (_shotsLeft > 0) return;
+            if (ShotsLeft > 0) return;
             base.Fire();
-            _shotsLeft = BurstNum - 1;
-            if (_shotsLeft > 0) _wait = DeltaWait;
+            ShotsLeft = BurstNum - 1;
+            if (ShotsLeft > 0) _wait = DeltaWait;
         }
 
         public override void Update()
         {
             base.Update();
-            if (_wait > 0f || _shotsLeft <= 0) return;
+            if (_wait > 0f || ShotsLeft <= 0) return;
             base.Fire();
-            _shotsLeft -= 1;
-            if (_shotsLeft > 0) _wait = DeltaWait;
+            ShotsLeft -= 1;
+            if (ShotsLeft > 0) _wait = DeltaWait;
         }
     }
 }

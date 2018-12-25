@@ -9,10 +9,10 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class PMR : BaseGun, IAmHg
     {
-        private int _mode;
-        public StateBinding ModeBinding = new StateBinding(nameof(_mode));
-        private readonly int[] _ammom = {30, 1};
-        public StateBinding AmmomBinding = new StateBinding(nameof(_ammom));
+        public int Mode;
+        public StateBinding ModeBinding = new StateBinding(nameof(Mode));
+        public readonly int[] Ammom = {30, 1};
+        public StateBinding AmmomBinding = new StateBinding(nameof(Ammom));
         private readonly AmmoType[] _ammoTypem =
         {
             new AT9mm
@@ -68,18 +68,18 @@ namespace TMGmod
             maxAccuracyLost = 0.15f;
             _editorName = "PMR30 With SG";
 			weight = 1f;
-            graphic = _graphicm[_switched ? _mode : 2];
+            graphic = _graphicm[_switched ? Mode : 2];
         }
 
         private void UpdateMode()
         {
-            graphic = _graphicm[_switched ? _mode : 2];
-            _ammoType = _ammoTypem[_mode];
-            _barrelOffsetTL = _barrelOffsetTLm[_mode];
-            _fireSound = _fireSoundm[_mode];
-            loseAccuracy = _loseAccuracym[_mode];
-            maxAccuracyLost = _maxAccuracyLostm[_mode];
-            _numBulletsPerFire = _numBulletsPerFirem[_mode];
+            graphic = _graphicm[_switched ? Mode : 2];
+            _ammoType = _ammoTypem[Mode];
+            _barrelOffsetTL = _barrelOffsetTLm[Mode];
+            _fireSound = _fireSoundm[Mode];
+            loseAccuracy = _loseAccuracym[Mode];
+            maxAccuracyLost = _maxAccuracyLostm[Mode];
+            _numBulletsPerFire = _numBulletsPerFirem[Mode];
         }
 
         public override void Update()
@@ -88,7 +88,7 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    _mode = 1 - _mode;
+                    Mode = 1 - Mode;
                     _switched = true;
                 }
 			}
@@ -97,10 +97,10 @@ namespace TMGmod
 		}
         public override void Fire()
         {
-            ammo = _ammom[_mode];
+            ammo = Ammom[Mode];
             base.Fire();
-            _ammom[_mode] = ammo;
-            ammo = _ammom[0] + _ammom[1];
+            Ammom[Mode] = ammo;
+            ammo = Ammom[0] + Ammom[1];
         }		
 	}
 }

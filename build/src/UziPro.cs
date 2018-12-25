@@ -11,8 +11,8 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        private bool _silencer;
-        public StateBinding SilencerBinding = new StateBinding(nameof(_silencer));
+        public bool Silencer;
+        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public UziPro (float xval, float yval)
           : base(xval, yval)
@@ -50,7 +50,7 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-					if (_silencer)
+					if (Silencer)
 					{
                         _sprite.frame -= 10;
                         _ammoType = new AT9mm
@@ -60,7 +60,7 @@ namespace TMGmod
                             penetration = 1f
                         };
                         _barrelOffsetTL = new Vec2(11f, 3f);	
-						_silencer = false;
+						Silencer = false;
                         _fireSound = GetPath("sounds/smg.wav");
 					}
                     else
@@ -73,7 +73,7 @@ namespace TMGmod
                             penetration = 0f
                         };
                         _barrelOffsetTL = new Vec2(17f, 3f);			 
-	 					_silencer = true;
+	 					Silencer = true;
                         _fireSound = GetPath("sounds/SilencedPistol.wav");
 					}
 				}

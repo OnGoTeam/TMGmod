@@ -9,8 +9,8 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
 
-        private bool _grip;
-        public StateBinding GripBinding = new StateBinding(nameof(_grip));
+        public bool Grip;
+        public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
         public Aug (float xval, float yval)
           : base(xval, yval)
@@ -47,14 +47,14 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_grip)
+                    if (Grip)
                     {
                         _sprite.SetAnimation("base");
                         _fireWait = 0.8f;
                         loseAccuracy = 0.1f;
                         maxAccuracyLost = 0.2f;
                         _ammoType.accuracy = 0.91f;
-                        _grip = false;
+                        Grip = false;
                     }
                     else
                     {
@@ -63,7 +63,7 @@ namespace TMGmod
                         loseAccuracy = 0.25f;
                         maxAccuracyLost = 0.125f;
                         _ammoType.accuracy = 0.94f;
-                        _grip = true;
+                        Grip = true;
                     }
                 }
 			}

@@ -11,8 +11,8 @@ namespace TMGmod
     {
         private int _patrons = 16;
         private int _bullets;
-        private bool _stick;
-        public StateBinding StickBinding = new StateBinding(nameof(_stick));
+        public bool Stick;
+        public StateBinding StickBinding = new StateBinding(nameof(Stick));
 
         public SKS (float xval, float yval)
           : base(xval, yval)
@@ -75,7 +75,7 @@ namespace TMGmod
                 maxAccuracyLost = 0f;
                 _ammoType.bulletThickness = 0.1f;
                 _kickForce = 0f;
-                _stick = true;
+                Stick = true;
                 Fire();
             }
             if (duck.inputProfile.Down("QUACK"))
@@ -111,7 +111,7 @@ namespace TMGmod
             {
                 center = new Vec2(0f, 4f)
             };
-            _stick = false;
+            Stick = false;
         }	
         public override void Thrown()
         {
@@ -140,7 +140,7 @@ namespace TMGmod
                     center = new Vec2(0f, 4f)
                 };
             }
-			if (_stick && _patrons == 0)
+			if (Stick && _patrons == 0)
 			{
 				ammo = 0;
 			}

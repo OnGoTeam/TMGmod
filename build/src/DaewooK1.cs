@@ -10,8 +10,8 @@ namespace TMGmod
     {
 
         private readonly SpriteMap _sprite;
-        private bool _stock;
-        public StateBinding StockBinding = new StateBinding(nameof(_stock));
+        public bool Stock;
+        public StateBinding StockBinding = new StateBinding(nameof(Stock));
         private const int NonSkinFrames = 2;
 
         public DaewooK1 (float xval, float yval)
@@ -51,13 +51,13 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_stock)
+                    if (Stock)
                     {
                         FrameId -= 10;
                         loseAccuracy = 0.1f;
                         maxAccuracyLost = 0.24f;
                         weight = 4.5f;
-                        _stock = false;
+                        Stock = false;
                     }
                     else
                     {
@@ -65,7 +65,7 @@ namespace TMGmod
                         loseAccuracy = 0.2f;
                         maxAccuracyLost = 0.36f;
                         weight = 3f;
-                        _stock = true;
+                        Stock = true;
                     }
                 }
 			}

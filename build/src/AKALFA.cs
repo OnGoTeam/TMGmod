@@ -10,8 +10,8 @@ namespace TMGmod
     public class AKALFA : BaseGun, IAmAr
     {
         private readonly SpriteMap _sprite;
-        private float _stock;
-        public StateBinding StockBinding = new StateBinding(nameof(_stock));
+        public bool Stock;
+        public StateBinding StockBinding = new StateBinding(nameof(Stock));
 
         public AKALFA (float xval, float yval)
           : base(xval, yval)
@@ -54,12 +54,12 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_stock > 0f)
+                    if (Stock)
                     {
                         _sprite.SetAnimation("base");
                         _ammoType.accuracy = 1f;
                         loseAccuracy = 0f;
-                        _stock = 0f;
+                        Stock = false;
                         weight = 5.5f;
                     }
                     else
@@ -67,7 +67,7 @@ namespace TMGmod
                         _sprite.SetAnimation("stock");
                         _ammoType.accuracy = 0.92f;
                         loseAccuracy = 0.045f;
-                        _stock = 1f;
+                        Stock = true;
                         weight = 3f;
                     }
                 }

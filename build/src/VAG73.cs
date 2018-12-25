@@ -8,8 +8,8 @@ namespace TMGmod
     [EditorGroup("TMG|AutoPistol")]
     public class Vag : BaseGun, IAmHg
     {
-        private float _mode = 1f;
-        public StateBinding ModeBinding = new StateBinding(nameof(_mode));
+        public float Mode = 1f;
+        public StateBinding ModeBinding = new StateBinding(nameof(Mode));
 
         public Vag(float xval, float yval)
           : base(xval, yval)
@@ -44,23 +44,23 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-					if (_mode > 0f && _mode < 2f)
+					if (Mode > 0f && Mode < 2f)
 					{
 				        graphic = new Sprite(GetPath("VAG732"));
 						_fireWait = 0.6f;
-						_mode = 2f;
+						Mode = 2f;
 					}
-                    else if (_mode > 1f && _mode < 3f)
+                    else if (Mode > 1f && Mode < 3f)
 					{
 				        graphic = new Sprite(GetPath("VAG733"));
 						_fireWait = 0.9f;
-						_mode = 3f;
+						Mode = 3f;
 					}
-                    else if (_mode > 2f && _mode < 4f)
+                    else if (Mode > 2f && Mode < 4f)
 					{
 				        graphic = new Sprite(GetPath("VAG731"));
 						_fireWait = 0.3f;
-						_mode = 1f;
+						Mode = 1f;
 					}
 				}
 			}

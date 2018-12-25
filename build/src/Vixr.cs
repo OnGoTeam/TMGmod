@@ -8,8 +8,8 @@ namespace TMGmod
     [EditorGroup("TMG|Machinegun")]
     public class Vixr : Gun
     {
-		private bool _stockngrip;
-        public StateBinding StockBinding = new StateBinding(nameof(_stockngrip));
+		public bool Stockngrip;
+        public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -46,12 +46,12 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_stockngrip)
+                    if (Stockngrip)
                     {
                         graphic = new Sprite(GetPath("VixrStock"));
                         loseAccuracy = 0.099f;
                         maxAccuracyLost = 0.17f;
-                        _stockngrip = false;
+                        Stockngrip = false;
                         weight = 3.9f;
                     }
                     else
@@ -59,7 +59,7 @@ namespace TMGmod
                         graphic = new Sprite(GetPath("VixrNoStock"));
                         loseAccuracy = 0.13f;
                         maxAccuracyLost = 0.4f;
-                        _stockngrip = true;
+                        Stockngrip = true;
                         weight = 2f;
                     }
                 }

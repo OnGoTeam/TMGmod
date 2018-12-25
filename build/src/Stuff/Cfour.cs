@@ -10,15 +10,15 @@ namespace TMGmod.Stuff
     public class Cfour : Holdable
     {
         private float _toexplode = -1f;
-        private bool _activated;
-        public StateBinding ActivatedBinding = new StateBinding(nameof(_activated));
-        private Duck _activator;
-        public StateBinding ActivatorBinding = new StateBinding(nameof(_activator));
-        private MaterialThing _stickThing;
-        public StateBinding StickBinding = new StateBinding(nameof(_stickThing));
+        public bool Activated;
+        public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
+        public Duck Activator;
+        public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
+        public MaterialThing StickThing;
+        public StateBinding StickBinding = new StateBinding(nameof(StickThing));
         private Vec2 _stickyVec2;
-        private bool _wasThrown;
-        public StateBinding WasThrownBinding = new StateBinding(nameof(_wasThrown));
+        public bool WasThrown;
+        public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
         public bool Weak;
 
         public Cfour(float xpos, float ypos) : base(xpos, ypos)
@@ -36,7 +36,7 @@ namespace TMGmod.Stuff
 
         private void Explode()
         {
-            _activator?.Fondle(this);
+            Activator?.Fondle(this);
             ExploCreator.CreateExplosion(position);
             Graphics.FlashScreen();
             if (isServerForObject && !Weak)
@@ -99,11 +99,11 @@ namespace TMGmod.Stuff
 
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
-            if (_stickThing != null) return;
+            if (StickThing != null) return;
             base.OnImpact(with, from);
-            if (!_activated) return;
-            _stickThing = with;
-            _stickThing.Fondle(this);
+            if (!Activated) return;
+            StickThing = with;
+            StickThing.Fondle(this);
             _stickyVec2 = position - with.position;
             //enablePhysics = false;
             // ReSharper disable once SwitchStatementMissingSomeCases
@@ -126,39 +126,39 @@ namespace TMGmod.Stuff
 
         public override void Thrown()
         {
-            _wasThrown = true;
+            WasThrown = true;
             base.Thrown();
         }
 
         public override void Update()
         {
             if (_destroyed) return;
-            if (_stickThing != null && _stickThing._destroyed)
+            if (StickThing != null && StickThing._destroyed)
             {
-                _stickThing = null;
+                StickThing = null;
             }
 
             _toexplode -= 0.1f;
-            if (duck != null && duck.holdObject == this && _stickThing != null)
+            if (duck != null && duck.holdObject == this && StickThing != null)
             {
-                _stickThing = null;
-                _activated = false;
+                StickThing = null;
+                Activated = false;
             }
 
-            if (_stickThing != null)
+            if (StickThing != null)
             {
                 sleeping = true;
-                position = _stickThing.position + _stickyVec2;
+                position = StickThing.position + _stickyVec2;
             }
             else
             {
                 sleeping = false;
             }
 
-            if (_activator != null && _activator.inputProfile.Down("QUACK")) _toexplode = Rando.Float(0f, 0.5f);
+            if (Activator != null && Activator.inputProfile.Down("QUACK")) _toexplode = Rando.Float(0f, 0.5f);
 
             if (grounded) angle = 0f;
-            else if ((duck == null || duck.holdObject != this) && _wasThrown && _stickThing == null)
+            else if ((duck == null || duck.holdObject != this) && WasThrown && StickThing == null)
             {
                 angle += 0.3f * offDir;
             }
@@ -170,8 +170,8 @@ namespace TMGmod.Stuff
 
         public override void OnPressAction()
         {
-            _activated = true;
-            _activator = duck;
+            Activated = true;
+            Activator = duck;
         }
     }
 }

@@ -8,10 +8,10 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ScarGL : Gun
     {
-        private int _mode;
-        public StateBinding ModeBinding = new StateBinding(nameof(_mode));
-        private readonly int[] _ammom = {20, 1};
-        public StateBinding AmmomBinding = new StateBinding(nameof(_ammom));
+        public int Mode;
+        public StateBinding ModeBinding = new StateBinding(nameof(Mode));
+        public readonly int[] Ammom = {20, 1};
+        public StateBinding AmmomBinding = new StateBinding(nameof(Ammom));
         private readonly AmmoType[] _ammoTypem =
         {
             new ATMagnum
@@ -68,27 +68,27 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "SCAR-H With GL";
 			weight = 6f;
-            graphic = _graphicm[_switched ? _mode : 2];
+            graphic = _graphicm[_switched ? Mode : 2];
         }
 
         private void UpdateMode()
         {
-            graphic = _graphicm[_switched ? _mode : 2];
-            _ammoType = _ammoTypem[_mode];
-            _barrelOffsetTL = _barrelOffsetTLm[_mode];
-            _fireSound = _fireSoundm[_mode];
-            loseAccuracy = _loseAccuracym[_mode];
-            maxAccuracyLost = _maxAccuracyLostm[_mode];
+            graphic = _graphicm[_switched ? Mode : 2];
+            _ammoType = _ammoTypem[Mode];
+            _barrelOffsetTL = _barrelOffsetTLm[Mode];
+            _fireSound = _fireSoundm[Mode];
+            loseAccuracy = _loseAccuracym[Mode];
+            maxAccuracyLost = _maxAccuracyLostm[Mode];
         }
 
         public override void Update()
         {
-            if (infiniteAmmoVal) _ammom[0] = 99;
+            if (infiniteAmmoVal) Ammom[0] = 99;
             if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    _mode = 1 - _mode;
+                    Mode = 1 - Mode;
                     _switched = true;
                 }
             }
@@ -97,10 +97,10 @@ namespace TMGmod
         }
         public override void Fire()
         {
-            ammo = _ammom[_mode];
+            ammo = Ammom[Mode];
             base.Fire();
-            _ammom[_mode] = ammo;
-            ammo = _ammom[0] + _ammom[1];
+            Ammom[Mode] = ammo;
+            ammo = Ammom[0] + Ammom[1];
         }
     }
 }

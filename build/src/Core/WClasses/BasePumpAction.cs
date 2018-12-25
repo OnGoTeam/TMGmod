@@ -5,7 +5,7 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BasePumpAction:BaseGun, IAmSg
     {
-        protected int LoadProgress;
+        public int LoadProgress;
         public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
         private float _loadAnimation = 1f;
         protected sbyte EpsilonA = 50;

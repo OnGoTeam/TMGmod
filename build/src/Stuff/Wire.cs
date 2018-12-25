@@ -10,16 +10,16 @@ namespace TMGmod.Stuff
     {
 
         private readonly SpriteMap _sprite;
-        private readonly int _teksturka;
-        public StateBinding TexBinding = new StateBinding(nameof(_teksturka));
-        private float _hp;
-        public StateBinding HpBinding = new StateBinding(nameof(_hp));
+        public readonly int Teksturka;
+        public StateBinding TexBinding = new StateBinding(nameof(Teksturka));
+        public float Hp;
+        public StateBinding HpBinding = new StateBinding(nameof(Hp));
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
-            _hp = 25f;
+            Hp = 25f;
             _sprite = new SpriteMap(GetPath("WireYes"), 48, 6);
             graphic = _sprite;
-            _teksturka = Rando.Int(0, 3);
+            Teksturka = Rando.Int(0, 3);
             center = new Vec2(24f, 3f);
             collisionOffset = new Vec2(-24f, -3f);
             collisionSize = new Vec2(48f, 6f);
@@ -29,7 +29,7 @@ namespace TMGmod.Stuff
         }
         public override void Update()
         {
-            if (_hp <= 0f) _hp = 0f;
+            if (Hp <= 0f) Hp = 0f;
             else
             {
                 var probablyduck =
@@ -38,12 +38,12 @@ namespace TMGmod.Stuff
                 {
                     if (!(realyduck is Thing r1)) continue;
                     //else
-                    r1.hSpeed *= 1f / (_hp / 26f + 1f);
-                    r1.vSpeed *= 1f / (_hp / 10f + 1f);
+                    r1.hSpeed *= 1f / (Hp / 26f + 1f);
+                    r1.vSpeed *= 1f / (Hp / 10f + 1f);
                 }
 
                 var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-16f, -3f), position + new Vec2(16f, 3f));
-                if (wirelist.Any(wire => wire != this && wire.sleeping && wire._hp >= 1f && wire.position.y > position.y))
+                if (wirelist.Any(wire => wire != this && wire.sleeping && wire.Hp >= 1f && wire.position.y > position.y))
                 {
                     sleeping = true;
                     vSpeed = 0f;
@@ -64,8 +64,8 @@ namespace TMGmod.Stuff
         private void Damage(AmmoType at)
         {
             if (at.penetration < 1.1f) return;
-            _hp -= at.penetration;
-            if (!(_hp < 1f)) return;
+            Hp -= at.penetration;
+            if (!(Hp < 1f)) return;
             //else
             thickness = 0.1f;
             graphic = new Sprite(GetPath("WireNot"));
@@ -73,7 +73,7 @@ namespace TMGmod.Stuff
         }
         public override void Draw()
         {
-            _sprite.frame = _teksturka;
+            _sprite.frame = Teksturka;
             base.Draw();
         }
     }

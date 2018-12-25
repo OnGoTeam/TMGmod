@@ -12,8 +12,8 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 10;
-        private bool _silencer;
-        public StateBinding SilencerBinding = new StateBinding(nameof(_silencer));
+        public bool Silencer;
+        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public CZ805 (float xval, float yval)
           : base(xval, yval)
@@ -49,7 +49,7 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (_silencer)
+                    if (Silencer)
                     {
                         FrameId -= 50;
                         _fireSound = "deepMachineGun2";
@@ -61,7 +61,7 @@ namespace TMGmod
                         loseAccuracy = 0.025f;
                         maxAccuracyLost = 0.32f;
                         _barrelOffsetTL = new Vec2(39f, 4f);
-                        _silencer = !_silencer;
+                        Silencer = !Silencer;
                         _flare = new SpriteMap("smallFlare", 11, 10);
                     }
                     else
@@ -76,7 +76,7 @@ namespace TMGmod
                         loseAccuracy = 0.02f;
                         maxAccuracyLost = 0.3f;
                         _barrelOffsetTL = new Vec2(42.5f, 4f);
-                        _silencer = !_silencer;
+                        Silencer = !Silencer;
                         _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     }
                 }
@@ -89,7 +89,7 @@ namespace TMGmod
         }
         public int FrameId
         {
-            private get => _sprite.frame;
+            get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
