@@ -35,7 +35,8 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(19f, 4f);
 			weight = 7f;
         }
-          public override void Update()
+
+        public override void Update()
         {
             if (_owner != null && _owner.height < 17f)
             {
