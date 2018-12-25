@@ -30,7 +30,8 @@ namespace TMGmod.Cases
                 typeof(UziPro),
                 typeof(PPSh),
                 typeof(MG44),
-                typeof(SkeetGun)
+                typeof(SkeetGun),
+                typeof(MP5)
             };
             CaseId = 6;
         }

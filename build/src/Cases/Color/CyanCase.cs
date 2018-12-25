@@ -29,7 +29,8 @@ namespace TMGmod.Cases.Color
                 typeof(SIX12S),
                 typeof(DaewooK1),
                 typeof(CZ805),
-                typeof(MP5)
+                typeof(MP5),
+                typeof(HK417)
             };
             CaseId = 3;
         }

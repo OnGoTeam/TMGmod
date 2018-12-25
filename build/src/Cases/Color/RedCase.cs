@@ -31,7 +31,9 @@ namespace TMGmod.Cases.Color
                 typeof(DaewooK1),
                 typeof(AugC),
                 typeof(SkeetGun),
-                typeof(PPSh)
+                typeof(PPSh),
+                typeof(HK417),
+                typeof(Vintorez)
             };
             CaseId = 1;
         }
