@@ -11,7 +11,8 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private float _stock;
-		
+        private bool _changed;
+
         public AKALFA (float xval, float yval)
           : base(xval, yval)
 		{
@@ -49,32 +50,41 @@ namespace TMGmod
 		}
         public override void Update()
         {
-            if (owner != null)
+            if (duck != null)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (duck.inputProfile.Down("QUACK"))
                 {
-					if (_stock > 0f)
-					{
-					    _sprite.SetAnimation("base");
-                        _ammoType.accuracy = 1f;
-                        loseAccuracy = 0f;
-		                _stock = 0f;
-						weight = 5.5f;
-					}
-                    else
-					{
-					    _sprite.SetAnimation("stock");
-                        _ammoType.accuracy = 0.92f;
-                        loseAccuracy = 0.045f;
-		                _stock = 1f;
-						weight = 3f;
-					}
-				}
+                    if (_changed)
+                    {
+                        if (_stock > 0f)
+                        {
+                            _sprite.SetAnimation("base");
+                            _ammoType.accuracy = 1f;
+                            loseAccuracy = 0f;
+                            _stock = 0f;
+                            weight = 5.5f;
+                        }
+                        else
+                        {
+                            _sprite.SetAnimation("stock");
+                            _ammoType.accuracy = 0.92f;
+                            loseAccuracy = 0.045f;
+                            _stock = 1f;
+                            weight = 3f;
+                        }
+
+                        _changed = true;
+                    }
+                }
+                else
+                {
+                    _changed = false;
+                }
 			}
 		    base.Update();
 		}
 
-        public float Kforce1Ar { get; set; }
-        public float Kforce2Ar { get; set; }
+        public float Kforce1Ar { get; }
+        public float Kforce2Ar { get; }
     }
 }
