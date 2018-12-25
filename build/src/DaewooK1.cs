@@ -13,7 +13,7 @@ namespace TMGmod
         public bool Stock;
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
         private const int NonSkinFrames = 2;
-
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public DaewooK1 (float xval, float yval)
           : base(xval, yval)
         {
@@ -77,7 +77,5 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public StateBinding FrameIdBinding => new StateBinding(nameof(FrameId));
     }
 }

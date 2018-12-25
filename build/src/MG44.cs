@@ -20,7 +20,7 @@ namespace TMGmod
         private const float AcclA = .045f;
         private const float AcclB = .225f;
         private float _raisestat;
-
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public MG44(float xval, float yval)
           : base(xval, yval)
         {
@@ -108,7 +108,5 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public StateBinding FrameIdBinding => new StateBinding(nameof(FrameId));
     }
 }

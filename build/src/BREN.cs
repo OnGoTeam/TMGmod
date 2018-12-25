@@ -14,7 +14,7 @@ namespace TMGmod
         private const int NonSkinFrames = 10;
         public bool Silencer;
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public CZ805 (float xval, float yval)
           : base(xval, yval)
 		{
@@ -92,7 +92,5 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public StateBinding FrameIdBinding => new StateBinding(nameof(FrameId));
     }
 }

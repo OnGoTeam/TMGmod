@@ -1,10 +1,7 @@
-﻿using DuckGame;
-
-namespace TMGmod.Core
+﻿namespace TMGmod.Core
 {
     public interface IHaveSkin
     {
         int FrameId { set; }
-        StateBinding FrameIdBinding { get; }
     }
 }
