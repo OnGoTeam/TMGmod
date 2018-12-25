@@ -48,27 +48,22 @@ namespace TMGmod
                     if (_stockngrip)
                     {
                         graphic = new Sprite(GetPath("VixrStock"));
-                        handAngle = Rando.Float(-0.3f, 0.3f);
+                        loseAccuracy = 0.099f;
+                        maxAccuracyLost = 0.17f;
                         _stockngrip = false;
                         weight = 3.9f;
                     }
                     else
                     {
                         graphic = new Sprite(GetPath("VixrNoStock"));
-                        handAngle = Rando.Float(Rando.Float(-0.45f, -0.44f), 0.45f);
                         loseAccuracy = 0.13f;
+                        maxAccuracyLost = 0.4f;
                         _stockngrip = true;
                         weight = 2f;
                     }
                 }
-                if (ammo == 0) handAngle = 0f;
 			}
 		    base.Update();
-        }
-        public override void OnReleaseAction()
-        {
-            handAngle = 0f;
-            base.OnReleaseAction();
         }
     }
 }
