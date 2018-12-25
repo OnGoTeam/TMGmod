@@ -13,6 +13,7 @@ namespace TMGmod
         private int _burstNumB;
         private readonly int _burstValue;
         private float _bw = 5.1f;
+        private bool _changed;
 
         private bool _stock;
         // ReSharper disable once MemberCanBePrivate.Global
@@ -65,25 +66,34 @@ namespace TMGmod
 			
             if (duck != null)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (duck.inputProfile.Down("QUACK"))
                 {
-					if (_stock)
-					{
-                        loseAccuracy = 0.15f;
-						weight = 5.5f;
-					    _sprite.SetAnimation("base");
-                        maxAccuracyLost = 0.1f;
-						_stock = false;
-					}
-                    else
-					{
-                        loseAccuracy = 0.2f;
-				        weight = 2.75f;
-					    _sprite.SetAnimation("stock");
-                        maxAccuracyLost = 0.3f;
-						_stock = true;
-					}
-				}
+                    if (!_changed)
+                    {
+                        if (_stock)
+                        {
+                            loseAccuracy = 0.15f;
+                            weight = 5.5f;
+                            _sprite.SetAnimation("base");
+                            maxAccuracyLost = 0.1f;
+                            _stock = false;
+                        }
+                        else
+                        {
+                            loseAccuracy = 0.2f;
+                            weight = 2.75f;
+                            _sprite.SetAnimation("stock");
+                            maxAccuracyLost = 0.3f;
+                            _stock = true;
+                        }
+
+                        _changed = true;
+                    }
+                }
+                else
+                {
+                    _changed = false;
+                }
 			}
             base.Update();
         }

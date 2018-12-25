@@ -51,7 +51,7 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Down("QUACK"))
                 {
-                    if (_changed)
+                    if (!_changed)
                     {
                         if (_stock)
                         {
