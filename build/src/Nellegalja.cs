@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
-    public class Nellegalja : Gun
+    public class Nellegalja : Gun, IAmDmr
     {
         public StateBinding LaserSightBinding = new StateBinding(nameof(laserSight));
 

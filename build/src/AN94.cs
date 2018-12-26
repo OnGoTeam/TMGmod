@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,13 +7,9 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class AN94 : Gun
+    public class AN94 : BaseBurst
     {
         private readonly SpriteMap _sprite;
-
-        private int _burstNumB;
-        private readonly int _burstValue;
-        private float _bw = 5.1f;
 
         public bool Stock;
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
@@ -32,38 +29,22 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMagnum {range = 310f, bulletSpeed = 180f};
             _fireSound = "deepMachineGun2";
-            _fullAuto = true;
+            _fullAuto = false;
             _fireWait = 0.1f;
             _kickForce = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
             _editorName = "AN94";
-            _burstValue = 2;
 			weight = 5.5f;
             _laserOffsetTL = new Vec2(30f, 2.5f);
             _sprite.AddAnimation("base", 0f, false, 0);
             _sprite.AddAnimation("stock", 0f, false, 1);
+            DeltaWait = 0.07f;
+            BurstNum = 2;
         }
-
-        public override void Fire()
-        {
-           // base.Fire();
-        }
+        
         public override void Update()
         {
-            //object obj;
-
-            if (_burstNumB > 0 && _bw > 0.1f)
-            {
-                base.Fire();
-                _burstNumB = _burstNumB -1;
-                _bw = 0;
-            }
-            else
-            {
-                _bw = _bw + 0.1f;
-            }
-			
             if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
@@ -88,12 +69,7 @@ namespace TMGmod
 			}
             base.Update();
         }
-        public override void OnPressAction()
-        {
-            if (!(_bw > 1f)) return;
-            _bw = 0.2f;
-            _burstNumB = _burstValue;
-        }
+
         public override void Initialize()
         {
 			if (!(Level.current is Editor))

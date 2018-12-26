@@ -1,17 +1,19 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Sniper|Custom")]
-    public class VintorezC : Gun
+    public class VintorezC : BaseGun, IAmSr, IAmAr
     {
   
         private readonly SpriteMap _sprite;
-        private readonly int _teksturka;
-		
+        public int Teksturka;
+        public StateBinding TeksturkaBinding = new StateBinding(nameof(Teksturka));
+
         public VintorezC(float xval, float yval)
           : base(xval, yval)
         {
@@ -27,8 +29,8 @@ namespace TMGmod.Custom_Guns
 			//I AM A GREEN TEXT
             _sprite = new SpriteMap(GetPath("Vintorezexmagptr"), 33, 12);
             graphic = _sprite;
-            _teksturka = Rando.Int(0, 3);
-            _sprite.frame = _teksturka;
+            Teksturka = Rando.Int(0, 3);
+            _sprite.frame = Teksturka;
             center = new Vec2(16.5f, 6f);
             collisionOffset = new Vec2(-16.5f, -6f);
             collisionSize = new Vec2(33f, 12f);
@@ -42,11 +44,22 @@ namespace TMGmod.Custom_Guns
             maxAccuracyLost = 0.15f;
             _editorName = "Vintorez with Extended Mag";
 			weight = 4.7f;
-		}
+            MinAccuracy = 0f;
+            BaseAccuracy = 0.9f;
+            Kforce1Ar = 0.4f;
+            Kforce2Ar = 0.85f;
+            MuAccuracySr = 1f;
+            LambdaAccuracySr = 0.5f;
+        }
         public override void Draw()
         {
-            _sprite.frame = _teksturka;
+            _sprite.frame = Teksturka;
             base.Draw();
         }
+
+        public float Kforce1Ar { get; }
+        public float Kforce2Ar { get; }
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
     }
 }

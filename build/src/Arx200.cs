@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
-    public class Arx200 : Gun, IHaveSkin
+    public class Arx200 : Gun, IHaveSkin, IAmDmr
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;

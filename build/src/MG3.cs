@@ -36,27 +36,27 @@ namespace TMGmod
             _editorName = "MG3";
 			weight = 7f;
         }
-          public override void Update()
+        public override void Update()
         {
             if (_owner != null && _owner.height < 17f)
             {
                 _kickForce = 0f;
-				loseAccuracy = 0f;
+			    loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
-				graphic = new Sprite(GetPath("mg3bipods"));
-				_bipodes = true;
+			    graphic = new Sprite(GetPath("mg3bipods"));
+			    _bipodes = true;
             }
             else
             {
                 _kickForce = 0.95f;
                 loseAccuracy = 0.025f;
                 maxAccuracyLost = 0.1f;
-				graphic = new Sprite(GetPath("mg3"));
-				_bipodes = false;
+			    graphic = new Sprite(GetPath("mg3"));
+			    _bipodes = false;
             }
             base.Update();
-			if (ammo == 0 && !_bipodes) graphic = new Sprite(GetPath("mg31"));
-			if (ammo == 0 && _bipodes) graphic = new Sprite(GetPath("mg3bipods1"));
+		    if (ammo == 0 && !_bipodes) graphic = new Sprite(GetPath("mg31"));
+		    if (ammo == 0 && _bipodes) graphic = new Sprite(GetPath("mg3bipods1"));
         }
 	}
 }	

@@ -1,14 +1,14 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class Aug : Gun
+    public class Aug : DefaultAr
     {
         private readonly SpriteMap _sprite;
-
         public bool Grip;
         public StateBinding GripBinding = new StateBinding(nameof(Grip));
 

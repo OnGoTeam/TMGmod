@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class AKALFA : BaseGun, IAmAr
+    public class AKALFA : DefaultAr
     {
         private readonly SpriteMap _sprite;
         public bool Stock;
@@ -38,7 +38,7 @@ namespace TMGmod
             _fireWait = 0.75f;
             _kickForce = 0.65f;
 		    Kforce1Ar = 0.05f;
-		    Kforce2Ar = 0.65f;
+		    Kforce2Ar = 0.75f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";
@@ -74,8 +74,5 @@ namespace TMGmod
 			}
 		    base.Update();
 		}
-
-        public float Kforce1Ar { get; }
-        public float Kforce2Ar { get; }
     }
 }

@@ -10,8 +10,9 @@ namespace TMGmod.Custom_Guns
     {
   
         private readonly SpriteMap _sprite;
-        private readonly int _teksturka;
-		
+        public int Teksturka;
+        public StateBinding TeksturkaBinding = new StateBinding(nameof(Teksturka));
+
         public TR21C (float xval, float yval)
             : base(xval, yval)
         {
@@ -27,8 +28,8 @@ namespace TMGmod.Custom_Guns
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21lmg2p"), 22, 14);
             graphic = _sprite;
-            _teksturka = Rando.Int(0, 3);
-            _sprite.frame = _teksturka;
+            Teksturka = Rando.Int(0, 3);
+            _sprite.frame = Teksturka;
             center = new Vec2(11f, 6f);
             collisionOffset = new Vec2(-11f, -6f);
             collisionSize = new Vec2(22f, 14f);
@@ -45,7 +46,7 @@ namespace TMGmod.Custom_Guns
         }
         public override void Draw()
         {
-            _sprite.frame = _teksturka;
+            _sprite.frame = Teksturka;
             base.Draw();
         }
     }

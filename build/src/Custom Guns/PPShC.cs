@@ -11,7 +11,8 @@ namespace TMGmod.Custom_Guns
     {
   
         private readonly SpriteMap _sprite;
-        private readonly int _teksturka;
+        public int Teksturka;
+        public StateBinding TeksturkaBinding = new StateBinding(nameof(Teksturka));
 
         public PPShC(float xval, float yval)
             : base(xval, yval)
@@ -25,8 +26,8 @@ namespace TMGmod.Custom_Guns
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PPshlowmagptr"), 48, 11);
             graphic = _sprite;
-            _teksturka = Rando.Int(0, 5);
-            _sprite.frame = _teksturka;
+            Teksturka = Rando.Int(0, 5);
+            _sprite.frame = Teksturka;
             center = new Vec2(23f, 5.5f);
             collisionOffset = new Vec2(-23f, -4.5f);
             collisionSize = new Vec2(46f, 11f);
@@ -43,7 +44,7 @@ namespace TMGmod.Custom_Guns
         }
         public override void Draw()
         {
-            _sprite.frame = _teksturka;
+            _sprite.frame = Teksturka;
             base.Draw();
         }
     }

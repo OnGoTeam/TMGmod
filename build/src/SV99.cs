@@ -49,18 +49,15 @@ namespace TMGmod
 				}
 				if (_loadState == 0)
 				{
-					if (Network.isActive)
-					{
-						if (isServerForObject)
-						{
-							_netLoad.Play();
-						}
-					}
-					else
-					{
-						SFX.Play("loadSniper");
-					}
-					_loadState++;
+				    if (!Network.isActive)
+				    {
+				        SFX.Play("loadSniper");
+				    }
+				    else if (isServerForObject)
+				    {
+				        _netLoad.Play();
+				    }
+                    _loadState++;
 				}
 				else if (_loadState == 1)
 				{

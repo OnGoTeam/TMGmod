@@ -8,8 +8,9 @@ namespace TMGmod.Custom_Guns
     [EditorGroup("TMG|Machinegun|Custom")]
     public class Bren : Gun
     {
-        private bool _silencer;
-		
+        public bool Silencer;
+        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+
         public Bren (float xval, float yval)
           : base(xval, yval)
 		{
@@ -38,11 +39,11 @@ namespace TMGmod.Custom_Guns
         }
         public override void Update()
         {
-            if (owner != null)
+            if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-					if (_silencer)
+					if (Silencer)
 					{
 				        graphic = new Sprite(GetPath("CZ805BrenZ"));
                         _fireSound = "deepMachineGun2";
@@ -54,7 +55,7 @@ namespace TMGmod.Custom_Guns
                         loseAccuracy = 0.025f;
                         maxAccuracyLost = 0.2f;
                         _barrelOffsetTL = new Vec2(39f, 4f);
-			            _silencer = false;
+			            Silencer = false;
 					}
                     else
 					{
@@ -68,7 +69,7 @@ namespace TMGmod.Custom_Guns
                         loseAccuracy = 0.02f;
                         maxAccuracyLost = 0.18f;
                         _barrelOffsetTL = new Vec2(42.5f, 4f);
-			            _silencer = true;
+			            Silencer = true;
 					}
 				}
 			}

@@ -35,8 +35,8 @@ namespace TMGmod.Core.WClasses
 
             switch (this)
             {
-                case IAmSr _:
-                    ammoType.accuracy = duck != null ? Math.Min(Math.Max(MinAccuracy, BaseAccuracy + 1f - Math.Abs(duck.hSpeed) / 2 - Math.Abs(duck.vSpeed / 2)), BaseAccuracy): BaseAccuracy;
+                case IAmSr thisSr:
+                    ammoType.accuracy = duck != null ? Math.Min(Math.Max(MinAccuracy, BaseAccuracy + thisSr.MuAccuracySr - (Math.Abs(duck.hSpeed) + Math.Abs(duck.vSpeed) * thisSr.LambdaAccuracySr)), BaseAccuracy): BaseAccuracy;
                     break;
                 case IFirstPrecise thisFirstPrecise:
                     ammoType.accuracy = thisFirstPrecise.CurrDelay <= 0f ? thisFirstPrecise.MaxAccuracy : BaseAccuracy;

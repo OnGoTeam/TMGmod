@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
-    public class Deadly44 : Gun
+    public class Deadly44 : BaseGun, IAmSg
     {
 		public Deadly44 (float xval, float yval)
           : base(xval, yval)

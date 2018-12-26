@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class M16LMG : Gun
+    public class M16LMG : DefaultLmg
     {
 		
 		public M16LMG (float xval, float yval)
@@ -34,6 +35,10 @@ namespace TMGmod
             _holdOffset = new Vec2(5f, 1f);
             _editorName = "M16-LMG";
 			weight = 5.75f;
+            BaseAccuracy = 0.8f;
+            MinAccuracy = 0.7f;
+            Kforce1Lmg = 0.23f;
+            Kforce2Lmg = 0.43f;
         }
           public override void Update()
         {

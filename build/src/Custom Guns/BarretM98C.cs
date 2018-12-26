@@ -7,7 +7,6 @@ namespace TMGmod.Custom_Guns
     [EditorGroup("TMG|Sniper|Custom")]
     public class BarretM98C : Sniper
     {
-		
         public BarretM98C(float xval, float yval) : base(xval, yval)
         {
             graphic = new Sprite(GetPath("BarretM98short"));
@@ -25,8 +24,6 @@ namespace TMGmod.Custom_Guns
             _holdOffset = new Vec2(-4f, 2f);
             _editorName = "Barrett M98C";
 			weight = 6.5f;
-			
-
         }
 
         public override void Draw()

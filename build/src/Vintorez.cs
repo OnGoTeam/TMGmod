@@ -46,6 +46,8 @@ namespace TMGmod
             BaseAccuracy = 0.9f;
             Kforce1Ar = 0.4f;
             Kforce2Ar = 0.85f;
+            MuAccuracySr = 1f;
+            LambdaAccuracySr = 0.5f;
         }
         public int FrameId
         {
@@ -55,5 +57,7 @@ namespace TMGmod
 
         public float Kforce1Ar { get; }
         public float Kforce2Ar { get; }
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
     }
 }

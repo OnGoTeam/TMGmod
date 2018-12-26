@@ -83,8 +83,7 @@ namespace TMGmod
                     {
                         _netLoad.Play();
                     }
-                    Sniper sniper = this;
-                    sniper._loadState = sniper._loadState + 1;
+                    _loadState++;
                 }
                 else if (_loadState == 1)
                 {
@@ -103,8 +102,7 @@ namespace TMGmod
                     handOffset.x = handOffset.x - 0.2f;
                     if (handOffset.x > 4f)
                     {
-                        Sniper sniper2 = this;
-                        sniper2._loadState = sniper2._loadState + 1;
+                        _loadState++;
                         Reload();
                         loaded = false;
                     }

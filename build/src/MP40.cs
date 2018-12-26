@@ -8,7 +8,7 @@ namespace TMGmod
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MP40 : BaseGun, IAmSmg, IFirstPrecise
+    public class MP40 : DefaultSmg, IFirstPrecise
     {
         public MP40(float xval, float yval)
             : base(xval, yval)
@@ -41,12 +41,9 @@ namespace TMGmod
             MaxDelaySmg = 50;
         }
 
-
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
+        
         public int CurrDelay { get; set; }
         public int MaxDelayFp { get; }
-        public int MaxDelaySmg { get; set; }
         public float MaxAccuracy { get; }
     }
 }
