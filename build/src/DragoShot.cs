@@ -1,5 +1,4 @@
 ﻿using DuckGame;
-using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -9,10 +8,12 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun")]
     public class DragoShot : BaseBurst
     {
-        public float Counter = 0f;
-        public float Step = 0.01f;
-        public float TimeToHappend = 1f;
-        public bool LoockerOfSound = false;
+        public float Counter;
+        public StateBinding CounterBinding = new StateBinding(nameof(Counter));
+        private const float Step = 0.01f;
+        private const float TimeToHappend = 1f;
+        public bool LoockerOfSound;
+        public StateBinding LoockerOfSoundBinding = new StateBinding(nameof(LoockerOfSound));
         public DragoShot (float xval, float yval)
           : base(xval, yval)
         {
@@ -42,10 +43,6 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 3f);
             _editorName = "DragoShot";
 			weight = 5f;
-            KforceDSmg = 2f;
-            MaxAccuracy = 0.9f;
-            MaxDelayFp = 10;
-            MaxDelaySmg = 50;
             DeltaWait = 0.15f;
             BurstNum = 1;
         }
@@ -55,7 +52,7 @@ namespace TMGmod
         }
         public override void OnHoldAction()
         {
-            if ((ammo != 0) && (Counter <= TimeToHappend)) Counter += Step;
+            if (ammo != 0 && Counter <= TimeToHappend) Counter += Step;
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
@@ -69,7 +66,7 @@ namespace TMGmod
         {
             if (Counter >= TimeToHappend)
             {
-                if (!(LoockerOfSound)) SFX.Play("woodHit");
+                if (!LoockerOfSound) SFX.Play("woodHit");
                 LoockerOfSound = true;
                 _ammoType.range = 170f;
                 _ammoType.accuracy = 0.9f;
@@ -87,11 +84,5 @@ namespace TMGmod
             }
             base.Update();
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
-        public int CurrDelay { get; set; }
-        public int MaxDelayFp { get; }
-        public int MaxDelaySmg { get; set; }
-        public float MaxAccuracy { get; }
     }
 }

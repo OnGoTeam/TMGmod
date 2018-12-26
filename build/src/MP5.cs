@@ -42,8 +42,6 @@ namespace TMGmod
             _editorName = "MP5";
 			weight = 3f;
             KforceDSmg = 2f;
-            MaxAccuracy = 0.9f;
-            MaxDelayFp = 10;
             MaxDelaySmg = 50;
             DeltaWait = 0.65f;
             BurstNum = 3;
@@ -74,10 +72,7 @@ namespace TMGmod
         }
         public float KforceDSmg { get; }
         public int CurrDelaySmg { get; set; }
-        public int CurrDelay { get; set; }
-        public int MaxDelayFp { get; }
         public int MaxDelaySmg { get; set; }
-        public float MaxAccuracy { get; }
         public int FrameId
         {
             get => _sprite.frame;
