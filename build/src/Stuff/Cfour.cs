@@ -15,7 +15,7 @@ namespace TMGmod.Stuff
         public bool Activated;
         public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
         public Duck Activator;
-        public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
+        //public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
         public MaterialThing StickThing;
         public StateBinding StickBinding = new StateBinding(nameof(StickThing));
         private Vec2 _stickyVec2;
