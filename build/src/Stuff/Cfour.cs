@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
-using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -39,7 +38,6 @@ namespace TMGmod.Stuff
         private void Explode()
         {
             Activator?.Fondle(this);
-            ExploCreator.CreateExplosion(position);
             Graphics.FlashScreen();
             if (isServerForObject && !Weak)
             {
@@ -68,9 +66,7 @@ namespace TMGmod.Stuff
                     Send.Message(new NMExplodingProp(varBullets), NetMessagePriority.ReliableOrdered);
                     varBullets.Clear();
                 }
-
-                AddFire();
-
+                
                 foreach (var window in Level.CheckCircleAll<Window>(position, 40f))
                     if (Level.CheckLine<Block>(position, window.position, window) == null)
                         window.Destroy(new DTImpact(this));
@@ -85,11 +81,10 @@ namespace TMGmod.Stuff
                     //force.x *= 1.1f;
                     thing.ApplyForce(force);
                 }
-                
                 AddFire();
             }
 
-            Destroy();
+            _destroyed = true;
             Level.Remove(this);
         }
 
