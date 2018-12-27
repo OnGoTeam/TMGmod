@@ -9,7 +9,6 @@ namespace TMGmod.Custom_Guns
     // ReSharper disable once InconsistentNaming
     public class PPShC : Gun
     {
-  
         private readonly SpriteMap _sprite;
         public int Teksturka;
         public StateBinding TeksturkaBinding = new StateBinding(nameof(Teksturka));

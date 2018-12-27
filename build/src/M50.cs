@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class M50 : Gun
+    public class M50 : BaseGun, ISpeedAccuracy
     {
         public M50 (float xval, float yval)
           : base(xval, yval)
@@ -36,6 +37,11 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(31f, 10f);
             _editorName = "M50 with Explosive Ammo";
 			weight = 6.75f;
+            MuAccuracySr = 1f;
+            LambdaAccuracySr = 0.5f;
         }
+
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
     }
 }

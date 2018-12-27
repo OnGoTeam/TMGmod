@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
-    public class M4A1C : DefaultAr
+    public class M4A1C : BaseAr
     {
 		
 		public M4A1C (float xval, float yval)

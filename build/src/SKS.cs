@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -7,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
     // ReSharper disable once InconsistentNaming
-    public class SKS : Gun
+    public class SKS : BaseGun, ISpeedAccuracy
     {
         private int _patrons = 16;
         private int _bullets;
@@ -42,6 +43,8 @@ namespace TMGmod
             maxAccuracyLost = 0.8f;
             _editorName = "SKS";
 			weight = 6f;
+            MuAccuracySr = 1f;
+            LambdaAccuracySr = 0.5f;
         }
         public override void Update()
         {
@@ -145,6 +148,9 @@ namespace TMGmod
 				ammo = 0;
 			}
             base.Thrown();
-        }		
-	}
+        }
+
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
+    }
 }

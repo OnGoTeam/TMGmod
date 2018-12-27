@@ -8,7 +8,7 @@ namespace TMGmod
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MP40 : DefaultSmg, IFirstPrecise
+    public class MP40 : BaseSmg, IFirstPrecise
     {
         public MP40(float xval, float yval)
             : base(xval, yval)

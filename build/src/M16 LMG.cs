@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class M16LMG : DefaultLmg
+    public class M16LMG : BaseLmg
     {
 		
 		public M16LMG (float xval, float yval)

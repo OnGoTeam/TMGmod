@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
-    public class Bren : Gun
+    public class Bren : Gun, IAmDmr
     {
         public bool Silencer;
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));

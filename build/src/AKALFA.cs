@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class AKALFA : DefaultAr
+    public class AKALFA : BaseAr
     {
         private readonly SpriteMap _sprite;
         public bool Stock;

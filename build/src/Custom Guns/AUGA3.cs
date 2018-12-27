@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
-    public class AugC : Gun, IHaveSkin
+    public class AugC : BaseAr, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
@@ -40,6 +41,7 @@ namespace TMGmod.Custom_Guns
             maxAccuracyLost = 0.1f;
             _editorName = "AUG A3";
 			weight = 5.5f;
+            Kforce2Ar = 0.7f;
         }
         public int FrameId
         {

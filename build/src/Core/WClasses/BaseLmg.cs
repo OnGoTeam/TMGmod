@@ -1,8 +1,8 @@
 ﻿namespace TMGmod.Core.WClasses
 {
-    public abstract class DefaultLmg:BaseGun,IRandKforce
+    public abstract class BaseLmg:BaseGun,IRandKforce
     {
-        protected DefaultLmg(float xval, float yval) : base(xval, yval)
+        protected BaseLmg(float xval, float yval) : base(xval, yval)
         {
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.7f;

@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -7,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class CZ805 : Gun, IHaveSkin
+    public class CZ805 : BaseAr, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
@@ -42,6 +43,7 @@ namespace TMGmod
             maxAccuracyLost = 0.32f;
             _editorName = "CZ-805 BREN";
 			weight = 5f;
+		    Kforce2Ar = 0.7f;
         }
         public override void Update()
         {

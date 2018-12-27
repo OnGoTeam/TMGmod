@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MAP : DefaultSmg
+    public class MAP : BaseSmg
     {
         public MAP(float xval, float yval)
           : base(xval, yval)

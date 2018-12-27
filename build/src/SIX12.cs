@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12 : Gun
+    public class SIX12 : Gun, IAmSg
     {
         // ReSharper disable once MemberCanBePrivate.Global
         public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);

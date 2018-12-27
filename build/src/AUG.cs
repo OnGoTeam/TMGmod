@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class Aug : DefaultAr
+    public class Aug : BaseAr
     {
         private readonly SpriteMap _sprite;
         public bool Grip;
@@ -40,6 +40,7 @@ namespace TMGmod
 			weight = 5.5f;
             _sprite.AddAnimation("base", 0f, false, 0);
             _sprite.AddAnimation("grip", 0f, false, 1);
+            Kforce2Ar = 0.7f;
         }
         public override void Update()
         {

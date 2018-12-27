@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -7,7 +8,7 @@ namespace TMGmod
     [EditorGroup("TMG|Machinegun")]
     [BaggedProperty("canSpawn", false)]
     // ReSharper disable once InconsistentNaming
-    public class AKwAR : Gun
+    public class AKwAR : BaseAr
     {
         private int _aammo;
         private readonly int _ammo;
@@ -43,6 +44,7 @@ namespace TMGmod
             _editorName = "AK with Ammo Reload";
 			weight = 5f;
             _bio = "Deprecated, bugs with sprite";
+            Kforce2Ar = 1.0f;
         }
 
 

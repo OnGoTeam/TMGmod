@@ -7,7 +7,7 @@ namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|LMG|Custom")]
     // ReSharper disable once InconsistentNaming
-    public class MG44C : DefaultLmg
+    public class MG44C : BaseLmg
     {
 		public MG44C (float xval, float yval)
           : base(xval, yval)

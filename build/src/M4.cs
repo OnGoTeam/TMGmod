@@ -1,12 +1,13 @@
 ﻿using System;
 using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class M4A1 : Gun
+    public class M4A1 : BaseAr
     {
         private int _ammobefore = 31;
         private int _counter;
@@ -32,12 +33,13 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.745f;
-            _kickForce = 0f;
+            _kickForce = 0.5f;
             loseAccuracy = 0.01f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(3f, 1f);
             _editorName = "M4A1";
 			weight = 4.5f;
+            Kforce2Ar = 0.5f;
         }
         public override void OnPressAction()
         {

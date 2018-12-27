@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class Rfb : Gun
+    public class Rfb : BaseAr
     {
 		
         public Rfb (float xval, float yval)
@@ -33,6 +34,7 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "RFB";
 			weight = 6f;
+		    Kforce2Ar = 0.7f;
         }
         public override void Update()
         {
