@@ -22,6 +22,7 @@ namespace TMGmod.Stuff
             thickness = 10f;
             weight = 8f;
             throwSpeedMultiplier = 0f;
+            _canRaise = false;
         }
 
         public override bool DoHit(Bullet bullet, Vec2 hitPos)

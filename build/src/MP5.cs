@@ -9,7 +9,7 @@ namespace TMGmod
 
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MP5 : BaseBurst, IAmSmg, IHaveSkin
+    public class MP5 : BaseBurst, IFirstKforce, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         public bool Rate;

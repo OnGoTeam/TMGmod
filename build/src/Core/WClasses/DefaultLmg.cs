@@ -1,6 +1,6 @@
 ﻿namespace TMGmod.Core.WClasses
 {
-    public abstract class DefaultLmg:BaseGun,IAmLmg
+    public abstract class DefaultLmg:BaseGun,IRandKforce
     {
         protected DefaultLmg(float xval, float yval) : base(xval, yval)
         {

@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MAP : Gun
+    public class MAP : DefaultSmg
     {
         public MAP(float xval, float yval)
           : base(xval, yval)
@@ -34,7 +35,5 @@ namespace TMGmod
             _editorName = "Michael";
 			weight = 2.5f;
         }
-
-
     }
 }

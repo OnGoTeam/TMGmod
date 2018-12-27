@@ -36,5 +36,14 @@ namespace TMGmod
             _editorName = "DeadlyGauge";
 			weight = 4f;
         }
+
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                --ammo;
+            }
+            loaded = true;
+        }
     }
 }

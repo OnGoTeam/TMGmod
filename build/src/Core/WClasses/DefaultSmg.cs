@@ -2,7 +2,7 @@
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class DefaultSmg:BaseGun,IAmSmg
+    public abstract class DefaultSmg:BaseGun,IFirstKforce
     {
         public StateBinding DelaySmgBinding = new StateBinding(nameof(CurrDelaySmg));
         protected DefaultSmg(float xval, float yval) : base(xval, yval)

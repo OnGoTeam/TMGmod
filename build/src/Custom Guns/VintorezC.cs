@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Sniper|Custom")]
-    public class VintorezC : BaseGun, IAmSr, IAmAr
+    public class VintorezC : BaseGun, ISpeedAccuracy, IHspeedKforce
     {
   
         private readonly SpriteMap _sprite;

@@ -62,5 +62,19 @@ namespace TMGmod
             base.Update();
         }
 
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(x, y, -offDir);
+                    _ammoType.PopShell(x, y, -offDir);
+                }
+
+                --ammo;
+            }
+            loaded = true;
+        }
     }
 }

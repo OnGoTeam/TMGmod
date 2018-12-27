@@ -9,6 +9,7 @@ namespace TMGmod.Core.WClasses
         protected float MinAccuracy;
         protected float PrevKforce;
         protected bool ToPrevKforce;
+        protected Vec2 ShellOffset;
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
             ToPrevKforce = true;
@@ -19,14 +20,14 @@ namespace TMGmod.Core.WClasses
             PrevKforce = _kickForce;
             switch (this)
             {
-                case IAmAr thisAr:
+                case IHspeedKforce thisAr:
                     if (duck != null)
                         _kickForce = Math.Abs(duck.hSpeed) < 0.1f ? thisAr.Kforce1Ar : thisAr.Kforce2Ar;
                     break;
-                case IAmLmg thisLmg:
+                case IRandKforce thisLmg:
                     _kickForce = Rando.Float(thisLmg.Kforce1Lmg, thisLmg.Kforce2Lmg);
                     break;
-                case IAmSmg thisSmg:
+                case IFirstKforce thisSmg:
                     if (thisSmg.CurrDelaySmg <= 0)
                         _kickForce += thisSmg.KforceDSmg;
                     thisSmg.CurrDelaySmg = thisSmg.MaxDelaySmg;
@@ -35,7 +36,7 @@ namespace TMGmod.Core.WClasses
 
             switch (this)
             {
-                case IAmSr thisSr:
+                case ISpeedAccuracy thisSr:
                     ammoType.accuracy = duck != null ? Math.Min(Math.Max(MinAccuracy, BaseAccuracy + thisSr.MuAccuracySr - (Math.Abs(duck.hSpeed) + Math.Abs(duck.vSpeed) * thisSr.LambdaAccuracySr)), BaseAccuracy): BaseAccuracy;
                     break;
                 case IFirstPrecise thisFirstPrecise:
@@ -53,7 +54,7 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case IAmSmg thisSmg:
+                case IFirstKforce thisSmg:
                     thisSmg.CurrDelaySmg -= 1;
                     if (thisSmg.CurrDelaySmg < 0)
                         thisSmg.CurrDelaySmg = 0;
@@ -67,6 +68,19 @@ namespace TMGmod.Core.WClasses
                     break;
             }
             base.Update();
+        }
+
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(x + ShellOffset.x, y + ShellOffset.y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
     }
 }

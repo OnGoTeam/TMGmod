@@ -20,7 +20,8 @@ namespace TMGmod
                 range = 175f,
                 accuracy = 0.81f,
                 penetration = 1f,
-                bulletSpeed = 12f
+                bulletSpeed = 12f,
+
             };
             _type = "gun";
             graphic = new Sprite(GetPath("VAG731"));
@@ -65,6 +66,15 @@ namespace TMGmod
 				}
 			}
 		    base.Update();
-		}			
-	}
+		}
+
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                --ammo;
+            }
+            loaded = true;
+        }
+    }
 }

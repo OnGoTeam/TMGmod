@@ -1,6 +1,6 @@
 ﻿namespace TMGmod.Core.WClasses
 {
-    public interface IAmSmg
+    public interface IFirstKforce
     {
         float KforceDSmg { get; }
         int CurrDelaySmg { get; set; }

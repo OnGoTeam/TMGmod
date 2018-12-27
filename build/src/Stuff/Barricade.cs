@@ -8,7 +8,7 @@ using TMGmod.Core.Particles;
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
-    public class BarricadeBeta:Block
+    public class Barricade:Block
     {
         private bool _anchored;
         public float Hp;
@@ -16,7 +16,7 @@ namespace TMGmod.Stuff
         public float ImpactSpeed;
         public StateBinding ImpactSpeedBinding = new StateBinding(nameof(ImpactSpeed));
         private float _duckcooldown;
-        public BarricadeBeta(float x, float y) : base(x, y)
+        public Barricade(float x, float y) : base(x, y)
         {
             _anchored = true;
             Hp = 10f;
@@ -27,6 +27,7 @@ namespace TMGmod.Stuff
             collisionSize = new Vec2(2f, 4f);
             graphic = new Sprite(GetPath("barr"));
             flammable = 0.6f;
+            _isStateObject = true;
             //if (!(owner is Duck duck)) return;
             //duck.clip.Add(this);
             //clip.Add(duck);
@@ -38,7 +39,7 @@ namespace TMGmod.Stuff
             _anchored = false;
             foreach (var block in blocks)
             {
-                if (block is BarricadeBeta && !(block as BarricadeBeta)._anchored) continue;
+                if (block is Barricade && !(block as Barricade)._anchored) continue;
                 //else
                 _anchored = true;
                 
@@ -57,7 +58,7 @@ namespace TMGmod.Stuff
 
         private void Damage(float dValue)
         {
-            var barricades = Level.CheckCircleAll<BarricadeBeta>(position, 10f);
+            var barricades = Level.CheckCircleAll<Barricade>(position, 10f);
             foreach (var barricade in barricades)
             {
                 if (barricade != this && barricade.Hp >= 1f)
@@ -100,7 +101,7 @@ namespace TMGmod.Stuff
                     vSpeed = Rando.Float(-1.5f, 1.5f)
                 };
                 Level.Add(bbp);
-                _destroyed = true;
+                Destroy();
                 Level.Remove(this);
             }
             base.Update();

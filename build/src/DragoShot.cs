@@ -59,7 +59,7 @@ namespace TMGmod
         {
             Counter = 0f;
             base.OnReleaseAction();
-            if (owner != null) Fire();
+            if (duck != null) Fire();
             LoockerOfSound = false;
         }
         public override void Update()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
 
@@ -42,20 +43,33 @@ namespace TMGmod.Stuff
             Graphics.FlashScreen();
             if (isServerForObject && !Weak)
             {
-                var grenade = new Grenade(x, y);
-                Fondle(grenade);
+                for (var index = 0; index < 1; ++index)
+                {
+                    var explosionPart = new ExplosionPart(x - 8f + Rando.Float(16f), y - 8f + Rando.Float(16f));
+                    explosionPart.xscale *= 0.7f;
+                    explosionPart.yscale *= 0.7f;
+                    Level.Add(explosionPart);
+                }
+                SFX.Play("explode");
+                var varBullets = new List<Bullet>();
                 for (var index = 0; index < 150; ++index)
                 {
-                    var num2 = (float) (index * 18.0 - 5.0) + Rando.Float(10f);
-                    var atShrapnel = new ATShrapnel {range = 30f + Rando.Float(0f, Rando.Float(70f))};
-                    var bullet = new Bullet(x + (float) (Math.Cos(Maths.DegToRad(num2)) * 6.0),
-                        y - (float) (Math.Sin(Maths.DegToRad(num2)) * 6.0), atShrapnel, num2)
-                    {
-                        firedFrom = this
-                    };
-                    grenade.firedBullets.Add(bullet);
+                    var num = (float)(index * 30.0 - 10.0) + Rando.Float(20f);
+                    var atShrapnel = new ATShrapnel { range = 30f + Rando.Float(0f, Rando.Float(70f)) };
+                    var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(num)) * 8.0),
+                            y - (float)(Math.Sin(Maths.DegToRad(num)) * 8.0), atShrapnel, num)
+                        { firedFrom = this };
+                    varBullets.Add(bullet);
                     Level.Add(bullet);
                 }
+
+                if (Network.isActive)
+                {
+                    Send.Message(new NMExplodingProp(varBullets), NetMessagePriority.ReliableOrdered);
+                    varBullets.Clear();
+                }
+
+                AddFire();
 
                 foreach (var window in Level.CheckCircleAll<Window>(position, 40f))
                     if (Level.CheckLine<Block>(position, window.position, window) == null)
@@ -71,19 +85,12 @@ namespace TMGmod.Stuff
                     //force.x *= 1.1f;
                     thing.ApplyForce(force);
                 }
-                grenade.bulletFireIndex += 120;
-                if (Network.isActive)
-                {
-                    Send.Message(new NMFireGun(grenade, grenade.firedBullets, grenade.bulletFireIndex, false),
-                        NetMessagePriority.ReliableOrdered);
-                    grenade.firedBullets.Clear();
-                }
                 
                 AddFire();
             }
 
+            Destroy();
             Level.Remove(this);
-            _destroyed = true;
         }
 
         public override void UpdateOnFire()
@@ -140,16 +147,21 @@ namespace TMGmod.Stuff
             }
 
             ToExplode -= 0.1f;
-            if (duck != null && duck.holdObject == this && StickThing != null)
+            if (duck != null && duck.holdObject == this)
             {
                 StickThing = null;
-                Activated = false;
+                if (duck != Activator)
+                {
+                    Activated = false;
+                }
             }
 
             if (StickThing != null)
             {
                 sleeping = true;
                 position = StickThing.position + _stickyVec2;
+                hSpeed = StickThing.hSpeed;
+                vSpeed = StickThing.vSpeed;
             }
             else
             {
@@ -171,6 +183,8 @@ namespace TMGmod.Stuff
 
         public override void OnPressAction()
         {
+            if (duck == null) return;
+            //else
             Activated = true;
             Activator = duck;
         }

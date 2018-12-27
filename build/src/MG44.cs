@@ -11,6 +11,7 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
+        /*
         private const float DefaultAccuracy = .75f;
         private const float MaxRaise = .6f;
         private const float EpsilonD = .2f;
@@ -19,7 +20,7 @@ namespace TMGmod
         private const float EpsilonY = EpsilonK / EpsilonX;
         private const float AcclA = .045f;
         private const float AcclB = .225f;
-        private float _raisestat;
+        private float _raisestat;*/
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public MG44(float xval, float yval)
           : base(xval, yval)
