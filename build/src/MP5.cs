@@ -55,16 +55,16 @@ namespace TMGmod
                     if (Rate)
                     {
                         Rate = false;
-                        BurstNum = 1;
-                        _fireWait = 0.3f;
-                        _sprite.frame -= 10;
+                        BurstNum = 3;
+                        _fireWait = 1.3f;
+                        _sprite.frame += 10;
                     }
                     else
                     {
                         Rate = true;
-                        BurstNum = 3;
-                        _fireWait = 1.3f;
-                        _sprite.frame += 10;
+                        BurstNum = 1;
+                        _fireWait = 0.3f;
+                        _sprite.frame -= 10;
                     }
                 }
             }
