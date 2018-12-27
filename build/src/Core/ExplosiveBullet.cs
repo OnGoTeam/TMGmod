@@ -2,9 +2,9 @@
 
 namespace TMGmod.Core
 {
-    public class Explode : Bullet
+    public class ExplosiveBullet : Bullet
     {
-        public Explode(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)
+        public ExplosiveBullet(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)
             : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
         {
             _tracer = false;
@@ -27,7 +27,7 @@ namespace TMGmod.Core
 
         protected override void Rebound(Vec2 pos, float dir, float rng)
         {
-            var bullet = new Explode(pos.x, pos.y, ammo, dir, null, rebound, rng)
+            var bullet = new ExplosiveBullet(pos.x, pos.y, ammo, dir, null, rebound, rng)
             {
                 _teleporter = _teleporter,
                 firedFrom = firedFrom
