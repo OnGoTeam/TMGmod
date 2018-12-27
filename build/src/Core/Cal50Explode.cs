@@ -12,7 +12,7 @@ namespace TMGmod.Core
             penetration = 0f;
             combustable = true;
             bulletSpeed = 55f;
-            bulletType = typeof(Explode);
+            bulletType = typeof(ExplosiveBullet);
         }
     }
 }
