@@ -61,7 +61,7 @@ namespace TMGmod
                     if (_sprite.frame < 20) _sprite.frame += 10;
                     break;
             }
-
+            /*
             if (_raisestat > MaxRaise) _raisestat = MaxRaise;
             if (_raisestat > 0f)
             {
@@ -90,8 +90,10 @@ namespace TMGmod
                 _raisestat = 0f;
                 handAngle = 0f;
             }
+            */
         }
 
+        /*
         public override void Fire()
         {
             var wasammo = ammo > 0;
@@ -102,7 +104,7 @@ namespace TMGmod
             var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
             _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
         }
-
+        */
         public int FrameId
         {
             get => _sprite.frame;
