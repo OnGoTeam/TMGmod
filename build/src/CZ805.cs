@@ -51,37 +51,39 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    Silencer = !Silencer;
+                    if (Silencer)
+                    {
+                        FrameId -= 50;
+                        _fireSound = "deepMachineGun2";
+                        _ammoType = new AT9mm
+                        {
+                            range = 400f,
+                            accuracy = 0.87f
+                        };
+                        loseAccuracy = 0.025f;
+                        maxAccuracyLost = 0.32f;
+                        _barrelOffsetTL = new Vec2(39f, 4f);
+                        Silencer = !Silencer;
+                        _flare = new SpriteMap("smallFlare", 11, 10);
+                    }
+                    else
+                    {
+                        FrameId += 50;
+                        _fireSound = GetPath("sounds/Silenced2.wav");
+                        _ammoType = new AT9mmS
+                        {
+                            range = 470f,
+                            accuracy = 0.95f
+                        };
+                        loseAccuracy = 0.02f;
+                        maxAccuracyLost = 0.3f;
+                        _barrelOffsetTL = new Vec2(42.5f, 4f);
+                        Silencer = !Silencer;
+                        _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    }
                 }
             }
-            if (Silencer)
-            {
-                FrameId -= 50;
-                _fireSound = "deepMachineGun2";
-                _ammoType = new AT9mm
-                {
-                    range = 400f,
-                    accuracy = 0.87f
-                };
-                loseAccuracy = 0.025f;
-                maxAccuracyLost = 0.32f;
-                _barrelOffsetTL = new Vec2(39f, 4f);
-                _flare = new SpriteMap("smallFlare", 11, 10);
-            }
-            else
-            {
-                FrameId += 50;
-                _fireSound = GetPath("sounds/Silenced2.wav");
-                _ammoType = new AT9mmS
-                {
-                    range = 470f,
-                    accuracy = 0.95f
-                };
-                loseAccuracy = 0.02f;
-                maxAccuracyLost = 0.3f;
-                _barrelOffsetTL = new Vec2(42.5f, 4f);
-                _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            }
+
             if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
             if (ammo > 12 && ammo <= 20 && FrameId / 10 % 5 != 2) _sprite.frame += 10;
             if (ammo > 5 && ammo <= 12 && FrameId / 10 % 5 != 3) _sprite.frame += 10;
