@@ -27,6 +27,7 @@ namespace TMGmod.NY
             _fireSound = "woodHit";
             _fullAuto = false;
             _fireWait = 1.2f;
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _kickForce = 0f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
