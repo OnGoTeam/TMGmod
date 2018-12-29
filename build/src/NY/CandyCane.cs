@@ -1,7 +1,6 @@
 ﻿using DuckGame;
-using TMGmod.Core.AmmoTypes;
 
-namespace TMGmod
+namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc")]
     public class CandyCane:Gun
@@ -19,14 +18,14 @@ namespace TMGmod
             _collisionOffset = new Vec2(-9f, -3.5f);
             _collisionSize = new Vec2(18f, 7f);
             _barrelOffsetTL = new Vec2(18f, 3.5f);
-            _fireSound = "pistolFire";
+            _fireSound = "woodHit";
             _fullAuto = false;
             _fireWait = 1.2f;
             _kickForce = 0f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
             _holdOffset = new Vec2(-1f, 1f);
-            _editorName = "woodHit";
+            _editorName = "CandyCane";
             _weight = 2.5f;
         }
 

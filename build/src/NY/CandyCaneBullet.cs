@@ -1,6 +1,6 @@
 ﻿using DuckGame;
 
-namespace TMGmod.Core.Bullets
+namespace TMGmod.NY
 {
     public class CandyCaneBullet:Bullet
     {

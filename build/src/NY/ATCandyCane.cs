@@ -1,7 +1,6 @@
 ﻿using DuckGame;
-using TMGmod.Core.Bullets;
 
-namespace TMGmod.Core.AmmoTypes
+namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
     public class ATCandyCane : AmmoType
