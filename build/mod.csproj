@@ -39,9 +39,8 @@
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AUG.cs" />
     <Compile Include="src\BarretM98.cs" />
-    <Compile Include="src\CandyCane.cs" />
-    <Compile Include="src\Core\AmmoTypes\ATCandyCane.cs" />
-    <Compile Include="src\Core\Bullets\CandyCaneBullet.cs" />
+    <Compile Include="src\NY\CandyCane.cs" />
+    <Compile Include="src\NY\CandyCaneBullet.cs" />
     <Compile Include="src\CZ805.cs" />
     <Compile Include="src\Caliber50.cs" />
     <Compile Include="src\Cases\ExampleCase.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="src\KSG12.cs" />
     <Compile Include="src\MP5.cs" />
     <Compile Include="src\MP5SD.cs" />
+    <Compile Include="src\NY\SpruceGun.cs" />
     <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Stuff\C4Pack.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
@@ -159,7 +159,10 @@
   <ItemGroup>
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\Core\AmmoTypes\" />
+    <Folder Include="src\Core\Bullets\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
