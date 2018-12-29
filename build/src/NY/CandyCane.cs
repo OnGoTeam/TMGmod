@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
 namespace TMGmod.NY
 {
@@ -8,8 +9,13 @@ namespace TMGmod.NY
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
             ammo = 1;
-            _ammoType = new ATCandyCane
+            _ammoType = new AT9mmS
             {
+                bulletType = typeof(CandyCaneBullet),
+                bulletSpeed = 15f,
+                range = 500f,
+                accuracy = 0.95f,
+                bulletLength = 3f,
                 sprite = new Sprite(GetPath("Holiday/candycane"))
             };
             _type = "gun";
