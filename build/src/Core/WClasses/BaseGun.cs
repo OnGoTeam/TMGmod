@@ -1,5 +1,6 @@
 ﻿using System;
 using DuckGame;
+using TMGmod.Cases;
 
 namespace TMGmod.Core.WClasses
 {
@@ -45,7 +46,16 @@ namespace TMGmod.Core.WClasses
                     break;
             }
 
+            var pammo = ammo;
             base.Fire();
+            if (pammo > ammo)
+            {
+                if (Rando.Float(0f, 1f) < 0.033f)
+                {
+                    var scase = new ExampleCase(x, y);
+                    Level.Add(scase);
+                }
+            }
             if (ToPrevKforce)
                 _kickForce = PrevKforce;
         }
