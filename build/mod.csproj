@@ -71,6 +71,8 @@
     <Compile Include="src\KSG12.cs" />
     <Compile Include="src\MP5.cs" />
     <Compile Include="src\MP5SD.cs" />
+    <Compile Include="src\NY\SnowBullet.cs" />
+    <Compile Include="src\NY\SnowMgun.cs" />
     <Compile Include="src\NY\SpruceGun.cs" />
     <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Stuff\C4Pack.cs" />
