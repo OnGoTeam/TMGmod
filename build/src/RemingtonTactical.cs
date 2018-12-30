@@ -38,7 +38,7 @@ namespace TMGmod
             {
                 center = new Vec2(3f, 4f)
             };
-            LoaderVec2 = new Vec2(2f, 1f);
+            LoaderVec2 = new Vec2(8f, 0f);
             EpsilonA = 50;
             EpsilonB = 100;
             Loaddx = 2f;
