@@ -7,6 +7,9 @@ namespace TMGmod.NY
     {
         
         private float _sprwait;
+        public int FrameId;
+        public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
+
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 24;
@@ -38,9 +41,11 @@ namespace TMGmod.NY
                 {
                     randres = Rando.Int(0, 29);
                 }
-                ((AT9mmParasha)ammoType).SpriteY.frame = randres;
+                FrameId = randres;
                 _sprwait += 1.0f;
             }
+
+            ((AT9mmParasha) ammoType).SpriteY.frame = FrameId;
             base.Update();
         }
     }

@@ -19,6 +19,7 @@ namespace TMGmod.NY
     public class AT9mmParasha : AmmoType
     {
         public readonly SpriteMap SpriteY;
+        
 
         public AT9mmParasha()
         {
