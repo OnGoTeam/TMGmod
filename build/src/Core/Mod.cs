@@ -59,7 +59,7 @@ namespace DuckGame.TMGmod
         // ReSharper disable once InconsistentNaming
 		private void CreateTMGLevelPlaylist()
 		{
-            var levelsLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG Maps v2.0\\");
+            var levelsLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG Maps v2.1\\");
             if (!Directory.Exists(levelsLocation))
                 Directory.CreateDirectory(levelsLocation);
             IList<string> levelList = new List<string>();

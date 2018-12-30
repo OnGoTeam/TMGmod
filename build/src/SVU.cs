@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     // ReSharper disable once InconsistentNaming
-    public class SVU : Gun, IAmDmr
+    public class SVU : BaseGun, IAmDmr
     {
         public SVU (float xval, float yval)
           : base(xval, yval)
