@@ -18,6 +18,7 @@ namespace TMGmod.NY
                 bulletLength = 3f,
                 sprite = new Sprite(GetPath("Holiday/candycane"))
             };
+            _ammoType.sprite.CenterOrigin();
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/candycane"));
             _center = new Vec2(9f, 3.5f);

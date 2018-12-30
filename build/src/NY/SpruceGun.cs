@@ -18,12 +18,13 @@ namespace TMGmod.NY
                 bulletLength = 0f,
                 bulletThickness = 0.25f
             };
+            _ammoType.sprite.CenterOrigin();
             _numBulletsPerFire = Rando.Int(5, 100);
             _type = "gun";
-            graphic = new Sprite(GetPath("Holiday/ShorTree"));
-            center = new Vec2(25.5f, 7.5f);
-            collisionOffset = new Vec2(-25.5f, -7.5f);
-            collisionSize = new Vec2(51f, 15f);
+            _graphic = new Sprite(GetPath("Holiday/ShorTree"));
+            _center = new Vec2(25.5f, 7.5f);
+            _collisionOffset = new Vec2(-25.5f, -7.5f);
+            _collisionSize = new Vec2(51f, 15f);
             _barrelOffsetTL = new Vec2(36f, 7f);
             _holdOffset = new Vec2(3f, -2f);
             _fireSound = "shotgunFire2";

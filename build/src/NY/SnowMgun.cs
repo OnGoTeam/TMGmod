@@ -19,16 +19,17 @@ namespace TMGmod.NY
                 accuracy = 0.95f,
                 bulletLength = 3f,
                 sprite = new Sprite(GetPath("Holiday/snow")),
-                affectedByGravity = true
+                affectedByGravity = true,
+                barrelAngleDegrees = -13.5f
             };
+            _ammoType.sprite.CenterOrigin();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Holiday/SnowMachineGun"), 17, 9);
-            this._ammoType.barrelAngleDegrees = -13.5f;
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(9.5f, 4.5f);
-            collisionOffset = new Vec2(-9.5f, -4.5f);
-            collisionSize = new Vec2(19f, 9f);
+            _center = new Vec2(9.5f, 4.5f);
+            _collisionOffset = new Vec2(-9.5f, -4.5f);
+            _collisionSize = new Vec2(19f, 9f);
             _barrelOffsetTL = new Vec2(17f, 4.5f);
             _holdOffset = new Vec2(-2f, 1f);
             _fireSound = "deepMachineGun2";
