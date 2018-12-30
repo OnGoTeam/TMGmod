@@ -1,7 +1,11 @@
-﻿namespace TMGmod.NY
+﻿using TMGmod.Core;
+
+namespace TMGmod.NY
 {
-    public class NewYearCase
+    public class NewYearCase:BaseCase
     {
-        
+        public NewYearCase(float xval, float yval) : base(xval, yval)
+        {
+        }
     }
 }
