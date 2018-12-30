@@ -3,7 +3,7 @@ using TMGmod.Core;
 
 namespace TMGmod.NY
 {
-    [EditorGroup("TMG|Misc")]
+    [EditorGroup("TMG|Misc|Holiday")]
     public class CandyCane:Gun
     {
         public CandyCane(float xval, float yval) : base(xval, yval)
@@ -34,6 +34,7 @@ namespace TMGmod.NY
             _holdOffset = new Vec2(-1f, 1f);
             _editorName = "CandyCane";
             _weight = 2.5f;
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
         }
 
         public override void Reload(bool shell = true)

@@ -8,6 +8,7 @@ using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
+    [BaggedProperty("canSpawn", false)]
     public class ExampleCase:BaseCase
     {
         public ExampleCase(float xval, float yval) : base(xval, yval)

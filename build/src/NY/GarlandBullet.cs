@@ -1,41 +1,27 @@
 ﻿using DuckGame;
-//using TMGmod.Core;
+using TMGmod.NY;
 
 namespace TMGmod.NY
 {
-    public class GarlandBullet:Bullet//, IHaveSkin
+    public class GarlandBullet:Bullet
     {
-        //internal int[] PrevFrameId;
-        //private SpriteMap _sprite;
-
         public GarlandBullet(float xval, float yval, AmmoType type, float ang = -1, Thing owner = null, bool rbound = false, float distance = -1, bool tracer = false, bool network = true) : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
         {
-            /*PrevFrameId = new[]
-            {
-                Rando.Int(0, 11),
-                Rando.Int(0, 11),
-                Rando.Int(0, 11),
-                Rando.Int(0, 11)
-            };
-            _sprite = new SpriteMap("Holiday/Garland", 16, 9);
-            _graphic = _sprite;
-            FrameId = Rando.Int(0, 11);*/
             _tracer = false;
+            _bulletLength = 0f;
         }
-        /*
-        public override void Draw()
-        {
-            foreach (var fid in PrevFrameId)
-            {
-                _sprite.
-            }
-            base.Draw();
-        }
+    }
+}
 
-        public int FrameId
+namespace TMGmod.Core
+{
+    // ReSharper disable once InconsistentNaming
+    public class AT9mmParasha : AmmoType
+    {
+        public AT9mmParasha()
         {
-            get => _sprite._frame;
-            set => _sprite._frame = value % 12;
-        }*/
+            bulletType = typeof(GarlandBullet);
+            combustable = true;
+        }
     }
 }
