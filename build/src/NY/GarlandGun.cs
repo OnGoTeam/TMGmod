@@ -15,7 +15,7 @@ namespace TMGmod.NY
             {
                 range = 1000f,
                 accuracy = 1f,
-                bulletSpeed = 4f,
+                bulletSpeed = 3f,
                 penetration = 0f,
                 speedVariation = 0f
             };
@@ -28,7 +28,7 @@ namespace TMGmod.NY
             _holdOffset = new Vec2(2f, -1f);
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
-            _fireWait = 0.7f;
+            _fireWait = 0.65f;
             _kickForce = 0f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
