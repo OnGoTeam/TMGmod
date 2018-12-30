@@ -1,17 +1,16 @@
 ﻿using DuckGame;
-using TMGmod.Core;
 
 namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc|Holiday")]
     public class GarlandGun : Gun
     {
-        private SpriteMap _sprite;
+        private readonly SpriteMap _sprite;
         private float _sprwait;
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 24;
-            _ammoType = new AT9mmParasha //работай, тварь
+            _ammoType = new AT9mmParasha(_sprite) //работай, тварь
             {
                 range = 1000f,
                 accuracy = 1f,
@@ -49,7 +48,6 @@ namespace TMGmod.NY
                     randres = Rando.Int(0, 29);
                 }
                 _sprite.frame = randres;
-                _ammoType.sprite = _sprite;
                 _sprwait += 1.0f;
             }
             base.Update();
