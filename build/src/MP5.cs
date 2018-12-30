@@ -12,8 +12,8 @@ namespace TMGmod
     public class MP5 : BaseBurst, IFirstKforce, IHaveSkin
     {
         private readonly SpriteMap _sprite;
-        public bool Rate;
-        public StateBinding RateBinding = new StateBinding(nameof(Rate));
+        public bool NonAuto = true;
+        public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public MP5(float xval, float yval)
@@ -29,14 +29,14 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5pattern"), 27, 12);
             graphic = _sprite;
-            _sprite.frame = 10;
+            _sprite.frame = 0;
             center = new Vec2(13.5f, 6f);
             collisionOffset = new Vec2(-13.5f, -6f);
             collisionSize = new Vec2(27f, 12f);
             _barrelOffsetTL = new Vec2(27f, 3f);
             _fireSound = "deepMachineGun";
             _fullAuto = false;
-            _fireWait = 1.3f;
+            _fireWait = 0.3f;
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
             _editorName = "MP5";
@@ -44,7 +44,7 @@ namespace TMGmod
             KforceDSmg = 2f;
             MaxDelaySmg = 50;
             DeltaWait = 0.65f;
-            BurstNum = 3;
+            BurstNum = 1;
         }
         public override void Update()
         {
@@ -52,16 +52,16 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-                    if (Rate)
+                    if (NonAuto)
                     {
-                        Rate = false;
+                        NonAuto = false;
                         BurstNum = 3;
                         _fireWait = 1.3f;
                         _sprite.frame += 10;
                     }
                     else
                     {
-                        Rate = true;
+                        NonAuto = true;
                         BurstNum = 1;
                         _fireWait = 0.3f;
                         _sprite.frame -= 10;

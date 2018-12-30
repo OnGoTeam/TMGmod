@@ -56,7 +56,7 @@ namespace TMGmod
             switch (ammo)
             {
                 case 1:
-                    _sprite.frame += 10;
+                    if (_sprite.frame < 10) _sprite.frame += 10;
                     break;
                 case 0:
                     if (_sprite.frame < 20) _sprite.frame += 10;

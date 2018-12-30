@@ -24,7 +24,7 @@ namespace TMGmod.Cases.Color
             thickness = 0.0f;
             weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Blue Container";
+            _editorName = "Red Container";
             Things = new List<Type>
             {
                 typeof(SIX12S),

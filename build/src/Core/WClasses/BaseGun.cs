@@ -1,6 +1,6 @@
 ﻿using System;
 using DuckGame;
-using TMGmod.Cases;
+using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
 {
@@ -50,9 +50,9 @@ namespace TMGmod.Core.WClasses
             base.Fire();
             if (pammo > ammo)
             {
-                if (Rando.Float(0f, 1f) < 0.033f)
+                if (Rando.Float(0f, 1f) < 0.05f)
                 {
-                    var scase = new ExampleCase(x, y);
+                    var scase = new NewYearCase(x, y);
                     Level.Add(scase);
                 }
             }

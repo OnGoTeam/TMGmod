@@ -73,6 +73,7 @@
     <Compile Include="src\MP5SD.cs" />
     <Compile Include="src\NY\GarlandBullet.cs" />
     <Compile Include="src\NY\GarlandGun.cs" />
+    <Compile Include="src\NY\NewYearCase.cs" />
     <Compile Include="src\NY\SnowBullet.cs" />
     <Compile Include="src\NY\SnowMgun.cs" />
     <Compile Include="src\NY\SpruceGun.cs" />
