@@ -5,9 +5,9 @@ namespace TMGmod.NY
     [EditorGroup("TMG|Misc|Holiday")]
     public class GarlandGun : Gun
     {
-        private readonly SpriteMap _sprite;
+        public SpriteMap Sprite;
         private float _sprwait;
-        public StateBinding AtBinding = new StateBinding(nameof(ammoType));
+        public StateBinding SpriteBinding = new StateBinding(nameof(Sprite));
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 24;
@@ -27,9 +27,9 @@ namespace TMGmod.NY
             _editorName = "Garlandun";
             _weight = 1f;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _sprite = new SpriteMap(GetPath("Holiday/Garland_2"), 16, 9);
-            _sprite.CenterOrigin();
-            _ammoType = new AT9mmParasha(_sprite)
+            Sprite = new SpriteMap(GetPath("Holiday/Garland_2"), 16, 9);
+            Sprite.CenterOrigin();
+            _ammoType = new AT9mmParasha(Sprite)
             {
                 range = 1000f,
                 accuracy = 1f,
@@ -44,12 +44,12 @@ namespace TMGmod.NY
             if (_sprwait <= 0f)
             {
                 var randres = Rando.Int(0, 29);
-                while (randres == _sprite.frame)
+                while (randres == Sprite.frame)
                 {
                     randres = Rando.Int(0, 29);
                 }
-                _sprite.frame = randres;
-                _ammoType = new AT9mmParasha(_sprite)
+                Sprite.frame = randres;
+                _ammoType = new AT9mmParasha(Sprite)
                 {
                     range = 1000f,
                     accuracy = 1f,
