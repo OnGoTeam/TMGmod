@@ -11,14 +11,14 @@ namespace TMGmod.NY
         public NewYearCase(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("Holiday/HolydayCase"), 14, 8);
-            graphic = sprite;
+            _graphic = sprite;
             sprite.frame = 0;
-            center = new Vec2(7f, 4f);
-            collisionOffset = new Vec2(-7f, -4f);
-            collisionSize = new Vec2(14f, 8f);
+            _center = new Vec2(7f, 4f);
+            _collisionOffset = new Vec2(-7f, -4f);
+            _collisionSize = new Vec2(14f, 8f);
             depth = -0.5f;
             thickness = 0.0f;
-            weight = 3f;
+            _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Holiday Case";
             Things = new List<Type>

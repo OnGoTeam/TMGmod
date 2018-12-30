@@ -16,7 +16,8 @@ namespace TMGmod.NY
                 range = 1000f,
                 accuracy = 1f,
                 bulletSpeed = 4f,
-                penetration = 0f
+                penetration = 0f,
+                speedVariation = 0f
             };
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/Garlandun"));
