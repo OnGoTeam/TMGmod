@@ -31,6 +31,7 @@ namespace TMGmod.NY
             combustable = true;
             SpriteY = new SpriteMap(new Nothing().GetPath("Holiday/Garland_2"), 16, 9);
             SpriteY.CenterOrigin();
+            sprite = SpriteY;
         }
     }
 }
