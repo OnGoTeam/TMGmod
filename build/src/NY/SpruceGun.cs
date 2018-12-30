@@ -8,9 +8,8 @@ namespace TMGmod.NY
         public SpruceGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 15;
-            _ammoType = new AT9mm
+            _ammoType = new ATIglu
             {
-                sprite = new Sprite(GetPath("Holiday/Igolka")),
                 range = 385f,
                 accuracy = Rando.Float(0f, 0.9f),
                 penetration = 1f,
@@ -18,7 +17,6 @@ namespace TMGmod.NY
                 bulletLength = 0f,
                 bulletThickness = 0.25f
             };
-            _ammoType.sprite.CenterOrigin();
             _numBulletsPerFire = Rando.Int(5, 100);
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/ShorTree"));

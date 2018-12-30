@@ -9,16 +9,13 @@ namespace TMGmod.NY
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
             ammo = 1;
-            _ammoType = new AT9mmS
+            _ammoType = new ATCane
             {
-                bulletType = typeof(CandyCaneBullet),
                 bulletSpeed = 15f,
                 range = 500f,
                 accuracy = 0.95f,
-                bulletLength = 3f,
-                sprite = new Sprite(GetPath("Holiday/candycane"))
+                bulletLength = 3f
             };
-            _ammoType.sprite.CenterOrigin();
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/candycane"));
             _center = new Vec2(9f, 3.5f);

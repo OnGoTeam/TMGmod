@@ -1,5 +1,4 @@
 ﻿using DuckGame;
-using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
@@ -11,18 +10,15 @@ namespace TMGmod.NY
         public SnowMgun(float xval, float yval) : base(xval, yval)
         {
             ammo = 40;
-            _ammoType = new AT9mmS
+            _ammoType = new ATSneg
             {
-                bulletType = typeof(SnowBullet),
                 bulletSpeed = 5f,
                 range = 500f,
                 accuracy = 0.95f,
                 bulletLength = 3f,
-                sprite = new Sprite(GetPath("Holiday/snow")),
                 affectedByGravity = true,
                 barrelAngleDegrees = -13.5f
             };
-            _ammoType.sprite.CenterOrigin();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Holiday/SnowMachineGun"), 17, 9);
             _graphic = _sprite;
