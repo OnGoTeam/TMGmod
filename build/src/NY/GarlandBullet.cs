@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
 namespace TMGmod.NY
 {
@@ -17,11 +18,19 @@ namespace TMGmod.NY
     // ReSharper disable once InconsistentNaming
     public class AT9mmParasha : AmmoType
     {
-        public AT9mmParasha(Sprite spr)
+        public readonly SpriteMap SpriteY;
+
+        public AT9mmParasha()
         {
+            range = 1000f;
+            accuracy = 1f;
+            bulletSpeed = 3f;
+            penetration = 0f;
+            speedVariation = 0f;
             bulletType = typeof(GarlandBullet);
             combustable = true;
-            sprite = spr;
+            SpriteY = new SpriteMap(new Nothing().GetPath("Holiday/Garland_2"), 16, 9);
+            SpriteY.CenterOrigin();
         }
     }
 }

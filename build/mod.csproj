@@ -39,6 +39,7 @@
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AUG.cs" />
     <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\Core\Nothing.cs" />
     <Compile Include="src\NY\CandyCane.cs" />
     <Compile Include="src\NY\CandyCaneBullet.cs" />
     <Compile Include="src\CZ805.cs" />
