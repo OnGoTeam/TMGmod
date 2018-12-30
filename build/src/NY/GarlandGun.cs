@@ -7,17 +7,10 @@ namespace TMGmod.NY
     {
         private readonly SpriteMap _sprite;
         private float _sprwait;
+        public StateBinding AtBinding = new StateBinding(nameof(ammoType));
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 24;
-            _ammoType = new AT9mmParasha(_sprite) //работай, тварь
-            {
-                range = 1000f,
-                accuracy = 1f,
-                bulletSpeed = 3f,
-                penetration = 0f,
-                speedVariation = 0f
-            };
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/Garlandun"));
             _center = new Vec2(11f, 3f);
@@ -36,6 +29,14 @@ namespace TMGmod.NY
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _sprite = new SpriteMap(GetPath("Holiday/Garland_2"), 16, 9);
             _sprite.CenterOrigin();
+            _ammoType = new AT9mmParasha(_sprite)
+            {
+                range = 1000f,
+                accuracy = 1f,
+                bulletSpeed = 3f,
+                penetration = 0f,
+                speedVariation = 0f
+            };
         }
         public override void Update()
         {
@@ -48,6 +49,14 @@ namespace TMGmod.NY
                     randres = Rando.Int(0, 29);
                 }
                 _sprite.frame = randres;
+                _ammoType = new AT9mmParasha(_sprite)
+                {
+                    range = 1000f,
+                    accuracy = 1f,
+                    bulletSpeed = 3f,
+                    penetration = 0f,
+                    speedVariation = 0f
+                };
                 _sprwait += 1.0f;
             }
             base.Update();
