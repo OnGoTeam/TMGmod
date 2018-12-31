@@ -4,6 +4,7 @@
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [BaggedProperty("canSpawn", false)]
     public class C4Pack:Holdable
     {
         public C4Pack(float xpos, float ypos) : base(xpos, ypos)
