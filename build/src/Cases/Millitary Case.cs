@@ -1,39 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DuckGame;
+using TMGmod.Custom_Guns;
 
-namespace TMGmod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class mpodarok : Holdable, IPlatform
+    public class Mpodarok : Holdable, IPlatform
     {
-        private System.Type _contains;
+        private Type _contains;
 
-        public mpodarok (float xval, float yval)
+        public Mpodarok (float xval, float yval)
           : base(xval, yval)
         {
-            this.graphic = new Sprite(GetPath("MillitaryCase"));
-		    this.center = new Vec2(7f, 4f);
-            this.collisionOffset = new Vec2(-7f, -4f);
-            this.collisionSize = new Vec2(14f, 8f);
-            this.depth = -0.5f;
-            this.thickness = 0.0f;
-            this.weight = 3f;
-            this.collideSounds.Add("presentLand");
-            this._editorName = "Millitary Container";
+            graphic = new Sprite(GetPath("MillitaryCase"));
+		    center = new Vec2(7f, 4f);
+            collisionOffset = new Vec2(-7f, -4f);
+            collisionSize = new Vec2(14f, 8f);
+            depth = -0.5f;
+            thickness = 0.0f;
+            weight = 3f;
+            collideSounds.Add("presentLand");
+            _editorName = "Millitary Container";
         }
 
 
 		public override void Initialize()
 	{
-		List<Type> things = new List<Type>()
-	    {
+		var things = new List<Type>
+		{
         typeof(AN94),
         typeof(AN94C),
-        typeof(aug),
-        typeof(cz805),	
+        typeof(Aug),
+        typeof(CZ805),	
         typeof(DragoShot),	
         typeof(Glock18),
         typeof(Glock18C),	
@@ -43,49 +44,41 @@ namespace TMGmod.src
         typeof(MG44C),	
         typeof(MP40),	
         typeof(P90),	
-        typeof(ussrgun),	
-        typeof(scarpdw),	
+        typeof(FnFcar),	
+        typeof(DaewooK1),	
         typeof(SIX12),	
         typeof(SIX12C),	
-        typeof(Vag),	
+        typeof(Vag)	
 		};
-		this._contains = things[Rando.Int(things.Count - 1)];
+		_contains = things[Rando.Int(things.Count - 1)];
 	}
 
 	public override void OnPressAction()
 	{
-		
-		if (this.owner != null)
-		{
-			Thing o = this.owner;
-			Duck d = base.duck;
-			if (d != null)
-			{
-				d.profile.stats.presentsOpened++;
-				base.duck.ThrowItem(true);
-			}
-			Level.Remove(this);
-			{
-				this.Initialize();
-			}
-			Holdable newThing = Editor.CreateThing(this._contains) as Holdable;
-			if (newThing != null)
-			{
-				if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
-				{
-					(newThing as Gun).infiniteAmmoVal = true;
-					(newThing as Gun).infinite.value = true;
-				}
-				newThing.x = o.x;
-				newThing.y = o.y;
-				Level.Add(newThing);
-				if (d != null)
-				{
-					d.GiveHoldable(newThing);
-					d.resetAction = true;
-				}
-			}
-		}
+	    if (owner == null) return;
+	    var o = owner;
+	    var d = duck;
+	    if (d != null)
+	    {
+	        d.profile.stats.presentsOpened++;
+	        duck.ThrowItem();
+	    }
+	    Level.Remove(this);
+	    {
+	        Initialize();
+	    }
+	    if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
+	    if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
+	    {
+	        (newThing as Gun).infiniteAmmoVal = true;
+	        (newThing as Gun).infinite.value = true;
+	    }
+	    newThing.x = o.x;
+	    newThing.y = o.y;
+	    Level.Add(newThing);
+	    if (d == null) return;
+	    d.GiveHoldable(newThing);
+	    d.resetAction = true;
 	}
     }
 }

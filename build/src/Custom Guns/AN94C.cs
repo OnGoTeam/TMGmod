@@ -1,83 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using DuckGame;
+﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
+// ReSharper disable VirtualMemberCallInConstructor
 
-namespace TMGmod.src
+namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|Misc|Custom Guns")]
-    public class AN94C : Gun
+    [EditorGroup("TMG|Machinegun|Custom")]
+    // ReSharper disable once InconsistentNaming
+    public class AN94C : BaseBurst
     {
-
-        int _burstNumB = 0;
-        int _burstValue;
-        float _bw = 5.1f;
-		
-		bool stock = false;
-		public EditorProperty<bool> laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+        // ReSharper disable once MemberCanBePrivate.Global
+        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public AN94C(float xval, float yval)
             : base(xval, yval)
         {
-            this.graphic = new Sprite(GetPath("AN94notfol"));
-            this.center = new Vec2(16f, 5f);
-            this.collisionOffset = new Vec2(-15f, -6f);
-            this.collisionSize = new Vec2(33f, 9f);
-            this._barrelOffsetTL = new Vec2(34f, 3f);
-            this._holdOffset = new Vec2(2f, 2f);
-            this.ammo = 30;
-            this._ammoType = new ATMagnum();
-            this._fireSound = "deepMachineGun2";
-            this._fullAuto = true;
-            this._fireWait = 0.1f;
-            this._kickForce = 0.9f;
-            this.loseAccuracy = 0.15f;
-            this.maxAccuracyLost = 0.1f;
-            this._ammoType.range = 310f;
-            this._editorName = "AN94 Fixed Stock";
-            this._burstValue = 2;
-			this.weight = 5f;
-            this._laserOffsetTL = new Vec2(30f, 2.5f);
+            graphic = new Sprite(GetPath("AN94notfol"));
+            center = new Vec2(16f, 5f);
+            collisionOffset = new Vec2(-15f, -6f);
+            collisionSize = new Vec2(33f, 9f);
+            _barrelOffsetTL = new Vec2(34f, 3f);
+            _holdOffset = new Vec2(2f, 2f);
+            ammo = 30;
+            _ammoType = new ATMagnum { range = 310f, bulletSpeed = 180f };
+            _fireSound = "deepMachineGun2";
+            _fullAuto = false;
+            _fireWait = 0.1f;
+            _kickForce = 0.9f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.1f;
+            _editorName = "AN94 Fixed Stock";
+			weight = 5f;
+            _laserOffsetTL = new Vec2(30f, 2.5f);
+            DeltaWait = 0.07f;
+            BurstNum = 2;
         }
 
-        public override void Fire()
-        {
-           // base.Fire();
-        }
-        public override void Update()
-        {
-            //object obj;
-
-            if (this._burstNumB > 0 && this._bw > 0.1f)
-            {
-                base.Fire();
-                this._burstNumB = _burstNumB -1;
-                this._bw = 0;
-            }
-            else
-            {
-                this._bw = this._bw + 0.1f;
-            }
-            base.Update();
-        }
-        public override void OnPressAction()
-        {
-            if (this._bw > 1f)
-            {
-                this._bw = 0.2f;
-                this._burstNumB = _burstValue;
-            }
-        }
         public override void Initialize()
         {
 			if (!(Level.current is Editor))
             {
-                if (this.laser.value == true)
+                if (Laser.value)
                 {
-                 this.laserSight = true;
+                    laserSight = true;
                 }
             }
             base.Initialize();

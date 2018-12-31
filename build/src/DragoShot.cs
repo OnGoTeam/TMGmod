@@ -1,41 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
-namespace TMGmod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
-    public class DragoShot : Gun
+    public class DragoShot : BaseBurst
     {
+        public float Counter;
+        public StateBinding CounterBinding = new StateBinding(nameof(Counter));
+        private const float Step = 0.01f;
+        private const float TimeToHappend = 1f;
+        public bool LoockerOfSound;
+        public StateBinding LoockerOfSoundBinding = new StateBinding(nameof(LoockerOfSound));
         public DragoShot (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 16;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 160f;
-            this._ammoType.accuracy = 0.7f;
-            this._ammoType.penetration = 2f;
-            this._numBulletsPerFire = 8;
-            this._ammoType.bulletThickness = 0.8f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("DragoShot"));
-            this.center = new Vec2(17f, 7f);
-            this.collisionOffset = new Vec2(-14f, -7f);
-            this.collisionSize = new Vec2(29f, 11f);
-            this._barrelOffsetTL = new Vec2(30f, 2.5f);
-            this._fireSound = "shotgunFire";
-            this._fullAuto = true;
-            this._fireWait = 2.2f;
-            this._kickForce = 1.2f;
-            this.loseAccuracy = 0f;
-            this.maxAccuracyLost = 0.5f;
-            this.laserSight = true;
-            this._laserOffsetTL = new Vec2(23f, 3f);
-            this._holdOffset = new Vec2(0f, 3f);
-            this._editorName = "DragoShot";
-			this.weight = 5f;
+            ammo = 16;
+            _ammoType = new ATMagnum
+            {
+                range = 120f,
+                accuracy = 0.7f,
+                penetration = 2f,
+                bulletThickness = 0.8f
+            };
+            _numBulletsPerFire = 8;
+            _type = "gun";
+            graphic = new Sprite(GetPath("DragoShot"));
+            center = new Vec2(17f, 7f);
+            collisionOffset = new Vec2(-14f, -7f);
+            collisionSize = new Vec2(29f, 11f);
+            _barrelOffsetTL = new Vec2(30f, 2.5f);
+            _fireSound = "shotgunFire";
+            _fullAuto = false;
+            _fireWait = 1.5f;
+            _kickForce = 5.5f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.4f;
+            laserSight = true;
+            _laserOffsetTL = new Vec2(23f, 3f);
+            _holdOffset = new Vec2(0f, 3f);
+            _editorName = "DragoShot";
+			weight = 5f;
+            DeltaWait = 0.15f;
+            BurstNum = 1;
+        }
+        public override void OnPressAction()
+        {
+            //Nothing Happend
+        }
+        public override void OnHoldAction()
+        {
+            if (ammo != 0 && Counter <= TimeToHappend) Counter += Step;
+            base.OnHoldAction();
+        }
+        public override void OnReleaseAction()
+        {
+            Counter = 0f;
+            base.OnReleaseAction();
+            if (duck != null) Fire();
+            LoockerOfSound = false;
+        }
+        public override void Update()
+        {
+            if (Counter >= TimeToHappend)
+            {
+                if (!LoockerOfSound) SFX.Play("woodHit");
+                LoockerOfSound = true;
+                _ammoType.range = 170f;
+                _ammoType.accuracy = 0.9f;
+                maxAccuracyLost = 0.1f;
+                _kickForce = 3f;
+                BurstNum = 4;
+            }
+            else
+            {
+                _ammoType.range = 120f;
+                _ammoType.accuracy = 0.7f;
+                maxAccuracyLost = 0.4f;
+                _kickForce = 5.5f;
+                BurstNum = 1;
+            }
+            base.Update();
         }
     }
 }

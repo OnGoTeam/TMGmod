@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
-namespace TMGmod.src
+namespace TMGmod.Core
 {
+    // ReSharper disable once InconsistentNaming
     public class HA : AmmoType
     {
         public HA()
         {
-            this.accuracy = 0.9f;
-            this.range = 700f;
-            this.penetration = 4f;
-            this.combustable = true;
-            this.bulletSpeed = 40f;
+            accuracy = 0.9f;
+            range = 700f;
+            penetration = 4f;
+            combustable = true;
+            bulletSpeed = 40f;
         }
 
         public override void PopShell(float x, float y, int dir)
         {
             Level.Add(new PistolShell(x, y)
             {
-                hSpeed = (float)dir * (1.5f + Rando.Float(1f))
+                hSpeed = dir * (1.5f + Rando.Float(1f))
             });
         }
     }

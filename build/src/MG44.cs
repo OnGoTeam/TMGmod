@@ -1,44 +1,115 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
+using TMGmod.Core;
 
-namespace TMGmod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod
 {
-    [EditorGroup("TMG|Heavy")]
-    public class MG44 : Gun
+    [EditorGroup("TMG|LMG")]
+    // ReSharper disable once InconsistentNaming
+    public class MG44 : Gun, IHaveSkin
     {
-		
-		public MG44 (float xval, float yval)
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 3;
+        /*
+        private const float DefaultAccuracy = .75f;
+        private const float MaxRaise = .6f;
+        private const float EpsilonD = .2f;
+        private const float EpsilonK = .1f;
+        private const float EpsilonX = .8f;
+        private const float EpsilonY = EpsilonK / EpsilonX;
+        private const float AcclA = .045f;
+        private const float AcclB = .225f;
+        private float _raisestat;*/
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public MG44(float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 80;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 750f;
-            this._ammoType.accuracy = 0.75f;
-            this._ammoType.penetration = 1.5f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("mg44req"));
-            this.center = new Vec2(19.5f, 6f);
-            this.collisionOffset = new Vec2(-19.5f, -6f);
-            this.collisionSize = new Vec2(39f, 12f);
-            this._barrelOffsetTL = new Vec2(40f, 4f);
-            this._fireSound = "deepMachineGun";
-            this._fullAuto = true;
-            this._fireWait = 0.9f;
-            this._kickForce = 0.6f;
-            this.loseAccuracy = 0f;
-            this.maxAccuracyLost = 0f;
-            this._holdOffset = new Vec2(4f, 0f);
-            this._editorName = "Magnium";
-			this.weight = 7.5f;
+            ammo = 80;
+            _ammoType = new ATMagnum
+            {
+                range = 750f,
+                accuracy = 0.75f,
+                penetration = 1.5f
+            };
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("mg44reqpattern"), 39, 12);
+            graphic = _sprite;
+            _sprite.frame = 0;
+            center = new Vec2(19.5f, 6f);
+            collisionOffset = new Vec2(-19.5f, -6f);
+            collisionSize = new Vec2(39f, 12f);
+            _barrelOffsetTL = new Vec2(40f, 4f);
+            _fireSound = "deepMachineGun";
+            _fullAuto = true;
+            _fireWait = 0.9f;
+            _kickForce = 0.6f;
+            loseAccuracy = 0f;
+            maxAccuracyLost = 0f;
+            _holdOffset = new Vec2(4f, 0f);
+            _editorName = "Magnium";
+            weight = 7.5f;
         }
-		public override void Update()
-		{
-		base.Update();
-			if (this.ammo == 1) this.graphic = new Sprite(GetPath("mg44req1"), 0f, 0f);
-			if (this.ammo == 0) this.graphic = new Sprite(GetPath("mg44req2"), 0f, 0f);
-		}
-	}
+        public override void Update()
+        {
+            base.Update();
+            switch (ammo)
+            {
+                case 1:
+                    if (_sprite.frame < 10) _sprite.frame += 10;
+                    break;
+                case 0:
+                    if (_sprite.frame < 20) _sprite.frame += 10;
+                    break;
+            }
+            /*
+            if (_raisestat > MaxRaise) _raisestat = MaxRaise;
+            if (_raisestat > 0f)
+            {
+                var δα = -EpsilonY - EpsilonK / (_raisestat - EpsilonX);
+
+                if (offDir < 0)
+                {
+                    handAngle = δα;
+                }
+                else
+                {
+                    handAngle = -δα;
+                }
+            }
+            _raisestat -= .015f;
+            if (duck == null)
+            {
+                _raisestat = 0f;
+                handAngle = 0f;
+            }
+            else
+            {
+                if (duck.crouch || duck.sliding) _raisestat -= .005f;
+                if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
+                if (!(_raisestat < 0f)) return;
+                _raisestat = 0f;
+                handAngle = 0f;
+            }
+            */
+        }
+
+        /*
+        public override void Fire()
+        {
+            var wasammo = ammo > 0;
+            _ammoType.accuracy = _raisestat < AcclA ? 1f : DefaultAccuracy;
+            base.Fire();
+            if (!wasammo) return;
+            if (_raisestat < AcclA) _raisestat = AcclB;
+            var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
+            _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
+        }
+        */
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+    }
 }

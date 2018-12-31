@@ -1,140 +1,156 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
+using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
-namespace TMGmod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
-    public class SKS : Gun
+    // ReSharper disable once InconsistentNaming
+    public class SKS : BaseGun, ISpeedAccuracy
     {
-		int patrons = 16;
-		int bullets = 0;
-		bool stick = false;
-		
+        private int _patrons = 16;
+        private int _bullets;
+        public bool Stick;
+        public StateBinding StickBinding = new StateBinding(nameof(Stick));
+
         public SKS (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 16;
-            this._ammoType = new AT9mm();
-            this._ammoType.range = 900f;
-            this._ammoType.accuracy = 0.965f;
-            this._ammoType.penetration = 1f;
-            this._ammoType.bulletSpeed = 75f;
-            this._ammoType.bulletThickness = 1f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("SKS"));
-            this.center = new Vec2(30f, 6f);
-            this.collisionOffset = new Vec2(-30f, -6f);
-            this.collisionSize = new Vec2(60f, 12f);
-            this._barrelOffsetTL = new Vec2(53f, 5f);
-            this._holdOffset = new Vec2(11f, 0f);
-            this._fireSound = GetPath("sounds/scar.wav");
-            this._flare.center = new Vec2(0f, 5f);
-            this._fullAuto = false;
-            this._fireWait = 1.55f;
-            this._kickForce = 0.6f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.8f;
-            this._editorName = "SKS";
-			this.weight = 6f;
+            ammo = 16;
+            _ammoType = new AT9mm
+            {
+                range = 1400f,
+                accuracy = 0.965f,
+                penetration = 1f,
+                bulletSpeed = 95f,
+                bulletThickness = 1.5f
+            };
+            _type = "gun";
+            graphic = new Sprite(GetPath("SKS"));
+            center = new Vec2(30f, 6f);
+            collisionOffset = new Vec2(-30f, -6f);
+            collisionSize = new Vec2(60f, 12f);
+            _barrelOffsetTL = new Vec2(53f, 5f);
+            _holdOffset = new Vec2(11f, 0f);
+            _fireSound = GetPath("sounds/scar.wav");
+            _flare.center = new Vec2(0f, 5f);
+            _fullAuto = false;
+            _fireWait = 1.55f;
+            _kickForce = 0.6f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.8f;
+            _editorName = "SKS";
+			weight = 6f;
+            MuAccuracySr = 1f;
+            LambdaAccuracySr = 0.5f;
         }
         public override void Update()
         {
 		    base.Update();
-			if (this.ammo < 17)
+			if (ammo < 17)
 			{
-			    this.patrons = this.ammo;	
+			    _patrons = ammo;	
 			}
-            if (this.owner != null)
+
+            if (duck == null) return;
+            //else
+            if (duck.inputProfile.Pressed("QUACK"))
             {
-                if (base.isServerForObject)
+                if (ammo < 17)
                 {
-					if (base.duck.inputProfile.Pressed("QUACK"))
-					{
-						 if (this.ammo < 17)
-						 {
-							this.patrons = this.ammo;
-							this.bullets = this.patrons + 20;
-						    this.ammo += 20;
-						 }
-			            this._flare = new SpriteMap((GetPath("takezis")), 4, 4, false);
-                        this._flare.center = new Vec2(0f, 0f);
-                        this._ammoType = new ATNB();
-                        this._fullAuto = false;
-                        this._fireWait = 0.1f;
-						this._numBulletsPerFire = 1;
-                        this._barrelOffsetTL = new Vec2(53f, 6f);
-                        this._fireSound = "";
-                        this.loseAccuracy = 0f;
-                        this.maxAccuracyLost = 0f;
-                        this._ammoType.bulletThickness = 0.1f;
-                        this._kickForce = 0f;
-						this.stick = true;
-				        base.Fire();
-					}
-                    if (base.duck.inputProfile.Down("QUACK"))
-					    {
-						this._holdOffset = new Vec2(17f, 0f);
-						if (this.ammo < this.bullets)
-					        {
-								this.ammo += 1;
-							}
-					    }
-                    if (base.duck.inputProfile.Released("QUACK"))
-					    {
-						this.ammo = this.patrons;
-                        this._ammoType = new AT9mm();
-                        this._ammoType.range = 900f;
-                        this._ammoType.accuracy = 0.91f;
-                        this._ammoType.penetration = 1f;
-                        this._ammoType.bulletSpeed = 75f;
-                        this._fullAuto = false;
-                        this._fireWait = 1.3f;
-						this._numBulletsPerFire = 1;
-                        this._barrelOffsetTL = new Vec2(53f, 3f);
-                        this._fireSound = GetPath("sounds/scar.wav");
-                        this._holdOffset = new Vec2(11f, 0f);
-                        this.loseAccuracy = 0.1f;
-                        this.maxAccuracyLost = 0.8f;
-                        this._ammoType.bulletThickness = 1f;
-                        this._kickForce = 0.6f;
-			            this._flare = new SpriteMap("smallFlare", 11, 10, false);
-                        this._flare.center = new Vec2(0f, 4f);
-						this.stick = false;
-					    }
-			    }
-			}
-		}	
+                    _patrons = ammo;
+                    _bullets = _patrons + 20;
+                    ammo += 20;
+                }
+                _flare = new SpriteMap(GetPath("takezis"), 4, 4)
+                {
+                    center = new Vec2(0f, 0f)
+                };
+                _ammoType = new ATNB();
+                _fullAuto = false;
+                _fireWait = 0.1f;
+                _numBulletsPerFire = 1;
+                _barrelOffsetTL = new Vec2(53f, 6f);
+                _fireSound = "";
+                loseAccuracy = 0f;
+                maxAccuracyLost = 0f;
+                _ammoType.bulletThickness = 0.1f;
+                _kickForce = 0f;
+                Stick = true;
+                Fire();
+            }
+            if (duck.inputProfile.Down("QUACK"))
+            {
+                _holdOffset = new Vec2(17f, 0f);
+                if (ammo < _bullets)
+                {
+                    ammo += 1;
+                }
+            }
+
+            if (!duck.inputProfile.Released("QUACK")) return;
+            //else
+            ammo = _patrons;
+            _ammoType = new AT9mm
+            {
+                range = 900f,
+                accuracy = 0.965f,
+                penetration = 1f,
+                bulletSpeed = 95f,
+                bulletThickness = 1.5f
+            };
+            _fullAuto = false;
+            _fireWait = 1.3f;
+            _numBulletsPerFire = 1;
+            _barrelOffsetTL = new Vec2(53f, 3f);
+            _fireSound = GetPath("sounds/scar.wav");
+            _holdOffset = new Vec2(11f, 0f);
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.8f;
+            _kickForce = 0.6f;
+            _flare = new SpriteMap("smallFlare", 11, 10)
+            {
+                center = new Vec2(0f, 4f)
+            };
+            Stick = false;
+        }	
         public override void Thrown()
         {
-			if (this.ammo != 0)
+			if (ammo != 0)
 			{           
-						this.ammo = this.patrons;
-						this._ammoType = new AT9mm();
-                        this._ammoType.range = 900f;
-                        this._ammoType.accuracy = 0.91f;
-                        this._ammoType.penetration = 1f;
-                        this._ammoType.bulletSpeed = 75f;
-                        this._fullAuto = false;
-                        this._fireWait = 1.3f;
-						this._numBulletsPerFire = 1;
-                        this._barrelOffsetTL = new Vec2(53f, 3f);
-                        this._fireSound = GetPath("sounds/scar.wav");
-                        this._holdOffset = new Vec2(11f, 0f);
-                        this.loseAccuracy = 0.1f;
-                        this.maxAccuracyLost = 0.8f;
-                        this._ammoType.bulletThickness = 1f;
-                        this._kickForce = 0.6f;
-			            this._flare = new SpriteMap("smallFlare", 11, 10, false);
-                        this._flare.center = new Vec2(0f, 4f);
-			}
-			if ((this.stick = true) && (this.patrons == 0))
+						ammo = _patrons;
+			    _ammoType = new AT9mm
+			    {
+			        range = 900f,
+			        accuracy = 0.965f,
+			        penetration = 1f,
+			        bulletSpeed = 95f,
+			        bulletThickness = 1.5f
+			    };
+			    _fullAuto = false;
+                _fireWait = 1.3f;
+				_numBulletsPerFire = 1;
+                _barrelOffsetTL = new Vec2(53f, 3f);
+                _fireSound = GetPath("sounds/scar.wav");
+                _holdOffset = new Vec2(11f, 0f);
+                loseAccuracy = 0.1f;
+                maxAccuracyLost = 0.8f;
+                _kickForce = 0.6f;
+                _flare = new SpriteMap("smallFlare", 11, 10)
+                {
+                    center = new Vec2(0f, 4f)
+                };
+            }
+			if (Stick && _patrons == 0)
 			{
-				this.ammo = 0;
+				ammo = 0;
 			}
             base.Thrown();
-        }		
-	}
+        }
+
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
+    }
 }

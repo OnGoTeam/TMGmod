@@ -1,40 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
+using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
-namespace TMGmod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class M50 : Gun
+    public class M50 : BaseGun, ISpeedAccuracy
     {
         public M50 (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 6;
-            this._ammoType = new cal50explode();
-            this._ammoType.range = 1500f;
-            this._ammoType.accuracy = 1f;
-            this._ammoType.penetration = 1f;
-            this._ammoType.bulletThickness = 2.5f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("m50"));
-            this.center = new Vec2(20f, 6.5f);
-            this.collisionOffset = new Vec2(-20f, -6.5f);
-            this.collisionSize = new Vec2(40f, 13f);
-            this._barrelOffsetTL = new Vec2(40f, 6f);
-            this._fireSound = GetPath("sounds/HeavySniper.wav");
-            this._fullAuto = false;
-            this._fireWait = 3.75f;
-            this._kickForce = 1.6f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.3f;
-            this._holdOffset = new Vec2(6f, -1f);
-            this.laserSight = true;
-            this._laserOffsetTL = new Vec2(31f, 10f);
-            this._editorName = "M50 with Explosive Ammo";
-			this.weight = 6.75f;
+            ammo = 7;
+            _ammoType = new Cal50Explode
+            {
+                range = 1100f,
+                accuracy = 1f,
+                penetration = 1f,
+                bulletThickness = 2.5f
+            };
+            _type = "gun";
+            graphic = new Sprite(GetPath("m50"));
+            center = new Vec2(20f, 6.5f);
+            collisionOffset = new Vec2(-20f, -6.5f);
+            collisionSize = new Vec2(40f, 13f);
+            _barrelOffsetTL = new Vec2(40f, 6f);
+            _fireSound = GetPath("sounds/HeavySniper.wav");
+            _fullAuto = false;
+            _fireWait = 3.75f;
+            _kickForce = 1.6f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            _holdOffset = new Vec2(6f, -1f);
+            laserSight = true;
+            _laserOffsetTL = new Vec2(31f, 10f);
+            _editorName = "M50 with Explosive Ammo";
+			weight = 6.75f;
+            MuAccuracySr = 1f;
+            LambdaAccuracySr = 0.5f;
         }
+
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
     }
 }

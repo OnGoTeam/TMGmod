@@ -30,19 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="DuckGame">
-      <HintPath>G:\SteamLibrary\steamapps\common\Duck Game\DuckGame.exe</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
+  <Import Project="dglink.csproj" />
   <ItemGroup>
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AF2011.cs" />
@@ -51,20 +39,62 @@
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AUG.cs" />
     <Compile Include="src\BarretM98.cs" />
-    <Compile Include="src\BREN.cs" />
+    <Compile Include="src\Core\Nothing.cs" />
+    <Compile Include="src\NY\ATCane.cs" />
+    <Compile Include="src\NY\ATIgla.cs" />
+    <Compile Include="src\NY\ATSnow.cs" />
+    <Compile Include="src\NY\CandyCane.cs" />
+    <Compile Include="src\NY\CandyCaneBullet.cs" />
+    <Compile Include="src\CZ805.cs" />
     <Compile Include="src\Caliber50.cs" />
-    <Compile Include="src\Cases\Civilian Case.cs" />
+    <Compile Include="src\Cases\ExampleCase.cs" />
+    <Compile Include="src\Cases\Color\BlueCase.cs" />
+    <Compile Include="src\Cases\Color\CyanCase.cs" />
+    <Compile Include="src\Cases\Color\RedCase.cs" />
+    <Compile Include="src\Cases\Color\YellowCase.cs" />
     <Compile Include="src\Cases\Heavy Millitary Case.cs" />
     <Compile Include="src\Cases\Millitary Case.cs" />
     <Compile Include="src\Cases\Warriors Case.cs" />
+    <Compile Include="src\Core\BaseCase.cs" />
+    <Compile Include="src\Core\IHaveSkin.cs" />
+    <Compile Include="src\Core\WClasses\BaseBurst.cs" />
+    <Compile Include="src\Core\WClasses\BaseGun.cs" />
+    <Compile Include="src\Core\WClasses\BaseBolt.cs" />
+    <Compile Include="src\Core\WClasses\BasePumpAction.cs" />
+    <Compile Include="src\Core\WClasses\BaseAr.cs" />
+    <Compile Include="src\Core\WClasses\BaseLmg.cs" />
+    <Compile Include="src\Core\WClasses\BaseSmg.cs" />
+    <Compile Include="src\Core\WClasses\IHspeedKforce.cs" />
+    <Compile Include="src\Core\WClasses\IAmDmr.cs" />
+    <Compile Include="src\Core\WClasses\IAmHg.cs" />
+    <Compile Include="src\Core\WClasses\IRandKforce.cs" />
+    <Compile Include="src\Core\WClasses\IAmSg.cs" />
+    <Compile Include="src\Core\WClasses\IFirstKforce.cs" />
+    <Compile Include="src\Core\WClasses\ISpeedAccuracy.cs" />
+    <Compile Include="src\Core\WClasses\IFirstPrecise.cs" />
+    <Compile Include="src\KSG12.cs" />
+    <Compile Include="src\MP5.cs" />
+    <Compile Include="src\MP5SD.cs" />
+    <Compile Include="src\NY\GarlandBullet.cs" />
+    <Compile Include="src\NY\GarlandGun.cs" />
+    <Compile Include="src\NY\NewYearCase.cs" />
+    <Compile Include="src\NY\SnowBullet.cs" />
+    <Compile Include="src\NY\SnowMgun.cs" />
+    <Compile Include="src\NY\SpruceGun.cs" />
+    <Compile Include="src\SkeetGun.cs" />
+    <Compile Include="src\Stuff\C4Pack.cs" />
+    <Compile Include="src\Stuff\Cfour.cs" />
     <Compile Include="src\Core\AT9mmSilenced.cs" />
     <Compile Include="src\Core\ATNotBullet.cs" />
     <Compile Include="src\Core\Cal50Explode.cs" />
+    <Compile Include="src\Core\Caliber50Bullet.cs" />
     <Compile Include="src\Core\Czmag.cs" />
-    <Compile Include="src\Core\EKSPLOZIVI SCHEET.cs" />
+    <Compile Include="src\Core\ExplosiveBullet.cs" />
+    <Compile Include="src\Core\ExploCreator.cs" />
     <Compile Include="src\Core\HA.cs" />
     <Compile Include="src\Core\MF.cs" />
     <Compile Include="src\Core\Mod.cs" />
+    <Compile Include="src\Core\Particles\BarrBetaPar.cs" />
     <Compile Include="src\Core\PTPA.cs" />
     <Compile Include="src\Custom Guns\44dbC.cs" />
     <Compile Include="src\Custom Guns\AN94C.cs" />
@@ -73,15 +103,18 @@
     <Compile Include="src\Custom Guns\BRENC.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
     <Compile Include="src\Custom Guns\M4C.cs" />
+    <Compile Include="src\Custom Guns\M960C.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
     <Compile Include="src\Custom Guns\SIX12C.cs" />
+    <Compile Include="src\Custom Guns\SIX12SC.cs" />
     <Compile Include="src\Custom Guns\SVUC.cs" />
+    <Compile Include="src\Custom Guns\SVUC1.cs" />
     <Compile Include="src\Custom Guns\TR-21C.cs" />
     <Compile Include="src\Custom Guns\VintorezC.cs" />
     <Compile Include="src\CZ75.cs" />
     <Compile Include="src\DragoShot.cs" />
-    <Compile Include="src\Glock17.cs" />
+    <Compile Include="src\Glock18.cs" />
     <Compile Include="src\HazeS.cs" />
     <Compile Include="src\Hk417.cs" />
     <Compile Include="src\M16 LMG.cs" />
@@ -93,7 +126,8 @@
     <Compile Include="src\MG3.cs" />
     <Compile Include="src\MG44.cs" />
     <Compile Include="src\Mixaly4.cs" />
-    <Compile Include="src\Mixaly4Fire.cs" />
+    <Compile Include="src\Stuff\Wire.cs" />
+    <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
     <Compile Include="src\mp7.cs" />
     <Compile Include="src\MPA27.cs" />
@@ -106,28 +140,37 @@
     <Compile Include="src\Remington.cs" />
     <Compile Include="src\RemingtonTactical.cs" />
     <Compile Include="src\SCARGL.cs" />
-    <Compile Include="src\SCARL.cs" />
-    <Compile Include="src\SCARMk20.cs" />
-    <Compile Include="src\SCARPDW.cs" />
-    <Compile Include="src\SCARSSR.cs" />
+    <Compile Include="src\Rfb.cs" />
+    <Compile Include="src\Arx200.cs" />
+    <Compile Include="src\DaewooK1.cs" />
+    <Compile Include="src\FnFcar.cs" />
     <Compile Include="src\SIX12.cs" />
+    <Compile Include="src\SIX12S.cs" />
     <Compile Include="src\SKS.cs" />
     <Compile Include="src\SNR22.cs" />
+    <Compile Include="src\Stuff\Barricade.cs" />
+    <Compile Include="src\Stuff\Barricades.cs" />
+    <Compile Include="src\Stuff\C4Skeet.cs" />
+    <Compile Include="src\Stuff\MontagneShield.cs" />
     <Compile Include="src\SV98.cs" />
     <Compile Include="src\SV99.cs" />
     <Compile Include="src\SVU.cs" />
     <Compile Include="src\TR-21.cs" />
     <Compile Include="src\Useless or deleted Guns\MAPF.cs" />
     <Compile Include="src\Useless or deleted Guns\MSRSH.cs" />
-    <Compile Include="src\Useless or deleted Guns\PTP1.cs" />
     <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />
     <Compile Include="src\USP.cs" />
     <Compile Include="src\VAG73.cs" />
     <Compile Include="src\Vintorez.cs" />
+    <Compile Include="src\Vixr.cs" />
     <Compile Include="src\X3X.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Core\AmmoTypes\" />
+    <Folder Include="src\Core\Bullets\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

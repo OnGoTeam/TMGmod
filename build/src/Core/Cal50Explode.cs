@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
-namespace TMGmod.src
+namespace TMGmod.Core
 {
 
-    public class cal50explode : AmmoType
+    public class Cal50Explode : AmmoType
     {
-        public cal50explode()
+        public Cal50Explode()
         {
-            this.accuracy = 0.9f;
-            this.range = 700f;
-            this.penetration = 0f;
-            this.combustable = true;
-            this.bulletSpeed = 55f;
-            this.bulletType = typeof(explode);
+            accuracy = 0.9f;
+            range = 700f;
+            penetration = 0f;
+            combustable = true;
+            bulletSpeed = 55f;
+            bulletType = typeof(ExplosiveBullet);
         }
     }
 }

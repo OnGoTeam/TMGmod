@@ -1,37 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
+using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
-namespace TMGmod.src
+// ReSharper disable VirtualMemberCallInConstructor
+
+namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|Misc|Custom Guns")]
-    public class augC : Gun
+    [EditorGroup("TMG|Machinegun|Custom")]
+    public class AugC : BaseAr, IHaveSkin
     {
-        public augC (float xval, float yval)
+
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+
+        public AugC (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 30;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 680f;
-            this._ammoType.accuracy = 0.96f;
-            this._ammoType.penetration = 1f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("auga3"));
-            this.center = new Vec2(15f, 6f);
-            this.collisionOffset = new Vec2(-15f, -6f);
-            this.collisionSize = new Vec2(30f, 12f);
-            this._barrelOffsetTL = new Vec2(30f, 5f);
-            this._holdOffset = new Vec2(-3f, 0f);
-            this._fireSound = GetPath("sounds/scar.wav");
-            this._fullAuto = true;
-            this._fireWait = 0.8f;
-            this._kickForce = 0.7f;
-            this.loseAccuracy = 0.025f;
-            this.maxAccuracyLost = 0.1f;
-            this._editorName = "AUG A3";
-			this.weight = 5.5f;
+            ammo = 30;
+            _ammoType = new ATMagnum
+            {
+                range = 425f,
+                accuracy = 0.93f,
+                penetration = 1f
+            };
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("AUGA3pattern"), 30, 12);
+            graphic = _sprite;
+            _sprite.frame = 0;
+            center = new Vec2(15f, 6f);
+            collisionOffset = new Vec2(-15f, -6f);
+            collisionSize = new Vec2(30f, 12f);
+            _barrelOffsetTL = new Vec2(30f, 5f);
+            _holdOffset = new Vec2(-3f, 0f);
+            _fireSound = GetPath("sounds/scar.wav");
+            _fullAuto = true;
+            _fireWait = 0.8f;
+            _kickForce = 0.7f;
+            loseAccuracy = 0.025f;
+            maxAccuracyLost = 0.1f;
+            _editorName = "AUG A3";
+			weight = 5.5f;
+            Kforce2Ar = 0.7f;
         }
-	}
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+    }
 }
