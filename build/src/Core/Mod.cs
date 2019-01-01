@@ -15,10 +15,10 @@ using System.Xml.Linq;
 [assembly: AssemblyCompany("OGT")]
 
 // The description of the mod
-[assembly: AssemblyDescription("Current update: Release")]
+[assembly: AssemblyDescription("Current update: Holy Rework")]
 
 // The mod's version
-[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.1.0.3")]
 
 // ReSharper disable once CheckNamespace
 namespace DuckGame.TMGmod
@@ -59,7 +59,7 @@ namespace DuckGame.TMGmod
         // ReSharper disable once InconsistentNaming
 		private void CreateTMGLevelPlaylist()
 		{
-            var levelsLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG Maps v2.1\\");
+            var levelsLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG v2.1.1\\");
             if (!Directory.Exists(levelsLocation))
                 Directory.CreateDirectory(levelsLocation);
             IList<string> levelList = new List<string>();

@@ -10,10 +10,8 @@ namespace TMGmod.NY
             ammo = 1;
             _ammoType = new ATCane
             {
-                bulletSpeed = 15f,
                 range = 500f,
-                accuracy = 0.95f,
-                bulletLength = 3f
+                accuracy = 0.95f
             };
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/candycane"));

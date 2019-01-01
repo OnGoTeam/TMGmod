@@ -12,10 +12,7 @@ namespace TMGmod.NY
             {
                 range = 385f,
                 accuracy = Rando.Float(0f, 0.9f),
-                penetration = 1f,
-                bulletSpeed = Rando.Float(0.1f, 15f),
-                bulletLength = 0f,
-                bulletThickness = 0.25f
+                bulletSpeed = Rando.Float(0.1f, 15f)
             };
             _numBulletsPerFire = Rando.Int(5, 100);
             _type = "gun";

@@ -12,6 +12,9 @@ namespace TMGmod.NY
             SpriteY = new SpriteMap(new Nothing().GetPath("Holiday/Igolka"), 4, 1);
             SpriteY.CenterOrigin();
             sprite = SpriteY;
+            penetration = 1f;
+            bulletLength = 0f;
+            bulletThickness = 0.25f;
         }
     }
 }

@@ -13,6 +13,8 @@ namespace TMGmod.NY
             SpriteY = new SpriteMap(new Nothing().GetPath("Holiday/candycane"), 18, 7);
             SpriteY.CenterOrigin();
             sprite = SpriteY;
+            bulletLength = 3f;
+            bulletSpeed = 15f;
         }
     }
 }
