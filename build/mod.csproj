@@ -32,6 +32,13 @@
   </PropertyGroup>
   <Import Project="dglink.csproj" />
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
