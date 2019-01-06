@@ -2,6 +2,6 @@
 {
     public interface IHaveSkin
     {
-        int FrameId { set; get; }
+        int FrameId { set; }
     }
 }
