@@ -93,14 +93,14 @@ namespace DuckGame.TMGmod
             if (!File.Exists(uffPlaylistLocation) || !File.ReadAllText(uffPlaylistLocation).Equals(contents))
             {
                 File.WriteAllText(uffPlaylistLocation, contents);
-                SaveAsPlay(uffPlaylistLocation, "Levels/TMG Levels.play");
+                SaveAsPlay(uffPlaylistLocation);
             }
         }
-        private void SaveAsPlay(string path, string localPath)
+        private void SaveAsPlay(string path)
         {
             if (MonoMain.disableCloud || MonoMain.cloudNoSave)
                 return;
-            byte[] data = File.ReadAllBytes(path);
+            File.ReadAllBytes(path);
         }
     }
 }
