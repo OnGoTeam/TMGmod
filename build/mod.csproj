@@ -211,14 +211,20 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF $(SolutionDir)  == $(TargetDir)build\ exit
-IF $(ConfigurationName) == "Debug" exit
-echo Transfering
-cd $(SolutionDir)
-cd ..
-xcopy content $(TargetDir)content\ /E /Y /Q
-copy mod.conf $(TargetDir)mod.conf
-echo Transfered</PostBuildEvent>
+    <PostBuildEvent>IF $(ConfigurationName) == "Debug" EXIT
+IF $(SolutionDir)  == $(TargetDir)build\ GOTO zipping
+ECHO Transfering
+CD $(SolutionDir)
+CD ..
+XCOPY content $(TargetDir)content\ /E /Y /Q
+COPY mod.conf $(TargetDir)mod.conf
+ECHO Transfered
+:zipping
+ECHO Zipping
+CD ..
+IF EXIST TMGmod.zip (ERASE TMGmod.zip
+echo Deleted TMGmod.zip)
+ECHO Zipped</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
