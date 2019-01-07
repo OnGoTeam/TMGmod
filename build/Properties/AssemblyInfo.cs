@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TMGmod")]
 [assembly: AssemblyDescription("Current update: Holy Rework")]
 //[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("OGT")]
+[assembly: AssemblyCompany("OnGoTeam")]
 [assembly: AssemblyProduct("TMGmod")]
 [assembly: AssemblyCopyright("Copyright © 2019 OGT")]
 //[assembly: AssemblyTrademark("")]
