@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Custom_Guns;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -8,6 +9,7 @@ using TMGmod.Custom_Guns;
 namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
+    [PublicAPI]
     public class Mpodarok : Holdable, IPlatform
     {
         private Type _contains;

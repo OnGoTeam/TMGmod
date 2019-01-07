@@ -1,7 +1,9 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
+    [PublicAPI]
     public class ExplosiveBullet : Bullet
     {
         public ExplosiveBullet(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)

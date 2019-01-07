@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -7,6 +8,7 @@ namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class MP7 : Gun
     {

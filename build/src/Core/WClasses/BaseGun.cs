@@ -1,9 +1,11 @@
 ﻿using System;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
 {
+    [PublicAPI]
     public abstract class BaseGun:Gun
     {
         protected float BaseAccuracy = 1f;

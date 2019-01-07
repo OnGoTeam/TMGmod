@@ -1,10 +1,12 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
+    [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class TR21C : Gun
     {

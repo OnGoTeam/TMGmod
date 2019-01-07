@@ -33,10 +33,17 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <Import Project="dglink.csproj" />
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=2018.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.Annotations.2018.2.1\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +66,7 @@
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AUG.cs" />
     <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\Core\AmmoTypes\BaseAmmoType.cs" />
     <Compile Include="src\Core\Nothing.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
@@ -189,17 +197,19 @@
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Core\AmmoTypes\" />
+    <Folder Include="Resources\" />
     <Folder Include="src\Core\Bullets\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -207,14 +217,25 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF $(SolutionDir)  == $(TargetDir)build\ exit
-IF $(ConfigurationName) == "Debug" exit
-echo Transfering
-cd $(SolutionDir)
-cd ..
-xcopy content $(TargetDir)content\ /E /Y /Q
-copy mod.conf $(TargetDir)mod.conf
-echo Transfered</PostBuildEvent>
+    <PostBuildEvent>IF NOT $(SolutionDir)  == $(TargetDir)build\ (
+    ECHO Please, check for overlapping of different builds
+)
+IF $(ConfigurationName) == "Debug" (
+    EXIT
+)
+IF NOT $(SolutionDir)  == $(TargetDir)build\ (
+    ECHO Transferring
+    CD $(SolutionDir)
+    CD ..
+    XCOPY content $(TargetDir)content\ /E /Y /Q
+    COPY mod.conf $(TargetDir)mod.conf
+    ECHO Transferred
+)
+CD ..
+IF EXIST TMGmod.zip (
+    ERASE TMGmod.zip
+    ECHO Deleted TMGmod.zip
+)</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

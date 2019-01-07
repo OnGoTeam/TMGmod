@@ -1,10 +1,12 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [PublicAPI]
     public class MontagneShield : Holdable
     {
         private readonly SpriteMap _sprite;

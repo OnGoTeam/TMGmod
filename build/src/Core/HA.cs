@@ -1,9 +1,10 @@
 ﻿using DuckGame;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Core
 {
     // ReSharper disable once InconsistentNaming
-    public class HA : AmmoType
+    public class HA : BaseAmmoType
     {
         public HA()
         {

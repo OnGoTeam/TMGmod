@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [PublicAPI]
     public class Barricades:GreyBlock
     {
         public Barricades(float xpos, float ypos) : base(xpos, ypos)

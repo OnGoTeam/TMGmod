@@ -1,10 +1,11 @@
 using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATSneg : AmmoType
+    public class ATSneg : BaseAmmoType
     {
         public readonly SpriteMap SpriteY;
         public ATSneg()

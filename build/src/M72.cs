@@ -1,10 +1,12 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Misc|Grenadelauncher")]
+    [PublicAPI]
     public class M72 : Gun
     {
 

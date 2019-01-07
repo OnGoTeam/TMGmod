@@ -1,9 +1,10 @@
 ﻿using DuckGame;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Core
 {
     // ReSharper disable once InconsistentNaming
-    public class PTPA : AmmoType
+    public class PTPA : BaseAmmoType
     {
         public PTPA()
         {

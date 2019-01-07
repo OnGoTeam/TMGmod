@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable RedundantOverriddenMember
 
@@ -14,9 +16,10 @@ using System.Xml.Linq;
 [assembly: AssemblyDescription("Current update: Holy Rework")]
 [assembly: AssemblyVersion("1.1.*")]
 
-// ReSharper disable once CheckNamespace
-namespace DuckGame.TMGmod
+ 
+namespace TMGmod.Core
 {
+    [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
     {
@@ -44,7 +47,8 @@ namespace DuckGame.TMGmod
             base.OnPostInitialize();
         }
 
-        private byte[] GetMD5Hash(byte[] sourceBytes)
+        // ReSharper disable once InconsistentNaming
+        private static IEnumerable<byte> GetMD5Hash(byte[] sourceBytes)
         {
             return new MD5CryptoServiceProvider().ComputeHash(sourceBytes);
         }

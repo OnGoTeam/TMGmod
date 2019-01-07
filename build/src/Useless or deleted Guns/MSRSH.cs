@@ -1,10 +1,14 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Useless_or_deleted_Guns
 {
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", false)]
+    [PublicAPI]
+    [Obsolete]
     // ReSharper disable once InconsistentNaming
     public class MSRC : Sniper
     {

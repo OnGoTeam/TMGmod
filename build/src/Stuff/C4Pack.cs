@@ -1,10 +1,13 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
+    [PublicAPI]
     public class C4Pack:Holdable
     {
         public C4Pack(float xpos, float ypos) : base(xpos, ypos)
