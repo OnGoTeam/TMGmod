@@ -194,10 +194,10 @@
     <Compile Include="src\X3X.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\rtst.png" />
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="src\Core\Bullets\" />
   </ItemGroup>
   <ItemGroup>
