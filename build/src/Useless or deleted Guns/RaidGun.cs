@@ -1,4 +1,6 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -6,6 +8,8 @@ namespace TMGmod.Useless_or_deleted_Guns
 {
 
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", true)]
+    [PublicAPI]
+    [Obsolete]
     public class RaidGun : Gun
     {
 

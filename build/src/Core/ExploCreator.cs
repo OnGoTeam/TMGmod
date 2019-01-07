@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using DuckGame;
 
 namespace TMGmod.Core
@@ -24,4 +24,4 @@ namespace TMGmod.Core
             SFX.Play("explode");
         }
     }
-}
+}*/

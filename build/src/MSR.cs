@@ -1,10 +1,12 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
+    [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class MSR : Sniper
     {

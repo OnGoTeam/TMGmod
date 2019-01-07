@@ -1,9 +1,11 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
+    [PublicAPI]
     public sealed class C4Skeet : Holdable
     {
         public C4Skeet(float xpos, float ypos) : base(xpos, ypos)

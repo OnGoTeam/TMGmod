@@ -1,4 +1,6 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -6,6 +8,8 @@ using TMGmod.Core;
 namespace TMGmod.Useless_or_deleted_Guns
 {
     [BaggedProperty("canSpawn", false)]
+    [PublicAPI]
+    [Obsolete]
     // ReSharper disable once InconsistentNaming
     public class MAPF : Gun
     {
