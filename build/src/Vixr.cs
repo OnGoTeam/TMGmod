@@ -1,11 +1,14 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
+
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
+    [PublicAPI]
     public class Vixr : Gun
     {
 		public bool Stockngrip;

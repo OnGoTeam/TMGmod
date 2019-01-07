@@ -35,6 +35,9 @@
   </PropertyGroup>
   <Import Project="dglink.csproj" />
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=2018.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.Annotations.2018.2.1\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +62,7 @@
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AUG.cs" />
     <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\Core\AmmoTypes\BaseAmmoType.cs" />
     <Compile Include="src\Core\Nothing.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
@@ -189,7 +193,6 @@
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Core\AmmoTypes\" />
     <Folder Include="src\Core\Bullets\" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

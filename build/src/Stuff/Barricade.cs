@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.Particles;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -8,6 +9,7 @@ using TMGmod.Core.Particles;
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [PublicAPI]
     public class Barricade:Block
     {
         private bool _anchored;

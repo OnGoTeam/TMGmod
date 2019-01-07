@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc|Holiday")]
+    [PublicAPI]
     public class GarlandGun : Gun
     {
         

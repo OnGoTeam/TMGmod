@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable RedundantOverriddenMember
 
@@ -18,6 +19,7 @@ using DuckGame;
  
 namespace TMGmod.Core
 {
+    [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
     {
@@ -45,7 +47,8 @@ namespace TMGmod.Core
             base.OnPostInitialize();
         }
 
-        private byte[] GetMD5Hash(byte[] sourceBytes)
+        // ReSharper disable once InconsistentNaming
+        private static IEnumerable<byte> GetMD5Hash(byte[] sourceBytes)
         {
             return new MD5CryptoServiceProvider().ComputeHash(sourceBytes);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -8,6 +9,7 @@ namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
+    [PublicAPI]
     public class Cfour : Holdable
     {
         public float ToExplode = -1f;
