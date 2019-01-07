@@ -1,10 +1,12 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using TMGmod.Useless_or_deleted_Guns;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Core
 {
+    [Obsolete]
     // ReSharper disable once InconsistentNaming
     public class MF : PhysicsObject, IPlatform
     {
