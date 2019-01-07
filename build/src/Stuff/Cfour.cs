@@ -7,6 +7,7 @@ using DuckGame;
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [BaggedProperty("canSpawn", false)]
     public class Cfour : Holdable
     {
         public float ToExplode = -1f;
@@ -16,7 +17,7 @@ namespace TMGmod.Stuff
         public Duck Activator;
         //public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
         public MaterialThing StickThing;
-        public StateBinding StickBinding = new StateBinding(nameof(StickThing));
+        //public StateBinding StickBinding = new StateBinding(nameof(StickThing));
         private Vec2 _stickyVec2;
         public bool WasThrown;
         public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));

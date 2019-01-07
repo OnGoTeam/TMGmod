@@ -10,15 +10,7 @@ namespace TMGmod.NY
         public SnowMgun(float xval, float yval) : base(xval, yval)
         {
             ammo = 40;
-            _ammoType = new ATSneg
-            {
-                bulletSpeed = 5f,
-                range = 500f,
-                accuracy = 0.95f,
-                bulletLength = 3f,
-                affectedByGravity = true,
-                barrelAngleDegrees = -13.5f
-            };
+            _ammoType = new ATSneg();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Holiday/SnowMachineGun"), 17, 9);
             _graphic = _sprite;

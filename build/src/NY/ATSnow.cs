@@ -13,6 +13,12 @@ namespace TMGmod.NY
             SpriteY = new SpriteMap(new Nothing().GetPath("Holiday/snow"), 6, 5);
             SpriteY.CenterOrigin();
             sprite = SpriteY;
+            bulletSpeed = 5f;
+            range = 500f;
+            accuracy = 0.95f;
+            bulletLength = 3f;
+            affectedByGravity = true;
+            barrelAngleDegrees = -13.5f;
         }
     }
 }
