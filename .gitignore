@@ -338,3 +338,5 @@ TMGmod.dll
 content/Thumbs.db
 TMGmod.dll.config
 TMGmodRepo_compiled.hash
+JetBrains.Annotations.dll
+JetBrains.Annotations.xml
