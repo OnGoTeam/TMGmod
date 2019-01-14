@@ -8,7 +8,6 @@ using DuckGame;
 using JetBrains.Annotations;
 
 // ReSharper disable RedundantOverriddenMember
-
  
 namespace TMGmod.Core
 {

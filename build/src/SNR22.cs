@@ -54,5 +54,11 @@ namespace TMGmod
             }
             base.Update();
         }
-	}
+        public override void UpdateOnFire()
+        {
+            loseAccuracy += 0.15f;
+            base.UpdateOnFire();
+        }
+
+    }
 }

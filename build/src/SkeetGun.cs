@@ -32,7 +32,7 @@ namespace TMGmod
             _fireSound = "shotgunFire";
             _barrelOffsetTL = new Vec2(43f, 1f);
             _fireWait = 0.5f;
-            _kickForce = 4.78f;
+            _kickForce = 6.55f;
             _editorName = "Virtual Double";
             _holdOffset = new Vec2(6f, 2f);
         }
