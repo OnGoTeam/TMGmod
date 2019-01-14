@@ -12,20 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP7 : Gun
     {
-        /*public float _angleOffset;
-
-        public override float angle
-        {
-            get
-            {
-                return base.angle + this._angleOffset;
-            }
-            set
-            {
-                this._angle = value;
-            }
-        }*/
-
         public MP7(float xval, float yval)
             : base(xval, yval)
         {
@@ -61,12 +47,10 @@ namespace TMGmod
                 {
                     if (offDir < 0)
                     {
-                        //this._angleOffset = 0.5f;
                         handAngle = 0.5f;
                     }
                     else
                     {
-                        //this._angleOffset = -0.5f;
                         handAngle = -0.5f;
                     }
 
@@ -78,12 +62,10 @@ namespace TMGmod
                     if (duck.sliding) return;
                     if (offDir > 0)
                     {
-                        //this._angleOffset = 0.5f;
                         handAngle = 0.5f;
                     }
                     else
                     {
-                        //this._angleOffset = -0.5f;
                         handAngle = -0.5f;
                     }
 
