@@ -12,7 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP7 : Gun
     {
-        //yeee
         public MP7(float xval, float yval)
             : base(xval, yval)
         {
