@@ -132,7 +132,7 @@ namespace TMGmod
                 }
             }
             laserSight = true;
-                    if (_owner != null && _owner.height < 17f)
+            if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
 				graphic = new Sprite(GetPath("SV98bipods"));

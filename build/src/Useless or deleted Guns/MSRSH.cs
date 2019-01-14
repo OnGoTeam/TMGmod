@@ -175,7 +175,7 @@ namespace TMGmod.Useless_or_deleted_Guns
                 }
             }
             laserSight = false;
-			            if (owner != null)
+			if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {

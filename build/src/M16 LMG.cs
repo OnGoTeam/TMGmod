@@ -42,7 +42,7 @@ namespace TMGmod
         }
           public override void Update()
         {
-            if (_owner != null && _owner.height < 17f)
+            if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
 				loseAccuracy = 0.005f;

@@ -48,7 +48,7 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (owner != null)
+            if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {

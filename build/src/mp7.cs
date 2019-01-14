@@ -55,7 +55,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            if (owner != null)
+            if (duck != null)
             {
                 if (duck.inputProfile.Down("UP") && !_raised && !duck.inputProfile.Down("QUACK"))
                 {

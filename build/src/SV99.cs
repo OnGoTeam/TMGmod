@@ -105,7 +105,7 @@ namespace TMGmod
 					}
 				}
 			}
-			if (loaded && owner != null && _loadState == -1)
+			if (loaded && duck != null && _loadState == -1)
 			{
 				laserSight = false;
 				return;
