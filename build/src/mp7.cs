@@ -57,7 +57,7 @@ namespace TMGmod
             base.Update();
             if (duck != null)
             {
-                if (duck.inputProfile.Down("UP") && !_raised && !duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Down("UP") && !_raised)
                 {
                     if (offDir < 0)
                     {
@@ -73,7 +73,7 @@ namespace TMGmod
                     return;
                 }
 
-                if (duck.inputProfile.Down("DOWN") && !_raised && !duck.inputProfile.Down("QUACK"))
+                if (duck.inputProfile.Down("QUACK") && !_raised)
                 {
                     if (duck.sliding) return;
                     if (offDir > 0)
