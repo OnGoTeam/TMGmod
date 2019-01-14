@@ -15,7 +15,7 @@ namespace TMGmod
         public TR21 (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 7;
+            ammo = 12;
             _ammoType = new ATMagnum
             {
                 range = 110f,
@@ -23,7 +23,7 @@ namespace TMGmod
                 penetration = 1f,
                 bulletThickness = 0.2f
             };
-            _numBulletsPerFire = 4;
+            _numBulletsPerFire = 9;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21p"), 22, 14);
             graphic = _sprite;

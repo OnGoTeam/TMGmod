@@ -18,7 +18,7 @@ namespace TMGmod.Custom_Guns
         public TR21C (float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 15;
+            ammo = 24;
             _ammoType = new ATMagnum
             {
                 range = 110f,
@@ -26,7 +26,7 @@ namespace TMGmod.Custom_Guns
                 penetration = 1f,
                 bulletThickness = 0.2f
             };
-            _numBulletsPerFire = 4;
+            _numBulletsPerFire = 9;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21lmg2p"), 22, 14);
             graphic = _sprite;

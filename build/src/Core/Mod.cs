@@ -13,7 +13,7 @@ using JetBrains.Annotations;
 //[assembly: AssemblyTitle("TMG Mod")]
 //[assembly: AssemblyCompany("OGT")]
 //[assembly: AssemblyDescription("Current update: Holy Rework")]
-//[assembly: AssemblyVersion("1.1.*")]
+//[assembly: AssemblyVersion("1.1.0.5")]
 
  
 namespace TMGmod.Core

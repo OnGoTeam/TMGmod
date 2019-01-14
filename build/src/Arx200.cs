@@ -34,11 +34,11 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
             _fireWait = 0.65f;
-            _kickForce = 0.7f;
+            _kickForce = 1.1f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
             _editorName = "Beretta ARX-200";
-			weight = 5.75f;
+			weight = 6f;
         }
 
         public int FrameId
