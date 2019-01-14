@@ -52,7 +52,7 @@ namespace TMGmod.Core.WClasses
             base.Fire();
             if (pammo > ammo)
             {
-                if (Rando.Float(0f, 1f) < 0.05f)
+                if (Rando.Float(0f, 1f) < 0.001f)
                 {
                     var scase = new NewYearCase(x, y);
                     Level.Add(scase);
