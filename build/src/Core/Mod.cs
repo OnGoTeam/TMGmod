@@ -9,12 +9,6 @@ using JetBrains.Annotations;
 
 // ReSharper disable RedundantOverriddenMember
 
-//Титры, что будут в меню
-//[assembly: AssemblyTitle("TMG Mod")]
-//[assembly: AssemblyCompany("OGT")]
-//[assembly: AssemblyDescription("Current update: Holy Rework")]
-//[assembly: AssemblyVersion("1.1.*")]
-
  
 namespace TMGmod.Core
 {
