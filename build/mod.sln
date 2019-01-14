@@ -16,8 +16,8 @@ Global
 		{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}.Debug|x86.Build.0 = Debug|x86
 		{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}.Release|x86.ActiveCfg = Release|x86
 		{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}.Release|x86.Build.0 = Release|x86
-		{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}.Workshop|x86.ActiveCfg = Workshop|x86
-		{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}.Workshop|x86.Build.0 = Workshop|x86
+		{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}.Workshop|x86.ActiveCfg = Release|x86
+		{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}.Workshop|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
