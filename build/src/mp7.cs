@@ -6,7 +6,7 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-
+    //[yee] switch
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
