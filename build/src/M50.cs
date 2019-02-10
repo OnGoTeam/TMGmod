@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class M50 : BaseGun, ISpeedAccuracy
+    public class M50 : BaseGun, ISpeedAccuracy, IAmSr
     {
         public M50 (float xval, float yval)
           : base(xval, yval)

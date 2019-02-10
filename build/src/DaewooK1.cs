@@ -1,12 +1,12 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class DaewooK1 : Gun, IHaveSkin
+    public class DaewooK1 : BaseSmg, IHaveSkin
     {
-
         private readonly SpriteMap _sprite;
         public bool Stock;
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
@@ -35,6 +35,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.86f;
             _kickForce = 0.5f;
+            KforceDSmg = 2.5f;
+            MaxDelaySmg = 50;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.24f;
             _editorName = "Daewoo K1";

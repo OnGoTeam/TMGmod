@@ -4,7 +4,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
-    public class DragoShot : BaseBurst
+    public class DragoShot : BaseBurst, IAmSr
     {
         public float Counter;
         public StateBinding CounterBinding = new StateBinding(nameof(Counter));

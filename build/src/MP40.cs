@@ -34,9 +34,9 @@ namespace TMGmod
             _editorName = "MP40";
 			_weight = 3f;
             KforceDSmg = 2.5f;
+            MaxDelaySmg = 50;
             MaxAccuracy = 1f;
             MaxDelayFp = 10;
-            MaxDelaySmg = 50;
         }
 
         

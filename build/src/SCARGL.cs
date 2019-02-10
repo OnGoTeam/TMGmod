@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class ScarGL : Gun
+    public class ScarGL : Gun, IAmAr
     {
         public int Mode;
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));

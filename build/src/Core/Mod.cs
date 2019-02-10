@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Properties;
 
 // ReSharper disable RedundantOverriddenMember
  
@@ -15,6 +16,7 @@ namespace TMGmod.Core
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
     {
+        internal string Bdate = Resources.BuildDate;
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         // ReSharper disable once MemberCanBePrivate.Global
 		internal static string AssemblyName { get; private set; }

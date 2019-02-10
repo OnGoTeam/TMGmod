@@ -1,10 +1,11 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : Gun
+    public class MG3 : Gun, IAmLmg
     {
         private bool _bipodes;
 		

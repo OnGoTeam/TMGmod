@@ -1,10 +1,11 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     // ReSharper disable once InconsistentNaming
-    public class SNR22 : Gun
+    public class SNR22 : Gun, IAmDmr
     {
         public SNR22 (float xval, float yval)
           : base(xval, yval)

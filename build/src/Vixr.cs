@@ -1,13 +1,14 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     [PublicAPI]
-    public class Vixr : Gun
+    public class Vixr : Gun, IAmAr
     {
 		public bool Stockngrip;
         public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));

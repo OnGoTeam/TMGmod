@@ -1,11 +1,12 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
     [BaggedProperty("canSpawn", false)]
-    public class SkeetGun:Gun, IHaveSkin
+    public class SkeetGun:Gun, IHaveSkin, IAmSg
     {
 
         private readonly SpriteMap _sprite;

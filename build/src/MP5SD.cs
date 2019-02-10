@@ -7,7 +7,7 @@ namespace TMGmod
 
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MP5SD : BaseBurst, IFirstKforce, IFirstPrecise
+    public class MP5SD : BaseBurst, IFirstKforce, IFirstPrecise, IAmSmg
     {
         public MP5SD(float xval, float yval)
             : base(xval, yval)

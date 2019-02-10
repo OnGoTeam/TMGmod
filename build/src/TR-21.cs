@@ -1,10 +1,11 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
     // ReSharper disable once InconsistentNaming
-    public class TR21 : Gun
+    public class TR21 : Gun, IAmSg
     {
   
         private readonly SpriteMap _sprite;

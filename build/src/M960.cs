@@ -1,10 +1,11 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
-    public class M960 : Gun
+    public class M960 : Gun, IAmSmg
     {
         // ReSharper disable once MemberCanBePrivate.Global
         public readonly EditorProperty<bool> Limited = new EditorProperty<bool>(false, null, 0f, 1f, 1f);

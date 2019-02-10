@@ -4,7 +4,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
     [BaggedProperty("isSuperWeapon", true)]
-    public class X3X : Gun
+    public sealed class X3X : Gun
     {
         private readonly SpriteMap _sprite;
         public X3X (float xval, float yval)

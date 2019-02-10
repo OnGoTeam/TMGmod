@@ -5,7 +5,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MPA27 : BaseBurst
+    public class MPA27 : BaseBurst, IAmSmg
     {
         
         public MPA27(float xval, float yval)

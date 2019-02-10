@@ -1,11 +1,12 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     [PublicAPI]
-    public class P90 : Gun
+    public class P90 : Gun, IAmSmg
     {
         public readonly EditorProperty<bool> Elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
         

@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -8,7 +9,7 @@ namespace TMGmod
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class MP7 : Gun
+    public class MP7 : Gun, IAmSmg
     {
         public MP7(float xval, float yval)
             : base(xval, yval)

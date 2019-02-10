@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh : Gun, IHaveSkin
+    public class PPSh : Gun, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;

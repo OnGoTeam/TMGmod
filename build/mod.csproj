@@ -79,6 +79,10 @@
     <Compile Include="src\BarretM98.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoType.cs" />
     <Compile Include="src\Core\Nothing.cs" />
+    <Compile Include="src\Core\WClasses\IAmAr.cs" />
+    <Compile Include="src\Core\WClasses\IAmLmg.cs" />
+    <Compile Include="src\Core\WClasses\IAmSmg.cs" />
+    <Compile Include="src\Core\WClasses\IAmSr.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
     <Compile Include="src\NY\ATSnow.cs" />

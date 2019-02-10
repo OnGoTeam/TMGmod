@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class SV99 : Sniper
+    public class SV99 : Sniper, IAmSr
     {
         public SV99(float xval, float yval) : base(xval, yval)
         {
