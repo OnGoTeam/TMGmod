@@ -12,15 +12,17 @@ namespace TMGmod.Stuff
     [PublicAPI]
     public class Barricade:Block
     {
-        private bool _anchored;
+        public bool Anchored;
+        public StateBinding AnchoredBinding = new StateBinding(nameof(Anchored));
         public float Hp;
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
         public float ImpactSpeed;
         public StateBinding ImpactSpeedBinding = new StateBinding(nameof(ImpactSpeed));
-        private float _duckcooldown;
+        public float Duckcooldown;
+        public StateBinding DcdBinding = new StateBinding(nameof(Duckcooldown));
         public Barricade(float x, float y) : base(x, y)
         {
-            _anchored = true;
+            Anchored = true;
             Hp = 10f;
             thickness = 2f;
             physicsMaterial = PhysicsMaterial.Wood;
@@ -38,16 +40,16 @@ namespace TMGmod.Stuff
         private bool CheckBlocks()
         {
             var blocks = Level.CheckLineAll<Block>(new Vec2(x, y + 2), new Vec2(x, y + 4));
-            _anchored = false;
+            Anchored = false;
             foreach (var block in blocks)
             {
-                if (block is Barricade && !(block as Barricade)._anchored) continue;
+                if (block is Barricade barricade && !barricade.Anchored) continue;
                 //else
-                _anchored = true;
+                Anchored = true;
                 
             }
             blocks = Level.CheckLineAll<Block>(new Vec2(x, y), new Vec2(x, y - 4));
-            return _anchored || blocks.Any(block => block != this);
+            return Anchored || blocks.Any(block => block != this);
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)
@@ -74,10 +76,10 @@ namespace TMGmod.Stuff
 
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
-            if (with is Duck duck && duck.inputProfile.Down("SHOOT") && _duckcooldown < 0)
+            if (with is Duck duck && duck.inputProfile.Down("SHOOT") && Duckcooldown < 0)
             {
                 SFX.Play("woodHit");
-                _duckcooldown = 2.0f;
+                Duckcooldown = 2.0f;
                 Hp -= 4f;
             }
             else if (Math.Abs(with.hSpeed) > 5f)
@@ -93,21 +95,26 @@ namespace TMGmod.Stuff
 
         public override void Update()
         {
-            _duckcooldown -= 0.1f;
+            Duckcooldown -= 0.1f;
             if (Hp < 0f || !CheckBlocks())
             {
-                SFX.Play("woodHit");
-                var bbp = new BarrBetaPar(x, y)
-                {
-                    hSpeed = ImpactSpeed + Rando.Float(-1f, 1f),
-                    vSpeed = Rando.Float(-1.5f, 1.5f)
-                };
-                Level.Add(bbp);
                 Destroy();
-                Level.Remove(this);
             }
             base.Update();
             thickness = 0.2f * Hp;
+        }
+
+        protected override bool OnDestroy(DestroyType type0 = null)
+        {
+            SFX.Play("woodHit");
+            var bbp = new BarrBetaPar(x, y)
+            {
+                hSpeed = ImpactSpeed + Rando.Float(-1f, 1f),
+                vSpeed = Rando.Float(-1.5f, 1.5f)
+            };
+            Level.Add(bbp);
+            Level.Remove(this);
+            return true;
         }
     }
 }
