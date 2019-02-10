@@ -2,14 +2,12 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
 
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MP5 : BaseBurst, IFirstKforce, IHaveSkin
+    public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
         public bool NonAuto = true;
@@ -28,11 +26,11 @@ namespace TMGmod
             BaseAccuracy = 0.7f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5pattern"), 27, 12);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(13.5f, 6f);
-            collisionOffset = new Vec2(-13.5f, -6f);
-            collisionSize = new Vec2(27f, 12f);
+            _center = new Vec2(13.5f, 6f);
+            _collisionOffset = new Vec2(-13.5f, -6f);
+            _collisionSize = new Vec2(27f, 12f);
             _barrelOffsetTL = new Vec2(27f, 3f);
             _fireSound = "deepMachineGun";
             _fullAuto = false;
@@ -40,7 +38,7 @@ namespace TMGmod
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
             _editorName = "MP5";
-			weight = 3f;
+			_weight = 3f;
             KforceDSmg = 2f;
             MaxDelaySmg = 50;
             DeltaWait = 0.65f;
@@ -48,24 +46,21 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (owner != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (NonAuto)
                 {
-                    if (NonAuto)
-                    {
-                        NonAuto = false;
-                        BurstNum = 3;
-                        _fireWait = 1.3f;
-                        _sprite.frame += 10;
-                    }
-                    else
-                    {
-                        NonAuto = true;
-                        BurstNum = 1;
-                        _fireWait = 0.3f;
-                        _sprite.frame -= 10;
-                    }
+                    NonAuto = false;
+                    BurstNum = 3;
+                    _fireWait = 1.3f;
+                    _sprite.frame += 10;
+                }
+                else
+                {
+                    NonAuto = true;
+                    BurstNum = 1;
+                    _fireWait = 0.3f;
+                    _sprite.frame -= 10;
                 }
             }
             base.Update();

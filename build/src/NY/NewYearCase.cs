@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
+using TMGmod.Cases.Color;
 
 namespace TMGmod.NY
 {
@@ -32,7 +33,15 @@ namespace TMGmod.NY
                 typeof(GarlandGun),
                 typeof(CandyCane),
                 typeof(SpruceGun),
-                typeof(SnowMgun)
+                typeof(SnowMgun),
+                typeof(PodarokColorB),
+                typeof(PodarokColorC),
+                typeof(PodarokColorY),
+                typeof(PodarokColorR),
+                typeof(PodarokColorB),
+                typeof(PodarokColorC),
+                typeof(PodarokColorY),
+                typeof(PodarokColorR)
             };
             CaseId = 6;
         }

@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
 
@@ -25,10 +23,10 @@ namespace TMGmod
                 bulletSpeed = 60f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("haze"));
-            center = new Vec2(12f, 3f);
-            collisionOffset = new Vec2(-12f, -3f);
-            collisionSize = new Vec2(24f, 12f);
+            _graphic = new Sprite(GetPath("haze"));
+            _center = new Vec2(12f, 3f);
+            _collisionOffset = new Vec2(-12f, -3f);
+            _collisionSize = new Vec2(24f, 12f);
             _barrelOffsetTL = new Vec2(25f, 2f);
             _fireSound = GetPath("sounds/SilencedPistol.wav");
             _fullAuto = true;
@@ -40,7 +38,7 @@ namespace TMGmod
             _editorName = "AF Haze";
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
-			weight = 2f;
+			_weight = 2f;
             _flare = new SpriteMap(GetPath("hazeFlare"), 13, 10) {center = new Vec2(0.0f, 5f)};
         }
 
@@ -74,7 +72,6 @@ namespace TMGmod
 
         public override void Fire()
         {
-
             if (_wait <= 0f)
             {
                 if (duck != null && duck.inputProfile.Down("QUACK") && _heatval < 1f)

@@ -6,15 +6,15 @@ namespace TMGmod.Stuff
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
     [PublicAPI]
-    public sealed class C4Skeet : Holdable
+    public class C4Skeet : Holdable
     {
         public C4Skeet(float xpos, float ypos) : base(xpos, ypos)
         {
-            weight = 8f;
-            graphic = new Sprite(GetPath("c4skeet"));
-            center = new Vec2(4f, 2f);
-            collisionOffset = new Vec2(-4f, -2f);
-            collisionSize = new Vec2(8f, 4f);
+            _weight = 8f;
+            _graphic = new Sprite(GetPath("c4skeet"));
+            _center = new Vec2(4f, 2f);
+            _collisionOffset = new Vec2(-4f, -2f);
+            _collisionSize = new Vec2(8f, 4f);
         }
 
         public override void Update()

@@ -1,14 +1,13 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class ScarGL : Gun
+    public class ScarGL : Gun, IAmAr
     {
         public int Mode;
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));
@@ -67,9 +66,9 @@ namespace TMGmod
             _graphicm[0] = new Sprite(GetPath("scargl1"));
             _graphicm[1] = new Sprite(GetPath("scargl2"));
             _graphicm[2] = new Sprite(GetPath("scargl"));
-            center = new Vec2(16.5f, 5f);
-            collisionOffset = new Vec2(-16.5f, -5f);
-            collisionSize = new Vec2(33f, 11f);
+            _center = new Vec2(16.5f, 5f);
+            _collisionOffset = new Vec2(-16.5f, -5f);
+            _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 3f);
             _holdOffset = new Vec2(2f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
@@ -80,8 +79,8 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.2f;
             _editorName = "SCAR-H With GL";
-			weight = 6f;
-            graphic = _graphicm[_switched ? Mode : 2];
+			_weight = 6f;
+            _graphic = _graphicm[_switched ? Mode : 2];
         }
 
         private void UpdateMode()

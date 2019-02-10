@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
@@ -18,7 +16,7 @@ namespace TMGmod.Custom_Guns
         public TR21C (float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 15;
+            ammo = 24;
             _ammoType = new ATMagnum
             {
                 range = 110f,
@@ -26,15 +24,15 @@ namespace TMGmod.Custom_Guns
                 penetration = 1f,
                 bulletThickness = 0.2f
             };
-            _numBulletsPerFire = 4;
+            _numBulletsPerFire = 9;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21lmg2p"), 22, 14);
-            graphic = _sprite;
+            _graphic = _sprite;
             Teksturka = Rando.Int(0, 3);
             _sprite.frame = Teksturka;
-            center = new Vec2(11f, 6f);
-            collisionOffset = new Vec2(-11f, -6f);
-            collisionSize = new Vec2(22f, 14f);
+            _center = new Vec2(11f, 6f);
+            _collisionOffset = new Vec2(-11f, -6f);
+            _collisionSize = new Vec2(22f, 14f);
             _barrelOffsetTL = new Vec2(22f, 4f);
             _fireSound = "shotgunFire";
             _fullAuto = true;
@@ -44,7 +42,7 @@ namespace TMGmod.Custom_Guns
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(-5f, 2f);
             _editorName = "Crocodile with Extended Mag";
-			weight = 7f;
+			_weight = 7f;
         }
         public override void Draw()
         {

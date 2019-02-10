@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Sniper|Custom")]
@@ -20,10 +18,10 @@ namespace TMGmod.Custom_Guns
                 penetration = 1.5f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("SVUexmag"));
-            center = new Vec2(20f, 8f);
-            collisionOffset = new Vec2(-14.5f, -8f);
-            collisionSize = new Vec2(31f, 11f);
+            _graphic = new Sprite(GetPath("SVUexmag"));
+            _center = new Vec2(20f, 8f);
+            _collisionOffset = new Vec2(-14.5f, -8f);
+            _collisionSize = new Vec2(31f, 11f);
             _barrelOffsetTL = new Vec2(31f, 5f);
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = true;
@@ -33,7 +31,7 @@ namespace TMGmod.Custom_Guns
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(1f, 2f);
             _editorName = "SVU with Ext Mag";
-			weight = 6f;
+			_weight = 6f;
         }
     }
 }

@@ -1,8 +1,6 @@
 using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
@@ -22,10 +20,10 @@ namespace TMGmod
 	        };
             _numBulletsPerFire = 4;
             _type = "gun";
-		    graphic = new Sprite(GetPath("KSG12"));
-		    center = new Vec2(18f, 5.5f);
-		    collisionOffset = new Vec2(-18f, -5.5f);
-		    collisionSize = new Vec2(36f, 11f);
+		    _graphic = new Sprite(GetPath("KSG12"));
+		    _center = new Vec2(18f, 5.5f);
+		    _collisionOffset = new Vec2(-18f, -5.5f);
+		    _collisionSize = new Vec2(36f, 11f);
 		    _barrelOffsetTL = new Vec2(36f, 3f);
             _holdOffset = new Vec2(-1f, 0f);
 		    _fireSound = "shotgunFire2";

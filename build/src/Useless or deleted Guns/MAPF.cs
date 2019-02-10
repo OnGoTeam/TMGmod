@@ -5,6 +5,7 @@ using TMGmod.Core;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
+#if DEBUG
 namespace TMGmod.Useless_or_deleted_Guns
 {
     [BaggedProperty("canSpawn", false)]
@@ -39,7 +40,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(-2f, 3f);
             _editorName = "FEUERFREI";
-			weight = 2.5f;
+            weight = 2.5f;
         }
 
         /*public override void OnPressAction()
@@ -92,3 +93,4 @@ namespace TMGmod.Useless_or_deleted_Guns
 
     }
 }
+#endif

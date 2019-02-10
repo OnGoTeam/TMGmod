@@ -1,22 +1,21 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class MSR : Sniper
+    public class MSR : Sniper, IAmSr
     {
 		
         public MSR(float xval, float yval) : base(xval, yval)
         {
-            graphic = new Sprite(GetPath("MSR"));
-            center = new Vec2(28.5f, 6f);
-            collisionOffset = new Vec2(-28.5f, -6f);
-            collisionSize = new Vec2(47f, 12f);
+            _graphic = new Sprite(GetPath("MSR"));
+            _center = new Vec2(28.5f, 6f);
+            _collisionOffset = new Vec2(-28.5f, -6f);
+            _collisionSize = new Vec2(47f, 12f);
             _barrelOffsetTL = new Vec2(48f, 5f);
             ammo = 5;
             _ammoType = new ATSniper
@@ -30,9 +29,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(14f, -1f);
             _editorName = "MSR";
-			weight = 4.65f;
-			
-
+			_weight = 4.65f;
         }
 
         public override void Draw()
@@ -79,64 +76,65 @@ namespace TMGmod
                     _angleOffset = 0f;
                     handOffset = Vec2.Zero;
                 }
-                if (_loadState == 0)
+
+                switch (_loadState)
                 {
-                    if (!Network.isActive)
+                    case 0:
                     {
-                        SFX.Play("loadSniper");
+                        if (!Network.isActive)
+                        {
+                            SFX.Play("loadSniper");
+                        }
+                        else if (isServerForObject)
+                        {
+                            _netLoad.Play();
+                        }
+                        Sniper sniper = this;
+                        sniper._loadState = sniper._loadState + 1;
+                        break;
                     }
-                    else if (isServerForObject)
-                    {
-                        _netLoad.Play();
-                    }
-                    Sniper sniper = this;
-                    sniper._loadState = sniper._loadState + 1;
-                }
-                else if (_loadState == 1)
-                {
-                    if (_angleOffset >= 0.1f)
+                    case 1 when _angleOffset >= 0.1f:
                     {
                         Sniper sniper1 = this;
                         sniper1._loadState = sniper1._loadState + 1;
+                        break;
                     }
-                    else
-                    {
+                    case 1:
                         _angleOffset = _angleOffset + 0.003f;
-                    }
-                }
-                else if (_loadState == 2)
-                {
-                    handOffset.x = handOffset.x - 0.2f;
-                    if (handOffset.x > 4f)
+                        break;
+                    case 2:
                     {
-                        Sniper sniper2 = this;
-                        sniper2._loadState = sniper2._loadState + 1;
-                        Reload();
-                        loaded = false;
+                        handOffset.x = handOffset.x - 0.2f;
+                        if (handOffset.x > 4f)
+                        {
+                            Sniper sniper2 = this;
+                            sniper2._loadState = sniper2._loadState + 1;
+                            Reload();
+                            loaded = false;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 3)
-                {
-                    handOffset.x = handOffset.x + 0.2f;
-                    if (handOffset.x <= 0f)
+                    case 3:
                     {
-                        Sniper sniper3 = this;
-                        sniper3._loadState = sniper3._loadState + 1;
-                        handOffset.x = 0f;
+                        handOffset.x = handOffset.x + 0.2f;
+                        if (handOffset.x <= 0f)
+                        {
+                            Sniper sniper3 = this;
+                            sniper3._loadState = sniper3._loadState + 1;
+                            handOffset.x = 0f;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 4)
-                {
-                    if (_angleOffset <= 0.03f)
-                    {
+                    case 4 when _angleOffset <= 0.03f:
                         _loadState = -1;
                         loaded = true;
                         _angleOffset = 0f;
-                    }
-                    else
-                    {
+                        break;
+                    case 4:
                         _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.15f);
-                    }
+                        break;
                 }
             }
             laserSight = false;

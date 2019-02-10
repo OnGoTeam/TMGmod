@@ -1,13 +1,11 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MPA27 : BaseBurst
+    public class MPA27 : BaseBurst, IAmSmg
     {
         
         public MPA27(float xval, float yval)
@@ -22,10 +20,10 @@ namespace TMGmod
                 bulletSpeed = 55f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("MPA27"));
-            center = new Vec2(6f, 7f);
-            collisionOffset = new Vec2(-8f, -7f);
-            collisionSize = new Vec2(16f, 14f);
+            _graphic = new Sprite(GetPath("MPA27"));
+            _center = new Vec2(6f, 7f);
+            _collisionOffset = new Vec2(-8f, -7f);
+            _collisionSize = new Vec2(16f, 14f);
             _barrelOffsetTL = new Vec2(16f, 3f);
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = false;
@@ -35,7 +33,7 @@ namespace TMGmod
             maxAccuracyLost = 0.44f;
             _holdOffset = new Vec2(-1f, 3f);
             _editorName = "Vista";
-            weight = 2f;
+            _weight = 2f;
             DeltaWait = 0.1f;
             BurstNum = 3;
         }

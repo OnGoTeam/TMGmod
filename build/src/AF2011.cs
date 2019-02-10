@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
@@ -21,10 +19,10 @@ namespace TMGmod
             };
             _numBulletsPerFire = 2;
             _type = "gun";
-            graphic = new Sprite(GetPath("AF2011"));
-            center = new Vec2(7f, 4f);
-            collisionOffset = new Vec2(-8f, -4f);
-            collisionSize = new Vec2(16f, 10f);
+            _graphic = new Sprite(GetPath("AF2011"));
+            _center = new Vec2(7f, 4f);
+            _collisionOffset = new Vec2(-8f, -4f);
+            _collisionSize = new Vec2(16f, 10f);
             _barrelOffsetTL = new Vec2(16f, 1f);
             _fireSound = "pistolFire";
             _fullAuto = false;
@@ -34,13 +32,11 @@ namespace TMGmod
             maxAccuracyLost = 0f;
             _holdOffset = new Vec2(-1f, 1f);
             _editorName = "AF-2011";
-			weight = 2.5f;
+			_weight = 2.5f;
         }
 
         public override void Fire()
         {
-            
-            
             if (ammo > 0)
             {
                 _ammoType.accuracy = _ammoType.accuracy - 0.05f;
@@ -53,7 +49,6 @@ namespace TMGmod
             if (_ammoType.accuracy + 0.01f < 0.95f)
             {
                 _ammoType.accuracy = _ammoType.accuracy + 0.003f;
-                base.Update();
             }
             else
             {

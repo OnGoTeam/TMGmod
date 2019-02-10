@@ -1,11 +1,10 @@
 ﻿using DuckGame;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class FnFcar: Gun
+    public class FnFcar: BaseAr
     {
         public FnFcar (float xval, float yval)
           : base(xval, yval)
@@ -18,27 +17,28 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("FCARNoBipods"));
-            center = new Vec2(18f, 7f);
-            collisionOffset = new Vec2(-18f, -7f);
-            collisionSize = new Vec2(36f, 14f);
+            _graphic = new Sprite(GetPath("FCARNoBipods"));
+            _center = new Vec2(18f, 7f);
+            _collisionOffset = new Vec2(-18f, -7f);
+            _collisionSize = new Vec2(36f, 14f);
             _barrelOffsetTL = new Vec2(37f, 6f);
             _holdOffset = new Vec2(3f, -1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.775f;
             _kickForce = 0.9f;
+            Kforce2Ar = 0.9f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.45f;
             _editorName = "FN FCAR";
             laserSight = true;
             _laserOffsetTL = new Vec2(19f, 4f);
-			weight = 7f;
+			_weight = 7f;
         }
 
         public override void Update()
         {
-            if (_owner != null && _owner.height < 17f)
+            if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
 				loseAccuracy = 0f;

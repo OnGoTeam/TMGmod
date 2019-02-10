@@ -340,3 +340,5 @@ TMGmod.dll.config
 TMGmodRepo_compiled.hash
 JetBrains.Annotations.dll
 JetBrains.Annotations.xml
+ogtdglib.dll
+build/Resources/BuildDate.txt

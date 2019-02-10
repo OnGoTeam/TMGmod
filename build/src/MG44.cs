@@ -1,13 +1,12 @@
 ﻿using DuckGame;
 using TMGmod.Core;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : Gun, IHaveSkin
+    public class MG44 : Gun, IHaveSkin, IAmLmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -25,7 +24,7 @@ namespace TMGmod
         public MG44(float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 80;
+            ammo = 60;
             _ammoType = new ATMagnum
             {
                 range = 750f,
@@ -34,11 +33,11 @@ namespace TMGmod
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg44reqpattern"), 39, 12);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(19.5f, 6f);
-            collisionOffset = new Vec2(-19.5f, -6f);
-            collisionSize = new Vec2(39f, 12f);
+            _center = new Vec2(19.5f, 6f);
+            _collisionOffset = new Vec2(-19.5f, -6f);
+            _collisionSize = new Vec2(39f, 12f);
             _barrelOffsetTL = new Vec2(40f, 4f);
             _fireSound = "deepMachineGun";
             _fullAuto = true;
@@ -48,7 +47,7 @@ namespace TMGmod
             maxAccuracyLost = 0f;
             _holdOffset = new Vec2(4f, 0f);
             _editorName = "Magnium";
-            weight = 7.5f;
+            _weight = 7.5f;
         }
         public override void Update()
         {

@@ -2,12 +2,10 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class M50 : BaseGun, ISpeedAccuracy
+    public class M50 : BaseGun, ISpeedAccuracy, IAmSr
     {
         public M50 (float xval, float yval)
           : base(xval, yval)
@@ -21,10 +19,10 @@ namespace TMGmod
                 bulletThickness = 2.5f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("m50"));
-            center = new Vec2(20f, 6.5f);
-            collisionOffset = new Vec2(-20f, -6.5f);
-            collisionSize = new Vec2(40f, 13f);
+            _graphic = new Sprite(GetPath("m50"));
+            _center = new Vec2(20f, 6.5f);
+            _collisionOffset = new Vec2(-20f, -6.5f);
+            _collisionSize = new Vec2(40f, 13f);
             _barrelOffsetTL = new Vec2(40f, 6f);
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
@@ -36,7 +34,7 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(31f, 10f);
             _editorName = "M50 with Explosive Ammo";
-			weight = 6.75f;
+			_weight = 6.75f;
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }

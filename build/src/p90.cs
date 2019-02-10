@@ -1,13 +1,13 @@
 ﻿using DuckGame;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using JetBrains.Annotations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
-    public class P90 : Gun
+    [PublicAPI]
+    public class P90 : Gun, IAmSmg
     {
-        // ReSharper disable once MemberCanBePrivate.Global
         public readonly EditorProperty<bool> Elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
         
         public P90(float xval, float yval)
@@ -21,10 +21,10 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("P90"));
-            center = new Vec2(9.5f, 3f);
-            collisionOffset = new Vec2(-8.5f, -3f);
-            collisionSize = new Vec2(19f, 6f);
+            _graphic = new Sprite(GetPath("P90"));
+            _center = new Vec2(9.5f, 3f);
+            _collisionOffset = new Vec2(-8.5f, -3f);
+            _collisionSize = new Vec2(19f, 6f);
             _barrelOffsetTL = new Vec2(19f, 3f);
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
@@ -35,7 +35,7 @@ namespace TMGmod
             _holdOffset = new Vec2(-3f, 0f);
             handOffset = new Vec2(2f, 0f);
             _editorName = "FN P90";
-			weight = 1.5f;
+			_weight = 1.5f;
         }
         public override void Initialize()
         {

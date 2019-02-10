@@ -1,19 +1,18 @@
 ﻿using DuckGame;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : Gun
+    public class MG3 : Gun, IAmLmg
     {
         private bool _bipodes;
 		
 		public MG3 (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 95;
+            ammo = 80;
             _ammoType = new ATMagnum
             {
                 range = 600f,
@@ -21,10 +20,10 @@ namespace TMGmod
                 penetration = 1.5f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("mg3"));
-            center = new Vec2(19.5f, 6f);
-            collisionOffset = new Vec2(-19.5f, -6f);
-            collisionSize = new Vec2(39f, 9f);
+            _graphic = new Sprite(GetPath("mg3"));
+            _center = new Vec2(19.5f, 6f);
+            _collisionOffset = new Vec2(-19.5f, -6f);
+            _collisionSize = new Vec2(39f, 9f);
             _barrelOffsetTL = new Vec2(40f, 4f);
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = true;
@@ -34,11 +33,11 @@ namespace TMGmod
             maxAccuracyLost = 0.1f;
             _holdOffset = new Vec2(4f, 2f);
             _editorName = "MG3";
-			weight = 7f;
+			_weight = 7f;
         }
         public override void Update()
         {
-            if (_owner != null && _owner.height < 17f)
+            if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
 			    loseAccuracy = 0f;

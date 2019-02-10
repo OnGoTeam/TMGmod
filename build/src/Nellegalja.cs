@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
@@ -22,10 +20,10 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("Nellegalja"));
-            center = new Vec2(15f, 5f);
-            collisionOffset = new Vec2(-14.5f, -5f);
-            collisionSize = new Vec2(29f, 11f);
+            _graphic = new Sprite(GetPath("Nellegalja"));
+            _center = new Vec2(15f, 5f);
+            _collisionOffset = new Vec2(-14.5f, -5f);
+            _collisionSize = new Vec2(29f, 11f);
             _barrelOffsetTL = new Vec2(30f, 4f);
             _fireSound = GetPath("sounds/Silenced2.wav");
             _fullAuto = false;
@@ -36,18 +34,15 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(21f, 1.5f);
             _editorName = "Nellegalja Weapon";
-			weight = 4f;
+			_weight = 4f;
         }
         public override void Update()
         {
-            if (owner != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
-                {
-                    laserSight = !laserSight;
-                }
-			}
-		    base.Update();
+                laserSight = !laserSight;
+            }
+            base.Update();
 		}			
 	}
 }

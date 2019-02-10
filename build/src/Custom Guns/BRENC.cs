@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
@@ -23,10 +21,10 @@ namespace TMGmod.Custom_Guns
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("CZ805BrenZ"));
-            center = new Vec2(20.5f, 5.5f);
-            collisionOffset = new Vec2(-20.5f, -5.5f);
-            collisionSize = new Vec2(41f, 11f);
+            _graphic = new Sprite(GetPath("CZ805BrenZ"));
+            _center = new Vec2(20.5f, 5.5f);
+            _collisionOffset = new Vec2(-20.5f, -5.5f);
+            _collisionSize = new Vec2(41f, 11f);
             _barrelOffsetTL = new Vec2(39f, 3.5f);
             _holdOffset = new Vec2(5f, 1f);
             _fireSound = "deepMachineGun2";
@@ -36,45 +34,42 @@ namespace TMGmod.Custom_Guns
             loseAccuracy = 0.025f;
             maxAccuracyLost = 0.2f;
             _editorName = "CZ-805 Civilian";
-			weight = 5f;
+			_weight = 5f;
         }
         public override void Update()
         {
-            if (duck != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (Silencer)
                 {
-					if (Silencer)
-					{
-				        graphic = new Sprite(GetPath("CZ805BrenZ"));
-                        _fireSound = "deepMachineGun2";
-                        _ammoType = new AT9mm
-                        {
-                            range = 500f,
-                            accuracy = 0.87f
-                        };
-                        loseAccuracy = 0.025f;
-                        maxAccuracyLost = 0.2f;
-                        _barrelOffsetTL = new Vec2(39f, 4f);
-			            Silencer = false;
-					}
-                    else
-					{
-				        graphic = new Sprite(GetPath("CZ805BrenZS"));
-                        _fireSound = GetPath("sounds/Silenced2.wav");
-                        _ammoType = new AT9mmS
-                        {
-                            range = 550f,
-                            accuracy = 0.95f
-                        };
-                        loseAccuracy = 0.02f;
-                        maxAccuracyLost = 0.18f;
-                        _barrelOffsetTL = new Vec2(42.5f, 4f);
-			            Silencer = true;
-					}
-				}
-			}
-		    base.Update();
+                    graphic = new Sprite(GetPath("CZ805BrenZ"));
+                    _fireSound = "deepMachineGun2";
+                    _ammoType = new AT9mm
+                    {
+                        range = 500f,
+                        accuracy = 0.87f
+                    };
+                    loseAccuracy = 0.025f;
+                    maxAccuracyLost = 0.2f;
+                    _barrelOffsetTL = new Vec2(39f, 4f);
+                    Silencer = false;
+                }
+                else
+                {
+                    graphic = new Sprite(GetPath("CZ805BrenZS"));
+                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    _ammoType = new AT9mmS
+                    {
+                        range = 550f,
+                        accuracy = 0.95f
+                    };
+                    loseAccuracy = 0.02f;
+                    maxAccuracyLost = 0.18f;
+                    _barrelOffsetTL = new Vec2(42.5f, 4f);
+                    Silencer = true;
+                }
+            }
+            base.Update();
 		}			
 	}
 }

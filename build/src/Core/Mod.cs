@@ -2,20 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Properties;
 
 // ReSharper disable RedundantOverriddenMember
-
-//Титры, что будут в меню
-[assembly: AssemblyTitle("TMG Mod")]
-[assembly: AssemblyCompany("OGT")]
-[assembly: AssemblyDescription("Current update: Holy Rework")]
-[assembly: AssemblyVersion("1.1.*")]
-
  
 namespace TMGmod.Core
 {
@@ -23,6 +16,7 @@ namespace TMGmod.Core
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
     {
+        internal string Bdate = Resources.BuildDate;
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         // ReSharper disable once MemberCanBePrivate.Global
 		internal static string AssemblyName { get; private set; }

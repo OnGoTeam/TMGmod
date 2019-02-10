@@ -14,7 +14,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\</OutputPath>
+    <OutputPath>..\..\TMGmod\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -27,19 +27,33 @@
     <OutputPath>..\..\TMGmod\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Workshop|x86'">
+    <OutputPath>..\..\TMGmod\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>TRACE;WORKSHOP</DefineConstants>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <Import Project="dglink.csproj" />
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=2018.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>packages\JetBrains.Annotations.2018.2.1\lib\net20\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=2018.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.Annotations.2018.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="ogtdglib, Version=0.0.6948.40475, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\ogtdglib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,6 +63,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,6 +83,10 @@
     <Compile Include="src\BarretM98.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoType.cs" />
     <Compile Include="src\Core\Nothing.cs" />
+    <Compile Include="src\Core\WClasses\IAmAr.cs" />
+    <Compile Include="src\Core\WClasses\IAmLmg.cs" />
+    <Compile Include="src\Core\WClasses\IAmSmg.cs" />
+    <Compile Include="src\Core\WClasses\IAmSr.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
     <Compile Include="src\NY\ATSnow.cs" />
@@ -155,6 +174,7 @@
     <Compile Include="src\MG44.cs" />
     <Compile Include="src\Mixaly4.cs" />
     <Compile Include="src\Stuff\Wire.cs" />
+    <Compile Include="src\SuperFe.cs" />
     <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
     <Compile Include="src\mp7.cs" />
@@ -194,18 +214,11 @@
     <Compile Include="src\X3X.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\BuildDate.txt" />
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="src\Core\Bullets\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -215,15 +228,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF NOT $(SolutionDir)  == $(TargetDir)build\ (
-    ECHO Please, check for overlapping of different builds
-)
-IF $(ConfigurationName) == "Debug" (
-    EXIT
-)
-IF NOT $(SolutionDir)  == $(TargetDir)build\ (
     ECHO Transferring
     CD $(SolutionDir)
     CD ..
@@ -238,8 +252,7 @@ IF EXIST TMGmod.zip (
 )</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>echo %25date%25 %25time%25 &gt; "$(ProjectDir)\Resources\BuildDate.txt"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

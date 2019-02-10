@@ -1,12 +1,11 @@
 ﻿using DuckGame;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     // ReSharper disable once InconsistentNaming
-    public class SNR22 : Gun
+    public class SNR22 : Gun, IAmDmr
     {
         public SNR22 (float xval, float yval)
           : base(xval, yval)
@@ -19,10 +18,10 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("SNR22"));
-            center = new Vec2(14f, 6f);
-            collisionOffset = new Vec2(-14.5f, -5f);
-            collisionSize = new Vec2(33f, 10f);
+            _graphic = new Sprite(GetPath("SNR22"));
+            _center = new Vec2(14f, 6f);
+            _collisionOffset = new Vec2(-14.5f, -5f);
+            _collisionSize = new Vec2(33f, 10f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
@@ -34,11 +33,11 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
-			weight = 6f;
+			_weight = 6f;
         }
-          public override void Update()
+        public override void Update()
         {
-            if (_owner != null && _owner.height < 17f)
+            if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
 				loseAccuracy = 0f;
@@ -54,5 +53,11 @@ namespace TMGmod
             }
             base.Update();
         }
-	}
+        public override void UpdateOnFire()
+        {
+            loseAccuracy += 0.15f;
+            base.UpdateOnFire();
+        }
+
+    }
 }

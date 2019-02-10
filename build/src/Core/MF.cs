@@ -2,8 +2,7 @@
 using DuckGame;
 using TMGmod.Useless_or_deleted_Guns;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
+#if DEBUG
 namespace TMGmod.Core
 {
     [Obsolete]
@@ -23,16 +22,16 @@ namespace TMGmod.Core
             _sprite.AddAnimation("burn", 0.2f + Rando.Float(0.2f), true, 0, 1, 2, 3, 4);
             _sprite.SetAnimation("burn");
             _sprite.imageIndex = Rando.Int(4);
-            graphic = _sprite;
-            center = new Vec2(8f, 8f);
-            collisionOffset = new Vec2(-4f, -2f);
-            collisionSize = new Vec2(8f, 4f);
+            _graphic = _sprite;
+            _center = new Vec2(8f, 8f);
+            _collisionOffset = new Vec2(-4f, -2f);
+            _collisionSize = new Vec2(8f, 4f);
             depth = -0.5f;
             thickness = 1f;
-            weight = 1f;
+            _weight = 1f;
             breakForce = 9999999f;
             _owner = owner;
-            weight = 0.5f;
+            _weight = 0.5f;
             gravMultiplier = 0.7f;
             _numFlames = numFlames;
         }
@@ -96,3 +95,4 @@ namespace TMGmod.Core
         }
     }
 }
+#endif

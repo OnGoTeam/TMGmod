@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
@@ -24,21 +22,21 @@ namespace TMGmod
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARX200pattern"), 33, 14);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(16f, 7f);
-            collisionOffset = new Vec2(-16.5f, -7f);
-            collisionSize = new Vec2(33f, 14f);
+            _center = new Vec2(16f, 7f);
+            _collisionOffset = new Vec2(-16.5f, -7f);
+            _collisionSize = new Vec2(33f, 14f);
             _barrelOffsetTL = new Vec2(33f, 5.5f);
             _holdOffset = new Vec2(1f, -1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
             _fireWait = 0.65f;
-            _kickForce = 0.7f;
+            _kickForce = 1.1f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
             _editorName = "Beretta ARX-200";
-			weight = 5.75f;
+			_weight = 6f;
         }
 
         public int FrameId

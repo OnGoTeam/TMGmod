@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
@@ -25,11 +23,11 @@ namespace TMGmod
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417pattern"), 30, 10);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 5;
-            center = new Vec2(15f, 5f);
-            collisionOffset = new Vec2(-14.5f, -5f);
-            collisionSize = new Vec2(30f, 10f);
+            _center = new Vec2(15f, 5f);
+            _collisionOffset = new Vec2(-14.5f, -5f);
+            _collisionSize = new Vec2(30f, 10f);
             _barrelOffsetTL = new Vec2(31f, 3f);
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = false;
@@ -38,7 +36,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _editorName = "Hk-417C";
-			weight = 3.5f;
+			_weight = 3.5f;
         }
         public int FrameId
         {

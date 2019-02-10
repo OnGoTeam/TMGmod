@@ -1,7 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod.Custom_Guns
 {
@@ -20,10 +19,10 @@ namespace TMGmod.Custom_Guns
                 penetration = 1.5f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("mg44reqnato2"));
-            center = new Vec2(19.5f, 6f);
-            collisionOffset = new Vec2(-19.5f, -6f);
-            collisionSize = new Vec2(39f, 12f);
+            _graphic = new Sprite(GetPath("mg44reqnato2"));
+            _center = new Vec2(19.5f, 6f);
+            _collisionOffset = new Vec2(-19.5f, -6f);
+            _collisionSize = new Vec2(39f, 12f);
             _barrelOffsetTL = new Vec2(40f, 4f);
             _fireSound = "deepMachineGun";
             _fullAuto = true;
@@ -33,7 +32,7 @@ namespace TMGmod.Custom_Guns
             maxAccuracyLost = 0f;
             _holdOffset = new Vec2(4f, 0f);
             _editorName = "Magnium with NATO Mag";
-			weight = 6f;
+			_weight = 6f;
             BaseAccuracy = 0.75f;
             MinAccuracy = 0.7f;
             Kforce1Lmg = 0.2f;

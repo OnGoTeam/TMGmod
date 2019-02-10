@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
@@ -28,11 +26,11 @@ namespace TMGmod
 		    };
 		    _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ805Brenpattern"), 41, 11);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(20.5f, 5.5f);
-            collisionOffset = new Vec2(-20.5f, -5.5f);
-            collisionSize = new Vec2(41f, 11f);
+            _center = new Vec2(20.5f, 5.5f);
+            _collisionOffset = new Vec2(-20.5f, -5.5f);
+            _collisionSize = new Vec2(41f, 11f);
             _barrelOffsetTL = new Vec2(39f, 3.5f);
             _holdOffset = new Vec2(5f, 1f);
             _fireSound = "deepMachineGun2";
@@ -42,45 +40,42 @@ namespace TMGmod
             loseAccuracy = 0.025f;
             maxAccuracyLost = 0.32f;
             _editorName = "CZ-805 BREN";
-			weight = 5f;
+			_weight = 5f;
 		    Kforce2Ar = 0.7f;
         }
         public override void Update()
         {
-            if (duck != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (Silencer)
                 {
-                    if (Silencer)
+                    FrameId -= 50;
+                    _fireSound = "deepMachineGun2";
+                    _ammoType = new AT9mm
                     {
-                        FrameId -= 50;
-                        _fireSound = "deepMachineGun2";
-                        _ammoType = new AT9mm
-                        {
-                            range = 400f,
-                            accuracy = 0.87f
-                        };
-                        loseAccuracy = 0.025f;
-                        maxAccuracyLost = 0.32f;
-                        _barrelOffsetTL = new Vec2(39f, 4f);
-                        Silencer = !Silencer;
-                        _flare = new SpriteMap("smallFlare", 11, 10);
-                    }
-                    else
+                        range = 400f,
+                        accuracy = 0.87f
+                    };
+                    loseAccuracy = 0.025f;
+                    maxAccuracyLost = 0.32f;
+                    _barrelOffsetTL = new Vec2(39f, 4f);
+                    Silencer = !Silencer;
+                    _flare = new SpriteMap("smallFlare", 11, 10);
+                }
+                else
+                {
+                    FrameId += 50;
+                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    _ammoType = new AT9mmS
                     {
-                        FrameId += 50;
-                        _fireSound = GetPath("sounds/Silenced2.wav");
-                        _ammoType = new AT9mmS
-                        {
-                            range = 470f,
-                            accuracy = 0.95f
-                        };
-                        loseAccuracy = 0.02f;
-                        maxAccuracyLost = 0.3f;
-                        _barrelOffsetTL = new Vec2(42.5f, 4f);
-                        Silencer = !Silencer;
-                        _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    }
+                        range = 470f,
+                        accuracy = 0.95f
+                    };
+                    loseAccuracy = 0.02f;
+                    maxAccuracyLost = 0.3f;
+                    _barrelOffsetTL = new Vec2(42.5f, 4f);
+                    Silencer = !Silencer;
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
             }
 

@@ -1,21 +1,20 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
-
-// ReSharper disable VirtualMemberCallInConstructor
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class SV99 : Sniper
+    public class SV99 : Sniper, IAmSr
     {
         public SV99(float xval, float yval) : base(xval, yval)
         {
-            graphic = new Sprite(GetPath("SV99"));
-            center = new Vec2(13.5f, 4.5f);
-            collisionOffset = new Vec2(-13.5f, -4.5f);
-            collisionSize = new Vec2(27f, 9f);
+            _graphic = new Sprite(GetPath("SV99"));
+            _center = new Vec2(13.5f, 4.5f);
+            _collisionOffset = new Vec2(-13.5f, -4.5f);
+            _collisionSize = new Vec2(27f, 9f);
             _barrelOffsetTL = new Vec2(28f, 5f);
             ammo = 6;
             _ammoType = new AT9mm
@@ -31,15 +30,15 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 0f);
 			_manualLoad = true;
             _editorName = "SV-99";
-			weight = 2f;
+			_weight = 2f;
 		}
         
         public override void Update()
 		{
 			base.Update();
 			if (_loadState > -1)
-			{
-				if (owner == null)
+            {
+                if (owner == null)
 				{
 					if (_loadState == 2)
 					{
@@ -49,63 +48,62 @@ namespace TMGmod
 					_angleOffset = 0f;
 					handOffset = Vec2.Zero;
 				}
-				if (_loadState == 0)
-				{
-				    if (!Network.isActive)
-				    {
-				        SFX.Play("loadSniper");
-				    }
-				    else if (isServerForObject)
-				    {
-				        _netLoad.Play();
-				    }
-                    _loadState++;
-				}
-				else if (_loadState == 1)
-				{
-					if (_angleOffset < 0.16f)
-					{
-						_angleOffset = MathHelper.Lerp(_angleOffset, 0.25f, 0.25f);
-					}
-					else
-					{
-						_loadState++;
-					}
-				}
-				else if (_loadState == -1)
-				{
-					handOffset.x = handOffset.x + 0.8f;
-					if (handOffset.x > 4f)
-					{
-						_loadState++;
-						Reload();
-						loaded = false;
-					}
-				}
-				else if (_loadState == 3)
-				{
-					handOffset.x = handOffset.x - 0.8f;
-					if (handOffset.x <= 0f)
-					{
-						_loadState++;
-						handOffset.x = 0f;
-					}
-				}
-				else if (_loadState == 4)
-				{
-					if (_angleOffset > 0.04f)
-					{
-						_angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.25f);
-					}
-					else
-					{
-						_loadState = -1;
-						loaded = true;
-						_angleOffset = 0f;
-					}
-				}
-			}
-			if (loaded && owner != null && _loadState == -1)
+
+                switch (_loadState)
+                {
+                    case 0:
+                    {
+                        if (!Network.isActive)
+                        {
+                            SFX.Play("loadSniper");
+                        }
+                        else if (isServerForObject)
+                        {
+                            _netLoad.Play();
+                        }
+                        _loadState++;
+                        break;
+                    }
+                    case 1 when _angleOffset < 0.16f:
+                        _angleOffset = MathHelper.Lerp(_angleOffset, 0.25f, 0.25f);
+                        break;
+                    case 1:
+                        _loadState++;
+                        break;
+                    case -1:
+                    {
+                        handOffset.x = handOffset.x + 0.8f;
+                        if (handOffset.x > 4f)
+                        {
+                            _loadState++;
+                            Reload();
+                            loaded = false;
+                        }
+
+                        break;
+                    }
+                    case 3:
+                    {
+                        handOffset.x = handOffset.x - 0.8f;
+                        if (handOffset.x <= 0f)
+                        {
+                            _loadState++;
+                            handOffset.x = 0f;
+                        }
+
+                        break;
+                    }
+                    case 4 when _angleOffset > 0.04f:
+                        _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.25f);
+                        break;
+                    case 4:
+                        _loadState = -1;
+                        loaded = true;
+                        _angleOffset = 0f;
+                        break;
+                }
+            }
+			if (loaded && duck != null && _loadState == -1)
 			{
 				laserSight = false;
 				return;

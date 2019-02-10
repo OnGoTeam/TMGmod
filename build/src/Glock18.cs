@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|AutoPistol")]
@@ -20,10 +18,10 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("Glock17"));
-            center = new Vec2(8f, 3f);
-            collisionOffset = new Vec2(-7.5f, -3.5f);
-            collisionSize = new Vec2(16f, 11f);
+            _graphic = new Sprite(GetPath("Glock17"));
+            _center = new Vec2(8f, 3f);
+            _collisionOffset = new Vec2(-7.5f, -3.5f);
+            _collisionSize = new Vec2(16f, 11f);
             _barrelOffsetTL = new Vec2(16f, 1f);
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
@@ -32,7 +30,7 @@ namespace TMGmod
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.2f;
             _editorName = "Glock 18";
-			weight = 1.7f;
+			_weight = 1.7f;
         }
         public override void OnHoldAction()
         {

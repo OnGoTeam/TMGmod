@@ -1,12 +1,10 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
-    public class DragoShot : BaseBurst
+    public class DragoShot : BaseBurst, IAmSr
     {
         public float Counter;
         public StateBinding CounterBinding = new StateBinding(nameof(Counter));
@@ -27,10 +25,10 @@ namespace TMGmod
             };
             _numBulletsPerFire = 8;
             _type = "gun";
-            graphic = new Sprite(GetPath("DragoShot"));
-            center = new Vec2(17f, 7f);
-            collisionOffset = new Vec2(-14f, -7f);
-            collisionSize = new Vec2(29f, 11f);
+            _graphic = new Sprite(GetPath("DragoShot"));
+            _center = new Vec2(17f, 7f);
+            _collisionOffset = new Vec2(-14f, -7f);
+            _collisionSize = new Vec2(29f, 11f);
             _barrelOffsetTL = new Vec2(30f, 2.5f);
             _fireSound = "shotgunFire";
             _fullAuto = false;
@@ -42,7 +40,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(23f, 3f);
             _holdOffset = new Vec2(0f, 3f);
             _editorName = "DragoShot";
-			weight = 5f;
+			_weight = 5f;
             DeltaWait = 0.15f;
             BurstNum = 1;
         }

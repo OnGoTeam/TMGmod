@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
@@ -16,13 +14,13 @@ namespace TMGmod.Stuff
         {
             Hp = 1000f;
             _sprite = new SpriteMap(GetPath("Montagne"), 4, 23);
-            graphic = _sprite;
-            center = new Vec2(2f, 11.5f);
-            collisionOffset = new Vec2(-2f, -11.5f);
-            collisionSize = new Vec2(4f, 23f);
+            _graphic = _sprite;
+            _center = new Vec2(2f, 11.5f);
+            _collisionOffset = new Vec2(-2f, -11.5f);
+            _collisionSize = new Vec2(4f, 23f);
             physicsMaterial = PhysicsMaterial.Metal;
             thickness = 10f;
-            weight = 8f;
+            _weight = 8f;
             throwSpeedMultiplier = 0f;
             _canRaise = false;
         }

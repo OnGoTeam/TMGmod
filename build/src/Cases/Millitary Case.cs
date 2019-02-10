@@ -4,8 +4,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Custom_Guns;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
@@ -17,13 +15,13 @@ namespace TMGmod.Cases
         public Mpodarok (float xval, float yval)
           : base(xval, yval)
         {
-            graphic = new Sprite(GetPath("MillitaryCase"));
-		    center = new Vec2(7f, 4f);
-            collisionOffset = new Vec2(-7f, -4f);
-            collisionSize = new Vec2(14f, 8f);
+            _graphic = new Sprite(GetPath("MillitaryCase"));
+		    _center = new Vec2(7f, 4f);
+            _collisionOffset = new Vec2(-7f, -4f);
+            _collisionSize = new Vec2(14f, 8f);
             depth = -0.5f;
             thickness = 0.0f;
-            weight = 3f;
+            _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Millitary Container";
         }

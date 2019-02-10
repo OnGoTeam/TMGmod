@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|AutoPistol")]
@@ -24,10 +22,10 @@ namespace TMGmod
 
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("VAG731"));
-            center = new Vec2(8f, 3f);
-            collisionOffset = new Vec2(-7.5f, -3.5f);
-            collisionSize = new Vec2(16f, 11f);
+            _graphic = new Sprite(GetPath("VAG731"));
+            _center = new Vec2(8f, 3f);
+            _collisionOffset = new Vec2(-7.5f, -3.5f);
+            _collisionSize = new Vec2(16f, 11f);
             _barrelOffsetTL = new Vec2(16f, 1f);
             _holdOffset = new Vec2(-2f, -3.5f);
             _fireSound = GetPath("sounds/2.wav");
@@ -37,35 +35,32 @@ namespace TMGmod
             loseAccuracy = 0.075f;
             maxAccuracyLost = 0.225f;
             _editorName = "Dominator";
-			weight = 2f;
+			_weight = 2f;
         }
         public override void Update()
         {
-            if (duck != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (Mode > 0f && Mode < 2f)
                 {
-					if (Mode > 0f && Mode < 2f)
-					{
-				        graphic = new Sprite(GetPath("VAG732"));
-						_fireWait = 0.6f;
-						Mode = 2f;
-					}
-                    else if (Mode > 1f && Mode < 3f)
-					{
-				        graphic = new Sprite(GetPath("VAG733"));
-						_fireWait = 0.9f;
-						Mode = 3f;
-					}
-                    else if (Mode > 2f && Mode < 4f)
-					{
-				        graphic = new Sprite(GetPath("VAG731"));
-						_fireWait = 0.3f;
-						Mode = 1f;
-					}
-				}
-			}
-		    base.Update();
+                    graphic = new Sprite(GetPath("VAG732"));
+                    _fireWait = 0.6f;
+                    Mode = 2f;
+                }
+                else if (Mode > 1f && Mode < 3f)
+                {
+                    graphic = new Sprite(GetPath("VAG733"));
+                    _fireWait = 0.9f;
+                    Mode = 3f;
+                }
+                else if (Mode > 2f && Mode < 4f)
+                {
+                    graphic = new Sprite(GetPath("VAG731"));
+                    _fireWait = 0.3f;
+                    Mode = 1f;
+                }
+            }
+            base.Update();
 		}
 
         public override void Reload(bool shell = true)
