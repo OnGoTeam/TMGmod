@@ -169,6 +169,7 @@
     <Compile Include="src\MG44.cs" />
     <Compile Include="src\Mixaly4.cs" />
     <Compile Include="src\Stuff\Wire.cs" />
+    <Compile Include="src\SuperFe.cs" />
     <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
     <Compile Include="src\mp7.cs" />
