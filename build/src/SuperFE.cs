@@ -9,7 +9,8 @@ namespace TMGmod
     {
         public SuperFe(float xval, float yval) : base(xval, yval)
         {
-            _kickForce = 12f;
+            ammo = 666;
+            _kickForce = 2f;
             _editorName = "SFE";
         }
 
