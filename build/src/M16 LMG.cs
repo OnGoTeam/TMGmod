@@ -13,7 +13,7 @@ namespace TMGmod
 		public M16LMG (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 95;
+            ammo = 60;
             _ammoType = new ATMagnum
             {
                 range = 345f,

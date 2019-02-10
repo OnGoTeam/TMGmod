@@ -39,8 +39,6 @@ namespace TMGmod
 
         public override void Fire()
         {
-            
-            
             if (ammo > 0)
             {
                 _ammoType.accuracy = _ammoType.accuracy - 0.05f;
@@ -53,7 +51,6 @@ namespace TMGmod
             if (_ammoType.accuracy + 0.01f < 0.95f)
             {
                 _ammoType.accuracy = _ammoType.accuracy + 0.003f;
-                base.Update();
             }
             else
             {

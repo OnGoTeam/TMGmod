@@ -50,29 +50,26 @@ namespace TMGmod
 		}
         public override void Update()
         {
-            if (duck != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (Stock)
                 {
-                    if (Stock)
-                    {
-                        _sprite.SetAnimation("base");
-                        _ammoType.accuracy = 1f;
-                        loseAccuracy = 0f;
-                        Stock = false;
-                        weight = 5.5f;
-                    }
-                    else
-                    {
-                        _sprite.SetAnimation("stock");
-                        _ammoType.accuracy = 0.92f;
-                        loseAccuracy = 0.045f;
-                        Stock = true;
-                        weight = 3f;
-                    }
+                    _sprite.SetAnimation("base");
+                    _ammoType.accuracy = 1f;
+                    loseAccuracy = 0f;
+                    Stock = false;
+                    weight = 5.5f;
                 }
-			}
-		    base.Update();
+                else
+                {
+                    _sprite.SetAnimation("stock");
+                    _ammoType.accuracy = 0.92f;
+                    loseAccuracy = 0.045f;
+                    Stock = true;
+                    weight = 3f;
+                }
+            }
+            base.Update();
 		}
     }
 }

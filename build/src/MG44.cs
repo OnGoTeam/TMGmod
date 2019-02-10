@@ -25,7 +25,7 @@ namespace TMGmod
         public MG44(float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 80;
+            ammo = 60;
             _ammoType = new ATMagnum
             {
                 range = 750f,

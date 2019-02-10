@@ -1,11 +1,12 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class FnFcar: Gun
+    public class FnFcar: BaseAr
     {
         public FnFcar (float xval, float yval)
           : base(xval, yval)
@@ -28,6 +29,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.775f;
             _kickForce = 0.9f;
+            Kforce2Ar = 0.9f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.45f;
             _editorName = "FN FCAR";

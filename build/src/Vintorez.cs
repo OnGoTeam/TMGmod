@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class Vintorez : BaseGun, ISpeedAccuracy, IHspeedKforce
+    public class Vintorez : BaseAr, ISpeedAccuracy
     {
 
         private readonly SpriteMap _sprite;
@@ -54,9 +54,7 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float Kforce1Ar { get; }
-        public float Kforce2Ar { get; }
+        
         public float MuAccuracySr { get; }
         public float LambdaAccuracySr { get; }
     }

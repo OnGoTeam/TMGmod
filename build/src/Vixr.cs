@@ -45,29 +45,26 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (duck != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (Stockngrip)
                 {
-                    if (Stockngrip)
-                    {
-                        graphic = new Sprite(GetPath("VixrStock"));
-                        loseAccuracy = 0.099f;
-                        maxAccuracyLost = 0.17f;
-                        Stockngrip = false;
-                        weight = 3.9f;
-                    }
-                    else
-                    {
-                        graphic = new Sprite(GetPath("VixrNoStock"));
-                        loseAccuracy = 0.13f;
-                        maxAccuracyLost = 0.4f;
-                        Stockngrip = true;
-                        weight = 2f;
-                    }
+                    graphic = new Sprite(GetPath("VixrStock"));
+                    loseAccuracy = 0.099f;
+                    maxAccuracyLost = 0.17f;
+                    Stockngrip = false;
+                    weight = 3.9f;
                 }
-			}
-		    base.Update();
+                else
+                {
+                    graphic = new Sprite(GetPath("VixrNoStock"));
+                    loseAccuracy = 0.13f;
+                    maxAccuracyLost = 0.4f;
+                    Stockngrip = true;
+                    weight = 2f;
+                }
+            }
+            base.Update();
         }
     }
 }

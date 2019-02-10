@@ -39,7 +39,7 @@ namespace TMGmod
 
         public override void Reload(bool shell = true)
         {
-            if (ammo != 0)
+            if (ammo > 0)
             {
                 --ammo;
             }
