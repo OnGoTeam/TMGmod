@@ -1,6 +1,9 @@
-﻿namespace TMGmod.Core.WClasses
+﻿using System;
+
+namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseBolt:BaseGun, ISpeedAccuracy
+    [Obsolete]
+    public abstract class BaseBolt:BaseGun, ISpeedAccuracy, IAmSr
     {
         protected BaseBolt(float xval, float yval) : base(xval, yval)
         {

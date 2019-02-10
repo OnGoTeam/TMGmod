@@ -5,7 +5,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class AN94 : BaseBurst
+    public class AN94 : BaseBurst, IHspeedKforce, IAmAr
     {
         private readonly SpriteMap _sprite;
 
@@ -29,7 +29,9 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 0.1f;
+            Kforce1Ar = 0.07f;
             _kickForce = 0.9f;
+            Kforce2Ar = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
             _editorName = "AN94";
@@ -73,5 +75,8 @@ namespace TMGmod
             }
             base.Initialize();
         }
-	}
+
+        public float Kforce1Ar { get; }
+        public float Kforce2Ar { get; }
+    }
 }
