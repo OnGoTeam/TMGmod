@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
@@ -24,10 +22,10 @@ namespace TMGmod
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ75a"), 12, 8);
-            graphic = _sprite;
-            center = new Vec2(8f, 3f);
-            collisionOffset = new Vec2(-7.5f, -3.5f);
-            collisionSize = new Vec2(15f, 9f);
+            _graphic = _sprite;
+            _center = new Vec2(8f, 3f);
+            _collisionOffset = new Vec2(-7.5f, -3.5f);
+            _collisionSize = new Vec2(15f, 9f);
             _barrelOffsetTL = new Vec2(16f, 1f);
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
@@ -36,7 +34,7 @@ namespace TMGmod
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             _editorName = "CZ-75";
-			weight = 1f;
+			_weight = 1f;
             _sprite.AddAnimation("haventmagaz", 0.3f, false, 1);
             _sprite.AddAnimation("havemagaz", 0.3f, false, 0);
             _sprite.SetAnimation("havemagaz");
@@ -63,6 +61,9 @@ namespace TMGmod
                         Level.Add(new Czmag(x - 5, y));
                     _sprite.SetAnimation("haventmagaz");
                     _fdelay = 40;
+                    break;
+                default:
+                    DoAmmoClick();
                     break;
             }            
         }

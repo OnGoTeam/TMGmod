@@ -2,8 +2,6 @@ using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
@@ -20,13 +18,13 @@ namespace TMGmod.Stuff
         {
             Hp = 25f;
             _sprite = new SpriteMap(GetPath("WireYes"), 48, 6);
-            graphic = _sprite;
+            _graphic = _sprite;
             Teksturka = Rando.Int(0, 3);
-            center = new Vec2(24f, 3f);
-            collisionOffset = new Vec2(-24f, -3f);
-            collisionSize = new Vec2(48f, 6f);
+            _center = new Vec2(24f, 3f);
+            _collisionOffset = new Vec2(-24f, -3f);
+            _collisionSize = new Vec2(48f, 6f);
             thickness = 3f;
-            weight = 40f;
+            _weight = 40f;
             throwSpeedMultiplier = 0f;
         }
         public override void Update()

@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
@@ -27,10 +25,10 @@ namespace TMGmod
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ALFASM"), 38, 9);
-		    graphic = _sprite;
-            center = new Vec2(19f, 4.5f);
-            collisionOffset = new Vec2(-19f, -4.5f);
-            collisionSize = new Vec2(38f, 9f);
+		    _graphic = _sprite;
+            _center = new Vec2(19f, 4.5f);
+            _collisionOffset = new Vec2(-19f, -4.5f);
+            _collisionSize = new Vec2(38f, 9f);
             _barrelOffsetTL = new Vec2(38f, 2.5f);
             _holdOffset = new Vec2(5f, 0f);
             _fireSound = "deepMachineGun2";
@@ -42,7 +40,7 @@ namespace TMGmod
             loseAccuracy = 0f;
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";
-			weight = 5.5f;
+			_weight = 5.5f;
             _laserOffsetTL = new Vec2(31f, 4f);
             laserSight = true;
 		    _sprite.AddAnimation("base", 0f, false, 0);

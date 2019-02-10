@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
@@ -27,11 +25,11 @@ namespace TMGmod
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("UziProSpattern"), 16, 10);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(8f, 5f);
-            collisionOffset = new Vec2(-8f, -5f);
-            collisionSize = new Vec2(16f, 10f);
+            _center = new Vec2(8f, 5f);
+            _collisionOffset = new Vec2(-8f, -5f);
+            _collisionSize = new Vec2(16f, 10f);
             _barrelOffsetTL = new Vec2(11f, 3f);
             _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
@@ -43,43 +41,40 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(9f, 6f);
             _editorName = "Uzi Pro";
-			weight = 2.5f;
+			_weight = 2.5f;
         }
         public override void Update()
         {
-            if (duck != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
+                if (Silencer)
                 {
-					if (Silencer)
-					{
-                        _sprite.frame -= 10;
-                        _ammoType = new AT9mm
-                        {
-                            range = 70f,
-                            accuracy = 0.9f,
-                            penetration = 1f
-                        };
-                        _barrelOffsetTL = new Vec2(11f, 3f);	
-						Silencer = false;
-                        _fireSound = GetPath("sounds/smg.wav");
-					}
-                    else
-					{
-                        _sprite.frame += 10;
-                        _ammoType = new AT9mmS
-                        {
-                            range = 100f,
-                            accuracy = 1f,
-                            penetration = 0f
-                        };
-                        _barrelOffsetTL = new Vec2(17f, 3f);			 
-	 					Silencer = true;
-                        _fireSound = GetPath("sounds/SilencedPistol.wav");
-					}
-				}
-			}
-		    base.Update();
+                    _sprite.frame -= 10;
+                    _ammoType = new AT9mm
+                    {
+                        range = 70f,
+                        accuracy = 0.9f,
+                        penetration = 1f
+                    };
+                    _barrelOffsetTL = new Vec2(11f, 3f);	
+                    Silencer = false;
+                    _fireSound = GetPath("sounds/smg.wav");
+                }
+                else
+                {
+                    _sprite.frame += 10;
+                    _ammoType = new AT9mmS
+                    {
+                        range = 100f,
+                        accuracy = 1f,
+                        penetration = 0f
+                    };
+                    _barrelOffsetTL = new Vec2(17f, 3f);			 
+                    Silencer = true;
+                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                }
+            }
+            base.Update();
         }
 
         public int FrameId

@@ -2,8 +2,6 @@
 using JetBrains.Annotations;
 using TMGmod.Core;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     //[yee] switch
@@ -22,10 +20,10 @@ namespace TMGmod
                 accuracy = 0.9f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("MP7"));
-            center = new Vec2(12f, 4f);
-            collisionOffset = new Vec2(-12f, -4f);
-            collisionSize = new Vec2(20f, 10f);
+            _graphic = new Sprite(GetPath("MP7"));
+            _center = new Vec2(12f, 4f);
+            _collisionOffset = new Vec2(-12f, -4f);
+            _collisionSize = new Vec2(20f, 10f);
             _barrelOffsetTL = new Vec2(20f, 3f);
             _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
@@ -35,42 +33,39 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
             _editorName = "MP7";
-            weight = 3f;
+            _weight = 3f;
         }
 
         public override void Update()
         {
             base.Update();
-            if (duck != null)
+            if (duck?.inputProfile.Down("UP") == true && !_raised)
             {
-                if (duck.inputProfile.Down("UP") && !_raised)
+                if (offDir < 0)
                 {
-                    if (offDir < 0)
-                    {
-                        handAngle = 0.5f;
-                    }
-                    else
-                    {
-                        handAngle = -0.5f;
-                    }
-
-                    return;
+                    handAngle = 0.5f;
+                }
+                else
+                {
+                    handAngle = -0.5f;
                 }
 
-                if (duck.inputProfile.Down("QUACK") && !_raised)
-                {
-                    if (duck.sliding) return;
-                    if (offDir > 0)
-                    {
-                        handAngle = 0.5f;
-                    }
-                    else
-                    {
-                        handAngle = -0.5f;
-                    }
+                return;
+            }
 
-                    return;
+            if (duck?.inputProfile.Down("QUACK") == true && !_raised)
+            {
+                if (duck.sliding) return;
+                if (offDir > 0)
+                {
+                    handAngle = 0.5f;
                 }
+                else
+                {
+                    handAngle = -0.5f;
+                }
+
+                return;
             }
 
             handAngle = 0f;

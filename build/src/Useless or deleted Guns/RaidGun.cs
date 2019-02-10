@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
+#if DEBUG
 namespace TMGmod.Useless_or_deleted_Guns
 {
 
@@ -41,3 +42,4 @@ namespace TMGmod.Useless_or_deleted_Guns
         }
     }
 }
+#endif

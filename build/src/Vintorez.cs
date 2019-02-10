@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
@@ -27,11 +25,11 @@ namespace TMGmod
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vintorezpattern"), 33, 11);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(16.5f, 5.5f);
-            collisionOffset = new Vec2(-16.5f, -5.5f);
-            collisionSize = new Vec2(33f, 11f);
+            _center = new Vec2(16.5f, 5.5f);
+            _collisionOffset = new Vec2(-16.5f, -5.5f);
+            _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(34f, 5f);
             _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
@@ -41,7 +39,7 @@ namespace TMGmod
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.15f;
             _editorName = "Vintorez";
-			weight = 4.7f;
+			_weight = 4.7f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;
             Kforce1Ar = 0.4f;

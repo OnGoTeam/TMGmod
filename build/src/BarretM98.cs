@@ -1,7 +1,5 @@
 ﻿using DuckGame;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
@@ -12,10 +10,10 @@ namespace TMGmod
 		
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
-            graphic = new Sprite(GetPath("BarretM98"));
-            center = new Vec2(17f, 10f);
-            collisionOffset = new Vec2(-25f, -10f);
-            collisionSize = new Vec2(50f, 13f);
+            _graphic = new Sprite(GetPath("BarretM98"));
+            _center = new Vec2(17f, 10f);
+            _collisionOffset = new Vec2(-25f, -10f);
+            _collisionSize = new Vec2(50f, 13f);
             _barrelOffsetTL = new Vec2(50f, 6f);
             ammo = 8;
             _ammoType = new ATSniper {penetration = 8f};
@@ -26,9 +24,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(-2f, 2f);
             _editorName = "Barrett M98B";
-			weight = 7f;
-			
-
+			_weight = 7f;
         }
 
         public override void Draw()
@@ -54,11 +50,11 @@ namespace TMGmod
                 base.OnPressAction();
                 return;
             }
-            if (ammo > 0 && _loadState == -1)
-            {
-                _loadState = 0;
-                _loadAnimation = 0;
-            }
+
+            if (ammo <= 0 || _loadState != -1) return;
+            //else
+            _loadState = 0;
+            _loadAnimation = 0;
         }
 
         public override void Update()
@@ -76,79 +72,77 @@ namespace TMGmod
                     _angleOffset = 0f;
                     handOffset = Vec2.Zero;
                 }
-                if (_loadState == 0)
+
+                switch (_loadState)
                 {
-                    if (!Network.isActive)
+                    case 0:
                     {
-                        SFX.Play("loadSniper");
+                        if (!Network.isActive)
+                        {
+                            SFX.Play("loadSniper");
+                        }
+                        else if (isServerForObject)
+                        {
+                            _netLoad.Play();
+                        }
+                        Sniper sniper = this;
+                        sniper._loadState = sniper._loadState + 1;
+                        break;
                     }
-                    else if (isServerForObject)
-                    {
-                        _netLoad.Play();
-                    }
-                    Sniper sniper = this;
-                    sniper._loadState = sniper._loadState + 1;
-                }
-                else if (_loadState == 1)
-                {
-                    if (_angleOffset >= 0.1f)
+                    case 1 when _angleOffset >= 0.1f:
                     {
                         Sniper sniper1 = this;
                         sniper1._loadState = sniper1._loadState + 1;
+                        break;
                     }
-                    else
-                    {
+                    case 1:
                         _angleOffset = _angleOffset + 0.003f;
-                    }
-                }
-                else if (_loadState == 2)
-                {
-                    handOffset.x = handOffset.x - 0.2f;
-                    if (handOffset.x > 4f)
+                        break;
+                    case 2:
                     {
-                        Sniper sniper2 = this;
-                        sniper2._loadState = sniper2._loadState + 1;
-                        Reload();
-                        loaded = false;
+                        handOffset.x = handOffset.x - 0.2f;
+                        if (handOffset.x > 4f)
+                        {
+                            Sniper sniper2 = this;
+                            sniper2._loadState = sniper2._loadState + 1;
+                            Reload();
+                            loaded = false;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 3)
-                {
-                    handOffset.x = handOffset.x + 0.2f;
-                    if (handOffset.x <= 0f)
+                    case 3:
                     {
-                        Sniper sniper3 = this;
-                        sniper3._loadState = sniper3._loadState + 1;
-                        handOffset.x = 0f;
+                        handOffset.x = handOffset.x + 0.2f;
+                        if (handOffset.x <= 0f)
+                        {
+                            Sniper sniper3 = this;
+                            sniper3._loadState = sniper3._loadState + 1;
+                            handOffset.x = 0f;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 4)
-                {
-                    if (_angleOffset <= 0.03f)
-                    {
+                    case 4 when _angleOffset <= 0.03f:
                         _loadState = -1;
                         loaded = true;
                         _angleOffset = 0f;
-                    }
-                    else
-                    {
+                        break;
+                    case 4:
                         _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.15f);
-                    }
+                        break;
                 }
             }
             laserSight = false;
         }
         public override void Initialize()
         {
-			if (!(Level.current is Editor))
+			if (!(Level.current is Editor) && Shortened.value)
             {
-                if (Shortened.value)
-                {
-                 _ammoType.accuracy = 0.9f;
-			     weight = 6.5f;
-				 graphic = new Sprite(GetPath("BarretM98short"));
-                 _barrelOffsetTL = new Vec2(39f, 6f);
-                }
+                _ammoType.accuracy = 0.9f;
+                weight = 6.5f;
+                graphic = new Sprite(GetPath("BarretM98short"));
+                _barrelOffsetTL = new Vec2(39f, 6f);
             }
             base.Initialize();
         }

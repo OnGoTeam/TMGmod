@@ -1,7 +1,5 @@
 ﻿using DuckGame;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
@@ -19,10 +17,10 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("SNR22"));
-            center = new Vec2(14f, 6f);
-            collisionOffset = new Vec2(-14.5f, -5f);
-            collisionSize = new Vec2(33f, 10f);
+            _graphic = new Sprite(GetPath("SNR22"));
+            _center = new Vec2(14f, 6f);
+            _collisionOffset = new Vec2(-14.5f, -5f);
+            _collisionSize = new Vec2(33f, 10f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
@@ -34,9 +32,9 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
-			weight = 6f;
+			_weight = 6f;
         }
-          public override void Update()
+        public override void Update()
         {
             if (duck != null && duck.height < 17f)
             {

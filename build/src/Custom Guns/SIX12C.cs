@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
@@ -23,10 +21,10 @@ namespace TMGmod.Custom_Guns
             };
             _numBulletsPerFire = 14;
             _type = "gun";
-            graphic = new Sprite(GetPath("SIX12laser2"));
-            center = new Vec2(19.5f, 5f);
-            collisionOffset = new Vec2(-19.5f, -5f);
-            collisionSize = new Vec2(29f, 10f);
+            _graphic = new Sprite(GetPath("SIX12laser2"));
+            _center = new Vec2(19.5f, 5f);
+            _collisionOffset = new Vec2(-19.5f, -5f);
+            _collisionSize = new Vec2(29f, 10f);
             _barrelOffsetTL = new Vec2(30f, 4.5f);
             _fireSound = "shotgunFire";
             _fullAuto = false;
@@ -38,7 +36,7 @@ namespace TMGmod.Custom_Guns
             _laserOffsetTL = new Vec2(24f, 7f);
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "SIX12 with Laser";
-			weight = 4f;
+			_weight = 4f;
         }
     }
 }

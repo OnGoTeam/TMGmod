@@ -1,7 +1,5 @@
 ﻿using DuckGame;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Core.Particles
 {
     public class BarrBetaPar : PhysicsObject
@@ -12,12 +10,12 @@ namespace TMGmod.Core.Particles
         {
             thickness = 2f;
             physicsMaterial = PhysicsMaterial.Wood;
-            center = new Vec2(1f, 2f);
-            collisionOffset = new Vec2(-1f, -2f);
-            collisionSize = new Vec2(2f, 4f);
-            graphic = new Sprite(GetPath("barr"));
+            _center = new Vec2(1f, 2f);
+            _collisionOffset = new Vec2(-1f, -2f);
+            _collisionSize = new Vec2(2f, 4f);
+            _graphic = new Sprite(GetPath("barr"));
             flammable = 0.6f;
-            weight = 1f;
+            _weight = 1f;
         }
 
         public override void Update()

@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Machinegun|Custom")]
@@ -26,11 +24,11 @@ namespace TMGmod.Custom_Guns
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AUGA3pattern"), 30, 12);
-            graphic = _sprite;
+            _graphic = _sprite;
             _sprite.frame = 0;
-            center = new Vec2(15f, 6f);
-            collisionOffset = new Vec2(-15f, -6f);
-            collisionSize = new Vec2(30f, 12f);
+            _center = new Vec2(15f, 6f);
+            _collisionOffset = new Vec2(-15f, -6f);
+            _collisionSize = new Vec2(30f, 12f);
             _barrelOffsetTL = new Vec2(30f, 5f);
             _holdOffset = new Vec2(-3f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
@@ -40,7 +38,7 @@ namespace TMGmod.Custom_Guns
             loseAccuracy = 0.025f;
             maxAccuracyLost = 0.1f;
             _editorName = "AUG A3";
-			weight = 5.5f;
+			_weight = 5.5f;
             Kforce2Ar = 0.7f;
         }
         public int FrameId

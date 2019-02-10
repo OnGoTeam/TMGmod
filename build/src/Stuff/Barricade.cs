@@ -4,8 +4,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.Particles;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
@@ -26,10 +24,10 @@ namespace TMGmod.Stuff
             Hp = 10f;
             thickness = 2f;
             physicsMaterial = PhysicsMaterial.Wood;
-            center = new Vec2(1f, 2f);
-            collisionOffset = new Vec2(-1f, -2f);
-            collisionSize = new Vec2(2f, 4f);
-            graphic = new Sprite(GetPath("barr"));
+            _center = new Vec2(1f, 2f);
+            _collisionOffset = new Vec2(-1f, -2f);
+            _collisionSize = new Vec2(2f, 4f);
+            _graphic = new Sprite(GetPath("barr"));
             flammable = 0.6f;
             _isStateObject = true;
             //if (!(owner is Duck duck)) return;

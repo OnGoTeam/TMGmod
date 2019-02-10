@@ -2,8 +2,6 @@
 using JetBrains.Annotations;
 using TMGmod.Core;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 
 namespace TMGmod
 {
@@ -27,10 +25,10 @@ namespace TMGmod
             };
             _type = "gun";
 			//I'M BLUE DARUDE SANDSTORM DA DUBAI
-            graphic = new Sprite(GetPath("VixrStock"));
-            center = new Vec2(16.5f, 4.5f);
-            collisionOffset = new Vec2(-16.5f, -4.5f);
-            collisionSize = new Vec2(33f, 9f);
+            _graphic = new Sprite(GetPath("VixrStock"));
+            _center = new Vec2(16.5f, 4.5f);
+            _collisionOffset = new Vec2(-16.5f, -4.5f);
+            _collisionSize = new Vec2(33f, 9f);
             _barrelOffsetTL = new Vec2(34f, 3.5f);
             _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
@@ -40,7 +38,7 @@ namespace TMGmod
             loseAccuracy = 0.099f;
             maxAccuracyLost = 0.17f;
             _editorName = "VIXR";
-			weight = 3.9f;
+			_weight = 3.9f;
             handAngle = 0f;
         }
         public override void Update()

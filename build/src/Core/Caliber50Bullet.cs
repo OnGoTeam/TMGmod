@@ -20,8 +20,8 @@ namespace TMGmod.Core
                     thing._hitPoints = 1;
                     thing.Hit(this, pos);
                     break;
-                case MaterialThing _ when ((MaterialThing) t)._hitPoints > 0f:
-                    ((MaterialThing) t)._hitPoints -= 8;
+                case MaterialThing thing when thing._hitPoints > 0f:
+                    thing._hitPoints -= 8;
                     break;
             }
         }

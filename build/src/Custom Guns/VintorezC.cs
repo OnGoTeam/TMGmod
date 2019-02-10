@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Sniper|Custom")]
@@ -28,12 +26,12 @@ namespace TMGmod.Custom_Guns
             _type = "gun";
 			//I AM A GREEN TEXT
             _sprite = new SpriteMap(GetPath("Vintorezexmagptr"), 33, 12);
-            graphic = _sprite;
+            _graphic = _sprite;
             Teksturka = Rando.Int(0, 3);
             _sprite.frame = Teksturka;
-            center = new Vec2(16.5f, 6f);
-            collisionOffset = new Vec2(-16.5f, -6f);
-            collisionSize = new Vec2(33f, 12f);
+            _center = new Vec2(16.5f, 6f);
+            _collisionOffset = new Vec2(-16.5f, -6f);
+            _collisionSize = new Vec2(33f, 12f);
             _barrelOffsetTL = new Vec2(34f, 5f);
             _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
@@ -43,7 +41,7 @@ namespace TMGmod.Custom_Guns
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.15f;
             _editorName = "Vintorez with Extended Mag";
-			weight = 4.7f;
+			_weight = 4.7f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;
             Kforce1Ar = 0.4f;

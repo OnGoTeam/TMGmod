@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
@@ -64,9 +62,9 @@ namespace TMGmod
             _graphicm[0] = new Sprite(GetPath("PMR301"));
             _graphicm[1] = new Sprite(GetPath("PMR302"));
             _graphicm[2] = new Sprite(GetPath("PMR30"));
-            center = new Vec2(8f, 5f);
-            collisionOffset = new Vec2(-8f, -5f);
-            collisionSize = new Vec2(16f, 10f);
+            _center = new Vec2(8f, 5f);
+            _collisionOffset = new Vec2(-8f, -5f);
+            _collisionSize = new Vec2(16f, 10f);
             _barrelOffsetTL = new Vec2(16f, 2.5f);
             _holdOffset = new Vec2(0f, 2f);
             _fireSound = GetPath("sounds/1.wav");
@@ -77,8 +75,8 @@ namespace TMGmod
             loseAccuracy = 0.025f;
             maxAccuracyLost = 0.15f;
             _editorName = "PMR30 With SG";
-			weight = 1f;
-            graphic = _graphicm[_switched ? Mode : 2];
+			_weight = 1f;
+            _graphic = _graphicm[_switched ? Mode : 2];
         }
 
         private void UpdateMode()
@@ -94,14 +92,11 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (duck != null)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (duck.inputProfile.Pressed("QUACK"))
-                {
-                    Mode = 1 - Mode;
-                    _switched = true;
-                }
-			}
+                Mode = 1 - Mode;
+                _switched = true;
+            }
             UpdateMode();
             base.Update();
 		}

@@ -1,7 +1,5 @@
 ﻿using DuckGame;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
@@ -26,12 +24,12 @@ namespace TMGmod
             _numBulletsPerFire = 9;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21p"), 22, 14);
-            graphic = _sprite;
+            _graphic = _sprite;
             _teksturka = Rando.Int(0, 3);
             _sprite.frame = _teksturka;
-            center = new Vec2(11f, 6f);
-            collisionOffset = new Vec2(-11f, -6f);
-            collisionSize = new Vec2(22f, 14f);
+            _center = new Vec2(11f, 6f);
+            _collisionOffset = new Vec2(-11f, -6f);
+            _collisionSize = new Vec2(22f, 14f);
             _barrelOffsetTL = new Vec2(22f, 4f);
             _fireSound = "shotgunFire";
             _fullAuto = true;
@@ -41,7 +39,7 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(-5f, 2f);
             _editorName = "Crocodile";
-			weight = 5.5f;
+			_weight = 5.5f;
         }
         public override void Draw()
         {

@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
+#if DEBUG
 namespace TMGmod.Useless_or_deleted_Guns
 {
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", false)]
@@ -24,8 +25,8 @@ namespace TMGmod.Useless_or_deleted_Guns
         private bool _fullAuto2;
         private bool _drobovik;
         private bool _snuper = true;
-	//Are you see that? This is a sniper rifle with underbarrel shotgun. But it does not work. R.I.P.
-    //Wait.. what are you doing here?!	
+        //Are you see that? This is a sniper rifle with underbarrel shotgun. But it does not work. R.I.P.
+        //Wait.. what are you doing here?!	
         public MSRC(float xval, float yval) : base(xval, yval)
         {
             graphic = new Sprite(GetPath("MSRSH"));
@@ -36,7 +37,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             _barrelOffsetTL = new Vec2(48f, 5f);
             _barrelOffsetTl2 = new Vec2(14f, 6f);
             ammo = 5;
-			_ammo2 = 4;
+            _ammo2 = 4;
             _ammoType = new ATSniper
             {
                 bulletSpeed = 85f
@@ -64,7 +65,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(14f, -1f);
             _editorName = "MSR With SH";
-			weight = 5.45f;
+            weight = 5.45f;
 			
 
         }
@@ -175,25 +176,25 @@ namespace TMGmod.Useless_or_deleted_Guns
                 }
             }
             laserSight = false;
-			if (duck != null)
+            if (duck != null)
             {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
-					if (!_switched)
-					{
-						_switched = true;
+                    if (!_switched)
+                    {
+                        _switched = true;
                         graphic = new Sprite(GetPath("MSRSH1"));
                     }
-    			    var g2 = _graphic2;
+                    var g2 = _graphic2;
                     _graphic2 = graphic;
                     graphic = g2;
                     var la2 = _loseAccuracy2;
                     _loseAccuracy2 = loseAccuracy;
                     loseAccuracy = la2;
-    			    var mal2 = _maxAccuracyLost2;
+                    var mal2 = _maxAccuracyLost2;
                     _maxAccuracyLost2 = maxAccuracyLost;
                     maxAccuracyLost = mal2;
-    			    var fak = _numBulletsPerFire2;
+                    var fak = _numBulletsPerFire2;
                     _numBulletsPerFire2 = _numBulletsPerFire;
                     _numBulletsPerFire = fak;
                     var botl2 = _barrelOffsetTl2;
@@ -205,19 +206,19 @@ namespace TMGmod.Useless_or_deleted_Guns
                     var at2 = _ammoType2;
                     _ammoType2 = _ammoType;
                     _ammoType = at2;
-					var s2 = _fireSound2;
-					_fireSound2 = _fireSound;
-					_fireSound = s2;
+                    var s2 = _fireSound2;
+                    _fireSound2 = _fireSound;
+                    _fireSound = s2;
                     var autonik = _fullAuto2;
                     _fullAuto2 = _fullAuto;
                     _fullAuto = autonik;
                     var stupidshit = _snuper;
                     _snuper = _drobovik;
                     _drobovik = stupidshit;
-				}
-			}
-		    base.Update();
-		}
+                }
+            }
+            base.Update();
+        }
         public override void Thrown()
         {
             if (ammo == 0)
@@ -231,7 +232,7 @@ namespace TMGmod.Useless_or_deleted_Guns
                 var mal2 = _maxAccuracyLost2;
                 _maxAccuracyLost2 = maxAccuracyLost;
                 maxAccuracyLost = mal2;
-    			var fak = _numBulletsPerFire2;
+                var fak = _numBulletsPerFire2;
                 _numBulletsPerFire2 = _numBulletsPerFire;
                 _numBulletsPerFire = fak;
                 var botl2 = _barrelOffsetTl2;
@@ -243,9 +244,9 @@ namespace TMGmod.Useless_or_deleted_Guns
                 var at2 = _ammoType2;
                 _ammoType2 = _ammoType;
                 _ammoType = at2;
-				var s2 = _fireSound2;
-				_fireSound2 = _fireSound;
-				_fireSound = s2;
+                var s2 = _fireSound2;
+                _fireSound2 = _fireSound;
+                _fireSound = s2;
                 var autonik = _fullAuto2;
                 _fullAuto2 = _fullAuto;
                 _fullAuto = autonik;
@@ -255,5 +256,6 @@ namespace TMGmod.Useless_or_deleted_Guns
             }
             base.Thrown();
         }		
-        }
-	}
+    }
+}
+#endif

@@ -2,8 +2,6 @@
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle")]
@@ -28,10 +26,10 @@ namespace TMGmod
                 bulletThickness = 1.5f
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("SKS"));
-            center = new Vec2(30f, 6f);
-            collisionOffset = new Vec2(-30f, -6f);
-            collisionSize = new Vec2(60f, 12f);
+            _graphic = new Sprite(GetPath("SKS"));
+            _center = new Vec2(30f, 6f);
+            _collisionOffset = new Vec2(-30f, -6f);
+            _collisionSize = new Vec2(60f, 12f);
             _barrelOffsetTL = new Vec2(53f, 5f);
             _holdOffset = new Vec2(11f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
@@ -42,7 +40,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.8f;
             _editorName = "SKS";
-			weight = 6f;
+			_weight = 6f;
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }

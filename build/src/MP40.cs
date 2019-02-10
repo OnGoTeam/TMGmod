@@ -1,8 +1,6 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-// ReSharper disable VirtualMemberCallInConstructor
-
 namespace TMGmod
 {
 
@@ -21,10 +19,10 @@ namespace TMGmod
             };
             BaseAccuracy = 0.5f;
             _type = "gun";
-            graphic = new Sprite(GetPath("MP40WW2"));
-            center = new Vec2(12f, 5f);
-            collisionOffset = new Vec2(-11f, -4f);
-            collisionSize = new Vec2(22f, 14f);
+            _graphic = new Sprite(GetPath("MP40WW2"));
+            _center = new Vec2(12f, 5f);
+            _collisionOffset = new Vec2(-11f, -4f);
+            _collisionSize = new Vec2(22f, 14f);
             _barrelOffsetTL = new Vec2(25f, 2f);
             _fireSound = "deepMachineGun";
             _fullAuto = true;
@@ -34,7 +32,7 @@ namespace TMGmod
             //loseAccuracy = 0.1f;
             //maxAccuracyLost = 0.5f;
             _editorName = "MP40";
-			weight = 3f;
+			_weight = 3f;
             KforceDSmg = 2.5f;
             MaxAccuracy = 1f;
             MaxDelayFp = 10;
