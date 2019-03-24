@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ogtdglib</name>
+    </assembly>
+    <members>
+        <member name="T:ogtdglib.AmmoTypes.BaseAmmoType">
+            <summary>
+            AmmoType with GetPath
+            </summary>
+        </member>
+        <member name="M:ogtdglib.AmmoTypes.BaseAmmoType.GetPath(System.String)">
+            <summary>
+            Implements GetPath for AmmoType through Nothing.GetPath
+            </summary>
+            <param name="asset"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ogtdglib.Effects.FrictionEffect">
+            <inheritdoc />
+            <summary>
+            Effect which multiplies speed of _linkThing by _friction
+            </summary>
+        </member>
+        <member name="M:ogtdglib.Effects.FrictionEffect.#ctor(DuckGame.Thing,DuckGame.Thing,System.Single)">
+            <inheritdoc />
+            <summary>
+            FrictionEffect with Owner owner on (at) _linkThing linkThing by _friction friction
+            </summary>
+            <param name="owner"></param>
+            <param name="linkThing"></param>
+            <param name="friction"></param>
+        </member>
+        <member name="M:ogtdglib.Effects.FrictionEffect.LinkedStep(DuckGame.Thing)">
+            <inheritdoc />
+            <summary>
+            Multiplies speed of _linkThing by _friction
+            </summary>
+            <param name="linkThing"></param>
+        </member>
+        <member name="T:ogtdglib.Effects.LinkedEffect">
+            <inheritdoc />
+            <summary>
+            Applies LinkedStep on (at) _linkThing every Step until Decayed
+            </summary>
+        </member>
+        <member name="M:ogtdglib.Effects.LinkedEffect.#ctor(DuckGame.Thing,DuckGame.Thing)">
+            <inheritdoc />
+            <summary>
+            LinkedEffect with Owner owner on (at) _linkThing linkThing
+            </summary>
+            <param name="owner"></param>
+            <param name="linkThing"></param>
+        </member>
+        <member name="M:ogtdglib.Effects.LinkedEffect.OnStep">
+            <inheritdoc />
+            <summary>
+            Applies LinkedStep on (at) _linkThing if it's presented
+            </summary>
+        </member>
+        <member name="M:ogtdglib.Effects.LinkedEffect.LinkedStep(DuckGame.Thing)">
+            <summary>
+            Effect body is in LinkedStep which is applied on (at) _linkThing every Step
+            </summary>
+            <param name="linkThing"></param>
+        </member>
+        <member name="T:ogtdglib.Effects.Effect">
+            <summary>
+            Applies OnStep every Step until Decayed
+            </summary>
+        </member>
+        <member name="P:ogtdglib.Effects.Effect.Decayed">
+            <summary>
+            Decayed should be used is OnStep to check if Effect shouldn't be applied
+            </summary>
+        </member>
+        <member name="P:ogtdglib.Effects.Effect.Owner">
+            <summary>
+            Owner is the thing which made this effect
+            </summary>
+        </member>
+        <member name="P:ogtdglib.Effects.Effect.Ticks">
+            <summary>
+            Ticks is how many times Step was made
+            </summary>
+        </member>
+        <member name="M:ogtdglib.Effects.Effect.#ctor(DuckGame.Thing)">
+            <summary>
+            Effect with Owner owner
+            </summary>
+            <param name="owner"></param>
+        </member>
+        <member name="M:ogtdglib.Effects.Effect.Step">
+            <summary>
+            Step is what's actually called by Effector
+            </summary>
+        </member>
+        <member name="M:ogtdglib.Effects.Effect.OnStep">
+            <summary>
+            Effect body is in OnStep which is applied every Step
+            </summary>
+        </member>
+        <member name="M:ogtdglib.Effects.Effect.Apply(ogtdglib.Effects.Effect)">
+            <summary>
+            Returns Effector corresponding to your Effect which calls Step every Update
+            </summary>
+            <param name="effect"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ogtdglib.Effects.StopEffect">
+            <inheritdoc />
+            <summary>
+            Effect which fixates _linkThing at its position until _ttd ticks applied (then decays)
+            </summary>
+        </member>
+        <member name="M:ogtdglib.Effects.StopEffect.#ctor(DuckGame.Thing,DuckGame.Thing,System.UInt32)">
+            <inheritdoc />
+            <summary>
+            StopEffect with Owner owner, _linkThing linkThing and _ttd ttd
+            </summary>
+            <param name="owner"></param>
+            <param name="linkThing"></param>
+            <param name="ttd"></param>
+        </member>
+        <member name="M:ogtdglib.Effects.StopEffect.LinkedStep(DuckGame.Thing)">
+            <inheritdoc />
+            <summary>
+            Fixates _linkThing by stopping it (speed=0) and moving it to first position
+            </summary>
+            <param name="linkThing"></param>
+        </member>
+        <member name="T:ogtdglib.Nothing">
+            <inheritdoc />
+            <summary>
+            Empty thing
+            </summary>
+        </member>
+    </members>
+</doc>
