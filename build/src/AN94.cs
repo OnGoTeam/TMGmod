@@ -17,7 +17,7 @@ namespace TMGmod
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("AN94SM"), 33, 9);
+            _sprite = new SpriteMap(new ogtdglib.Nothing(Core.TMGmod.LastInstance).GetPath("AN94SM"), 33, 9);
             _graphic = _sprite;
             _center = new Vec2(16f, 5f);
             _collisionOffset = new Vec2(-15f, -5f);

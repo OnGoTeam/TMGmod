@@ -1,8 +1,9 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using DuckGame;
 using TMGmod.Useless_or_deleted_Guns;
 
-#if DEBUG
+
 namespace TMGmod.Core
 {
     [Obsolete]
