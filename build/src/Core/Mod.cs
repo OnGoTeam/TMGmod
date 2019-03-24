@@ -8,7 +8,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Properties;
 
- 
+
 namespace TMGmod.Core
 {
     [PublicAPI]
