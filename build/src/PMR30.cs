@@ -31,7 +31,7 @@ namespace TMGmod
             _kickForce = 0.55f;
             loseAccuracy = 0.025f;
             maxAccuracyLost = 0.15f;
-            _editorName = "PMR30";
+            _editorName = "PMR-30";
 			_weight = 1f;
         }
     }

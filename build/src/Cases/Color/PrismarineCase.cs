@@ -6,11 +6,11 @@ using TMGmod.Core;
 namespace TMGmod.Cases
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class PodarokWarrior : BaseCase
+    public class PodarokPrismarine : BaseCase
     {
-        public PodarokWarrior(float xval, float yval) : base(xval, yval)
+        public PodarokPrismarine(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("WarriorsCase"), 14, 8);
+            var sprite = new SpriteMap(GetPath("PrismarineCase"), 14, 8);
             _graphic = sprite;
             sprite.frame = Rando.Int(0, 4);
             _center = new Vec2(7f, 4f);
@@ -28,7 +28,9 @@ namespace TMGmod.Cases
                 typeof(PPSh),
                 typeof(MG44),
                 typeof(SkeetGun),
-                typeof(MP5)
+                typeof(MP5),
+                typeof(MP5SD),
+                typeof(AWS)
             };
             CaseId = 6;
         }

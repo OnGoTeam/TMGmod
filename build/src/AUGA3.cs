@@ -4,7 +4,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|Machinegun|Custom")]
+    [EditorGroup("TMG|Machinegun")]
     public class AugC : BaseAr, IHaveSkin
     {
 

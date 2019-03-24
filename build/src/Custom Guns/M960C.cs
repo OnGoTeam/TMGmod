@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace TMGmod.Custom_Guns
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Custom")]
     [PublicAPI]
     public class M960Low : Gun
     {
