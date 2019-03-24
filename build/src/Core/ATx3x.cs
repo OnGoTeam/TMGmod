@@ -3,9 +3,9 @@ using DuckGame;
 namespace TMGmod.Core
 {
     // ReSharper disable once InconsistentNaming
-    public class ATpizdec : AmmoType
+    public class ATx3x : AmmoType
     {
-        public ATpizdec()
+        public ATx3x()
         {
 			bulletLength = 30f;
             combustable = true;

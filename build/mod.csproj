@@ -82,7 +82,6 @@
     <Compile Include="src\BarretM98.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoType.cs" />
     <Compile Include="src\Core\ATx3x.cs" />
-    <Compile Include="src\Core\Nothing.cs" />
     <Compile Include="src\Core\WClasses\IAmAr.cs" />
     <Compile Include="src\Core\WClasses\IAmLmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSmg.cs" />
@@ -138,11 +137,9 @@
     <Compile Include="src\Core\Czmag.cs" />
     <Compile Include="src\Core\ExplosiveBullet.cs" />
     <Compile Include="src\Core\ExploCreator.cs" />
-    <Compile Include="src\Core\HA.cs" />
     <Compile Include="src\Core\MF.cs" />
     <Compile Include="src\Core\Mod.cs" />
     <Compile Include="src\Core\Particles\BarrBetaPar.cs" />
-    <Compile Include="src\Core\PTPA.cs" />
     <Compile Include="src\Custom Guns\44dbC.cs" />
     <Compile Include="src\Custom Guns\AN94C.cs" />
     <Compile Include="src\Custom Guns\AUGA3.cs" />

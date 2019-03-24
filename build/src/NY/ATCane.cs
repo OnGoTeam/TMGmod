@@ -1,5 +1,5 @@
 using DuckGame;
-using TMGmod.Core;
+using ogtdglib;
 using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.NY

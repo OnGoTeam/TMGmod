@@ -12,7 +12,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 8;
-            _ammoType = new ATpizdec();
+            _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
             _sprite = new SpriteMap(GetPath("X3Xa"), 28, 15);

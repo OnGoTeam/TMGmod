@@ -1,10 +1,9 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace TMGmod.Core.AmmoTypes
 {
     [PublicAPI]
-    public abstract class BaseAmmoType:AmmoType
+    public abstract class BaseAmmoType:ogtdglib.AmmoTypes.BaseAmmoType
     {
         
     }

@@ -1,5 +1,5 @@
 ﻿using DuckGame;
-using TMGmod.Core;
+using ogtdglib;
 
 namespace TMGmod.NY
 {
