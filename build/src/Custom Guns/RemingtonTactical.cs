@@ -1,7 +1,7 @@
 using DuckGame;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
     public class RemingtonTac : BasePumpAction

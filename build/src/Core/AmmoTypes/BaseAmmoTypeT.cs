@@ -1,6 +1,5 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
-using ogtdglib;
 
 namespace TMGmod.Core.AmmoTypes
 {
@@ -14,7 +13,7 @@ namespace TMGmod.Core.AmmoTypes
 
         private void InitNothing()
         {
-            if (_nothing is null) _nothing = new Nothing(TMGmod.LastInstance);
+            if (_nothing is null) _nothing = new Nothing();
         }
         
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿using DuckGame;
-using ogtdglib;
+using TMGmod.Core;
 
 namespace TMGmod.NY
 {
@@ -30,7 +30,7 @@ namespace TMGmod.NY
             speedVariation = 0f;
             bulletType = typeof(GarlandBullet);
             combustable = true;
-            SpriteY = new SpriteMap(new Nothing(Core.TMGmod.LastInstance).GetPath("Holiday/Garland_2"), 16, 9);
+            SpriteY = new SpriteMap(new Nothing().GetPath("Holiday/Garland_2"), 16, 9);
             SpriteY.CenterOrigin();
             sprite = SpriteY;
         }
