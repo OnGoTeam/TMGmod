@@ -15,12 +15,12 @@ namespace TMGmod
         public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Fid;
+        public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
         public MP5(float xval, float yval)
             : base(xval, yval)
         {
-            Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new AT9mm
             {
@@ -50,7 +50,7 @@ namespace TMGmod
         }
         private void UpdateSkin()
         {
-            var fid = Fid.value;
+            var fid = Skin.value;
             while (!Allowedlst.Contains(fid))
             {
                 fid = Rando.Int(0, 9);
