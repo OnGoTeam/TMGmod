@@ -30,6 +30,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SIX12Spattern"), 29, 10);
             _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(19.5f, 5f);
             _collisionOffset = new Vec2(-19.5f, -5f);
             _collisionSize = new Vec2(29f, 10f);
@@ -45,7 +46,6 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "SIX12 Silenced";
 			_weight = 4f;
-            _sprite.frame = 0;
         }
 
         /*public override void Initialize()
