@@ -22,6 +22,7 @@ namespace TMGmod
             };
             _type = "gun";
             _graphic = new Sprite(GetPath("MP7"));
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(12f, 4f);
             _collisionOffset = new Vec2(-12f, -4f);
             _collisionSize = new Vec2(20f, 10f);

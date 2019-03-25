@@ -1,6 +1,8 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+
 
 namespace TMGmod
 {
@@ -21,9 +23,12 @@ namespace TMGmod
         private const float AcclB = .225f;
         private float _raisestat;*/
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 3, 5, 7 });
         public MG44(float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 60;
             _ammoType = new ATMagnum
             {
@@ -105,10 +110,26 @@ namespace TMGmod
             _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
         }
         */
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

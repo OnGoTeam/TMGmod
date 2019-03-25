@@ -59,7 +59,9 @@ namespace TMGmod
             {
                 if (Silencer)
                 {
-                    graphic = new Sprite(GetPath("USP"));
+                    _sprite.frame -= 10;
+                    _flare = new SpriteMap("smallFlare", 11, 10);
+                    _flare.center = new Vec2(0.0f, 5f);
                     _fireSound = GetPath("sounds/1.wav");
                     _ammoType = new AT9mm
                     {
@@ -72,8 +74,9 @@ namespace TMGmod
                 }
                 else
                 {
-                    graphic = new Sprite(GetPath("USPS"));
+                    _sprite.frame += 10;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _ammoType = new AT9mmS
                     {
                         range = 130f,

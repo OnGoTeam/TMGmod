@@ -32,6 +32,7 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("MP5SDpattern"), 31, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(15.5f, 6f);
             _collisionOffset = new Vec2(-15.5f, -6f);
             _collisionSize = new Vec2(31f, 12f);

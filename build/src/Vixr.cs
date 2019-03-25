@@ -24,7 +24,8 @@ namespace TMGmod
                bulletSpeed = 21f
             };
             _type = "gun";
-			//I'M BLUE DARUDE SANDSTORM DA DUBAI
+            //I'M BLUE DARUDE SANDSTORM DA DUBAI
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _graphic = new Sprite(GetPath("VixrStock"));
             _center = new Vec2(16.5f, 4.5f);
             _collisionOffset = new Vec2(-16.5f, -4.5f);

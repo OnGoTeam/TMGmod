@@ -1,6 +1,8 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+
 
 namespace TMGmod
 {
@@ -10,9 +12,12 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Fid;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6 });
         public Arx200 (float xval, float yval)
           : base(xval, yval)
         {
+            Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new ATMagnum
             {
@@ -38,11 +43,26 @@ namespace TMGmod
             _editorName = "Beretta ARX-200";
 			_weight = 6f;
         }
+        private void UpdateSkin()
+        {
+            var fid = Fid.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
 
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }
