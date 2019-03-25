@@ -58,7 +58,7 @@ namespace TMGmod
                     loseAccuracy = 0.3f;
                     maxAccuracyLost = 0.4f;
                     laserSight = false;
-                    Laserino = true;
+                    Laserino = false;
                 }
                 else
                 {
@@ -66,10 +66,10 @@ namespace TMGmod
                     loseAccuracy = 0.5f;
                     maxAccuracyLost = 0.5f;
                     laserSight = true;
-                    Laserino = false;
+                    Laserino = true;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-            SFX.Play(GetPath("sounds/tuduc.wav"));
             base.Update();
         }
         private void UpdateSkin()
