@@ -26,6 +26,7 @@ namespace TMGmod
 		    };
 		    _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ805Brenpattern"), 41, 11);
+            _flare.center = new Vec2(0.0f, 5f);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(20.5f, 5.5f);
