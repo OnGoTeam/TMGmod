@@ -10,7 +10,7 @@ namespace TMGmod
     public class SIX12S : Gun, IHaveSkin, IAmSg
     {
         private readonly SpriteMap _sprite;
-        public bool Nolaser;
+        public bool Laserino = false;
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Fid;
@@ -26,6 +26,7 @@ namespace TMGmod
                 accuracy = 0.9f
             };
             _numBulletsPerFire = 14;
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SIX12Spattern"), 29, 10);
             _graphic = _sprite;
@@ -50,24 +51,24 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Nolaser)
-                {
-                    FrameId += 10;
-                    loseAccuracy = 0.45f;
-                    maxAccuracyLost = 0.5f;
-                    laserSight = true;
-                    Nolaser = false;
-                }
-                else
+                if (Laserino)
                 {
                     FrameId -= 10;
                     loseAccuracy = 0.3f;
                     maxAccuracyLost = 0.5f;
                     laserSight = false;
-                    Nolaser = true;
+                    Laserino = false;
                 }
+                else
+                {
+                    FrameId += 10;
+                    loseAccuracy = 0.45f;
+                    maxAccuracyLost = 0.5f;
+                    laserSight = true;
+                    Laserino = true;
+                }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-            SFX.Play(GetPath("sounds/tuduc.wav"));
             base.Update();
         }
         private void UpdateSkin()
