@@ -20,13 +20,12 @@ namespace TMGmod
             ammo = 30;
 		    _ammoType = new AT9mm
 		    {
-		        range = 500f,
+		        range = 330f,
 		        accuracy = 0.87f,
 		        penetration = 1f
 		    };
 		    _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ805Brenpattern"), 41, 11);
-            _flare.center = new Vec2(0.0f, 5f);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(20.5f, 5.5f);
@@ -54,15 +53,15 @@ namespace TMGmod
                     _fireSound = "deepMachineGun2";
                     _ammoType = new AT9mm
                     {
-                        range = 400f,
+                        range = 330f,
                         accuracy = 0.87f
                     };
                     loseAccuracy = 0.025f;
                     maxAccuracyLost = 0.32f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
                     Silencer = false;
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
                     _flare = new SpriteMap("smallFlare", 11, 10);
+                    _flare.center = new Vec2(0.0f, 5f);
                 }
                 else
                 {
@@ -70,16 +69,16 @@ namespace TMGmod
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _ammoType = new AT9mmS
                     {
-                        range = 470f,
+                        range = 380f,
                         accuracy = 0.95f
                     };
                     loseAccuracy = 0.02f;
                     maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(42.5f, 4f);
                     Silencer = true;
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
 
             if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
