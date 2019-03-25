@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|SMG")]
     public class SpectreM4 : BaseSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -22,9 +22,10 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 145f,
-                accuracy = 0.83f,
-                penetration = 1f
+                range = 125f,
+                accuracy = 0.76f,
+                penetration = 1f,
+                bulletSpeed = 16f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SpectreM4pattern"), 19, 10);
@@ -34,7 +35,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-9.5f, -5f);
             _collisionSize = new Vec2(19f, 10f);
             _barrelOffsetTL = new Vec2(14f, 2f);
-            _holdOffset = new Vec2(3f, 0f);
+            _holdOffset = new Vec2(3f, 3f);
             _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
             _fireWait = 0.31f;
@@ -59,12 +60,16 @@ namespace TMGmod
                     _ammoType = new AT9mm
                     {
                         range = 145f,
-                        accuracy = 0.83f,
-                        penetration = 1f
+                        accuracy = 0.76f,
+                        penetration = 1f,
+                        bulletSpeed = 16f
                     };
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.34f;
                     weight = 3.3f;
+                    _fireSound = GetPath("sounds/smg.wav");
+                    _flare = new SpriteMap("smallFlare", 11, 10);
+                    _flare.center = new Vec2(0.0f, 5f);
                     Silencer = false;
                 }
                 else
@@ -79,6 +84,8 @@ namespace TMGmod
                     loseAccuracy = 0.07f;
                     maxAccuracyLost = 0.3f;
                     weight = 3.8f;
+                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     Silencer = true;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
