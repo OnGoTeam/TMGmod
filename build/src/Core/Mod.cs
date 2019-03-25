@@ -22,7 +22,7 @@ namespace TMGmod.Core
         // ReSharper disable once MemberCanBePrivate.Global
         public TMGmod()
         {
-            //Debug.Log("TMGmod");
+            Debug.Log("TMGmod loading");
             AppDomain.CurrentDomain.AssemblyResolve +=
                 CurrentDomain_AssemblyResolve;
             LastInstance = this;
