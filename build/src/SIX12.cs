@@ -10,7 +10,7 @@ namespace TMGmod
     public class SIX12 : Gun, IHaveSkin, IAmSg
     {
         private readonly SpriteMap _sprite;
-        public bool Laserino = false;
+        public bool Laserino;
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
