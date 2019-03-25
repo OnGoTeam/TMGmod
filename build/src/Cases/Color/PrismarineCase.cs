@@ -23,6 +23,8 @@ namespace TMGmod.Cases.Color
             _editorName = "Sweet Case";
             Things = new List<Type>
             {
+                typeof(SIX12S),
+                typeof(SIX12),
                 typeof(Arx200),
                 typeof(UziPro),
                 typeof(PPSh),

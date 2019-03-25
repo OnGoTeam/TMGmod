@@ -96,6 +96,7 @@ namespace TMGmod.Custom_Guns
             {
                 Mode = 1 - Mode;
                 _switched = true;
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             UpdateMode();
             base.Update();

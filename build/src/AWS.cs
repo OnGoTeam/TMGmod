@@ -29,17 +29,17 @@ namespace TMGmod
             _ammoType = new AT9mmS
             {
                 range = 550f,
-                accuracy = 0.97f,
-                penetration = 0.5f
+                accuracy = 0.97f
             };
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10);
+            _flare.center = new Vec2(0.0f, 5f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
             _kickForce = 1.75f;
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "AWS";
 			_weight = 5f;
-            laserSight = true;
+            laserSight = false;
             _laserOffsetTL = new Vec2(18f, 3f);
 			
 		}
@@ -56,7 +56,7 @@ namespace TMGmod
             }
             base.Draw();
             angle = ang;
-            laserSight = true;
+            laserSight = false;
         }
 
         public override void OnPressAction()
@@ -147,7 +147,7 @@ namespace TMGmod
                         break;
                 }
             }
-            laserSight = true;
+            laserSight = false;
             if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;

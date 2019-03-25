@@ -1,19 +1,28 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core.WClasses;
+using TMGmod.Core;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     // ReSharper disable once InconsistentNaming
-    public class SV98 : Sniper, IAmSr
+    public class SV98 : Sniper, IAmSr, IHaveSkin
     {
-		
-		public SV98(float xval, float yval) : base(xval, yval)
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 2;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5});
+        public SV98(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("SV98"));
-            _center = new Vec2(16.5f, 4.5f);
-            _collisionOffset = new Vec2(-16.5f, -4.5f);
-            _collisionSize = new Vec2(33f, 9f);
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("SV98pattern"), 33, 11);
+            _graphic = _sprite;
+            _sprite.frame = 0;
+            _center = new Vec2(16.5f, 5.5f);
+            _collisionOffset = new Vec2(-16.5f, -5.5f);
+            _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(34f, 5f);
             ammo = 5;
             _ammoType = new ATSniper();
@@ -135,14 +144,35 @@ namespace TMGmod
             if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
-				graphic = new Sprite(GetPath("SV98bipods"));
+                if ((_sprite.frame > -1) && (_sprite.frame < 10)) _sprite.frame += 10;
             }
             else
             {
                 _kickForce = 1.75f;
-				graphic = new Sprite(GetPath("SV98"));
+                if ((_sprite.frame > 9) && (_sprite.frame < 20)) _sprite.frame -= 10;
             }
             OnHoldAction();
         }
-	}
+        private void UpdateSkin()
+        {
+            var fid = Skin.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
+    }
 }

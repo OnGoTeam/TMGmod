@@ -47,8 +47,8 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             MaxDelayFp = 10;
             MaxDelaySmg = 50;
-            DeltaWait = 0.35f;
-            BurstNum = 3;
+            DeltaWait = 0.65f;
+            BurstNum = 1;
         }
         private void UpdateSkin()
         {
@@ -77,6 +77,7 @@ namespace TMGmod
                     _fireWait = 0.3f;
                     _sprite.frame -= 10;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
         }

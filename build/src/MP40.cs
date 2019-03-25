@@ -19,7 +19,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.5f;
             _type = "gun";
-            _graphic = new Sprite(GetPath("MP40WW2"));
+            _graphic = new Sprite(GetPath("MP40"));
             _center = new Vec2(12f, 5f);
             _collisionOffset = new Vec2(-11f, -4f);
             _collisionSize = new Vec2(22f, 14f);

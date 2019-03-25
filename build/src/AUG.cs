@@ -62,6 +62,7 @@ namespace TMGmod
                     _ammoType.accuracy = 0.94f;
                     Grip = true;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
 		}			

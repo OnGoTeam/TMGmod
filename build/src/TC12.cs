@@ -5,47 +5,48 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
-    // ReSharper disable once InconsistentNaming
-    public class CZ805 : BaseAr, IHaveSkin
+    [EditorGroup("TMG|Shotgun")]
+    public class TC12 : Gun, IAmDmr, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 10;
-        public bool Silencer;
+        private const int NonSkinFrames = 2;
+        public bool Silencer = false;
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 4, 5, 7 });
-        public CZ805 (float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
+        public TC12 (float xval, float yval)
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 30;
-		    _ammoType = new AT9mm
-		    {
-		        range = 330f,
-		        accuracy = 0.87f,
-		        penetration = 1f
-		    };
-		    _type = "gun";
-            _sprite = new SpriteMap(GetPath("CZ805Brenpattern"), 41, 11);
+            ammo = 10;
+            _ammoType = new AT9mm
+            {
+                range = 240f,
+                accuracy = 0.91f,
+                penetration = 1f
+            };
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("TC-12pattern"), 39, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(20.5f, 5.5f);
-            _collisionOffset = new Vec2(-20.5f, -5.5f);
-            _collisionSize = new Vec2(41f, 11f);
-            _barrelOffsetTL = new Vec2(39f, 3.5f);
-            _holdOffset = new Vec2(5f, 1f);
+            _center = new Vec2(19.5f, 5f);
+            _collisionOffset = new Vec2(-19.5f, -5f);
+            _collisionSize = new Vec2(39f, 12f);
+            _barrelOffsetTL = new Vec2(28f, 3f);
+            _holdOffset = new Vec2(5f, 0f);
             _fireSound = "deepMachineGun2";
-            _fullAuto = true;
-            _fireWait = 0.9f;
-            _kickForce = 0.7f;
-            loseAccuracy = 0.025f;
-            maxAccuracyLost = 0.32f;
-            _editorName = "CZ-805 BREN";
-			_weight = 5f;
-		    Kforce2Ar = 0.7f;
+            _fullAuto = false;
+            _fireWait = 0.88f;
+            _kickForce = 5.3f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            laserSight = true;
+            _laserOffsetTL = new Vec2(26f, 5.5f);
+            _editorName = "TC-12";
+			_weight = 4.5f;
         }
         public override void Update()
         {
@@ -53,42 +54,38 @@ namespace TMGmod
             {
                 if (Silencer)
                 {
-                    FrameId -= 50;
+                    FrameId -= 10;
                     _fireSound = "deepMachineGun2";
                     _ammoType = new AT9mm
                     {
-                        range = 330f,
-                        accuracy = 0.87f
+                        range = 240f,
+                        accuracy = 0.91f,
+                        penetration = 1f
                     };
-                    loseAccuracy = 0.025f;
-                    maxAccuracyLost = 0.32f;
-                    _barrelOffsetTL = new Vec2(39f, 4f);
+                    _kickForce = 5.3f;
+                    loseAccuracy = 0.1f;
+                    _barrelOffsetTL = new Vec2(28f, 3f);
                     Silencer = false;
                     _flare = new SpriteMap("smallFlare", 11, 10);
                     _flare.center = new Vec2(0.0f, 5f);
                 }
                 else
                 {
-                    FrameId += 50;
-                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    FrameId += 10;
+                    _fireSound = GetPath("sounds/Silenced3.wav");
                     _ammoType = new AT9mmS
                     {
-                        range = 380f,
-                        accuracy = 0.95f
+                        range = 300f,
+                        accuracy = 0.97f
                     };
-                    loseAccuracy = 0.02f;
-                    maxAccuracyLost = 0.3f;
-                    _barrelOffsetTL = new Vec2(42.5f, 4f);
+                    _kickForce = 4.5f;
+                    loseAccuracy = 0f;
+                    _barrelOffsetTL = new Vec2(39f, 3f);
                     Silencer = true;
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-
-            if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
-            if (ammo > 12 && ammo <= 20 && FrameId / 10 % 5 != 2) _sprite.frame += 10;
-            if (ammo > 5 && ammo <= 12 && FrameId / 10 % 5 != 3) _sprite.frame += 10;
-            if (ammo > 0 && ammo <= 5 && FrameId / 10 % 5 != 4) _sprite.frame += 10;
             base.Update();
         }
         private void UpdateSkin()

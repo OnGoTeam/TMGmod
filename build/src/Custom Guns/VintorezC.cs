@@ -1,47 +1,49 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper|Custom")]
-    public class VintorezC : BaseGun, ISpeedAccuracy, IHspeedKforce
+    [EditorGroup("TMG|Sniper")]
+    public class VintorezC : BaseAr, ISpeedAccuracy, IHaveSkin
     {
-  
+
         private readonly SpriteMap _sprite;
-        public int Teksturka;
-        public StateBinding TeksturkaBinding = new StateBinding(nameof(Teksturka));
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 7 });
 
         public VintorezC(float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new AT9mmS
             {
                 range = 550f,
                 accuracy = 0.9f,
-                penetration = 1.5f,
                 bulletSpeed = 25f
             };
             _type = "gun";
-			//I AM A GREEN TEXT
-            _sprite = new SpriteMap(GetPath("Vintorezexmagptr"), 33, 12);
+            _sprite = new SpriteMap(GetPath("VintorezCpattern"), 33, 11);
             _graphic = _sprite;
-            Teksturka = Rando.Int(0, 3);
-            _sprite.frame = Teksturka;
-            _center = new Vec2(16.5f, 6f);
-            _collisionOffset = new Vec2(-16.5f, -6f);
-            _collisionSize = new Vec2(33f, 12f);
+            _sprite.frame = 0;
+            _center = new Vec2(16.5f, 5.5f);
+            _collisionOffset = new Vec2(-16.5f, -5.5f);
+            _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(34f, 5f);
             _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _fullAuto = true;
             _fireWait = 0.7f;
             _kickForce = 0.85f;
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.15f;
-            _editorName = "Vintorez with Extended Mag";
-			_weight = 4.7f;
+            _editorName = "Vintorez with extra mag";
+            _weight = 4.7f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;
             Kforce1Ar = 0.4f;
@@ -49,15 +51,28 @@ namespace TMGmod.Custom_Guns
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }
-        public override void Draw()
-        {
-            _sprite.frame = Teksturka;
-            base.Draw();
-        }
-
-        public float Kforce1Ar { get; }
-        public float Kforce2Ar { get; }
         public float MuAccuracySr { get; }
         public float LambdaAccuracySr { get; }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
     }
 }

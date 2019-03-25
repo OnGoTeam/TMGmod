@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
@@ -6,68 +6,80 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class DaewooK1 : BaseSmg, IHaveSkin
+    public class SpectreM4 : BaseSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
-        public bool Stock;
-        public StateBinding StockBinding = new StateBinding(nameof(Stock));
+        public bool Silencer;
+        public StateBinding StockBinding = new StateBinding(nameof(Silencer));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 7 });
-        public DaewooK1 (float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public SpectreM4(float xval, float yval)
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 40;
-            _ammoType = new ATMagnum
+            ammo = 30;
+            _ammoType = new AT9mm
             {
-                range = 345f,
+                range = 145f,
                 accuracy = 0.83f,
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("DaewooK1pattern"), 28, 11);
+            _sprite = new SpriteMap(GetPath("SpectreM4pattern"), 19, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(14f, 5f);
-            _collisionOffset = new Vec2(-14f, -5f);
-            _collisionSize = new Vec2(28f, 11f);
-            _barrelOffsetTL = new Vec2(28f, 3f);
-            _holdOffset = new Vec2(-2f, 2f);
-            _fireSound = GetPath("sounds/scar.wav");
+            _center = new Vec2(9.5f, 5f);
+            _collisionOffset = new Vec2(-9.5f, -5f);
+            _collisionSize = new Vec2(19f, 10f);
+            _barrelOffsetTL = new Vec2(14f, 2f);
+            _holdOffset = new Vec2(3f, 0f);
+            _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
-            _fireWait = 0.86f;
-            _kickForce = 0.5f;
-            KforceDSmg = 2.5f;
+            _fireWait = 0.31f;
+            _kickForce = 0.8f;
+            KforceDSmg = 2.7f;
             MaxDelaySmg = 50;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.24f;
-            _editorName = "Daewoo K1";
-			_weight = 4.5f;
+            maxAccuracyLost = 0.34f;
+            _editorName = "Spectre M4";
+            _weight = 3.3f;
         }
 
-        
+
 
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Stock)
+                if (Silencer)
                 {
                     FrameId -= 10;
+                    _ammoType = new AT9mm
+                    {
+                        range = 145f,
+                        accuracy = 0.83f,
+                        penetration = 1f
+                    };
                     loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.24f;
-                    weight = 4.5f;
-                    Stock = false;
+                    maxAccuracyLost = 0.34f;
+                    weight = 3.3f;
+                    Silencer = false;
                 }
                 else
                 {
                     FrameId += 10;
-                    loseAccuracy = 0.2f;
-                    maxAccuracyLost = 0.36f;
-                    weight = 3f;
-                    Stock = true;
+                    _ammoType = new AT9mmS
+                    {
+                        range = 167f,
+                        accuracy = 0.92f,
+                        penetration = 1f
+                    };
+                    loseAccuracy = 0.07f;
+                    maxAccuracyLost = 0.3f;
+                    weight = 3.8f;
+                    Silencer = true;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

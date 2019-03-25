@@ -66,6 +66,7 @@ namespace TMGmod
                     Stock = true;
                     weight = 3f;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
 		}

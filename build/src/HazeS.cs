@@ -17,8 +17,7 @@ namespace TMGmod
             _ammoType = new AT9mmS
             {
                 accuracy = 0.9f,
-                range = 180f,
-                penetration = 1.1f,
+                range = 150f,
                 combustable = true,
                 bulletSpeed = 60f
             };

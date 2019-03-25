@@ -1,22 +1,24 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
-
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Custom")]
-    [PublicAPI]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class PPShC : Gun
+    public class PPShC : Gun, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
-        public int Teksturka;
-        public StateBinding TeksturkaBinding = new StateBinding(nameof(Teksturka));
-
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 6, 7 });
         public PPShC(float xval, float yval)
             : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 35;
             _ammoType = new AT9mm
             {
@@ -24,10 +26,9 @@ namespace TMGmod.Custom_Guns
                 accuracy = 0.9f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPshlowmagptr"), 48, 11);
+            _sprite = new SpriteMap(GetPath("PPShpattern"), 48, 16);
             _graphic = _sprite;
-            Teksturka = Rando.Int(0, 5);
-            _sprite.frame = Teksturka;
+            _sprite.frame = 0;
             _center = new Vec2(23f, 5.5f);
             _collisionOffset = new Vec2(-23f, -4.5f);
             _collisionSize = new Vec2(46f, 11f);
@@ -39,13 +40,29 @@ namespace TMGmod.Custom_Guns
             _holdOffset = new Vec2(7f, -1f);
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.2f;
-            _editorName = "PPSh with Low Mag";
-			_weight = 5.5f;
+            _editorName = "PPSh";
+            _weight = 5.5f;
         }
-        public override void Draw()
+        private void UpdateSkin()
         {
-            _sprite.frame = Teksturka;
-            base.Draw();
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="src\NY\SnowMgun.cs" />
     <Compile Include="src\NY\SpruceGun.cs" />
     <Compile Include="src\SkeetGun.cs" />
+    <Compile Include="src\Spectre M4.cs" />
     <Compile Include="src\Stuff\C4Pack.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
     <Compile Include="src\Core\AT9mmSilenced.cs" />
@@ -148,8 +149,6 @@
     <Compile Include="src\Custom Guns\M960C.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
-    <Compile Include="src\Custom Guns\SIX12C.cs" />
-    <Compile Include="src\Custom Guns\SIX12SC.cs" />
     <Compile Include="src\Custom Guns\SVUC.cs" />
     <Compile Include="src\Custom Guns\SVUC1.cs" />
     <Compile Include="src\Custom Guns\TR-21C.cs" />
@@ -167,15 +166,15 @@
     <Compile Include="src\M960.cs" />
     <Compile Include="src\MG3.cs" />
     <Compile Include="src\MG44.cs" />
-    <Compile Include="src\Mixaly4.cs" />
+    <Compile Include="src\SMG9.cs" />
     <Compile Include="src\Stuff\Wire.cs" />
     <Compile Include="src\SuperFe.cs" />
     <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
     <Compile Include="src\mp7.cs" />
-    <Compile Include="src\MPA27.cs" />
+    <Compile Include="src\Vista.cs" />
     <Compile Include="src\MSR.cs" />
-    <Compile Include="src\Nellegalja.cs" />
+    <Compile Include="src\TC12.cs" />
     <Compile Include="src\p90.cs" />
     <Compile Include="src\PMR30.cs" />
     <Compile Include="src\Custom Guns\PMR30SH.cs" />

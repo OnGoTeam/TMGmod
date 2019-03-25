@@ -1,26 +1,29 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
-    public class Vintorez : BaseAr, ISpeedAccuracy
+    public class Vintorez : BaseAr, ISpeedAccuracy, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-		
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 7 });
+
         public Vintorez(float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
             _ammoType = new AT9mmS
             {
                 range = 550f,
                 accuracy = 0.9f,
-                penetration = 1.5f,
                 bulletSpeed = 25f
             };
             _type = "gun";
@@ -48,13 +51,28 @@ namespace TMGmod
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-        
-        public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
     }
 }

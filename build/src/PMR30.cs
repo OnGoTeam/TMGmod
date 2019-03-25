@@ -1,25 +1,33 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
-
 namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
     // ReSharper disable once InconsistentNaming
-    public class PMRC : BaseGun, IAmHg
+    public class PMRC : BaseGun, IAmHg, IHaveSkin
     {
-
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 9 });
         public PMRC(float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 215f,
+                range = 125f,
                 accuracy = 0.875f,
                 penetration = 1f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("PMR30Civilian"));
+            _sprite = new SpriteMap(GetPath("PMR30pattern"), 16, 10);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
@@ -33,6 +41,28 @@ namespace TMGmod
             maxAccuracyLost = 0.15f;
             _editorName = "PMR-30";
 			_weight = 1f;
+        }
+        private void UpdateSkin()
+        {
+            var fid = Skin.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
+        public float KforceDSmg { get; }
+        public int CurrDelaySmg { get; set; }
+        public int MaxDelaySmg { get; set; }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, -1f);
             laserSight = true;
-            _laserOffsetTL = new Vec2(31f, 10f);
+            _laserOffsetTL = new Vec2(31f, 9f);
             _editorName = "M50 with Explosive Ammo";
 			_weight = 6.75f;
             MuAccuracySr = 1f;

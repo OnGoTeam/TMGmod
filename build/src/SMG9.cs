@@ -5,32 +5,32 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class MAP : BaseSmg
+    public class SMG9 : BaseSmg
     {
-        public MAP(float xval, float yval)
+        public SMG9(float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 27;
+            ammo = 48;
             _ammoType = new AT9mm
             {
-                range = 100f,
-                accuracy = 0.4f,
-                penetration = 1f
+                range = 95f,
+                accuracy = 0.6f,
+                penetration = 0.4f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("Mixaly4sPistol"));
+            _graphic = new Sprite(GetPath("SMG9"));
             _center = new Vec2(7f, 7f);
             _collisionOffset = new Vec2(-8f, -7f);
             _collisionSize = new Vec2(16f, 15f);
-            _barrelOffsetTL = new Vec2(16f, 5f);
+            _barrelOffsetTL = new Vec2(16f, 4f);
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = true;
-            _fireWait = 0.45f;
+            _fireWait = 0.35f;
             _kickForce = 0f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.2f;
-            _holdOffset = new Vec2(-2f, 2f);
-            _editorName = "Michael";
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.33f;
+            _holdOffset = new Vec2(-3f, 2f);
+            _editorName = "SMG-9";
 			_weight = 2.5f;
         }
     }

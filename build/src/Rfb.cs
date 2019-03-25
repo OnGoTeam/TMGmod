@@ -52,6 +52,7 @@ namespace TMGmod
                     _fireWait = 0.79f;
                     maxAccuracyLost = 0.25f;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
 		}			

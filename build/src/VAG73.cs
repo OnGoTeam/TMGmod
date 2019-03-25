@@ -59,6 +59,7 @@ namespace TMGmod
                     _fireWait = 0.3f;
                     Mode = 1f;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
 		}

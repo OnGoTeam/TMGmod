@@ -8,7 +8,6 @@ namespace TMGmod.Cases.Color
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorR : BaseCase
     {
-
         public PodarokColorR(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
@@ -25,12 +24,15 @@ namespace TMGmod.Cases.Color
             Things = new List<Type>
             {
                 typeof(SIX12S),
+                typeof(SIX12),
                 typeof(DaewooK1),
                 typeof(AugC),
                 typeof(SkeetGun),
                 typeof(PPSh),
                 typeof(HK417),
-                typeof(Vintorez)
+                typeof(Vintorez),
+                typeof(VintorezC),
+                typeof(PMRC)
             };
             CaseId = 1;
         }

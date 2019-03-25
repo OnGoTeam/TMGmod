@@ -9,7 +9,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
     {
-
         private readonly SpriteMap _sprite;
         public bool NonAuto = true;
         public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
@@ -75,6 +74,7 @@ namespace TMGmod
                     _fireWait = 0.3f;
                     _sprite.frame -= 10;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
         }

@@ -68,6 +68,7 @@ namespace TMGmod.Custom_Guns
                     _barrelOffsetTL = new Vec2(42.5f, 4f);
                     Silencer = true;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
 		}			

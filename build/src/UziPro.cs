@@ -35,7 +35,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.4f;
             _kickForce = 0.5f;
-            loseAccuracy = 0.005f;
+            loseAccuracy = 0.08f;
             maxAccuracyLost = 0.5f;
             _holdOffset = new Vec2(2f, 0f);
             laserSight = true;
@@ -66,13 +66,13 @@ namespace TMGmod
                     _ammoType = new AT9mmS
                     {
                         range = 100f,
-                        accuracy = 1f,
-                        penetration = 0f
+                        accuracy = 1f
                     };
                     _barrelOffsetTL = new Vec2(17f, 3f);			 
                     Silencer = true;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
         }

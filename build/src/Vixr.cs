@@ -21,7 +21,6 @@ namespace TMGmod
             {
                range = 300f,
                accuracy = 0.88f,
-               penetration = 1f,
                bulletSpeed = 21f
             };
             _type = "gun";
@@ -62,6 +61,7 @@ namespace TMGmod
                     Stockngrip = true;
                     weight = 2f;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
         }

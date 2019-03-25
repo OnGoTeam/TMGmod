@@ -47,7 +47,7 @@ namespace TMGmod.Cases
         typeof(FnFcar),	
         typeof(DaewooK1),	
         typeof(SIX12),	
-        typeof(SIX12C),	
+        typeof(SIX12S),	
         typeof(Vag)	
 		};
 		_contains = things[Rando.Int(things.Count - 1)];

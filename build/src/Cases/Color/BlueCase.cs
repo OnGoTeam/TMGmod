@@ -24,11 +24,13 @@ namespace TMGmod.Cases.Color
             Things = new List<Type>
             {
                 typeof(SIX12S),
+                typeof(SIX12),
                 typeof(DaewooK1),
                 typeof(UziPro),
                 typeof(MP5),
                 typeof(MP5SD),
-                typeof(AWS)
+                typeof(AWS),
+                typeof(USP)
             };
             CaseId = 2;
         }
