@@ -145,7 +145,7 @@
     <Compile Include="src\Custom Guns\BarretM98C.cs" />
     <Compile Include="src\Custom Guns\BRENC.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
-    <Compile Include="src\Custom Guns\M4C.cs" />
+    <Compile Include="src\Type 89.cs" />
     <Compile Include="src\Custom Guns\M960C.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
