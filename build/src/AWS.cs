@@ -10,12 +10,14 @@ namespace TMGmod
     public class AWS : Sniper, IAmSr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 1;
+        private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Fid;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 6, 7 });
-        public AWS(float xval, float yval) : base(xval, yval)
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 5, 6, 7 });
+        public AWS(float xval, float yval)
+          : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("AWSpattern"), 33, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -26,9 +28,12 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new AT9mmS
             {
-                range = 700f
+                range = 550f,
+                accuracy = 0.97f,
+                penetration = 0.5f
             };
-            _fireSound = "sniper";
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
             _kickForce = 1.75f;
             _holdOffset = new Vec2(2f, 0f);
@@ -146,18 +151,18 @@ namespace TMGmod
             if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
-                _sprite.frame += 10;
+                if ((_sprite.frame > -1) && (_sprite.frame < 10)) _sprite.frame += 10;
             }
             else
             {
                 _kickForce = 1.75f;
-                _sprite.frame -= 10;
+                if ((_sprite.frame > 9) && (_sprite.frame < 20)) _sprite.frame -= 10;
             }
             OnHoldAction();
         }
         private void UpdateSkin()
         {
-            var fid = Fid.value;
+            var fid = Skin.value;
             while (!Allowedlst.Contains(fid))
             {
                 fid = Rando.Int(0, 9);

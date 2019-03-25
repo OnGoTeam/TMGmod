@@ -9,12 +9,12 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SIX12S : Gun, IHaveSkin, IAmSg
     {
-
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 1;
+        public bool Nolaser;
+        private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Fid;
-        private static readonly List<int> Allowedlst = new List<int>(new[]{ 0, 1, 2, 3, 4 });
+        private static readonly List<int> Allowedlst = new List<int>(new[]{ 0, 1, 2, 3, 4, 5, 6, 7, 9 });
         public SIX12S (float xval, float yval)
           : base(xval, yval)
         {
@@ -22,9 +22,8 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new AT9mmS
             {
-                range = 225f,
-                accuracy = 0.9f,
-                penetration = 1f
+                range = 180f,
+                accuracy = 0.9f
             };
             _numBulletsPerFire = 14;
             _type = "gun";
@@ -47,15 +46,30 @@ namespace TMGmod
             _editorName = "SIX12 Silenced";
 			_weight = 4f;
         }
-
-        /*public override void Initialize()
+        public override void Update()
         {
-            var fid = Fid.value;
-            if (fid == -1) fid = Rando.Int(0, 9);
-            _sprite.frame = fid;
-            base.Initialize();
-        }*/
-
+            if (duck?.inputProfile.Pressed("QUACK") == true)
+            {
+                if (Nolaser)
+                {
+                    FrameId += 10;
+                    loseAccuracy = 0.45f;
+                    maxAccuracyLost = 0.5f;
+                    laserSight = true;
+                    Nolaser = false;
+                }
+                else
+                {
+                    FrameId -= 10;
+                    loseAccuracy = 0.3f;
+                    maxAccuracyLost = 0.5f;
+                    laserSight = false;
+                    Nolaser = true;
+                }
+            }
+            SFX.Play(GetPath("sounds/tuduc.wav"));
+            base.Update();
+        }
         private void UpdateSkin()
         {
             var fid = Fid.value;
