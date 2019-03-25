@@ -19,7 +19,7 @@ namespace TMGmod
         public MSR(float xval, float yval) : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("AWSpattern"), 47, 12);
+            _sprite = new SpriteMap(GetPath("MSRpattern"), 47, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(28.5f, 6f);
