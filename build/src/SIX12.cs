@@ -18,6 +18,7 @@ namespace TMGmod
         public SIX12 (float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
             _ammoType = new ATMagnum
             {
