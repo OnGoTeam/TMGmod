@@ -59,7 +59,8 @@ namespace TMGmod
                     loseAccuracy = 0.025f;
                     maxAccuracyLost = 0.32f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
-                    Silencer = !Silencer;
+                    Silencer = false;
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
                     _flare = new SpriteMap("smallFlare", 11, 10);
                 }
                 else
@@ -74,7 +75,8 @@ namespace TMGmod
                     loseAccuracy = 0.02f;
                     maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(42.5f, 4f);
-                    Silencer = !Silencer;
+                    Silencer = true;
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
             }
