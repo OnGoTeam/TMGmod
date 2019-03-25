@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using DuckGame;
@@ -16,9 +17,18 @@ namespace TMGmod.Core
     public class TMGmod : Mod
     {
         internal string Bdate = Resources.BuildDate;
+        internal static TMGmod LastInstance;
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         // ReSharper disable once MemberCanBePrivate.Global
-		internal static string AssemblyName { get; private set; }
+        public TMGmod()
+        {
+            Debug.Log("TMGmod");
+            AppDomain.CurrentDomain.AssemblyResolve +=
+                CurrentDomain_AssemblyResolve;
+            LastInstance = this;
+        }
+
+        internal static string AssemblyName { get; private set; }
 		
 		//Приоритет. Мод загружается раньше/позже других модов
 		public override Priority priority => Priority.Normal;
@@ -28,6 +38,14 @@ namespace TMGmod.Core
         {
             base.OnPreInitialize();
         }*/
+
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            var assemblyname = new AssemblyName(args.Name).Name;
+            var assemblyFileName = Path.Combine(configuration.directory, assemblyname + ".dll");
+            var assembly = Assembly.LoadFrom(assemblyFileName);
+            return assembly;
+        }
 
         //Происходит после запуска мода
         protected override void OnPostInitialize()
