@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Custom")]
     public class VintorezC : BaseAr, ISpeedAccuracy, IHaveSkin
     {
 
