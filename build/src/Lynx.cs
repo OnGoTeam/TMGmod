@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     // ReSharper disable once InconsistentNaming
-    public class Lynx : Gun, IAmDmr, IHaveSkin
+    public class Lynx : Gun, IAmDmr, ISpeedAccuracy, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;

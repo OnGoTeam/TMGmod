@@ -25,7 +25,7 @@ namespace TMGmod
             {
                 range = 80f,
                 accuracy = 0.75f,
-                penetration = 1f,
+                penetration = 0.6f,
                 bulletSpeed = 55f
             };
             _type = "gun";

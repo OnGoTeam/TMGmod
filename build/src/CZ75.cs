@@ -18,7 +18,7 @@ namespace TMGmod
             {
                 range = 80f,
                 accuracy = 0.75f,
-                penetration = 0f
+                penetration = 0.4f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ75a"), 12, 8);
