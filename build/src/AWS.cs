@@ -41,8 +41,8 @@ namespace TMGmod
 			_weight = 5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(18f, 3f);
-			
-		}
+
+        }
         public override void Draw()
         {
             var ang = angle;

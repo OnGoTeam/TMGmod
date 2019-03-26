@@ -86,6 +86,7 @@
     <Compile Include="src\Core\WClasses\IAmLmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSr.cs" />
+    <Compile Include="src\MK17.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
     <Compile Include="src\NY\ATSnow.cs" />
