@@ -35,7 +35,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Dragoshotpattern"), 29, 11);
             _graphic = _sprite;
-            _sprite.frame = 2;
+            _sprite.frame = Rando.Int(0, 9);
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-14f, -7f);
             _collisionSize = new Vec2(29f, 11f);
