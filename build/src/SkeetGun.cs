@@ -15,7 +15,7 @@ namespace TMGmod
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Fid;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 6, 7, 9 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
             Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);

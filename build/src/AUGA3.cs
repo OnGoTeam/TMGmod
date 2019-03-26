@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
-    public class AugC : BaseAr, IHaveSkin
+    public class AUGA3 : BaseAr, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
@@ -16,7 +16,7 @@ namespace TMGmod
         public readonly EditorProperty<int> Fid;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5 });
 
-        public AugC (float xval, float yval)
+        public AUGA3(float xval, float yval)
           : base(xval, yval)
         {
             Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);

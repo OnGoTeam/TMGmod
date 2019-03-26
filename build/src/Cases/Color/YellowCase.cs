@@ -31,7 +31,10 @@ namespace TMGmod.Cases.Color
                 typeof(MP5SD),
                 typeof(AWS),
                 typeof(CZ805),
-                typeof(USP)
+                typeof(USP),
+                typeof(SkeetGun),
+                typeof(AKALFA),
+                typeof(SMG9)
             };
             CaseId = 4;
         }

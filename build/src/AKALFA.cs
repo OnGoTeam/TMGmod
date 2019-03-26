@@ -1,19 +1,26 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class AKALFA : BaseAr
+    public class AKALFA : BaseAr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
-        public bool Stock;
+        private const int NonSkinFrames = 2;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Fid;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4, 5 });
+        public bool Stock = true;
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
 
         public AKALFA (float xval, float yval)
           : base(xval, yval)
-		{
+        {
+            Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new AT9mm
             {
@@ -24,8 +31,10 @@ namespace TMGmod
                 bulletThickness = 0.87f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("ALFASM"), 38, 9);
-		    _graphic = _sprite;
+            _sprite = new SpriteMap(GetPath("ALFApattern"), 38, 9);
+            _graphic = _sprite;
+            _sprite.frame = 0;
+            _graphic = _sprite;
             _center = new Vec2(19f, 4.5f);
             _collisionOffset = new Vec2(-19f, -4.5f);
             _collisionSize = new Vec2(38f, 9f);
@@ -43,8 +52,6 @@ namespace TMGmod
 			_weight = 5.5f;
             _laserOffsetTL = new Vec2(31f, 4f);
             laserSight = true;
-		    _sprite.AddAnimation("base", 0f, false, 0);
-		    _sprite.AddAnimation("stock", 0f, false, 1);
 		}
         public override void Update()
         {
@@ -52,7 +59,7 @@ namespace TMGmod
             {
                 if (Stock)
                 {
-                    _sprite.SetAnimation("base");
+                    _sprite.frame -= 10;
                     _ammoType.accuracy = 1f;
                     loseAccuracy = 0f;
                     Stock = false;
@@ -60,15 +67,34 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.SetAnimation("stock");
+                    _sprite.frame += 10;
                     _ammoType.accuracy = 0.92f;
                     loseAccuracy = 0.045f;
                     Stock = true;
-                    weight = 3f;
+                    weight = 3.5f;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
-		}
+        }
+        private void UpdateSkin()
+        {
+            var fid = Fid.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
     }
 }

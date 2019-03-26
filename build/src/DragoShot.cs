@@ -1,10 +1,12 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
-    public class DragoShot : BaseBurst, IAmSr
+    public class DragoShot : BaseBurst, IAmSr, IHaveSkin
     {
         public float Counter;
         public StateBinding CounterBinding = new StateBinding(nameof(Counter));
@@ -12,9 +14,15 @@ namespace TMGmod
         private const float TimeToHappend = 1f;
         public bool LoockerOfSound;
         public StateBinding LoockerOfSoundBinding = new StateBinding(nameof(LoockerOfSound));
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Fid;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
         public DragoShot (float xval, float yval)
           : base(xval, yval)
         {
+            Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 16;
             _ammoType = new ATMagnum
             {
@@ -25,7 +33,9 @@ namespace TMGmod
             };
             _numBulletsPerFire = 8;
             _type = "gun";
-            _graphic = new Sprite(GetPath("DragoShot"));
+            _sprite = new SpriteMap(GetPath("Dragoshotpattern"), 29, 11);
+            _graphic = _sprite;
+            _sprite.frame = 2;
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-14f, -7f);
             _collisionSize = new Vec2(29f, 11f);
@@ -81,6 +91,25 @@ namespace TMGmod
                 BurstNum = 1;
             }
             base.Update();
+        }
+        private void UpdateSkin()
+        {
+            var fid = Fid.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

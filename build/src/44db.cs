@@ -31,7 +31,7 @@ namespace TMGmod
             _kickForce = 9f;
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.5f;
-            _editorName = "DeadlyGauge";
+            _editorName = "DeadlyGAUGA1e";
 			_weight = 4f;
         }
 

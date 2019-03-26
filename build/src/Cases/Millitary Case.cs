@@ -33,7 +33,7 @@ namespace TMGmod.Cases
 		{
         typeof(AN94),
         typeof(AN94C),
-        typeof(Aug),
+        typeof(AUGA1),
         typeof(CZ805),	
         typeof(DragoShot),	
         typeof(Glock18),

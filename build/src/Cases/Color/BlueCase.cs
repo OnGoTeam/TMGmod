@@ -30,7 +30,11 @@ namespace TMGmod.Cases.Color
                 typeof(MP5),
                 typeof(MP5SD),
                 typeof(AWS),
-                typeof(USP)
+                typeof(USP),
+                typeof(BigShot),
+                typeof(Vista),
+                typeof(DragoShot),
+                typeof(AUGA1)
             };
             CaseId = 2;
         }

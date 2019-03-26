@@ -74,9 +74,10 @@
     <Compile Include="src\AKALFA.cs" />
     <Compile Include="src\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
-    <Compile Include="src\AUG.cs" />
+    <Compile Include="src\AUGA1.cs" />
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
     <Compile Include="src\Core\ATx3x.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="src\NY\CandyCane.cs" />
     <Compile Include="src\NY\CandyCaneBullet.cs" />
     <Compile Include="src\CZ805.cs" />
-    <Compile Include="src\Caliber50.cs" />
+    <Compile Include="src\50AEpistol.cs" />
     <Compile Include="src\Cases\ExampleCase.cs" />
     <Compile Include="src\Cases\Color\BlueCase.cs" />
     <Compile Include="src\Cases\Color\CyanCase.cs" />
@@ -189,7 +190,7 @@
     <Compile Include="src\SIX12.cs" />
     <Compile Include="src\SIX12S.cs" />
     <Compile Include="src\SKS.cs" />
-    <Compile Include="src\SNR22.cs" />
+    <Compile Include="src\Lynx.cs" />
     <Compile Include="src\Stuff\Barricade.cs" />
     <Compile Include="src\Stuff\Barricades.cs" />
     <Compile Include="src\Stuff\C4Skeet.cs" />

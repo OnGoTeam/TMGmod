@@ -15,7 +15,7 @@ namespace TMGmod
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 4, 6 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 4, 7 });
         public USP(float xval, float yval)
           : base(xval, yval)
         {
@@ -69,7 +69,6 @@ namespace TMGmod
                         accuracy = 0.8f
                     };
                     _barrelOffsetTL = new Vec2(15f, 3f);
-                    _sprite.frame -= 10;
                     Silencer = false;
                 }
                 else
@@ -83,7 +82,6 @@ namespace TMGmod
                         accuracy = 0.9f
                     };
                     _barrelOffsetTL = new Vec2(23f, 3f);
-                    _sprite.frame += 10;
                     Silencer = true;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));

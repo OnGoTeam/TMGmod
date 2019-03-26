@@ -6,11 +6,11 @@ using TMGmod.Core;
 namespace TMGmod.Cases.Color
 {
     [EditorGroup("TMG|Misc|Cases")]
-    public class PodarokPrismarine : BaseCase
+    public class PodarokNitro : BaseCase
     {
-        public PodarokPrismarine(float xval, float yval) : base(xval, yval)
+        public PodarokNitro(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("PrismarineCase"));
+            _graphic = new Sprite(GetPath("NitroCase"));
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);
@@ -18,26 +18,31 @@ namespace TMGmod.Cases.Color
             thickness = 0.0f;
             _weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Sweet Case";
+            _editorName = "Nitro Case";
             Things = new List<Type>
             {
                 typeof(SIX12S),
                 typeof(SIX12),
-                typeof(Arx200),
-                typeof(UziPro),
+                typeof(AWS),
                 typeof(PPSh),
                 typeof(PPShC),
                 typeof(MG44),
                 typeof(SkeetGun),
                 typeof(MP5),
                 typeof(MP5SD),
-                typeof(AWS),
-                typeof(AUGA1),
-                typeof(AN94),
-                typeof(Vixr),
-                typeof(SpectreM4)
+                typeof(DaewooK1),
+                typeof(USP),
+                typeof(Vintorez),
+                typeof(VintorezC),
+                typeof(BigShot),
+                typeof(Arx200),
+                typeof(AN94C),
+                typeof(Type89),
+                typeof(Rfb),
+                typeof(FnFcar),
+                typeof(HazeS)
             };
-            CaseId = 6;
+            CaseId = 7;
         }
     }
 }

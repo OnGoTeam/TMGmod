@@ -30,7 +30,11 @@ namespace TMGmod.Cases.Color
                 typeof(MP5SD),
                 typeof(HK417),
                 typeof(USP),
-                typeof(CZ805)
+                typeof(CZ805),
+                typeof(AF2011),
+                typeof(MG44),
+                typeof(SV99),
+                typeof(Lynx)
             };
             CaseId = 3;
         }

@@ -41,7 +41,7 @@ namespace TMGmod.Cases
             typeof(PPSh),	
             typeof(PPShC),
             typeof(ScarGL),	
-            typeof(SNR22),	
+            typeof(Lynx),	
             typeof(SV98),	
             typeof(SVU),	
             typeof(SVUC),		

@@ -28,7 +28,7 @@ namespace TMGmod.Cases
                 typeof(AF2011),
                 typeof(M93R),
                 typeof(SMG9),
-                typeof(MPA27),
+                typeof(Vista),
                 typeof(BigShot),
                 typeof(TC12),
                 typeof(Rfb),
