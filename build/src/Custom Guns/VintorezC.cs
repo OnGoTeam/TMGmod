@@ -3,7 +3,7 @@ using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod
+namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Sniper|Custom")]
     public class VintorezC : BaseAr, ISpeedAccuracy, IHaveSkin

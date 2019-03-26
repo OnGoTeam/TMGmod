@@ -6,12 +6,13 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
+    // ReSharper disable once InconsistentNaming
     public class TC12 : Gun, IAmDmr, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        public bool Silencer = false;
+        public bool Silencer;
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;

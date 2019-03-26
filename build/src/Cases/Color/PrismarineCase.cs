@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
+using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases.Color
 {

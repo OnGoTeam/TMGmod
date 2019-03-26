@@ -7,6 +7,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
+    // ReSharper disable once InconsistentNaming
     public class AUGA3 : BaseAr, IHaveSkin
     {
 
