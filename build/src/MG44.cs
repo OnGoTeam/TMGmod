@@ -24,7 +24,7 @@ namespace TMGmod
         private float _raisestat;*/
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 3, 5, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 6, 7 });
         public MG44(float xval, float yval)
           : base(xval, yval)
         {

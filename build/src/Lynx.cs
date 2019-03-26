@@ -89,5 +89,7 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; }
     }
 }

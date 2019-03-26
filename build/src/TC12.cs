@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun")]
+    [EditorGroup("TMG|Rifle")]
     // ReSharper disable once InconsistentNaming
     public class TC12 : Gun, IAmDmr, IHaveSkin
     {

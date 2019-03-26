@@ -33,7 +33,7 @@ namespace TMGmod
             _kickForce = 3.76f;
             loseAccuracy = 0.5f;
             maxAccuracyLost = 1f;
-            _holdOffset = new Vec2(0f, -2f);
+            _holdOffset = new Vec2(0f, 2f);
             _editorName = "50AE Pistol";
 			_weight = 2.5f;
         }

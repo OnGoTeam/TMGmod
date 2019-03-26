@@ -40,7 +40,7 @@ namespace TMGmod
             _fireWait = 0.81f;
             _kickForce = 2.35f;
 		    Kforce1Ar = 2.3f;
-		    Kforce2Ar = 4.3f;
+		    Kforce2Ar = 2.6f;
             loseAccuracy = 0.3f;
             maxAccuracyLost = 1.8f;
             _editorName = "Mk17 with Shield";

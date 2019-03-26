@@ -21,7 +21,7 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 366f,
-                accuracy = 0.95f,
+                accuracy = 0.85f,
                 penetration = 1.3f
             };
             _type = "gun";
@@ -36,7 +36,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.71f;
             _kickForce = 1.8f;
-            loseAccuracy = 0.05f;
+            loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             _holdOffset = new Vec2(1f, 0f);
             _editorName = "Type 89";
