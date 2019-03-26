@@ -31,7 +31,7 @@ namespace TMGmod
             _kickForce = 9f;
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.5f;
-            _editorName = "DeadlyGAUGA1e";
+            _editorName = "You scared Ded";
 			_weight = 4f;
         }
 
