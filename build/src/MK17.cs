@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using DuckGame;
-using TMGmod.Core;
+﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -15,7 +13,7 @@ namespace TMGmod
         public MK17(float xval, float yval)
           : base(xval, yval)
         {
-            thickness = 5f;
+            thickness = 6f;
             ammo = 20;
             _ammoType = new AT9mm
             {

@@ -6,7 +6,7 @@ using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
-    [EditorGroup("TMG|Misc|Cases")]
+    [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Mpodarok : Holdable, IPlatform
     {
