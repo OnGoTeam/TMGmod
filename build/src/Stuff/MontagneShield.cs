@@ -1,11 +1,12 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
     [PublicAPI]
-    public class MontagneShield : Holdable
+    public class MontagneShield : Holdable, IPlatform, IPathNodeBlocker
     {
         private readonly SpriteMap _sprite;
         public float Hp;
@@ -23,6 +24,7 @@ namespace TMGmod.Stuff
             _weight = 8f;
             throwSpeedMultiplier = 0f;
             _canRaise = false;
+            flammable = 0;
         }
 
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
@@ -73,9 +75,52 @@ namespace TMGmod.Stuff
                 _sprite.frame = 3;
             }
         }
+        
+        public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
+        {
+            var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
+            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) && (from == ImpactedFrom.Left) || from == ImpactedFrom.Right)
+            {
+                if (duck == null && Math.Abs(with.hSpeed) * with.weight > 40f)
+                {
+                    angleDegrees = 90f * offDir;
+                    collisionOffset = new Vec2(-11.5f, -2f);
+                    collisionSize = new Vec2(23f, 4f);
+                    sleeping = false;
+                }
+                with.hSpeed = hSpeed;
+            }
+            base.Impact(with, from, solidImpact);
+        }
 
         public override void Update()
         {
+            var hspd = duck?.hSpeed ?? hSpeed;
+            var dvecx = hspd * 3;
+            var hit1 = topLeft + new Vec2(Math.Min(dvecx, 0), 0);
+            var hit2 = bottomRight + new Vec2(Math.Max(dvecx, 0), 0);
+            foreach (var fire in Level.CheckRectAll<SmallFire>(hit1, hit2))
+            {
+                fire.hSpeed = hspd;
+            }
+            var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
+            if (collisionSize.x < 5f)
+            foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
+            {
+                if (thing == duck || thing == this || thing is IDontMove || thing is Block) continue;
+                if (!(thing is IAmADuck || doblock)) continue;
+                thing.hSpeed = hspd;
+                var dx = Math.Abs(thing.x - x) > 0.01f ? (thing is Duck? 2: 4) / (thing.x - x): 0;
+                dx = Math.Min(2, dx);
+                dx = Math.Max(-2, dx);
+                thing.x += dx;
+                if (Math.Abs(hspd) < 0.1f) continue;
+                //else
+                var hvk = Math.Abs(thing.x - x) / 2f;
+                hvk = Math.Min(hvk, 1);
+                if (duck != null) duck.hSpeed *= hvk;
+                else hSpeed *= hvk;
+            }
             if (duck == null)
             {
                 /*if (grounded)
@@ -89,5 +134,10 @@ namespace TMGmod.Stuff
             }
             base.Update();
         }
+
+        /*public override void Touch(MaterialThing with)
+        {
+            base.Touch(with);
+        }*/
     }
 }

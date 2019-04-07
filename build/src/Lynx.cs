@@ -52,14 +52,14 @@ namespace TMGmod
                 _kickForce = 0f;
 				loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
-				graphic = new Sprite(GetPath("Lynxbipods"));
+                _sprite.frame = _sprite.frame % 10 + 10;
             }
             else
             {
                 _kickForce = 0.8f;
                 loseAccuracy = 0.1f;
                 maxAccuracyLost = 0.3f;
-				graphic = new Sprite(GetPath("Lynx"));
+                _sprite.frame %= 10;
             }
             base.Update();
         }
