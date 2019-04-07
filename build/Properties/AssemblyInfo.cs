@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 //
 
 #if WORKSHOP
-[assembly: AssemblyVersion("1.1.1.0")]
+[assembly: AssemblyVersion("1.1.1.1")]
 #else
 [assembly: AssemblyVersion("1.1.*")]
 #endif
