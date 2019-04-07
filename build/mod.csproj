@@ -22,6 +22,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>
     </DocumentationFile>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\..\TMGmod\</OutputPath>
@@ -33,6 +34,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -45,15 +47,13 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <Import Project="dglink.csproj" />
   <ItemGroup>
     <Reference Include="JetBrains.Annotations, Version=2018.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>packages\JetBrains.Annotations.2018.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="ogtdglib, Version=0.0.6948.41901, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\ogtdglib\ogtdglib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,31 +69,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
     <Compile Include="src\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
-    <Compile Include="src\AUG.cs" />
+    <Compile Include="src\AUGA1.cs" />
+    <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
-    <Compile Include="src\Core\AmmoTypes\BaseAmmoType.cs" />
+    <Compile Include="src\Cases\Color\NitroCase.cs" />
+    <Compile Include="src\Cases\Color\PrismarineCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
+    <Compile Include="src\Core\ATx3x.cs" />
     <Compile Include="src\Core\Nothing.cs" />
     <Compile Include="src\Core\WClasses\IAmAr.cs" />
     <Compile Include="src\Core\WClasses\IAmLmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSr.cs" />
+    <Compile Include="src\MK17.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
     <Compile Include="src\NY\ATSnow.cs" />
     <Compile Include="src\NY\CandyCane.cs" />
     <Compile Include="src\NY\CandyCaneBullet.cs" />
     <Compile Include="src\CZ805.cs" />
-    <Compile Include="src\Caliber50.cs" />
+    <Compile Include="src\50AEpistol.cs" />
     <Compile Include="src\Cases\ExampleCase.cs" />
     <Compile Include="src\Cases\Color\BlueCase.cs" />
     <Compile Include="src\Cases\Color\CyanCase.cs" />
@@ -101,7 +101,6 @@
     <Compile Include="src\Cases\Color\YellowCase.cs" />
     <Compile Include="src\Cases\Heavy Millitary Case.cs" />
     <Compile Include="src\Cases\Millitary Case.cs" />
-    <Compile Include="src\Cases\Warriors Case.cs" />
     <Compile Include="src\Core\BaseCase.cs" />
     <Compile Include="src\Core\IHaveSkin.cs" />
     <Compile Include="src\Core\WClasses\BaseBurst.cs" />
@@ -129,6 +128,7 @@
     <Compile Include="src\NY\SnowMgun.cs" />
     <Compile Include="src\NY\SpruceGun.cs" />
     <Compile Include="src\SkeetGun.cs" />
+    <Compile Include="src\Spectre M4.cs" />
     <Compile Include="src\Stuff\C4Pack.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
     <Compile Include="src\Core\AT9mmSilenced.cs" />
@@ -138,23 +138,19 @@
     <Compile Include="src\Core\Czmag.cs" />
     <Compile Include="src\Core\ExplosiveBullet.cs" />
     <Compile Include="src\Core\ExploCreator.cs" />
-    <Compile Include="src\Core\HA.cs" />
     <Compile Include="src\Core\MF.cs" />
     <Compile Include="src\Core\Mod.cs" />
     <Compile Include="src\Core\Particles\BarrBetaPar.cs" />
-    <Compile Include="src\Core\PTPA.cs" />
     <Compile Include="src\Custom Guns\44dbC.cs" />
     <Compile Include="src\Custom Guns\AN94C.cs" />
-    <Compile Include="src\Custom Guns\AUGA3.cs" />
+    <Compile Include="src\AUGA3.cs" />
     <Compile Include="src\Custom Guns\BarretM98C.cs" />
     <Compile Include="src\Custom Guns\BRENC.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
-    <Compile Include="src\Custom Guns\M4C.cs" />
+    <Compile Include="src\Type 89.cs" />
     <Compile Include="src\Custom Guns\M960C.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
-    <Compile Include="src\Custom Guns\SIX12C.cs" />
-    <Compile Include="src\Custom Guns\SIX12SC.cs" />
     <Compile Include="src\Custom Guns\SVUC.cs" />
     <Compile Include="src\Custom Guns\SVUC1.cs" />
     <Compile Include="src\Custom Guns\TR-21C.cs" />
@@ -172,21 +168,21 @@
     <Compile Include="src\M960.cs" />
     <Compile Include="src\MG3.cs" />
     <Compile Include="src\MG44.cs" />
-    <Compile Include="src\Mixaly4.cs" />
+    <Compile Include="src\SMG9.cs" />
     <Compile Include="src\Stuff\Wire.cs" />
     <Compile Include="src\SuperFe.cs" />
     <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
     <Compile Include="src\mp7.cs" />
-    <Compile Include="src\MPA27.cs" />
+    <Compile Include="src\Vista.cs" />
     <Compile Include="src\MSR.cs" />
-    <Compile Include="src\Nellegalja.cs" />
+    <Compile Include="src\TC12.cs" />
     <Compile Include="src\p90.cs" />
     <Compile Include="src\PMR30.cs" />
-    <Compile Include="src\PMR30SH.cs" />
+    <Compile Include="src\Custom Guns\PMR30SH.cs" />
     <Compile Include="src\PPSh.cs" />
     <Compile Include="src\Remington.cs" />
-    <Compile Include="src\RemingtonTactical.cs" />
+    <Compile Include="src\Custom Guns\RemingtonTactical.cs" />
     <Compile Include="src\SCARGL.cs" />
     <Compile Include="src\Rfb.cs" />
     <Compile Include="src\Arx200.cs" />
@@ -195,7 +191,7 @@
     <Compile Include="src\SIX12.cs" />
     <Compile Include="src\SIX12S.cs" />
     <Compile Include="src\SKS.cs" />
-    <Compile Include="src\SNR22.cs" />
+    <Compile Include="src\Lynx.cs" />
     <Compile Include="src\Stuff\Barricade.cs" />
     <Compile Include="src\Stuff\Barricades.cs" />
     <Compile Include="src\Stuff\C4Skeet.cs" />
@@ -223,10 +219,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

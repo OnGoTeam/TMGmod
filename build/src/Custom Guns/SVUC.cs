@@ -26,7 +26,7 @@ namespace TMGmod.Custom_Guns
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = true;
             _fireWait = 0.75f;
-            _kickForce = 1.5f;
+            _kickForce = 1f;
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(1f, 2f);

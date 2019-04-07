@@ -1,7 +1,8 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 using JetBrains.Annotations;
 
-#if DEBUG
+
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]

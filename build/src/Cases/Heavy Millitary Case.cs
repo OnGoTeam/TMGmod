@@ -6,7 +6,7 @@ using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
-    [EditorGroup("TMG|Misc|Cases")]
+    [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Hpodarok : Holdable, IPlatform
     {
@@ -41,7 +41,7 @@ namespace TMGmod.Cases
             typeof(PPSh),	
             typeof(PPShC),
             typeof(ScarGL),	
-            typeof(SNR22),	
+            typeof(Lynx),	
             typeof(SV98),	
             typeof(SVU),	
             typeof(SVUC),		

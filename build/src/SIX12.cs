@@ -1,28 +1,37 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12 : Gun, IAmSg
+    public class SIX12 : Gun, IHaveSkin, IAmSg
     {
-        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
-		
-		public SIX12 (float xval, float yval)
+        private readonly SpriteMap _sprite;
+        public bool Laserino;
+        private const int NonSkinFrames = 2;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7 });
+        public SIX12 (float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
             _ammoType = new ATMagnum
             {
-                range = 225f,
+                range = 165f,
                 accuracy = 0.87f,
                 penetration = 1f,
                 bulletThickness = 0.5f
             };
             _numBulletsPerFire = 14;
             _type = "gun";
-            _graphic = new Sprite(GetPath("SIX12"));
+            _sprite = new SpriteMap(GetPath("SIX12pattern"), 29, 10);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(19.5f, 5f);
             _collisionOffset = new Vec2(-19.5f, -5f);
             _collisionSize = new Vec2(29f, 10f);
@@ -39,16 +48,50 @@ namespace TMGmod
             _editorName = "SIX12";
 			_weight = 4f;
         }
-        public override void Initialize()
+        public override void Update()
         {
-			if (!(Level.current is Editor) && Laser.value)
+            if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                laserSight = true;
-                graphic = new Sprite(GetPath("SIX12laser2"));
-                loseAccuracy = 0.5f;
-                maxAccuracyLost = 0.5f;
+                if (Laserino)
+                {
+                    FrameId -= 10;
+                    loseAccuracy = 0.3f;
+                    maxAccuracyLost = 0.4f;
+                    laserSight = false;
+                    Laserino = false;
+                }
+                else
+                {
+                    FrameId += 10;
+                    loseAccuracy = 0.5f;
+                    maxAccuracyLost = 0.5f;
+                    laserSight = true;
+                    Laserino = true;
+                }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-            base.Initialize();
+            base.Update();
         }
-	}
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
+    }
 }

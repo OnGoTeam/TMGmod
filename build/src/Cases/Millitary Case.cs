@@ -6,7 +6,7 @@ using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
-    [EditorGroup("TMG|Misc|Cases")]
+    [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Mpodarok : Holdable, IPlatform
     {
@@ -33,7 +33,7 @@ namespace TMGmod.Cases
 		{
         typeof(AN94),
         typeof(AN94C),
-        typeof(Aug),
+        typeof(AUGA1),
         typeof(CZ805),	
         typeof(DragoShot),	
         typeof(Glock18),
@@ -47,7 +47,7 @@ namespace TMGmod.Cases
         typeof(FnFcar),	
         typeof(DaewooK1),	
         typeof(SIX12),	
-        typeof(SIX12C),	
+        typeof(SIX12S),	
         typeof(Vag)	
 		};
 		_contains = things[Rando.Int(things.Count - 1)];
@@ -68,10 +68,10 @@ namespace TMGmod.Cases
 	        Initialize();
 	    }
 	    if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
-	    if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
+	    if (Rando.Int(500) == 1 && newThing is Gun gun1 && gun1.CanSpawnInfinite())
 	    {
-	        (newThing as Gun).infiniteAmmoVal = true;
-	        (newThing as Gun).infinite.value = true;
+	        gun1.infiniteAmmoVal = true;
+	        gun1.infinite.value = true;
 	    }
 	    newThing.x = o.x;
 	    newThing.y = o.y;

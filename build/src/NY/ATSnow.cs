@@ -5,7 +5,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATSneg : BaseAmmoType
+    public class ATSneg : BaseAmmoTypeT
     {
         public readonly SpriteMap SpriteY;
         public ATSneg()

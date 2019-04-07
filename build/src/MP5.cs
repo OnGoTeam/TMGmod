@@ -1,10 +1,10 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
     public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
@@ -14,9 +14,12 @@ namespace TMGmod
         public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
         public MP5(float xval, float yval)
             : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new AT9mm
             {
@@ -44,6 +47,15 @@ namespace TMGmod
             DeltaWait = 0.65f;
             BurstNum = 1;
         }
+        private void UpdateSkin()
+        {
+            var fid = Skin.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -62,6 +74,7 @@ namespace TMGmod
                     _fireWait = 0.3f;
                     _sprite.frame -= 10;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
         }
@@ -72,6 +85,11 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

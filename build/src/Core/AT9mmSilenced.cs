@@ -10,6 +10,7 @@ namespace TMGmod.Core
 			bulletLength = 0f;
             combustable = true;
             bulletSpeed = 37f;
+            penetration = 0.4f;
         }
     }
 }

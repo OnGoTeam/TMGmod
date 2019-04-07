@@ -61,7 +61,8 @@ namespace TMGmod.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Ищет локализованную строку, похожую на 24.03.2019 23:06:34,35 
+        ///.
         /// </summary>
         internal static string BuildDate {
             get {

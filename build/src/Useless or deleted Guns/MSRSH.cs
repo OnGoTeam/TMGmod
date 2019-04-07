@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using DuckGame;
 using JetBrains.Annotations;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
-#if DEBUG
+
 namespace TMGmod.Useless_or_deleted_Guns
 {
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", false)]

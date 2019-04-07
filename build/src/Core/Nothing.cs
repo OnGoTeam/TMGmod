@@ -1,9 +1,14 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
-    public class Nothing:Thing
+    /// <inheritdoc />
+    /// <summary>
+    ///     Empty thing
+    /// </summary>
+    [PublicAPI]
+    public sealed class Nothing : Thing
     {
-        
     }
 }

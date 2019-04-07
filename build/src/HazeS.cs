@@ -1,29 +1,36 @@
-﻿using DuckGame;
-using TMGmod.Core;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core.WClasses;
+using TMGmod.Core;
 
 namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|AutoPistol")]
-    public class HazeS : BaseGun, IAmHg
+    public class HazeS : BaseGun, IAmHg, IHaveSkin
     {
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 2;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
         private float _heatval;
-
         public HazeS(float xval, float yval) :
             base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
             _ammoType = new AT9mmS
             {
                 accuracy = 0.9f,
-                range = 180f,
-                penetration = 1.1f,
+                range = 150f,
                 combustable = true,
                 bulletSpeed = 60f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("haze"));
+            _sprite = new SpriteMap(GetPath("HazeSpattern"), 24, 12);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(12f, 3f);
             _collisionOffset = new Vec2(-12f, -3f);
             _collisionSize = new Vec2(24f, 12f);
@@ -82,6 +89,27 @@ namespace TMGmod
             }
 
             base.Fire();
+        }
+        private void UpdateSkin()
+        {
+            var fid = Skin.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

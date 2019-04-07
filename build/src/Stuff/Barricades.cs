@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [BaggedProperty("CanSpawn", false)]
     [PublicAPI]
     public class Barricades:GreyBlock
     {

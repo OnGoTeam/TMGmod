@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -14,13 +15,16 @@ namespace TMGmod
         public bool Silencer;
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 4, 5, 7 });
         public CZ805 (float xval, float yval)
           : base(xval, yval)
-		{
+        {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
 		    _ammoType = new AT9mm
 		    {
-		        range = 500f,
+		        range = 330f,
 		        accuracy = 0.87f,
 		        penetration = 1f
 		    };
@@ -53,14 +57,17 @@ namespace TMGmod
                     _fireSound = "deepMachineGun2";
                     _ammoType = new AT9mm
                     {
-                        range = 400f,
+                        range = 330f,
                         accuracy = 0.87f
                     };
                     loseAccuracy = 0.025f;
                     maxAccuracyLost = 0.32f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
-                    Silencer = !Silencer;
-                    _flare = new SpriteMap("smallFlare", 11, 10);
+                    Silencer = false;
+                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
                 }
                 else
                 {
@@ -68,15 +75,16 @@ namespace TMGmod
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _ammoType = new AT9mmS
                     {
-                        range = 470f,
+                        range = 380f,
                         accuracy = 0.95f
                     };
                     loseAccuracy = 0.02f;
                     maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(42.5f, 4f);
-                    Silencer = !Silencer;
+                    Silencer = true;
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
 
             if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
@@ -85,10 +93,26 @@ namespace TMGmod
             if (ammo > 0 && ammo <= 5 && FrameId / 10 % 5 != 4) _sprite.frame += 10;
             base.Update();
         }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

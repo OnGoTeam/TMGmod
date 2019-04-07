@@ -1,18 +1,27 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core.WClasses;
+using TMGmod.Core;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class MSR : Sniper, IAmSr
+    public class MSR : Sniper, IAmSr, IHaveSkin
     {
-		
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
         public MSR(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("MSR"));
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("MSRpattern"), 47, 12);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(28.5f, 6f);
             _collisionOffset = new Vec2(-28.5f, -6f);
             _collisionSize = new Vec2(47f, 12f);
@@ -139,5 +148,26 @@ namespace TMGmod
             }
             laserSight = false;
         }
-	}
+        private void UpdateSkin()
+        {
+            var fid = Skin.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
+    }
 }

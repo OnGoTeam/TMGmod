@@ -5,7 +5,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATCane : BaseAmmoType
+    public class ATCane : BaseAmmoTypeT
     {
         public readonly SpriteMap SpriteY;
         public ATCane()

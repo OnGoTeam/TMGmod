@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -10,9 +11,12 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Fid;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
         public Arx200 (float xval, float yval)
           : base(xval, yval)
         {
+            Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new ATMagnum
             {
@@ -27,7 +31,7 @@ namespace TMGmod
             _center = new Vec2(16f, 7f);
             _collisionOffset = new Vec2(-16.5f, -7f);
             _collisionSize = new Vec2(33f, 14f);
-            _barrelOffsetTL = new Vec2(33f, 5.5f);
+            _barrelOffsetTL = new Vec2(33f, 6f);
             _holdOffset = new Vec2(1f, -1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
@@ -38,11 +42,26 @@ namespace TMGmod
             _editorName = "Beretta ARX-200";
 			_weight = 6f;
         }
+        private void UpdateSkin()
+        {
+            var fid = Fid.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
 
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

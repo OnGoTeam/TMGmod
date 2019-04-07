@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -12,9 +13,12 @@ namespace TMGmod
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 7 });
         public DaewooK1 (float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 40;
             _ammoType = new ATMagnum
             {
@@ -30,7 +34,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-14f, -5f);
             _collisionSize = new Vec2(28f, 11f);
             _barrelOffsetTL = new Vec2(28f, 3f);
-            _holdOffset = new Vec2(-2f, 2f);
+            _holdOffset = new Vec2(-2f, 1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.86f;
@@ -65,14 +69,30 @@ namespace TMGmod
                     weight = 3f;
                     Stock = true;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
-		}
+        }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
 
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

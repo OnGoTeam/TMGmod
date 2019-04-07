@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Properties;
 
-// ReSharper disable RedundantOverriddenMember
- 
+
 namespace TMGmod.Core
 {
     [PublicAPI]
@@ -17,18 +17,36 @@ namespace TMGmod.Core
     public class TMGmod : Mod
     {
         internal string Bdate = Resources.BuildDate;
+        internal static TMGmod LastInstance;
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         // ReSharper disable once MemberCanBePrivate.Global
-		internal static string AssemblyName { get; private set; }
+        public TMGmod()
+        {
+            Debug.Log("TMGmod loading");
+            AppDomain.CurrentDomain.AssemblyResolve +=
+                CurrentDomain_AssemblyResolve;
+            LastInstance = this;
+        }
+
+        internal static string AssemblyName { get; private set; }
 		
 		//Приоритет. Мод загружается раньше/позже других модов
-		public override Priority priority => base.priority;
+		public override Priority priority => Priority.Normal;
 
         //Происходит перед запуском мода
-        protected override void OnPreInitialize()
+        /*protected override void OnPreInitialize()
         {
             base.OnPreInitialize();
+        }*/
+
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            var assemblyname = new AssemblyName(args.Name).Name;
+            var assemblyFileName = Path.Combine(configuration.directory, assemblyname + ".dll");
+            var assembly = Assembly.LoadFrom(assemblyFileName);
+            return assembly;
         }
+
         //Происходит после запуска мода
         protected override void OnPostInitialize()
         {
@@ -76,23 +94,22 @@ namespace TMGmod.Core
             if (Directory.Exists("DuckGame\\Levels\\TMG v2.1.1")) Directory.Delete("DuckGame\\Levels\\TMG v2.1.1");*/
 
             // Потом создаём плейлист
-            string uffPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
-            XElement playlistElement = new XElement("playlist");
-            foreach (string s in levelslist)
+            var uffPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
+            var playlistElement = new XElement("playlist");
+            foreach (var s in levelslist)
             {
-                XElement levelElement = new XElement("element", s.Replace('\\', '/'));
+                var levelElement = new XElement("element", s.Replace('\\', '/'));
                 playlistElement.Add(levelElement);
             }
-            XDocument playlist = new XDocument();
+            var playlist = new XDocument();
             playlist.Add(playlistElement);
-            string contents = playlist.ToString();
+            var contents = playlist.ToString();
             if (string.IsNullOrWhiteSpace(contents))
                 throw new Exception("Blank XML (" + uffPlaylistLocation + ")");
-            if (!File.Exists(uffPlaylistLocation) || !File.ReadAllText(uffPlaylistLocation).Equals(contents))
-            {
-                File.WriteAllText(uffPlaylistLocation, contents);
-                SaveAsPlay(uffPlaylistLocation);
-            }
+            if (File.Exists(uffPlaylistLocation) && File.ReadAllText(uffPlaylistLocation).Equals(contents)) return;
+            //else
+            File.WriteAllText(uffPlaylistLocation, contents);
+            SaveAsPlay(uffPlaylistLocation);
         }
         private void SaveAsPlay(string path)
         {

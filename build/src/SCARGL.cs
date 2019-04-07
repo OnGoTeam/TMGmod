@@ -102,6 +102,7 @@ namespace TMGmod
                 {
                     Mode = 1 - Mode;
                     _switched = true;
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
                 }
             }
             UpdateMode();

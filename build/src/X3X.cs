@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core;
 
 namespace TMGmod
 {
@@ -11,13 +12,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 8;
-            _ammoType = new ATMagnum
-            {
-                range = 500f,
-                accuracy = 1f,
-                penetration = 100f,
-                bulletThickness = 5f
-            };
+            _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
             _sprite = new SpriteMap(GetPath("X3Xa"), 28, 15);

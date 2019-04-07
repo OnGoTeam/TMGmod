@@ -7,6 +7,7 @@ using TMGmod.Core.Particles;
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [BaggedProperty("CanSpawn", false)]
     [PublicAPI]
     public class Barricade:Block
     {

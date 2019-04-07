@@ -5,7 +5,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATIglu : BaseAmmoType
+    public class ATIglu : BaseAmmoTypeT
     {
         public readonly SpriteMap SpriteY;
         public ATIglu()

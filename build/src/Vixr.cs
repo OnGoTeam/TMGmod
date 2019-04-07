@@ -1,32 +1,41 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
-
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
     [PublicAPI]
-    public class Vixr : Gun, IAmAr
+    public class Vixr : Gun, IAmAr, IHaveSkin
     {
-		public bool Stockngrip;
+		public bool Stockngrip = true;
         public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Fid;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6 });
+        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
         {
+            Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 25;
             _ammoType = new AT9mmS
             {
                range = 300f,
                accuracy = 0.88f,
-               penetration = 1f,
                bulletSpeed = 21f
             };
             _type = "gun";
-			//I'M BLUE DARUDE SANDSTORM DA DUBAI
-            _graphic = new Sprite(GetPath("VixrStock"));
+            //I'M BLUE DARUDE SANDSTORM DA DUBAI
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _sprite = new SpriteMap(GetPath("Vixrpattern"), 33, 9);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(16.5f, 4.5f);
             _collisionOffset = new Vec2(-16.5f, -4.5f);
             _collisionSize = new Vec2(33f, 9f);
@@ -48,22 +57,42 @@ namespace TMGmod
             {
                 if (Stockngrip)
                 {
-                    graphic = new Sprite(GetPath("VixrStock"));
-                    loseAccuracy = 0.099f;
-                    maxAccuracyLost = 0.17f;
+                    _sprite.frame += 10;
+                    loseAccuracy = 0.13f;
+                    maxAccuracyLost = 0.4f;
                     Stockngrip = false;
-                    weight = 3.9f;
+                    weight = 2f;
                 }
                 else
                 {
-                    graphic = new Sprite(GetPath("VixrNoStock"));
-                    loseAccuracy = 0.13f;
-                    maxAccuracyLost = 0.4f;
+                    _sprite.frame -= 10;
+                    loseAccuracy = 0.099f;
+                    maxAccuracyLost = 0.17f;
                     Stockngrip = true;
-                    weight = 2f;
+                    weight = 3.9f;
                 }
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
+        }
+        private void UpdateSkin()
+        {
+            var fid = Fid.value;
+            while (!Allowedlst.Contains(fid))
+            {
+                fid = Rando.Int(0, 9);
+            }
+            _sprite.frame = fid;
+        }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }
