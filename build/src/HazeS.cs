@@ -15,6 +15,34 @@ namespace TMGmod
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
         private float _heatval;
+        public float Heatval
+        {
+            get => _heatval;
+            set
+            {
+                _heatval = value;
+                _ammoType.accuracy = _heatval > 3f ? 1.2f - _heatval * 0.1f : 0.9f;
+                _ammoType.bulletSpeed = 60f + 10f * _heatval;
+                _ammoType.range = 180f;
+                Sighted = _sighted;
+            }
+        }
+
+        private bool _sighted;
+
+        public bool Sighted
+        {
+            get => _sighted;
+            set
+            {
+                _sighted = value;
+                if (!value) return;
+                //else
+                _ammoType.accuracy = 1f;
+                _ammoType.range = 450f;
+            }
+        }
+
         public HazeS(float xval, float yval) :
             base(xval, yval)
         {
@@ -52,21 +80,19 @@ namespace TMGmod
         public override void Update()
         {
             if (_heatval > 6f) _heatval = 6f;
-            _ammoType.accuracy = _heatval > 3f ? 1.2f - _heatval * 0.1f: 0.9f;
-            _ammoType.bulletSpeed = 60f + 10f * _heatval;
+            Heatval = _heatval;
             _heatval -= 0.05f;
-            _ammoType.range = 180f;
             if (_heatval < 0f) _heatval = 0f;
             if (duck != null)
             {
                 if (duck.inputProfile.Down("QUACK") && _heatval < 1f)
                 {
                     _holdOffset = new Vec2(3f, -2f) * 0.2f + _holdOffset * 0.8f;
-                    _ammoType.accuracy = 1f;
-                    _ammoType.range = 450f;
+                    Sighted = true;
                 }
                 else
                 {
+                    _sighted = false;
                     _holdOffset = new Vec2(1f, 0f) * 0.2f + _holdOffset * 0.8f;
                 }
             }

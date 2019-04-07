@@ -107,7 +107,7 @@ namespace TMGmod.Stuff
             if (collisionSize.x < 5f)
             foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
             {
-                if (thing == duck || thing == this || thing is IDontMove || thing is Block) continue;
+                if (thing == duck || thing == this || thing is IDontMove || thing is Block || thing is Teleporter) continue;
                 if (!(thing is IAmADuck || doblock)) continue;
                 thing.hSpeed = hspd;
                 var dx = Math.Abs(thing.x - x) > 0.01f ? (thing is Duck? 2: 4) / (thing.x - x): 0;
