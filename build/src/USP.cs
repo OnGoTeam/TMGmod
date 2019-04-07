@@ -10,7 +10,41 @@ namespace TMGmod
     public class USP : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
-        public bool Silencer;
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame += 10;
+                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    _ammoType = new AT9mmS
+                    {
+                        range = 130f,
+                        accuracy = 0.9f
+                    };
+                    _barrelOffsetTL = new Vec2(23f, 3f);
+                }
+                else
+                {
+                    _sprite.frame -= 10;
+                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                    _fireSound = GetPath("sounds/1.wav");
+                    _ammoType = new AT9mm
+                    {
+                        range = 100f,
+                        accuracy = 0.8f
+                    };
+                    _barrelOffsetTL = new Vec2(15f, 3f);
+                }
+            }
+        }
+
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
@@ -57,35 +91,7 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer)
-                {
-                    _sprite.frame -= 10;
-                    _flare = new SpriteMap("smallFlare", 11, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                    _fireSound = GetPath("sounds/1.wav");
-                    _ammoType = new AT9mm
-                    {
-                        range = 100f,
-                        accuracy = 0.8f
-                    };
-                    _barrelOffsetTL = new Vec2(15f, 3f);
-                    Silencer = false;
-                }
-                else
-                {
-                    _sprite.frame += 10;
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _ammoType = new AT9mmS
-                    {
-                        range = 130f,
-                        accuracy = 0.9f
-                    };
-                    _barrelOffsetTL = new Vec2(23f, 3f);
-                    Silencer = true;
-                }
+                Silencer = !Silencer;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
