@@ -82,7 +82,7 @@ namespace TMGmod
                         break;
                     case -1:
                     {
-                        handOffset.x = handOffset.x + 0.8f;
+                        handOffset.x += 0.8f;
                         if (handOffset.x > 4f)
                         {
                             _loadState++;
@@ -94,7 +94,7 @@ namespace TMGmod
                     }
                     case 3:
                     {
-                        handOffset.x = handOffset.x - 0.8f;
+                        handOffset.x -= 0.8f;
                         if (handOffset.x <= 0f)
                         {
                             _loadState++;

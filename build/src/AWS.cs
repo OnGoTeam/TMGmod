@@ -31,8 +31,10 @@ namespace TMGmod
                 range = 550f,
                 accuracy = 0.97f
             };
-            _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10);
-            _flare.center = new Vec2(0.0f, 5f);
+            _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
             _kickForce = 1.75f;

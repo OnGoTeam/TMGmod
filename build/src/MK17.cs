@@ -7,7 +7,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MK17 : BaseAr
     {
-        private float Damaged = 1;
+        private float _damaged = 1;
         private readonly SpriteMap _sprite;
 
         public MK17(float xval, float yval)
@@ -46,13 +46,13 @@ namespace TMGmod
         }
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
-            Damaged = bullet.ammo.penetration;
+            _damaged = bullet.ammo.penetration;
             Damage(bullet.ammo);
             return Hit(bullet, hitPos);
         }
         private void Damage(AmmoType at)
         {
-            thickness -= Damaged;
+            thickness -= _damaged;
             if (thickness <= 0f)
             {
                 _sprite.frame = 1;

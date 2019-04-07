@@ -60,8 +60,10 @@ namespace TMGmod
                 if (Silencer)
                 {
                     _sprite.frame -= 10;
-                    _flare = new SpriteMap("smallFlare", 11, 10);
-                    _flare.center = new Vec2(0.0f, 5f);
+                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
                     _fireSound = GetPath("sounds/1.wav");
                     _ammoType = new AT9mm
                     {

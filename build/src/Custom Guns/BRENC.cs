@@ -53,8 +53,10 @@ namespace TMGmod.Custom_Guns
                     maxAccuracyLost = 0.2f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
                     Silencer = false;
-                    _flare = new SpriteMap("smallFlare", 11, 10);
-                    _flare.center = new Vec2(0.0f, 5f);
+                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
                 }
                 else
                 {

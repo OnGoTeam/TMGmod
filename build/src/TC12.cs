@@ -67,8 +67,10 @@ namespace TMGmod
                     loseAccuracy = 0.1f;
                     _barrelOffsetTL = new Vec2(28f, 3f);
                     Silencer = false;
-                    _flare = new SpriteMap("smallFlare", 11, 10);
-                    _flare.center = new Vec2(0.0f, 5f);
+                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
                 }
                 else
                 {

@@ -40,10 +40,10 @@ namespace TMGmod.Core
                 Initialize();
             }
             if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
-            if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
+            if (Rando.Int(500) == 1 && newThing is Gun gun1 && gun1.CanSpawnInfinite())
             {
-                (newThing as Gun).infiniteAmmoVal = true;
-                (newThing as Gun).infinite.value = true;
+                gun1.infiniteAmmoVal = true;
+                gun1.infinite.value = true;
             }
             newThing.x = o.x;
             newThing.y = o.y;
