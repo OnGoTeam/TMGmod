@@ -43,14 +43,7 @@ namespace TMGmod
             base.Update();
             if (duck?.inputProfile.Down("UP") == true && !_raised)
             {
-                if (offDir < 0)
-                {
-                    handAngle = 0.5f;
-                }
-                else
-                {
-                    handAngle = -0.5f;
-                }
+                handAngle = offDir * -0.5f;
 
                 return;
             }
@@ -58,14 +51,7 @@ namespace TMGmod
             if (duck?.inputProfile.Down("QUACK") == true && !_raised)
             {
                 if (duck.sliding) return;
-                if (offDir > 0)
-                {
-                    handAngle = 0.5f;
-                }
-                else
-                {
-                    handAngle = -0.5f;
-                }
+                handAngle = offDir * 0.5f;
 
                 return;
             }

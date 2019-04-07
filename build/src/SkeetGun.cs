@@ -38,7 +38,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(43f, 1f);
             _fireWait = 0.5f;
             _kickForce = 6.55f;
-            _editorName = "Virtual Double";
+            _editorName = "Skeet Double";
             _holdOffset = new Vec2(6f, 2f);
         }
 
