@@ -145,7 +145,7 @@
     <Compile Include="src\Custom Guns\AN94C.cs" />
     <Compile Include="src\AUGA3.cs" />
     <Compile Include="src\Custom Guns\BarretM98C.cs" />
-    <Compile Include="src\Custom Guns\BRENC.cs" />
+    <Compile Include="src\CZC2.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
     <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />

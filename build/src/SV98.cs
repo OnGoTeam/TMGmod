@@ -155,12 +155,12 @@ namespace TMGmod
         }
         private void UpdateSkin()
         {
-            var fid = Skin.value;
-            while (!Allowedlst.Contains(fid))
+            var bublic= Skin.value;
+            while (!Allowedlst.Contains(bublic))
             {
-                fid = Rando.Int(0, 9);
+                bublic = Rando.Int(0, 9);
             }
-            _sprite.frame = fid;
+            _sprite.frame = bublic;
         }
 
         public int FrameId

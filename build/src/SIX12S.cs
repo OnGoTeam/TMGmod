@@ -13,12 +13,12 @@ namespace TMGmod
         public bool Laserino;
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Fid;
+        public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[]{ 0, 1, 2, 3, 4, 5, 6, 7, 9 });
         public SIX12S (float xval, float yval)
           : base(xval, yval)
         {
-            Fid = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
             _ammoType = new AT9mmS
             {
@@ -73,12 +73,12 @@ namespace TMGmod
         }
         private void UpdateSkin()
         {
-            var fid = Fid.value;
-            while (!Allowedlst.Contains(fid))
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
             {
-                fid = Rando.Int(0, 9);
+                bublic = Rando.Int(0, 9);
             }
-            _sprite.frame = fid;
+            _sprite.frame = bublic;
         }
 
         public int FrameId
