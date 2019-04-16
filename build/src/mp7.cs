@@ -11,6 +11,14 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP7 : Gun, IAmSmg
     {
+        public float HandAngleOff
+        {
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
+        }
+
+        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+
         public MP7(float xval, float yval)
             : base(xval, yval)
         {
@@ -43,29 +51,14 @@ namespace TMGmod
             base.Update();
             if (duck?.inputProfile.Down("UP") == true && !_raised)
             {
-                if (offDir < 0)
-                {
-                    handAngle = 0.5f;
-                }
-                else
-                {
-                    handAngle = -0.5f;
-                }
+                HandAngleOff = -0.5f;
 
                 return;
             }
 
-            if (duck?.inputProfile.Down("QUACK") == true && !_raised)
+            if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
             {
-                if (duck.sliding) return;
-                if (offDir > 0)
-                {
-                    handAngle = 0.5f;
-                }
-                else
-                {
-                    handAngle = -0.5f;
-                }
+                HandAngleOff = 0.5f;
 
                 return;
             }

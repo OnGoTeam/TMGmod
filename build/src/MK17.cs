@@ -28,19 +28,20 @@ namespace TMGmod
             _graphic = _sprite;
             _sprite.frame = 0;
             _graphic = _sprite;
-            _center = new Vec2(13f, 6f);
-            _collisionOffset = new Vec2(-13f, -6f);
+            _center = new Vec2(5f, 6f);
+            _collisionOffset = -_center;
             _collisionSize = new Vec2(26f, 12f);
             _barrelOffsetTL = new Vec2(26f, 5.5f);
-            _holdOffset = new Vec2(5f, -1f);
+            _holdOffset = new Vec2(-3f, -1f);
+            ShellOffset = new Vec2(13f, 6f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.81f;
             _kickForce = 2.35f;
-		    Kforce1Ar = 2.3f;
-		    Kforce2Ar = 2.6f;
+		    Kforce1Ar = 1.6f;
+		    Kforce2Ar = 1.9f;
             loseAccuracy = 0.3f;
-            maxAccuracyLost = 1.8f;
+            maxAccuracyLost = 1.5f;
             _editorName = "Mk17 with Shield";
 			_weight = 7f;
         }

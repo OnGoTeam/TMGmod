@@ -1,8 +1,8 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
-using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
@@ -36,10 +36,11 @@ namespace TMGmod.Cases
                 typeof(SV98),
                 typeof(USP),
                 typeof(UziPro),
-                typeof(Bren),
+                typeof(CZC2),
                 typeof(DaewooK1)
             };
             CaseId = 1;
         }
     }
 }
+#endif

@@ -77,6 +77,8 @@
     <Compile Include="src\AUGA1.cs" />
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\Buddies\MagBuddy.cs" />
+    <Compile Include="src\Buddies\AKwARv2.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
@@ -145,8 +147,9 @@
     <Compile Include="src\Custom Guns\AN94C.cs" />
     <Compile Include="src\AUGA3.cs" />
     <Compile Include="src\Custom Guns\BarretM98C.cs" />
-    <Compile Include="src\Custom Guns\BRENC.cs" />
+    <Compile Include="src\CZC2.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
+    <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />
     <Compile Include="src\Custom Guns\M960C.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />

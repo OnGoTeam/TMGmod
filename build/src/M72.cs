@@ -17,8 +17,7 @@ namespace TMGmod
                 range = 2000f,
                 accuracy = 0.95f,
                 barrelAngleDegrees = 0f,
-                bulletSpeed = 10f,
-                affectedByGravity = false
+                bulletSpeed = 10f
             };
             _type = "gun";
             _graphic = new Sprite(GetPath("M72a5"));

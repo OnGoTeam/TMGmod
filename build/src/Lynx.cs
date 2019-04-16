@@ -52,14 +52,14 @@ namespace TMGmod
                 _kickForce = 0f;
 				loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
-				graphic = new Sprite(GetPath("Lynxbipods"));
+                _sprite.frame = _sprite.frame % 10 + 10;
             }
             else
             {
                 _kickForce = 0.8f;
                 loseAccuracy = 0.1f;
                 maxAccuracyLost = 0.3f;
-				graphic = new Sprite(GetPath("Lynx"));
+                _sprite.frame %= 10;
             }
             base.Update();
         }
@@ -70,12 +70,12 @@ namespace TMGmod
         }
         private void UpdateSkin()
         {
-            var fid = Skin.value;
-            while (!Allowedlst.Contains(fid))
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
             {
-                fid = Rando.Int(0, 9);
+                bublic = Rando.Int(0, 9);
             }
-            _sprite.frame = fid;
+            _sprite.frame = bublic;
         }
 
         public int FrameId
