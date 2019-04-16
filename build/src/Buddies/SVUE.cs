@@ -9,6 +9,8 @@ namespace TMGmod.Buddies
     public class SVUE: BaseGun, IAmDmr, MagBuddy.ISupportReload
     {
         private readonly MagBuddy _magBuddy;
+        private bool _onemoreclick = true;
+        private byte _mags = 3;
 
         public SVUE (float xval, float yval)
           : base(xval, yval)
@@ -40,19 +42,36 @@ namespace TMGmod.Buddies
 
         public override void OnPressAction()
         {
+            if (ammo <= 0) _magBuddy.Doload();
             base.OnPressAction();
-            if (ammo <= 0) _magBuddy.Reload();
+        }
+
+        public override void Update()
+        {
+            if (ammo <= 0) _magBuddy.Disload();
+            base.Update();
         }
 
         public bool SetMag()
         {
+            if (_mags <= 0) return false;
+            if (_wait > 1f) return false;
+            if (_onemoreclick)
+            {
+                SFX.Play(GetPath("sounds/tuduc.wav"));
+                _wait += 5f;
+                return _onemoreclick = false;
+            }
+            _onemoreclick = true;
             ammo = 10;
+            _mags -= 1;
             return true;
         }
 
         public bool DropMag(Thing mag)
         {
-            SFX.Play("magnum");
+            SFX.Play(GetPath("sounds/tuduc.wav"));
+            _wait += 7f;
             return true;
         }
 
