@@ -77,6 +77,8 @@
     <Compile Include="src\AUGA1.cs" />
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\Buddies\MagBuddy.cs" />
+    <Compile Include="src\Buddies\SVUE.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />

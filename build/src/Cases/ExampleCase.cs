@@ -1,8 +1,8 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
-using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
@@ -43,3 +43,4 @@ namespace TMGmod.Cases
         }
     }
 }
+#endif
