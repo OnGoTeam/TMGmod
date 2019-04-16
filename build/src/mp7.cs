@@ -48,9 +48,8 @@ namespace TMGmod
                 return;
             }
 
-            if (duck?.inputProfile.Down("QUACK") == true && !_raised)
+            if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
             {
-                if (duck.sliding) return;
                 handAngle = offDir * 0.5f;
 
                 return;
