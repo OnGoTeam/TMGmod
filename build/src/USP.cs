@@ -17,6 +17,7 @@ namespace TMGmod
             {
                 if (value)
                 {
+                    _sprite.frame %= 10;
                     _sprite.frame += 10;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
@@ -29,7 +30,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.frame -= 10;
+                    _sprite.frame %= 10;
                     _flare = new SpriteMap("smallFlare", 11, 10)
                     {
                         center = new Vec2(0.0f, 5f)
