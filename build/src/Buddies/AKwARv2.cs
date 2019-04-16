@@ -4,41 +4,42 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Buddies
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Machinegun")]
     // ReSharper disable once InconsistentNaming
-    public class SVUE: BaseGun, IAmDmr, MagBuddy.ISupportReload
+    public class AKwARv2: BaseGun, IAmDmr, MagBuddy.ISupportReload
     {
         private readonly MagBuddy _magBuddy;
         private bool _onemoreclick = true;
         private byte _mags = 3;
 
-        public SVUE (float xval, float yval)
+        public AKwARv2(float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 10;
+            ammo = 30;
             _ammoType = new ATMagnum
             {
-                range = 580f,
-                accuracy = 0.91f,
-                penetration = 1.5f
+                range = 500f,
+                accuracy = 0.85f,
+                penetration = 2f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("SVU"));
-            _center = new Vec2(20f, 8f);
-            _collisionOffset = new Vec2(-14.5f, -8f);
+            _graphic = new Sprite(GetPath("AKwAR1"));
+            _center = new Vec2(16f, 5f);
+            _collisionOffset = new Vec2(-15.5f, -5f);
             _collisionSize = new Vec2(31f, 11f);
-            _barrelOffsetTL = new Vec2(31f, 5f);
-            _fireSound = GetPath("sounds/HeavyRifle.wav");
+            _barrelOffsetTL = new Vec2(31f, 4f);
+            _holdOffset = new Vec2(1f, -1f);
+            _fireSound = "deepMachineGun2";
             _fullAuto = true;
-            _fireWait = 0.75f;
-            _kickForce = 1.5f;
+            _fireWait = 0.85f;
+            _kickForce = 1f;
             loseAccuracy = 0.05f;
-            maxAccuracyLost = 0.45f;
-            _holdOffset = new Vec2(1f, 2f);
-            _editorName = "SVUE";
-			_weight = 5f;
+            maxAccuracyLost = 0.2f;
+            _editorName = "AKwARv2";
+            _weight = 5f;
             _magBuddy = new MagBuddy(this, typeof(UziPro));
         }
+
 
         public override void OnPressAction()
         {
@@ -49,6 +50,7 @@ namespace TMGmod.Buddies
         public override void Update()
         {
             if (ammo <= 0) _magBuddy.Disload();
+
             base.Update();
         }
 
@@ -59,11 +61,12 @@ namespace TMGmod.Buddies
             if (_onemoreclick)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
+                _graphic = new Sprite(GetPath("AKwAR1"));
                 _wait += 5f;
                 return _onemoreclick = false;
             }
             _onemoreclick = true;
-            ammo = 10;
+            ammo = 30;
             _mags -= 1;
             return true;
         }
@@ -71,6 +74,7 @@ namespace TMGmod.Buddies
         public bool DropMag(Thing mag)
         {
             SFX.Play(GetPath("sounds/tuduc.wav"));
+            graphic = new Sprite(GetPath("AKwAR"));
             _wait += 7f;
             return true;
         }
