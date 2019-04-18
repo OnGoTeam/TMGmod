@@ -5,6 +5,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Machinegun")]
+    // ReSharper disable once InconsistentNaming
     public class M4A1 : BaseAr
     {
         private int _ammobefore = 31;
@@ -36,7 +37,7 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(3f, 1f);
             _editorName = "M4A1";
-			_weight = 4.5f;
+			_weight = 6.5f;
             Kforce2Ar = 0.5f;
         }
         public override void OnPressAction()

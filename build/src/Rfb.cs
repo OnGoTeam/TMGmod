@@ -21,7 +21,7 @@ namespace TMGmod
             _ammoType = new ATMagnum
             {
                 range = 580f,
-                accuracy = 0.92f,
+                accuracy = 0.89f,
                 penetration = 1f
             };
             _type = "gun";
@@ -35,9 +35,9 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
-            _fireWait = 0.3f;
-            _kickForce = 0.7f;
-            loseAccuracy = 0.025f;
+            _fireWait = 0.46f;
+            _kickForce = 1.7f;
+            loseAccuracy = 0.08f;
             maxAccuracyLost = 0.2f;
             _editorName = "RFB";
 			_weight = 6f;

@@ -40,7 +40,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.8f;
-            _kickForce = 0.7f;
+            _kickForce = 1.7f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A1";

@@ -40,7 +40,7 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.9f;
-            _kickForce = 0.7f;
+            _kickForce = 2.1f;
             loseAccuracy = 0.025f;
             maxAccuracyLost = 0.32f;
             _editorName = "CZ-805 BREN";

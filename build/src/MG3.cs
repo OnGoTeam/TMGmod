@@ -24,7 +24,7 @@ namespace TMGmod
             _center = new Vec2(19.5f, 6f);
             _collisionOffset = new Vec2(-19.5f, -6f);
             _collisionSize = new Vec2(39f, 9f);
-            _barrelOffsetTL = new Vec2(40f, 4f);
+            _barrelOffsetTL = new Vec2(39f, 3f);
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = true;
             _fireWait = 0.5f;

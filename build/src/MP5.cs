@@ -37,7 +37,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(27f, 3f);
             _fireSound = "deepMachineGun";
             _fullAuto = false;
-            _fireWait = 0.3f;
+            _fireWait = 0.5f;
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
             _editorName = "MP5";
@@ -64,15 +64,16 @@ namespace TMGmod
                 {
                     NonAuto = false;
                     BurstNum = 3;
-                    _fireWait = 1.3f;
+                    _fireWait = 1.8f;
+                    _sprite.frame %= 10;
                     _sprite.frame += 10;
                 }
                 else
                 {
                     NonAuto = true;
                     BurstNum = 1;
-                    _fireWait = 0.3f;
-                    _sprite.frame -= 10;
+                    _fireWait = 0.5f;
+                    _sprite.frame %= 10;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

@@ -74,8 +74,8 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fireSoundm[0] = _fireSound;
             _fullAuto = true;
-            _fireWait = 1.2f;
-            _kickForce = 0.8f;
+            _fireWait = 1f;
+            _kickForce = 2.6f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.2f;
             _editorName = "SCAR-H With GL";
