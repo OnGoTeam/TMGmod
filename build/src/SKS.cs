@@ -8,7 +8,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SKS : BaseGun, ISpeedAccuracy
     {
-        private int _patrons = 16;
+        private int _patrons = 8;
         private int _bullets;
         public bool Stick;
         public StateBinding StickBinding = new StateBinding(nameof(Stick));
@@ -16,7 +16,7 @@ namespace TMGmod
         public SKS (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 16;
+            ammo = 8;
             _ammoType = new AT9mm
             {
                 range = 1400f,
@@ -36,7 +36,7 @@ namespace TMGmod
             _flare.center = new Vec2(0f, 5f);
             _fullAuto = false;
             _fireWait = 1.55f;
-            _kickForce = 0.6f;
+            _kickForce = 4.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.8f;
             _editorName = "SKS";
@@ -47,7 +47,7 @@ namespace TMGmod
         public override void Update()
         {
 		    base.Update();
-			if (ammo < 17)
+			if (ammo < 9)
 			{
 			    _patrons = ammo;	
 			}
@@ -56,7 +56,7 @@ namespace TMGmod
             //else
             if (duck.inputProfile.Pressed("QUACK"))
             {
-                if (ammo < 17)
+                if (ammo < 9)
                 {
                     _patrons = ammo;
                     _bullets = _patrons + 20;
@@ -70,11 +70,10 @@ namespace TMGmod
                 _fullAuto = false;
                 _fireWait = 0.1f;
                 _numBulletsPerFire = 1;
-                _barrelOffsetTL = new Vec2(53f, 6f);
+                _barrelOffsetTL = new Vec2(0f, 6f);
                 _fireSound = "";
                 loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
-                _ammoType.bulletThickness = 0.1f;
                 _kickForce = 0f;
                 Stick = true;
                 Fire();
@@ -93,7 +92,7 @@ namespace TMGmod
             ammo = _patrons;
             _ammoType = new AT9mm
             {
-                range = 900f,
+                range = 1400f,
                 accuracy = 0.965f,
                 penetration = 1f,
                 bulletSpeed = 95f,
@@ -107,7 +106,7 @@ namespace TMGmod
             _holdOffset = new Vec2(11f, 0f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.8f;
-            _kickForce = 0.6f;
+            _kickForce = 4.8f;
             _flare = new SpriteMap("smallFlare", 11, 10)
             {
                 center = new Vec2(0f, 4f)
@@ -121,7 +120,7 @@ namespace TMGmod
 						ammo = _patrons;
 			    _ammoType = new AT9mm
 			    {
-			        range = 900f,
+			        range = 1400f,
 			        accuracy = 0.965f,
 			        penetration = 1f,
 			        bulletSpeed = 95f,
@@ -135,7 +134,7 @@ namespace TMGmod
                 _holdOffset = new Vec2(11f, 0f);
                 loseAccuracy = 0.1f;
                 maxAccuracyLost = 0.8f;
-                _kickForce = 0.6f;
+                _kickForce = 4.8f;
                 _flare = new SpriteMap("smallFlare", 11, 10)
                 {
                     center = new Vec2(0f, 4f)
@@ -147,7 +146,6 @@ namespace TMGmod
 			}
             base.Thrown();
         }
-
         public float MuAccuracySr { get; }
         public float LambdaAccuracySr { get; }
     }

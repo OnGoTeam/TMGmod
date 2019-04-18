@@ -13,7 +13,7 @@ namespace TMGmod.Stuff
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
         public MontagneShield(float xpos, float ypos) : base(xpos, ypos)
         {
-            Hp = 1000f;
+            Hp = 500f;
             _sprite = new SpriteMap(GetPath("Montagne"), 4, 23);
             _graphic = _sprite;
             _center = new Vec2(2f, 11.5f);
@@ -53,24 +53,24 @@ namespace TMGmod.Stuff
 
         private void Damage(AmmoType at)
         {
-            thickness = Hp < 950f ? Hp * 0.01f : 10000f;
+            thickness = Hp < 450 ? Hp * 0.01f : 10000f;
             Hp -= at.penetration * 5f;
-            if (Hp <= 1000f)
+            if (Hp <= 500f)
             {
                 _sprite.frame = 0;
             }
 
-            if (Hp <= 600f)
+            if (Hp <= 300f)
             {
                 _sprite.frame = 1;
             }
 
-            if (Hp <= 300f)
+            if (Hp <= 150f)
             {
                 _sprite.frame = 2;
             }
 
-            if (Hp <= 200f)
+            if (Hp <= 100f)
             {
                 _sprite.frame = 3;
             }
