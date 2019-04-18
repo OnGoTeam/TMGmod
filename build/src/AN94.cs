@@ -51,13 +51,12 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Stock)
+                if (!Stock)
                 {
                     loseAccuracy = 0.15f;
                     weight = 5.5f;
                     _sprite.frame += 10;
                     maxAccuracyLost = 0.1f;
-                    Stock = false;
                 }
                 else
                 {
@@ -65,8 +64,9 @@ namespace TMGmod
                     weight = 2.75f;
                     _sprite.frame -= 10;
                     maxAccuracyLost = 0.3f;
-                    Stock = true;
                 }
+
+                Stock = !Stock;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
