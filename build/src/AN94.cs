@@ -34,7 +34,7 @@ namespace TMGmod
             _ammoType = new ATMagnum {range = 260f, bulletSpeed = 180f};
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 0.1f;
+            _fireWait = 3f;
             Kforce1Ar = 0.07f;
             _kickForce = 0.9f;
             Kforce2Ar = 0.9f;

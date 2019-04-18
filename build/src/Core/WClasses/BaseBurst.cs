@@ -15,7 +15,7 @@ namespace TMGmod.Core.WClasses
 
         public override void Fire()
         {
-            if (ShotsLeft > 0) return;
+            if (ShotsLeft > 0 || _wait > 0) return;
             base.Fire();
             ShotsLeft = BurstNum - 1;
             if (ShotsLeft > 0) _wait = DeltaWait;
