@@ -100,6 +100,7 @@ namespace TMGmod.Stuff
             {
                 Destroy();
             }
+            if (_destroyed) return;
             base.Update();
             thickness = 0.2f * Hp;
         }
@@ -107,14 +108,22 @@ namespace TMGmod.Stuff
         protected override bool OnDestroy(DestroyType type0 = null)
         {
             SFX.Play("woodHit");
-            var bbp = new BarrBetaPar(x, y)
+            if (isServerForObject)
             {
-                hSpeed = ImpactSpeed * 0.9f + Rando.Float(-1f, 1f),
-                vSpeed = Rando.Float(-1.5f, 1.5f)
-            };
-            Level.Add(bbp);
+                var bbp = new BarrBetaPar(x, y)
+                {
+                    hSpeed = ImpactSpeed * 0.9f + Rando.Float(-1f, 1f),
+                    vSpeed = Rando.Float(-1.5f, 1.5f)
+                };
+                Level.Add(bbp);
+            }
+
             Level.Remove(this);
             return true;
+        }
+
+        public override void Regenerate()
+        {
         }
     }
 }
