@@ -18,6 +18,7 @@ namespace TMGmod
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
         public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
+
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
@@ -41,12 +42,13 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
             _editorName = "AN94";
-			_weight = 5.5f;
+            _weight = 5.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(30f, 2.5f);
             DeltaWait = 0.07f;
             BurstNum = 2;
-        }        
+        }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
