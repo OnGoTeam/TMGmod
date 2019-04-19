@@ -26,7 +26,7 @@ namespace TMGmod.Custom_Guns
                 accuracy = 0.9f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPShpattern"), 48, 16);
+            _sprite = new SpriteMap(GetPath("PPShCpattern"), 48, 16);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(23f, 5.5f);
