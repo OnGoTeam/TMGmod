@@ -9,14 +9,13 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class TC12 : Gun, IAmDmr, IHaveSkin
     {
-
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         public bool Silencer;
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3 });
 
         public TC12 (float xval, float yval)
           : base(xval, yval)
@@ -40,7 +39,7 @@ namespace TMGmod
             _holdOffset = new Vec2(5f, 0f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 0.88f;
+            _fireWait = 1.03f;
             _kickForce = 5.3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
@@ -100,13 +99,11 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

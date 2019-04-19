@@ -17,7 +17,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new AT9mm
             {
-                range = 370f,
+                range = 345f,
                 accuracy = 1f,
                 penetration = 1f,
                 bulletSpeed = 35f,
@@ -41,7 +41,7 @@ namespace TMGmod
 		    Kforce1Ar = 1.6f;
 		    Kforce2Ar = 1.9f;
             loseAccuracy = 0.3f;
-            maxAccuracyLost = 1.5f;
+            maxAccuracyLost = 0.9f;
             _editorName = "Mk17 with Shield";
 			_weight = 7f;
         }

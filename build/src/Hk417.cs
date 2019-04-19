@@ -13,7 +13,7 @@ namespace TMGmod
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 3, 5, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 7 });
         public HK417 (float xval, float yval)
           : base(xval, yval)
         {
@@ -21,24 +21,25 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new ATMagnum
             {
-                range = 600f,
+                range = 300f,
                 accuracy = 0.9f,
                 penetration = 1f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417pattern"), 30, 10);
             _graphic = _sprite;
-            _sprite.frame = 5;
+            _sprite.frame = 0;
             _center = new Vec2(15f, 5f);
             _collisionOffset = new Vec2(-14.5f, -5f);
             _collisionSize = new Vec2(30f, 10f);
             _barrelOffsetTL = new Vec2(31f, 3f);
+            _holdOffset = new Vec2(0f, 1f);
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = false;
             _fireWait = 0.8f;
             _kickForce = 0.7f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.3f;
+            maxAccuracyLost = 0.5f;
             _editorName = "Hk-417C";
 			_weight = 3.5f;
         }
@@ -51,13 +52,11 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
