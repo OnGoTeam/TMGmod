@@ -79,6 +79,7 @@
     <Compile Include="src\BarretM98.cs" />
     <Compile Include="src\Buddies\MagBuddy.cs" />
     <Compile Include="src\Buddies\AKwARv2.cs" />
+    <Compile Include="src\Buddies\SuperArmor.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
