@@ -1,17 +1,17 @@
 ﻿using DuckGame;
-using TMGmod.Core.WClasses;
+using JetBrains.Annotations;
 
-namespace TMGmod
+namespace TMGmod.Custom_Guns
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
-    public class M960 : Gun, IAmSmg
-    {
-        // ReSharper disable once MemberCanBePrivate.Global		
-        public M960(float xval, float yval)
+    [PublicAPI]
+    public class M960Low : Gun
+    {		
+        public M960Low(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 50;
+            ammo = 30;
             _ammoType = new AT9mm
             {
                 range = Rando.Float(0f, 70f),
@@ -19,26 +19,26 @@ namespace TMGmod
                 penetration = 0.4f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("M950A"));
-            _center = new Vec2(13.5f, 3.5f);
-            _collisionOffset = new Vec2(-11.5f, -3.5f);
-            _collisionSize = new Vec2(23f, 7f);
-            _barrelOffsetTL = new Vec2(19f, 2.5f);
+            _graphic = new Sprite(GetPath("M900"));
+            _center = new Vec2(18.5f, 3.5f);
+            _collisionOffset = new Vec2(-18.5f, -3.5f);
+            _collisionSize = new Vec2(27f, 7f);
+            _barrelOffsetTL = new Vec2(26f, 2.5f);
             _fireSound = "smg";
             _fullAuto = true;
-            _fireWait = 0.17f;
+            _fireWait = 0.28f;
             _kickForce = 0.3f;
-            _holdOffset = new Vec2(2.5f, 1.5f);
+            _holdOffset = new Vec2(7.5f, 1.5f);
             loseAccuracy = 0.01f;
             maxAccuracyLost = 0.05f;
-            _editorName = "Calico M950A";
+            _editorName = "Calico M900";
 			_weight = 1f;
             handAngle = 0f;
         }
         public override void OnHoldAction()
         {
-            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 45f));
-            handAngle = Rando.Float(-0.15f, 0.15f);
+            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 67f)) + 5f;
+            handAngle = Rando.Float(-0.1f, 0.1f);
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
