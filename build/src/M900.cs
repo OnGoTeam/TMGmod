@@ -6,9 +6,9 @@ namespace TMGmod
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     [PublicAPI]
-    public class M960Low : Gun
+    public class M900 : Gun
     {		
-        public M960Low(float xval, float yval)
+        public M900(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 30;
