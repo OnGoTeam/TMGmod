@@ -61,8 +61,8 @@ namespace TMGmod
                         range = 310f,
                         accuracy = 0.87f
                     };
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.38f;
+                    loseAccuracy = 0.1f;
+                    maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
                     _flare = new SpriteMap("smallFlare", 11, 10)
                     {
@@ -79,8 +79,8 @@ namespace TMGmod
                         range = 360f,
                         accuracy = 0.95f
                     };
-                    loseAccuracy = 0.19f;
-                    maxAccuracyLost = 0.32f;
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.28f;
                     _barrelOffsetTL = new Vec2(42.5f, 4f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }

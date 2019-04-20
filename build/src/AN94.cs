@@ -29,7 +29,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(33f, 9f);
             _barrelOffsetTL = new Vec2(34f, 3f);
-            _holdOffset = new Vec2(3f, 2f);
+            _holdOffset = new Vec2(1f, 2f);
             ammo = 30;
             _ammoType = new ATMagnum {range = 260f, bulletSpeed = 180f};
             _fireSound = "deepMachineGun2";

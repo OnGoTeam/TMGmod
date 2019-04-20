@@ -7,6 +7,7 @@ namespace TMGmod
     [PublicAPI]
     public class M72 : Gun
     {
+        private readonly SpriteMap _sprite;
 
         public M72(float xval, float yval)
             : base(xval, yval)
@@ -16,22 +17,25 @@ namespace TMGmod
             {
                 range = 2000f,
                 accuracy = 0.95f,
-                barrelAngleDegrees = 0f,
-                bulletSpeed = 10f
+                barrelAngleDegrees = -5f,
+                bulletSpeed = 15f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("M72a5"));
+            _sprite = new SpriteMap(GetPath("M72pattern"), 32, 11);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(16f, 5.5f);
             _collisionOffset = new Vec2(-16f, -5.5f);
             _collisionSize = new Vec2(32f, 11f);
             _barrelOffsetTL = new Vec2(32f, 4f);
+            _holdOffset = new Vec2(2f, 1f);
             _fireSound = "deepMachineGun";
             _fullAuto = false;
             _fireWait = 1f;
-            _kickForce = 1.2f;
-            loseAccuracy = 0.3f;
-            maxAccuracyLost = 0.5f;
-            _editorName = "M72 Grenade Launcher";
+            _kickForce = 5f;
+            loseAccuracy = 0.8f;
+            maxAccuracyLost = 1f;
+            _editorName = "M72 GL";
             _weight = 4.5f;
         }
         public override void Update()
@@ -39,19 +43,19 @@ namespace TMGmod
             switch (ammo)
             {
                 case 4:
-                    graphic = new Sprite(GetPath("M72a4"));
+                    _sprite.frame = 1;
                     break;
                 case 3:
-                    graphic = new Sprite(GetPath("M72a3"));
+                    _sprite.frame = 2;
                     break;
                 case 2:
-                    graphic = new Sprite(GetPath("M72a2"));
+                    _sprite.frame = 3;
                     break;
                 case 1:
-                    graphic = new Sprite(GetPath("M72a1"));
+                    _sprite.frame = 4;
                     break;
                 case 0:
-                    graphic = new Sprite(GetPath("M72a0"));
+                    _sprite.frame = 5;
                     break;
             }
 
