@@ -240,6 +240,16 @@
     XCOPY content $(TargetDir)content\ /E /Y /Q
     COPY mod.conf $(TargetDir)mod.conf
     ECHO Transferred
+    IF $(ConfigurationName) == Workshop (
+    IF EXIST $(TargetDir)content\deleteco\ (
+    RMDIR /Q /S $(TargetDir)content\deleteco\
+        ECHO Deleted deleteco
+    )
+    IF EXIST $(TargetDir)TMGmod.pdb (
+    ERASE $(TargetDir)TMGmod.pdb
+    ECHO Deleted TMGmod.pdb
+    )
+    )
 )
 CD ..
 IF EXIST TMGmod.zip (
