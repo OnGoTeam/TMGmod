@@ -7,14 +7,13 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG")]
     // ReSharper disable once InconsistentNaming
-    public class SMG9 : BaseSmg, IHaveSkin
+    public class SMG9 : BaseSmg, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 4 });
-        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
         public SMG9(float xval, float yval)
           : base(xval, yval)
         {
@@ -38,9 +37,11 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.35f;
             _kickForce = 0f;
+            KforceDSmg = 3.2f;
+            MaxDelaySmg = 5;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.33f;
-            _holdOffset = new Vec2(-3f, 2f);
+            _holdOffset = new Vec2(-1f, 2f);
             _editorName = "SMG-9";
 			_weight = 2.5f;
         }

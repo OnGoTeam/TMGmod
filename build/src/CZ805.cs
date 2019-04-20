@@ -41,7 +41,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.9f;
             _kickForce = 2.1f;
-            loseAccuracy = 0.025f;
+            loseAccuracy = 0.065f;
             maxAccuracyLost = 0.32f;
             _editorName = "CZ-805 BREN";
 			_weight = 5f;

@@ -32,7 +32,7 @@ namespace TMGmod.Custom_Guns
             _kickForce = 9f;
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.5f;
-            _editorName = "Deadly One More Gauge";
+            _editorName = "You Scared Ded Twice";
 			_weight = 4.25f;
         }
 		public override void Update()

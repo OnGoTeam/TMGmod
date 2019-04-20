@@ -6,7 +6,6 @@ namespace TMGmod
     public class BarretM98 : Sniper
     {
         // ReSharper disable once MemberCanBePrivate.Global
-        public readonly EditorProperty<bool> Shortened = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
@@ -134,17 +133,6 @@ namespace TMGmod
                 }
             }
             laserSight = false;
-        }
-        public override void Initialize()
-        {
-			if (!(Level.current is Editor) && Shortened.value)
-            {
-                _ammoType.accuracy = 0.9f;
-                weight = 6.5f;
-                graphic = new Sprite(GetPath("BarretM98short"));
-                _barrelOffsetTL = new Vec2(39f, 6f);
-            }
-            base.Initialize();
         }
 	}
 }

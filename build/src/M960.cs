@@ -26,7 +26,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(19f, 2.5f);
             _fireSound = "smg";
             _fullAuto = true;
-            _fireWait = 0.17f;
+            _fireWait = 0.2f;
             _kickForce = 0.3f;
             _holdOffset = new Vec2(2.5f, 1.5f);
             loseAccuracy = 0.01f;

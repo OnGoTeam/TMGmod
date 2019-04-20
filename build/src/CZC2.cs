@@ -38,11 +38,11 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(39f, 3.5f);
             _holdOffset = new Vec2(5f, 1f);
             _fireSound = "deepMachineGun2";
-            _fullAuto = true;
+            _fullAuto = false;
             _fireWait = 0.9f;
             _kickForce = 1.5f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.38f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
             _editorName = "CZ C2-SAR";
             _weight = 4.4f;
             Kforce2Ar = 0.7f;

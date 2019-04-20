@@ -17,7 +17,6 @@ namespace TMGmod
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
-        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public AN94(float xval, float yval)
             : base(xval, yval)
@@ -73,14 +72,6 @@ namespace TMGmod
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
-        }
-        public override void Initialize()
-        {
-			if (!(Level.current is Editor) && Laser.value)
-            {
-                laserSight = true;
-            }
-            base.Initialize();
         }
         private void UpdateSkin()
         {
