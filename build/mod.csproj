@@ -152,7 +152,7 @@
     <Compile Include="src\Custom Guns\Glock17C.cs" />
     <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />
-    <Compile Include="src\M960C.cs" />
+    <Compile Include="src\M900.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
     <Compile Include="src\Custom Guns\SVUC.cs" />
