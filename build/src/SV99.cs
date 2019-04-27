@@ -34,7 +34,7 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/Silenced3.wav");
             _fullAuto = false;
-            _kickForce = 1.25f;
+            _kickForce = 1.7f;
             loseAccuracy = 0.5f;
             maxAccuracyLost = 1.5f;
             _holdOffset = new Vec2(1f, 0f);

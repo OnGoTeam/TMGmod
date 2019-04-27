@@ -33,7 +33,7 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
-            _kickForce = 1.85f;
+            _kickForce = 5.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(14f, -1f);

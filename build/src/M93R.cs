@@ -1,24 +1,26 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Pistol")]
-    public class M93R : BaseGun, IAmHg
+    public class M93R : BaseBurst, IAmHg, IHaveSkin
     {
-        private int _burstNumB;
-        private readonly int _burstValue;
-        private float _bw = 5.1f;
-		private readonly SpriteMap _sprite;
-        private readonly int _teksturka;
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
 
         public M93R(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("M93Rpatterns"), 12, 9);
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("M93Rpattern"), 12, 9);
             _graphic = _sprite;
-            _teksturka = Rando.Int(0, 4);
-            _sprite.frame = _teksturka;
+            _sprite.frame = 0;
             _center = new Vec2(6f, 2f);
             _collisionOffset = new Vec2(-6f, -2f);
             _collisionSize = new Vec2(12f, 9f);
@@ -28,46 +30,33 @@ namespace TMGmod
             _ammoType = new ATMagnum {range = 70f};
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = true;
-            _fireWait = 0.27f;
+            _fireWait = 0.9f;
             _kickForce = 0.24f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.2f;
             _editorName = "M93R";
-            _burstValue = 3;
 			_weight = 2f;
+            DeltaWait = 0.3f;
+            BurstNum = 3;
         }
-
-        public override void Fire()
+        private void UpdateSkin()
         {
-           // base.Fire();
-        }
-        public override void Update()
-        {
-            //object obj;
-
-            if (_burstNumB > 0 && _bw > 0.1f)
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
             {
-                base.Fire();
-                _burstNumB = _burstNumB -1;
-                _bw = 0;
+                bublic = Rando.Int(0, 9);
             }
-            else
-            {
-                _bw = _bw + 0.1f;
-            }
-		base.Update();
+            _sprite.frame = bublic;
         }
-        public override void OnPressAction()
+        public int FrameId
         {
-            if (!(_bw > 1f)) return;
-            //else
-            _bw = 0.3f;
-            _burstNumB = _burstValue;
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-		public override void Draw()
+        public override void EditorPropertyChanged(object property)
         {
-            _sprite.frame = _teksturka;
-            base.Draw();
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
-	}
+    }
 }

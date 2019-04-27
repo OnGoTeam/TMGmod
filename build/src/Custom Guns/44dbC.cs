@@ -1,26 +1,36 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Shotgun|Custom")]
-    public class Deadly44C : Gun, IAmSg
+    public class Deadly44C : Gun, IAmSg, IHaveSkin
     {
-		
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 2;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
         public Deadly44C (float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
             _ammoType = new ATMagnum
             {
-                range = 150f,
-                accuracy = 0.2f,
+                range = 100f,
+                accuracy = 0.1f,
                 penetration = 4f,
                 bulletThickness = 2f
             };
             _numBulletsPerFire = 44;
             _type = "gun";
-            _graphic = new Sprite(GetPath("44dbonemore"));
+            _sprite = new SpriteMap(GetPath("44dbTWICEpattern"), 33, 10);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(16.5f, 5f);
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 10f);
@@ -37,8 +47,31 @@ namespace TMGmod.Custom_Guns
         }
 		public override void Update()
         {
-			if (ammo < 2) graphic = new Sprite(GetPath("44dbnonemore"));
+			if (ammo < 2)
+            {
+                _sprite.frame %= 10;
+                _sprite.frame += 10;
+            }
             base.Update();
-	    } 
+        }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
     }
 }

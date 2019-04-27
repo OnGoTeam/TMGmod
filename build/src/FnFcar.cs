@@ -32,14 +32,14 @@ namespace TMGmod
             _collisionOffset = new Vec2(-18f, -7.5f);
             _collisionSize = new Vec2(36f, 15f);
             _barrelOffsetTL = new Vec2(37f, 6f);
-            _holdOffset = new Vec2(3f, -1f);
+            _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
-            _fullAuto = true;
+            _fullAuto = false;
             _fireWait = 0.775f;
-            _kickForce = 0.9f;
+            _kickForce = 2.4f;
             Kforce2Ar = 0.9f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.45f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.2f;
             _editorName = "FN FCAR";
             laserSight = true;
             _laserOffsetTL = new Vec2(19f, 4f);
@@ -57,9 +57,9 @@ namespace TMGmod
             }
             else
             {
-                _kickForce = 0.9f;
-                loseAccuracy = 0.1f;
-                maxAccuracyLost = 0.45f;
+                _kickForce = 2.4f;
+                loseAccuracy = 0.15f;
+                maxAccuracyLost = 0.2f;
                 if ((_sprite.frame > 9) && (_sprite.frame < 20)) _sprite.frame -= 10;
             }
             base.Update();

@@ -9,18 +9,18 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AUGA1 : BaseAr, IHaveSkin
     {
-        public bool Grip;
-        public StateBinding GripBinding = new StateBinding(nameof(Grip));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6 });
+        public bool Grip;
+        public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
         public AUGA1 (float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(3, this, -1f, 9f, 0.5f);
             ammo = 42;
             _ammoType = new ATMagnum
             {
@@ -36,7 +36,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 12f);
             _barrelOffsetTL = new Vec2(30f, 5f);
-            _holdOffset = new Vec2(-3f, 0f);
+            _holdOffset = new Vec2(-2f, 1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.8f;
