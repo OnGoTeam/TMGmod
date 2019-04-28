@@ -246,6 +246,10 @@
     RMDIR /Q /S $(TargetDir)content\deleteco\
         ECHO Deleted deleteco
     )
+    IF EXIST $(TargetDir)content\oldmaps\ (
+    RMDIR /Q /S $(TargetDir)content\oldmaps\
+        ECHO Deleted oldmaps
+    )
     IF EXIST $(TargetDir)TMGmod.pdb (
     ERASE $(TargetDir)TMGmod.pdb
     ECHO Deleted TMGmod.pdb
