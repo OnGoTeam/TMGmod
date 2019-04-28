@@ -53,7 +53,7 @@ namespace TMGmod.Stuff
 
         private void Damage(AmmoType at)
         {
-            thickness = Hp < 225 ? Hp * 0.04f : 10000f;
+            thickness = Hp < 225 ? Hp * 0.01f : 10000f;
             Hp -= at.penetration * 5f;
             if (Hp <= 250f)
             {
