@@ -84,14 +84,21 @@ namespace TMGmod.Core
             }
 
             //Удаляем старые карты
-            /*var oldlevels1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)\\");
-            if (Directory.Exists(oldlevels1)) Directory.Delete(oldlevels1);
-            if (Directory.Exists("DuckGame\\Levels\\New TMG Maps")) Directory.Delete("DuckGame\\Levels\\New TMG Maps");
-            if (Directory.Exists("DuckGame\\Levels\\New TMG Levels")) Directory.Delete("DuckGame\\Levels\\New TMG Levels");
-            if (Directory.Exists("DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)")) Directory.Delete("DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)");
-            if (Directory.Exists("DuckGame\\Levels\\TMG Maps v2.0")) Directory.Delete("DuckGame\\Levels\\TMG Maps v2.0");
-            if (Directory.Exists("DuckGame\\Levels\\TMG Maps v2.1")) Directory.Delete("DuckGame\\Levels\\TMG Maps v2.1");
-            if (Directory.Exists("DuckGame\\Levels\\TMG v2.1.1")) Directory.Delete("DuckGame\\Levels\\TMG v2.1.1");*/
+            var olddirlist = new List<string>(new[]
+            {
+                "DuckGame\\Levels\\New TMG Maps",
+                "DuckGame\\Levels\\New TMG Levels",
+                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
+                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
+                "DuckGame\\Levels\\TMG Maps v2.0",
+                "DuckGame\\Levels\\TMG Maps v2.1",
+                "DuckGame\\Levels\\TMG v2.1.1"
+            });
+            foreach (var dirpath in olddirlist)
+            {
+                var dirpath1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath);
+                if (Directory.Exists(dirpath1)) Directory.Delete(dirpath1,true);
+            }
 
             // Потом создаём плейлист
             var uffPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
