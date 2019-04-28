@@ -17,7 +17,7 @@ namespace TMGmod
         public HK417 (float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
             ammo = 10;
             _ammoType = new ATMagnum
             {
@@ -28,7 +28,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417pattern"), 30, 10);
             _graphic = _sprite;
-            _sprite.frame = 0;
+            _sprite.frame = 4;
             _center = new Vec2(15f, 5f);
             _collisionOffset = new Vec2(-14.5f, -5f);
             _collisionSize = new Vec2(30f, 10f);
