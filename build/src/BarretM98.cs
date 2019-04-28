@@ -31,7 +31,7 @@ namespace TMGmod
             _kickForce = 6f;
             laserSight = false;
             //_laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(7f, -1f);
+            _holdOffset = new Vec2(7f, 0f);
             _editorName = "Barrett M98";
 			_weight = 7f;
         }

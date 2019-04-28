@@ -36,7 +36,7 @@ namespace TMGmod
             _kickForce = 5.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(14f, -1f);
+            _holdOffset = new Vec2(14f, 0f);
             _editorName = "MSR";
 			_weight = 4.65f;
         }
