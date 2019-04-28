@@ -69,6 +69,22 @@ namespace TMGmod.Core
         // Чтобы играть было приятно, пихаем карты в сам мод, и делаем так, чтобы они скачивались вместе с ним
 		private void CreatingTMGLevels()
         {
+            //Уносим старые нерабочие карты в очко
+            var olddirlist = new List<string>(new[]
+            {
+                "DuckGame\\Levels\\New TMG Maps",
+                "DuckGame\\Levels\\New TMG Levels",
+                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
+                "DuckGame\\Levels\\TMG",
+                "DuckGame\\Levels\\TMG Maps v2.0",
+                "DuckGame\\Levels\\TMG Maps v2.1",
+                "DuckGame\\Levels\\TMG v2.1.1"
+            });
+            foreach (var dirpath in olddirlist)
+            {
+                var dirpath1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath);
+                if (Directory.Exists(dirpath1)) Directory.Delete(dirpath1, true);
+            }
             // Сначала определяем левелы, и копируем их
             var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
             if (!Directory.Exists(levels)) Directory.CreateDirectory(levels);
@@ -82,24 +98,6 @@ namespace TMGmod.Core
                 if (!File.Exists(copyto) || !GetMD5Hash(File.ReadAllBytes(firstlocated)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(copyto)))) File.Copy(firstlocated, copyto, true);
                 levelslist.Add(copyto);
             }
-
-            //Удаляем старые карты
-            var olddirlist = new List<string>(new[]
-            {
-                "DuckGame\\Levels\\New TMG Maps",
-                "DuckGame\\Levels\\New TMG Levels",
-                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
-                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
-                "DuckGame\\Levels\\TMG Maps v2.0",
-                "DuckGame\\Levels\\TMG Maps v2.1",
-                "DuckGame\\Levels\\TMG v2.1.1"
-            });
-            foreach (var dirpath in olddirlist)
-            {
-                var dirpath1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath);
-                if (Directory.Exists(dirpath1)) Directory.Delete(dirpath1,true);
-            }
-
             // Потом создаём плейлист
             var uffPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
             var playlistElement = new XElement("playlist");
