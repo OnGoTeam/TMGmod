@@ -37,7 +37,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = false;
             _fireWait = 0.8f;
-            _kickForce = 0.7f;
+            _kickForce = 2.7f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
             _editorName = "Hk-417C";

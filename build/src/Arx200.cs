@@ -20,7 +20,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 750f,
+                range = 500f,
                 accuracy = 0.95f,
                 penetration = 1f
             };
@@ -37,7 +37,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
             _fireWait = 0.65f;
-            _kickForce = 1.1f;
+            _kickForce = 3.1f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
             _editorName = "Beretta ARX-200";
