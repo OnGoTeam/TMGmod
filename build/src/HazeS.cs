@@ -100,8 +100,10 @@ namespace TMGmod
             }
             else
             {
-                _holdOffset = new Vec2();
+                _holdOffset = new Vec2(1f,0f);
             }
+
+            CurrHone = HoldOffsetNoExtra;
         }
 
         public override void Fire()
