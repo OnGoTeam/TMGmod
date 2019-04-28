@@ -6,7 +6,7 @@ using TMGmod.Core;
 namespace TMGmod
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|AutoPistol")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class HazeS : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;

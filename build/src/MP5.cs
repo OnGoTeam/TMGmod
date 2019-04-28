@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
     public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
     {

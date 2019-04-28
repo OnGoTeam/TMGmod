@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun")]
+    [EditorGroup("TMG|Shotgun|Other")]
     public class DragoShot : BaseBurst, IAmSr, IHaveSkin
     {
         public float Counter;

@@ -4,7 +4,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Buddies
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class AKwARv2: BaseGun, IAmDmr, MagBuddy.ISupportReload
     {

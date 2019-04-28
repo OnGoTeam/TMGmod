@@ -6,7 +6,7 @@ using System;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class M4A1 : BaseAr, IHaveSkin
     {

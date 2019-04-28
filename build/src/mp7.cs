@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     //[yee] switch
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class MP7 : Gun, IAmSmg

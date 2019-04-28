@@ -4,7 +4,7 @@ using TMGmod.Core;
 using TMGmod.Core.WClasses;
 namespace TMGmod
 {
-    [EditorGroup("TMG|Pistol")]
+    [EditorGroup("TMG|Handgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class PMRC : BaseGun, IAmHg, IHaveSkin
     {

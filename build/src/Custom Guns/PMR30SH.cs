@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|Pistol|Custom")]
+    [EditorGroup("TMG|Handgun|Custom")]
     // ReSharper disable once InconsistentNaming
     public class PMR : BaseGun, IAmHg
     {

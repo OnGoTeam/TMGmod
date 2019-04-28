@@ -3,9 +3,9 @@ using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper|Custom")]
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
     public class BarretM98C : Sniper, IAmSr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -32,7 +32,7 @@ namespace TMGmod.Custom_Guns
             laserSight = false;
             //_laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(-2f, -1f);
-            _editorName = "Barrett M98C";
+            _editorName = "Barrett M98 Shorty";
 			_weight = 4.5f;
         }
 

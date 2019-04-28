@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class SVU : BaseGun, IAmDmr
     {
@@ -26,11 +26,11 @@ namespace TMGmod
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = true;
             _fireWait = 0.75f;
-            _kickForce = 1.8f;
+            _kickForce = 2.8f;
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.45f;
             _holdOffset = new Vec2(1f, 2f);
-            _editorName = "SVU";
+            _editorName = "SVU 10 ammo";
 			_weight = 5f;
         }
     }

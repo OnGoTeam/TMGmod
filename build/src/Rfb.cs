@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Combined")]
     public class Rfb : BaseAr, IHaveSkin
     {
         private readonly SpriteMap _sprite;

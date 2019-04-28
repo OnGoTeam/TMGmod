@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|MP")]
     // ReSharper disable once InconsistentNaming
     public class SMG9 : BaseSmg, IHaveSkin
     {

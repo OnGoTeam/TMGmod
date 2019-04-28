@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun")]
+    [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class Ksg12 : BasePumpAction
     {
 	    public Ksg12(float xval, float yval)

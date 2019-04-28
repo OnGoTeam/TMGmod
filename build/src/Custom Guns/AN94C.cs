@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|Machinegun|Custom")]
+    [EditorGroup("TMG|Rifle|Burst|Custom")]
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {

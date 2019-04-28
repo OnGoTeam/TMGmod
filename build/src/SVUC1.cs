@@ -1,24 +1,24 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper|Custom")]
+    [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SVUC : Gun, IAmDmr
+    public class SVUE : BaseGun, IAmDmr
     {
-        public SVUC (float xval, float yval)
+        public SVUE (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 5;
+            ammo = 16;
             _ammoType = new ATMagnum
             {
-                range = 700f,
-                accuracy = 0.925f,
+                range = 580f,
+                accuracy = 0.91f,
                 penetration = 1.5f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("SVUlmag"));
+            _graphic = new Sprite(GetPath("SVUexmag"));
             _center = new Vec2(20f, 8f);
             _collisionOffset = new Vec2(-14.5f, -8f);
             _collisionSize = new Vec2(31f, 11f);
@@ -26,12 +26,12 @@ namespace TMGmod.Custom_Guns
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = true;
             _fireWait = 0.75f;
-            _kickForce = 1f;
+            _kickForce = 2.8f;
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(1f, 2f);
-            _editorName = "SVU with Low Mag";
-			_weight = 5f;
+            _editorName = "SVU 16 ammo";
+			_weight = 6f;
         }
     }
 }

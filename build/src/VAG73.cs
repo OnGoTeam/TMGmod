@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|AutoPistol")]
+    [EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class Vag : BaseGun, IAmHg
     {
         public float Mode = 1f;

@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace TMGmod
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
     public class M900 : Gun, IAmSmg, IHaveSkin
     {

@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [BaggedProperty("canSpawn", false)]
     // ReSharper disable once InconsistentNaming
     public class AKwAR : BaseAr

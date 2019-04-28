@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Semi-Automatic")]
     public class M50 : BaseGun, ISpeedAccuracy, IAmSr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -43,7 +43,7 @@ namespace TMGmod
             _holdOffset = new Vec2(6f, -1f);
             laserSight = true;
             _laserOffsetTL = new Vec2(31f, 9f);
-            _editorName = "M50 with Explosive Ammo";
+            _editorName = "M50";
             _weight = 6.75f;
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;

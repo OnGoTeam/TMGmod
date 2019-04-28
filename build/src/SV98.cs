@@ -5,7 +5,7 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
     public class SV98 : Sniper, IAmSr, IHaveSkin
     {

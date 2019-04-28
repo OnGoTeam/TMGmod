@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod.Custom_Guns
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Custom")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class PPShC : Gun, IHaveSkin, IAmSmg
     {

@@ -1,9 +1,9 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun|Custom")]
+    [EditorGroup("TMG|Shotgun|Fully-Automatic")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class TR21C : Gun
@@ -41,7 +41,7 @@ namespace TMGmod.Custom_Guns
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(-5f, 2f);
-            _editorName = "Crocodile with Extended Mag";
+            _editorName = "Crocodile 24 ammo";
 			_weight = 7f;
         }
         public override void Draw()

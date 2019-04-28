@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|PDW")]
     public class DaewooK1 : BaseSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -22,7 +22,7 @@ namespace TMGmod
             ammo = 40;
             _ammoType = new ATMagnum
             {
-                range = 345f,
+                range = 245f,
                 accuracy = 0.83f,
                 penetration = 1f
             };

@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Fully-Automatic")]
     public class Vintorez : BaseAr, ISpeedAccuracy, IHaveSkin
     {
 
@@ -42,7 +42,7 @@ namespace TMGmod
             _kickForce = 2.85f;
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.15f;
-            _editorName = "Vintorez";
+            _editorName = "Vintorez 10 ammo";
 			_weight = 4.7f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;

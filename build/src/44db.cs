@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun|Custom")]
+    [EditorGroup("TMG|Shotgun|Break-Action|")]
     public class Deadly44 : Gun, IAmSg, IHaveSkin
     {
         private readonly SpriteMap _sprite;

@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [PublicAPI]
     public class Vixr : Gun, IAmAr, IHaveSkin
     {
@@ -17,7 +17,6 @@ namespace TMGmod
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6 });
-        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public Vixr(float xval, float yval)
           : base(xval, yval)

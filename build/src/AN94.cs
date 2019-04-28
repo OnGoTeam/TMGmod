@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Burst")]
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
