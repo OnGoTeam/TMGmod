@@ -99,7 +99,7 @@ namespace TMGmod.Core
                 levelslist.Add(copyto);
             }
             // Потом создаём плейлист
-            var uffPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
+            var tmgPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
             var playlistElement = new XElement("playlist");
             foreach (var s in levelslist)
             {
@@ -110,11 +110,11 @@ namespace TMGmod.Core
             playlist.Add(playlistElement);
             var contents = playlist.ToString();
             if (string.IsNullOrWhiteSpace(contents))
-                throw new Exception("Blank XML (" + uffPlaylistLocation + ")");
-            if (File.Exists(uffPlaylistLocation) && File.ReadAllText(uffPlaylistLocation).Equals(contents)) return;
+                throw new Exception("Blank XML (" + tmgPlaylistLocation + ")");
+            if (File.Exists(tmgPlaylistLocation) && File.ReadAllText(tmgPlaylistLocation).Equals(contents)) return;
             //else
-            File.WriteAllText(uffPlaylistLocation, contents);
-            SaveAsPlay(uffPlaylistLocation);
+            File.WriteAllText(tmgPlaylistLocation, contents);
+            SaveAsPlay(tmgPlaylistLocation);
         }
         private void SaveAsPlay(string path)
         {
