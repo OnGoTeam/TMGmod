@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    [EditorGroup("TMG|Rifle|PDW")]
     [PublicAPI]
     public class Vixr : BaseGun, IAmAr, IHaveSkin
     {
