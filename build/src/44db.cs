@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Break-Action|")]
-    public class Deadly44 : Gun, IAmSg, IHaveSkin
+    public class Deadly44 : BaseGun, IAmSg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -26,6 +26,7 @@ namespace TMGmod
                 penetration = 4f,
                 bulletThickness = 2f
             };
+            BaseAccuracy = 0.1f;
             _numBulletsPerFire = 44;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("44dbpattern"), 33, 10);

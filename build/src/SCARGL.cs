@@ -7,7 +7,7 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class ScarGL : Gun, IAmAr
+    public class ScarGL : BaseGun, IAmAr
     {
         public int Mode;
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));
@@ -62,6 +62,7 @@ namespace TMGmod
                 bulletSpeed = 35f,
                 barrelAngleDegrees = 0f
             };
+            BaseAccuracy = 0.9f;
             _type = "gun";
             _graphicm[0] = new Sprite(GetPath("scargl1"));
             _graphicm[1] = new Sprite(GetPath("scargl2"));

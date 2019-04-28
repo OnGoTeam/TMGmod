@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [PublicAPI]
-    public class Vixr : Gun, IAmAr, IHaveSkin
+    public class Vixr : BaseGun, IAmAr, IHaveSkin
     {
 		public bool Stockngrip = true;
         public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));
@@ -29,6 +29,7 @@ namespace TMGmod
                accuracy = 0.88f,
                bulletSpeed = 21f
             };
+            BaseAccuracy = 0.88f;
             _type = "gun";
             //I'M BLUE DARUDE SANDSTORM DA DUBAI
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);

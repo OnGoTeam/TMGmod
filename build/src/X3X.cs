@@ -1,11 +1,12 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
     [BaggedProperty("isSuperWeapon", true)]
-    public sealed class X3X : Gun
+    public sealed class X3X : BaseGun
     {
         private readonly SpriteMap _sprite;
         public X3X (float xval, float yval)

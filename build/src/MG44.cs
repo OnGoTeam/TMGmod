@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : Gun, IHaveSkin, IAmLmg
+    public class MG44 : BaseGun, IHaveSkin, IAmLmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -36,6 +36,7 @@ namespace TMGmod
                 accuracy = 0.75f,
                 penetration = 1.5f
             };
+            BaseAccuracy = 0.75f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg44reqpattern"), 39, 12);
             _graphic = _sprite;

@@ -1,11 +1,12 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Grenadelauncher")]
     [PublicAPI]
-    public class M72 : Gun
+    public class M72 : BaseGun
     {
         private readonly SpriteMap _sprite;
 
@@ -20,6 +21,7 @@ namespace TMGmod
                 barrelAngleDegrees = -5f,
                 bulletSpeed = 15f
             };
+            BaseAccuracy = 0.95f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M72pattern"), 32, 11);
             _graphic = _sprite;

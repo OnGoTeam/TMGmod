@@ -5,7 +5,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SVUC : Gun, IAmDmr
+    public class SVUC : BaseGun, IAmDmr
     {
         public SVUC (float xval, float yval)
           : base(xval, yval)
@@ -17,6 +17,7 @@ namespace TMGmod
                 accuracy = 0.91f,
                 penetration = 1.5f
             };
+            BaseAccuracy = 0.91f;
             _type = "gun";
             _graphic = new Sprite(GetPath("SVUlmag"));
             _center = new Vec2(20f, 8f);

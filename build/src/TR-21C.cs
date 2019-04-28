@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Fully-Automatic")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class TR21C : Gun
+    public class TR21C : BaseGun
     {
   
         private readonly SpriteMap _sprite;
@@ -24,6 +25,7 @@ namespace TMGmod
                 penetration = 1f,
                 bulletThickness = 0.2f
             };
+            BaseAccuracy = 0.8f;
             _numBulletsPerFire = 9;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21lmg2p"), 22, 14);

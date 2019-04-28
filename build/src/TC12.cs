@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class TC12 : Gun, IAmDmr, IHaveSkin
+    public class TC12 : BaseGun, IAmDmr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -28,6 +28,7 @@ namespace TMGmod
                 accuracy = 0.91f,
                 penetration = 1f
             };
+            BaseAccuracy = 0.91f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TC-12pattern"), 39, 12);
             _graphic = _sprite;

@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
-    public class Arx200 : Gun, IHaveSkin, IAmDmr
+    public class Arx200 : BaseGun, IHaveSkin, IAmDmr
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -24,6 +24,7 @@ namespace TMGmod
                 accuracy = 0.95f,
                 penetration = 1f
             };
+            BaseAccuracy = 0.95f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARX200pattern"), 33, 14);
             _graphic = _sprite;

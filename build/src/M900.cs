@@ -9,7 +9,7 @@ namespace TMGmod
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
-    public class M900 : Gun, IAmSmg, IHaveSkin
+    public class M900 : BaseGun, IAmSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -27,6 +27,7 @@ namespace TMGmod
                 accuracy = 0.4f,
                 penetration = 0.4f
             };
+            BaseAccuracy = 0.4f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M900pattern"), 27, 7);
             _graphic = _sprite;

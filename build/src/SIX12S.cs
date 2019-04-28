@@ -7,7 +7,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12S : Gun, IHaveSkin, IAmSg
+    public class SIX12S : BaseGun, IHaveSkin, IAmSg
     {
         private readonly SpriteMap _sprite;
         public bool Laserino;
@@ -25,6 +25,7 @@ namespace TMGmod
                 range = 180f,
                 accuracy = 0.9f
             };
+            BaseAccuracy = 0.9f;
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _type = "gun";

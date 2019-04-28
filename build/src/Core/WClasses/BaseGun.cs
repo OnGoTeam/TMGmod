@@ -16,7 +16,7 @@ namespace TMGmod.Core.WClasses
         protected Vec2 CurrHone;
         private bool _currHoneInit;
 
-        protected Vec2 ExtraHoldOffset => duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 5);
+        protected Vec2 ExtraHoldOffset => duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
 
         protected Vec2 HoldOffsetNoExtra
         {
