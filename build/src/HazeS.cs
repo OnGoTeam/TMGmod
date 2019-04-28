@@ -79,13 +79,14 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (_heatval > 6f) _heatval = 6f;
+            base.Update();
+            if (_heatval > 8f) _heatval = 8f;
             Heatval = _heatval;
-            _heatval -= 0.05f;
+            _heatval -= 0.1f;
             if (_heatval < 0f) _heatval = 0f;
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK") && _heatval < 1f)
+                if (duck.inputProfile.Down("QUACK") && _heatval < 2f)
                 {
                     _holdOffset = new Vec2(3f, -2f) * 0.2f + _holdOffset * 0.8f;
                     Sighted = true;
@@ -100,11 +101,11 @@ namespace TMGmod
             {
                 _holdOffset = new Vec2();
             }
-            base.Update();
         }
 
         public override void Fire()
         {
+            Heatval = Heatval;
             if (_wait <= 0f)
             {
                 if (duck != null && duck.inputProfile.Down("QUACK") && _heatval < 1f)
