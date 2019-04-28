@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Semi-Automatic")]
     public class FnFcar: BaseAr, IHaveSkin
     {
         private readonly SpriteMap _sprite;

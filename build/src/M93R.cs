@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Pistol")]
+    [EditorGroup("TMG|Handgun|Burst")]
     public class M93R : BaseBurst, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;

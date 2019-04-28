@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Misc|Grenadelauncher")]
+    [EditorGroup("TMG|Grenadelauncher")]
     [PublicAPI]
     public class M72 : Gun
     {

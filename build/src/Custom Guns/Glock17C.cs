@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|AutoPistol|Custom")]
+    [EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class Glock18C : Gun, IAmHg
     {
 		

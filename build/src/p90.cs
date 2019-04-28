@@ -4,7 +4,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
     public class P90 : Gun, IAmSmg
     {

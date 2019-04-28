@@ -3,9 +3,9 @@ using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun|Custom")]
+    [EditorGroup("TMG|Shotgun|Break-Action")]
     public class Deadly44C : Gun, IAmSg, IHaveSkin
     {
         private readonly SpriteMap _sprite;

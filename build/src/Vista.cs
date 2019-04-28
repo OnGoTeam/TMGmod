@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|Burst")]
     // ReSharper disable once InconsistentNaming
     public class Vista : BaseBurst, IAmSmg, IHaveSkin
     {

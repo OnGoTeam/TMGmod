@@ -4,7 +4,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class ScarGL : Gun, IAmAr

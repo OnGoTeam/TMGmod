@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Pistol")]
+    [EditorGroup("TMG|Handgun|Semi-Automatic")]
     public class BigShot : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -16,7 +16,7 @@ namespace TMGmod
         public BigShot (float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(1, this, -1f, 9f, 0.5f);
             ammo = 7;
             _ammoType = new AT50C();
             _type = "gun";

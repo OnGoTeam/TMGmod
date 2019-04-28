@@ -5,7 +5,7 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class Lynx : Gun, IAmDmr, ISpeedAccuracy, IHaveSkin
     {

@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
     public class BarretM98 : Sniper, IAmSr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -32,7 +32,7 @@ namespace TMGmod
             laserSight = false;
             //_laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(7f, -1f);
-            _editorName = "Barrett M98B";
+            _editorName = "Barrett M98";
 			_weight = 7f;
         }
 

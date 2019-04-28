@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     public class SpectreM4 : BaseSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;

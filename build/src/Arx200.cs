@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle")]
+    [EditorGroup("TMG|Rifle|DMR")]
     public class Arx200 : Gun, IHaveSkin, IAmDmr
     {
         private readonly SpriteMap _sprite;

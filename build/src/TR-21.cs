@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun")]
+    [EditorGroup("TMG|Shotgun|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class TR21 : Gun, IAmSg
     {
@@ -39,7 +39,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(-5f, 2f);
-            _editorName = "Crocodile";
+            _editorName = "Crocodile 12 ammo";
 			_weight = 5.5f;
         }
         public override void Draw()
