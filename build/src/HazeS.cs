@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
@@ -80,7 +81,6 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (duck != null && Sighted) Fire();
             base.Update();
             if (_heatval > 8f) _heatval = 8f;
             Heatval = _heatval;
@@ -88,7 +88,7 @@ namespace TMGmod
             if (_heatval < 0f) _heatval = 0f;
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK") && _heatval < 2f)
+                if (duck.inputProfile.Down("QUACK") && _heatval < 2f && Math.Abs(duck.hSpeed) < 2.845f)
                 {
                     _holdOffset = new Vec2(3f, -2f) * 0.2f + _holdOffset * 0.8f;
                     Sighted = true;
@@ -101,6 +101,7 @@ namespace TMGmod
             }
             else
             {
+                _sighted = false;
                 _holdOffset = new Vec2(1f,0f);
             }
 
@@ -109,14 +110,18 @@ namespace TMGmod
 
         public override void Fire()
         {
-            Heatval = Heatval;
-            if (_wait <= 0f)
+            if (ammo > 0)
             {
-                if (duck != null && duck.inputProfile.Down("QUACK") && _heatval < 1f)
+                Heatval = Heatval;
+                if (_wait <= 0f)
                 {
-                    _heatval += 4f;
+                    if (Sighted && _heatval < 1f)
+                    {
+                        _heatval += 4f;
+                    }
+
+                    _heatval += 1f;
                 }
-                _heatval += 1f;
             }
 
             base.Fire();
