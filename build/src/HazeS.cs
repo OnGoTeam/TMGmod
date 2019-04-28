@@ -27,6 +27,7 @@ namespace TMGmod
                 Sighted = _sighted;
             }
         }
+        public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
 
         private bool _sighted;
 
