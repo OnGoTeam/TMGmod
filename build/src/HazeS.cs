@@ -80,6 +80,7 @@ namespace TMGmod
 
         public override void Update()
         {
+            if (duck != null && Sighted) Fire();
             base.Update();
             if (_heatval > 8f) _heatval = 8f;
             Heatval = _heatval;
