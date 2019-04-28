@@ -89,7 +89,6 @@ namespace TMGmod.Core
                 "DuckGame\\Levels\\New TMG Maps",
                 "DuckGame\\Levels\\New TMG Levels",
                 "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
-                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
                 "DuckGame\\Levels\\TMG Maps v2.0",
                 "DuckGame\\Levels\\TMG Maps v2.1",
                 "DuckGame\\Levels\\TMG v2.1.1"
