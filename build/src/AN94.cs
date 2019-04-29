@@ -17,7 +17,6 @@ namespace TMGmod
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
-
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
