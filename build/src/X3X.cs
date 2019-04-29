@@ -12,7 +12,7 @@ namespace TMGmod
         public X3X (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 8;
+            ammo = 5;
             _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
