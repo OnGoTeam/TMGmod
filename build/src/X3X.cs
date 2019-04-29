@@ -4,7 +4,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Handgun|Semi-Automatic")]
+    [EditorGroup("TMG|Handgun|Bolt-Action")]
     [BaggedProperty("isSuperWeapon", true)]
     public sealed class X3X : BaseGun
     {
