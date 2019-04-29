@@ -151,6 +151,7 @@
     <Compile Include="src\BarretM98C.cs" />
     <Compile Include="src\CZC2.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
+    <Compile Include="src\Stuff\Greyfinite.cs" />
     <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />
     <Compile Include="src\M900.cs" />
