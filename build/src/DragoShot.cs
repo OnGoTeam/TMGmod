@@ -22,7 +22,7 @@ namespace TMGmod
         public DragoShot (float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(-1, this, -1f, 9f, 0.5f);
             ammo = 16;
             _ammoType = new ATMagnum
             {
