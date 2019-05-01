@@ -17,7 +17,7 @@ namespace TMGmod.Stuff
         public MaterialThing Activator;
         public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
         public MaterialThing StickThing;
-        public StateBinding StickBinding = new StateBinding(nameof(StickThing));
+        //public StateBinding StickBinding = new StateBinding(nameof(StickThing));
         private Vec2 _stickyVec2;
         public bool WasThrown;
         public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
@@ -169,7 +169,7 @@ namespace TMGmod.Stuff
                 angle += 0.3f * offDir;
             }
 
-            if (-0.5 < ToExplode && ToExplode < 0f) Destroy();
+            if (-0.5 < ToExplode && ToExplode < 0f && !_destroyed) Destroy();
 
             base.Update();
         }
@@ -184,6 +184,7 @@ namespace TMGmod.Stuff
         
         protected override bool OnDestroy(DestroyType _ = null)
         {
+            if (_destroyed) return true;
             Explode();
             return true;
         }
