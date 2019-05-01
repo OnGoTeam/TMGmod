@@ -14,7 +14,7 @@ namespace TMGmod.Stuff
         public StateBinding ToExplodeBinding = new StateBinding(nameof(ToExplode));
         public bool Activated;
         public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
-        public Duck Activator;
+        public MaterialThing Activator;
         public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
         public MaterialThing StickThing;
         public StateBinding StickBinding = new StateBinding(nameof(StickThing));
@@ -161,7 +161,7 @@ namespace TMGmod.Stuff
                 sleeping = false;
             }
 
-            if (Activator != null && !Activator.dead && Activator.inputProfile.Down("QUACK")) ToExplode = Rando.Float(0f, 0.5f);
+            if (Activator is Duck duck1 && !duck1.dead && duck1.IsQuacking()) ToExplode = Rando.Float(0f, 0.5f);
 
             if (grounded) angle = 0f;
             else if ((duck == null || duck.holdObject != this) && WasThrown && StickThing == null)

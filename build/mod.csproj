@@ -239,6 +239,7 @@
     ECHO Transferring
     CD $(SolutionDir)
     CD ..
+    RMDIR /S /Q $(TargetDir)content\
     XCOPY content $(TargetDir)content\ /E /Y /Q
     COPY mod.conf $(TargetDir)mod.conf
     ECHO Transferred
