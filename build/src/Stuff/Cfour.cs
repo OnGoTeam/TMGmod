@@ -22,6 +22,7 @@ namespace TMGmod.Stuff
         public bool WasThrown;
         public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
         public bool Weak;
+        private bool _didboom;
 
         public Cfour(float xpos, float ypos) : base(xpos, ypos)
         {
@@ -38,6 +39,8 @@ namespace TMGmod.Stuff
 
         private void Explode()
         {
+            if (_didboom) return;
+            _didboom = true;
             Activator?.Fondle(this);
             Graphics.FlashScreen();
             for (var index = 0; index < 1; ++index)
