@@ -103,8 +103,8 @@ namespace TMGmod.Stuff
 
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
-            if (StickThing != null) return;
             base.OnImpact(with, from);
+            if (StickThing != null) return;
             if (!Activated) return;
             StickThing = with;
             StickThing.Fondle(this);
