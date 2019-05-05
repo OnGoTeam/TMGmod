@@ -22,7 +22,7 @@ namespace TMGmod
             set
             {
                 _heatval = value;
-                _ammoType.accuracy = _heatval > 3f ? 1.2f - _heatval * 0.1f : 0.9f;
+                _ammoType.accuracy = _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
                 _ammoType.bulletSpeed = 60f + 10f * _heatval;
                 _ammoType.range = 180f;
                 Sighted = _sighted;
@@ -82,10 +82,17 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            if (_heatval > 8f) _heatval = 8f;
-            Heatval = _heatval;
+            if (_heatval > 8f)
+            {
+                _heatval = 8f;
+                for (var i = 0; i < 4; i++)
+                {
+                    Level.Add(SmallSmoke.New(x, y));
+                }
+            }
             _heatval -= 0.1f;
             if (_heatval < 0f) _heatval = 0f;
+            Heatval = _heatval;
             if (duck != null)
             {
                 if (duck.inputProfile.Down("QUACK") && _heatval < 2f && Math.Abs(duck.hSpeed) < 2.845f)
@@ -123,7 +130,6 @@ namespace TMGmod
                     _heatval += 1f;
                 }
             }
-
             base.Fire();
         }
         private void UpdateSkin()
