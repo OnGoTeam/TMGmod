@@ -74,7 +74,7 @@ namespace TMGmod.Stuff
             foreach (var window in Level.CheckCircleAll<Window>(position, 40f))
                 if (Level.CheckLine<Block>(position, window.position, window) == null)
                     window.Destroy(new DTImpact(this));
-            foreach (var thing in Level.CheckCircleAll<Thing>(position, 200f))
+            foreach (var thing in Level.CheckCircleAll<Thing>(position, 500f))
             {
                 if (Level.CheckLine<Block>(position, thing.position, thing) != null) continue;
                 //else
