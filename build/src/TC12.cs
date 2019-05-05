@@ -24,7 +24,7 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new AT9mm
             {
-                range = 340f,
+                range = 270f,
                 accuracy = 0.91f,
                 penetration = 1f
             };
@@ -59,7 +59,7 @@ namespace TMGmod
                     _fireSound = "deepMachineGun2";
                     _ammoType = new AT9mm
                     {
-                        range = 240f,
+                        range = 270f,
                         accuracy = 0.91f,
                         penetration = 1f
                     };
@@ -78,7 +78,7 @@ namespace TMGmod
                     _fireSound = GetPath("sounds/Silenced3.wav");
                     _ammoType = new AT9mmS
                     {
-                        range = 300f,
+                        range = 330f,
                         accuracy = 0.97f
                     };
                     _kickForce = 4.5f;
