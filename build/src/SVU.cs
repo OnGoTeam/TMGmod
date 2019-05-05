@@ -28,7 +28,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.75f;
             _kickForce = 2.8f;
-            loseAccuracy = 0.05f;
+            loseAccuracy = 0.1f;
             maxAccuracyLost = 0.45f;
             _holdOffset = new Vec2(1f, 2f);
             _editorName = "SVU 10 ammo";

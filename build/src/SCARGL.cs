@@ -28,7 +28,7 @@ namespace TMGmod
         {
             new ATMagnum
             {
-                range = 900f,
+                range = 400f,
                 accuracy = 0.9f,
                 penetration = 1f,
                 bulletSpeed = 35f,
@@ -46,8 +46,8 @@ namespace TMGmod
         private readonly Sprite[] _graphicm = {new Sprite(), new Sprite(), new Sprite()};
         private readonly Vec2[] _barrelOffsetTLm = {new Vec2(33f, 3f), new Vec2(30f, 6.5f)};
         private readonly string[] _fireSoundm = {"sounds/1.wav", "deepMachineGun"};
-        private readonly float[] _loseAccuracym = {.01f, 0f};
-        private readonly float[] _maxAccuracyLostm = {.2f, 0f};
+        private readonly float[] _loseAccuracym = {.1f, 0f};
+        private readonly float[] _maxAccuracyLostm = {.45f, 0f};
         private bool _switched;
 
         public ScarGL (float xval, float yval)
@@ -56,7 +56,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 900f,
+                range = 400f,
                 accuracy = 0.9f,
                 penetration = 1f,
                 bulletSpeed = 35f,
@@ -78,7 +78,7 @@ namespace TMGmod
             _fireWait = 1f;
             _kickForce = 2.6f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.2f;
+            maxAccuracyLost = 0.45f;
             _editorName = "SCAR-H With GL";
 			_weight = 6f;
             _graphic = _graphicm[_switched ? Mode : 2];

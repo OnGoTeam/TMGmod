@@ -24,7 +24,7 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 70f,
-                accuracy = 0.9f,
+                accuracy = 0.61f,
                 penetration = 1f
             };
             _type = "gun";
@@ -57,7 +57,7 @@ namespace TMGmod
                     _ammoType = new AT9mm
                     {
                         range = 70f,
-                        accuracy = 0.9f,
+                        accuracy = 0.61f,
                         penetration = 1f
                     };
                     _barrelOffsetTL = new Vec2(11f, 3f);	
@@ -74,7 +74,7 @@ namespace TMGmod
                     _ammoType = new AT9mmS
                     {
                         range = 100f,
-                        accuracy = 1f
+                        accuracy = 0.8f
                     };
                     _barrelOffsetTL = new Vec2(17f, 3f);			 
                     Silencer = true;

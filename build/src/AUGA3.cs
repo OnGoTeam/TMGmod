@@ -24,7 +24,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMagnum
             {
-                range = 425f,
+                range = 376f,
                 accuracy = 0.93f,
                 penetration = 1f
             };
@@ -41,8 +41,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.8f;
             _kickForce = 1.7f;
-            loseAccuracy = 0.025f;
-            maxAccuracyLost = 0.1f;
+            loseAccuracy = 0.08f;
+            maxAccuracyLost = 0.2f;
             _editorName = "AUG A3";
 			_weight = 5.5f;
             Kforce2Ar = 0.7f;

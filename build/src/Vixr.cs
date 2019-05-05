@@ -44,9 +44,9 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = true;
             _fireWait = 0.65f;
-            _kickForce = 0.8f;
-            loseAccuracy = 0.099f;
-            maxAccuracyLost = 0.17f;
+            _kickForce = 1.8f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.2f;
             _editorName = "VIXR";
 			_weight = 3.9f;
             handAngle = 0f;

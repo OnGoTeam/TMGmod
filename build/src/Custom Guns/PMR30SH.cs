@@ -25,8 +25,8 @@ namespace TMGmod.Custom_Guns
         {
             new AT9mm
             {
-                range = 215f,
-                accuracy = 0.875f,
+                range = 125f,
+                accuracy = 0.75f,
                 penetration = 1f
             },
             new AT9mm
@@ -41,8 +41,8 @@ namespace TMGmod.Custom_Guns
         private readonly Sprite[] _graphicm = {new Sprite(), new Sprite(), new Sprite()};
         private readonly Vec2[] _barrelOffsetTLm = {new Vec2(16f, 2.5f), new Vec2(14f, 6f)};
         private readonly string[] _fireSoundm = {"sounds/1.wav", "littleGun"};
-        private readonly float[] _loseAccuracym = {.025f, 0f};
-        private readonly float[] _maxAccuracyLostm = {.15f, 0f};
+        private readonly float[] _loseAccuracym = {.1f, 0f};
+        private readonly float[] _maxAccuracyLostm = {.55f, 0f};
         private readonly int[] _numBulletsPerFirem = {1, 16};
         private bool _switched;
 
@@ -52,8 +52,8 @@ namespace TMGmod.Custom_Guns
             ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 215f,
-                accuracy = 0.875f,
+                range = 125f,
+                accuracy = 0.75f,
                 penetration = 1f
             };
             _numBulletsPerFire = 1;
@@ -72,8 +72,8 @@ namespace TMGmod.Custom_Guns
             _fullAuto = false;
             _fireWait = 0.5f;
             _kickForce = 0.55f;
-            loseAccuracy = 0.025f;
-            maxAccuracyLost = 0.15f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.55f;
             _editorName = "PMR30 With SG";
 			_weight = 1f;
             _graphic = _graphicm[_switched ? Mode : 2];

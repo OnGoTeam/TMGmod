@@ -22,7 +22,7 @@ namespace TMGmod
             ammo = 80;
             _ammoType = new ATMagnum
             {
-                range = 600f,
+                range = 480f,
                 accuracy = 0.8f,
                 penetration = 1.5f
             };
@@ -37,9 +37,9 @@ namespace TMGmod
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = true;
             _fireWait = 0.5f;
-            _kickForce = 0.95f;
-            loseAccuracy = 0.025f;
-            maxAccuracyLost = 0.1f;
+            _kickForce = 1.5f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(4f, 1.5f);
             _editorName = "MG3";
 			_weight = 7f;
@@ -56,9 +56,9 @@ namespace TMGmod
             }
             else
             {
-                _kickForce = 0.95f;
-                loseAccuracy = 0.025f;
-                maxAccuracyLost = 0.1f;
+                _kickForce = 3.5f;
+                loseAccuracy = 0.1f;
+                maxAccuracyLost = 0.45f;
                 _sprite.frame %= 20;
             }
             base.Update();

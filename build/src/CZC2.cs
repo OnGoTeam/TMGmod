@@ -24,7 +24,7 @@ namespace TMGmod
             ammo = 23;
             _ammoType = new AT9mm
             {
-                range = 330f,
+                range = 310f,
                 accuracy = 0.87f,
                 penetration = 1f
             };
@@ -76,7 +76,7 @@ namespace TMGmod
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _ammoType = new AT9mmS
                     {
-                        range = 360f,
+                        range = 350f,
                         accuracy = 0.95f
                     };
                     loseAccuracy = 0.15f;

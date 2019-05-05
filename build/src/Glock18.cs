@@ -14,8 +14,8 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 100f,
-                accuracy = 1f,
-                penetration = 1f
+                accuracy = 0.65f,
+                penetration = 0.5f
             };
             _type = "gun";
             _graphic = new Sprite(GetPath("Glock17"));
@@ -26,9 +26,9 @@ namespace TMGmod
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
             _fireWait = 0.4f;
-            _kickForce = 0.1f;
-            loseAccuracy = 0.05f;
-            maxAccuracyLost = 0.2f;
+            _kickForce = 1.4f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.4f;
             _editorName = "Glock 18 17 ammo";
 			_weight = 1.7f;
         }

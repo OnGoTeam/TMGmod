@@ -27,7 +27,7 @@ namespace TMGmod
             ammo = 50;
             _ammoType = new ATMagnum
             {
-                range = 345f,
+                range = 400f,
                 accuracy = 0.8f,
                 penetration = 1.5f
             };
@@ -41,10 +41,10 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(38f, 4f);
             _fireSound = "deepMachineGun";
             _fullAuto = true;
-            _fireWait = 0.825f;
-            _kickForce = 0.33f;
-            loseAccuracy = 0.01f;
-            maxAccuracyLost = 0.12f;
+            _fireWait = 0.83f;
+            _kickForce = 2.33f;
+            loseAccuracy = 0.07f;
+            maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, 1f);
             _editorName = "M16 LMG";
 			_weight = 5.75f;
@@ -63,13 +63,13 @@ namespace TMGmod
             else
             {
                 _kickForce = 0.33f;
-                loseAccuracy = 0.01f;
+                loseAccuracy = 0.07f;
             }
             base.Update();
         }
         public override void OnPressAction()
         {
-            ammo = Rando.Int(0, _ammobefore / 6 * (1 + _counter / 2));
+            ammo = Rando.Int(0, _ammobefore / 2 * (1 + _counter / 2));
             if (ammo > _ammobefore) ammo = _ammobefore;
             _ammobefore -= ammo;
             base.OnPressAction();

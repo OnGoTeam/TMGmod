@@ -25,7 +25,7 @@ namespace TMGmod
             _collisionSize = new Vec2(50f, 13f);
             _barrelOffsetTL = new Vec2(50f, 6f);
             ammo = 8;
-            _ammoType = new ATSniper {penetration = 4f};
+            _ammoType = new ATSniper {penetration = 4f, range = 850, accuracy = 1};
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
             _kickForce = 6f;

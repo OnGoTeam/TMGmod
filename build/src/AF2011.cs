@@ -39,10 +39,10 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(16f, 1f);
             _fireSound = "pistolFire";
             _fullAuto = false;
-            _fireWait = 1.2f;
-            _kickForce = 0f;
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0f;
+            _fireWait = 0.9f;
+            _kickForce = 1.7f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.4f;
             _holdOffset = new Vec2(-1f, 1f);
             _editorName = "AF-2011";
 			_weight = 2.5f;

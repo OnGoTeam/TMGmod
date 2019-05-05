@@ -26,9 +26,9 @@ namespace TMGmod.Custom_Guns
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
             _fireWait = 0.4f;
-            _kickForce = 0.1f;
-            loseAccuracy = 0.03f;
-            maxAccuracyLost = 0.16f;
+            _kickForce = 1.4f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.4f;
             _editorName = "Glock 18 33 ammo";
 			_weight = 2.1f;
         }

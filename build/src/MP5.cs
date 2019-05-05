@@ -24,7 +24,8 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 215f,
-                accuracy = 0.7f
+                accuracy = 0.7f,
+                penetration = 1f
             };
             BaseAccuracy = 0.7f;
             _type = "gun";

@@ -24,7 +24,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new AT9mm
             {
-                range = 425f,
+                range = 360f,
                 accuracy = 1f,
                 penetration = 1.5f,
                 bulletSpeed = 60f,
@@ -69,7 +69,7 @@ namespace TMGmod
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
                     _ammoType.accuracy = 0.92f;
-                    loseAccuracy = 0.045f;
+                    loseAccuracy = 0.1f;
                     weight = 3.5f;
                 }
 

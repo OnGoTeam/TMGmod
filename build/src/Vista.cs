@@ -39,7 +39,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = false;
             _fireWait = 0.36f;
-            _kickForce = 0f;
+            _kickForce = 1.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
             _holdOffset = new Vec2(-1f, 3f);

@@ -20,7 +20,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 580f,
+                range = 380f,
                 accuracy = 0.89f,
                 penetration = 1f
             };
@@ -38,7 +38,7 @@ namespace TMGmod
             _fireWait = 0.46f;
             _kickForce = 1.7f;
             loseAccuracy = 0.08f;
-            maxAccuracyLost = 0.2f;
+            maxAccuracyLost = 0.3f;
             _editorName = "RFB";
 			_weight = 6f;
 		    Kforce2Ar = 0.7f;
@@ -51,15 +51,15 @@ namespace TMGmod
                 {
                     _fullAuto = false;
                     _sprite.frame -= 10;
-                    _fireWait = 0.3f;
-                    maxAccuracyLost = 0.2f;
+                    _fireWait = 0.46f;
+                    maxAccuracyLost = 0.3f;
                 }
                 else
                 {
                     _fullAuto = true;
                     _sprite.frame += 10;
                     _fireWait = 0.79f;
-                    maxAccuracyLost = 0.25f;
+                    maxAccuracyLost = 0.4f;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

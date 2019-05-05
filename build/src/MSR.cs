@@ -29,7 +29,10 @@ namespace TMGmod
             ammo = 5;
             _ammoType = new ATSniper
             {
-                bulletSpeed = 85f
+                bulletSpeed = 85f,
+                range = 1200f,
+                penetration = 2f,
+                accuracy = 1f
             };
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
