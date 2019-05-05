@@ -27,9 +27,10 @@ namespace TMGmod
             _fireWait = 2.5f;
             _kickForce = 10f;
             loseAccuracy = 1.9f;
-            maxAccuracyLost = 0.5f;
+            maxAccuracyLost = 2.5f;
             _holdOffset = new Vec2(0f, 2f);
-            _editorName = "EXsess's X3X";
+            _editorName = "X3X";
+            _bio = "ammo = 5";
 			_weight = 5.5f;
             _manualLoad = true;
             _sprite.AddAnimation("idle", 0.3f, false, 0);

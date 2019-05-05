@@ -38,7 +38,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 0.75f;
-            _kickForce = 0f;
+            _kickForce = 0.9f;
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             _editorName = "CZ-75";

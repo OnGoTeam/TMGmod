@@ -27,7 +27,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMagnum
             {
-                range = 300f,
+                range = 330f,
                 accuracy = 0.8f,
                 penetration = 1f
             };
@@ -42,9 +42,9 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.745f;
-            _kickForce = 0.5f;
-            loseAccuracy = 0.01f;
-            maxAccuracyLost = 0.3f;
+            _kickForce = 1.9f;
+            loseAccuracy = 0.07f;
+            maxAccuracyLost = 0.21f;
             _holdOffset = new Vec2(3f, 1f);
             _editorName = "M4A1";
 			_weight = 6.5f;

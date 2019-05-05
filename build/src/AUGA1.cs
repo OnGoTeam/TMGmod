@@ -24,7 +24,7 @@ namespace TMGmod
             ammo = 42;
             _ammoType = new ATMagnum
             {
-                range = 500f,
+                range = 400f,
                 accuracy = 0.91f,
                 penetration = 1f
             };

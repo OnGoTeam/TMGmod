@@ -21,7 +21,7 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 125f,
-                accuracy = 0.875f,
+                accuracy = 0.75f,
                 penetration = 1f
             };
             _type = "gun";
@@ -37,8 +37,8 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.5f;
             _kickForce = 0.55f;
-            loseAccuracy = 0.025f;
-            maxAccuracyLost = 0.15f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.55f;
             _editorName = "PMR-30";
 			_weight = 1f;
         }

@@ -19,7 +19,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 40;
+            ammo = 32;
             _ammoType = new ATMagnum
             {
                 range = 245f,

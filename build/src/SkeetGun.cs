@@ -24,8 +24,9 @@ namespace TMGmod
             {
                 accuracy = 0.9f,
                 bulletColor = new Color(255, 0, 0),
-                range = 500f,
-                bulletSpeed = 50f
+                range = 250f,
+                bulletSpeed = 50f,
+                penetration = 1.5f
             };
             BaseAccuracy = 0.9f;
             _numBulletsPerFire = 10;

@@ -18,7 +18,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 48;
+            ammo = 24;
             _ammoType = new AT9mm
             {
                 range = 95f,
@@ -36,11 +36,11 @@ namespace TMGmod
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = true;
             _fireWait = 0.35f;
-            _kickForce = 0f;
+            _kickForce = 2f;
             KforceDSmg = 3.2f;
             MaxDelaySmg = 5;
             loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.33f;
+            maxAccuracyLost = 0.57f;
             _holdOffset = new Vec2(-1f, 2f);
             _editorName = "SMG-9";
 			_weight = 2.5f;

@@ -48,9 +48,9 @@ namespace TMGmod.Custom_Guns
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.9f;
-            _kickForce = 0.6f;
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0f;
+            _kickForce = 1.8f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.6f;
             _holdOffset = new Vec2(4f, 0f);
             _editorName = "Magnium NATOmag";
             _weight = 6f;

@@ -20,7 +20,7 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 1400f,
-                accuracy = 0.965f,
+                accuracy = 0.97f,
                 penetration = 1f,
                 bulletSpeed = 95f,
                 bulletThickness = 1.5f
@@ -93,7 +93,7 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 1400f,
-                accuracy = 0.965f,
+                accuracy = 0.97f,
                 penetration = 1f,
                 bulletSpeed = 95f,
                 bulletThickness = 1.5f
@@ -121,7 +121,7 @@ namespace TMGmod
 			    _ammoType = new AT9mm
 			    {
 			        range = 1400f,
-			        accuracy = 0.965f,
+			        accuracy = 0.97f,
 			        penetration = 1f,
 			        bulletSpeed = 95f,
 			        bulletThickness = 1.5f
