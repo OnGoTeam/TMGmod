@@ -4,7 +4,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class MP40 : BaseSmg, IFirstPrecise
     {
@@ -15,7 +15,8 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 190f,
-                accuracy = 0.5f
+                accuracy = 0.5f,
+                penetration = 0.7f
             };
             BaseAccuracy = 0.5f;
             _type = "gun";

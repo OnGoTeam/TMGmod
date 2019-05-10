@@ -1,12 +1,13 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun|Custom")]
+    [EditorGroup("TMG|Shotgun|Fully-Automatic")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class TR21C : Gun
+    public class TR21C : BaseGun
     {
   
         private readonly SpriteMap _sprite;
@@ -24,6 +25,7 @@ namespace TMGmod.Custom_Guns
                 penetration = 1f,
                 bulletThickness = 0.2f
             };
+            BaseAccuracy = 0.8f;
             _numBulletsPerFire = 9;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TR-21lmg2p"), 22, 14);
@@ -41,7 +43,7 @@ namespace TMGmod.Custom_Guns
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(-5f, 2f);
-            _editorName = "Crocodile with Extended Mag";
+            _editorName = "Crocodile 24 ammo";
 			_weight = 7f;
         }
         public override void Draw()

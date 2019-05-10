@@ -1,29 +1,38 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
+using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
-    public class BarretM98 : Sniper
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
+    public class BarretM98 : Sniper, IAmSr, IHaveSkin
     {
-        // ReSharper disable once MemberCanBePrivate.Global
-        public readonly EditorProperty<bool> Shortened = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
-		
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("BarretM98"));
-            _center = new Vec2(17f, 10f);
-            _collisionOffset = new Vec2(-25f, -10f);
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("BarretM98pattern"), 50, 13);
+            _graphic = _sprite;
+            _sprite.frame = 0;
+            _center = new Vec2(25f, 6.5f);
+            _collisionOffset = new Vec2(-25f, -6.5f);
             _collisionSize = new Vec2(50f, 13f);
             _barrelOffsetTL = new Vec2(50f, 6f);
             ammo = 8;
-            _ammoType = new ATSniper {penetration = 8f};
+            _ammoType = new ATSniper {penetration = 4f, range = 850, accuracy = 1};
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
-            _kickForce = 2.5f;
+            _kickForce = 6f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(-2f, 2f);
-            _editorName = "Barrett M98B";
+            //_laserOffsetTL = new Vec2(31f, 9f);
+            _holdOffset = new Vec2(7f, 0f);
+            _editorName = "Barrett M98";
 			_weight = 7f;
         }
 
@@ -135,16 +144,24 @@ namespace TMGmod
             }
             laserSight = false;
         }
-        public override void Initialize()
+        private void UpdateSkin()
         {
-			if (!(Level.current is Editor) && Shortened.value)
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
             {
-                _ammoType.accuracy = 0.9f;
-                weight = 6.5f;
-                graphic = new Sprite(GetPath("BarretM98short"));
-                _barrelOffsetTL = new Vec2(39f, 6f);
+                bublic = Rando.Int(0, 9);
             }
-            base.Initialize();
+            _sprite.frame = bublic;
         }
-	}
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
+    }
 }

@@ -6,9 +6,9 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun")]
+    [EditorGroup("TMG|Shotgun|Break-Action")]
     [BaggedProperty("canSpawn", false)]
-    public class SkeetGun:Gun, IHaveSkin, IAmSg
+    public class SkeetGun:BaseGun, IHaveSkin, IAmSg
     {
 
         private readonly SpriteMap _sprite;
@@ -24,9 +24,11 @@ namespace TMGmod
             {
                 accuracy = 0.9f,
                 bulletColor = new Color(255, 0, 0),
-                range = 500f,
-                bulletSpeed = 50f
+                range = 250f,
+                bulletSpeed = 50f,
+                penetration = 1.5f
             };
+            BaseAccuracy = 0.9f;
             _numBulletsPerFire = 10;
             _sprite = new SpriteMap(GetPath("SkeetDoublepattern"), 41, 7);
             _graphic = _sprite;

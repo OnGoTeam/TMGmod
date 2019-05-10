@@ -5,18 +5,17 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle")]
+    [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class TC12 : Gun, IAmDmr, IHaveSkin
+    public class TC12 : BaseGun, IAmDmr, IHaveSkin
     {
-
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         public bool Silencer;
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3 });
 
         public TC12 (float xval, float yval)
           : base(xval, yval)
@@ -25,10 +24,11 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new AT9mm
             {
-                range = 240f,
+                range = 270f,
                 accuracy = 0.91f,
                 penetration = 1f
             };
+            BaseAccuracy = 0.91f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TC-12pattern"), 39, 12);
             _graphic = _sprite;
@@ -40,7 +40,7 @@ namespace TMGmod
             _holdOffset = new Vec2(5f, 0f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 0.88f;
+            _fireWait = 1.03f;
             _kickForce = 5.3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
@@ -59,7 +59,7 @@ namespace TMGmod
                     _fireSound = "deepMachineGun2";
                     _ammoType = new AT9mm
                     {
-                        range = 240f,
+                        range = 270f,
                         accuracy = 0.91f,
                         penetration = 1f
                     };
@@ -78,7 +78,7 @@ namespace TMGmod
                     _fireSound = GetPath("sounds/Silenced3.wav");
                     _ammoType = new AT9mmS
                     {
-                        range = 300f,
+                        range = 330f,
                         accuracy = 0.97f
                     };
                     _kickForce = 4.5f;
@@ -100,13 +100,11 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

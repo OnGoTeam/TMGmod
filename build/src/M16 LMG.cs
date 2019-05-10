@@ -1,42 +1,52 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using System;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class M16LMG : BaseLmg
+    public class M16LMG : BaseLmg, IHaveSkin
     {
-        private int _ammobefore = 61;
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private int _ammobefore = 51;
         private int _counter;
         private float _explode;
-        private const double Explodechance = 0.0005;
+        private const double Explodechance = 0.00025;
 
         public M16LMG (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 60;
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            ammo = 50;
             _ammoType = new ATMagnum
             {
-                range = 345f,
+                range = 400f,
                 accuracy = 0.8f,
                 penetration = 1.5f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("m4lmg"));
+            _sprite = new SpriteMap(GetPath("M16LMGpattern"), 38, 11);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(19f, 6f);
             _collisionOffset = new Vec2(-19f, -6f);
             _collisionSize = new Vec2(38f, 11f);
             _barrelOffsetTL = new Vec2(38f, 4f);
             _fireSound = "deepMachineGun";
             _fullAuto = true;
-            _fireWait = 0.825f;
-            _kickForce = 0.33f;
-            loseAccuracy = 0.01f;
-            maxAccuracyLost = 0.12f;
-            _holdOffset = new Vec2(5f, 1f);
-            _editorName = "M16-LMG";
+            _fireWait = 0.83f;
+            _kickForce = 2.33f;
+            loseAccuracy = 0.07f;
+            maxAccuracyLost = 0.3f;
+            _holdOffset = new Vec2(6f, 1f);
+            _editorName = "M16 LMG";
 			_weight = 5.75f;
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.7f;
@@ -53,13 +63,13 @@ namespace TMGmod
             else
             {
                 _kickForce = 0.33f;
-                loseAccuracy = 0.01f;
+                loseAccuracy = 0.07f;
             }
             base.Update();
         }
         public override void OnPressAction()
         {
-            ammo = Rando.Int(0, _ammobefore / 6 * (1 + _counter / 2));
+            ammo = Rando.Int(0, _ammobefore / 2 * (1 + _counter / 2));
             if (ammo > _ammobefore) ammo = _ammobefore;
             _ammobefore -= ammo;
             base.OnPressAction();
@@ -75,6 +85,11 @@ namespace TMGmod
             _explode = Rando.Float(0, 1);
             if (_explode < Explodechance) CreateExplosion(position);
             base.Fire();
+        }
+        public override void Thrown()
+        {
+            if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;
+            base.Thrown();
         }
         private void CreateExplosion(Vec2 pos)
         {
@@ -102,6 +117,25 @@ namespace TMGmod
             }
             SFX.Play("explode");
             Level.Remove(this);
+        }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

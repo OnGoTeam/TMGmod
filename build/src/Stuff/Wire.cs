@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
+    [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Wire : PhysicsObject
     {

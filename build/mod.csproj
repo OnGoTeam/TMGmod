@@ -28,13 +28,14 @@
     <OutputPath>..\..\TMGmod\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>7.3</LangVersion>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -79,6 +80,7 @@
     <Compile Include="src\BarretM98.cs" />
     <Compile Include="src\Buddies\MagBuddy.cs" />
     <Compile Include="src\Buddies\AKwARv2.cs" />
+    <Compile Include="src\Buddies\SuperArmor.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
@@ -143,21 +145,22 @@
     <Compile Include="src\Core\MF.cs" />
     <Compile Include="src\Core\Mod.cs" />
     <Compile Include="src\Core\Particles\BarrBetaPar.cs" />
-    <Compile Include="src\Custom Guns\44dbC.cs" />
+    <Compile Include="src\44dbC.cs" />
     <Compile Include="src\Custom Guns\AN94C.cs" />
     <Compile Include="src\AUGA3.cs" />
-    <Compile Include="src\Custom Guns\BarretM98C.cs" />
+    <Compile Include="src\BarretM98C.cs" />
     <Compile Include="src\CZC2.cs" />
     <Compile Include="src\Custom Guns\Glock17C.cs" />
+    <Compile Include="src\Stuff\Greyfinite.cs" />
     <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />
-    <Compile Include="src\Custom Guns\M960C.cs" />
+    <Compile Include="src\M900.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
-    <Compile Include="src\Custom Guns\SVUC.cs" />
-    <Compile Include="src\Custom Guns\SVUC1.cs" />
-    <Compile Include="src\Custom Guns\TR-21C.cs" />
-    <Compile Include="src\Custom Guns\VintorezC.cs" />
+    <Compile Include="src\SVUC.cs" />
+    <Compile Include="src\SVUC1.cs" />
+    <Compile Include="src\TR-21C.cs" />
+    <Compile Include="src\VintorezC.cs" />
     <Compile Include="src\CZ75.cs" />
     <Compile Include="src\DragoShot.cs" />
     <Compile Include="src\Glock18.cs" />
@@ -185,7 +188,7 @@
     <Compile Include="src\Custom Guns\PMR30SH.cs" />
     <Compile Include="src\PPSh.cs" />
     <Compile Include="src\Remington.cs" />
-    <Compile Include="src\Custom Guns\RemingtonTactical.cs" />
+    <Compile Include="src\RemingtonTactical.cs" />
     <Compile Include="src\SCARGL.cs" />
     <Compile Include="src\Rfb.cs" />
     <Compile Include="src\Arx200.cs" />
@@ -236,9 +239,24 @@
     ECHO Transferring
     CD $(SolutionDir)
     CD ..
+    RMDIR /S /Q $(TargetDir)content\
     XCOPY content $(TargetDir)content\ /E /Y /Q
     COPY mod.conf $(TargetDir)mod.conf
     ECHO Transferred
+    IF $(ConfigurationName) == Workshop (
+    IF EXIST $(TargetDir)content\deleteco\ (
+    RMDIR /Q /S $(TargetDir)content\deleteco\
+        ECHO Deleted deleteco
+    )
+    IF EXIST $(TargetDir)content\oldmaps\ (
+    RMDIR /Q /S $(TargetDir)content\oldmaps\
+        ECHO Deleted oldmaps
+    )
+    IF EXIST $(TargetDir)TMGmod.pdb (
+    ERASE $(TargetDir)TMGmod.pdb
+    ECHO Deleted TMGmod.pdb
+    )
+    )
 )
 CD ..
 IF EXIST TMGmod.zip (

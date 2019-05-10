@@ -5,7 +5,7 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
     public class AWS : Sniper, IAmSr, IHaveSkin
     {
@@ -37,7 +37,7 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
-            _kickForce = 1.75f;
+            _kickForce = 4.75f;
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "AWS";
 			_weight = 5f;
@@ -157,7 +157,7 @@ namespace TMGmod
             }
             else
             {
-                _kickForce = 1.75f;
+                _kickForce = 4.75f;
                 if ((_sprite.frame > 9) && (_sprite.frame < 20)) _sprite.frame -= 10;
             }
             OnHoldAction();

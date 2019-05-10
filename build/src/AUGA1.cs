@@ -5,26 +5,26 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class AUGA1 : BaseAr, IHaveSkin
     {
-        public bool Grip;
-        public StateBinding GripBinding = new StateBinding(nameof(Grip));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6 });
+        public bool Grip;
+        public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
         public AUGA1 (float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(3, this, -1f, 9f, 0.5f);
             ammo = 42;
             _ammoType = new ATMagnum
             {
-                range = 500f,
+                range = 400f,
                 accuracy = 0.91f,
                 penetration = 1f
             };
@@ -36,11 +36,11 @@ namespace TMGmod
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 12f);
             _barrelOffsetTL = new Vec2(30f, 5f);
-            _holdOffset = new Vec2(-3f, 0f);
+            _holdOffset = new Vec2(-2f, 1f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.8f;
-            _kickForce = 0.7f;
+            _kickForce = 1.7f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A1";

@@ -6,10 +6,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     //[yee] switch
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class MP7 : Gun, IAmSmg
+    public class MP7 : BaseGun, IAmSmg
     {
         public float HandAngleOff
         {
@@ -28,6 +28,7 @@ namespace TMGmod
                 range = 190f,
                 accuracy = 0.9f
             };
+            BaseAccuracy = 0.9f;
             _type = "gun";
             _graphic = new Sprite(GetPath("MP7"));
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);

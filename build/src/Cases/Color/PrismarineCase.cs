@@ -19,7 +19,7 @@ namespace TMGmod.Cases.Color
             thickness = 0.0f;
             _weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Sweet Case";
+            _editorName = "Prismarine Case";
             Things = new List<Type>
             {
                 typeof(SIX12S),

@@ -5,9 +5,9 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun")]
+    [EditorGroup("TMG|Shotgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12S : Gun, IHaveSkin, IAmSg
+    public class SIX12S : BaseGun, IHaveSkin, IAmSg
     {
         private readonly SpriteMap _sprite;
         public bool Laserino;
@@ -25,6 +25,7 @@ namespace TMGmod
                 range = 180f,
                 accuracy = 0.9f
             };
+            BaseAccuracy = 0.9f;
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _type = "gun";
@@ -37,8 +38,8 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(30f, 4.5f);
             _fireSound = "shotgunFire";
             _fullAuto = false;
-            _fireWait = 1.7f;
-            _kickForce = 5f;
+            _fireWait = 2f;
+            _kickForce = 5.5f;
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             laserSight = false;

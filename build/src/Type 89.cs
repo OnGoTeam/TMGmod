@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     public class Type89 : BaseAr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -37,7 +37,7 @@ namespace TMGmod
             _fireWait = 0.71f;
             _kickForce = 1.8f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.4f;
+            maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(1f, 0f);
             _editorName = "Type 89";
 			_weight = 4.6f;

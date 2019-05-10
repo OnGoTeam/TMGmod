@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
     public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
     {
@@ -24,7 +24,8 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 215f,
-                accuracy = 0.7f
+                accuracy = 0.7f,
+                penetration = 1f
             };
             BaseAccuracy = 0.7f;
             _type = "gun";
@@ -37,7 +38,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(27f, 3f);
             _fireSound = "deepMachineGun";
             _fullAuto = false;
-            _fireWait = 0.3f;
+            _fireWait = 0.5f;
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
             _editorName = "MP5";
@@ -64,15 +65,16 @@ namespace TMGmod
                 {
                     NonAuto = false;
                     BurstNum = 3;
-                    _fireWait = 1.3f;
+                    _fireWait = 1.8f;
+                    _sprite.frame %= 10;
                     _sprite.frame += 10;
                 }
                 else
                 {
                     NonAuto = true;
                     BurstNum = 1;
-                    _fireWait = 0.3f;
-                    _sprite.frame -= 10;
+                    _fireWait = 0.5f;
+                    _sprite.frame %= 10;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

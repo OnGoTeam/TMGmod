@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Pistol")]
+    [EditorGroup("TMG|Handgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class USP : BaseGun, IAmHg, IHaveSkin
     {
@@ -73,9 +73,9 @@ namespace TMGmod
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 0.75f;
-            _kickForce = 0f;
-            loseAccuracy = 0.05f;
-            maxAccuracyLost = 0.1f;
+            _kickForce = 1f;
+            loseAccuracy = 0.2f;
+            maxAccuracyLost = 0.4f;
             _editorName = "USP-S";
 			_weight = 1f;
         }

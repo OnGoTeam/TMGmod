@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Burst")]
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
@@ -17,7 +17,6 @@ namespace TMGmod
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
-        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
@@ -29,55 +28,49 @@ namespace TMGmod
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(33f, 9f);
             _barrelOffsetTL = new Vec2(34f, 3f);
-            _holdOffset = new Vec2(3f, 2f);
+            _holdOffset = new Vec2(1f, 2f);
             ammo = 30;
-            _ammoType = new ATMagnum {range = 260f, bulletSpeed = 180f};
+            _ammoType = new ATMagnum { range = 260f, bulletSpeed = 60f, accuracy = 0.87f};
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 0.1f;
+            _fireWait = 2f;
             Kforce1Ar = 0.07f;
             _kickForce = 0.9f;
             Kforce2Ar = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
             _editorName = "AN94";
-			_weight = 5.5f;
+            _weight = 5.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(30f, 2.5f);
             DeltaWait = 0.07f;
             BurstNum = 2;
-        }        
+        }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Stock)
+                if (!Stock)
                 {
                     loseAccuracy = 0.15f;
                     weight = 5.5f;
-                    _sprite.frame += 10;
+                    _sprite.frame %= 10;
                     maxAccuracyLost = 0.1f;
-                    Stock = false;
                 }
                 else
                 {
                     loseAccuracy = 0.2f;
                     weight = 2.75f;
-                    _sprite.frame -= 10;
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
                     maxAccuracyLost = 0.3f;
-                    Stock = true;
                 }
+
+                Stock = !Stock;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
-        }
-        public override void Initialize()
-        {
-			if (!(Level.current is Editor) && Laser.value)
-            {
-                laserSight = true;
-            }
-            base.Initialize();
         }
         private void UpdateSkin()
         {

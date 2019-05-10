@@ -4,9 +4,9 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
-    public class P90 : Gun, IAmSmg
+    public class P90 : BaseGun, IAmSmg
     {
         public readonly EditorProperty<bool> Elongated = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
         
@@ -20,6 +20,7 @@ namespace TMGmod
                 accuracy = 0.6f,
                 penetration = 1f
             };
+            BaseAccuracy = 0.6f;
             _type = "gun";
             _graphic = new Sprite(GetPath("P90"));
             _center = new Vec2(9.5f, 3f);

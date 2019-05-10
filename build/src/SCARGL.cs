@@ -4,10 +4,10 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class ScarGL : Gun, IAmAr
+    public class ScarGL : BaseGun, IAmAr
     {
         public int Mode;
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));
@@ -28,7 +28,7 @@ namespace TMGmod
         {
             new ATMagnum
             {
-                range = 900f,
+                range = 400f,
                 accuracy = 0.9f,
                 penetration = 1f,
                 bulletSpeed = 35f,
@@ -46,8 +46,8 @@ namespace TMGmod
         private readonly Sprite[] _graphicm = {new Sprite(), new Sprite(), new Sprite()};
         private readonly Vec2[] _barrelOffsetTLm = {new Vec2(33f, 3f), new Vec2(30f, 6.5f)};
         private readonly string[] _fireSoundm = {"sounds/1.wav", "deepMachineGun"};
-        private readonly float[] _loseAccuracym = {.01f, 0f};
-        private readonly float[] _maxAccuracyLostm = {.2f, 0f};
+        private readonly float[] _loseAccuracym = {.1f, 0f};
+        private readonly float[] _maxAccuracyLostm = {.45f, 0f};
         private bool _switched;
 
         public ScarGL (float xval, float yval)
@@ -56,12 +56,13 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 900f,
+                range = 400f,
                 accuracy = 0.9f,
                 penetration = 1f,
                 bulletSpeed = 35f,
                 barrelAngleDegrees = 0f
             };
+            BaseAccuracy = 0.9f;
             _type = "gun";
             _graphicm[0] = new Sprite(GetPath("scargl1"));
             _graphicm[1] = new Sprite(GetPath("scargl2"));
@@ -74,10 +75,10 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fireSoundm[0] = _fireSound;
             _fullAuto = true;
-            _fireWait = 1.2f;
-            _kickForce = 0.8f;
+            _fireWait = 1f;
+            _kickForce = 2.6f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.2f;
+            maxAccuracyLost = 0.45f;
             _editorName = "SCAR-H With GL";
 			_weight = 6f;
             _graphic = _graphicm[_switched ? Mode : 2];

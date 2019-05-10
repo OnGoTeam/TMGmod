@@ -28,7 +28,7 @@ namespace TMGmod.Cases.Color
                 typeof(DaewooK1),
                 typeof(MP5),
                 typeof(MP5SD),
-                typeof(HK417),
+                typeof(TC12),
                 typeof(USP),
                 typeof(CZ805),
                 typeof(AF2011),

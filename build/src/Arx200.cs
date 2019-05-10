@@ -5,8 +5,8 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle")]
-    public class Arx200 : Gun, IHaveSkin, IAmDmr
+    [EditorGroup("TMG|Rifle|DMR")]
+    public class Arx200 : BaseGun, IHaveSkin, IAmDmr
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -20,10 +20,11 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 750f,
+                range = 450f,
                 accuracy = 0.95f,
                 penetration = 1f
             };
+            BaseAccuracy = 0.95f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARX200pattern"), 33, 14);
             _graphic = _sprite;
@@ -36,7 +37,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
             _fireWait = 0.65f;
-            _kickForce = 1.1f;
+            _kickForce = 3.1f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
             _editorName = "Beretta ARX-200";

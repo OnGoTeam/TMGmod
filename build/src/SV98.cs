@@ -5,7 +5,7 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
     public class SV98 : Sniper, IAmSr, IHaveSkin
     {
@@ -25,10 +25,15 @@ namespace TMGmod
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(34f, 5f);
             ammo = 5;
-            _ammoType = new ATSniper();
+            _ammoType = new ATSniper
+            {
+                penetration = 1f,
+                range = 1250f,
+                accuracy = 1f
+            };
             _fireSound = "sniper";
             _fullAuto = false;
-            _kickForce = 1.75f;
+            _kickForce = 4.67f;
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "SV-98";
 			_weight = 4.5f;
@@ -148,7 +153,7 @@ namespace TMGmod
             }
             else
             {
-                _kickForce = 1.75f;
+                _kickForce = 4.67f;
                 if ((_sprite.frame > 9) && (_sprite.frame < 20)) _sprite.frame -= 10;
             }
             OnHoldAction();

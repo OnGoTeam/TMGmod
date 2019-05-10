@@ -6,9 +6,9 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh : Gun, IHaveSkin, IAmSmg
+    public class PPSh : BaseGun, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -23,8 +23,10 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 300f,
-                accuracy = 0.9f
+                accuracy = 0.9f,
+                penetration = 0.4f
             };
+            BaseAccuracy = 0.9f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PPShpattern"), 48, 16);
             _graphic = _sprite;

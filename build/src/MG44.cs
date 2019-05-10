@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : Gun, IHaveSkin, IAmLmg
+    public class MG44 : BaseGun, IHaveSkin, IAmLmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -32,10 +32,11 @@ namespace TMGmod
             ammo = 60;
             _ammoType = new ATMagnum
             {
-                range = 750f,
+                range = 380f,
                 accuracy = 0.75f,
                 penetration = 1.5f
             };
+            BaseAccuracy = 0.75f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg44reqpattern"), 39, 12);
             _graphic = _sprite;
@@ -47,9 +48,9 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.9f;
-            _kickForce = 0.6f;
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0f;
+            _kickForce = 1.8f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(4f, 0f);
             _editorName = "Magnium";
             _weight = 7.5f;

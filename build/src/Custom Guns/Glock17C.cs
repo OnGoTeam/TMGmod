@@ -3,8 +3,8 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|AutoPistol|Custom")]
-    public class Glock18C : Gun, IAmHg
+    [EditorGroup("TMG|Handgun|Fully-Automatic")]
+    public class Glock18C : BaseGun, IAmHg
     {
 		
         public Glock18C(float xval, float yval)
@@ -26,10 +26,10 @@ namespace TMGmod.Custom_Guns
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
             _fireWait = 0.4f;
-            _kickForce = 0.1f;
-            loseAccuracy = 0.03f;
-            maxAccuracyLost = 0.16f;
-            _editorName = "Glock 18 with Extended Mag";
+            _kickForce = 1.4f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.4f;
+            _editorName = "Glock 18 33 ammo";
 			_weight = 2.1f;
         }
         public override void OnHoldAction()

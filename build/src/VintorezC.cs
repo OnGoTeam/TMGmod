@@ -3,9 +3,9 @@ using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper|Custom")]
+    [EditorGroup("TMG|Sniper|Fully-Automatic")]
     public class VintorezC : BaseAr, ISpeedAccuracy, IHaveSkin
     {
 
@@ -39,10 +39,10 @@ namespace TMGmod.Custom_Guns
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _fullAuto = true;
             _fireWait = 0.7f;
-            _kickForce = 0.85f;
+            _kickForce = 2.85f;
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.15f;
-            _editorName = "Vintorez with extra mag";
+            _editorName = "Vintorez 20 ammo";
             _weight = 4.7f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;

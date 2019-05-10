@@ -1,17 +1,18 @@
 ﻿using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Pistol")]
+    [EditorGroup("TMG|Handgun|Bolt-Action")]
     [BaggedProperty("isSuperWeapon", true)]
-    public sealed class X3X : Gun
+    public sealed class X3X : BaseGun
     {
         private readonly SpriteMap _sprite;
         public X3X (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 8;
+            ammo = 5;
             _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
@@ -26,9 +27,10 @@ namespace TMGmod
             _fireWait = 2.5f;
             _kickForce = 10f;
             loseAccuracy = 1.9f;
-            maxAccuracyLost = 0.5f;
+            maxAccuracyLost = 2.5f;
             _holdOffset = new Vec2(0f, 2f);
-            _editorName = "EXsess's X3X";
+            _editorName = "X3X";
+            _bio = "ammo = 5";
 			_weight = 5.5f;
             _manualLoad = true;
             _sprite.AddAnimation("idle", 0.3f, false, 0);

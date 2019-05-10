@@ -6,7 +6,7 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class MSR : Sniper, IAmSr, IHaveSkin
@@ -29,14 +29,17 @@ namespace TMGmod
             ammo = 5;
             _ammoType = new ATSniper
             {
-                bulletSpeed = 85f
+                bulletSpeed = 85f,
+                range = 1200f,
+                penetration = 2f,
+                accuracy = 1f
             };
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
-            _kickForce = 1.85f;
+            _kickForce = 5.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(14f, -1f);
+            _holdOffset = new Vec2(14f, 0f);
             _editorName = "MSR";
 			_weight = 4.65f;
         }

@@ -3,7 +3,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Shotgun")]
+    [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class Remington : BasePumpAction
     {
 	    public Remington(float xval, float yval) : base(xval, yval)

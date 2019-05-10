@@ -1,29 +1,40 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using System;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
-    public class M4A1 : BaseAr
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    // ReSharper disable once InconsistentNaming
+    public class M4A1 : BaseAr, IHaveSkin
     {
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
+        public readonly EditorProperty<int> Skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         private int _ammobefore = 31;
         private int _counter;
         private float _explode;
-        private const double Explodechance = 0.0005;
+        private const double Explodechance = 0.00025;
 
         public M4A1 (float xval, float yval)
           : base(xval, yval)
         {
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATMagnum
             {
-                range = 300f,
+                range = 330f,
                 accuracy = 0.8f,
                 penetration = 1f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("M4A1"));
+            _sprite = new SpriteMap(GetPath("M4A1pattern"), 30, 11);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 11f);
@@ -31,12 +42,12 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.745f;
-            _kickForce = 0.5f;
-            loseAccuracy = 0.01f;
-            maxAccuracyLost = 0.3f;
+            _kickForce = 1.9f;
+            loseAccuracy = 0.07f;
+            maxAccuracyLost = 0.21f;
             _holdOffset = new Vec2(3f, 1f);
             _editorName = "M4A1";
-			_weight = 4.5f;
+			_weight = 6.5f;
             Kforce2Ar = 0.5f;
         }
         public override void OnPressAction()
@@ -57,6 +68,11 @@ namespace TMGmod
             _explode = Rando.Float(0,1);
             if (_explode < Explodechance) CreateExplosion(position);
             base.Fire();
+        }
+        public override void Thrown()
+        {
+            if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;
+            base.Thrown();
         }
         private void CreateExplosion(Vec2 pos)
         {
@@ -84,6 +100,25 @@ namespace TMGmod
             }
             SFX.Play("explode");
             Level.Remove(this);
+        }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

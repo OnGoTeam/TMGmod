@@ -6,9 +6,9 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|PDW")]
     [PublicAPI]
-    public class Vixr : Gun, IAmAr, IHaveSkin
+    public class Vixr : BaseGun, IAmAr, IHaveSkin
     {
 		public bool Stockngrip = true;
         public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));
@@ -17,7 +17,6 @@ namespace TMGmod
         public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
         public readonly EditorProperty<int> Skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6 });
-        public readonly EditorProperty<bool> Laser = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -30,6 +29,7 @@ namespace TMGmod
                accuracy = 0.88f,
                bulletSpeed = 21f
             };
+            BaseAccuracy = 0.88f;
             _type = "gun";
             //I'M BLUE DARUDE SANDSTORM DA DUBAI
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
@@ -44,9 +44,9 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = true;
             _fireWait = 0.65f;
-            _kickForce = 0.8f;
-            loseAccuracy = 0.099f;
-            maxAccuracyLost = 0.17f;
+            _kickForce = 1.8f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.2f;
             _editorName = "VIXR";
 			_weight = 3.9f;
             handAngle = 0f;

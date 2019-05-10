@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG")]
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     public class SpectreM4 : BaseSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -22,7 +22,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 125f,
+                range = 145f,
                 accuracy = 0.76f,
                 penetration = 1f,
                 bulletSpeed = 16f

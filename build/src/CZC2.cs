@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle")]
+    [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
     public class CZC2 : BaseAr, IAmDmr, IHaveSkin
     {
@@ -24,7 +24,7 @@ namespace TMGmod
             ammo = 23;
             _ammoType = new AT9mm
             {
-                range = 330f,
+                range = 310f,
                 accuracy = 0.87f,
                 penetration = 1f
             };
@@ -38,11 +38,11 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(39f, 3.5f);
             _holdOffset = new Vec2(5f, 1f);
             _fireSound = "deepMachineGun2";
-            _fullAuto = true;
+            _fullAuto = false;
             _fireWait = 0.9f;
-            _kickForce = 1.5f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.38f;
+            _kickForce = 3.5f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
             _editorName = "CZ C2-SAR";
             _weight = 4.4f;
             Kforce2Ar = 0.7f;
@@ -61,8 +61,8 @@ namespace TMGmod
                         range = 310f,
                         accuracy = 0.87f
                     };
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.38f;
+                    loseAccuracy = 0.1f;
+                    maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
                     _flare = new SpriteMap("smallFlare", 11, 10)
                     {
@@ -76,11 +76,11 @@ namespace TMGmod
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _ammoType = new AT9mmS
                     {
-                        range = 360f,
+                        range = 350f,
                         accuracy = 0.95f
                     };
-                    loseAccuracy = 0.19f;
-                    maxAccuracyLost = 0.32f;
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.28f;
                     _barrelOffsetTL = new Vec2(42.5f, 4f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }

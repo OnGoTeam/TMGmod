@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Machinegun")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class CZ805 : BaseAr, IHaveSkin
     {
@@ -40,9 +40,9 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.9f;
-            _kickForce = 0.7f;
-            loseAccuracy = 0.025f;
-            maxAccuracyLost = 0.32f;
+            _kickForce = 2.76f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
             _editorName = "CZ-805 BREN";
 			_weight = 5f;
 		    Kforce2Ar = 0.7f;
@@ -60,8 +60,8 @@ namespace TMGmod
                         range = 330f,
                         accuracy = 0.87f
                     };
-                    loseAccuracy = 0.025f;
-                    maxAccuracyLost = 0.32f;
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.35f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
                     Silencer = false;
                     _flare = new SpriteMap("smallFlare", 11, 10)
@@ -78,7 +78,7 @@ namespace TMGmod
                         range = 380f,
                         accuracy = 0.95f
                     };
-                    loseAccuracy = 0.02f;
+                    loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(42.5f, 4f);
                     Silencer = true;

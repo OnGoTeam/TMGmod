@@ -69,6 +69,22 @@ namespace TMGmod.Core
         // Чтобы играть было приятно, пихаем карты в сам мод, и делаем так, чтобы они скачивались вместе с ним
 		private void CreatingTMGLevels()
         {
+            //Уносим старые нерабочие карты в очко
+            var olddirlist = new List<string>(new[]
+            {
+                "DuckGame\\Levels\\New TMG Maps",
+                "DuckGame\\Levels\\New TMG Levels",
+                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
+                "DuckGame\\Levels\\TMG",
+                "DuckGame\\Levels\\TMG Maps v2.0",
+                "DuckGame\\Levels\\TMG Maps v2.1",
+                "DuckGame\\Levels\\TMG v2.1.1"
+            });
+            foreach (var dirpath in olddirlist)
+            {
+                var dirpath1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath);
+                if (Directory.Exists(dirpath1)) Directory.Delete(dirpath1, true);
+            }
             // Сначала определяем левелы, и копируем их
             var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
             if (!Directory.Exists(levels)) Directory.CreateDirectory(levels);
@@ -82,19 +98,8 @@ namespace TMGmod.Core
                 if (!File.Exists(copyto) || !GetMD5Hash(File.ReadAllBytes(firstlocated)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(copyto)))) File.Copy(firstlocated, copyto, true);
                 levelslist.Add(copyto);
             }
-
-            //Удаляем старые карты
-            /*var oldlevels1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)\\");
-            if (Directory.Exists(oldlevels1)) Directory.Delete(oldlevels1);
-            if (Directory.Exists("DuckGame\\Levels\\New TMG Maps")) Directory.Delete("DuckGame\\Levels\\New TMG Maps");
-            if (Directory.Exists("DuckGame\\Levels\\New TMG Levels")) Directory.Delete("DuckGame\\Levels\\New TMG Levels");
-            if (Directory.Exists("DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)")) Directory.Delete("DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)");
-            if (Directory.Exists("DuckGame\\Levels\\TMG Maps v2.0")) Directory.Delete("DuckGame\\Levels\\TMG Maps v2.0");
-            if (Directory.Exists("DuckGame\\Levels\\TMG Maps v2.1")) Directory.Delete("DuckGame\\Levels\\TMG Maps v2.1");
-            if (Directory.Exists("DuckGame\\Levels\\TMG v2.1.1")) Directory.Delete("DuckGame\\Levels\\TMG v2.1.1");*/
-
             // Потом создаём плейлист
-            var uffPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
+            var tmgPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
             var playlistElement = new XElement("playlist");
             foreach (var s in levelslist)
             {
@@ -105,11 +110,11 @@ namespace TMGmod.Core
             playlist.Add(playlistElement);
             var contents = playlist.ToString();
             if (string.IsNullOrWhiteSpace(contents))
-                throw new Exception("Blank XML (" + uffPlaylistLocation + ")");
-            if (File.Exists(uffPlaylistLocation) && File.ReadAllText(uffPlaylistLocation).Equals(contents)) return;
+                throw new Exception("Blank XML (" + tmgPlaylistLocation + ")");
+            if (File.Exists(tmgPlaylistLocation) && File.ReadAllText(tmgPlaylistLocation).Equals(contents)) return;
             //else
-            File.WriteAllText(uffPlaylistLocation, contents);
-            SaveAsPlay(uffPlaylistLocation);
+            File.WriteAllText(tmgPlaylistLocation, contents);
+            SaveAsPlay(tmgPlaylistLocation);
         }
         private void SaveAsPlay(string path)
         {

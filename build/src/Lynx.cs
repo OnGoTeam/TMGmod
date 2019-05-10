@@ -5,9 +5,9 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class Lynx : Gun, IAmDmr, ISpeedAccuracy, IHaveSkin
+    public class Lynx : BaseGun, IAmDmr, ISpeedAccuracy, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -36,7 +36,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
             _fireWait = 5f;
-            _kickForce = 0.8f;
+            _kickForce = 5.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(0f, 1f);
@@ -56,7 +56,7 @@ namespace TMGmod
             }
             else
             {
-                _kickForce = 0.8f;
+                _kickForce = 5.8f;
                 loseAccuracy = 0.1f;
                 maxAccuracyLost = 0.3f;
                 _sprite.frame %= 10;

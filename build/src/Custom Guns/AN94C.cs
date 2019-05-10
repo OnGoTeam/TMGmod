@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|Machinegun|Custom")]
+    [EditorGroup("TMG|Rifle|Burst|Custom")]
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
@@ -30,10 +30,10 @@ namespace TMGmod.Custom_Guns
             _barrelOffsetTL = new Vec2(34f, 3f);
             _holdOffset = new Vec2(3f, 2f);
             ammo = 30;
-            _ammoType = new ATMagnum { range = 260f, bulletSpeed = 180f };
+            _ammoType = new ATMagnum { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 0.1f;
+            _fireWait = 2f;
             Kforce1Ar = 0.07f;
             _kickForce = 0.9f;
             Kforce2Ar = 0.9f;

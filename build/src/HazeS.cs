@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
@@ -6,7 +7,7 @@ using TMGmod.Core;
 namespace TMGmod
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|AutoPistol")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class HazeS : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -21,12 +22,13 @@ namespace TMGmod
             set
             {
                 _heatval = value;
-                _ammoType.accuracy = _heatval > 3f ? 1.2f - _heatval * 0.1f : 0.9f;
+                _ammoType.accuracy = _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
                 _ammoType.bulletSpeed = 60f + 10f * _heatval;
                 _ammoType.range = 180f;
                 Sighted = _sighted;
             }
         }
+        public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
 
         private bool _sighted;
 
@@ -79,13 +81,21 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (_heatval > 6f) _heatval = 6f;
-            Heatval = _heatval;
-            _heatval -= 0.05f;
+            base.Update();
+            if (_heatval > 8f)
+            {
+                _heatval = 8f;
+                for (var i = 0; i < 4; i++)
+                {
+                    Level.Add(SmallSmoke.New(x, y));
+                }
+            }
+            _heatval -= 0.1f;
             if (_heatval < 0f) _heatval = 0f;
+            Heatval = _heatval;
             if (duck != null)
             {
-                if (duck.inputProfile.Down("QUACK") && _heatval < 1f)
+                if (duck.inputProfile.Down("QUACK") && _heatval < 2f && Math.Abs(duck.hSpeed) < 2.845f)
                 {
                     _holdOffset = new Vec2(3f, -2f) * 0.2f + _holdOffset * 0.8f;
                     Sighted = true;
@@ -98,22 +108,28 @@ namespace TMGmod
             }
             else
             {
-                _holdOffset = new Vec2();
+                _sighted = false;
+                _holdOffset = new Vec2(1f,0f);
             }
-            base.Update();
+
+            CurrHone = HoldOffsetNoExtra;
         }
 
         public override void Fire()
         {
-            if (_wait <= 0f)
+            if (ammo > 0)
             {
-                if (duck != null && duck.inputProfile.Down("QUACK") && _heatval < 1f)
+                Heatval = Heatval;
+                if (_wait <= 0f)
                 {
-                    _heatval += 4f;
-                }
-                _heatval += 1f;
-            }
+                    if (Sighted && _heatval < 1f)
+                    {
+                        _heatval += 4f;
+                    }
 
+                    _heatval += 1f;
+                }
+            }
             base.Fire();
         }
         private void UpdateSkin()

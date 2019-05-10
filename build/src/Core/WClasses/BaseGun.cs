@@ -13,6 +13,17 @@ namespace TMGmod.Core.WClasses
         protected float PrevKforce;
         protected bool ToPrevKforce;
         protected Vec2 ShellOffset;
+        protected Vec2 CurrHone;
+        private bool _currHoneInit;
+
+        protected Vec2 ExtraHoldOffset => duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
+
+        protected Vec2 HoldOffsetNoExtra
+        {
+            get => _holdOffset - ExtraHoldOffset;
+            set => _holdOffset = value + ExtraHoldOffset;
+        }
+
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
             ToPrevKforce = true;
@@ -64,6 +75,15 @@ namespace TMGmod.Core.WClasses
         
         public override void Update()
         {
+            if (!_currHoneInit)
+            {
+                _currHoneInit = true;
+                CurrHone = _holdOffset;
+            }
+
+            HoldOffsetNoExtra = CurrHone;
+            CurrHone = HoldOffsetNoExtra;
+
             switch (this)
             {
                 case IFirstKforce thisSmg:

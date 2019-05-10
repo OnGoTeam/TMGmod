@@ -6,7 +6,7 @@ using TMGmod.Core;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper")]
+    [EditorGroup("TMG|Sniper|Bolt-Action")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class SV99 : Sniper, IAmSr, IHaveSkin
@@ -30,11 +30,12 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 penetration = 1f,
-                range = 1000f
+                range = 800f,
+                accuracy = 0.9f
             };
             _fireSound = GetPath("sounds/Silenced3.wav");
             _fullAuto = false;
-            _kickForce = 1.25f;
+            _kickForce = 1.7f;
             loseAccuracy = 0.5f;
             maxAccuracyLost = 1.5f;
             _holdOffset = new Vec2(1f, 0f);
