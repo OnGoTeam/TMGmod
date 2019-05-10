@@ -5,15 +5,20 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
+    /// <inheritdoc cref="BaseBurst"/>
+    /// <inheritdoc cref="IAmDmr"/>
+    /// <inheritdoc cref="IHaveSkin"/>
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
     public class HK417 : BaseGun, IAmDmr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 7 });
+
+        /// <inheritdoc />
         public HK417 (float xval, float yval)
           : base(xval, yval)
         {
@@ -52,11 +57,17 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+
+        /// <inheritdoc />
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+        /// <summary>
+        /// Updates skin when Skin's changed
+        /// </summary>
+        /// <param name="property"></param>
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

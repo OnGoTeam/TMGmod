@@ -1,11 +1,16 @@
 ﻿using DuckGame;
+using TMGmod.Stuff;
 
 namespace TMGmod.Core.Particles
 {
+    /// <summary>
+    /// Particle(?<see cref="PhysicsObject"/>) appearing on <see cref="Barricade"/> destroy
+    /// </summary>
     public class BarrBetaPar : PhysicsObject
     {
         private byte _tick;
 
+        /// <inheritdoc />
         public BarrBetaPar(float xval, float yval) : base(xval, yval)
         {
             thickness = 2f;
@@ -18,6 +23,9 @@ namespace TMGmod.Core.Particles
             _weight = 1f;
         }
 
+        /// <summary>
+        /// updates sleeping to not to float in the air
+        /// </summary>
         public override void Update()
         {
             _tick += 1;

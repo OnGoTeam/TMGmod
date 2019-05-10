@@ -9,22 +9,14 @@ namespace TMGmod.Core.AmmoTypes
     [PublicAPI]
     public abstract class BaseAmmoTypeT : AmmoType
     {
-        private Nothing _nothing;
-
-        private void InitNothing()
-        {
-            if (_nothing is null) _nothing = new Nothing();
-        }
-        
         /// <summary>
-        ///     Implements GetPath for AmmoType through Nothing.GetPath
+        ///     Implements GetPath for <see cref="AmmoType"/> through <see cref="Mod"/>.GetPath
         /// </summary>
         /// <param name="asset"></param>
         /// <returns></returns>
         protected string GetPath(string asset)
         {
-            InitNothing();
-            return _nothing.GetPath(asset);
+            return Mod.GetPath<TMGmod>(asset);
         }
     }
 }

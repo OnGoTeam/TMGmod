@@ -22,8 +22,8 @@ namespace TMGmod.Custom_Guns
         private const float AcclA = .045f;
         private const float AcclB = .225f;
         private float _raisestat;*/
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         public MG44C(float xval, float yval)
           : base(xval, yval)

@@ -12,6 +12,7 @@ using TMGmod.Properties;
 
 namespace TMGmod.Core
 {
+    /// <inheritdoc />
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
@@ -20,6 +21,7 @@ namespace TMGmod.Core
         internal static TMGmod LastInstance;
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         // ReSharper disable once MemberCanBePrivate.Global
+        /// <inheritdoc />
         public TMGmod()
         {
             Debug.Log("TMGmod loading");
@@ -31,7 +33,8 @@ namespace TMGmod.Core
         internal static string AssemblyName { get; private set; }
 		
 		//Приоритет. Мод загружается раньше/позже других модов
-		public override Priority priority => Priority.Normal;
+        /// <inheritdoc />
+        public override Priority priority => Priority.Normal;
 
         //Происходит перед запуском мода
         /*protected override void OnPreInitialize()
@@ -48,6 +51,7 @@ namespace TMGmod.Core
         }
 
         //Происходит после запуска мода
+        /// <inheritdoc />
         protected override void OnPostInitialize()
         {
             //Директория

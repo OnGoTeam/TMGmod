@@ -12,8 +12,8 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 2, 5 });
 
         public Vista(float xval, float yval)

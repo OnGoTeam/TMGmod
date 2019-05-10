@@ -1,5 +1,4 @@
 using DuckGame;
-using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.NY
@@ -11,7 +10,7 @@ namespace TMGmod.NY
         public ATCane()
         {
             bulletType = typeof(CandyCaneBullet);
-            SpriteY = new SpriteMap(new Nothing().GetPath("Holiday/candycane"), 18, 7);
+            SpriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/candycane"), 18, 7);
             SpriteY.CenterOrigin();
             sprite = SpriteY;
             bulletLength = 3f;

@@ -9,23 +9,23 @@ namespace TMGmod.Core.WClasses
     /// BaseGun implements some useful features
     /// Used to not to write smth again and over
     ///     implements wclasses specs
-    ///         IFirstKforce
-    ///         IFirstPrecise
-    ///         IHspeedKforce
-    ///         IRandKforce
-    ///         ISpeedAccuracy
+    ///         <see cref="IFirstKforce"/>
+    ///         <see cref="IFirstPrecise"/>
+    ///         <see cref="IHspeedKforce"/>
+    ///         <see cref="IRandKforce"/>
+    ///         <see cref="ISpeedAccuracy"/>
     ///     dynamic holdOffset
-    ///     random cases dropped from firing
+    ///     random cases (<see cref="NewYearCase"/>) dropped from firing
     /// </summary>
     [PublicAPI]
     public abstract class BaseGun:Gun
     {
         /// <summary>
-        /// Base accuracy used by ISpeedAccuracy and IFirstPrecise
+        /// Base accuracy used by <see cref="ISpeedAccuracy"/> and <see cref="IFirstPrecise"/>
         /// </summary>
         protected float BaseAccuracy = 1f;
         /// <summary>
-        /// Base accuracy used by ISpeedAccuracy
+        /// Base accuracy used by <see cref="ISpeedAccuracy"/>
         /// </summary>
         protected float MinAccuracy;
         /// <summary>
@@ -33,11 +33,11 @@ namespace TMGmod.Core.WClasses
         /// </summary>
         protected float PrevKforce;
         /// <summary>
-        /// whether reset Kforce to PrevKforce
+        /// whether reset Kforce to <see cref="PrevKforce"/>
         /// </summary>
         protected bool ToPrevKforce;
         /// <summary>
-        /// custom shell-drop offset
+        /// custom shell-drop offset (<seealso cref="Reload"/>)
         /// </summary>
         protected Vec2 ShellOffset;
         /// <summary>
@@ -52,7 +52,7 @@ namespace TMGmod.Core.WClasses
         protected Vec2 ExtraHoldOffset => duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
 
         /// <summary>
-        /// holdoffSet - ExtraHoldOffset
+        /// holdOffset - <see cref="ExtraHoldOffset"/>
         /// </summary>
         protected Vec2 HoldOffsetNoExtra
         {
@@ -71,7 +71,7 @@ namespace TMGmod.Core.WClasses
         }
 
         /// <summary>
-        /// Fire modification/reimplementation
+        /// <see cref="Gun.Fire"/> modification/reimplementation
         /// </summary>
         public override void Fire()
         {
@@ -118,7 +118,7 @@ namespace TMGmod.Core.WClasses
         }
 
         /// <summary>
-        /// Update modification/reimplementation
+        /// <see cref="Gun.Update"/> modification/reimplementation
         /// </summary>
         public override void Update()
         {
@@ -150,7 +150,7 @@ namespace TMGmod.Core.WClasses
         }
 
         /// <summary>
-        /// shellOffset
+        /// <see cref="ShellOffset"/> realization
         /// </summary>
         /// <param name="shell"></param>
         public override void Reload(bool shell = true)

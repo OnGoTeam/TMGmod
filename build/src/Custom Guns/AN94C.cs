@@ -5,18 +5,34 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
+    /// <inheritdoc cref="BaseBurst"/>
+    /// <inheritdoc cref="IHspeedKforce"/>
+    /// <inheritdoc cref="IAmAr"/>
+    /// <inheritdoc cref="IHaveSkin"/>
+    /// <summary>
+    /// Has switched laser
+    /// </summary>
     [EditorGroup("TMG|Rifle|Burst|Custom")]
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
+        /// <summary>
+        /// whether laser is on
+        /// </summary>
         public bool Laserino;
-        public StateBinding StockBinding = new StateBinding(nameof(Laserino));
+        /// <summary>
+        /// Laser syncing
+        /// </summary>
+        public StateBinding LaserBinding = new StateBinding(nameof(Laserino));
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
+
+        /// <inheritdoc />
         public AN94C(float xval, float yval)
             : base(xval, yval)
         {
@@ -46,6 +62,8 @@ namespace TMGmod.Custom_Guns
             DeltaWait = 0.07f;
             BurstNum = 2;
         }
+
+        /// <inheritdoc />
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -77,17 +95,27 @@ namespace TMGmod.Custom_Guns
             }
             _sprite.frame = bublic;
         }
+
+        /// <inheritdoc />
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+        /// <summary>
+        /// Updates skin when Skin's changed
+        /// </summary>
+        /// <param name="property"></param>
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+
+        /// <inheritdoc />
         public float Kforce1Ar { get; }
+
+        /// <inheritdoc />
         public float Kforce2Ar { get; }
     }
 }

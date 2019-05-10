@@ -5,25 +5,39 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
+    /// <summary>
+    /// spawns random from its Things
+    /// </summary>
     [PublicAPI]
     public abstract class BaseCase:Holdable,IPlatform
     {
         private Type _contains;
 
+        /// <summary>
+        /// <see cref="List{Thing}"/> of things spawned from that
+        /// </summary>
         protected List<Type> Things { private get; set; }
 
+        /// <summary>
+        /// Id of spawned skins (<see cref="IHaveSkin.FrameId"/>)
+        /// </summary>
         protected int CaseId { private get; set; }
 
+        /// <inheritdoc />
         protected BaseCase(float xval, float yval) : base(xval, yval)
         {
 
         }
 
+        /// <inheritdoc />
         public override void Initialize()
         {
             _contains = Things[Rando.Int(Things.Count - 1)];
         }
 
+        /// <summary>
+        /// OnPressAction spawns random one from <see cref="Things"/> with possibly skin <see cref="CaseId"/>
+        /// </summary>
         public override void OnPressAction()
         {
             if (owner == null) return;

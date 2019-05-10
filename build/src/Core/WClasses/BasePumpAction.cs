@@ -3,22 +3,53 @@ using DuckGame;
 
 namespace TMGmod.Core.WClasses
 {
+    /// <inheritdoc cref="BaseGun"/>
+    /// /// <inheritdoc cref="IAmSg"/>
+    /// <summary>
+    /// Base class (<see cref="BaseGun"/>) for pump-action Shotguns (<see cref="IAmSg"/>)
+    /// </summary>
     public abstract class BasePumpAction:BaseGun, IAmSg
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int LoadProgress;
+        /// <summary>
+        /// <see cref="LoadProgress"/> syncing
+        /// </summary>
         public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
         private float _loadAnimation = 1f;
+        /// <summary>
+        /// Time when this reloads (<see cref="Gun.Reload"/>)
+        /// </summary>
         protected sbyte EpsilonA = 50;
+        /// <summary>
+        /// Reload cycle length
+        /// </summary>
         protected int EpsilonB = 100;
+        /// <summary>
+        /// Pump loader sprite
+        /// </summary>
         protected SpriteMap LoaderSprite;
+        /// <summary>
+        /// Loader offset
+        /// </summary>
         protected Vec2 LoaderVec2;
+        /// <summary>
+        /// Load delta x
+        /// </summary>
         protected float Loaddx = 3f;
 
+        /// <inheritdoc />
         protected BasePumpAction(float xval, float yval) : base(xval, yval)
         {
             LoadProgress = EpsilonB;
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Load animation update
+        /// </summary>
         public override void Update()
         {
             base.Update();
@@ -46,6 +77,7 @@ namespace TMGmod.Core.WClasses
                 LoadProgress = EpsilonB;
         }
 
+        /// <inheritdoc />
         public override void OnPressAction()
         {
             if (loaded)
@@ -63,6 +95,9 @@ namespace TMGmod.Core.WClasses
             }
         }
 
+        /// <summary>
+        /// Drawing loader
+        /// </summary>
         public override void Draw()
         {
             base.Draw();

@@ -3,8 +3,12 @@ using DuckGame;
 namespace TMGmod.Core
 {
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// <see cref="AmmoType"/> for not AT cases
+    /// </summary>
     public class ATNB : AmmoType
     {
+        /// <inheritdoc />
         public ATNB()
         {
 			bulletLength = 1f;

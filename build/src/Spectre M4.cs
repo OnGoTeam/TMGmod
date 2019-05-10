@@ -12,8 +12,8 @@ namespace TMGmod
         public bool Silencer;
         public StateBinding StockBinding = new StateBinding(nameof(Silencer));
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6 });
         public SpectreM4(float xval, float yval)
           : base(xval, yval)

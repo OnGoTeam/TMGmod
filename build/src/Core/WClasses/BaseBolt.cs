@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 
 namespace TMGmod.Core.WClasses
 {
@@ -17,3 +18,4 @@ namespace TMGmod.Core.WClasses
         public float LambdaAccuracySr { get; }
     }
 }
+#endif
