@@ -5,30 +5,74 @@ using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
 {
+    /// <summary>
+    /// BaseGun implements some useful features
+    /// Used to not to write smth again and over
+    ///     implements wclasses specs
+    ///         IFirstKforce
+    ///         IFirstPrecise
+    ///         IHspeedKforce
+    ///         IRandKforce
+    ///         ISpeedAccuracy
+    ///     dynamic holdOffset
+    ///     random cases dropped from firing
+    /// </summary>
     [PublicAPI]
     public abstract class BaseGun:Gun
     {
+        /// <summary>
+        /// Base accuracy used by ISpeedAccuracy and IFirstPrecise
+        /// </summary>
         protected float BaseAccuracy = 1f;
+        /// <summary>
+        /// Base accuracy used by ISpeedAccuracy
+        /// </summary>
         protected float MinAccuracy;
+        /// <summary>
+        /// Used for custom Kforce modifying
+        /// </summary>
         protected float PrevKforce;
+        /// <summary>
+        /// whether reset Kforce to PrevKforce
+        /// </summary>
         protected bool ToPrevKforce;
+        /// <summary>
+        /// custom shell-drop offset
+        /// </summary>
         protected Vec2 ShellOffset;
+        /// <summary>
+        /// Current hold offset no extra
+        /// </summary>
         protected Vec2 CurrHone;
         private bool _currHoneInit;
 
+        /// <summary>
+        /// Extra holdOffset for sliding
+        /// </summary>
         protected Vec2 ExtraHoldOffset => duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
 
+        /// <summary>
+        /// holdoffSet - ExtraHoldOffset
+        /// </summary>
         protected Vec2 HoldOffsetNoExtra
         {
             get => _holdOffset - ExtraHoldOffset;
             set => _holdOffset = value + ExtraHoldOffset;
         }
 
+        /// <summary>
+        /// stub for TPKF
+        /// </summary>
+        /// <param name="xval"></param>
+        /// <param name="yval"></param>
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
             ToPrevKforce = true;
         }
 
+        /// <summary>
+        /// Fire modification/reimplementation
+        /// </summary>
         public override void Fire()
         {
             PrevKforce = _kickForce;
@@ -72,7 +116,10 @@ namespace TMGmod.Core.WClasses
             if (ToPrevKforce)
                 _kickForce = PrevKforce;
         }
-        
+
+        /// <summary>
+        /// Update modification/reimplementation
+        /// </summary>
         public override void Update()
         {
             if (!_currHoneInit)
@@ -102,13 +149,17 @@ namespace TMGmod.Core.WClasses
             base.Update();
         }
 
+        /// <summary>
+        /// shellOffset
+        /// </summary>
+        /// <param name="shell"></param>
         public override void Reload(bool shell = true)
         {
             if (ammo != 0)
             {
                 if (shell)
                 {
-                    _ammoType.PopShell(x + ShellOffset.x, y + ShellOffset.y, -offDir);
+                    _ammoType.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir);
                 }
                 --ammo;
             }
