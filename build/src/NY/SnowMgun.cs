@@ -3,10 +3,13 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
     public class SnowMgun : BaseSmg
     {
         private readonly SpriteMap _sprite;
+
+        /// <inheritdoc />
         public SnowMgun(float xval, float yval) : base(xval, yval)
         {
             ammo = 40;
@@ -29,6 +32,8 @@ namespace TMGmod.NY
             _editorName = "SnowMacnineGun";
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
         }
+
+        /// <inheritdoc />
         public override void Update()
         {
             if (ammo > 20 && ammo <= 30 && _sprite.frame < 1) _sprite.frame += 1;

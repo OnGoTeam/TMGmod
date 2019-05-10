@@ -3,10 +3,15 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Thing denoting whether shield should block all things
+    /// </summary>
     [PublicAPI]
     [EditorGroup("TMG|Misc")]
     public class ShieldBlockAll: Thing
     {
+        /// <inheritdoc />
         public ShieldBlockAll()
         {
             _graphic = new Sprite("swirl");

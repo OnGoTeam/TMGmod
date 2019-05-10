@@ -2,9 +2,11 @@
 
 namespace TMGmod.NY
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
     public class CandyCane:Gun
     {
+        /// <inheritdoc />
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
             ammo = 1;
@@ -32,6 +34,7 @@ namespace TMGmod.NY
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
         }
 
+        /// <inheritdoc />
         public override void Reload(bool shell = true)
         {
             if (loaded) return;

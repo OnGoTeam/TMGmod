@@ -4,15 +4,32 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
+    /// <summary>
+    /// Holdable shield protecting from bullets and impacts
+    /// </summary>
     [EditorGroup("TMG|Misc")]
     [PublicAPI]
     public class MontagneShield : Holdable, IPlatform, IPathNodeBlocker
     {
         private readonly SpriteMap _sprite;
+        /// <summary>
+        /// hitpoints
+        /// </summary>
         public float Hp = 250f;
+        /// <summary>
+        /// max <see cref="Hp"/>
+        /// </summary>
         public float HpMax = 250f;
+        /// <summary>
+        /// Absolute invincibility limit
+        /// </summary>
         public float Hp1;
+        /// <summary>
+        /// <see cref="Hp"/> syncing
+        /// </summary>
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
+
+        /// <inheritdoc />
         public MontagneShield(float xpos, float ypos) : base(xpos, ypos)
         {
             Hp1 = Hp * 0.9f;
@@ -29,6 +46,7 @@ namespace TMGmod.Stuff
             flammable = 0;
         }
 
+        /// <inheritdoc />
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             SFX.Play(bullet.ammo.penetration < thickness ? "metalRebound" : "woodHit");
@@ -36,6 +54,7 @@ namespace TMGmod.Stuff
             return Hit(bullet, hitPos);
         }
 
+        /// <inheritdoc />
         public override void Thrown()
         {
             if (duck == null) return;
@@ -77,7 +96,8 @@ namespace TMGmod.Stuff
                 _sprite.frame = 3;
             }
         }
-        
+
+        /// <inheritdoc />
         public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
         {
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
@@ -95,6 +115,7 @@ namespace TMGmod.Stuff
             base.Impact(with, from, solidImpact);
         }
 
+        /// <inheritdoc />
         public override void Update()
         {
             var hspd = duck?.hSpeed ?? hSpeed;

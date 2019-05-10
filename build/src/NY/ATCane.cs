@@ -4,9 +4,15 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
+    /// <inheritdoc />
     public class ATCane : BaseAmmoTypeT
     {
+        /// <summary>
+        /// bullet sprite
+        /// </summary>
         public readonly SpriteMap SpriteY;
+
+        /// <inheritdoc />
         public ATCane()
         {
             bulletType = typeof(CandyCaneBullet);

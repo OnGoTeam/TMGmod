@@ -5,16 +5,25 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-
+    /// <inheritdoc cref="BaseGun"/>
+    /// <inheritdoc cref="IHaveSkin"/>
+    /// <inheritdoc cref="IAmSmg"/>
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
+
     // ReSharper disable once InconsistentNaming
     public class PPShC : BaseGun, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
+
+        /// <inheritdoc />
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        /// <inheritdoc />
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 6, 7 });
+
+        /// <inheritdoc />
         public PPShC(float xval, float yval)
             : base(xval, yval)
         {
@@ -55,12 +64,14 @@ namespace TMGmod.Custom_Guns
             _sprite.frame = bublic;
         }
 
+        /// <inheritdoc />
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
+        /// <inheritdoc />
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

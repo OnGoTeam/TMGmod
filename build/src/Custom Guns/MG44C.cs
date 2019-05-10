@@ -6,6 +6,9 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
+    /// <inheritdoc cref="BaseGun"/>
+    /// /// <inheritdoc cref="IHaveSkin"/>
+    /// /// <inheritdoc cref="IAmLmg"/>
     [EditorGroup("TMG|LMG|Custom")]
     // ReSharper disable once InconsistentNaming
     public class MG44C : BaseGun, IHaveSkin, IAmLmg
@@ -22,9 +25,14 @@ namespace TMGmod.Custom_Guns
         private const float AcclA = .045f;
         private const float AcclB = .225f;
         private float _raisestat;*/
+        /// <inheritdoc />
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        /// <inheritdoc />
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
+        /// <inheritdoc />
         public MG44C(float xval, float yval)
           : base(xval, yval)
         {
@@ -55,6 +63,8 @@ namespace TMGmod.Custom_Guns
             _editorName = "Magnium NATOmag";
             _weight = 6f;
         }
+
+        /// <inheritdoc />
         public override void Update()
         {
             base.Update();
@@ -121,12 +131,14 @@ namespace TMGmod.Custom_Guns
             _sprite.frame = bublic;
         }
 
+        /// <inheritdoc />
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
+        /// <inheritdoc />
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

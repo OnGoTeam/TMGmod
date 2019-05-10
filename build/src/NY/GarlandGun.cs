@@ -3,15 +3,23 @@ using JetBrains.Annotations;
 
 namespace TMGmod.NY
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
     [PublicAPI]
     public class GarlandGun : Gun
     {
         
         private float _sprwait;
+        /// <summary>
+        /// sprite frame id
+        /// </summary>
         public int FrameId;
+        /// <summary>
+        /// FrameId binding
+        /// </summary>
         public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
 
+        /// <inheritdoc />
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 24;
@@ -33,6 +41,8 @@ namespace TMGmod.NY
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _ammoType = new AT9mmParasha();
         }
+
+        /// <inheritdoc />
         public override void Update()
         {
             _sprwait -= 0.11f;

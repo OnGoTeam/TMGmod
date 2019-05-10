@@ -3,14 +3,31 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
+    /// <inheritdoc cref="BaseGun"/>
+    /// /// <inheritdoc cref="IAmHg"/>
     [EditorGroup("TMG|Handgun|Custom")]
     // ReSharper disable once InconsistentNaming
     public class PMR : BaseGun, IAmHg
     {
+        /// <summary>
+        /// Mode id
+        /// </summary>
         public int Mode;
+        /// <summary>
+        /// Mode syncing
+        /// </summary>
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));
+        /// <summary>
+        /// Ammo 0
+        /// </summary>
         public int Ammom0 = 30;
+        /// <summary>
+        /// Ammo 1
+        /// </summary>
         public int Ammom1 = 1;
+        /// <summary>
+        /// Ammo for modes
+        /// </summary>
         public int[] Ammom
         {
             get => new[] {Ammom0, Ammom1};
@@ -19,7 +36,13 @@ namespace TMGmod.Custom_Guns
                 Ammom1 = value[1];
             }
         }
+        /// <summary>
+        /// Ammo 0 binding
+        /// </summary>
         public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
+        /// <summary>
+        /// Ammo 1 binding
+        /// </summary>
         public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
@@ -46,6 +69,7 @@ namespace TMGmod.Custom_Guns
         private readonly int[] _numBulletsPerFirem = {1, 16};
         private bool _switched;
 
+        /// <inheritdoc />
         public PMR(float xval, float yval)
           : base(xval, yval)
         {
@@ -90,6 +114,7 @@ namespace TMGmod.Custom_Guns
             _numBulletsPerFire = _numBulletsPerFirem[Mode];
         }
 
+        /// <inheritdoc />
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -101,6 +126,8 @@ namespace TMGmod.Custom_Guns
             UpdateMode();
             base.Update();
 		}
+
+        /// <inheritdoc />
         public override void Fire()
         {
             ammo = Ammom[Mode];

@@ -5,25 +5,59 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
+    /// <summary>
+    /// Stickable quack-explosives
+    /// </summary>
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Cfour : Holdable
     {
+        /// <summary>
+        /// Time to explode
+        /// </summary>
         public float ToExplode = -1f;
+        /// <summary>
+        /// <see cref="ToExplode"/> syncing
+        /// </summary>
         public StateBinding ToExplodeBinding = new StateBinding(nameof(ToExplode));
+        /// <summary>
+        /// Whether is was activated by <see cref="Duck"/>
+        /// </summary>
         public bool Activated;
+        /// <summary>
+        /// <see cref="Activated"/> syncing
+        /// </summary>
         public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
+        /// <summary>
+        /// Who/what activated it
+        /// </summary>
         public MaterialThing Activator;
+        /// <summary>
+        /// <see cref="Activator"/> syncing
+        /// </summary>
         public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
+        /// <summary>
+        /// what it's stick to
+        /// </summary>
         public MaterialThing StickThing;
         //public StateBinding StickBinding = new StateBinding(nameof(StickThing));
         private Vec2 _stickyVec2;
+        /// <summary>
+        /// Whether it was thrown by <see cref="Duck"/>
+        /// </summary>
         public bool WasThrown;
+        /// <summary>
+        /// <see cref="WasThrown"/> syncing
+        /// </summary>
         public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
+        /// <summary>
+        /// Whether it doesn't explode properly
+        /// </summary>
         public bool Weak;
         private bool _didboom;
 
+        /// <inheritdoc />
         public Cfour(float xpos, float ypos) : base(xpos, ypos)
         {
             _weight = 3f;
@@ -89,18 +123,21 @@ namespace TMGmod.Stuff
             Level.Remove(this);
         }
 
+        /// <inheritdoc />
         public override void UpdateOnFire()
         {
             ToExplode = Rando.Float(0f, 1.5f);
             base.UpdateOnFire();
         }
 
+        /// <inheritdoc />
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
             ToExplode = Rando.Float(0f, 0.7f);
             return base.Hit(bullet, hitPos);
         }
 
+        /// <inheritdoc />
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
             base.OnImpact(with, from);
@@ -128,12 +165,14 @@ namespace TMGmod.Stuff
             }
         }
 
+        /// <inheritdoc />
         public override void Thrown()
         {
             WasThrown = true;
             base.Thrown();
         }
 
+        /// <inheritdoc />
         public override void Update()
         {
             if (_destroyed) return;
@@ -177,6 +216,7 @@ namespace TMGmod.Stuff
             base.Update();
         }
 
+        /// <inheritdoc />
         public override void OnPressAction()
         {
             if (duck == null) return;
@@ -184,7 +224,8 @@ namespace TMGmod.Stuff
             Activated = true;
             Activator = duck;
         }
-        
+
+        /// <inheritdoc />
         protected override bool OnDestroy(DestroyType _ = null)
         {
             if (_destroyed) return true;

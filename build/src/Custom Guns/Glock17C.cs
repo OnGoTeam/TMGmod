@@ -3,10 +3,12 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
+    /// <inheritdoc cref="BaseGun"/>
+    /// /// <inheritdoc cref="IAmHg"/>
     [EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class Glock18C : BaseGun, IAmHg
     {
-		
+        /// <inheritdoc />
         public Glock18C(float xval, float yval)
           : base(xval, yval)
         {
@@ -32,6 +34,8 @@ namespace TMGmod.Custom_Guns
             _editorName = "Glock 18 33 ammo";
 			_weight = 2.1f;
         }
+
+        /// <inheritdoc />
         public override void OnHoldAction()
         {
             handAngle = Rando.Float(-0.08f, 0.08f);
