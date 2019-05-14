@@ -68,15 +68,6 @@ namespace TMGmod.Custom_Guns
         public override void Update()
         {
             base.Update();
-            switch (ammo)
-            {
-                case 1:
-                    if (_sprite.frame < 10) _sprite.frame += 10;
-                    break;
-                case 0:
-                    if (_sprite.frame < 20) _sprite.frame += 10;
-                    break;
-            }
             /*
             if (_raisestat > MaxRaise) _raisestat = MaxRaise;
             if (_raisestat > 0f)
