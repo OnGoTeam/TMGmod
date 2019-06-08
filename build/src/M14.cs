@@ -7,42 +7,41 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SVU : BaseGun, IAmDmr, IHaveSkin
+    public class M14 : BaseGun, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        public SVU(float xval, float yval)
+        public M14(float xval, float yval)
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
-            _ammoType = new AT9mmS
+            _ammoType = new ATMagnum
             {
-                range = 600f,
-                accuracy = 0.91f
+                range = 540f,
+                accuracy = 0.85f
             };
-            BaseAccuracy = 0.91f;
+            BaseAccuracy = 0.85f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("SVUpattern"), 37, 11);
+            _sprite = new SpriteMap(GetPath("M14pattern"), 46, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _center = new Vec2(18.5f, 5.5f);
-            _collisionOffset = new Vec2(-18.5f, -5.5f);
-            _collisionSize = new Vec2(37f, 11f);
-            _barrelOffsetTL = new Vec2(37f, 6f);
-            _fireSound = GetPath("sounds/HeavyRifle.wav");
+            _center = new Vec2(23f, 5.5f);
+            _collisionOffset = new Vec2(-23f, -5.5f);
+            _collisionSize = new Vec2(46f, 11f);
+            _barrelOffsetTL = new Vec2(46f, 3f);
+            _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
-            _fireWait = 0.65f;
-            _kickForce = 2.8f;
-            loseAccuracy = 0.05f;
+            _fireWait = 0.85f;
+            _kickForce = 3.5f;
+            loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
-            _holdOffset = new Vec2(1f, 0f);
-            _editorName = "SVU";
-            _weight = 6f;
+            _holdOffset = new Vec2(7f, 1f);
+            _editorName = "M14";
+            _weight = 4.75f;
         }
         private void UpdateSkin()
         {

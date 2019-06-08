@@ -2,96 +2,80 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
-//using System;
+using System;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|LMG")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class M16LMG : BaseLmg, IHaveSkin
+    public class AR15Proto : BaseAr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        //private int _ammobefore = 51;
-        //private int _counter;
-        //private float _explode;
-        //private const double Explodechance = 0;
+        private int _ammobefore = 21;
+        private float _explode;
+        private int _uselessinteger = 3;
+        private const double Explodechance = 0.006;
 
-        public M16LMG (float xval, float yval)
+        public AR15Proto(float xval, float yval)
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 50;
+            ammo = 20;
             _ammoType = new ATMagnum
             {
-                range = 400f,
+                range = 330f,
                 accuracy = 0.8f,
-                penetration = 1.5f
+                penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("M16LMGpattern"), 38, 11);
+            _sprite = new SpriteMap(GetPath("AR15Protopattern"), 27, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19f, 6f);
-            _collisionOffset = new Vec2(-19f, -6f);
-            _collisionSize = new Vec2(38f, 11f);
-            _barrelOffsetTL = new Vec2(38f, 4f);
+            _center = new Vec2(18.5f, 5f);
+            _collisionOffset = new Vec2(-18.5f, -5f);
+            _collisionSize = new Vec2(27f, 10f);
+            _barrelOffsetTL = new Vec2(27f, 4f);
             _fireSound = "deepMachineGun";
             _fullAuto = true;
-            _fireWait = 0.83f;
-            _kickForce = 2.33f;
+            _fireWait = 0.745f;
+            _kickForce = 1.9f;
             loseAccuracy = 0.07f;
-            maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(6f, 1f);
-            _editorName = "M16 LMG";
-			_weight = 6f;
-            BaseAccuracy = 0.8f;
-            MinAccuracy = 0.7f;
-            Kforce1Lmg = 0.23f;
-            Kforce2Lmg = 0.43f;
-        }
-        public override void Update()
-        {
-            if (duck != null && duck.height < 17f)
-            {
-                _kickForce = 0f;
-				loseAccuracy = 0f;
-            }
-            else
-            {
-                _kickForce = 0.33f;
-                loseAccuracy = 0.07f;
-            }
-            base.Update();
+            maxAccuracyLost = 0.21f;
+            _holdOffset = new Vec2(2f, 1f);
+            _editorName = "AR15 Proto";
+			_weight = 4.2f;
+            Kforce2Ar = 0.5f;
         }
         public override void OnPressAction()
         {
-            /*ammo = Rando.Int(0, _ammobefore / 2 * (1 + _counter / 2));
+            ammo = Rando.Int(0, _ammobefore / _uselessinteger);
             if (ammo > _ammobefore) ammo = _ammobefore;
-            _ammobefore -= ammo; */
+            _ammobefore -= ammo;
+            if ((ammo < 1) && (_ammobefore < 1)) CreateExplosion(position);
             base.OnPressAction();
         }
         public override void OnReleaseAction()
         {
-            /*if (ammo > 0) _ammobefore += ammo;
-            if (ammo == 0) _counter += 1; */
+            if (ammo > 0) _ammobefore += ammo;
+            _uselessinteger = 1;
             base.OnReleaseAction();
         }
         public override void Fire()
         {
-            /*_explode = Rando.Float(0, 1);
-            if (_explode < Explodechance) CreateExplosion(position); */
+            _explode = Rando.Float(0,1);
+            if (_explode < Explodechance) CreateExplosion(position);
             base.Fire();
         }
         public override void Thrown()
         {
-            /*if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore; */
+            if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;
             base.Thrown();
         }
-        /*private void CreateExplosion(Vec2 pos)
+        private void CreateExplosion(Vec2 pos)
         {
             var cx = pos.x;
             var cy = pos.y - 2f;
@@ -110,14 +94,14 @@ namespace TMGmod
             {
                 var dir = i * 18f - 5f + Rando.Float(10f);
                 var shrap = new ATShrapnel { range = 20f + Rando.Float(6f) };
-                var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(dir)) * 6.0),
-                        y - (float)(Math.Sin(Maths.DegToRad(dir)) * 6.0), shrap, dir)
-                { firedFrom = this };
-                Level.Add(bullet);
+                //var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(dir)) * 6.0),
+                //        y - (float)(Math.Sin(Maths.DegToRad(dir)) * 6.0), shrap, dir)
+                //{ firedFrom = this };
+                //Level.Add(bullet);
             }
             SFX.Play("explode");
             Level.Remove(this);
-        }*/
+        }
         private void UpdateSkin()
         {
             var bublic = Skin.value;

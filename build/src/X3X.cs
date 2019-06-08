@@ -16,12 +16,12 @@ namespace TMGmod
             _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
-            _sprite = new SpriteMap(GetPath("X3Xa"), 28, 15);
+            _sprite = new SpriteMap(GetPath("X3Xpattern"), 27, 14);
             _graphic = _sprite;
             _center = new Vec2(14f, 9f);
             _collisionOffset = new Vec2(-11.5f, -9f);
-            _collisionSize = new Vec2(23f, 15f);
-            _barrelOffsetTL = new Vec2(28f, 5f);
+            _collisionSize = new Vec2(27f, 14f);
+            _barrelOffsetTL = new Vec2(27f, 5f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2.5f;
@@ -29,7 +29,7 @@ namespace TMGmod
             loseAccuracy = 1.9f;
             maxAccuracyLost = 2.5f;
             _holdOffset = new Vec2(0f, 2f);
-            _editorName = "X3X";
+            _editorName = "Experimental X3X";
             _bio = "ammo = 5";
 			_weight = 5.5f;
             _manualLoad = true;

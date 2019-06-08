@@ -2,7 +2,7 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
-using System;
+//using System;
 
 namespace TMGmod
 {
@@ -15,10 +15,10 @@ namespace TMGmod
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        private int _ammobefore = 31;
-        private int _counter;
-        private float _explode;
-        private const double Explodechance = 0.00025;
+        //private int _ammobefore = 31;
+        //private int _counter;
+        //private float _explode;
+        //private const double Explodechance = 0.0025;
 
         public M4A1 (float xval, float yval)
           : base(xval, yval)
@@ -45,36 +45,36 @@ namespace TMGmod
             _kickForce = 1.9f;
             loseAccuracy = 0.07f;
             maxAccuracyLost = 0.21f;
-            _holdOffset = new Vec2(3f, 1f);
+            _holdOffset = new Vec2(2f, 1f);
             _editorName = "M4A1";
-			_weight = 6.5f;
+			_weight = 4.4f;
             Kforce2Ar = 0.5f;
         }
         public override void OnPressAction()
         {
-            ammo = Rando.Int(0, _ammobefore / 6 * (1 + _counter / 2));
+            /*ammo = Rando.Int(0, _ammobefore / 6 * (1 + _counter / 2));
             if (ammo > _ammobefore) ammo = _ammobefore;
-            _ammobefore -= ammo;
+            _ammobefore -= ammo;*/
             base.OnPressAction();
         }
         public override void OnReleaseAction()
         {
-            if (ammo > 0) _ammobefore += ammo;
-            if (ammo == 0) _counter += 1;
+            /*if (ammo > 0) _ammobefore += ammo;
+            if (ammo == 0) _counter += 1;*/
             base.OnReleaseAction();
         }
         public override void Fire()
         {
-            _explode = Rando.Float(0,1);
-            if (_explode < Explodechance) CreateExplosion(position);
+            /*_explode = Rando.Float(0,1);
+            if (_explode < Explodechance) CreateExplosion(position);*/
             base.Fire();
         }
         public override void Thrown()
         {
-            if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;
+            /*if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;*/
             base.Thrown();
         }
-        private void CreateExplosion(Vec2 pos)
+        /*private void CreateExplosion(Vec2 pos)
         {
             var cx = pos.x;
             var cy = pos.y - 2f;
@@ -100,8 +100,8 @@ namespace TMGmod
             }
             SFX.Play("explode");
             Level.Remove(this);
-        }
-        private void UpdateSkin()
+        }*/
+            private void UpdateSkin()
         {
             var bublic = Skin.value;
             while (!Allowedlst.Contains(bublic))

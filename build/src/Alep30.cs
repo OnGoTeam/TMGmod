@@ -5,44 +5,50 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper|Fully-Automatic")]
-    // ReSharper disable once InconsistentNaming
-    public class SVU : BaseGun, IAmDmr, IHaveSkin
+    /// <inheritdoc cref="BaseGun"/>
+    /// /// <inheritdoc cref="IAmHg"/>
+    [EditorGroup("TMG|Handgun|Fully-Automatic")]
+    public class Alep30 : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        public SVU(float xval, float yval)
+        public Alep30(float xval, float yval)
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 10;
-            _ammoType = new AT9mmS
+            ammo = 26;
+            _ammoType = new AT9mm
             {
-                range = 600f,
-                accuracy = 0.91f
+                range = 115f,
+                accuracy = 1f,
+                penetration = 0.4f
             };
-            BaseAccuracy = 0.91f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("SVUpattern"), 37, 11);
+            _sprite = new SpriteMap(GetPath("Alep30pattern"), 16, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _center = new Vec2(18.5f, 5.5f);
-            _collisionOffset = new Vec2(-18.5f, -5.5f);
-            _collisionSize = new Vec2(37f, 11f);
-            _barrelOffsetTL = new Vec2(37f, 6f);
-            _fireSound = GetPath("sounds/HeavyRifle.wav");
+            _center = new Vec2(8f, 3f);
+            _collisionOffset = new Vec2(-7.5f, -3.5f);
+            _collisionSize = new Vec2(16f, 11f);
+            _barrelOffsetTL = new Vec2(16f, 1f);
+            _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
-            _fireWait = 0.65f;
-            _kickForce = 2.8f;
-            loseAccuracy = 0.05f;
-            maxAccuracyLost = 0.25f;
-            _holdOffset = new Vec2(1f, 0f);
-            _editorName = "SVU";
-            _weight = 6f;
+            _fireWait = 0.6f;
+            _kickForce = 1.85f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.4f;
+            _editorName = "Alep 30";
+			_weight = 2.1f;
+        }
+
+        /// <inheritdoc />
+        public override void OnHoldAction()
+        {
+            handAngle = Rando.Float(-0.08f, 0.08f);
+            base.OnHoldAction();
         }
         private void UpdateSkin()
         {

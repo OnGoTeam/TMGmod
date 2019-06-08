@@ -76,6 +76,7 @@
     <Compile Include="src\AKALFA.cs" />
     <Compile Include="src\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
+    <Compile Include="src\AR15 Proto.cs" />
     <Compile Include="src\AUGA1.cs" />
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="src\Core\WClasses\IAmLmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSr.cs" />
+    <Compile Include="src\G9M.cs" />
     <Compile Include="src\MK17.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
@@ -151,15 +153,15 @@
     <Compile Include="src\AUGA3.cs" />
     <Compile Include="src\BarretM98C.cs" />
     <Compile Include="src\CZC2.cs" />
-    <Compile Include="src\Custom Guns\Glock17C.cs" />
+    <Compile Include="src\Alep30.cs" />
     <Compile Include="src\Stuff\Greyfinite.cs" />
     <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />
     <Compile Include="src\M900.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
     <Compile Include="src\Custom Guns\PPShC.cs" />
-    <Compile Include="src\SVUC.cs" />
-    <Compile Include="src\SVUC1.cs" />
+    <Compile Include="src\M14.cs" />
+    <Compile Include="src\IB8mm.cs" />
     <Compile Include="src\TR-21C.cs" />
     <Compile Include="src\VintorezC.cs" />
     <Compile Include="src\CZ75.cs" />
@@ -184,7 +186,7 @@
     <Compile Include="src\Vista.cs" />
     <Compile Include="src\MSR.cs" />
     <Compile Include="src\TC12.cs" />
-    <Compile Include="src\p90.cs" />
+    <Compile Include="src\PP19.cs" />
     <Compile Include="src\PMR30.cs" />
     <Compile Include="src\Custom Guns\PMR30SH.cs" />
     <Compile Include="src\PPSh.cs" />
