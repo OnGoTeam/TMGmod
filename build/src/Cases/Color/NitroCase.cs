@@ -27,8 +27,12 @@ namespace TMGmod.Cases.Color
                 typeof(SIX12S),
                 typeof(SIX12),
                 typeof(AWS),
+#if DEBUG
                 typeof(PPSh),
                 typeof(PPShC),
+#endif
+                typeof(PPSh41),
+                typeof(PPK42),
                 typeof(MG44),
                 typeof(SkeetGun),
                 typeof(MP5),

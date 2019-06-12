@@ -4,13 +4,14 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Buddies
 {
-    [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    [EditorGroup("TMG|DEBUG")]
     // ReSharper disable once InconsistentNaming
     public class AKwARv2: BaseGun, IAmDmr, MagBuddy.ISupportReload
     {
+        private readonly SpriteMap _sprite;
         private readonly MagBuddy _magBuddy;
         private bool _onemoreclick = true;
-        private byte _mags = 3;
+        private byte _mags = 1;
 
         public AKwARv2(float xval, float yval)
           : base(xval, yval)
@@ -23,11 +24,13 @@ namespace TMGmod.Buddies
                 penetration = 2f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("AKwAR1"));
-            _center = new Vec2(16f, 5f);
-            _collisionOffset = new Vec2(-15.5f, -5f);
-            _collisionSize = new Vec2(31f, 11f);
-            _barrelOffsetTL = new Vec2(31f, 4f);
+            _sprite = new SpriteMap(GetPath("ARW-Apattern"), 27, 9);
+            _graphic = _sprite;
+            _sprite.frame = 0;
+            _center = new Vec2(14f, 4f);
+            _collisionOffset = new Vec2(-14f, -4f);
+            _collisionSize = new Vec2(27f, 9f);
+            _barrelOffsetTL = new Vec2(27f, 4f);
             _holdOffset = new Vec2(1f, -1f);
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
@@ -50,7 +53,7 @@ namespace TMGmod.Buddies
         public override void Update()
         {
             if (ammo <= 0) _magBuddy.Disload();
-
+            if ((ammo <= 0) && (_mags <= 0)) _sprite.frame = 2;
             base.Update();
         }
 
@@ -61,7 +64,7 @@ namespace TMGmod.Buddies
             if (_onemoreclick)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
-                _graphic = new Sprite(GetPath("AKwAR1"));
+                _sprite.frame = 3;
                 _wait += 5f;
                 return _onemoreclick = false;
             }
@@ -74,7 +77,7 @@ namespace TMGmod.Buddies
         public bool DropMag(Thing mag)
         {
             SFX.Play(GetPath("sounds/tuduc.wav"));
-            graphic = new Sprite(GetPath("AKwAR"));
+            _sprite.frame = 1;
             _wait += 7f;
             return true;
         }

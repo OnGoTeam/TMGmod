@@ -134,6 +134,8 @@
     <Compile Include="src\NY\SnowBullet.cs" />
     <Compile Include="src\NY\SnowMgun.cs" />
     <Compile Include="src\NY\SpruceGun.cs" />
+    <Compile Include="src\PPK42.cs" />
+    <Compile Include="src\PPSh41.cs" />
     <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Spectre M4.cs" />
     <Compile Include="src\Stuff\C4Pack.cs" />
@@ -159,7 +161,7 @@
     <Compile Include="src\Type 89.cs" />
     <Compile Include="src\M900.cs" />
     <Compile Include="src\Custom Guns\MG44C.cs" />
-    <Compile Include="src\Custom Guns\PPShC.cs" />
+    <Compile Include="src\Useless or deleted Guns\PPShC.cs" />
     <Compile Include="src\M14.cs" />
     <Compile Include="src\IB8mm.cs" />
     <Compile Include="src\TR-21C.cs" />
@@ -189,7 +191,7 @@
     <Compile Include="src\PP19.cs" />
     <Compile Include="src\PMR30.cs" />
     <Compile Include="src\Custom Guns\PMR30SH.cs" />
-    <Compile Include="src\PPSh.cs" />
+    <Compile Include="src\Useless or deleted Guns\PPSh.cs" />
     <Compile Include="src\Remington.cs" />
     <Compile Include="src\RemingtonTactical.cs" />
     <Compile Include="src\SCARGL.cs" />

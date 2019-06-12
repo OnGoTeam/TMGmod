@@ -6,44 +6,46 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh : BaseGun, IHaveSkin, IAmSmg
+    public class PPSh41 : BaseSmg, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 6, 7 });
-        public PPSh(float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+        public PPSh41(float xval, float yval)
             : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 71;
             _ammoType = new AT9mm
             {
-                range = 300f,
-                accuracy = 0.9f,
+                range = 200f,
+                accuracy = 0.73f,
                 penetration = 0.4f
             };
-            BaseAccuracy = 0.9f;
+            BaseAccuracy = 0.73f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPShpattern"), 48, 16);
+            _sprite = new SpriteMap(GetPath("PPSH41pattern"), 30, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(23f, 5.5f);
-            _collisionOffset = new Vec2(-23f, -4.5f);
-            _collisionSize = new Vec2(46f, 11f);
-            _barrelOffsetTL = new Vec2(47f, 4f);
+            _center = new Vec2(15f, 4f);
+            _collisionOffset = new Vec2(-15f, -4f);
+            _collisionSize = new Vec2(30f, 8f);
+            _barrelOffsetTL = new Vec2(30f, 2f);
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.25f;
-            _kickForce = 0.5f;
-            _holdOffset = new Vec2(7f, -1f);
+            _kickForce = 1.2f;
+            KforceDSmg = 4f;
+            MaxDelaySmg = 80;
+            _holdOffset = new Vec2(3f, 1f);
             loseAccuracy = 0.05f;
-            maxAccuracyLost = 0.2f;
-            _editorName = "PPSh";
-			_weight = 5.5f;
+            maxAccuracyLost = 0.4f;
+            _editorName = "PPSh 41";
+			_weight = 3.5f;
         }
         private void UpdateSkin()
         {

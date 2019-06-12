@@ -3,56 +3,49 @@ using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
-    /// <inheritdoc cref="BaseGun"/>
-    /// <inheritdoc cref="IHaveSkin"/>
-    /// <inheritdoc cref="IAmSmg"/>
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
 
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class PPShC : BaseGun, IHaveSkin, IAmSmg
+    public class PPK42 : BaseSmg, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-
-        /// <inheritdoc />
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        /// <inheritdoc />
         public EditorProperty<int> Skin { get; }
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 6, 7 });
-
-        /// <inheritdoc />
-        public PPShC(float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7 });
+        public PPK42(float xval, float yval)
             : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 35;
+            ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 300f,
-                accuracy = 0.9f,
-                penetration = 0.4f
+                range = 180f,
+                accuracy = 0.8f,
+                penetration = 1f
             };
-            BaseAccuracy = 0.9f;
+            BaseAccuracy = 0.8f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPShCpattern"), 48, 16);
+            _sprite = new SpriteMap(GetPath("PPK42pattern"), 25, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(23f, 5.5f);
-            _collisionOffset = new Vec2(-23f, -4.5f);
-            _collisionSize = new Vec2(46f, 11f);
-            _barrelOffsetTL = new Vec2(47f, 4f);
+            _center = new Vec2(13f, 5f);
+            _collisionOffset = new Vec2(-13f, -5f);
+            _collisionSize = new Vec2(25f, 11f);
+            _barrelOffsetTL = new Vec2(25f, 2f);
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
-            _fireWait = 0.25f;
-            _kickForce = 0.5f;
-            _holdOffset = new Vec2(7f, -1f);
-            loseAccuracy = 0.05f;
-            maxAccuracyLost = 0.2f;
-            _editorName = "PPSh";
-            _weight = 5.5f;
+            _fireWait = 0.45f;
+            _kickForce = 1.2f;
+            KforceDSmg = 2f;
+            MaxDelaySmg = 20;
+            _holdOffset = new Vec2(5f, 2f);
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.5f;
+            _editorName = "PPK 42";
+			_weight = 3f;
         }
         private void UpdateSkin()
         {
@@ -64,14 +57,12 @@ namespace TMGmod.Custom_Guns
             _sprite.frame = bublic;
         }
 
-        /// <inheritdoc />
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        /// <inheritdoc />
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
