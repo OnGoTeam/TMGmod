@@ -29,8 +29,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("M14pattern"), 46, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(23f, 5.5f);
-            _collisionOffset = new Vec2(-23f, -5.5f);
+            _center = new Vec2(23f, 6f);
+            _collisionOffset = new Vec2(-23f, -6f);
             _collisionSize = new Vec2(46f, 11f);
             _barrelOffsetTL = new Vec2(46f, 3f);
             _fireSound = GetPath("sounds/scar.wav");

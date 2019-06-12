@@ -39,11 +39,11 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(28f, 3f);
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
-            _fireWait = 0.2f;
-            _kickForce = 1.8f;
-            loseAccuracy = 0.09f;
-            maxAccuracyLost = 0.55f;
-            _holdOffset = new Vec2(-3f, 0f);
+            _fireWait = 0.75f;
+            _kickForce = 1.5f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.35f;
+            _holdOffset = new Vec2(2f, -1f);
             handOffset = new Vec2(2f, 0f);
             _editorName = "PP-19 Bizon";
 			_weight = 1.5f;
@@ -55,8 +55,8 @@ namespace TMGmod
                 if (Stock)
                 {
                     FrameId -= 10;
-                    loseAccuracy = 0.09f;
-                    maxAccuracyLost = 0.55f;
+                    loseAccuracy = 0.1f;
+                    maxAccuracyLost = 0.35f;
                     _weight = 1.5f;
                     Stock = false;
                 }

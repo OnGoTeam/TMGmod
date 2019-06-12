@@ -23,13 +23,14 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 115f,
-                accuracy = 1f,
+                accuracy = 0.6f,
                 penetration = 0.4f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Alep30pattern"), 16, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(8f, 3f);
             _collisionOffset = new Vec2(-7.5f, -3.5f);
             _collisionSize = new Vec2(16f, 11f);
@@ -39,7 +40,7 @@ namespace TMGmod
             _fireWait = 0.6f;
             _kickForce = 1.85f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.4f;
+            maxAccuracyLost = 0.6f;
             _editorName = "Alep 30";
 			_weight = 2.1f;
         }

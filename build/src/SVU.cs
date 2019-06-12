@@ -30,8 +30,8 @@ namespace TMGmod
             _graphic = _sprite;
             _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _center = new Vec2(18.5f, 5.5f);
-            _collisionOffset = new Vec2(-18.5f, -5.5f);
+            _center = new Vec2(18f, 6f);
+            _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
             _barrelOffsetTL = new Vec2(37f, 6f);
             _fireSound = GetPath("sounds/HeavyRifle.wav");
