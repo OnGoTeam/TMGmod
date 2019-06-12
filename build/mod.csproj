@@ -213,7 +213,7 @@
     <Compile Include="src\Useless or deleted Guns\MSRSH.cs" />
     <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />
     <Compile Include="src\USP.cs" />
-    <Compile Include="src\VAG73.cs" />
+    <Compile Include="src\ANP-73.cs" />
     <Compile Include="src\Vintorez.cs" />
     <Compile Include="src\Vixr.cs" />
     <Compile Include="src\X3X.cs" />
