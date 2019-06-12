@@ -35,7 +35,7 @@ namespace TMGmod.Cases.Color
                 typeof(PPShC),
                 typeof(HK417),
                 typeof(Vintorez),
-                typeof(VintorezC),
+                typeof(VSK94),
                 typeof(PMRC),
                 typeof(BigShot)
             };

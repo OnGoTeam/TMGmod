@@ -35,7 +35,7 @@ namespace TMGmod
             _manualLoad = true;
             _sprite.AddAnimation("idle", 0.3f, false, 0);
             _sprite.AddAnimation("fire", 0.3f, false, 1);
-            _sprite.AddAnimation("empty", 1f, true, 1);
+            _sprite.AddAnimation("empty", 1f, true, 2);
         }
 
         public override void Fire()

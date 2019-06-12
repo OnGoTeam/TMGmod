@@ -13,7 +13,7 @@ namespace TMGmod
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7 });
 
         public Vintorez(float xval, float yval)
           : base(xval, yval)
@@ -42,7 +42,7 @@ namespace TMGmod
             _kickForce = 2.85f;
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.15f;
-            _editorName = "Vintorez 10 ammo";
+            _editorName = "Vintorez";
 			_weight = 4.7f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;

@@ -163,7 +163,7 @@
     <Compile Include="src\M14.cs" />
     <Compile Include="src\IB8mm.cs" />
     <Compile Include="src\TR-21C.cs" />
-    <Compile Include="src\VintorezC.cs" />
+    <Compile Include="src\VSK-94.cs" />
     <Compile Include="src\CZ75.cs" />
     <Compile Include="src\DragoShot.cs" />
     <Compile Include="src\Glock18.cs" />

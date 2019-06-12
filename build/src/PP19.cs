@@ -33,8 +33,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("PP19Bizonpattern"), 28, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(14f, 4.5f);
-            _collisionOffset = new Vec2(-14f, -4.5f);
+            _center = new Vec2(14f, 5f);
+            _collisionOffset = new Vec2(-14f, -5f);
             _collisionSize = new Vec2(28f, 9f);
             _barrelOffsetTL = new Vec2(28f, 3f);
             _fireSound = GetPath("sounds/2.wav");
@@ -43,7 +43,7 @@ namespace TMGmod
             _kickForce = 1.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.35f;
-            _holdOffset = new Vec2(2f, -1f);
+            _holdOffset = new Vec2(2f, 0f);
             handOffset = new Vec2(2f, 0f);
             _editorName = "PP-19 Bizon";
 			_weight = 1.5f;

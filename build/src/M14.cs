@@ -39,7 +39,7 @@ namespace TMGmod
             _kickForce = 3.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
-            _holdOffset = new Vec2(7f, 1f);
+            _holdOffset = new Vec2(6f, 1f);
             _editorName = "M14";
             _weight = 4.75f;
         }

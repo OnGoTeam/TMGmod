@@ -45,7 +45,7 @@ namespace TMGmod
             _kickForce = 1.9f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.21f;
-            _holdOffset = new Vec2(4f, 1f);
+            _holdOffset = new Vec2(7f, 1f);
             _editorName = "AR15 Proto";
 			_weight = 4.2f;
             Kforce2Ar = 0.5f;

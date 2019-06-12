@@ -36,7 +36,7 @@ namespace TMGmod.Cases.Color
                 typeof(DaewooK1),
                 typeof(USP),
                 typeof(Vintorez),
-                typeof(VintorezC),
+                typeof(VSK94),
                 typeof(BigShot),
                 typeof(Arx200),
                 typeof(AN94C),

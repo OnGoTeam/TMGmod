@@ -6,16 +6,16 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
-    public class VintorezC : BaseAr, ISpeedAccuracy, IHaveSkin
+    public class VSK94 : BaseAr, ISpeedAccuracy, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7 });
 
-        public VintorezC(float xval, float yval)
+        public VSK94(float xval, float yval)
           : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -27,23 +27,23 @@ namespace TMGmod
                 bulletSpeed = 25f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("VintorezCpattern"), 33, 12);
+            _sprite = new SpriteMap(GetPath("VSK-94pattern"), 32, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(16.5f, 5.5f);
-            _collisionOffset = new Vec2(-16.5f, -5.5f);
-            _collisionSize = new Vec2(33f, 12f);
-            _barrelOffsetTL = new Vec2(34f, 5f);
+            _center = new Vec2(16f, 5f);
+            _collisionOffset = new Vec2(-16f, -5f);
+            _collisionSize = new Vec2(32f, 10f);
+            _barrelOffsetTL = new Vec2(32f, 5f);
             _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _fullAuto = true;
-            _fireWait = 0.7f;
+            _fireWait = 0.5f;
             _kickForce = 2.85f;
-            loseAccuracy = 0.08f;
+            loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
-            _editorName = "Vintorez 20 ammo";
-            _weight = 4.7f;
+            _editorName = "VSK-94";
+            _weight = 4f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;
             Kforce1Ar = 0.4f;
