@@ -85,6 +85,8 @@
     <Compile Include="src\Buddies\SuperArmor.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\SRM2.cs" />
+    <Compile Include="src\Core\AmmoTypes\SRM1.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
     <Compile Include="src\Core\ATx3x.cs" />
     <Compile Include="src\Core\Nothing.cs" />

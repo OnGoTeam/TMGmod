@@ -12,8 +12,9 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         private bool Loaded = true;
-        private int _yee = 30;
+        private int _yee = 20;
         private bool _yeeenabled = false;
+        private bool _shootwasyes = false;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 8 });
@@ -23,15 +24,9 @@ namespace TMGmod
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 8;
-            _ammoType = new ATMagnum
-            {
-                range = 120f,
-                accuracy = 0.4f,
-                penetration = 1f
-            };
-            BaseAccuracy = 0.4f;
-            _numBulletsPerFire = 6;
-            _barrelAngleOffset = -2f;
+            _ammoType = new ATSRM1();
+            BaseAccuracy = 0.6f;
+            _numBulletsPerFire = 5;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SRM1206"), 29, 10);
             _graphic = _sprite;
@@ -39,29 +34,29 @@ namespace TMGmod
             _center = new Vec2(15f, 5f);
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(29f, 10f);
-            _barrelOffsetTL = new Vec2(29f, 4f);
+            _barrelOffsetTL = new Vec2(29f, 3.5f);
             _fireSound = "shotgunFire";
             _fullAuto = false;
             _fireWait = 2f;
-            _kickForce = 4f;
+            _kickForce = 6f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(-5f, 2f);
-            _editorName = "Crocodile 12 ammo";
+            _editorName = "SRM 1208";
             _weight = 5.5f;
             DeltaWait = 0.5f;
             BurstNum = 2;
         }
         public override void Update()
         {
-            if (ammo % 2 == 0) _barrelAngleOffset = 25f; else _barrelAngleOffset = -25f;
+            if (ammo % 2 == 0) _ammoType = new ATSRM1(); else _ammoType = new ATSRM2();
             if (ammo <= 0)
             {
                 Loaded = false;
                 _sprite.frame %= 10;
             }
             if (_yeeenabled) _yee -= 1;
-            if ((!_yeeenabled) && (_yee != 30)) _yee = 30;
+            if ((!_yeeenabled) && (_yee < 20)) _yee = 20;
             if (_yee <= 0)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
@@ -71,27 +66,29 @@ namespace TMGmod
             }
             base.Update();
         }
-        public override void Fire()
-        {
-            if (Loaded) Fire();
-            base.Fire();
-        }
         public override void OnPressAction()
         {
-            if (!Loaded)
+            if ((!Loaded) && (ammo > 0) && (!_yeeenabled))
             {
-                _sprite.frame %= 10;
-                _sprite.frame += 10;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                if (_sprite.frame < 10) SFX.Play(GetPath("sounds/tuduc.wav"));
                 _yeeenabled = true;
+                _sprite.frame = (_sprite.frame % 10) + 10;
             }
-            else Fire();
-            base.OnPressAction();
+            else if (Loaded) Fire();
         }
         public override void OnReleaseAction()
         {
-            if ((Loaded) && (ammo > 0)) Loaded = false;
+            if (_shootwasyes)
+            {
+                _shootwasyes = false;
+                Loaded = false;
+            }
             base.OnReleaseAction();
+        }
+        public override void Fire()
+        {
+            _shootwasyes = true;
+            base.Fire();
         }
         private void UpdateSkin()
         {
