@@ -31,11 +31,15 @@ namespace TMGmod.Cases.Color
                 typeof(DaewooK1),
                 typeof(AUGA3),
                 typeof(SkeetGun),
+#if DEBUG
                 typeof(PPSh),
                 typeof(PPShC),
+#endif
+                typeof(PPSh41),
+                typeof(PPK42),
                 typeof(HK417),
                 typeof(Vintorez),
-                typeof(VintorezC),
+                typeof(VSK94),
                 typeof(PMRC),
                 typeof(BigShot)
             };

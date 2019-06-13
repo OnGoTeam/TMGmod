@@ -7,6 +7,7 @@ using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
+    [EditorGroup("TMG|DEBUG")]
     [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Hpodarok : Holdable, IPlatform
@@ -45,11 +46,11 @@ namespace TMGmod.Cases
             typeof(Lynx),	
             typeof(SV98),	
             typeof(SVU),	
-            typeof(SVUC),		
+            typeof(IB8mm),		
             typeof(TR21),	
             typeof(TR21C),	
             typeof(Vintorez),
-            typeof(VintorezC),
+            typeof(VSK94),
             typeof(X3X)
 		    };
 		    _contains = things[Rando.Int(things.Count - 1)];

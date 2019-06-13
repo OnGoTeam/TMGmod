@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Useless_or_deleted_Guns
 {
-
+    [EditorGroup("TMG|DEBUG")]
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", true)]
     [PublicAPI]
     [Obsolete]

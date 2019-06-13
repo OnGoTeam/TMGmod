@@ -29,7 +29,7 @@ namespace TMGmod
             _kickForce = 1.4f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
-            _editorName = "Glock 18 17 ammo";
+            _editorName = "Glock 18";
 			_weight = 1.7f;
         }
         public override void OnHoldAction()

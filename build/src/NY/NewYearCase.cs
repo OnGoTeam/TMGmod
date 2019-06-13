@@ -28,7 +28,11 @@ namespace TMGmod.NY
             {
                 typeof(Arx200),
                 typeof(UziPro),
+#if Debug       
                 typeof(PPSh),
+#endif
+                typeof(PPSh41),
+                typeof(PPK42),
                 typeof(MG44),
                 typeof(SkeetGun),
                 typeof(MP5),

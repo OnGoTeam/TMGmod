@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#if DEBUG
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod.Useless_or_deleted_Guns
 {
     /// <inheritdoc cref="BaseGun"/>
     /// <inheritdoc cref="IHaveSkin"/>
     /// <inheritdoc cref="IAmSmg"/>
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|DEBUG")]
 
     // ReSharper disable once InconsistentNaming
     public class PPShC : BaseGun, IHaveSkin, IAmSmg
@@ -84,3 +85,4 @@ namespace TMGmod.Custom_Guns
         }
     }
 }
+#endif
