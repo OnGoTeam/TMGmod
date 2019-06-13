@@ -27,15 +27,15 @@ namespace TMGmod
             _ammoType = new ATMagnum
             {
                 range = 380f,
-                accuracy = 0.89f,
+                accuracy = 0.9f,
                 penetration = 1f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("RFB"), 33, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(16.5f, 5.5f);
-            _collisionOffset = new Vec2(-16.5f, -5.5f);
+            _center = new Vec2(17f, 5f);
+            _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             _holdOffset = new Vec2(0f, 1f);
@@ -43,7 +43,7 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.46f;
             _kickForce = 1.7f;
-            loseAccuracy = 0.08f;
+            loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _editorName = "RFB";
 			_weight = 6f;
@@ -59,6 +59,7 @@ namespace TMGmod
                     _sprite.frame -= 10;
                     _fireWait = 0.46f;
                     maxAccuracyLost = 0.3f;
+                    _ammoType.accuracy = 0.9f;
                 }
                 else
                 {
@@ -66,6 +67,7 @@ namespace TMGmod
                     _sprite.frame += 10;
                     _fireWait = 0.79f;
                     maxAccuracyLost = 0.4f;
+                    _ammoType.accuracy = 0.6f;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

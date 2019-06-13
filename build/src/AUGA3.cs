@@ -21,7 +21,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 8 });
 
         public AUGA3(float xval, float yval)
           : base(xval, yval)

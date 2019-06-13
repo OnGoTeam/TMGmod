@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -16,13 +17,18 @@ namespace TMGmod
         private bool _yeeenabled = false;
         private bool _shootwasyes = false;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        public EditorProperty<int> Skin { get; }
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 8 });
 
         public SRM1208(float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 8;
             _ammoType = new ATSRM1();
             BaseAccuracy = 0.6f;
@@ -34,16 +40,16 @@ namespace TMGmod
             _center = new Vec2(15f, 5f);
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(29f, 10f);
-            _barrelOffsetTL = new Vec2(29f, 3.5f);
+            _barrelOffsetTL = new Vec2(29f, 2f);
             _fireSound = "shotgunFire";
             _fullAuto = false;
             _fireWait = 2f;
             _kickForce = 6f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
-            _holdOffset = new Vec2(-5f, 2f);
+            _holdOffset = new Vec2(0f, 1f);
             _editorName = "SRM 1208";
-            _weight = 5.5f;
+            _weight = 4.5f;
             DeltaWait = 0.5f;
             BurstNum = 2;
         }

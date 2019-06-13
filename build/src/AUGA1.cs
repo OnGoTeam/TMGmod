@@ -19,14 +19,14 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 4, 5, 6, 8 });
         public bool Grip;
         public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
         public AUGA1 (float xval, float yval)
           : base(xval, yval)
         {
-            skin = new EditorProperty<int>(3, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             ammo = 42;
             _ammoType = new ATMagnum
             {

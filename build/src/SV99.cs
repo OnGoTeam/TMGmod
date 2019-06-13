@@ -20,10 +20,10 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 8 });
         public SV99(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("SV99"), 27, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
