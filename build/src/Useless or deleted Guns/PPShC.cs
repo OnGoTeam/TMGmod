@@ -1,6 +1,7 @@
 ﻿#if DEBUG
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -20,15 +21,19 @@ namespace TMGmod.Useless_or_deleted_Guns
         /// <inheritdoc />
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
         /// <inheritdoc />
-        public EditorProperty<int> Skin { get; }
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 6, 7 });
 
         /// <inheritdoc />
         public PPShC(float xval, float yval)
             : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 35;
             _ammoType = new AT9mm
             {

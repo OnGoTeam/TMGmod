@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -11,14 +12,19 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        public EditorProperty<int> Skin { get; }
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
 
         public M93R(float xval, float yval)
             : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("M93R"), 12, 9);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("M93Rpattern"), 12, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(6f, 2f);

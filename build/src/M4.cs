@@ -2,7 +2,12 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+<<<<<<< HEAD
+using System;
+using JetBrains.Annotations;
+=======
 //using System;
+>>>>>>> d96a95c08ccbef8d15adf32cf84bdf46c8a1e983
 
 namespace TMGmod
 {
@@ -13,7 +18,12 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        public EditorProperty<int> Skin { get; }
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         //private int _ammobefore = 31;
         //private int _counter;
@@ -23,7 +33,7 @@ namespace TMGmod
         public M4A1 (float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATMagnum
             {
