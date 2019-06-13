@@ -13,23 +13,13 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-<<<<<<< HEAD:build/src/VintorezC.cs
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 7 });
-=======
         public EditorProperty<int> Skin { get; }
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7 });
->>>>>>> d96a95c08ccbef8d15adf32cf84bdf46c8a1e983:build/src/VSK-94.cs
 
         public VSK94(float xval, float yval)
           : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new AT9mmS
             {
@@ -38,7 +28,7 @@ namespace TMGmod
                 bulletSpeed = 25f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("VSK-94pattern"), 32, 10);
+            _sprite = new SpriteMap(GetPath("VSK-94"), 32, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16f, 5f);

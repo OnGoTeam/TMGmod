@@ -24,7 +24,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("AWSpattern"), 33, 11);
+            _sprite = new SpriteMap(GetPath("AWS"), 33, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16.5f, 5.5f);

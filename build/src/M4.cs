@@ -2,12 +2,7 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
-<<<<<<< HEAD
-using System;
 using JetBrains.Annotations;
-=======
-//using System;
->>>>>>> d96a95c08ccbef8d15adf32cf84bdf46c8a1e983
 
 namespace TMGmod
 {
@@ -42,7 +37,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("M4A1pattern"), 30, 11);
+            _sprite = new SpriteMap(GetPath("M4A1"), 30, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(15f, 6f);
