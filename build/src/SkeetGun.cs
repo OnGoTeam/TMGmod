@@ -30,7 +30,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.9f;
             _numBulletsPerFire = 10;
-            _sprite = new SpriteMap(GetPath("SkeetDoublepattern"), 41, 7);
+            _sprite = new SpriteMap(GetPath("SkeetDouble"), 41, 7);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(20.5f, 3.5f);

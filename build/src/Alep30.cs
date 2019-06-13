@@ -28,7 +28,7 @@ namespace TMGmod
                 bulletSpeed = 30f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Alep30pattern"), 16, 11);
+            _sprite = new SpriteMap(GetPath("Alep30"), 16, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);

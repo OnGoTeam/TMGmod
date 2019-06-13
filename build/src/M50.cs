@@ -27,7 +27,7 @@ namespace TMGmod
                 bulletThickness = 2.5f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("m50pattern"), 40, 13);
+            _sprite = new SpriteMap(GetPath("M50"), 40, 13);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(20f, 6.5f);

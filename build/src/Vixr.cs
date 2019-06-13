@@ -33,7 +33,7 @@ namespace TMGmod
             _type = "gun";
             //I'M BLUE DARUDE SANDSTORM DA DUBAI
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _sprite = new SpriteMap(GetPath("Vixrpattern"), 33, 9);
+            _sprite = new SpriteMap(GetPath("Vixr"), 33, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16.5f, 4.5f);

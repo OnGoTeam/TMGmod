@@ -17,7 +17,7 @@ namespace TMGmod
         public BarretM98C(float xval, float yval) : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("BarretM98SHORTpattern"), 32, 13);
+            _sprite = new SpriteMap(GetPath("BarretM98SHORT"), 32, 13);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16f, 6.5f);

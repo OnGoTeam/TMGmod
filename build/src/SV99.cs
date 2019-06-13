@@ -19,7 +19,7 @@ namespace TMGmod
         public SV99(float xval, float yval) : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("SV99pattern"), 27, 9);
+            _sprite = new SpriteMap(GetPath("SV99"), 27, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(13.5f, 4.5f);

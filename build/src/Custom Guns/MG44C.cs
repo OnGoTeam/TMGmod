@@ -46,7 +46,7 @@ namespace TMGmod.Custom_Guns
             };
             BaseAccuracy = 0.75f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("mg44reqNATOpattern"), 39, 12);
+            _sprite = new SpriteMap(GetPath("mg44reqNATO"), 39, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(19.5f, 6f);

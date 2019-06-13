@@ -73,7 +73,7 @@ namespace TMGmod
                 bulletSpeed = 60f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("HazeSpattern"), 24, 12);
+            _sprite = new SpriteMap(GetPath("HazeS"), 24, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(12f, 3f);

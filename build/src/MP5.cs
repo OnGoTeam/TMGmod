@@ -29,7 +29,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.7f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("MP5pattern"), 27, 12);
+            _sprite = new SpriteMap(GetPath("MP5"), 27, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(13.5f, 6f);

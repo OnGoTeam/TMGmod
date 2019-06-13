@@ -26,7 +26,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.85f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("M14pattern"), 46, 11);
+            _sprite = new SpriteMap(GetPath("M14"), 46, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(23f, 6f);

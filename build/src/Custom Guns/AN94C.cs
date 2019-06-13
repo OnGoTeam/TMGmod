@@ -37,7 +37,7 @@ namespace TMGmod.Custom_Guns
             : base(xval, yval)
         {
             Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("AN94Cpattern"), 33, 9);
+            _sprite = new SpriteMap(GetPath("AN94C"), 33, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16f, 5f);

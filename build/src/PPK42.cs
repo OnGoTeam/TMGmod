@@ -28,7 +28,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.8f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPK42pattern"), 25, 11);
+            _sprite = new SpriteMap(GetPath("PPK42"), 25, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(13f, 5f);

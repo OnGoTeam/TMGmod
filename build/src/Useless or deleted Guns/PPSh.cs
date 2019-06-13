@@ -29,7 +29,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             };
             BaseAccuracy = 0.9f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPShpattern"), 48, 16);
+            _sprite = new SpriteMap(GetPath("PPSh"), 48, 16);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(23f, 5.5f);

@@ -16,7 +16,7 @@ namespace TMGmod
             _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
-            _sprite = new SpriteMap(GetPath("X3Xpattern"), 27, 14);
+            _sprite = new SpriteMap(GetPath("X3X"), 27, 14);
             _graphic = _sprite;
             _center = new Vec2(14f, 9f);
             _collisionOffset = new Vec2(-11.5f, -9f);

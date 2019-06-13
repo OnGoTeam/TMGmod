@@ -28,7 +28,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("UziProSpattern"), 16, 10);
+            _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(8f, 5f);

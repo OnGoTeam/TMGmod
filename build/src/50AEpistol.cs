@@ -20,7 +20,7 @@ namespace TMGmod
             ammo = 7;
             _ammoType = new AT50C();
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("50AEPistolpattern"), 26, 10);
+            _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             _graphic = _sprite;
             _sprite.frame = 1;
             _center = new Vec2(13f, 5f);

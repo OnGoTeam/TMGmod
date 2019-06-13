@@ -29,7 +29,7 @@ namespace TMGmod
             BaseAccuracy = 0.1f;
             _numBulletsPerFire = 44;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("44dbTWICEpattern"), 33, 10);
+            _sprite = new SpriteMap(GetPath("44dbTWICE"), 33, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16.5f, 5f);

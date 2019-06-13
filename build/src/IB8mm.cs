@@ -26,7 +26,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.71f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("IB-8mm Sniperpattern"), 28, 12);
+            _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);

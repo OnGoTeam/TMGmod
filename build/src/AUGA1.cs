@@ -29,7 +29,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("AUGA1pattern"), 30, 12);
+            _sprite = new SpriteMap(GetPath("AUGA1"), 30, 12);
             _graphic = _sprite;
             _sprite.frame = 3;
             _center = new Vec2(15f, 6f);

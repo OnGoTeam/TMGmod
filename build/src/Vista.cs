@@ -29,7 +29,7 @@ namespace TMGmod
                 bulletSpeed = 55f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Vistapattern"), 16, 14);
+            _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
             _graphic = _sprite;
             _sprite.frame = 5;
             _center = new Vec2(6f, 7f);

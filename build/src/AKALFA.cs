@@ -31,7 +31,7 @@ namespace TMGmod
                 bulletThickness = 0.87f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("ALFApattern"), 38, 9);
+            _sprite = new SpriteMap(GetPath("ALFA"), 38, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _graphic = _sprite;

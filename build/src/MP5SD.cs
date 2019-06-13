@@ -29,7 +29,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.8f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("MP5SDpattern"), 31, 12);
+            _sprite = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);

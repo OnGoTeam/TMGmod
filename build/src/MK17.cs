@@ -31,7 +31,7 @@ namespace TMGmod
                 bulletThickness = 0.6f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Mk17Shieldpattern"), 26, 12);
+            _sprite = new SpriteMap(GetPath("Mk17Shield"), 26, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(5f, 8f);

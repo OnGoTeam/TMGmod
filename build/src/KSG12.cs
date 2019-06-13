@@ -18,7 +18,7 @@ namespace TMGmod
 	            bulletSpeed = 50f,
 	            bulletThickness = 0.25f
 	        };
-            _numBulletsPerFire = 4;
+            _numBulletsPerFire = 6;
             _type = "gun";
 		    _graphic = new Sprite(GetPath("KSG12"));
 		    _center = new Vec2(18f, 5.5f);

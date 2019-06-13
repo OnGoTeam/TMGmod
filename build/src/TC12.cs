@@ -30,7 +30,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.91f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("TC-12pattern"), 39, 12);
+            _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(19.5f, 5f);

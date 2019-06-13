@@ -27,7 +27,7 @@ namespace TMGmod
                 penetration = 0.4f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("CZ75pattern"), 12, 8);
+            _sprite = new SpriteMap(GetPath("CZ75"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(8f, 3f);

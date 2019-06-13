@@ -85,7 +85,7 @@ namespace TMGmod.Custom_Guns
             //graphic = new Sprite(GetPath("PMR30"));
             _graphicm[0] = new Sprite(GetPath("PMR301"));
             _graphicm[1] = new Sprite(GetPath("PMR302"));
-            _graphicm[2] = new Sprite(GetPath("PMR30"));
+            _graphicm[2] = new Sprite(GetPath("PMR300"));
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);

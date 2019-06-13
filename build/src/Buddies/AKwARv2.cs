@@ -24,7 +24,7 @@ namespace TMGmod.Buddies
                 penetration = 2f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("ARW-Apattern"), 27, 9);
+            _sprite = new SpriteMap(GetPath("ARW-A"), 27, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(14f, 4f);

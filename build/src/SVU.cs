@@ -26,7 +26,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.91f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("SVUpattern"), 37, 11);
+            _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);

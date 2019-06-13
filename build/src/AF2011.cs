@@ -30,7 +30,7 @@ namespace TMGmod
             };
             _numBulletsPerFire = 2;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("AF2011pattern"), 16, 9);
+            _sprite = new SpriteMap(GetPath("AF2011"), 16, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(7f, 4f);

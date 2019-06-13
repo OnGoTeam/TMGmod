@@ -33,7 +33,7 @@ namespace TMGmod
             };
             _numBulletsPerFire = 8;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Dragoshotpattern"), 29, 11);
+            _sprite = new SpriteMap(GetPath("Dragoshot"), 29, 11);
             _graphic = _sprite;
             _sprite.frame = Rando.Int(0, 9);
             _center = new Vec2(17f, 7f);

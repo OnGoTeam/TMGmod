@@ -63,7 +63,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("USPpattern"), 23, 9);
+            _sprite = new SpriteMap(GetPath("USP"), 23, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(8f, 3f);

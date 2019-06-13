@@ -26,7 +26,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.95f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("ARX200pattern"), 33, 14);
+            _sprite = new SpriteMap(GetPath("ARX200"), 33, 14);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16f, 7f);

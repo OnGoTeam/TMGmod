@@ -25,7 +25,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PMR30pattern"), 16, 10);
+            _sprite = new SpriteMap(GetPath("PMR30"), 16, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(8f, 5f);

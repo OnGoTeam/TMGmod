@@ -210,7 +210,7 @@
     <Compile Include="src\SV98.cs" />
     <Compile Include="src\SV99.cs" />
     <Compile Include="src\SVU.cs" />
-    <Compile Include="src\TR-21.cs" />
+    <Compile Include="src\SRM1208.cs" />
     <Compile Include="src\Useless or deleted Guns\MAPF.cs" />
     <Compile Include="src\Useless or deleted Guns\MSRSH.cs" />
     <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />

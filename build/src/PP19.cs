@@ -30,7 +30,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.6f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PP19Bizonpattern"), 28, 9);
+            _sprite = new SpriteMap(GetPath("PP19Bizon"), 28, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(14f, 5f);

@@ -32,7 +32,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("AR15Protopattern"), 27, 10);
+            _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(19.5f, 5f);

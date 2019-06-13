@@ -27,7 +27,7 @@ namespace TMGmod
                 penetration = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("DaewooK1pattern"), 28, 11);
+            _sprite = new SpriteMap(GetPath("DaewooK1"), 28, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(14f, 5f);

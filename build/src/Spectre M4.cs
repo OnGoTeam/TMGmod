@@ -28,7 +28,7 @@ namespace TMGmod
                 bulletSpeed = 16f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("SpectreM4pattern"), 19, 10);
+            _sprite = new SpriteMap(GetPath("SpectreM4"), 19, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(9.5f, 5f);

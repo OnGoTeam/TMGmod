@@ -29,7 +29,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.4f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("M900pattern"), 27, 7);
+            _sprite = new SpriteMap(GetPath("M900"), 27, 7);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(18.5f, 3.5f);
