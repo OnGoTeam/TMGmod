@@ -54,28 +54,38 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (ammo % 2 == 0) _barrelAngleOffset = 2f; else _barrelAngleOffset = -2f;
-            if (ammo <= 0) Loaded = false;
+            if (ammo % 2 == 0) _barrelAngleOffset = 25f; else _barrelAngleOffset = -25f;
+            if (ammo <= 0)
+            {
+                Loaded = false;
+                _sprite.frame %= 10;
+            }
             if (_yeeenabled) _yee -= 1;
             if ((!_yeeenabled) && (_yee != 30)) _yee = 30;
+            if (_yee <= 0)
+            {
+                SFX.Play(GetPath("sounds/tuduc.wav"));
+                _sprite.frame %= 10;
+                _yeeenabled = false;
+                Loaded = true;
+            }
             base.Update();
+        }
+        public override void Fire()
+        {
+            if (Loaded) Fire();
+            base.Fire();
         }
         public override void OnPressAction()
         {
-            if (Loaded) Fire();
-            else
+            if (!Loaded)
             {
+                _sprite.frame %= 10;
                 _sprite.frame += 10;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
                 _yeeenabled = true;
-                if (_yee <= 0)
-                {
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
-                    _sprite.frame -= 10;
-                    _yeeenabled = false;
-                    Loaded = true;
-                }
             }
+            else Fire();
             base.OnPressAction();
         }
         public override void OnReleaseAction()
