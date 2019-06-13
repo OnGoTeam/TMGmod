@@ -4,10 +4,10 @@ using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod
+namespace TMGmod.Useless_or_deleted_Guns
 {
 
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
+    [BaggedProperty("isInDemo", true), EditorGroup("TMG|DEBUG")]
     // ReSharper disable once InconsistentNaming
     public class PPSh : BaseGun, IHaveSkin, IAmSmg
     {
