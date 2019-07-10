@@ -41,8 +41,8 @@ namespace TMGmod
             _graphic = _sprite;
             _sprite.frame = 0;
             _graphic = _sprite;
-            _center = new Vec2(19f, 4.5f);
-            _collisionOffset = new Vec2(-19f, -4.5f);
+            _center = new Vec2(19f, 5f);
+            _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(38f, 9f);
             _barrelOffsetTL = new Vec2(38f, 2.5f);
             _holdOffset = new Vec2(5f, 0f);

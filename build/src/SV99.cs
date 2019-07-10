@@ -26,9 +26,9 @@ namespace TMGmod
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("SV99"), 27, 9);
             _graphic = _sprite;
-            _sprite.frame = 0;
-            _center = new Vec2(13.5f, 4.5f);
-            _collisionOffset = new Vec2(-13.5f, -4.5f);
+            _sprite.frame = 8;
+            _center = new Vec2(13f, 5f);
+            _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(27f, 9f);
             _barrelOffsetTL = new Vec2(28f, 5f);
             ammo = 6;

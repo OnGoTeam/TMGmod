@@ -37,8 +37,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("M900"), 27, 7);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(18.5f, 3.5f);
-            _collisionOffset = new Vec2(-18.5f, -3.5f);
+            _center = new Vec2(18f, 4f);
+            _collisionOffset = new Vec2(-18f, -4f);
             _collisionSize = new Vec2(27f, 7f);
             _barrelOffsetTL = new Vec2(26f, 2.5f);
             _fireSound = "smg";

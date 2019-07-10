@@ -32,7 +32,7 @@ namespace TMGmod
             ammo = 8;
             _ammoType = new ATSRM1();
             BaseAccuracy = 0.6f;
-            _numBulletsPerFire = 5;
+            _numBulletsPerFire = 8;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SRM1206"), 29, 10);
             _graphic = _sprite;
