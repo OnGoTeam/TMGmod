@@ -50,7 +50,7 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 1f);
             _editorName = "SRM 1208";
             _weight = 4.5f;
-            DeltaWait = 0.5f;
+            DeltaWait = 1f;
             BurstNum = 2;
         }
         public override void Update()
