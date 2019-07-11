@@ -16,7 +16,7 @@ namespace TMGmod.Core
             accuracy = 1f;
             combustable = true;
             bulletSpeed = 5f;
-			range = 55f;
+			range = 50f;
 			penetration = 228f;
         }
     }

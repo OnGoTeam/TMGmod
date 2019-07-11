@@ -43,14 +43,14 @@ namespace TMGmod
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-17f, -7f);
             _collisionSize = new Vec2(34f, 13f);
-            _barrelOffsetTL = new Vec2(34f, 4f);
+            _barrelOffsetTL = new Vec2(34f, 5f);
             _fireSound = "shotgunFire";
             _fullAuto = true;
             _fireWait = 1.4f;
             _kickForce = 6f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.7f;
-            _holdOffset = new Vec2(-5f, 2f);
+            _holdOffset = new Vec2(1f, 0f);
             _editorName = "AA-12";
 			_weight = 7f;
         }
