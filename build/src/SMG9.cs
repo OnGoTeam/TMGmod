@@ -19,7 +19,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 4 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4 });
         public SMG9(float xval, float yval)
           : base(xval, yval)
         {
@@ -34,7 +34,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SMG9"), 16, 15);
             _graphic = _sprite;
-            _sprite.frame = 4;
+            _sprite.frame = 0;
             _center = new Vec2(7f, 7f);
             _collisionOffset = new Vec2(-8f, -7f);
             _collisionSize = new Vec2(16f, 15f);

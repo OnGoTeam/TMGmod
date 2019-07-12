@@ -80,12 +80,12 @@
     <Compile Include="src\AUGA1.cs" />
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
-    <Compile Include="src\Buddies\ArwaMag.cs" />
     <Compile Include="src\Buddies\MagBuddy.cs" />
     <Compile Include="src\Buddies\AKwARv2.cs" />
     <Compile Include="src\Buddies\SuperArmor.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
+    <Compile Include="src\Cases\Color\GreenCase.cs" />
     <Compile Include="src\Core\AmmoTypes\SRM2.cs" />
     <Compile Include="src\Core\AmmoTypes\SRM1.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />

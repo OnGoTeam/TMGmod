@@ -35,7 +35,7 @@ namespace TMGmod
             BaseAccuracy = 0.6f;
             _numBulletsPerFire = 8;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("SRM1206"), 29, 10);
+            _sprite = new SpriteMap(GetPath("SRM1208"), 29, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(15f, 5f);
