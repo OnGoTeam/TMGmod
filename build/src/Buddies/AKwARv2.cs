@@ -6,7 +6,7 @@ namespace TMGmod.Buddies
 {
     [EditorGroup("TMG|DEBUG")]
     // ReSharper disable once InconsistentNaming
-    public class AKwARv2: BaseGun, IAmDmr, MagBuddy.ISupportReload
+    public class AKwARv2: BaseGun, IAmAr, MagBuddy.ISupportReload
     {
         private readonly SpriteMap _sprite;
         private readonly MagBuddy _magBuddy;
