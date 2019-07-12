@@ -31,6 +31,7 @@ namespace TMGmod.Cases.Color
                 typeof(SIX12S),
                 typeof(SIX12),
                 typeof(DaewooK1),
+                typeof(AUGA1),
                 typeof(AUGA3),
                 typeof(SkeetGun),
 #if DEBUG
@@ -43,7 +44,9 @@ namespace TMGmod.Cases.Color
                 typeof(Vintorez),
                 typeof(VSK94),
                 typeof(PMRC),
-                typeof(BigShot)
+                typeof(BigShot),
+                typeof(SKS),
+                typeof(SRM1208)
             };
             CaseId = 1;
         }

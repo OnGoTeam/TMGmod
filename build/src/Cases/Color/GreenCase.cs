@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
+#if DEBUG
+using TMGmod.Useless_or_deleted_Guns;
+#endif
 
 namespace TMGmod.Cases.Color
 {
@@ -31,12 +34,17 @@ namespace TMGmod.Cases.Color
                 typeof(AA12),
                 typeof(DragoShot),
                 typeof(MP40),
+#if DEBUG
+                typeof(PPSh),
+                typeof(PPShC),
+#endif
                 typeof(PPSh41),
                 typeof(PPK42),
                 typeof(SV98),
                 typeof(SV99),
                 typeof(SRM1208),
-                typeof(SKS)
+                typeof(SKS),
+                typeof(AWS)
             };
             CaseId = 8;
         }

@@ -36,7 +36,11 @@ namespace TMGmod.Cases.Color
                 typeof(BigShot),
                 typeof(Vista),
                 typeof(DragoShot),
-                typeof(AUGA1)
+                typeof(AUGA1),
+                typeof(PPSh41),
+                typeof(PPK42),
+                typeof(SKS),
+                typeof(SRM1208)
             };
             CaseId = 2;
         }

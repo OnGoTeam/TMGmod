@@ -19,7 +19,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 5, 6, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
         public AWS(float xval, float yval)
           : base(xval, yval)
         {

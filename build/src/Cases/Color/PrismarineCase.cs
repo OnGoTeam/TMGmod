@@ -44,7 +44,8 @@ namespace TMGmod.Cases.Color
                 typeof(AUGA1),
                 typeof(AN94),
                 typeof(Vixr),
-                typeof(SpectreM4)
+                typeof(SpectreM4),
+                typeof(SKS)
             };
             CaseId = 6;
         }

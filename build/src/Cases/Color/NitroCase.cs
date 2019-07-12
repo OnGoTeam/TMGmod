@@ -7,7 +7,6 @@ using TMGmod.Custom_Guns;
 using TMGmod.Useless_or_deleted_Guns;
 #endif
 
-
 namespace TMGmod.Cases.Color
 {
     /// <inheritdoc />
@@ -17,7 +16,9 @@ namespace TMGmod.Cases.Color
         /// <inheritdoc />
         public PodarokNitro(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("NitroCase"));
+            var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
+            _graphic = sprite;
+            sprite.frame = 0;
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);
@@ -51,7 +52,10 @@ namespace TMGmod.Cases.Color
                 typeof(Type89),
                 typeof(Rfb),
                 typeof(FnFcar),
-                typeof(HazeS)
+                typeof(HazeS),
+                typeof(AA12),
+                typeof(MP40),
+                typeof(SKS)
             };
             CaseId = 7;
         }
