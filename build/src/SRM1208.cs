@@ -63,7 +63,7 @@ namespace TMGmod
                 _sprite.frame %= 10;
             }
             if (_yeeenabled) _yee -= 1;
-            if ((!_yeeenabled) && (_yee < 20)) _yee = 20;
+            if (!_yeeenabled && _yee < 20) _yee = 20;
             if (_yee <= 0)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
@@ -75,11 +75,11 @@ namespace TMGmod
         }
         public override void OnPressAction()
         {
-            if ((!_loaded) && (ammo > 0) && (!_yeeenabled))
+            if (!_loaded && ammo > 0 && !_yeeenabled)
             {
                 if (_sprite.frame < 10) SFX.Play(GetPath("sounds/tuduc.wav"));
                 _yeeenabled = true;
-                _sprite.frame = (_sprite.frame % 10) + 10;
+                _sprite.frame = _sprite.frame % 10 + 10;
             }
             else if (_loaded) Fire();
         }

@@ -159,12 +159,12 @@ namespace TMGmod
             if (duck != null && duck.height < 17f)
             {
                 _kickForce = 0f;
-                if ((_sprite.frame > -1) && (_sprite.frame < 10)) _sprite.frame += 10;
+                if (_sprite.frame > -1 && _sprite.frame < 10) _sprite.frame += 10;
             }
             else
             {
                 _kickForce = 4.75f;
-                if ((_sprite.frame > 9) && (_sprite.frame < 20)) _sprite.frame -= 10;
+                if (_sprite.frame > 9 && _sprite.frame < 20) _sprite.frame -= 10;
             }
             OnHoldAction();
         }

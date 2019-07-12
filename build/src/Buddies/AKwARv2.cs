@@ -53,7 +53,7 @@ namespace TMGmod.Buddies
         public override void Update()
         {
             if (ammo <= 0) _magBuddy.Disload();
-            if ((ammo <= 0) && (_mags <= 0)) _sprite.frame = 2;
+            if (ammo <= 0 && _mags <= 0) _sprite.frame = 2;
             base.Update();
         }
 

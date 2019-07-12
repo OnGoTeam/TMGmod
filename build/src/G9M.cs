@@ -72,7 +72,7 @@ namespace TMGmod
             ammo = Rando.Int(0, _ammobefore / _uselessinteger);
             if (ammo > _ammobefore) ammo = _ammobefore;
             _ammobefore -= ammo;
-            if ((ammo < 1) && (_ammobefore < 1)) CreateExplosion(position);
+            if (ammo < 1 && _ammobefore < 1) CreateExplosion(position);
             base.OnPressAction();
         }
         public override void OnReleaseAction()
@@ -89,7 +89,7 @@ namespace TMGmod
         }
         public override void Thrown()
         {
-            if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;
+            if (ammo < 1 && _ammobefore > 0) ammo = _ammobefore;
             base.Thrown();
         }
         private void CreateExplosion(Vec2 pos)

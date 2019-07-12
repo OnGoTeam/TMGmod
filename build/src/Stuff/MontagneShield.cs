@@ -81,17 +81,17 @@ namespace TMGmod.Stuff
                 _sprite.frame = 0;
             }
 
-            if (Hp <= (HpMax * 0.75f))
+            if (Hp <= HpMax * 0.75f)
             {
                 _sprite.frame = 1;
             }
 
-            if (Hp <= (HpMax * 0.5f))
+            if (Hp <= HpMax * 0.5f)
             {
                 _sprite.frame = 2;
             }
 
-            if (Hp <= (HpMax * 0.25f))
+            if (Hp <= HpMax * 0.25f)
             {
                 _sprite.frame = 3;
             }
@@ -101,7 +101,7 @@ namespace TMGmod.Stuff
         public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
         {
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
-            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) && (from == ImpactedFrom.Left) || from == ImpactedFrom.Right)
+            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) && @from == ImpactedFrom.Left || from == ImpactedFrom.Right)
             {
                 if (duck == null && Math.Abs(with.hSpeed) * with.weight > 40f)
                 {

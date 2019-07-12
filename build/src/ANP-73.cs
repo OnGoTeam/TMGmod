@@ -42,28 +42,28 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if ((_sprite.frame < 4) && (_sprite.frame > 2))
+                if (_sprite.frame < 4 && _sprite.frame > 2)
                 {
                     _sprite.frame = 2;
                     _fireWait = 1.2f;
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.5f;
                 }
-                else if ((_sprite.frame < 3) && (_sprite.frame > 1))
+                else if (_sprite.frame < 3 && _sprite.frame > 1)
                 {
                     _sprite.frame = 1;
                     _fireWait = 0.9f;
                     loseAccuracy = 0.2f;
                     maxAccuracyLost = 0.6f;
                 }
-                else if ((_sprite.frame < 2) && (_sprite.frame > 0))
+                else if (_sprite.frame < 2 && _sprite.frame > 0)
                 {
                     _sprite.frame = 0;
                     _fireWait = 0.6f;
                     loseAccuracy = 0.3f;
                     maxAccuracyLost = 0.7f;
                 }
-                else if ((_sprite.frame < 1) && (_sprite.frame > -1))
+                else if (_sprite.frame < 1 && _sprite.frame > -1)
                 {
                     _sprite.frame = 3;
                     _fireWait = 1.5f;

@@ -68,7 +68,7 @@ namespace TMGmod
                 _sprite.frame %= 20;
             }
             base.Update();
-		    if (ammo == 0 && ((_sprite.frame >= 0 && _sprite.frame < 10) || (_sprite.frame >= 20 && _sprite.frame < 30))) _sprite.frame += 10;
+		    if (ammo == 0 && (_sprite.frame >= 0 && _sprite.frame < 10 || _sprite.frame >= 20 && _sprite.frame < 30)) _sprite.frame += 10;
         }
         private void UpdateSkin()
         {

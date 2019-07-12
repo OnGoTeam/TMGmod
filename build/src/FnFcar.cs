@@ -59,14 +59,14 @@ namespace TMGmod
                 _kickForce = 0f;
 				loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
-                if ((_sprite.frame > -1) && (_sprite.frame < 10)) _sprite.frame += 10;
+                if (_sprite.frame > -1 && _sprite.frame < 10) _sprite.frame += 10;
             }
             else
             {
                 _kickForce = 2.4f;
                 loseAccuracy = 0.15f;
                 maxAccuracyLost = 0.2f;
-                if ((_sprite.frame > 9) && (_sprite.frame < 20)) _sprite.frame -= 10;
+                if (_sprite.frame > 9 && _sprite.frame < 20) _sprite.frame -= 10;
             }
             base.Update();
         }
