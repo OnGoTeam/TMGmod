@@ -80,6 +80,7 @@
     <Compile Include="src\AUGA1.cs" />
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
+    <Compile Include="src\Buddies\ArwaMag.cs" />
     <Compile Include="src\Buddies\MagBuddy.cs" />
     <Compile Include="src\Buddies\AKwARv2.cs" />
     <Compile Include="src\Buddies\SuperArmor.cs" />

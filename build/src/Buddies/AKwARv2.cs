@@ -77,7 +77,18 @@ namespace TMGmod.Buddies
         public bool DropMag(Thing mag)
         {
             SFX.Play(GetPath("sounds/tuduc.wav"));
-            _sprite.frame = 1;
+            switch (_sprite.frame)
+            {
+                case 0:
+                    _sprite.frame = 1;
+                    break;
+                case 3:
+                    _sprite.frame = 2;
+                    break;
+                default:
+                    _sprite.frame = 1;
+                    break;
+            }
             _wait += 7f;
             return true;
         }
