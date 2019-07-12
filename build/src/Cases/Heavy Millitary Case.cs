@@ -47,8 +47,8 @@ namespace TMGmod.Cases
             typeof(SV98),	
             typeof(SVU),	
             typeof(IB8mm),		
-            /*typeof(TR21),	
-            typeof(TR21C),*/	
+            typeof(AA12),	
+            typeof(SRM1208),	
             typeof(Vintorez),
             typeof(VSK94),
             typeof(X3X)
