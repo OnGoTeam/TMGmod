@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Custom_Guns;
+using TMGmod.Useless_or_deleted_Guns;
 
 namespace TMGmod.Cases
 {
@@ -47,8 +47,8 @@ namespace TMGmod.Cases
             typeof(SV98),	
             typeof(SVU),	
             typeof(IB8mm),		
-            typeof(TR21),	
-            typeof(TR21C),	
+            /*typeof(TR21),	
+            typeof(TR21C),*/	
             typeof(Vintorez),
             typeof(VSK94),
             typeof(X3X)
