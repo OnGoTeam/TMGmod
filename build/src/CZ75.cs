@@ -70,7 +70,7 @@ namespace TMGmod
                         Level.Add(new Czmag(x + 5, y));
                     else
                         Level.Add(new Czmag(x - 5, y));
-                        _sprite.frame = 10;
+                    _sprite.frame = 10;
                     _fdelay = 40;
                     break;
                 default:

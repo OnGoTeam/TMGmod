@@ -127,8 +127,7 @@ namespace TMGmod.Stuff
                 fire.hSpeed = hspd;
             }
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
-            if (collisionSize.x < 5f)
-            foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
+            if (collisionSize.x < 5f) foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
             {
                 if (thing == duck || thing == this || thing is IDontMove || thing is Block || thing is Teleporter) continue;
                 if (!(thing is IAmADuck || doblock)) continue;
