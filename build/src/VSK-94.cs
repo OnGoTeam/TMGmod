@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
+    // ReSharper disable once InconsistentNaming
     public class VSK94 : BaseAr, ISpeedAccuracy, IHaveSkin
     {
 

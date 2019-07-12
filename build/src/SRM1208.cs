@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -12,10 +13,10 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        private bool Loaded = true;
+        private bool _loaded = true;
         private int _yee = 20;
-        private bool _yeeenabled = false;
-        private bool _shootwasyes = false;
+        private bool _yeeenabled;
+        private bool _shootwasyes;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -58,7 +59,7 @@ namespace TMGmod
             if (ammo % 2 == 0) _ammoType = new ATSRM1(); else _ammoType = new ATSRM2();
             if (ammo <= 0)
             {
-                Loaded = false;
+                _loaded = false;
                 _sprite.frame %= 10;
             }
             if (_yeeenabled) _yee -= 1;
@@ -68,26 +69,26 @@ namespace TMGmod
                 SFX.Play(GetPath("sounds/tuduc.wav"));
                 _sprite.frame %= 10;
                 _yeeenabled = false;
-                Loaded = true;
+                _loaded = true;
             }
             base.Update();
         }
         public override void OnPressAction()
         {
-            if ((!Loaded) && (ammo > 0) && (!_yeeenabled))
+            if ((!_loaded) && (ammo > 0) && (!_yeeenabled))
             {
                 if (_sprite.frame < 10) SFX.Play(GetPath("sounds/tuduc.wav"));
                 _yeeenabled = true;
                 _sprite.frame = (_sprite.frame % 10) + 10;
             }
-            else if (Loaded) Fire();
+            else if (_loaded) Fire();
         }
         public override void OnReleaseAction()
         {
             if (_shootwasyes)
             {
                 _shootwasyes = false;
-                Loaded = false;
+                _loaded = false;
             }
             base.OnReleaseAction();
         }

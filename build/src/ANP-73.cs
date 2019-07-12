@@ -4,6 +4,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|MP")]
+    // ReSharper disable once InconsistentNaming
     public class ANP73 : BaseGun, IAmHg
     {
         private readonly SpriteMap _sprite;

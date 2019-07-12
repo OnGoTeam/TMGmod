@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
-using System;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
+    // ReSharper disable once InconsistentNaming
     public class PP19 : BaseGun, IAmSmg, IHaveSkin
     {
         public bool Stock;

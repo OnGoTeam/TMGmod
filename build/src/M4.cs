@@ -55,30 +55,30 @@ namespace TMGmod
 			_weight = 4.4f;
             Kforce2Ar = 0.5f;
         }
-        public override void OnPressAction()
+        /*public override void OnPressAction()
         {
             /*ammo = Rando.Int(0, _ammobefore / 6 * (1 + _counter / 2));
             if (ammo > _ammobefore) ammo = _ammobefore;
-            _ammobefore -= ammo;*/
+            _ammobefore -= ammo;#1#
             base.OnPressAction();
         }
         public override void OnReleaseAction()
         {
             /*if (ammo > 0) _ammobefore += ammo;
-            if (ammo == 0) _counter += 1;*/
+            if (ammo == 0) _counter += 1;#1#
             base.OnReleaseAction();
         }
         public override void Fire()
         {
             /*_explode = Rando.Float(0,1);
-            if (_explode < Explodechance) CreateExplosion(position);*/
+            if (_explode < Explodechance) CreateExplosion(position);#1#
             base.Fire();
         }
         public override void Thrown()
         {
-            /*if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;*/
+            /*if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;#1#
             base.Thrown();
-        }
+        }*/
         /*private void CreateExplosion(Vec2 pos)
         {
             var cx = pos.x;

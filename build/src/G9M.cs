@@ -107,15 +107,16 @@ namespace TMGmod
                     cy - (float)(Math.Sin(Maths.DegToRad(dir)) * dist));
                 Level.Add(ins);
             }
+            /*
             for (var i = 0; i < 25; i++)
             {
                 var dir = i * 18f - 5f + Rando.Float(10f);
                 var shrap = new ATShrapnel { range = 20f + Rando.Float(6f) };
-                //var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(dir)) * 6.0),
-                //        y - (float)(Math.Sin(Maths.DegToRad(dir)) * 6.0), shrap, dir)
-                //{ firedFrom = this };
-                //Level.Add(bullet);
-            }
+                var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(dir)) * 6.0),
+                        y - (float)(Math.Sin(Maths.DegToRad(dir)) * 6.0), shrap, dir)
+                { firedFrom = this };
+                Level.Add(bullet);
+            }*/
             SFX.Play("explode");
             Level.Remove(this);
         }
