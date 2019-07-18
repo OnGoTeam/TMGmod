@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // атрибутов. Отредактируйте значения этих атрибутов, чтобы изменить
 // общие сведения об этой сборке.
 [assembly: AssemblyTitle("TMGmod")]
-[assembly: AssemblyDescription("Current update: Armory Upgrade :: REV. 0")]
+[assembly: AssemblyDescription("Current update: Armory Upgrade")]
 //[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OnGoTeam")]
 [assembly: AssemblyProduct("TMGmod")]
@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 // patch (revision)                 5
 
 #if WORKSHOP
-[assembly: AssemblyVersion("1.1.2.5")]
+[assembly: AssemblyVersion("1.1.2.6")]
 #else
 [assembly: AssemblyVersion("1.102.*")]
 #endif
