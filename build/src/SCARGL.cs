@@ -50,7 +50,6 @@ namespace TMGmod
         private readonly float[] _maxAccuracyLostm = {.45f, 0f};
         private readonly SpriteMap[] _flarem;
         private bool _switched;
-        public StateBinding FlareBinding = new StateBinding(nameof(Flare));
 
         public SpriteMap Flare
         {
