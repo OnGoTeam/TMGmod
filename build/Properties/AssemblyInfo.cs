@@ -29,6 +29,12 @@ using System.Runtime.InteropServices;
 //      Редакция
 //
 
+// proposed system:
+// major                            1
+// minor*100 + major milestone    203
+// minor milestone                  4
+// patch (revision)                 5
+
 #if WORKSHOP
 [assembly: AssemblyVersion("1.1.2.0")]
 #else
