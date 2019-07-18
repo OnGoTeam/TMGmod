@@ -16,7 +16,7 @@ namespace TMGmod.Cases.Color
         /// <inheritdoc />
         public PodarokNitro(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
+            var sprite = new SpriteMap(GetPath("NitroCase"), 14, 8);
             _graphic = sprite;
             sprite.frame = 0;
             _center = new Vec2(7f, 4f);
