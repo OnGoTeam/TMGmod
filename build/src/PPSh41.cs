@@ -40,7 +40,7 @@ namespace TMGmod
             _center = new Vec2(15f, 4f);
             _collisionOffset = new Vec2(-15f, -4f);
             _collisionSize = new Vec2(30f, 8f);
-            _barrelOffsetTL = new Vec2(30f, 2f);
+            _barrelOffsetTL = new Vec2(29f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
@@ -51,7 +51,7 @@ namespace TMGmod
             _kickForce = 1.2f;
             KforceDSmg = 4f;
             MaxDelaySmg = 80;
-            _holdOffset = new Vec2(3f, 1f);
+            _holdOffset = new Vec2(2f, 1f);
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.4f;
             _editorName = "PPSh 41";

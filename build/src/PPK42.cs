@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -13,12 +14,17 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        public EditorProperty<int> Skin { get; }
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7 });
         public PPK42(float xval, float yval)
             : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new AT9mm
             {
@@ -45,7 +51,7 @@ namespace TMGmod
             _kickForce = 1.2f;
             KforceDSmg = 2f;
             MaxDelaySmg = 20;
-            _holdOffset = new Vec2(5f, 2f);
+            _holdOffset = new Vec2(4f, 2f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
             _editorName = "PPK 42";
