@@ -67,6 +67,7 @@ namespace TMGmod
                         penetration = 1f,
                         bulletSpeed = 16f
                     };
+                    _barrelOffsetTL = new Vec2(13f, 1f);
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.34f;
                     weight = 3.3f;
@@ -87,6 +88,7 @@ namespace TMGmod
                         accuracy = 0.92f,
                         penetration = 1f
                     };
+                    _barrelOffsetTL = new Vec2(16f, 1f);
                     loseAccuracy = 0.07f;
                     maxAccuracyLost = 0.3f;
                     weight = 3.8f;
