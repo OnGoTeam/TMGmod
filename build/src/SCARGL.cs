@@ -48,7 +48,7 @@ namespace TMGmod
         private readonly string[] _fireSoundm = {"sounds/1.wav", "deepMachineGun"};
         private readonly float[] _loseAccuracym = {.1f, 0f};
         private readonly float[] _maxAccuracyLostm = {.45f, 0f};
-        private SpriteMap[] _flarem;
+        private readonly SpriteMap[] _flarem;
         private bool _switched;
         public StateBinding FlareBinding = new StateBinding(nameof(Flare));
 

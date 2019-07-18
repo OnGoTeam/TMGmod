@@ -44,7 +44,7 @@ namespace TMGmod
             _center = new Vec2(16.5f, 4.5f);
             _collisionOffset = new Vec2(-16.5f, -4.5f);
             _collisionSize = new Vec2(33f, 9f);
-            _barrelOffsetTL = new Vec2(34f, 3.5f);
+            _barrelOffsetTL = new Vec2(33f, 3f);
             _holdOffset = new Vec2(3f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = true;

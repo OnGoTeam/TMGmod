@@ -43,7 +43,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-20.5f, -3.5f);
             _collisionSize = new Vec2(41f, 7f);
             _fireSound = "shotgunFire";
-            _barrelOffsetTL = new Vec2(43f, 1f);
+            _barrelOffsetTL = new Vec2(41f, 0f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
@@ -57,7 +57,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            _barrelOffsetTL = ammo % 2 == 0 ? new Vec2(43f, 1f) : new Vec2(43f, 3f);
+            _barrelOffsetTL = ammo % 2 == 0 ? new Vec2(41f, 0f) : new Vec2(41f, 2f);
             if (duck != null)
             {
                 if (duck.sliding || duck.crouch)

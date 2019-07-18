@@ -59,7 +59,7 @@ namespace TMGmod.Custom_Guns
             _center = new Vec2(19.5f, 6f);
             _collisionOffset = new Vec2(-19.5f, -6f);
             _collisionSize = new Vec2(39f, 12f);
-            _barrelOffsetTL = new Vec2(40f, 4f);
+            _barrelOffsetTL = new Vec2(39f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)

@@ -30,7 +30,7 @@ namespace TMGmod
             _center = new Vec2(16.5f, 5.5f);
             _collisionOffset = new Vec2(-16.5f, -5.5f);
             _collisionSize = new Vec2(33f, 11f);
-            _barrelOffsetTL = new Vec2(34f, 4f);
+            _barrelOffsetTL = new Vec2(33f, 4f);
             ammo = 6;
             _ammoType = new AT9mmS
             {

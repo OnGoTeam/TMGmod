@@ -42,7 +42,7 @@ namespace TMGmod
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
-            _barrelOffsetTL = new Vec2(37f, 6f);
+            _barrelOffsetTL = new Vec2(37f, 5f);
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = true;
             _fireWait = 0.65f;

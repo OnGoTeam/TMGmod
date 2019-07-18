@@ -180,7 +180,7 @@
     <Compile Include="src\M50.cs" />
     <Compile Include="src\M72.cs" />
     <Compile Include="src\M93R.cs" />
-    <Compile Include="src\M960.cs" />
+    <Compile Include="src\M950.cs" />
     <Compile Include="src\MG3.cs" />
     <Compile Include="src\MG44.cs" />
     <Compile Include="src\SMG9.cs" />

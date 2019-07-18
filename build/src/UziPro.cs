@@ -40,7 +40,7 @@ namespace TMGmod
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
-            _barrelOffsetTL = new Vec2(11f, 3f);
+            _barrelOffsetTL = new Vec2(10f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
@@ -70,7 +70,7 @@ namespace TMGmod
                         accuracy = 0.61f,
                         penetration = 1f
                     };
-                    _barrelOffsetTL = new Vec2(11f, 3f);	
+                    _barrelOffsetTL = new Vec2(10f, 2f);
                     Silencer = false;
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
                     {
@@ -86,7 +86,7 @@ namespace TMGmod
                         range = 100f,
                         accuracy = 0.8f
                     };
-                    _barrelOffsetTL = new Vec2(17f, 3f);			 
+                    _barrelOffsetTL = new Vec2(16f, 2f);
                     Silencer = true;
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _fireSound = GetPath("sounds/SilencedPistol.wav");

@@ -40,7 +40,7 @@ namespace TMGmod
             _center = new Vec2(9.5f, 5f);
             _collisionOffset = new Vec2(-9.5f, -5f);
             _collisionSize = new Vec2(19f, 10f);
-            _barrelOffsetTL = new Vec2(14f, 2f);
+            _barrelOffsetTL = new Vec2(13f, 1f);
             _holdOffset = new Vec2(3f, 3f);
             _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
@@ -77,6 +77,7 @@ namespace TMGmod
                     };
                     Silencer = false;
                 }
+                //TODO: botl
                 else
                 {
                     FrameId += 10;

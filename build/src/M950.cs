@@ -8,7 +8,7 @@ namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
-    public class M960 : BaseGun, IAmSmg, IHaveSkin
+    public class M950 : BaseGun, IAmSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -21,7 +21,7 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         // ReSharper disable once MemberCanBePrivate.Global		
-        public M960(float xval, float yval)
+        public M950(float xval, float yval)
             : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -40,7 +40,7 @@ namespace TMGmod
             _center = new Vec2(11f, 4f);
             _collisionOffset = new Vec2(-11f, -4f);
             _collisionSize = new Vec2(23f, 7f);
-            _barrelOffsetTL = new Vec2(19f, 2.5f);
+            _barrelOffsetTL = new Vec2(23f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)

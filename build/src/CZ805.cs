@@ -41,7 +41,7 @@ namespace TMGmod
             _center = new Vec2(20.5f, 5.5f);
             _collisionOffset = new Vec2(-20.5f, -5.5f);
             _collisionSize = new Vec2(41f, 11f);
-            _barrelOffsetTL = new Vec2(39f, 3.5f);
+            _barrelOffsetTL = new Vec2(39f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
@@ -72,7 +72,7 @@ namespace TMGmod
                     };
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.35f;
-                    _barrelOffsetTL = new Vec2(39f, 4f);
+                    _barrelOffsetTL = new Vec2(39f, 3f);
                     Silencer = false;
                     _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
                     {
@@ -90,7 +90,7 @@ namespace TMGmod
                     };
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.3f;
-                    _barrelOffsetTL = new Vec2(42.5f, 4f);
+                    _barrelOffsetTL = new Vec2(42.5f, 3f);
                     Silencer = true;
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }

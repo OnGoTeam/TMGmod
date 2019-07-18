@@ -42,7 +42,7 @@ namespace TMGmod
             _center = new Vec2(16.5f, 5f);
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 10f);
-            _barrelOffsetTL = new Vec2(34f, 2.5f);
+            _barrelOffsetTL = new Vec2(33f, 2f);
             _holdOffset = new Vec2(2f, 1f);
             _fireSound = "shotgun";
             _fullAuto = false;

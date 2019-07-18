@@ -27,7 +27,7 @@ namespace TMGmod
                         range = 130f,
                         accuracy = 0.9f
                     };
-                    _barrelOffsetTL = new Vec2(23f, 3f);
+                    _barrelOffsetTL = new Vec2(23f, 2f);
                 }
                 else
                 {
@@ -42,7 +42,7 @@ namespace TMGmod
                         range = 100f,
                         accuracy = 0.8f
                     };
-                    _barrelOffsetTL = new Vec2(15f, 3f);
+                    _barrelOffsetTL = new Vec2(14f, 2f);
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace TMGmod
             _center = new Vec2(8f, 3f);
             _collisionOffset = new Vec2(-7.5f, -3.5f);
             _collisionSize = new Vec2(23f, 9f);
-            _barrelOffsetTL = new Vec2(15f, 3f);
+            _barrelOffsetTL = new Vec2(14f, 3f);
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 0.75f;

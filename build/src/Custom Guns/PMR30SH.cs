@@ -62,7 +62,7 @@ namespace TMGmod.Custom_Guns
         };
 
         private readonly Sprite[] _graphicm = {new Sprite(), new Sprite(), new Sprite()};
-        private readonly Vec2[] _barrelOffsetTLm = {new Vec2(16f, 2.5f), new Vec2(14f, 6f)};
+        private readonly Vec2[] _barrelOffsetTLm = {new Vec2(16f, 2f), new Vec2(14f, 6f)};
         private readonly string[] _fireSoundm = {"sounds/1.wav", "littleGun"};
         private readonly float[] _loseAccuracym = {.1f, 0f};
         private readonly float[] _maxAccuracyLostm = {.55f, 0f};
@@ -89,7 +89,7 @@ namespace TMGmod.Custom_Guns
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
-            _barrelOffsetTL = new Vec2(16f, 2.5f);
+            _barrelOffsetTL = new Vec2(16f, 2f);
             _holdOffset = new Vec2(0f, 2f);
             _fireSound = GetPath("sounds/1.wav");
             _fireSoundm[0] = _fireSound;
