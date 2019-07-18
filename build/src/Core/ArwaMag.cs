@@ -1,6 +1,6 @@
 ﻿using DuckGame;
 
-namespace TMGmod.Buddies
+namespace TMGmod.Core
 {
     public class ArwaMag : PhysicsObject
     {

@@ -1,7 +1,8 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
+using TMGmod.Core;
 
-namespace TMGmod.Buddies
+namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
@@ -30,7 +31,7 @@ namespace TMGmod.Buddies
             _collisionOffset = new Vec2(-14f, -4f);
             _collisionSize = new Vec2(27f, 9f);
             _barrelOffsetTL = new Vec2(27f, 4f);
-            _holdOffset = new Vec2(1f, -1f);
+            _holdOffset = new Vec2(1f, -2f);
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.85f;

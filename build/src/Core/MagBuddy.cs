@@ -2,7 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 
-namespace TMGmod.Buddies
+namespace TMGmod.Core
 {
     /// <summary>
     /// Mag drop-reload implementator
