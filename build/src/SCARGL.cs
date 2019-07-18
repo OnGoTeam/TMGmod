@@ -79,7 +79,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 3f);
-            _flarem = new SpriteMap[]
+            _flarem = new[]
             {
                 new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
                 {
