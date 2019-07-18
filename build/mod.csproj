@@ -74,7 +74,7 @@
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
-    <Compile Include="src\AKwAR.cs" />
+    <Compile Include="src\Useless or deleted Guns\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AR15 Proto.cs" />
     <Compile Include="src\AUGA1.cs" />

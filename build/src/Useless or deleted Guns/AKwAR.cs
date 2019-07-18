@@ -1,7 +1,8 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod
+namespace TMGmod.Useless_or_deleted_Guns
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [BaggedProperty("canSpawn", false)]
@@ -86,3 +87,4 @@ namespace TMGmod
         }
     }
 }
+#endif

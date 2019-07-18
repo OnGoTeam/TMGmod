@@ -48,7 +48,15 @@ namespace TMGmod
         private readonly string[] _fireSoundm = {"sounds/1.wav", "deepMachineGun"};
         private readonly float[] _loseAccuracym = {.1f, 0f};
         private readonly float[] _maxAccuracyLostm = {.45f, 0f};
+        private SpriteMap[] _flarem;
         private bool _switched;
+        public StateBinding FlareBinding = new StateBinding(nameof(Flare));
+
+        public SpriteMap Flare
+        {
+            get => _flare;
+            set => _flare = value;
+        }
 
         public ScarGL (float xval, float yval)
           : base(xval, yval)
@@ -71,10 +79,18 @@ namespace TMGmod
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 3f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
+            _flarem = new SpriteMap[]
             {
-                center = new Vec2(0.0f, 5f)
+                new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
+                {
+                    center = new Vec2(0.0f, 5f)
+                },
+                new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+                {
+                    center = new Vec2(0.0f, 5f)
+                }
             };
+            _flare = _flarem[Mode];
             _holdOffset = new Vec2(2f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fireSoundm[0] = _fireSound;
@@ -96,6 +112,7 @@ namespace TMGmod
             _fireSound = _fireSoundm[Mode];
             loseAccuracy = _loseAccuracym[Mode];
             maxAccuracyLost = _maxAccuracyLostm[Mode];
+            _flare = _flarem[Mode];
         }
 
         public override void Update()
