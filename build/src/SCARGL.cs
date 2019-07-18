@@ -22,8 +22,8 @@ namespace TMGmod
                 Ammom1 = value[1];
             }
         }
-        //public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
-        //public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
+        public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
+        public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
             new ATMagnum
