@@ -2,8 +2,14 @@
 
 namespace TMGmod.Buddies
 {
-    public class ArwaMag:PhysicsObject
+    public class ArwaMag : PhysicsObject
     {
-        //TODO: mag for ARW-A
+        public ArwaMag()
+        {
+            _graphic = new Sprite(GetPath("armag.png"));
+            _collisionSize = new Vec2(4, 7);
+            physicsMaterial = PhysicsMaterial.Plastic;
+            gravity = 0;
+        }
     }
 }

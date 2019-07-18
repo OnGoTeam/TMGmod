@@ -1,19 +1,18 @@
-﻿#if DEBUG
-using DuckGame;
+﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Buddies
 {
-    [EditorGroup("TMG|DEBUG")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AKwARv2: BaseGun, IAmAr, MagBuddy.ISupportReload
+    public class ARwA: BaseGun, IAmAr, MagBuddy.ISupportReload
     {
         private readonly SpriteMap _sprite;
         private readonly MagBuddy _magBuddy;
         private bool _onemoreclick = true;
         private byte _mags = 1;
 
-        public AKwARv2(float xval, float yval)
+        public ARwA(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 30;
@@ -38,9 +37,9 @@ namespace TMGmod.Buddies
             _kickForce = 1f;
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.2f;
-            _editorName = "AKwARv2";
+            _editorName = "ARwA";
             _weight = 5f;
-            _magBuddy = new MagBuddy(this, typeof(UziPro));
+            _magBuddy = new MagBuddy(this, typeof(ArwaMag));
         }
 
 
@@ -52,7 +51,7 @@ namespace TMGmod.Buddies
 
         public override void Update()
         {
-            if (ammo <= 0) _magBuddy.Disload();
+            if (ammo <= 0 ) _magBuddy.Disload();
             if (ammo <= 0 && _mags <= 0) _sprite.frame = 2;
             base.Update();
         }
@@ -93,7 +92,6 @@ namespace TMGmod.Buddies
             return true;
         }
 
-        public Vec2 SpawnPos { get; set; }
+        public Vec2 SpawnPos => new Vec2(0, -1);
     }
 }
-#endif

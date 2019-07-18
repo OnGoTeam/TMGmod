@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using System;
+﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
 
@@ -33,8 +32,7 @@ namespace TMGmod.Buddies
             if (!_magType.IsSubclassOf(typeof(Thing))) return false;
             //else
             var mag0 = Editor.CreateThing(_magType);
-            mag0.position = _gun.position;
-            mag0.position += new Vec2(gun.SpawnPos.x * _gun.offDir, gun.SpawnPos.y);
+            mag0.position = _gun.Offset(gun.SpawnPos);
             mag0.offDir = _gun.offDir;
             Level.Add(mag0);
             if (gun.DropMag(mag0))
@@ -68,8 +66,7 @@ namespace TMGmod.Buddies
 
             //int TicksToR { get; set; }
 
-            Vec2 SpawnPos { get; set; }
+            Vec2 SpawnPos { get; }
         }
     }
 }
-#endif
