@@ -44,10 +44,7 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (_sprite.currentAnimation == "fire" && _sprite.finished)
-            {
-                _sprite.SetAnimation("idle");
-            }
+            
             base.Update();
         }
 
@@ -60,12 +57,17 @@ namespace TMGmod
             if (loaded)
             {
                 base.Fire();
+                _sprite.SetAnimation("fire");
             }
             else
             {
                 SFX.Play("Click");
-                _sprite.SetAnimation("fire");
-                Reload();
+                if (_sprite.finished)
+                {
+                    if (_sprite.currentAnimation == "fire")
+                        _sprite.SetAnimation("idle");
+                    Reload();
+                }
             }
             base.OnPressAction();
         }
