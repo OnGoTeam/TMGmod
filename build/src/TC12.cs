@@ -43,6 +43,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-19.5f, -5f);
             _collisionSize = new Vec2(39f, 12f);
             _barrelOffsetTL = new Vec2(28f, 3f);
+            _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _holdOffset = new Vec2(5f, 0f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
@@ -73,7 +77,7 @@ namespace TMGmod
                     loseAccuracy = 0.1f;
                     _barrelOffsetTL = new Vec2(28f, 3f);
                     Silencer = false;
-                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f)
                     };
@@ -91,7 +95,10 @@ namespace TMGmod
                     loseAccuracy = 0f;
                     _barrelOffsetTL = new Vec2(39f, 3f);
                     Silencer = true;
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

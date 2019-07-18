@@ -38,6 +38,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 12f);
             _barrelOffsetTL = new Vec2(31f, 5f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.71f;

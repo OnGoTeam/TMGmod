@@ -97,7 +97,7 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
 			_weight = 2f;
-            _flare = new SpriteMap(GetPath("hazeFlare"), 13, 10) {center = new Vec2(0.0f, 5f)};
+            _flare = new SpriteMap(GetPath("FlareHazeS"), 13, 10) {center = new Vec2(0.0f, 5f)};
         }
 
         /// <inheritdoc />

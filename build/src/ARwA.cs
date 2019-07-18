@@ -27,11 +27,15 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("ARW-A"), 27, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(14f, 4f);
-            _collisionOffset = new Vec2(-14f, -4f);
+            _center = new Vec2(13f, 5f);
+            _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(27f, 9f);
-            _barrelOffsetTL = new Vec2(27f, 4f);
-            _holdOffset = new Vec2(1f, -2f);
+            _barrelOffsetTL = new Vec2(27f, 3f);
+            _holdOffset = new Vec2(-1f, 1f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.85f;
@@ -42,7 +46,6 @@ namespace TMGmod
             _weight = 5f;
             _magBuddy = new MagBuddy(this, typeof(ArwaMag));
         }
-
 
         public override void OnPressAction()
         {

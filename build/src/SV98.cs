@@ -30,6 +30,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-16.5f, -5.5f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(34f, 5f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             ammo = 5;
             _ammoType = new ATSniper
             {

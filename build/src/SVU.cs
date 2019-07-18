@@ -29,7 +29,10 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);

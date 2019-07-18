@@ -42,6 +42,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-20.5f, -5.5f);
             _collisionSize = new Vec2(41f, 11f);
             _barrelOffsetTL = new Vec2(39f, 3.5f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _holdOffset = new Vec2(5f, 1f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
@@ -70,7 +74,7 @@ namespace TMGmod
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(39f, 4f);
-                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f)
                     };

@@ -31,6 +31,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-6f, -2f);
             _collisionSize = new Vec2(12f, 9f);
             _barrelOffsetTL = new Vec2(13f, 2f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _holdOffset = new Vec2(-2f, 0f);
             ammo = 15;
             _ammoType = new ATMagnum {range = 70f, accuracy = 0.7f, penetration = 0.4f};

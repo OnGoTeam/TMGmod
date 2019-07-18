@@ -46,6 +46,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-23f, -6f);
             _collisionSize = new Vec2(46f, 11f);
             _barrelOffsetTL = new Vec2(42f, 5f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _holdOffset = new Vec2(8f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _flare.center = new Vec2(0f, 5f);
@@ -122,9 +126,9 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.8f;
             _kickForce = 4.8f;
-            _flare = new SpriteMap("smallFlare", 11, 10)
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0f, 4f)
+                center = new Vec2(0.0f, 5f)
             };
             Stick = false;
         }	
@@ -150,9 +154,9 @@ namespace TMGmod
                 loseAccuracy = 0.1f;
                 maxAccuracyLost = 0.8f;
                 _kickForce = 4.8f;
-                _flare = new SpriteMap("smallFlare", 11, 10)
+                _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
                 {
-                    center = new Vec2(0f, 4f)
+                    center = new Vec2(0.0f, 5f)
                 };
             }
 			if (Stick && _patrons == 0)

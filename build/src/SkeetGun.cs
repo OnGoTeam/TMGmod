@@ -44,6 +44,10 @@ namespace TMGmod
             _collisionSize = new Vec2(41f, 7f);
             _fireSound = "shotgunFire";
             _barrelOffsetTL = new Vec2(43f, 1f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fireWait = 0.5f;
             _kickForce = 6.55f;
             _editorName = "Skeet Double";

@@ -30,6 +30,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-25f, -6.5f);
             _collisionSize = new Vec2(50f, 13f);
             _barrelOffsetTL = new Vec2(50f, 6f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             ammo = 8;
             _ammoType = new ATSniper {penetration = 4f, range = 850, accuracy = 1};
             _fireSound = GetPath("sounds/HeavySniper.wav");
