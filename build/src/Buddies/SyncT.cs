@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
 using OgtDgLib.Ext;
 
