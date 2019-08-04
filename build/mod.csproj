@@ -72,8 +72,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="src\44db.cs" />
+    <Compile Include="src\Bersa 45.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
+    <Compile Include="src\Buddies\LockedContainer.cs" />
+    <Compile Include="src\Buddies\LockedRedCase.cs" />
+    <Compile Include="src\Buddies\StingerMissile.cs" />
+    <Compile Include="src\Core\ContextSkinRender.cs" />
+    <Compile Include="src\M16A6.cs" />
+    <Compile Include="src\Stuff\ActiveDefenseSystem.cs" />
     <Compile Include="src\Useless or deleted Guns\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AR15 Proto.cs" />

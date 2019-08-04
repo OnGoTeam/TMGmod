@@ -45,7 +45,7 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
-            _fireWait = 5f;
+            _fireWait = 4f;
             _kickForce = 5.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
