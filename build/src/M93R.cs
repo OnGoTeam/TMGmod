@@ -37,10 +37,10 @@ namespace TMGmod
             };
             _holdOffset = new Vec2(-2f, 0f);
             ammo = 15;
-            _ammoType = new ATMagnum {range = 70f, accuracy = 0.7f, penetration = 0.4f};
+            _ammoType = new ATMagnum {range = 70f, accuracy = 0.7f, penetration = 0.4f, bulletSpeed = 33f};
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
-            _fireWait = 0.9f;
+            _fireWait = 1.5f;
             _kickForce = 0.24f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.6f;
