@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.props" Condition="Exists('packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.props')" />
+  <Import Project="packages\ILMerge.3.0.29\build\ILMerge.props" Condition="Exists('packages\ILMerge.3.0.29\build\ILMerge.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +13,9 @@
     <AssemblyName>TMGmod</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +28,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\..\TMGmod\</OutputPath>
@@ -37,6 +43,7 @@
     <LangVersion>7.3</LangVersion>
     <DebugSymbols>true</DebugSymbols>
     <DocumentationFile>..\..\TMGmod\TMGmod.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -50,12 +57,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <Import Project="dglink.csproj" />
   <ItemGroup>
     <Reference Include="JetBrains.Annotations, Version=2019.1.3.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>packages\JetBrains.Annotations.2019.1.3\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="MSBuild.AutoILMerge.Task, Version=1.0.0.0, Culture=en-US, processorArchitecture=MSIL">
+      <HintPath>packages\MSBuild.AutoILMerge.Task.1.1.1\lib\net40\MSBuild.AutoILMerge.Task.dll</HintPath>
+    </Reference>
+    <Reference Include="OgtDgLib">
+      <HintPath>packages\OgtDgLib\OgtDgLib.dll</HintPath>
+    </Reference>
+    <Reference Include="OgtDgLib.Ext">
+      <HintPath>packages\OgtDgLib\OgtDgLib.Ext.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,6 +98,7 @@
     <Compile Include="src\Core\ContextSkinRender.cs" />
     <Compile Include="src\M16A6.cs" />
     <Compile Include="src\Stuff\ActiveDefenseSystem.cs" />
+    <Compile Include="src\Buddies\SyncT.cs" />
     <Compile Include="src\Useless or deleted Guns\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AR15 Proto.cs" />
@@ -233,7 +251,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="ILMerge.props" />
     <None Include="Resources\BuildDate.txt" />
+    <Content Include="content\ILMergeOrder.txt" />
+    <Content Include="ILMergeInternalizeExcludeList.txt" />
+    <Content Include="ILMergeOrder.txt" />
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +305,15 @@ IF EXIST TMGmod.zip (
   <PropertyGroup>
     <PreBuildEvent>echo %25date%25 %25time%25 &gt; "$(ProjectDir)\Resources\BuildDate.txt"</PreBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\ILMerge.3.0.29\build\ILMerge.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ILMerge.3.0.29\build\ILMerge.props'))" />
+    <Error Condition="!Exists('packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.props'))" />
+    <Error Condition="!Exists('packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.targets'))" />
+  </Target>
+  <Import Project="packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.targets" Condition="Exists('packages\MSBuild.AutoILMerge.Task.1.1.1\build\MSBuild.AutoILMerge.Task.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
