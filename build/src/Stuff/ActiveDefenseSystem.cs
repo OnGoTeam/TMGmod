@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 using System.Collections.Generic;
 using System;
 using JetBrains.Annotations;
@@ -16,9 +17,7 @@ namespace TMGmod.Stuff
         private readonly int _trackTicks;
         [UsedImplicitly]
         public int Ammo = 5;
-#pragma warning disable IDE0052 // Удалить непрочитанные закрытые члены
         public StateBinding AmmoBinding = new StateBinding(nameof(Ammo));
-#pragma warning restore IDE0052 // Удалить непрочитанные закрытые члены
         private readonly int _simTracked;
         public ActiveDefenseSystem(float xpos, float ypos) : base(xpos, ypos)
         {
@@ -180,3 +179,5 @@ namespace TMGmod.Stuff
         }
     }
 }
+
+#endif

@@ -57,9 +57,9 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
-            [UsedImplicitly]
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }

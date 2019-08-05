@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 
 namespace TMGmod.Buddies
 {
@@ -9,22 +10,27 @@ namespace TMGmod.Buddies
         {
             base.Touch(with);
             Key key = null;
-            if (with is Key || with is Duck duck1 && duck1.holdObject is Key)
+            if (!(with is Key) && (!(with is Duck duck1) || !(duck1.holdObject is Key))) return;
+            switch (with)
             {
-                if (with is Duck duck2 && duck2.holdObject is Key key1)
+                case Duck duck2 when duck2.holdObject is Key key1:
                     key = key1;
-                if (with is Key key2)
+                    break;
+                case Key key2:
                     key = key2;
-                if (key == null) return; //For Clarity Sake
-                var newThing = Editor.CreateThing(typeof(T));
-                if (newThing == null) return;
-                newThing.position = Offset(SpawnPos);
-                Level.Add(newThing);
-                Level.Remove(key);
-                Level.Remove(this);
+                    break;
             }
+
+            if (key == null) return; //For Clarity Sake
+            var newThing = Editor.CreateThing(typeof(T));
+            if (newThing == null) return;
+            newThing.position = Offset(SpawnPos);
+            Level.Add(newThing);
+            Level.Remove(key);
+            Level.Remove(this);
         }
-        public LockedContainer(float xval, float yval):base(xval, yval)
+
+        protected LockedContainer(float xval, float yval):base(xval, yval)
         {
         }
 
@@ -64,3 +70,4 @@ namespace TMGmod.Buddies
         }
     }
 }
+#endif

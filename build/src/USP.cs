@@ -103,6 +103,7 @@ namespace TMGmod
             }
             base.Update();
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

@@ -82,6 +82,7 @@ namespace TMGmod
         public override ContextMenu GetContextMenu()
         {
             var contextMenu = base.GetContextMenu();
+#if DEBUG
             foreach (var allowed in Allowedlst)
             {
                 var sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
@@ -89,6 +90,7 @@ namespace TMGmod
                 contextMenu.AddItem(new ContextSkinRender(null, sprite));
             }
             return contextMenu;
+#endif
         }
     }
 }

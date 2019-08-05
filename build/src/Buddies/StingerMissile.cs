@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿#if true
+using DuckGame;
 using System;
 
 namespace TMGmod.Buddies
@@ -62,3 +63,5 @@ namespace TMGmod.Buddies
         }
     }
 }
+
+#endif

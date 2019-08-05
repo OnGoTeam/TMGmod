@@ -1,8 +1,11 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using JetBrains.Annotations;
+using DuckGame;
 
 namespace TMGmod.Buddies
 {
     [EditorGroup("TMG|Misc")]
+    [PublicAPI]
     class LockedRedCase : LockedContainer<Cases.Color.PodarokColorR>
     {
         public LockedRedCase(float xval, float yval) : base(xval, yval)
@@ -21,3 +24,4 @@ namespace TMGmod.Buddies
         protected override Vec2 SpawnPos => new Vec2();
     }
 }
+#endif
