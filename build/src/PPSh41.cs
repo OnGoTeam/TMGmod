@@ -50,7 +50,7 @@ namespace TMGmod
             _fireWait = 0.25f;
             _kickForce = 1.2f;
             KforceDSmg = 4f;
-            MaxDelaySmg = 80;
+            MaxDelaySmg = 50;
             _holdOffset = new Vec2(2f, 1f);
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.4f;
@@ -77,6 +77,20 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+
+        public override ContextMenu GetContextMenu()
+        {
+            var contextMenu = base.GetContextMenu();
+#if DEBUG
+            foreach (var allowed in Allowedlst)
+            {
+                var sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
+                sprite._frame = allowed;
+                contextMenu.AddItem(new ContextSkinRender(null, sprite));
+            }
+#endif
+            return contextMenu;
         }
     }
 }

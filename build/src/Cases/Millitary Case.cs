@@ -42,7 +42,7 @@ namespace TMGmod.Cases
         typeof(Alep30),	
         typeof(HazeS),	
         typeof(M4A1),
-        typeof(M960),
+        typeof(M950),
         typeof(MG44C),	
         typeof(MP40),	
         typeof(PP19),	

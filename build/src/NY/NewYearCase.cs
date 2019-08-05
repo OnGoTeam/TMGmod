@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Cases.Color;
+#if DEBUG
+using TMGmod.Useless_or_deleted_Guns;
+#endif
 
 namespace TMGmod.NY
 {
@@ -28,7 +31,7 @@ namespace TMGmod.NY
             {
                 typeof(Arx200),
                 typeof(UziPro),
-#if Debug       
+#if DEBUG
                 typeof(PPSh),
 #endif
                 typeof(PPSh41),

@@ -12,6 +12,7 @@ namespace TMGmod.Core
         /// <summary>
         /// this's sprite's _frame
         /// </summary>
+        [UsedImplicitly]
         int FrameId { set; }
         /// <summary>
         /// FrameId syncing

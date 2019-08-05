@@ -64,17 +64,15 @@ namespace TMGmod
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             _damaged = bullet.ammo.penetration;
-            Damage(bullet.ammo);
+            Damage();
             return Hit(bullet, hitPos);
         }
-        private void Damage(AmmoType at)
+        private void Damage()
         {
             thickness -= _damaged;
-            if (thickness <= 0f)
-            {
-                _sprite.frame %= 10;
-                _sprite.frame += 10;
-            }
+            if (!(thickness <= 0f)) return;
+            _sprite.frame %= 10;
+            _sprite.frame += 10;
         }
         private void UpdateSkin()
         {

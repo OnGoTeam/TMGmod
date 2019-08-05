@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if DEBUG
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -6,8 +7,8 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Handgun|Burst")]
-    public class M93R : BaseBurst, IAmHg, IHaveSkin
+    [EditorGroup("TMG|Handgun|Semi-Automatic")]
+    public class Bersa45 : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -18,36 +19,39 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
-
-        public M93R(float xval, float yval)
-            : base(xval, yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public Bersa45(float xval, float yval)
+          : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("M93R"), 12, 9);
+            ammo = 11;
+            _ammoType = new AT9mm
+            {
+                range = 90f,
+                accuracy = 0.76f,
+                penetration = 0.4f,
+                bulletSpeed = 25f
+            };
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("deleteco/Future/Bersa45.png"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(6f, 2f);
-            _collisionOffset = new Vec2(-6f, -2f);
-            _collisionSize = new Vec2(12f, 9f);
-            _barrelOffsetTL = new Vec2(12f, 1f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f)
-            };
-            _holdOffset = new Vec2(-2f, 0f);
-            ammo = 15;
-            _ammoType = new ATMagnum {range = 70f, accuracy = 0.7f, penetration = 0.4f, bulletSpeed = 33f};
+            _center = new Vec2(6f, 4f);
+            _collisionOffset = new Vec2(-6f, -4f);
+            _collisionSize = new Vec2(12f, 8f);
+            _barrelOffsetTL = new Vec2(12f, 1.5f);
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
-            _fireWait = 1.5f;
-            _kickForce = 0.24f;
+            _fireWait = 0.3f;
+            _kickForce = 1f;
             loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.6f;
-            _editorName = "M93R";
-			_weight = 2f;
-            DeltaWait = 0.3f;
-            BurstNum = 3;
+            maxAccuracyLost = 0.9f;
+            _holdOffset = new Vec2(-1f, 2f);
+            _editorName = "Bersa 45";
+            _laserOffsetTL = new Vec2(9f, 4f);
+            laserSight = true;
+			_weight = 1f;
         }
         private void UpdateSkin()
         {
@@ -58,6 +62,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
@@ -70,3 +75,4 @@ namespace TMGmod
         }
     }
 }
+#endif
