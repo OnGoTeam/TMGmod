@@ -4,7 +4,7 @@ using DuckGame;
 
 namespace TMGmod.Buddies
 {
-    [EditorGroup("TMG|Misc")]
+    [EditorGroup("TMG|DEBUG")]
     [PublicAPI]
     class LockedRedCase : LockedContainer<Cases.Color.PodarokColorR>
     {
