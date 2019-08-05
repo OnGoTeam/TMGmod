@@ -43,7 +43,7 @@ namespace TMGmod
         {
             UpdCds();
             base.Fire();
-            if (Bipods && _wait == _fireWait) _cdstate += 49;
+            if (Bipods && _wait >= _fireWait) _cdstate += 49;
         }
     }
 }

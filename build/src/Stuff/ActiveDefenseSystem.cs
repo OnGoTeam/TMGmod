@@ -1,32 +1,34 @@
 ﻿using DuckGame;
 using System.Collections.Generic;
 using System;
+using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
-    class ActiveDefenseSystem:Holdable
+    public class ActiveDefenseSystem:Holdable
     {
         private readonly List<AdsHit> _hitPosList = new List<AdsHit>();
         private readonly List<Tracked> _trackeds = new List<Tracked>();
         private readonly List<Grenade> _grenades = new List<Grenade>();
         private int _ticks;
-        internal float Range;
-        private readonly int TrackTicks;
+        private readonly float _range;
+        private readonly int _trackTicks;
+        [UsedImplicitly]
         public int Ammo = 5;
 #pragma warning disable IDE0052 // Удалить непрочитанные закрытые члены
         public StateBinding AmmoBinding = new StateBinding(nameof(Ammo));
 #pragma warning restore IDE0052 // Удалить непрочитанные закрытые члены
-        private readonly int SimTracked;
+        private readonly int _simTracked;
         public ActiveDefenseSystem(float xpos, float ypos) : base(xpos, ypos)
         {
             _graphic = new Sprite(GetPath("ADS"));
             _center = new Vec2(7f, 8f);
             _collisionOffset = new Vec2(-7f, -8f);
             _collisionSize = new Vec2(14f, 16f);
-            Range = 128f;
-            TrackTicks = 10;
-            SimTracked = 2;
+            _range = 128f;
+            _trackTicks = 10;
+            _simTracked = 2;
             _editorName = "ADS";
         }
 
@@ -35,7 +37,7 @@ namespace TMGmod.Stuff
             _ticks += 1;
             if (grounded)
             {
-                var grenades = Level.CheckCircleAll<Grenade>(position, Range);
+                var grenades = Level.CheckCircleAll<Grenade>(position, _range);
                 foreach (var grenade in grenades)
                 {
                     if (!_grenades.Contains(grenade))
@@ -45,9 +47,9 @@ namespace TMGmod.Stuff
                     }
                 }
                 _grenades.RemoveAll(InvalidGrenade);
-                if (_grenades.Count > SimTracked)
+                if (_grenades.Count > _simTracked)
                 {
-                    _grenades.RemoveRange(SimTracked, _grenades.Count - SimTracked);
+                    _grenades.RemoveRange(_simTracked, _grenades.Count - _simTracked);
                 }
                 _trackeds.RemoveAll(InvalidTracked);
                 foreach (var tracked in _trackeds)
@@ -57,7 +59,7 @@ namespace TMGmod.Stuff
                 }
                 foreach (var tracked in _trackeds)
                 {
-                    if (tracked.TrLev > TrackTicks)
+                    if (tracked.TrLev > _trackTicks)
                     {
                         HitTracked(tracked);
                     }
@@ -79,12 +81,12 @@ namespace TMGmod.Stuff
         private bool InvalidTracked(Tracked tracked)
         {
             var grenade = tracked.Inst;
-            return tracked.TrLev > TrackTicks || !_grenades.Contains(grenade);
+            return tracked.TrLev > _trackTicks || !_grenades.Contains(grenade);
         }
 
         private bool InvalidGrenade(Grenade grenade)
         {
-            return Level.CheckLine<Block>(position, grenade.position) != null || grenade.destroyed || (grenade.position - position).Length() > Range + 16f;
+            return Level.CheckLine<Block>(position, grenade.position) != null || grenade.destroyed || (grenade.position - position).Length() > _range + 16f;
         }
 
         public override void Draw()
@@ -92,7 +94,7 @@ namespace TMGmod.Stuff
             _hitPosList.RemoveAll(OldHit);
             foreach (var tracked in _trackeds)
             {
-                if (tracked.TrLev <= TrackTicks)
+                if (tracked.TrLev <= _trackTicks)
                 {
                     Graphics.DrawLine(position, tracked.Inst.position, new Color(255, 0, 0));
                 }
@@ -103,7 +105,7 @@ namespace TMGmod.Stuff
                 var color = new Color(255, 255, 255 + 4 * tickspast);
                 Graphics.DrawLine(position, hitPos.Pos, color);
                 Graphics.DrawLine(hitPos.Pos - new Vec2(tickspast / (float) Math.Sqrt(8)), hitPos.Pos + new Vec2(tickspast / (float) Math.Sqrt(8)), color);
-                Graphics.DrawCircle(hitPos.Pos, tickspast / 2, color);
+                Graphics.DrawCircle(hitPos.Pos, (float) tickspast / 2, color);
             }
             base.Draw();
         }
@@ -119,7 +121,7 @@ namespace TMGmod.Stuff
             }
             var grenade = tracked.Inst;
             float maxcount = 20;
-            maxcount /= Math.Max(maxcount * (grenade.position - position).Length() / (Range * 5), 1);
+            maxcount /= Math.Max(maxcount * (grenade.position - position).Length() / (_range * 5), 1);
             for (var i = 0; i < maxcount; ++i)
             {
                 Level.Add(SmallSmoke.New(grenade.x, grenade.y));

@@ -57,11 +57,9 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
-        public int MaxDelaySmg { get; set; }
         public int FrameId
         {
+            [UsedImplicitly]
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }

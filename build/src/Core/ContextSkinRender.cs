@@ -13,8 +13,8 @@ namespace TMGmod.Core
         public override void Draw()
         {
             _image.depth = depth + 3;
-            _image.x = x + _image.width / 2;
-            _image.y = y + _image.height / 2;
+            _image.x = x + (float) _image.width / 2;
+            _image.y = y + (float) _image.height / 2;
             _image.color = Color.White;
             _image.Draw();
             base.Draw();

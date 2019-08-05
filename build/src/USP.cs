@@ -103,9 +103,6 @@ namespace TMGmod
             }
             base.Update();
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
-        public int MaxDelaySmg { get; set; }
         public int FrameId
         {
             get => _sprite.frame;
