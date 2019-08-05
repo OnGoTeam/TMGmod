@@ -43,12 +43,8 @@ namespace TMGmod.Buddies
         {
             if (duck != null && duck.IsQuacking())
             {
-                _ammoType.penetration = 100;
-                _ammoType.range = 10000;
-            }
-            else
-            {
-                AmmoTypeSerialized = new BitBuffer(_ats);
+                _ammoType.penetration = Rando.Float(0,5);
+                _ammoType.range = Rando.Float(0, 500);
             }
             base.Update();
         }
