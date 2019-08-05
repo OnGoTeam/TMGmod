@@ -89,8 +89,8 @@ namespace TMGmod
                 sprite._frame = allowed;
                 contextMenu.AddItem(new ContextSkinRender(null, sprite));
             }
-            return contextMenu;
 #endif
+            return contextMenu;
         }
     }
 }
