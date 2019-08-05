@@ -1,4 +1,4 @@
-﻿#if true
+﻿#if DEBUG
 using DuckGame;
 using System;
 
