@@ -65,9 +65,7 @@
     <Compile Include="src\Core\Czmag.cs" />
     <Compile Include="src\Core\EKSPLOZIVI SCHEET.cs" />
     <Compile Include="src\Core\HA.cs" />
-    <Compile Include="src\Core\MF.cs" />
     <Compile Include="src\Core\Mod.cs" />
-    <Compile Include="src\Core\PTPA.cs" />
     <Compile Include="src\Custom Guns\44dbC.cs" />
     <Compile Include="src\Custom Guns\AN94C.cs" />
     <Compile Include="src\Custom Guns\AUGA3.cs" />
@@ -119,17 +117,10 @@
     <Compile Include="src\SV99.cs" />
     <Compile Include="src\SVU.cs" />
     <Compile Include="src\TR-21.cs" />
-    <Compile Include="src\Useless or deleted Guns\MAPF.cs" />
-    <Compile Include="src\Useless or deleted Guns\MSRSH.cs" />
-    <Compile Include="src\Useless or deleted Guns\PTP1.cs" />
-    <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />
     <Compile Include="src\USP.cs" />
     <Compile Include="src\VAG73.cs" />
     <Compile Include="src\Vintorez.cs" />
     <Compile Include="src\X3X.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
