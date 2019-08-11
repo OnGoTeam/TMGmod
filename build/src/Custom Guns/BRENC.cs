@@ -7,7 +7,7 @@ namespace TMGmod.src
     // ReSharper disable once InconsistentNaming
     public class bren : Gun
     {
-        private float _silencer;
+        private bool _silencer;
 		
         public bren (float xval, float yval)
           : base(xval, yval)
@@ -38,7 +38,7 @@ namespace TMGmod.src
                 {
                     if (duck.inputProfile.Pressed("QUACK"))
                     {
-				        if (_silencer > 0f)
+				        if (_silencer)
                         {
                             _graphic = new Sprite(GetPath("CZ805BrenZ"));
                             _fireSound = "deepMachineGun2";
@@ -46,7 +46,7 @@ namespace TMGmod.src
                             loseAccuracy = 0.025f;
                             maxAccuracyLost = 0.2f;
                             _barrelOffsetTL = new Vec2(39f, 4f);
-                            _silencer = 0f;
+                            _silencer = false;
                         }
                         else
                         {
@@ -56,7 +56,7 @@ namespace TMGmod.src
                             loseAccuracy = 0.02f;
                             maxAccuracyLost = 0.18f;
                             _barrelOffsetTL = new Vec2(42.5f, 4f);
-                            _silencer = 1f;
+                            _silencer = true;
                         }
 					}
 				}

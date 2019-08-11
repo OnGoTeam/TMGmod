@@ -53,11 +53,10 @@ namespace TMGmod.src
                 base.OnPressAction();
                 return;
             }
-            if (ammo > 0 && _loadState == -1)
-            {
-                _loadState = 0;
-                _loadAnimation = 0;
-            }
+
+            if (ammo <= 0 || _loadState != -1) return;
+            _loadState = 0;
+            _loadAnimation = 0;
         }
 
         public override void Update()
@@ -75,64 +74,69 @@ namespace TMGmod.src
                     _angleOffset = 0f;
                     handOffset = Vec2.Zero;
                 }
-                if (_loadState == 0)
+
+                switch (_loadState)
                 {
-                    if (!Network.isActive)
+                    case 0:
                     {
-                        SFX.Play("loadSniper");
+                        if (!Network.isActive)
+                        {
+                            SFX.Play("loadSniper");
+                        }
+                        else if (isServerForObject)
+                        {
+                            _netLoad.Play();
+                        }
+                        Sniper sniper = this;
+                        sniper._loadState += 1;
+                        break;
                     }
-                    else if (isServerForObject)
-                    {
-                        _netLoad.Play();
-                    }
-                    Sniper sniper = this;
-                    sniper._loadState += 1;
-                }
-                else if (_loadState == 1)
-                {
-                    if (_angleOffset >= 0.1f)
+
+                    case 1 when _angleOffset >= 0.1f:
                     {
                         Sniper sniper1 = this;
                         sniper1._loadState += 1;
+                        break;
                     }
-                    else
-                    {
+
+                    case 1:
                         _angleOffset += 0.003f;
-                    }
-                }
-                else if (_loadState == 2)
-                {
-                    handOffset.x -= 0.2f;
-                    if (handOffset.x > 4f)
+                        break;
+                    case 2:
                     {
-                        Sniper sniper2 = this;
-                        sniper2._loadState += 1;
-                        Reload();
-                        loaded = false;
+                        handOffset.x -= 0.2f;
+                        if (handOffset.x > 4f)
+                        {
+                            Sniper sniper2 = this;
+                            sniper2._loadState += 1;
+                            Reload();
+                            loaded = false;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 3)
-                {
-                    handOffset.x += 0.2f;
-                    if (handOffset.x <= 0f)
+
+                    case 3:
                     {
-                        Sniper sniper3 = this;
-                        sniper3._loadState += 1;
-                        handOffset.x = 0f;
+                        handOffset.x += 0.2f;
+                        if (handOffset.x <= 0f)
+                        {
+                            Sniper sniper3 = this;
+                            sniper3._loadState += 1;
+                            handOffset.x = 0f;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 4)
-                {
-                    if (_angleOffset <= 0.03f)
-                    {
+
+                    case 4 when _angleOffset <= 0.03f:
                         _loadState = -1;
                         loaded = true;
                         _angleOffset = 0f;
-                    }
-                    else
-                    {
+                        break;
+                    case 4:
                         _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.15f);
-                    }
+                        break;
                 }
             }
             laserSight = false;
