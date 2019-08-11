@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
 
+    // ReSharper disable once InconsistentNaming
     public class cal50explode : AmmoType
     {
         public cal50explode()
         {
-            this.accuracy = 0.9f;
-            this.range = 700f;
-            this.penetration = 0f;
-            this.combustable = true;
-            this.bulletSpeed = 55f;
-            this.bulletType = typeof(explode);
+            accuracy = 0.9f;
+            range = 700f;
+            penetration = 0f;
+            combustable = true;
+            bulletSpeed = 55f;
+            bulletType = typeof(explode);
         }
     }
 }

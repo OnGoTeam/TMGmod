@@ -1,56 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
+using JetBrains.Annotations;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Machinegun")]
+    [UsedImplicitly]
+    // ReSharper disable once InconsistentNaming
     public class AKwAR : Gun
     {
-        int _aammo;
-        int _ammo;
-        int _rs;
-        bool _isroundsin = true; 
+        private int _aammo;
+        private readonly int _ammo;
+        private int _rs;
+        private bool _isroundsin = true; 
 
 
         public AKwAR(float xval, float yval)
             : base(xval, yval)
         {
-            this.ammo = 30;
-            this._ammo = 30;
-            this._aammo = 30;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 500f;
-            this._ammoType.accuracy = 0.85f;
-            this._ammoType.penetration = 2f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("AKwAR1"));
-            this.center = new Vec2(16f, 5f);
-            this.collisionOffset = new Vec2(-15.5f, -5f);
-            this.collisionSize = new Vec2(31f, 11f);
-            this._barrelOffsetTL = new Vec2(31f, 4f);
-            this._holdOffset = new Vec2(1f, -1f);
-            this._fireSound = "deepMachineGun2";
-            this._fullAuto = true;
-            this._fireWait = 0.85f;
-            this._kickForce = 1f;
-            this.loseAccuracy = 0.05f;
-            this.maxAccuracyLost = 0.2f;
-            this._editorName = "AK with Ammo Reload";
-			this.weight = 5f;
-            this._bio = "Deprecated, bugs with sprite";
+            ammo = 30;
+            _ammo = 30;
+            _aammo = 30;
+            _ammoType = new ATMagnum {range = 500f, accuracy = 0.85f, penetration = 2f};
+            _type = "gun";
+            _graphic = new Sprite(GetPath("AKwAR1"));
+            _center = new Vec2(16f, 5f);
+            _collisionOffset = new Vec2(-15.5f, -5f);
+            _collisionSize = new Vec2(31f, 11f);
+            _barrelOffsetTL = new Vec2(31f, 4f);
+            _holdOffset = new Vec2(1f, -1f);
+            _fireSound = "deepMachineGun2";
+            _fullAuto = true;
+            _fireWait = 0.85f;
+            _kickForce = 1f;
+            loseAccuracy = 0.05f;
+            maxAccuracyLost = 0.2f;
+            _editorName = "AK with Ammo Reload";
+			_weight = 5f;
+            _bio = "Deprecated, bugs with sprite";
         }
-        
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
+
         public override void OnPressAction()
         {
-            if (this.ammo > 0)
+            if (ammo > 0)
             {
                 base.Fire();
             }
@@ -60,7 +53,7 @@ namespace TMGmod.src
                 /*if (this._isroundsin == false)
                 {
                     SFX.Play("Click");
-                    this.graphic = new Sprite(GetPath("AKwAR1"));
+                    this._graphic = new Sprite(GetPath("AKwAR1"));
                     this._isroundsin = true;
                     if (this._aammo > this._ammo)
                     {
@@ -75,11 +68,11 @@ namespace TMGmod.src
                 }*/
 
 
-                if (this._isroundsin == true && this.ammo == 0)
+                if (_isroundsin && ammo == 0)
                 {
                     SFX.Play("Click");
-                    this.graphic = new Sprite(GetPath("AKwAR"));
-                    this._isroundsin = false;
+                    _graphic = new Sprite(GetPath("AKwAR"));
+                    _isroundsin = false;
                 }
                 
 
@@ -90,23 +83,23 @@ namespace TMGmod.src
 
         public override void Update()
         {
-            if (this._isroundsin == false)
+            if (_isroundsin == false)
             {
-                _rs = _rs + 1;
+                _rs += 1;
                 if (_rs == 10)
                 {
                     SFX.Play("Click");
-                    this.graphic = new Sprite(GetPath("AKwAR1"));
-                    this._isroundsin = true;
-                    if (this._aammo > this._ammo)
+                    _graphic = new Sprite(GetPath("AKwAR1"));
+                    _isroundsin = true;
+                    if (_aammo > _ammo)
                     {
-                        this.ammo = this._ammo;
-                        this._aammo = this._aammo - this._ammo;
+                        ammo = _ammo;
+                        _aammo -= _ammo;
                     }
                     else
                     {
-                        this.ammo = this._aammo;
-                        this._aammo = 0;
+                        ammo = _aammo;
+                        _aammo = 0;
                     }
                     _rs = 0;
                 }
@@ -119,7 +112,7 @@ namespace TMGmod.src
             this._fireSound = "Click";
             this.PlayFireSound();
             this._fireSound = "deepMachineGun2";
-            this.graphic = new Sprite(GetPath("AKALFA"));
+            this._graphic = new Sprite(GetPath("AKALFA"));
             this._isroundsin = true;
             if (this._aammo + this.ammo > this._ammo)
             {

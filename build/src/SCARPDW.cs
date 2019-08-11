@@ -1,63 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Machinegun")]
+    // ReSharper disable once InconsistentNaming
     public class scarpdw : Gun
     {
-		bool upirka = false;
+        private bool _upirka;
 		
         public scarpdw (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 30;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 600f;
-            this._ammoType.accuracy = 0.79f;
-            this._ammoType.penetration = 1f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("scarpdwstock"));
-            this.center = new Vec2(14f, 5f);
-            this.collisionOffset = new Vec2(-14f, -5f);
-            this.collisionSize = new Vec2(28f, 11f);
-            this._barrelOffsetTL = new Vec2(28f, 4f);
-            this._holdOffset = new Vec2(0f, 0f);
-            this._fireSound = GetPath("sounds/scar.wav");
-            this._fullAuto = true;
-            this._fireWait = 0.8f;
-            this._kickForce = 0.4f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.3f;
-            this._editorName = "SCAR-L PDW";
-			this.weight = 5.5f;
+            ammo = 30;
+            _ammoType = new ATMagnum {range = 600f, accuracy = 0.79f, penetration = 1f};
+            _type = "gun";
+            _graphic = new Sprite(GetPath("scarpdwstock"));
+            _center = new Vec2(14f, 5f);
+            _collisionOffset = new Vec2(-14f, -5f);
+            _collisionSize = new Vec2(28f, 11f);
+            _barrelOffsetTL = new Vec2(28f, 4f);
+            _holdOffset = new Vec2(0f, 0f);
+            _fireSound = GetPath("sounds/scar.wav");
+            _fullAuto = true;
+            _fireWait = 0.8f;
+            _kickForce = 0.4f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            _editorName = "SCAR-L PDW";
+			_weight = 5.5f;
         }
         public override void Update()
         {
-            if (this.owner != null)
+            if (owner != null)
             {
-                if (base.isServerForObject)
+                if (isServerForObject)
                 {
-                    if (base.duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if (this.upirka)
+					    if (_upirka)
 					    {
-				         this.graphic = new Sprite(GetPath("scarpdwstock"));
-                         this.loseAccuracy = 0.1f;
-				         this.maxAccuracyLost = 0.2f;
-			             this.weight = 5.5f;
-						 this.upirka = false;
+                            _graphic = new Sprite(GetPath("scarpdwstock"));
+                            loseAccuracy = 0.1f;
+				            maxAccuracyLost = 0.2f;
+			                _weight = 5.5f;
+						    _upirka = false;
 					    }
-                      else
+                        else
 					    {
-				         this.graphic = new Sprite(GetPath("SCARPDW"));
-                         this.loseAccuracy = 0.3f;
-				         this.maxAccuracyLost = 0.5f;
-			             this.weight = 3f;
-						 this.upirka = true;
+                            _graphic = new Sprite(GetPath("SCARPDW"));
+                            loseAccuracy = 0.3f;
+				            maxAccuracyLost = 0.5f;
+			                _weight = 3f;
+						    _upirka = true;
 					    }
 					}
 				}

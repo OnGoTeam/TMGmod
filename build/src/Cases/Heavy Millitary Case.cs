@@ -1,34 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DuckGame;
+using JetBrains.Annotations;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Misc|Cases")]
+    [PublicAPI]
+    // ReSharper disable once InconsistentNaming
     public class hpodarok : Holdable, IPlatform
     {
-        private System.Type _contains;
+        private Type _contains;
 
         public hpodarok (float xval, float yval)
           : base(xval, yval)
         {
-            this.graphic = new Sprite(GetPath("HeavyMillitaryCase"));
-		    this.center = new Vec2(7f, 4f);
-            this.collisionOffset = new Vec2(-7f, -4f);
-            this.collisionSize = new Vec2(14f, 8f);
-            this.depth = -0.5f;
-            this.thickness = 0.0f;
-            this.weight = 3f;
-            this.collideSounds.Add("presentLand");
-            this._editorName = "Heavy Millitary Container";
+            _graphic = new Sprite(GetPath("HeavyMillitaryCase"));
+		    _center = new Vec2(7f, 4f);
+            _collisionOffset = new Vec2(-7f, -4f);
+            _collisionSize = new Vec2(14f, 8f);
+            depth = -0.5f;
+            thickness = 0.0f;
+            _weight = 3f;
+            collideSounds.Add("presentLand");
+            _editorName = "Heavy Millitary Container";
         }
 
 
 		public override void Initialize()
 	{
-		List<Type> things = new List<Type>()
+		var things = new List<Type>()
 	    {
         typeof(AKALFA),
         typeof(BarretM98),
@@ -50,26 +52,26 @@ namespace TMGmod.src
         typeof(VintorezC),
         typeof(X3X)
 		};
-		this._contains = things[Rando.Int(things.Count - 1)];
+		_contains = things[Rando.Int(things.Count - 1)];
 	}
 
 	public override void OnPressAction()
 	{
 		
-		if (this.owner != null)
+		if (owner != null)
 		{
-			Thing o = this.owner;
-			Duck d = base.duck;
+			var o = owner;
+			var d = duck;
 			if (d != null)
 			{
 				d.profile.stats.presentsOpened++;
-				base.duck.ThrowItem(true);
+				duck.ThrowItem();
 			}
 			Level.Remove(this);
 			{
-				this.Initialize();
+				Initialize();
 			}
-			Holdable newThing = Editor.CreateThing(this._contains) as Holdable;
+			var newThing = Editor.CreateThing(_contains) as Holdable;
 			if (newThing != null)
 			{
 				if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())

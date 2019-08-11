@@ -1,68 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|AutoPistol")]
     public class Vag : Gun
     {
-		float mode = 1f;
+        private int _mode = 1;
 		
 		public Vag(float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 48;
-            this._ammoType = new AT9mm();
-            this._ammoType.range = 175f;
-            this._ammoType.accuracy = 0.81f;
-            this._ammoType.penetration = 1f;
-            this._ammoType.bulletSpeed = 12f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("VAG731"));
-            this.center = new Vec2(8f, 3f);
-            this.collisionOffset = new Vec2(-7.5f, -3.5f);
-            this.collisionSize = new Vec2(16f, 11f);
-            this._barrelOffsetTL = new Vec2(16f, 1f);
-            this._holdOffset = new Vec2(-2f, -3.5f);
-            this._fireSound = GetPath("sounds/2.wav");
-            this._fullAuto = true;
-            this._fireWait = 0.3f;
-            this._kickForce = 0.1f;
-            this.loseAccuracy = 0.075f;
-            this.maxAccuracyLost = 0.225f;
-            this._editorName = "Dominator";
-			this.weight = 2f;
+            ammo = 48;
+            _ammoType = new AT9mm {range = 175f, accuracy = 0.81f, penetration = 1f, bulletSpeed = 12f};
+            _type = "gun";
+            _graphic = new Sprite(GetPath("VAG731"));
+            _center = new Vec2(8f, 3f);
+            _collisionOffset = new Vec2(-7.5f, -3.5f);
+            _collisionSize = new Vec2(16f, 11f);
+            _barrelOffsetTL = new Vec2(16f, 1f);
+            _holdOffset = new Vec2(-2f, -3.5f);
+            _fireSound = GetPath("sounds/2.wav");
+            _fullAuto = true;
+            _fireWait = 0.3f;
+            _kickForce = 0.1f;
+            loseAccuracy = 0.075f;
+            maxAccuracyLost = 0.225f;
+            _editorName = "Dominator";
+			_weight = 2f;
         }
         public override void Update()
         {
-            if (this.owner != null)
+            if (owner != null)
             {
-                if (base.isServerForObject)
+                if (isServerForObject)
                 {
-                    if (base.duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-					  if ((this.mode > 0f) && (this.mode < 2f))
-					    {
-				         this.graphic = new Sprite(GetPath("VAG732"));
-						 this._fireWait = 0.6f;
-						 this.mode = 2f;
-					    }
-                      else if ((this.mode > 1f) && (this.mode < 3f))
-					    {
-				         this.graphic = new Sprite(GetPath("VAG733"));
-						 this._fireWait = 0.9f;
-						 this.mode = 3f;
-					    }
-                      else if ((this.mode > 2f) && (this.mode < 4f))
-					    {
-				         this.graphic = new Sprite(GetPath("VAG731"));
-						 this._fireWait = 0.3f;
-						 this.mode = 1f;
-					    }
-					}
+                        switch (_mode)
+                        {
+                            case 1:
+                                _graphic = new Sprite(GetPath("VAG732"));
+                                _fireWait = 0.6f;
+                                _mode = 2;
+                                break;
+                            case 2:
+                                _graphic = new Sprite(GetPath("VAG733"));
+                                _fireWait = 0.9f;
+                                _mode = 3;
+                                break;
+                            case 3:
+                                _graphic = new Sprite(GetPath("VAG731"));
+                                _fireWait = 0.3f;
+                                _mode = 1;
+                                break;
+                        }
+                    }
 				}
 			}
 		    base.Update();

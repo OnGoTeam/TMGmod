@@ -1,110 +1,106 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DuckGame;
+using JetBrains.Annotations;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
 [EditorGroup("TMG|Shotgun")]
 public class Remington : Gun
 {
-	public sbyte _loadProgress = 100;
+    [UsedImplicitly]
+	public sbyte LoadProgress = 100;
 
-	public float _loadAnimation = 1f;
+    private float _loadAnimation = 1f;
+    [UsedImplicitly]
+	public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
 
-	public StateBinding _loadProgressBinding = new StateBinding("_loadProgress", -1, false, false);
-
-	protected SpriteMap _loaderSprite;
+    private readonly SpriteMap _loaderSprite;
 
 	public Remington(float xval, float yval)
 		: base(xval, yval)
 	{
-		this.ammo = 3;
-		this._ammoType = new AT9mm();
-        this._ammoType.range = 115f;
-        this._ammoType.accuracy = 0.57f;
-        this._ammoType.penetration = 1f;
-		this._type = "gun";
-		this.graphic = new Sprite(GetPath("Remington"));
-		this.center = new Vec2(12f, 4f);
-		this.collisionOffset = new Vec2(-12f, -4f);
-		this.collisionSize = new Vec2(24f, 7f);
-		this._barrelOffsetTL = new Vec2(24f, 1.5f);
-        this._holdOffset = new Vec2(-1f, 2f);
-		this._fireSound = "shotgunFire2";
-		this._kickForce = 2.5f;
-		this._numBulletsPerFire = 5;
-        this._ammoType.bulletSpeed = 19f;
-        this._ammoType.bulletThickness = 0.6f;
-		this._manualLoad = true;
-        this._fireWait = 5f;
-		this._loaderSprite = new SpriteMap((GetPath("RemingtonPimp")), 6, 8, false);
-		this._loaderSprite.center = new Vec2(3f, 4f);
-        this._editorName = "Remington";
+		ammo = 3;
+        _ammoType = new AT9mm {range = 115f, accuracy = 0.57f, penetration = 1f};
+        _type = "gun";
+		_graphic = new Sprite(GetPath("Remington"));
+		_center = new Vec2(12f, 4f);
+		_collisionOffset = new Vec2(-12f, -4f);
+		_collisionSize = new Vec2(24f, 7f);
+		_barrelOffsetTL = new Vec2(24f, 1.5f);
+        _holdOffset = new Vec2(-1f, 2f);
+		_fireSound = "shotgunFire2";
+		_kickForce = 2.5f;
+		_numBulletsPerFire = 5;
+        _ammoType.bulletSpeed = 19f;
+        _ammoType.bulletThickness = 0.6f;
+		_manualLoad = true;
+        _fireWait = 5f;
+        _loaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8) {center = new Vec2(3f, 4f)};
+        _editorName = "Remington";
 	}
 
 	public override void Update()
 	{
 		base.Update();
-		if (this._loadAnimation == -1f)
+		if (Math.Abs(_loadAnimation - (-1f)) < 0.0001f)
 		{
-			SFX.Play("shotgunLoad", 1f, 0f, 0f, false);
-			this._loadAnimation = 0f;
+			SFX.Play("shotgunLoad");
+			_loadAnimation = 0f;
 		}
-		if (this._loadAnimation >= 0f)
+		if (_loadAnimation >= 0f)
 		{
-			if (this._loadAnimation == 0.5f && base.ammo != 0)
+			if (Math.Abs(_loadAnimation - 0.5f) < 0.0001f && ammo != 0)
 			{
-				base._ammoType.PopShell(base.x, base.y, -this.offDir);
+				_ammoType.PopShell(x, y, -offDir);
 			}
-			if (this._loadAnimation < 1f)
+			if (_loadAnimation < 1f)
 			{
-				this._loadAnimation += 0.0625f;
+				_loadAnimation += 0.0625f;
 			}
 			else
 			{
-				this._loadAnimation = 1f;
+				_loadAnimation = 1f;
 			}
 		}
-		if (this._loadProgress >= 0)
+		if (LoadProgress >= 0)
 		{
-			if (this._loadProgress == 50)
+			if (LoadProgress == 50)
 			{
-				this.Reload(false);
+				Reload(false);
 			}
-			if (this._loadProgress < 100)
+			if (LoadProgress < 100)
 			{
-				this._loadProgress += 10;
+				LoadProgress += 10;
 			}
 			else
 			{
-				this._loadProgress = 100;
+				LoadProgress = 100;
 			}
 		}
 	}
 
 	public override void OnPressAction()
 	{
-		if (base.loaded)
+		if (loaded)
 		{
 			base.OnPressAction();
-			this._loadProgress = -1;
-			this._loadAnimation = -0.2f;
+			LoadProgress = -1;
+			_loadAnimation = -0.2f;
 		}
-		else if (this._loadProgress == -1)
+		else if (LoadProgress == -1)
 		{
-			this._loadProgress = 0;
-			this._loadAnimation = -1f;
+			LoadProgress = 0;
+			_loadAnimation = -1f;
 		}
 	}
 
 	public override void Draw()
 	{
 		base.Draw();
-		Vec2 bOffset = new Vec2(18f, -5f);
-		float offset = (float)Math.Sin((double)(this._loadAnimation * 3.14f)) * 3f;
-		base.Draw(this._loaderSprite, new Vec2(bOffset.x - 8f - offset, bOffset.y + 4f), 1);
+		var bOffset = new Vec2(18f, -5f);
+		var offset = (float)Math.Sin(_loadAnimation * 3.14f) * 3f;
+		base.Draw(_loaderSprite, new Vec2(bOffset.x - 8f - offset, bOffset.y + 4f));
 	}
 }
 }

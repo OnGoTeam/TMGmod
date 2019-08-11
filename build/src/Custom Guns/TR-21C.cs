@@ -1,50 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Misc|Custom Guns")]
+    // ReSharper disable once InconsistentNaming
     public class TR21C : Gun
     {
-  
-     private SpriteMap _sprite;
-     public int teksturka = 1;
+        private readonly SpriteMap _sprite;
+        private readonly int _teksturka;
 		
         public TR21C (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 30;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 110f;
-            this._ammoType.accuracy = 0.8f;
-            this._ammoType.penetration = 1f;
-            this._numBulletsPerFire = 4;
-            this._ammoType.bulletThickness = 0.2f;
-            this._type = "gun";
-            this._sprite = new SpriteMap((GetPath("TR-21lmg2p")), 22, 14, false);
-            this.graphic = (Sprite)this._sprite;
-            this.teksturka = Rando.Int(0, 3);
-            this._sprite.frame = teksturka;
-            this.center = new Vec2(11f, 6f);
-            this.collisionOffset = new Vec2(-11f, -6f);
-            this.collisionSize = new Vec2(22f, 14f);
-            this._barrelOffsetTL = new Vec2(22f, 4f);
-            this._fireSound = "shotgunFire";
-            this._fullAuto = true;
-            this._fireWait = 0.8f;
-            this._kickForce = 1.6f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.25f;
-            this._holdOffset = new Vec2(-5f, 2f);
-            this._editorName = "Crocodile with Extended Mag";
-			this.weight = 7f;
+            ammo = 30;
+            _ammoType = new ATMagnum {range = 110f, accuracy = 0.8f, penetration = 1f};
+            _numBulletsPerFire = 4;
+            _ammoType.bulletThickness = 0.2f;
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("TR-21lmg2p"), 22, 14);
+            _graphic = _sprite;
+            _teksturka = Rando.Int(0, 3);
+            _sprite.frame = _teksturka;
+            _center = new Vec2(11f, 6f);
+            _collisionOffset = new Vec2(-11f, -6f);
+            _collisionSize = new Vec2(22f, 14f);
+            _barrelOffsetTL = new Vec2(22f, 4f);
+            _fireSound = "shotgunFire";
+            _fullAuto = true;
+            _fireWait = 0.8f;
+            _kickForce = 1.6f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.25f;
+            _holdOffset = new Vec2(-5f, 2f);
+            _editorName = "Crocodile with Extended Mag";
+			_weight = 7f;
         }
         public override void Draw()
         {
-            this._sprite.frame = teksturka;
+            _sprite.frame = _teksturka;
             base.Draw();
         }
     }

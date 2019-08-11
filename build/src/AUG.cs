@@ -1,76 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Machinegun")]
+    // ReSharper disable once InconsistentNaming
     public class aug : Gun
     {
-        private SpriteMap _sprite;
+        private readonly SpriteMap _sprite;
 
-        bool grip = false;
+        private bool _grip;
 		
         public aug (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 42;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 650f;
-            this._ammoType.accuracy = 0.91f;
-            this._ammoType.penetration = 1f;
-            this._type = "gun";
-            this._sprite = new SpriteMap(GetPath("AUGSM"), 30, 12);
-            this.graphic = this._sprite;
-            this.center = new Vec2(15f, 6f);
-            this.collisionOffset = new Vec2(-15f, -6f);
-            this.collisionSize = new Vec2(30f, 12f);
-            this._barrelOffsetTL = new Vec2(30f, 5f);
-            this._holdOffset = new Vec2(-3f, 0f);
-            this._fireSound = GetPath("sounds/scar.wav");
-            this._fullAuto = true;
-            this._fireWait = 0.8f;
-            this._kickForce = 0.7f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.2f;
-            this._editorName = "AUG A1";
-			this.weight = 5.5f;
-            this._sprite.AddAnimation("base", 0f, false, new int[]
-            {
-                0,
-            });
-            this._sprite.AddAnimation("grip", 0f, false, new int[]
-            {
-                1,
-            });
+            ammo = 42;
+            _ammoType = new ATMagnum {range = 650f, accuracy = 0.91f, penetration = 1f};
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("AUGSM"), 30, 12);
+            _graphic = _sprite;
+            _center = new Vec2(15f, 6f);
+            _collisionOffset = new Vec2(-15f, -6f);
+            _collisionSize = new Vec2(30f, 12f);
+            _barrelOffsetTL = new Vec2(30f, 5f);
+            _holdOffset = new Vec2(-3f, 0f);
+            _fireSound = GetPath("sounds/scar.wav");
+            _fullAuto = true;
+            _fireWait = 0.8f;
+            _kickForce = 0.7f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.2f;
+            _editorName = "AUG A1";
+			_weight = 5.5f;
+            _sprite.AddAnimation("base", 0f, false, 0);
+            _sprite.AddAnimation("grip", 0f, false, 1);
         }
         public override void Update()
         {
-            if (this.owner != null)
+            if (owner != null)
             {
-                if (base.isServerForObject)
+                if (isServerForObject)
                 {
-                    if (base.duck.inputProfile.Pressed("QUACK", false))
+                    if (duck.inputProfile.Pressed("QUACK"))
                     {
-			    	    if (this.grip)
+			    	    if (_grip)
 				 	    {
-					        this._sprite.SetAnimation("base");
-                            this._fireWait = 0.8f;
-                            this.loseAccuracy = 0.1f;
-		   		            this.maxAccuracyLost = 0.2f;
-	   		     			this._ammoType.accuracy = 0.91f;
-						    this.grip = false;
+					        _sprite.SetAnimation("base");
+                            _fireWait = 0.8f;
+                            loseAccuracy = 0.1f;
+		   		            maxAccuracyLost = 0.2f;
+	   		     			_ammoType.accuracy = 0.91f;
+						    _grip = false;
 					    }
                         else
 					    {
-					        this._sprite.SetAnimation("grip");
-                            this._fireWait = 1.2f;
-                            this.loseAccuracy = 0.25f;
-				            this.maxAccuracyLost = 0.125f;
-						    this._ammoType.accuracy = 0.94f;
-						    this.grip = true;
+					        _sprite.SetAnimation("grip");
+                            _fireWait = 1.2f;
+                            loseAccuracy = 0.25f;
+				            maxAccuracyLost = 0.125f;
+						    _ammoType.accuracy = 0.94f;
+						    _grip = true;
 					    }
 					}
 				}

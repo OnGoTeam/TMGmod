@@ -1,49 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
+using JetBrains.Annotations;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG")]
     public class M960 : Gun
     {
-		
-		public EditorProperty<bool> limited = new EditorProperty<bool>(false, null, 0f, 1f, 1f, null, false, false);
+		[UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        public EditorProperty<bool> limited = new EditorProperty<bool>(false, null, 0f, 1f, 1f);
 		
         public M960(float xval, float yval)
             : base(xval, yval)
         {
-            this.ammo = 50;
-            this._ammoType = new AT9mm();
-            this._ammoType.range = 185f;
-            this._ammoType.accuracy = 0.9f;
-            this._type = "gun";
-            base.graphic = new Sprite(GetPath("M960"), 0f, 0f);
-            this.center = new Vec2(13.5f, 3.5f);
-            this.collisionOffset = new Vec2(-11.5f, -3.5f);
-            this.collisionSize = new Vec2(23f, 7f);
-            this._barrelOffsetTL = new Vec2(23f, 2.5f);
-            this._fireSound = "smg";
-            this._fullAuto = true;
-            this._fireWait = 0.15f;
-            this._kickForce = 0.3f;
-            this._holdOffset = new Vec2(2.5f, 1.5f);
-            this.loseAccuracy = 0.01f;
-            this.maxAccuracyLost = 0.05f;
-            this._editorName = "Calico M960";
-			this.weight = 1.5f;
+            ammo = 50;
+            _ammoType = new AT9mm {range = 185f, accuracy = 0.9f};
+            _type = "gun";
+            _graphic = new Sprite(GetPath("M960"));
+            _center = new Vec2(13.5f, 3.5f);
+            _collisionOffset = new Vec2(-11.5f, -3.5f);
+            _collisionSize = new Vec2(23f, 7f);
+            _barrelOffsetTL = new Vec2(23f, 2.5f);
+            _fireSound = "smg";
+            _fullAuto = true;
+            _fireWait = 0.15f;
+            _kickForce = 0.3f;
+            _holdOffset = new Vec2(2.5f, 1.5f);
+            loseAccuracy = 0.01f;
+            maxAccuracyLost = 0.05f;
+            _editorName = "Calico M960";
+			_weight = 1.5f;
         }
         public override void Initialize()
         {
 			if (!(Level.current is Editor))
             {
-                if (this.limited.value == true)
+                if (limited.value)
                 {
-                 this._fireWait = 0.5f;
-                 this._ammoType.accuracy = 0.95f;
+                 _fireWait = 0.5f;
+                 _ammoType.accuracy = 0.95f;
                 }
             }
             base.Initialize();

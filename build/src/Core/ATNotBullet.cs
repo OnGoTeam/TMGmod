@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DuckGame;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
+    // ReSharper disable once InconsistentNaming
     public class ATNB : AmmoType
     {
         public ATNB()
         {
-			this.bulletLength = 1f;
-			this.accuracy = 1f;
-            this.combustable = true;
-            this.bulletSpeed = 5f;
-			this.range = 0.3f;
-			this.penetration = 175f;
+			bulletLength = 1f;
+			accuracy = 1f;
+            combustable = true;
+            bulletSpeed = 5f;
+			range = 0.3f;
+			penetration = 175f;
         }
     }
 }

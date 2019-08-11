@@ -1,37 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DuckGame;
+using JetBrains.Annotations;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Misc|Cases")]
+    [PublicAPI]
+    // ReSharper disable once InconsistentNaming
     public class lpodarok : Holdable, IPlatform
     {
-        private System.Type _contains;
-	    private SpriteMap _sprite;
+        private Type _contains;
+	    private readonly SpriteMap _sprite;
 
         public lpodarok (float xval, float yval)
           : base(xval, yval)
         {
-            this._sprite = new SpriteMap((GetPath("CivilianCase")), 14, 8, false);
-            this.graphic = (Sprite)this._sprite;	
-		    this._sprite.frame = Rando.Int(0, 4);
-		    this.center = new Vec2(7f, 4f);
-            this.collisionOffset = new Vec2(-7f, -4f);
-            this.collisionSize = new Vec2(14f, 8f);
-            this.depth = -0.5f;
-            this.thickness = 0.0f;
-            this.weight = 3f;
-            this.collideSounds.Add("presentLand");
-            this._editorName = "Civilian Container";
+            _sprite = new SpriteMap(GetPath("CivilianCase"), 14, 8);
+            _graphic = _sprite;	
+		    _sprite.frame = Rando.Int(0, 4);
+		    _center = new Vec2(7f, 4f);
+            _collisionOffset = new Vec2(-7f, -4f);
+            _collisionSize = new Vec2(14f, 8f);
+            depth = -0.5f;
+            thickness = 0.0f;
+            _weight = 3f;
+            collideSounds.Add("presentLand");
+            _editorName = "Civilian Container";
         }
 
 
 		public override void Initialize()
 	{
-		List<Type> things = new List<Type>()
+		var things = new List<Type>()
 	    {
         typeof(CZ75),
         typeof(AF2011),
@@ -47,43 +49,39 @@ namespace TMGmod.src
         typeof(MAPFire),	
         typeof(bren)
 		};
-		this._contains = things[Rando.Int(things.Count - 1)];
+		_contains = things[Rando.Int(things.Count - 1)];
 	}
 
 	public override void OnPressAction()
 	{
-		
-		if (this.owner != null)
-		{
-			Thing o = this.owner;
-			Duck d = base.duck;
-			if (d != null)
-			{
-				d.profile.stats.presentsOpened++;
-				base.duck.ThrowItem(true);
-			}
-			Level.Remove(this);
-			{
-				this.Initialize();
-			}
-			Holdable newThing = Editor.CreateThing(this._contains) as Holdable;
-			if (newThing != null)
-			{
-				if (Rando.Int(500) == 1 && newThing is Gun && (newThing as Gun).CanSpawnInfinite())
-				{
-					(newThing as Gun).infiniteAmmoVal = true;
-					(newThing as Gun).infinite.value = true;
-				}
-				newThing.x = o.x;
-				newThing.y = o.y;
-				Level.Add(newThing);
-				if (d != null)
-				{
-					d.GiveHoldable(newThing);
-					d.resetAction = true;
-				}
-			}
-		}
-	}
+        if (owner == null) return;
+        //else
+        var o = owner;
+        var d = duck;
+        if (d != null)
+        {
+            d.profile.stats.presentsOpened++;
+            duck.ThrowItem();
+        }
+        Level.Remove(this);
+        {
+            Initialize();
+        }
+        if (Editor.CreateThing(_contains) is Holdable newThing)
+        {
+            if (Rando.Int(500) == 1 && newThing is Gun thing && thing.CanSpawnInfinite())
+            {
+                thing.infiniteAmmoVal = true;
+                thing.infinite.value = true;
+            }
+            newThing.x = o.x;
+            newThing.y = o.y;
+            Level.Add(newThing);
+            if (d == null) return;
+            //else
+            d.GiveHoldable(newThing);
+            d.resetAction = true;
+        }
+    }
     }
 }

@@ -1,36 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DuckGame;
+﻿using DuckGame;
 
+// ReSharper disable once CheckNamespace
 namespace TMGmod.src
 {
     [EditorGroup("TMG|Rifle")]
+    // ReSharper disable once InconsistentNaming
     public class hk417 : Gun
     {
         public hk417 (float xval, float yval)
           : base(xval, yval)
         {
-            this.ammo = 20;
-            this._ammoType = new ATMagnum();
-            this._ammoType.range = 700f;
-            this._ammoType.accuracy = 0.9f;
-            this._ammoType.penetration = 1f;
-            this._type = "gun";
-            this.graphic = new Sprite(GetPath("Hk417"));
-            this.center = new Vec2(15f, 5f);
-            this.collisionOffset = new Vec2(-14.5f, -5f);
-            this.collisionSize = new Vec2(30f, 10f);
-            this._barrelOffsetTL = new Vec2(31f, 3f);
-            this._fireSound = GetPath("sounds/HeavyRifle.wav");
-            this._fullAuto = false;
-            this._fireWait = 0.8f;
-            this._kickForce = 0.7f;
-            this.loseAccuracy = 0.1f;
-            this.maxAccuracyLost = 0.3f;
-            this._editorName = "Hk-417C";
-			this.weight = 3.5f;
+            ammo = 20;
+            _ammoType = new ATMagnum {range = 700f, accuracy = 0.9f, penetration = 1f};
+            _type = "gun";
+            _graphic = new Sprite(GetPath("Hk417"));
+            _center = new Vec2(15f, 5f);
+            _collisionOffset = new Vec2(-14.5f, -5f);
+            _collisionSize = new Vec2(30f, 10f);
+            _barrelOffsetTL = new Vec2(31f, 3f);
+            _fireSound = GetPath("sounds/HeavyRifle.wav");
+            _fullAuto = false;
+            _fireWait = 0.8f;
+            _kickForce = 0.7f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            _editorName = "Hk-417C";
+			_weight = 3.5f;
         }
     }
 }
