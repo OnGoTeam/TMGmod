@@ -30,11 +30,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <Import Project="dglink.csproj" />
   <ItemGroup>
-    <Reference Include="DuckGame">
-      <HintPath>G:\SteamLibrary\steamapps\common\Duck Game\DuckGame.exe</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
