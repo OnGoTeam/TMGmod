@@ -2,21 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
-
-// The title of your mod, as displayed in menus
-[assembly: AssemblyTitle("TMG Mod")]
-
-// The author of the mod
-[assembly: AssemblyCompany("OGT")]
-
-// The description of the mod
-[assembly: AssemblyDescription("Current update: Release")]
-
-// The mod's version
-[assembly: AssemblyVersion("1.0.0.0")]
 
 // ReSharper disable once CheckNamespace
 namespace DuckGame.TMGmod
@@ -27,10 +14,11 @@ namespace DuckGame.TMGmod
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         internal static string AssemblyName { get; private set; }
-		
-		// The mod's priority; this property controls the load order of the mod.
 
-        // This function is run before all mods are finished loading.
+        public TMGmod()
+        {
+            Debug.Log("TMGC loading");
+        }
 
         // This function is run after all mods are loaded.
         protected override void OnPostInitialize()
@@ -41,7 +29,7 @@ namespace DuckGame.TMGmod
             if (!Directory.Exists(tmgModDirectory))
                 Directory.CreateDirectory(tmgModDirectory);
 			
-            CreateTMGLevelPlaylist();
+            CreatingTMGLevels();
 		}
 
         // ReSharper disable once InconsistentNaming
@@ -51,27 +39,25 @@ namespace DuckGame.TMGmod
         }
 
         // ReSharper disable once InconsistentNaming
-        private static void CreateTMGLevelPlaylist()
-		{
-            var levelsLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)\\");
-            if (!Directory.Exists(levelsLocation))
-                Directory.CreateDirectory(levelsLocation);
-            IList<string> levelList = new List<string>();
+        private static void CreatingTMGLevels()
+        {
+            // Сначала определяем левелы, и копируем их
+            var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMGC\\");
+            if (!Directory.Exists(levels)) Directory.CreateDirectory(levels);
+            IList<string> levelslist = new List<string>();
 
-            // copy levels over
             foreach (var s in Directory.GetFiles(GetPath<TMGmod>("levels")))
             {
-                var saveString = AssemblyName + "\\content\\levels\\";
-                var oldLocation = s.Replace('/', '\\');
-                var newLocation = levelsLocation + oldLocation.Substring(oldLocation.IndexOf(saveString, StringComparison.Ordinal) + saveString.Length);
-                if (!File.Exists(newLocation) || !GetMD5Hash(File.ReadAllBytes(oldLocation)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(newLocation))))
-                    File.Copy(oldLocation, newLocation, true);
-                levelList.Add(newLocation);
-			}
-			// create playlist
-            var tmgPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMGlev.play");
+                var takefrom = AssemblyName + "\\content\\levels\\";
+                var firstlocated = s.Replace('/', '\\');
+                var copyto = levels + firstlocated.Substring(firstlocated.IndexOf(takefrom, StringComparison.Ordinal) + takefrom.Length);
+                if (!File.Exists(copyto) || !GetMD5Hash(File.ReadAllBytes(firstlocated)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(copyto)))) File.Copy(firstlocated, copyto, true);
+                levelslist.Add(copyto);
+            }
+            // Потом создаём плейлист
+            var tmgPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMGC.play");
             var playlistElement = new XElement("playlist");
-            foreach (var s in levelList)
+            foreach (var s in levelslist)
             {
                 var levelElement = new XElement("element", s.Replace('\\', '/'));
                 playlistElement.Add(levelElement);
@@ -81,6 +67,16 @@ namespace DuckGame.TMGmod
             var contents = playlist.ToString();
             if (string.IsNullOrWhiteSpace(contents))
                 throw new Exception("Blank XML (" + tmgPlaylistLocation + ")");
+            if (File.Exists(tmgPlaylistLocation) && File.ReadAllText(tmgPlaylistLocation).Equals(contents)) return;
+            //else
+            File.WriteAllText(tmgPlaylistLocation, contents);
+            SaveAsPlay(tmgPlaylistLocation);
         }
-	}
+        private static void SaveAsPlay(string path)
+        {
+            if (MonoMain.disableCloud || MonoMain.cloudNoSave)
+                return;
+            File.ReadAllBytes(path);
+        }
+    }
 }

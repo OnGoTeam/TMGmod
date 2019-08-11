@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
