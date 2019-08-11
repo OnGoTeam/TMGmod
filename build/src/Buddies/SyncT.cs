@@ -44,7 +44,7 @@ namespace TMGmod.Buddies
             if (duck != null && duck.IsQuacking())
             {
                 _ammoType.penetration = Rando.Float(0,5);
-                _ammoType.range = Rando.Float(0, 500);
+                _ammoType.range = Rando.Float(0, 500) * Rando.Float(0, 1) * Rando.Float(0, 1) * Rando.Float(0, 1);
             }
             base.Update();
         }
