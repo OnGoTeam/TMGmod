@@ -13,10 +13,22 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        private bool _loaded = true;
-        private int _yee = 20;
-        private bool _yeeenabled;
-        private bool _shootwasyes;
+        [UsedImplicitly]
+        public bool Loaded = true;
+        [UsedImplicitly]
+        public StateBinding LddBinding = new StateBinding(nameof(Loaded));
+        [UsedImplicitly]
+        public int Yee = 20;
+        [UsedImplicitly]
+        public StateBinding YeeBinding = new StateBinding(nameof(Yee));
+        [UsedImplicitly]
+        public bool Yeeenabled;
+        [UsedImplicitly]
+        public StateBinding YeeeBinding = new StateBinding(nameof(Yeeenabled));
+        [UsedImplicitly]
+        public bool Shootwasyes;
+        [UsedImplicitly]
+        public StateBinding SwyBinding = new StateBinding(nameof(Shootwasyes));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -63,42 +75,42 @@ namespace TMGmod
             if (ammo % 2 == 0) _ammoType = new ATSRM1(); else _ammoType = new ATSRM2();
             if (ammo <= 0)
             {
-                _loaded = false;
+                Loaded = false;
                 _sprite.frame %= 10;
             }
-            if (_yeeenabled) _yee -= 1;
-            if (!_yeeenabled && _yee < 20) _yee = 20;
-            if (_yee <= 0)
+            if (Yeeenabled) Yee -= 1;
+            if (!Yeeenabled && Yee < 20) Yee = 20;
+            if (Yee <= 0)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
                 _sprite.frame %= 10;
-                _yeeenabled = false;
-                _loaded = true;
+                Yeeenabled = false;
+                Loaded = true;
             }
             base.Update();
         }
         public override void OnPressAction()
         {
-            if (!_loaded && ammo > 0 && !_yeeenabled)
+            if (!Loaded && ammo > 0 && !Yeeenabled)
             {
                 if (_sprite.frame < 10) SFX.Play(GetPath("sounds/tuduc.wav"));
-                _yeeenabled = true;
+                Yeeenabled = true;
                 _sprite.frame = _sprite.frame % 10 + 10;
             }
-            else if (_loaded) Fire();
+            else if (Loaded) Fire();
         }
         public override void OnReleaseAction()
         {
-            if (_shootwasyes)
+            if (Shootwasyes)
             {
-                _shootwasyes = false;
-                _loaded = false;
+                Shootwasyes = false;
+                Loaded = false;
             }
             base.OnReleaseAction();
         }
         public override void Fire()
         {
-            _shootwasyes = true;
+            Shootwasyes = true;
             base.Fire();
         }
         private void UpdateSkin()
@@ -110,6 +122,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
