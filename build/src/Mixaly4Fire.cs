@@ -44,7 +44,7 @@ namespace TMGmod.src
                         {
                             _graphic = new Sprite(GetPath("uzipro"));
                             _ammoType = new AT9mm {range = 70f, accuracy = 0.9f, penetration = 3f};
-                            _barrelOffsetTL = new Vec2(11f, 3f);	
+                            _barrelOffsetTL = new Vec2(11f, 3f);
                             _glooshitel = false;
                             _fireSound = GetPath("sounds/smg.wav");
                         }
