@@ -11,7 +11,7 @@ namespace TMGmod.Custom_Guns
     /// <inheritdoc cref="IAmAr"/>
     /// <inheritdoc cref="IHaveSkin"/>
     /// <summary>
-    /// Has switched laser
+    /// Has switchable laser
     /// </summary>
     [EditorGroup("TMG|Rifle|Burst|Custom")]
     // ReSharper disable once InconsistentNaming
@@ -20,11 +20,11 @@ namespace TMGmod.Custom_Guns
         /// <summary>
         /// whether laser is on
         /// </summary>
-        public bool Laserino;
+        [UsedImplicitly] public bool Laserino;
         /// <summary>
         /// Laser syncing
         /// </summary>
-        public StateBinding LaserBinding = new StateBinding(nameof(Laserino));
+        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(Laserino));
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
