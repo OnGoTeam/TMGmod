@@ -6,7 +6,6 @@ namespace TMGmod.src
     [EditorGroup("TMG|Misc|Custom Guns")]
     public class Glock18C : Gun
     {
-		
         public Glock18C(float xval, float yval)
           : base(xval, yval)
         {

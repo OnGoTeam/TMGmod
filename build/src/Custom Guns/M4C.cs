@@ -8,7 +8,6 @@ namespace TMGmod.src
     [PublicAPI]
     public class M4A1C : Gun
     {
-		
 		public M4A1C (float xval, float yval)
           : base(xval, yval)
         {

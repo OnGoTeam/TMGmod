@@ -7,7 +7,6 @@ namespace TMGmod.src
     // ReSharper disable once InconsistentNaming
     public class MG44 : Gun
     {
-		
 		public MG44 (float xval, float yval)
           : base(xval, yval)
         {
@@ -30,10 +29,17 @@ namespace TMGmod.src
 			_weight = 7.5f;
         }
 		public override void Update()
-		{
-		base.Update();
-			if (ammo == 1) _graphic = new Sprite(GetPath("mg44req1"));
-			if (ammo == 0) _graphic = new Sprite(GetPath("mg44req2"));
-		}
+        {
+            base.Update();
+            switch (ammo)
+            {
+                case 1:
+                    _graphic = new Sprite(GetPath("mg44req1"));
+                    break;
+                case 0:
+                    _graphic = new Sprite(GetPath("mg44req2"));
+                    break;
+            }
+        }
 	}
 }

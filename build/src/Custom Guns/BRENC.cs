@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 // ReSharper disable once CheckNamespace
 namespace TMGmod.src
@@ -7,8 +8,12 @@ namespace TMGmod.src
     // ReSharper disable once InconsistentNaming
     public class bren : Gun
     {
-        private bool _silencer;
-		
+        [UsedImplicitly]
+        public bool Silencer;
+        [UsedImplicitly]
+        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+
+
         public bren (float xval, float yval)
           : base(xval, yval)
 		{
@@ -38,7 +43,7 @@ namespace TMGmod.src
                 {
                     if (duck.inputProfile.Pressed("QUACK"))
                     {
-				        if (_silencer)
+				        if (Silencer)
                         {
                             _graphic = new Sprite(GetPath("CZ805BrenZ"));
                             _fireSound = "deepMachineGun2";
@@ -46,7 +51,7 @@ namespace TMGmod.src
                             loseAccuracy = 0.025f;
                             maxAccuracyLost = 0.2f;
                             _barrelOffsetTL = new Vec2(39f, 4f);
-                            _silencer = false;
+                            Silencer = false;
                         }
                         else
                         {
@@ -56,7 +61,7 @@ namespace TMGmod.src
                             loseAccuracy = 0.02f;
                             maxAccuracyLost = 0.18f;
                             _barrelOffsetTL = new Vec2(42.5f, 4f);
-                            _silencer = true;
+                            Silencer = true;
                         }
 					}
 				}

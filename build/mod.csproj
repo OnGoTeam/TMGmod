@@ -49,7 +49,6 @@
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
-    <Compile Include="src\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AUG.cs" />
     <Compile Include="src\BarretM98.cs" />

@@ -8,7 +8,7 @@ namespace TMGmod.src
     public class AKALFA : Gun
     {
         private readonly SpriteMap _sprite;
-        private float _stock;
+        private bool _stock;
 		
         public AKALFA (float xval, float yval)
           : base(xval, yval)
@@ -51,12 +51,12 @@ namespace TMGmod.src
                 {
                     if (duck.inputProfile.Pressed("QUACK"))
                     {
-					    if (_stock > 0f)
+					    if (_stock)
 					    {
 					        _sprite.SetAnimation("base");
                             _ammoType.accuracy = 1f;
                             loseAccuracy = 0f;
-		                 	_stock = 0f;
+		                 	_stock = false;
 						    _weight = 5.5f;
 					    }
                         else
@@ -64,7 +64,7 @@ namespace TMGmod.src
 					        _sprite.SetAnimation("stock");
                             _ammoType.accuracy = 0.92f;
                             loseAccuracy = 0.045f;
-		                	_stock = 1f;
+		                	_stock = true;
 						    _weight = 3f;
 					    }
 					}
