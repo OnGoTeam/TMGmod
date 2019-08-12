@@ -8,24 +8,14 @@ using TMGmod.Core.WClasses;
 namespace TMGmod.Custom_Guns
 {
     /// <inheritdoc cref="BaseGun"/>
-    /// /// <inheritdoc cref="IHaveSkin"/>
-    /// /// <inheritdoc cref="IAmLmg"/>
+    /// <inheritdoc cref="IHaveSkin"/>
+    /// <inheritdoc cref="IAmLmg"/>
     [EditorGroup("TMG|LMG|Custom")]
     // ReSharper disable once InconsistentNaming
     public class MG44C : BaseGun, IHaveSkin, IAmLmg
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        /*
-        private const float DefaultAccuracy = .75f;
-        private const float MaxRaise = .6f;
-        private const float EpsilonD = .2f;
-        private const float EpsilonK = .1f;
-        private const float EpsilonX = .8f;
-        private const float EpsilonY = EpsilonK / EpsilonX;
-        private const float AcclA = .045f;
-        private const float AcclB = .225f;
-        private float _raisestat;*/
         /// <inheritdoc />
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
@@ -75,55 +65,6 @@ namespace TMGmod.Custom_Guns
             _weight = 6f;
         }
 
-        //// <inheritdoc />
-        /*
-        public override void Update()
-        {
-            base.Update();
-            
-            if (_raisestat > MaxRaise) _raisestat = MaxRaise;
-            if (_raisestat > 0f)
-            {
-                var δα = -EpsilonY - EpsilonK / (_raisestat - EpsilonX);
-
-                if (offDir < 0)
-                {
-                    handAngle = δα;
-                }
-                else
-                {
-                    handAngle = -δα;
-                }
-            }
-            _raisestat -= .015f;
-            if (duck == null)
-            {
-                _raisestat = 0f;
-                handAngle = 0f;
-            }
-            else
-            {
-                if (duck.crouch || duck.sliding) _raisestat -= .005f;
-                if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
-                if (!(_raisestat < 0f)) return;
-                _raisestat = 0f;
-                handAngle = 0f;
-            }
-        }
-        */
-
-        /*
-        public override void Fire()
-        {
-            var wasammo = ammo > 0;
-            _ammoType.accuracy = _raisestat < AcclA ? 1f : DefaultAccuracy;
-            base.Fire();
-            if (!wasammo) return;
-            if (_raisestat < AcclA) _raisestat = AcclB;
-            var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
-            _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
-        }
-        */
         private void UpdateSkin()
         {
             var bublic = Skin.value;
