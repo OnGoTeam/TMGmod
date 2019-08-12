@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
@@ -12,23 +13,23 @@ namespace TMGmod.Custom_Guns
         /// <summary>
         /// Mode id
         /// </summary>
-        public int Mode;
+        [UsedImplicitly] public int Mode;
         /// <summary>
         /// Mode syncing
         /// </summary>
-        public StateBinding ModeBinding = new StateBinding(nameof(Mode));
+        [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
         /// <summary>
         /// Ammo 0
         /// </summary>
-        public int Ammom0 = 30;
+        [UsedImplicitly] public int Ammom0 = 30;
         /// <summary>
         /// Ammo 1
         /// </summary>
-        public int Ammom1 = 1;
+        [UsedImplicitly] public int Ammom1 = 1;
         /// <summary>
         /// Ammo for modes
         /// </summary>
-        public int[] Ammom
+        [UsedImplicitly] public int[] Ammom
         {
             get => new[] {Ammom0, Ammom1};
             set {
@@ -39,11 +40,11 @@ namespace TMGmod.Custom_Guns
         /// <summary>
         /// Ammo 0 binding
         /// </summary>
-        public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
+        [UsedImplicitly] public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
         /// <summary>
         /// Ammo 1 binding
         /// </summary>
-        public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
+        [UsedImplicitly] public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
             new AT9mm
