@@ -20,7 +20,30 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4, 5 });
-        public bool Stock = true;
+        [UsedImplicitly]
+        public bool Stock
+        {
+            get => _sprite.frame < 10;
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 10;
+                    _ammoType.accuracy = 1f;
+                    loseAccuracy = 0f;
+                    weight = 5.5f;
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _ammoType.accuracy = 0.92f;
+                    loseAccuracy = 0.1f;
+                    weight = 3.5f;
+                }
+            }
+        }
+        [UsedImplicitly]
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
 
         public AKALFA (float xval, float yval)
@@ -67,22 +90,6 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (!Stock)
-                {
-                    _sprite.frame %= 10;
-                    _ammoType.accuracy = 1f;
-                    loseAccuracy = 0f;
-                    weight = 5.5f;
-                }
-                else
-                {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    _ammoType.accuracy = 0.92f;
-                    loseAccuracy = 0.1f;
-                    weight = 3.5f;
-                }
-
                 Stock = !Stock;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

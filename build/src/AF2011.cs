@@ -13,8 +13,6 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public bool Silencer;
-        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
