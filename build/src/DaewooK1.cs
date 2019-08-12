@@ -69,7 +69,6 @@ namespace TMGmod
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.24f;
                     weight = 4.5f;
-                    Stock = false;
                 }
                 else
                 {
@@ -77,8 +76,9 @@ namespace TMGmod
                     loseAccuracy = 0.2f;
                     maxAccuracyLost = 0.36f;
                     weight = 3f;
-                    Stock = true;
                 }
+
+                Stock = !Stock;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();

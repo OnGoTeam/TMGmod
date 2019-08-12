@@ -20,7 +20,32 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 4, 5, 6, 8 });
-        public bool Grip;
+        [UsedImplicitly]
+        public bool Grip
+        {
+            get => _sprite.frame > 10;
+            set
+            {
+                if (!value)
+                {
+                    _sprite.frame %= 10;
+                    _fireWait = 0.8f;
+                    loseAccuracy = 0.1f;
+                    maxAccuracyLost = 0.2f;
+                    _ammoType.accuracy = 0.91f;
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _fireWait = 1.2f;
+                    loseAccuracy = 0.25f;
+                    maxAccuracyLost = 0.125f;
+                    _ammoType.accuracy = 0.94f;
+                }
+            }
+        }
+        [UsedImplicitly]
         public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
         public AUGA1 (float xval, float yval)
@@ -61,24 +86,7 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Grip)
-                {
-                    _sprite.frame -= 10;
-                    _fireWait = 0.8f;
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.2f;
-                    _ammoType.accuracy = 0.91f;
-                    Grip = false;
-                }
-                else
-                {
-                    _sprite.frame += 10;
-                    _fireWait = 1.2f;
-                    loseAccuracy = 0.25f;
-                    maxAccuracyLost = 0.125f;
-                    _ammoType.accuracy = 0.94f;
-                    Grip = true;
-                }
+                Grip = !Grip;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
@@ -92,6 +100,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

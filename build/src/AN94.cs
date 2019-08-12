@@ -10,7 +10,30 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
-        public bool Stock = true;
+        [UsedImplicitly]
+        public bool Stock
+        {
+            get => _sprite.frame < 10;
+            set
+            {
+                if (value)
+                {
+                    loseAccuracy = 0.15f;
+                    weight = 5.5f;
+                    _sprite.frame %= 10;
+                    maxAccuracyLost = 0.1f;
+                }
+                else
+                {
+                    loseAccuracy = 0.2f;
+                    weight = 2.75f;
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    maxAccuracyLost = 0.3f;
+                }
+            }
+        }
+        [UsedImplicitly]
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
@@ -61,22 +84,6 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (!Stock)
-                {
-                    loseAccuracy = 0.15f;
-                    weight = 5.5f;
-                    _sprite.frame %= 10;
-                    maxAccuracyLost = 0.1f;
-                }
-                else
-                {
-                    loseAccuracy = 0.2f;
-                    weight = 2.75f;
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    maxAccuracyLost = 0.3f;
-                }
-
                 Stock = !Stock;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

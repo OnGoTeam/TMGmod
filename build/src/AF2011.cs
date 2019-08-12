@@ -56,7 +56,7 @@ namespace TMGmod
         {
             if (ammo > 0)
             {
-                _ammoType.accuracy = _ammoType.accuracy - 0.05f;
+                _ammoType.accuracy -= 0.05f;
             }
             base.Fire();
         }
@@ -65,7 +65,7 @@ namespace TMGmod
         {
             if (_ammoType.accuracy + 0.01f < 0.95f)
             {
-                _ammoType.accuracy = _ammoType.accuracy + 0.003f;
+                _ammoType.accuracy += 0.003f;
             }
             else
             {

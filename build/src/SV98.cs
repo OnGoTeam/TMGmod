@@ -56,11 +56,11 @@ namespace TMGmod
             var ang = angle;
             if (offDir <= 0)
             {
-                angle = angle + _angleOffset;
+                angle += _angleOffset;
             }
             else
             {
-                angle = angle - _angleOffset;
+                angle -= _angleOffset;
             }
             base.Draw();
             angle = ang;
@@ -115,15 +115,15 @@ namespace TMGmod
                     case 1 when _angleOffset >= 0.1f:
                     {
                         Sniper sniper1 = this;
-                        sniper1._loadState = sniper1._loadState + 1;
+                        sniper1._loadState += 1;
                         break;
                     }
                     case 1:
-                        _angleOffset = _angleOffset + 0.003f;
+                        _angleOffset += 0.003f;
                         break;
                     case 2:
                     {
-                        handOffset.x = handOffset.x - 0.2f;
+                        handOffset.x -= 0.2f;
                         if (handOffset.x > 4f)
                         {
                             _loadState++;
@@ -135,11 +135,11 @@ namespace TMGmod
                     }
                     case 3:
                     {
-                        handOffset.x = handOffset.x + 0.2f;
+                        handOffset.x += 0.2f;
                         if (handOffset.x <= 0f)
                         {
                             Sniper sniper3 = this;
-                            sniper3._loadState = sniper3._loadState + 1;
+                            sniper3._loadState += 1;
                             handOffset.x = 0f;
                         }
 

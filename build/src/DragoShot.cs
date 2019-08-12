@@ -9,11 +9,15 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Other")]
     public class DragoShot : BaseBurst, IAmSr, IHaveSkin
     {
+        [UsedImplicitly]
         public float Counter;
+        [UsedImplicitly]
         public StateBinding CounterBinding = new StateBinding(nameof(Counter));
         private const float Step = 0.01f;
         private const float TimeToHappend = 1f;
+        [UsedImplicitly]
         public bool LoockerOfSound;
+        [UsedImplicitly]
         public StateBinding LoockerOfSoundBinding = new StateBinding(nameof(LoockerOfSound));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;

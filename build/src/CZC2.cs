@@ -63,8 +63,7 @@ namespace TMGmod
             {
                 if (Silencer)
                 {
-                    Silencer = false;
-                    FrameId -= 10;
+                    FrameId %= 10;
                     _fireSound = "deepMachineGun2";
                     _ammoType = new AT9mm
                     {
@@ -81,7 +80,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    Silencer = true;
+                    FrameId %= 10;
                     FrameId += 10;
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _ammoType = new AT9mmS
@@ -94,6 +93,8 @@ namespace TMGmod
                     _barrelOffsetTL = new Vec2(41f, 3f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
+
+                Silencer = !Silencer;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();

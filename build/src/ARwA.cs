@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
 
@@ -11,7 +12,10 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private readonly MagBuddy _magBuddy;
         private bool _onemoreclick = true;
-        private byte _mags = 1;
+        [UsedImplicitly]
+        public byte Mags = 1;
+        [UsedImplicitly]
+        public StateBinding MagsBinding = new StateBinding(nameof(Mags));
 
         public ARwA(float xval, float yval)
           : base(xval, yval)
@@ -56,13 +60,13 @@ namespace TMGmod
         public override void Update()
         {
             if (ammo <= 0 ) _magBuddy.Disload();
-            if (ammo <= 0 && _mags <= 0) _sprite.frame = 2;
+            if (ammo <= 0 && Mags <= 0) _sprite.frame = 2;
             base.Update();
         }
 
         public bool SetMag()
         {
-            if (_mags <= 0) return false;
+            if (Mags <= 0) return false;
             if (_wait > 1f) return false;
             if (_onemoreclick)
             {
@@ -73,7 +77,7 @@ namespace TMGmod
             }
             _onemoreclick = true;
             ammo = 30;
-            _mags -= 1;
+            Mags -= 1;
             return true;
         }
 

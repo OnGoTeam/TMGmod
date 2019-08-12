@@ -1,25 +1,16 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
-    class M16A6 : AK47
+    public class M16A6 : AK47
     {
         private uint _cdstate;
         public bool Bipods
         {
-            get => duck is null ? false : (duck.crouch || duck.sliding) && duck.grounded && _cdstate < 100;
-            set
-            {
-                if (value)
-                {
-                    _kickForce = 0;
-                }
-                else
-                {
-                    _kickForce = 10;
-                }
-            }
+            get => !(duck is null) && (duck.crouch || duck.sliding) && duck.grounded && _cdstate < 100;
+            set => _kickForce = value ? 0 : 10;
         }
         public M16A6(float xval, float yval) : base(xval, yval)
         {
@@ -47,3 +38,4 @@ namespace TMGmod
         }
     }
 }
+#endif
