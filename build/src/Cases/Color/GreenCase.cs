@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using System;
+﻿using System;
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
@@ -50,4 +49,3 @@ namespace TMGmod.Cases.Color
         }
     }
 }
-#endif
