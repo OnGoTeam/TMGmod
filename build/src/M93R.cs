@@ -44,6 +44,7 @@ namespace TMGmod
             _kickForce = 0.24f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.6f;
+            ShellOffset = new Vec2(0f, 0f);
             _editorName = "M93R";
 			_weight = 2f;
             DeltaWait = 0.3f;

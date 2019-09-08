@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : Gun, IAmLmg, IHaveSkin
+    public class MG3 : BaseGun, IAmLmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -47,6 +47,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(4f, 1.5f);
+            ShellOffset = new Vec2(-5f, -2f);
             _editorName = "MG3";
 			_weight = 7f;
         }

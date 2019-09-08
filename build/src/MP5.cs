@@ -51,6 +51,7 @@ namespace TMGmod
             _fireWait = 0.5f;
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
+            ShellOffset = new Vec2(2f, -4f);
             _editorName = "MP5";
 			_weight = 3f;
             KforceDSmg = 2f;

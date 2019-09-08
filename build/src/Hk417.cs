@@ -49,6 +49,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             _holdOffset = new Vec2(0f, 1f);
+            ShellOffset = new Vec2(-3f, -2f);
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = false;
             _fireWait = 0.8f;

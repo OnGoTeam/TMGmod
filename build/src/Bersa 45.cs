@@ -48,6 +48,7 @@ namespace TMGmod
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.9f;
             _holdOffset = new Vec2(-1f, 2f);
+            ShellOffset = new Vec2(0f, 0f);
             _editorName = "Bersa 45";
             _laserOffsetTL = new Vec2(9f, 4f);
             laserSight = true;

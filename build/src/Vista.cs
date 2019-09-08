@@ -49,6 +49,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
             _holdOffset = new Vec2(-1f, 3f);
+            ShellOffset = new Vec2(-4f, -3f);
             _editorName = "Vista";
             _weight = 2f;
             DeltaWait = 0.1f;

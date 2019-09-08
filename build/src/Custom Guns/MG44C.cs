@@ -61,6 +61,7 @@ namespace TMGmod.Custom_Guns
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.6f;
             _holdOffset = new Vec2(4f, 0f);
+            ShellOffset = new Vec2(-5f, -2f);
             _editorName = "Magnium NATOmag";
             _weight = 6f;
         }

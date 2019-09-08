@@ -55,6 +55,7 @@ namespace TMGmod
             loseAccuracy = 0.07f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, 1f);
+            ShellOffset = new Vec2(-7f, -2f);
             _editorName = "M16 LMG";
 			_weight = 6f;
             BaseAccuracy = 0.8f;

@@ -92,6 +92,7 @@ namespace TMGmod.Custom_Guns
             _collisionSize = new Vec2(16f, 10f);
             _barrelOffsetTL = new Vec2(16f, 2f);
             _holdOffset = new Vec2(0f, 2f);
+            ShellOffset = new Vec2(-2f, -3f);
             _fireSound = GetPath("sounds/1.wav");
             _fireSoundm[0] = _fireSound;
             _fullAuto = false;

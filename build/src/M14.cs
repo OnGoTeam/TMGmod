@@ -50,6 +50,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(6f, 1f);
+            ShellOffset = new Vec2(-13f, -4f);
             _editorName = "M14";
             _weight = 4.75f;
         }

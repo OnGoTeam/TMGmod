@@ -52,6 +52,7 @@ namespace TMGmod
             KforceDSmg = 4f;
             MaxDelaySmg = 50;
             _holdOffset = new Vec2(2f, 1f);
+            ShellOffset = new Vec2(0f, -3f);
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.4f;
             _editorName = "PPSh 41";

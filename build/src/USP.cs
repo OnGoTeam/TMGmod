@@ -82,6 +82,7 @@ namespace TMGmod
             _kickForce = 1f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
+            ShellOffset = new Vec2(-3f, -1f);
             _editorName = "USP-S";
 			_weight = 1f;
         }

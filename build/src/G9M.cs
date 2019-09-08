@@ -56,6 +56,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, 1f);
+            ShellOffset = new Vec2(-7f, -2f);
             _editorName = "G9M";
 			_weight = 6f;
             BaseAccuracy = 0.8f;

@@ -47,6 +47,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             _holdOffset = new Vec2(5f, 1f);
+            ShellOffset = new Vec2(-5f, -3f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 0.9f;

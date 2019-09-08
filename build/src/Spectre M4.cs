@@ -41,7 +41,6 @@ namespace TMGmod
             _collisionOffset = new Vec2(-9.5f, -5f);
             _collisionSize = new Vec2(19f, 10f);
             _barrelOffsetTL = new Vec2(13f, 1f);
-            _holdOffset = new Vec2(3f, 3f);
             _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
             _fireWait = 0.31f;
@@ -50,6 +49,8 @@ namespace TMGmod
             MaxDelaySmg = 50;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.34f;
+            _holdOffset = new Vec2(3f, 3f);
+            ShellOffset = new Vec2(0f, 0f);
             _editorName = "Spectre M4";
             _weight = 3.3f;
         }

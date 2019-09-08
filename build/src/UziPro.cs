@@ -52,6 +52,7 @@ namespace TMGmod
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.5f;
             _holdOffset = new Vec2(2f, 0f);
+            ShellOffset = new Vec2(-5f, -3f);
             laserSight = true;
             _laserOffsetTL = new Vec2(9f, 6f);
             _editorName = "Uzi Pro";

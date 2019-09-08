@@ -29,6 +29,7 @@ namespace TMGmod
             _kickForce = 1.4f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
+            ShellOffset = new Vec2(-1f, -2f);
             _editorName = "Glock 18";
 			_weight = 1.7f;
         }

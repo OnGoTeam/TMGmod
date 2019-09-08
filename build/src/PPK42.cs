@@ -52,6 +52,7 @@ namespace TMGmod
             KforceDSmg = 2f;
             MaxDelaySmg = 20;
             _holdOffset = new Vec2(4f, 2f);
+            ShellOffset = new Vec2(-3f, -4f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
             _editorName = "PPK 42";

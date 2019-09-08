@@ -36,8 +36,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("M50"), 40, 13);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(20f, 6.5f);
-            _collisionOffset = new Vec2(-20f, -6.5f);
+            _center = new Vec2(20f, 7f);
+            _collisionOffset = new Vec2(-20f, -7f);
             _collisionSize = new Vec2(40f, 13f);
             _barrelOffsetTL = new Vec2(40f, 5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
@@ -51,6 +51,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, -1f);
+            ShellOffset = new Vec2(0f, 0f);
             laserSight = true;
             _laserOffsetTL = new Vec2(31f, 9f);
             _editorName = "M50";

@@ -54,6 +54,7 @@ namespace TMGmod
             maxAccuracyLost = 0.35f;
             _holdOffset = new Vec2(2f, 0f);
             handOffset = new Vec2(2f, 0f);
+            ShellOffset = new Vec2(-1f, -2f);
             _editorName = "PP-19 Bizon";
 			_weight = 1.5f;
         }

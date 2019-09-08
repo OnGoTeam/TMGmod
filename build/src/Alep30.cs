@@ -48,7 +48,8 @@ namespace TMGmod
             _kickForce = 1.85f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.6f;
-            _holdOffset = new Vec2(3f, 0f);
+            _holdOffset = new Vec2(1f, 0f);
+            ShellOffset = new Vec2(-3f, -1f);            
             _editorName = "Alep 30";
 			_weight = 2.1f;
         }

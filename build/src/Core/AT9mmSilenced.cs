@@ -13,7 +13,7 @@ namespace TMGmod.Core
         /// </summary>
         public AT9mmS()
         {
-			bulletLength = 0f;
+            bulletLength = 0f;
             combustable = true;
             bulletSpeed = 37f;
             penetration = 0.4f;

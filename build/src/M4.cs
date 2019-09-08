@@ -55,6 +55,7 @@ namespace TMGmod
             loseAccuracy = 0.07f;
             maxAccuracyLost = 0.21f;
             _holdOffset = new Vec2(2f, 1f);
+            ShellOffset = new Vec2(-2f, -2f);
             _editorName = "M4A1";
 			_weight = 4.4f;
             Kforce2Ar = 0.5f;
