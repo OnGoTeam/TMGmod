@@ -11,7 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
-        private int _postrounds = Rando.ChooseInt(2, 3);
+        private int _postrounds = Rando.ChooseInt(20, 30);
         private int postframe = 8;
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -65,6 +65,8 @@ namespace TMGmod
         }
         public override void Update()
         {
+            if (_postrounds == 20) _sprite.frame = 10 + (_sprite.frame % 10);
+            if (_postrounds == 30) _sprite.frame = 20 + (_sprite.frame % 10);
             base.Update();
         }
         private void UpdateSkin()
@@ -74,7 +76,7 @@ namespace TMGmod
             {
                 bublic = Rando.Int(0, 9);
             }
-            _sprite.frame += bublic;
+            _sprite.frame = bublic;
         }
         [UsedImplicitly]
         public int FrameId
@@ -84,14 +86,12 @@ namespace TMGmod
         }
         public override void EditorPropertyChanged(object property)
         {
-            if (rounds.value == 0) _postrounds = Rando.ChooseInt(2, 3);
-            if (rounds.value == 1) _postrounds = 2;
-            if (rounds.value == 2) _postrounds = 3;
+            if (rounds.value == 0) _postrounds = Rando.ChooseInt(20, 30);
+            if (rounds.value == 1) _postrounds = 20;
+            if (rounds.value == 2) _postrounds = 30;
             ammo = _postrounds;
-            if ((rounds.value == 0) & (_sprite.frame > 9)) _sprite.frame -= 10;
-            if ((rounds.value == 1) & (_sprite.frame < 9) & (_sprite.frame > 19)) _sprite.frame += 10;
-            if ((rounds.value == 2) & (_sprite.frame < 19)) _sprite.frame += 10;
             UpdateSkin();
+            _sprite.frame = (rounds.value * 10) + (_sprite.frame % 10);
             base.EditorPropertyChanged(property);
         }
     }
