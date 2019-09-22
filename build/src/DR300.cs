@@ -10,7 +10,7 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
-        private int postrounds = Rando.ChooseInt(20, 30);
+        private readonly int _postrounds;
         private int postframe = 28;
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -30,13 +30,14 @@ namespace TMGmod
         public DR300(float xval, float yval)
           : base(xval, yval)
         {
+            _postrounds = Rando.ChooseInt(20, 30);
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             rounds = new EditorProperty<int>(1, this, 0, 2, 1);
-            if (rounds == 1) postrounds = 20;
+            if (rounds == 1) _postrounds = 20;
             if (rounds == 1) postframe = 8;
-            if (rounds == 2) postrounds = 30;
+            if (rounds == 2) _postrounds = 30;
             if (rounds == 2) postframe = 18;
-            ammo = postrounds;
+            ammo = _postrounds;
             _ammoType = new AT9mm
             {
                 range = 475f,
@@ -76,8 +77,8 @@ namespace TMGmod
             var bublic = Skin.value;
             while (!Allowedlst.Contains(bublic))
             {
-                if (rounds == 30) bublic = Rando.Int(0, 9);
-                else if (rounds == 20) bublic = Rando.Int(10, 19);
+                if (rounds.value == 30) bublic = Rando.Int(0, 9);
+                else if (rounds.value == 20) bublic = Rando.Int(10, 19);
             }
             _sprite.frame = bublic;
         }
