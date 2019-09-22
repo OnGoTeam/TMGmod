@@ -50,7 +50,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.1f;
             _holdOffset = new Vec2(0f, 0f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-10f, 0f);
             _editorName = "SVU";
             _weight = 6f;
         }

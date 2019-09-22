@@ -39,7 +39,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 5f);
-            _holdOffset = new Vec2(3f, 0f);
+            _holdOffset = new Vec2(2f, 0f);
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);

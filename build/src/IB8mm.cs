@@ -47,7 +47,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.45f;
             _holdOffset = new Vec2(-2f, 0f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-3f, 0f);
             _editorName = "IB-8mm Sniper";
 			_weight = 3f;
         }

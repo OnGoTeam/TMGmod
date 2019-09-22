@@ -41,7 +41,7 @@ namespace TMGmod
             _fireWait = 0.5f;
             _kickForce = 0.5f;
             _holdOffset = new Vec2(3f, 1f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-6f, -2f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
             _editorName = "MP7";
