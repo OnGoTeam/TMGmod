@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -8,6 +9,15 @@ namespace TMGmod
     [BaggedProperty("isSuperWeapon", true)]
     public sealed class X3X : BaseGun
     {
+        [UsedImplicitly]
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % 3;
+        }
+
         private readonly SpriteMap _sprite;
         public X3X (float xval, float yval)
           : base(xval, yval)
