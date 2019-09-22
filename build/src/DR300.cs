@@ -50,9 +50,9 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("deleteco/Future/DR300.png"), 37, 11);
             _graphic = _sprite;
             _sprite.frame = postframe;
-            _center = new Vec2(6f, 4f);
-            _collisionOffset = new Vec2(-6f, -4f);
-            _collisionSize = new Vec2(12f, 8f);
+            _center = new Vec2(18f, 6f);
+            _collisionOffset = new Vec2(-18f, -6f);
+            _collisionSize = new Vec2(37f, 11f);
             _barrelOffsetTL = new Vec2(12f, 1.5f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _fireSound = GetPath("sounds/1.wav");
@@ -78,8 +78,7 @@ namespace TMGmod
             var bublic = Skin.value;
             while (!Allowedlst.Contains(bublic))
             {
-                if (rounds.value == 30) bublic = Rando.Int(0, 9);
-                else if (rounds.value == 20) bublic = Rando.Int(10, 19);
+                bublic = Rando.Int(0, 9);
             }
             _sprite.frame = bublic;
         }
