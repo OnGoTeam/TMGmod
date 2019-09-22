@@ -27,7 +27,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Rounds => rounds;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 8 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 8 });
         public DR300(float xval, float yval)
           : base(xval, yval)
         {
@@ -74,7 +74,7 @@ namespace TMGmod
             {
                 bublic = Rando.Int(0, 9);
             }
-            _sprite.frame = bublic;
+            _sprite.frame += bublic;
         }
         [UsedImplicitly]
         public int FrameId
@@ -89,9 +89,8 @@ namespace TMGmod
             if (rounds.value == 2) _postrounds = 3;
             ammo = _postrounds;
             if ((rounds.value == 0) & (_sprite.frame > 9)) _sprite.frame -= 10;
-            if ((rounds.value == 1) & (_sprite.frame < 9)) _sprite.frame += 10;
+            if ((rounds.value == 1) & (_sprite.frame < 9) & (_sprite.frame > 19)) _sprite.frame += 10;
             if ((rounds.value == 2) & (_sprite.frame < 19)) _sprite.frame += 10;
-            _sprite.frame = postframe;
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
