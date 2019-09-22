@@ -11,7 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
-        private readonly int _postrounds;
+        private int _postrounds = Rando.ChooseInt(2, 3);
         private int postframe = 28;
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -33,11 +33,6 @@ namespace TMGmod
         {
             rounds = new EditorProperty<int>(0, this, 0, 2, 1);
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _postrounds = Rando.ChooseInt(2, 3);
-            if (rounds.value == 1) _postrounds = 2;
-            if (rounds.value == 1) postframe = 8;
-            if (rounds.value == 2) _postrounds = 3;
-            if (rounds.value == 2) postframe = 18;
             ammo = _postrounds;
             _ammoType = new AT9mm
             {
@@ -89,6 +84,12 @@ namespace TMGmod
         }
         public override void EditorPropertyChanged(object property)
         {
+            if (rounds.value == 0) _postrounds = Rando.ChooseInt(2, 3);
+            if (rounds.value == 1) _postrounds = 2;
+            if (rounds.value == 1) postframe = 8;
+            if (rounds.value == 2) _postrounds = 3;
+            if (rounds.value == 2) postframe = 18;
+            ammo = _postrounds;
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
