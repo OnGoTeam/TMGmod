@@ -33,10 +33,10 @@ namespace TMGmod
             _postrounds = Rando.ChooseInt(20, 30);
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             rounds = new EditorProperty<int>(1, this, 0, 2, 1);
-            if (rounds == 1) _postrounds = 20;
-            if (rounds == 1) postframe = 8;
-            if (rounds == 2) _postrounds = 30;
-            if (rounds == 2) postframe = 18;
+            if (rounds.value == 1) _postrounds = 20;
+            if (rounds.value == 1) postframe = 8;
+            if (rounds.value == 2) _postrounds = 30;
+            if (rounds.value == 2) postframe = 18;
             ammo = _postrounds;
             _ammoType = new AT9mm
             {
