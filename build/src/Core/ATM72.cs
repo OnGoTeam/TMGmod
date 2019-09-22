@@ -3,6 +3,7 @@ using TMGmod.Core.Shells;
 
 namespace TMGmod.Core
 {
+    // ReSharper disable once InconsistentNaming
     public class ATM72 : AmmoType
     {
         public ATM72()
@@ -18,7 +19,7 @@ namespace TMGmod.Core
             bulletColor = Color.White;
             bulletType = typeof(GrenadeBullet);
             immediatelyDeadly = true;
-            sprite = new Sprite("launcherGrenade", 0.0f, 0.0f);
+            sprite = new Sprite("launcherGrenade");
             sprite.CenterOrigin();
         }
 

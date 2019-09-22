@@ -8,6 +8,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
+    // ReSharper disable once InconsistentNaming
     public class AR9SX : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;

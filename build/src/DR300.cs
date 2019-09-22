@@ -8,6 +8,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    // ReSharper disable once InconsistentNaming
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
         private readonly int _postrounds;
@@ -70,7 +71,7 @@ namespace TMGmod
         public override void Update()
         {
             if (_sprite.frame == 28) 
-            base.Update();
+                base.Update();
         }
         private void UpdateSkin()
         {
