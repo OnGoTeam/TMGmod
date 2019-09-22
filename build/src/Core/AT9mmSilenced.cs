@@ -18,5 +18,11 @@ namespace TMGmod.Core
             bulletSpeed = 37f;
             penetration = 0.4f;
         }
+        public override void PopShell(float x, float y, int dir)
+        {
+            PistolShell pistolShell = new PistolShell(x, y);
+            pistolShell.hSpeed = dir * (1.5f + Rando.Float(1f));
+            Level.Add(pistolShell);
+        }
     }
 }

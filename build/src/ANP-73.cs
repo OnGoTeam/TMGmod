@@ -29,7 +29,7 @@ namespace TMGmod
             _collisionSize = new Vec2(19f, 14f);
             _barrelOffsetTL = new Vec2(19f, 3f);
             _holdOffset = new Vec2(3f, 2f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-3f, -3f);
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
             _fireWait = 1.5f;
@@ -75,13 +75,13 @@ namespace TMGmod
             }
             base.Update();
 		}
-        public override void Reload(bool shell = true)
-        {
-            if (ammo != 0)
-            {
-                --ammo;
-            }
-            loaded = true;
-        }
+//        public override void Reload(bool shell = true)
+  //      {
+    //        if (ammo != 0)
+      //      {
+        //        --ammo;
+          //  }
+            //loaded = true;
+              // }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.Shells;
 
 namespace TMGmod.Core
 {
@@ -17,6 +18,12 @@ namespace TMGmod.Core
             combustable = true;
             bulletSpeed = 55f;
             bulletType = typeof(ExplosiveBullet);
+        }
+        public override void PopShell(float x, float y, int dir)
+        {
+            M50Shell redpill = new M50Shell(x, y);
+            redpill.hSpeed = dir * (6f + Rando.Float(1f));
+            Level.Add(redpill);
         }
     }
 }

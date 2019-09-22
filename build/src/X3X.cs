@@ -18,54 +18,45 @@ namespace TMGmod
             //this.graphic = new Sprite(GetPath("X3X"));
             _sprite = new SpriteMap(GetPath("X3X"), 27, 14);
             _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(14f, 9f);
             _collisionOffset = new Vec2(-11.5f, -9f);
             _collisionSize = new Vec2(27f, 14f);
             _barrelOffsetTL = new Vec2(27f, 5f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 2.5f;
+            _fireWait = 2f;
             _kickForce = 10f;
             loseAccuracy = 1.9f;
             maxAccuracyLost = 2.5f;
             _holdOffset = new Vec2(0f, 2f);
+            ShellOffset = new Vec2(-4f, -1f);
             _editorName = "Experimental X3X";
             _bio = "ammo = 5";
 			_weight = 5.5f;
-            _manualLoad = true;
-            _sprite.AddAnimation("idle", 0.3f, false, 0);
-            _sprite.AddAnimation("fire", 0.3f, false, 1);
-            _sprite.AddAnimation("empty", 1f, true, 2);
         }
-
         public override void Fire()
         {
-            //base.Fire();
+            base.Fire();
         }
 
         public override void OnPressAction()
         {
-            if (ammo == 0)
+            if ((ammo > 0) & (_sprite.frame == 0))
             {
-                _sprite.SetAnimation("empty");
+                _sprite.frame = 1;
+                Fire();
             }
-            if (loaded)
+            else if (_sprite.frame == 1)
             {
-                base.Fire();
-                _sprite.SetAnimation("fire");
+                _sprite.frame = 0;
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-            else
+            if ((ammo < 2) & (_sprite.frame == 0))
             {
-                SFX.Play("Click");
-                if (_sprite.finished)
-                {
-                    if (_sprite.currentAnimation == "fire")
-                        _sprite.SetAnimation("idle");
-                    Reload();
-                }
+                _sprite.frame = 2;
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-            base.OnPressAction();
         }
-        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
+using TMGmod.Core;
 
 namespace TMGmod
 {
@@ -14,13 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 5;
-            _ammoType = new ATGrenade
-            {
-                range = 2000f,
-                accuracy = 0.95f,
-                barrelAngleDegrees = -5f,
-                bulletSpeed = 15f
-            };
+            _ammoType = new ATM72();
             BaseAccuracy = 0.95f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M72"), 32, 11);
@@ -38,7 +33,7 @@ namespace TMGmod
             _kickForce = 5f;
             loseAccuracy = 0.8f;
             maxAccuracyLost = 1f;
-            _editorName = "M72 GL";
+            _editorName = "M72";
             _weight = 4.5f;
         }
         public override void Update()

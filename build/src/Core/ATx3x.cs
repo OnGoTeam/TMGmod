@@ -1,4 +1,5 @@
 using DuckGame;
+using TMGmod.Core.Shells;
 
 namespace TMGmod.Core
 {
@@ -18,6 +19,12 @@ namespace TMGmod.Core
             accuracy = 1f;
             penetration = 100f;
             bulletThickness = 5f;
+        }
+        public override void PopShell(float x, float y, int dir)
+        {
+            X3XShell flyingtoilet = new X3XShell(x, y);
+            flyingtoilet.hSpeed = dir * (7f + Rando.Float(1f));
+            Level.Add(flyingtoilet);
         }
     }
 }
