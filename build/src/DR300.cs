@@ -48,25 +48,27 @@ namespace TMGmod
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
-            _barrelOffsetTL = new Vec2(12f, 1.5f);
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _barrelOffsetTL = new Vec2(37f, 2f);
             _fireSound = GetPath("sounds/1.wav");
+            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fullAuto = false;
             _fireWait = 0.3f;
-            _kickForce = 1f;
-            loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.9f;
-            _holdOffset = new Vec2(-1f, 2f);
+            _kickForce = 3.7f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            _holdOffset = new Vec2(2f, 3f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "Bersa 45";
-            _laserOffsetTL = new Vec2(9f, 4f);
-            laserSight = true;
-			_weight = 1f;
+            _editorName = "DR-300";
+            laserSight = false;
+			_weight = 3.5f;
         }
         public override void Update()
         {
-            if (_postrounds == 20) _sprite.frame = 10 + (_sprite.frame % 10);
-            if (_postrounds == 30) _sprite.frame = 20 + (_sprite.frame % 10);
+            if ((_postrounds == 20) & (_sprite.frame > 19) & (_sprite.frame < 9)) _sprite.frame = 10 + (_sprite.frame % 10);
+            if ((_postrounds == 30) & (_sprite.frame < 19)) _sprite.frame = 20 + (_sprite.frame % 10);
             base.Update();
         }
         private void UpdateSkin()
