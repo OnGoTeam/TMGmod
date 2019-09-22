@@ -12,7 +12,7 @@ namespace TMGmod
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
         private int _postrounds = Rando.ChooseInt(2, 3);
-        private int postframe = 28;
+        private int postframe = 8;
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -32,7 +32,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             rounds = new EditorProperty<int>(0, this, 0, 2, 1);
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             ammo = _postrounds;
             _ammoType = new AT9mm
             {
@@ -86,10 +86,12 @@ namespace TMGmod
         {
             if (rounds.value == 0) _postrounds = Rando.ChooseInt(2, 3);
             if (rounds.value == 1) _postrounds = 2;
-            if (rounds.value == 1) postframe = 8;
             if (rounds.value == 2) _postrounds = 3;
-            if (rounds.value == 2) postframe = 18;
             ammo = _postrounds;
+            if ((rounds.value == 0) & (_sprite.frame > 9)) _sprite.frame -= 10;
+            if ((rounds.value == 1) & (_sprite.frame < 9)) _sprite.frame += 10;
+            if ((rounds.value == 2) & (_sprite.frame < 19)) _sprite.frame += 10;
+            _sprite.frame = postframe;
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
