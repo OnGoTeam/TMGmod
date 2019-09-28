@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Custom_Guns;
 #if DEBUG
@@ -11,6 +12,7 @@ namespace TMGmod.Cases.Color
 {
     /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
+    [UsedImplicitly]
     public class PodarokNitro : BaseCase
     {
         /// <inheritdoc />

@@ -22,8 +22,7 @@ namespace TMGmod.Core
         }
         public override void PopShell(float x, float y, int dir)
         {
-            X3XShell flyingtoilet = new X3XShell(x, y);
-            flyingtoilet.hSpeed = dir * (7f + Rando.Float(1f));
+            var flyingtoilet = new X3XShell(x, y) {hSpeed = dir * (7f + Rando.Float(1f))};
             Level.Add(flyingtoilet);
         }
     }
