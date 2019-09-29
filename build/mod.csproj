@@ -182,7 +182,7 @@
     <Compile Include="src\M14.cs" />
     <Compile Include="src\IB8mm.cs" />
     <Compile Include="src\AA12.cs" />
-    <Compile Include="src\VSK-94.cs" />
+    <Compile Include="src\Anyx SR2 Compact.cs" />
     <Compile Include="src\CZ75.cs" />
     <Compile Include="src\DragoShot.cs" />
     <Compile Include="src\Glock18.cs" />
@@ -234,7 +234,7 @@
     <Compile Include="src\USP.cs" />
     <Compile Include="src\ANP-73.cs" />
     <Compile Include="src\Vintorez.cs" />
-    <Compile Include="src\Vixr.cs" />
+    <Compile Include="src\Anyx ARS Elite.cs" />
     <Compile Include="src\X3X.cs" />
   </ItemGroup>
   <ItemGroup>

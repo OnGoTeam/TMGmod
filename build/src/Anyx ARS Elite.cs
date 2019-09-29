@@ -6,11 +6,17 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|PDW")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [PublicAPI]
     public class Vixr : BaseGun, IAmAr, IHaveSkin
     {
-		public bool Stockngrip = true;
+        public float AdecvaticHandAngle
+        {
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
+        }
+        public StateBinding HandAngleOffBinding = new StateBinding(nameof(AdecvaticHandAngle));
+        public bool Stockngrip = true;
         public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -27,34 +33,38 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 25;
+            ammo = 21;
             _ammoType = new AT9mmS
             {
-               range = 300f,
-               accuracy = 0.88f,
-               bulletSpeed = 21f
+               range = 350f,
+               accuracy = 0.81f,
+               bulletSpeed = 40f,
+               penetration = 1f
             };
-            BaseAccuracy = 0.88f;
+            BaseAccuracy = 0.81f;
             _type = "gun";
-            //I'M BLUE DARUDE SANDSTORM DA DUBAI
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _sprite = new SpriteMap(GetPath("Vixr"), 33, 9);
+            //THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends
+            _sprite = new SpriteMap(GetPath("Anyx ARS Elite"), 33, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(16.5f, 4.5f);
-            _collisionOffset = new Vec2(-16.5f, -4.5f);
+            _center = new Vec2(17f, 5f);
+            _collisionOffset = -_center;
             _collisionSize = new Vec2(33f, 9f);
-            _barrelOffsetTL = new Vec2(33f, 3f);
-            _holdOffset = new Vec2(3f, 0f);
+            _barrelOffsetTL = new Vec2(28f, 2f);
+            _holdOffset = new Vec2(4f, 2f);
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
+            _flare = new SpriteMap(GetPath("FlareAnyxARS"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fullAuto = true;
-            _fireWait = 0.65f;
-            _kickForce = 1.8f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.2f;
-            _editorName = "VIXR";
-			_weight = 3.9f;
+            _fireWait = 0.75f;
+            _kickForce = 4.6f;
+            loseAccuracy = 0.2f;
+            maxAccuracyLost = 0.4f;
+            _editorName = "Anyx ARS Elite";
+			_weight = 6f;
             handAngle = 0f;
         }
         public override void Update()
@@ -64,22 +74,35 @@ namespace TMGmod
                 if (Stockngrip)
                 {
                     _sprite.frame += 10;
-                    loseAccuracy = 0.13f;
-                    maxAccuracyLost = 0.4f;
+                    loseAccuracy = 0.3f;
+                    maxAccuracyLost = 0.6f;
+                    _fireWait = 0.5f;
                     Stockngrip = false;
-                    weight = 2f;
+                    weight = 3f;
                 }
                 else
                 {
                     _sprite.frame -= 10;
-                    loseAccuracy = 0.099f;
-                    maxAccuracyLost = 0.17f;
+                    loseAccuracy = 0.2f;
+                    maxAccuracyLost = 0.4f;
+                    _fireWait = 0.75f;
                     Stockngrip = true;
-                    weight = 3.9f;
+                    weight = 6f;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
+        }
+        public override void OnHoldAction()
+        {
+            if (ammo > 0) AdecvaticHandAngle -= 0.01f;
+            else if (ammo < 1) AdecvaticHandAngle = 0f;
+            base.OnHoldAction();
+        }
+        public override void OnReleaseAction()
+        {
+            AdecvaticHandAngle = 0f;
+            base.OnReleaseAction();
         }
         private void UpdateSkin()
         {

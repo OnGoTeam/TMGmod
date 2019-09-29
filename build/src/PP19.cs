@@ -21,7 +21,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
         public PP19(float xval, float yval)
           : base(xval, yval)
         {
@@ -65,16 +65,18 @@ namespace TMGmod
                 if (Stock)
                 {
                     FrameId -= 10;
-                    loseAccuracy = 0.1f;
+                    loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.35f;
+                    _fireWait = 0.75f;
                     _weight = 1.5f;
                     Stock = false;
                 }
                 else
                 {
                     FrameId += 10;
-                    loseAccuracy = 0.14f;
+                    loseAccuracy = 0.25f;
                     maxAccuracyLost = 0.7f;
+                    _fireWait = 0.5f;
                     _weight = 1f;
                     Stock = true;
                 }

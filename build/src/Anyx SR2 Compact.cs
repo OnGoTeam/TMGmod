@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class VSK94 : BaseAr, ISpeedAccuracy, IHaveSkin
+    public class VSK94 : BaseAr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -25,36 +25,40 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 20;
-            _ammoType = new AT9mmS
+            ammo = 11;
+            _ammoType = new AT9mm
             {
-                range = 550f,
-                accuracy = 0.9f,
-                bulletSpeed = 25f
+                range = 560f,
+                accuracy = 0.95f,
+                bulletSpeed = 55f,
+                penetration = 2f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("VSK-94"), 32, 10);
+            _sprite = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(16f, 5f);
-            _collisionOffset = new Vec2(-16f, -5f);
+            _center = new Vec2(11f, 5f);
+            _collisionOffset = -_center;
             _collisionSize = new Vec2(32f, 10f);
-            _barrelOffsetTL = new Vec2(32f, 4f);
-            _holdOffset = new Vec2(3f, 0f);
-            ShellOffset = new Vec2(0f, 0f);
-            _fireSound = GetPath("sounds/Silenced1.wav");
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _barrelOffsetTL = new Vec2(32f, 3f);
+            _holdOffset = new Vec2(3f, 1f);
+            ShellOffset = new Vec2(-8f, -1f);
+            _fireSound = GetPath("sounds/HeavySniper.wav");
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fullAuto = true;
-            _fireWait = 0.5f;
-            _kickForce = 2.85f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.15f;
-            _editorName = "VSK-94";
-            _weight = 4f;
+            _fireWait = 1.4f;
+            _kickForce = 5.2f;
+            loseAccuracy = 0.2f;
+            maxAccuracyLost = 0.6f;
+            _editorName = "Anyx SR2 Compact";
+            _weight = 5.5f;
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;
-            Kforce1Ar = 0.4f;
-            Kforce2Ar = 0.85f;
+            Kforce1Ar = 5.4f;
+            Kforce2Ar = 6.85f;
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }

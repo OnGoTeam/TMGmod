@@ -45,7 +45,8 @@ namespace TMGmod.Cases.Color
                 typeof(SV99),
                 typeof(SRM1208),
                 typeof(SKS),
-                typeof(AWS)
+                typeof(AWS),
+                typeof(PP19)
             };
             CaseId = 8;
         }
