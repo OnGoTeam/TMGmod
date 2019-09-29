@@ -12,7 +12,7 @@ namespace TMGmod
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
         private int _postrounds = Rando.ChooseInt(20, 30);
-        private int postframe = 8;
+        private const int Postframe = 8;
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -23,15 +23,15 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> rounds;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Rounds => rounds;
+        [UsedImplicitly]
+        public EditorProperty<int> Rounds { get; }
+
         private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 8 });
         public DR300(float xval, float yval)
           : base(xval, yval)
         {
-            rounds = new EditorProperty<int>(0, this, 0, 2, 1);
+            Rounds = new EditorProperty<int>(0, this, 0, 2, 1);
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             ammo = _postrounds;
             _ammoType = new AT9mm
@@ -44,7 +44,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("deleteco/Future/DR300.png"), 37, 11);
             _graphic = _sprite;
-            _sprite.frame = postframe;
+            _sprite.frame = Postframe;
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
@@ -88,12 +88,23 @@ namespace TMGmod
         }
         public override void EditorPropertyChanged(object property)
         {
-            if (rounds.value == 0) _postrounds = Rando.ChooseInt(20, 30);
-            if (rounds.value == 1) _postrounds = 20;
-            if (rounds.value == 2) _postrounds = 30;
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (Rounds.value)
+            {
+                case 0:
+                    _postrounds = Rando.ChooseInt(20, 30);
+                    break;
+                case 1:
+                    _postrounds = 20;
+                    break;
+                case 2:
+                    _postrounds = 30;
+                    break;
+            }
+
             ammo = _postrounds;
             UpdateSkin();
-            _sprite.frame = (rounds.value * 10) + (_sprite.frame % 10);
+            _sprite.frame = (Rounds.value * 10) + (_sprite.frame % 10);
             base.EditorPropertyChanged(property);
         }
     }

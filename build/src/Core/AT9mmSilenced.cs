@@ -20,8 +20,7 @@ namespace TMGmod.Core
         }
         public override void PopShell(float x, float y, int dir)
         {
-            PistolShell pistolShell = new PistolShell(x, y);
-            pistolShell.hSpeed = dir * (1.5f + Rando.Float(1f));
+            var pistolShell = new PistolShell(x, y) {hSpeed = dir * (1.5f + Rando.Float(1f))};
             Level.Add(pistolShell);
         }
     }

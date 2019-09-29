@@ -21,8 +21,7 @@ namespace TMGmod.Core
         }
         public override void PopShell(float x, float y, int dir)
         {
-            M50Shell redpill = new M50Shell(x, y);
-            redpill.hSpeed = dir * (6f + Rando.Float(1f));
+            var redpill = new M50Shell(x, y) {hSpeed = dir * (6f + Rando.Float(1f))};
             Level.Add(redpill);
         }
     }

@@ -45,10 +45,6 @@ namespace TMGmod
             _bio = "ammo = 5";
 			_weight = 5.5f;
         }
-        public override void Fire()
-        {
-            base.Fire();
-        }
 
         public override void OnPressAction()
         {
@@ -62,11 +58,11 @@ namespace TMGmod
                 _sprite.frame = 0;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-            if ((ammo < 2) & (_sprite.frame == 0))
-            {
-                _sprite.frame = 2;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
+
+            if (!((ammo < 2) & (_sprite.frame == 0))) return;
+            //else
+            _sprite.frame = 2;
+            SFX.Play(GetPath("sounds/tuduc.wav"));
         }
     }
 }

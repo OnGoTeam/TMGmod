@@ -1,10 +1,11 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 
 namespace TMGmod.Core
 {
     public class ContextSkinRender : ContextMenu
     {
-        private SpriteMap _image;
+        private readonly SpriteMap _image;
         public ContextSkinRender(IContextListener owner, SpriteMap img, bool hasToproot = false, Vec2 topRoot = default) : base(owner, null, hasToproot, topRoot)
         {
             _image = img;
@@ -21,3 +22,4 @@ namespace TMGmod.Core
         }
     }
 }
+#endif
