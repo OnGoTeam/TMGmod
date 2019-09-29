@@ -30,7 +30,7 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 115f,
-                accuracy = 0.6f,
+                accuracy = 0.4f,
                 penetration = 1f
             };
             BaseAccuracy = 0.6f;
@@ -52,7 +52,7 @@ namespace TMGmod
             _kickForce = 1.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.35f;
-            _holdOffset = new Vec2(2f, 0f);
+            _holdOffset = new Vec2(2f, 1f);
             handOffset = new Vec2(2f, 0f);
             ShellOffset = new Vec2(-1f, -2f);
             _editorName = "PP-19 Bizon";
