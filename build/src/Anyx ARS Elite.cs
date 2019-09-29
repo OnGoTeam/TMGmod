@@ -10,12 +10,14 @@ namespace TMGmod
     [PublicAPI]
     public class Vixr : BaseGun, IAmAr, IHaveSkin
     {
-        public float AdecvaticHandAngle
+        public float HandAngleOff
         {
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
-        public StateBinding HandAngleOffBinding = new StateBinding(nameof(AdecvaticHandAngle));
+
+        private float _handAngleOff;
+        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         public bool Stockngrip = true;
         public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));
         private readonly SpriteMap _sprite;
@@ -69,6 +71,7 @@ namespace TMGmod
         }
         public override void Update()
         {
+            HandAngleOff = _handAngleOff;
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
                 if (Stockngrip)
@@ -95,13 +98,15 @@ namespace TMGmod
         }
         public override void OnHoldAction()
         {
-            if (ammo > 0) AdecvaticHandAngle -= 0.01f;
-            else if (ammo < 1) AdecvaticHandAngle = 0f;
+            if (ammo > 0) HandAngleOff -= 0.01f;
+            else if (ammo < 1) HandAngleOff = 0f;
+            _handAngleOff = HandAngleOff;
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
         {
-            AdecvaticHandAngle = 0f;
+            HandAngleOff = 0f;
+            _handAngleOff = HandAngleOff;
             base.OnReleaseAction();
         }
         private void UpdateSkin()
