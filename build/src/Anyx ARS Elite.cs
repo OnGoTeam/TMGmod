@@ -54,8 +54,8 @@ namespace TMGmod
             _collisionSize = new Vec2(33f, 9f);
             _barrelOffsetTL = new Vec2(28f, 2f);
             _holdOffset = new Vec2(4f, 2f);
-            ShellOffset = new Vec2(0f, 0f);
-            _fireSound = GetPath("sounds/Silenced1.wav");
+            ShellOffset = new Vec2(-13f, -2f);
+            _fireSound = GetPath("sounds/RifleOrMG.wav");
             _flare = new SpriteMap(GetPath("FlareAnyxARS"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)

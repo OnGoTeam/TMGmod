@@ -59,7 +59,7 @@ namespace TMGmod
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
 
-            if (!((ammo < 2) & (_sprite.frame == 0))) return;
+            if (!((ammo < 1) & (_sprite.frame == 0))) return;
             //else
             _sprite.frame = 2;
             SFX.Play(GetPath("sounds/tuduc.wav"));
