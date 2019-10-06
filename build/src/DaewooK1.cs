@@ -69,6 +69,7 @@ namespace TMGmod
                     FrameId -= 10;
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.24f;
+                    _fireWait = 0.86f;
                     weight = 4.5f;
                 }
                 else
@@ -76,6 +77,7 @@ namespace TMGmod
                     FrameId += 10;
                     loseAccuracy = 0.2f;
                     maxAccuracyLost = 0.36f;
+                    _fireWait = 0.5f;
                     weight = 3f;
                 }
 

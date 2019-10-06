@@ -20,6 +20,7 @@ namespace TMGmod
                 {
                     loseAccuracy = 0.15f;
                     weight = 5.5f;
+                    _fireWait = 2f;
                     _sprite.frame %= 10;
                     maxAccuracyLost = 0.1f;
                 }
@@ -27,6 +28,7 @@ namespace TMGmod
                 {
                     loseAccuracy = 0.2f;
                     weight = 2.75f;
+                    _fireWait = 1.5f;
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
                     maxAccuracyLost = 0.3f;

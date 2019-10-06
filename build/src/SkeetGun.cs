@@ -39,8 +39,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("SkeetDouble"), 41, 7);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(20.5f, 3.5f);
-            _collisionOffset = new Vec2(-20.5f, -3.5f);
+            _center = new Vec2(21f, 4f);
+            _collisionOffset = new Vec2(-21f, -4f);
             _collisionSize = new Vec2(41f, 7f);
             _fireSound = "shotgunFire";
             _barrelOffsetTL = new Vec2(41f, 0f);
@@ -51,7 +51,7 @@ namespace TMGmod
             _fireWait = 0.5f;
             _kickForce = 6.55f;
             _editorName = "Skeet Double";
-            _holdOffset = new Vec2(6f, 2f);
+            _holdOffset = new Vec2(9f, 2f);
         }
 
         public override void Update()
