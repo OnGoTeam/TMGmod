@@ -28,9 +28,9 @@ namespace TMGmod
             _ammoType = new AT9mmS
             {
                 range = 600f,
-                accuracy = 0.91f
+                accuracy = 0.95f
             };
-            BaseAccuracy = 0.91f;
+            BaseAccuracy = 0.95f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;
@@ -45,7 +45,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(37f, 5f);
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = true;
-            _fireWait = 0.65f;
+            _fireWait = 1.2f;
             _kickForce = 2.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.1f;
