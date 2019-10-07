@@ -31,7 +31,7 @@ namespace TMGmod.Cases.Color
             _editorName = "Millitary Case";
             Things = new List<Type>
             {
-                typeof(X3X)
+                typeof(X3X) //здесь должно быть всё оружие
             };
             CaseId = 0;
         }

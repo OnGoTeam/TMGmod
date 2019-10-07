@@ -10,6 +10,14 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class VSK94 : BaseAr, IHaveSkin
     {
+        public float HandAngleOff
+        {
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
+        }
+        private float _handAngleOff;
+        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -64,6 +72,24 @@ namespace TMGmod
         }
         public float MuAccuracySr { get; }
         public float LambdaAccuracySr { get; }
+        public override void OnHoldAction()
+        {
+            if (ammo > 0) HandAngleOff -= 0.01f;
+            else if (ammo < 1) HandAngleOff = 0f;
+            _handAngleOff = HandAngleOff;
+            base.OnHoldAction();
+        }
+        public override void OnReleaseAction()
+        {
+            HandAngleOff = 0f;
+            _handAngleOff = HandAngleOff;
+            base.OnReleaseAction();
+        }
+        public override void Update()
+        {
+            HandAngleOff = _handAngleOff;
+            base.Update();
+        }
         private void UpdateSkin()
         {
             var bublic = Skin.value;
