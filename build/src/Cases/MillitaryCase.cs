@@ -32,7 +32,7 @@ namespace TMGmod.Cases
         public override void Initialize()
         {
             var physicsObjects = ItemBox.GetPhysicsObjects(Editor.Placeables);
-            physicsObjects.RemoveAll(t => !(t.IsSubclassOf(typeof(Gun)) && t.Assembly == typeof(BaseGun).Assembly));
+            physicsObjects.RemoveAll(t => !(t.IsSubclassOf(typeof(Gun)) && t.Assembly == typeof(Core.TMGmod).Assembly));
             Things = new List<Type>
             {
                 typeof(X3X) //здесь должно быть всё оружие
