@@ -61,16 +61,20 @@ namespace TMGmod.Core
             }
             newThing.x = o.x;
             newThing.y = o.y;
-            if (CaseId != -1)
-                if (newThing is IHaveSkin skinThing)
-                {
-                    skinThing.FrameId = CaseId;
-                }
+            Spawned(newThing);
             Level.Add(newThing);
             if (d == null) return;
             //else
             d.GiveHoldable(newThing);
             d.resetAction = true;
+        }
+
+        protected virtual void Spawned(Holdable thing)
+        {
+            if (thing is IHaveSkin skinThing)
+            {
+                skinThing.FrameId = CaseId;
+            }
         }
     }
 }

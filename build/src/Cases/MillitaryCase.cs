@@ -25,7 +25,7 @@ namespace TMGmod.Cases
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Millitary Case";
-            CaseId = -1;
+            CaseId = 0;
         }
 
         public override void Initialize()
@@ -40,6 +40,14 @@ namespace TMGmod.Cases
             };
             Things = physicsObjects;
             base.Initialize();
+        }
+
+        protected override void Spawned(Holdable thing)
+        {
+            if (thing is I5 && thing is IHaveSkin skinThing)
+            {
+                skinThing.FrameId = 5;
+            }
         }
     }
 }
