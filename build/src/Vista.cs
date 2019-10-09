@@ -37,7 +37,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
             _graphic = _sprite;
-            _sprite.frame = 5;
+            _sprite.frame = 0;
             _center = new Vec2(6f, 7f);
             _collisionOffset = new Vec2(-8f, -7f);
             _collisionSize = new Vec2(16f, 14f);
