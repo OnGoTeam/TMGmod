@@ -9,7 +9,7 @@ namespace TMGmod
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class MP40 : BaseSmg, IFirstPrecise, IHaveSkin
+    public class MP40 : BaseSmg, IFirstPrecise, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;

@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12 : BaseGun, IHaveSkin, IAmSg
+    public class SIX12 : BaseGun, IHaveSkin, IAmSg, I5
     {
         private readonly SpriteMap _sprite;
         public bool Laserino;

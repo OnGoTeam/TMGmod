@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : BaseGun, IAmLmg, IHaveSkin
+    public class MG3 : BaseGun, IAmLmg, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;

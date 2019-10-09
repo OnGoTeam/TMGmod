@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : Sniper, IAmSr, IHaveSkin
+    public class AWS : Sniper, IAmSr, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;

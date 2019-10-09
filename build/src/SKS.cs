@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SKS : BaseGun, IHaveSkin, ISpeedAccuracy
+    public class SKS : BaseGun, IHaveSkin, ISpeedAccuracy, I5
     {
         private int _patrons = 12;
         private int _bullets;

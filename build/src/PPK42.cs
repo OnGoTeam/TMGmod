@@ -9,7 +9,7 @@ namespace TMGmod
 
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class PPK42 : BaseSmg, IHaveSkin
+    public class PPK42 : BaseSmg, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;

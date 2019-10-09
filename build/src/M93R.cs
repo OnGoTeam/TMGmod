@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Burst")]
-    public class M93R : BaseBurst, IAmHg, IHaveSkin
+    public class M93R : BaseBurst, IAmHg, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;

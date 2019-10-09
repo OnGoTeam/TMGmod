@@ -10,7 +10,7 @@ namespace TMGmod.Useless_or_deleted_Guns
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|DEBUG")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh : BaseGun, IHaveSkin, IAmSmg
+    public class PPSh : BaseGun, IHaveSkin, IAmSmg, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
