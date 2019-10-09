@@ -61,10 +61,11 @@ namespace TMGmod.Core
             }
             newThing.x = o.x;
             newThing.y = o.y;
-            if (newThing is IHaveSkin skinThing)
-            {
-                skinThing.FrameId = CaseId;
-            }
+            if (CaseId != -1)
+                if (newThing is IHaveSkin skinThing)
+                {
+                    skinThing.FrameId = CaseId;
+                }
             Level.Add(newThing);
             if (d == null) return;
             //else
