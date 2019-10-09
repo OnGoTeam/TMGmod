@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
-using TMGmod.Custom_Guns;
-#if DEBUG
-using TMGmod.Useless_or_deleted_Guns;
-#endif
+using TMGmod.Core.WClasses;
 
-namespace TMGmod.Cases.Color
+namespace TMGmod.Cases
 {
     /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
@@ -29,11 +26,19 @@ namespace TMGmod.Cases.Color
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Millitary Case";
+            CaseId = 0;
+        }
+
+        public override void Initialize()
+        {
+            var physicsObjects = ItemBox.GetPhysicsObjects(Editor.Placeables);
+            physicsObjects.RemoveAll(t => !(t.IsSubclassOf(typeof(Gun)) && t.Assembly == typeof(BaseGun).Assembly));
             Things = new List<Type>
             {
                 typeof(X3X) //здесь должно быть всё оружие
             };
-            CaseId = 0;
+            Things = physicsObjects;
+            base.Initialize();
         }
     }
 }
