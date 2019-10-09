@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class Lynx : BaseGun, IAmDmr, ISpeedAccuracy, IHaveSkin
+    public class Lynx : BaseGun, IAmDmr, ISpeedAccuracy, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -19,7 +19,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 5 });
         public Lynx (float xval, float yval)
           : base(xval, yval)
         {

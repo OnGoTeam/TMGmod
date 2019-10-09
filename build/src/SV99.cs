@@ -9,7 +9,7 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class SV99 : Sniper, IAmSr, IHaveSkin
+    public class SV99 : Sniper, IAmSr, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -20,7 +20,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 8 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 5, 8 });
         public SV99(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);

@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AUGA1 : BaseAr, IHaveSkin
+    public class AUGA1 : BaseAr, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;

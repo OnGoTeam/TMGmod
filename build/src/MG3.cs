@@ -26,7 +26,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 80;
-            _ammoType = new ATMagnum
+            _ammoType = new AT9mm
             {
                 range = 480f,
                 accuracy = 0.8f,
@@ -47,7 +47,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(4f, 1.5f);
-            ShellOffset = new Vec2(-5f, -2f);
+            ShellOffset = new Vec2(-2f, -3f);
             _editorName = "MG3";
 			_weight = 7f;
         }

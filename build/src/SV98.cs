@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class SV98 : Sniper, IAmSr, IHaveSkin
+    public class SV98 : Sniper, IAmSr, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -19,15 +19,15 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8});
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5, 8});
         public SV98(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("SV98"), 33, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(16.5f, 5.5f);
-            _collisionOffset = new Vec2(-16.5f, -5.5f);
+            _center = new Vec2(17f, 6f);
+            _collisionOffset = new Vec2(-17f, -6f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
