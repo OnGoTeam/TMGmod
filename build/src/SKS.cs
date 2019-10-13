@@ -136,8 +136,8 @@ namespace TMGmod
         public override void Thrown()
         {
 			if (ammo != 0)
-			{           
-						ammo = _patrons;
+			{
+                ammo = _patrons;
 			    _ammoType = new AT9mm
 			    {
 			        range = 1400f,
@@ -175,7 +175,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
