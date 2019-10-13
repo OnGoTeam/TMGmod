@@ -1,6 +1,6 @@
 using DuckGame;
 
-namespace TMGmod.Core
+namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
     /// <summary>
