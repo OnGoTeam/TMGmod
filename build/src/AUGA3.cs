@@ -30,8 +30,8 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMagnum
             {
-                range = 376f,
-                accuracy = 0.93f,
+                range = 370f,
+                accuracy = 0.9f,
                 penetration = 1f
             };
             _type = "gun";
@@ -55,7 +55,7 @@ namespace TMGmod
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A3";
-			_weight = 5.5f;
+			_weight = 5f;
             Kforce2Ar = 0.7f;
         }
         private void UpdateSkin()

@@ -29,19 +29,17 @@ namespace TMGmod
                 if (!value)
                 {
                     _sprite.frame %= 10;
-                    _fireWait = 0.8f;
                     loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.2f;
-                    _ammoType.accuracy = 0.91f;
+                    maxAccuracyLost = 0.3f;
+                    _ammoType.accuracy = 0.85f;
                 }
                 else
                 {
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
-                    _fireWait = 1.2f;
-                    loseAccuracy = 0.25f;
-                    maxAccuracyLost = 0.125f;
-                    _ammoType.accuracy = 0.94f;
+                    loseAccuracy = 0.1f;
+                    maxAccuracyLost = 0.2f;
+                    _ammoType.accuracy = 0.95f;
                 }
             }
         }
@@ -55,8 +53,8 @@ namespace TMGmod
             ammo = 42;
             _ammoType = new ATMagnum
             {
-                range = 400f,
-                accuracy = 0.91f,
+                range = 325f,
+                accuracy = 0.85f,
                 penetration = 1f
             };
             _type = "gun";

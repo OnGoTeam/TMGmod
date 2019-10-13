@@ -71,7 +71,7 @@ namespace TMGmod
                     _fullAuto = true;
                     _sprite.frame += 10;
                     _fireWait = 0.79f;
-                    maxAccuracyLost = 0.4f;
+                    maxAccuracyLost = 0.45f;
                     _ammoType.accuracy = 0.6f;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));

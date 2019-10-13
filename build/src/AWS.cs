@@ -11,7 +11,7 @@ namespace TMGmod
     public class AWS : Sniper, IAmSr, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 2;
+        private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming

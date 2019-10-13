@@ -30,10 +30,10 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 215f,
-                accuracy = 0.7f,
+                accuracy = 0.8f,
                 penetration = 1f
             };
-            BaseAccuracy = 0.7f;
+            BaseAccuracy = 0.8f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5"), 27, 12);
             _graphic = _sprite;
@@ -79,6 +79,7 @@ namespace TMGmod
                     _fireWait = 1.8f;
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
+                    _ammoType.accuracy = 0.7f;
                 }
                 else
                 {
@@ -86,6 +87,7 @@ namespace TMGmod
                     BurstNum = 1;
                     _fireWait = 0.5f;
                     _sprite.frame %= 10;
+                    _ammoType.accuracy = 0.8f;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
