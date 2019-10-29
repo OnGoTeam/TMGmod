@@ -84,8 +84,6 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";
 			_weight = 5.5f;
-            _laserOffsetTL = new Vec2(31f, 4f);
-            laserSight = true;
 		}
         public override void Update()
         {
