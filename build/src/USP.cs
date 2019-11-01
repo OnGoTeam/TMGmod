@@ -100,8 +100,9 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
+                if (Silencer == true) SFX.Play(GetPath("sounds/silencer_off.wav"));
+                else SFX.Play(GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
         }
