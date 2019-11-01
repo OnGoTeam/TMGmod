@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -8,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : BaseGun, IAmLmg, IHaveSkin, I5
+    public class MG3 : BaseGun, IAmLmg, IHaveSkin, I5, IHaveBipods
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 3;
+        private const int NonSkinFrames = 6;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -53,23 +54,12 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (duck != null && duck.height < 17f)
-            {
-                _kickForce = 0f;
-			    loseAccuracy = 0f;
-                maxAccuracyLost = 0f;
-                _sprite.frame %= 20;
-                _sprite.frame += 20;
-            }
-            else
-            {
-                _kickForce = 3.5f;
-                loseAccuracy = 0.1f;
-                maxAccuracyLost = 0.45f;
-                _sprite.frame %= 20;
-            }
             base.Update();
-		    if (ammo == 0 && (_sprite.frame >= 0 && _sprite.frame < 10 || _sprite.frame >= 20 && _sprite.frame < 30)) _sprite.frame += 10;
+            Bipods = Bipods;
+            if (ammo == 0 && FrameId % 20 >= 0 && FrameId % 20 < 10) FrameId += 10;
+            if (duck == null) BipodsDisabled = false;
+            else if (!BipodsQ(this, true)) BipodsDisabled = false;
+            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
         }
         private void UpdateSkin()
         {
@@ -90,5 +80,43 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+
+        public override void Fire()
+        {
+            if (FrameId / 20 == 1) return;
+            base.Fire();
+        }
+
+        public bool Bipods
+        {
+            get => BipodsQ();
+            set
+            {
+                var bipods = BipodsState > 0.99f;
+                _kickForce = bipods ? 0 : 3.5f;
+                loseAccuracy = bipods ? 0 : 0.1f;
+                maxAccuracyLost = bipods ? 0 : 0.45f;
+                BipodsState += 1f / 10 * (value ? 1: -1);
+                FrameId = FrameId % 20 + 20 * (bipods ? 2 : BipodsState < 0.01f ? 0 : 1);
+            }
+        }
+        [UsedImplicitly]
+        public float BipodsState
+        {
+            get => duck != null ? _bipodsstate : 0;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _bipodsstate = value;
+            }
+        }
+
+        private float _bipodsstate;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        public bool BipodsDisabled { get; private set; }
+
+        [UsedImplicitly]
+        public StateBinding BsBinding => new StateBinding(nameof(BipodsState));
     }
 }

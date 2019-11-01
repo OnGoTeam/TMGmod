@@ -165,5 +165,17 @@ namespace TMGmod.Core.WClasses
             }
             loaded = true;
         }
+
+        public static bool BipodsQ(Gun gun, bool bypassihb=false)
+        {
+            var duck = gun.duck;
+            if (!bypassihb && gun is IHaveBipods ihb && ihb.BipodsDisabled) return false;
+            return !(duck is null) && !gun.raised && (duck.crouch || duck.sliding) && duck.grounded && Math.Abs(duck.hSpeed) < 0.05f;
+        }
+
+        public bool BipodsQ()
+        {
+            return BipodsQ(this);
+        }
     }
 }

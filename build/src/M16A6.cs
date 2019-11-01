@@ -1,17 +1,26 @@
 ﻿#if DEBUG
 using DuckGame;
+using JetBrains.Annotations;
+using TMGmod.Core;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
-    public class M16A6 : AK47
+    [UsedImplicitly]
+    public class M16A6 : AK47, IHaveBipods
     {
         private uint _cdstate;
+        [UsedImplicitly]
         public bool Bipods
         {
-            get => !(duck is null) && (duck.crouch || duck.sliding) && duck.grounded && _cdstate < 100;
+            get => BaseGun.BipodsQ(this);
             set => _kickForce = value ? 0 : 10;
         }
+
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        public bool BipodsDisabled => false;
+
         public M16A6(float xval, float yval) : base(xval, yval)
         {
         }

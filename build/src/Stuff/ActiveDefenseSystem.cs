@@ -74,7 +74,7 @@ namespace TMGmod.Stuff
 
         private bool OldHit(AdsHit adsHit)
         {
-            return (_ticks - adsHit.Tick) > 30;
+            return _ticks - adsHit.Tick > 30;
         }
 
         private bool InvalidTracked(Tracked tracked)

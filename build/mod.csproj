@@ -83,6 +83,7 @@
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
     <Compile Include="src\Core\ContextSkinRender.cs" />
     <Compile Include="src\Core\I5.cs" />
+    <Compile Include="src\Core\IHaveBipods.cs" />
     <Compile Include="src\Core\Shells\M50shell.cs" />
     <Compile Include="src\Core\Shells\M72shell.cs" />
     <Compile Include="src\Core\Shells\X3Xshell.cs" />
