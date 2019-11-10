@@ -18,7 +18,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5, 6, 7, 9 });
         public Arx200 (float xval, float yval)
           : base(xval, yval)
         {

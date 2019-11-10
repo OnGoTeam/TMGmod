@@ -50,7 +50,7 @@ namespace TMGmod
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(24f, 7f);
+            _laserOffsetTL = new Vec2(24f, 7.5f);
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "SIX12 Silenced";
 			_weight = 4f;
