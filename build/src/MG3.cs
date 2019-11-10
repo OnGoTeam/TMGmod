@@ -44,7 +44,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = true;
             _fireWait = 0.5f;
-            _kickForce = 1.5f;
+            _kickForce = 2.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(4f, 1.5f);
@@ -97,9 +97,11 @@ namespace TMGmod
                     BipodsState += 1f / 10 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
-                _kickForce = bipods ? 0 : 3.5f;
+                _ammoType.range = bipods ? 550f : 480f;
+                _ammoType.bulletSpeed = bipods ? 40f : 28f;
+                _kickForce = bipods ? 0 : 2.5f;
                 loseAccuracy = bipods ? 0 : 0.1f;
-                maxAccuracyLost = bipods ? 0 : 0.45f;
+                maxAccuracyLost = bipods ? 0 : 0.25f;
                 FrameId = FrameId % 20 + 20 * (bipods ? 2 : nobipods ? 0 : 1);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     SFX.Play(GetPath("sounds/beepods1"));
