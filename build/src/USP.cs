@@ -12,6 +12,7 @@ namespace TMGmod
     public class USP : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public bool Silencer
         {
             get => _fireSound == GetPath("sounds/SilencedPistol.wav");
@@ -47,7 +48,7 @@ namespace TMGmod
                 }
             }
         }
-
+        [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -100,8 +101,7 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer == true) SFX.Play(GetPath("sounds/silencer_off.wav"));
-                else SFX.Play(GetPath("sounds/silencer_on.wav"));
+                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
             }
             base.Update();
