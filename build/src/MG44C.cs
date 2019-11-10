@@ -16,6 +16,8 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
+        public float randomaticKickforce;
+        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(randomaticKickforce));
         /// <inheritdoc />
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
@@ -71,13 +73,14 @@ namespace TMGmod
         {
             base.Update();
             Bipods = Bipods;
+            randomaticKickforce = Rando.Float(0.9f, 1.5f);
         }
         public bool Bipods
         {
             get => HandleQ();
             set
             {
-                _kickForce = value ? 1f : 1.8f;
+                _kickForce = value ? randomaticKickforce : 1.8f;
                 loseAccuracy = value ? 0f : 0.1f;
                 maxAccuracyLost = value ? 0f : 0.3f;
             }
