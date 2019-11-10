@@ -180,7 +180,7 @@
     <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />
     <Compile Include="src\M900.cs" />
-    <Compile Include="src\Custom Guns\MG44C.cs" />
+    <Compile Include="src\MG44C.cs" />
     <Compile Include="src\Useless or deleted Guns\PPShC.cs" />
     <Compile Include="src\M14.cs" />
     <Compile Include="src\IB8mm.cs" />

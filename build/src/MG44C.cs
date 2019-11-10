@@ -10,7 +10,7 @@ namespace TMGmod.Custom_Guns
     /// <inheritdoc cref="BaseGun"/>
     /// <inheritdoc cref="IHaveSkin"/>
     /// <inheritdoc cref="IAmLmg"/>
-    [EditorGroup("TMG|LMG|Custom")]
+    [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
     public class MG44C : BaseGun, IHaveSkin, IAmLmg
     {
@@ -27,7 +27,7 @@ namespace TMGmod.Custom_Guns
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
 
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 6, 7 });
 
         /// <inheritdoc />
         public MG44C(float xval, float yval)
@@ -43,16 +43,16 @@ namespace TMGmod.Custom_Guns
             };
             BaseAccuracy = 0.75f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("mg44reqNATO"), 39, 12);
+            _sprite = new SpriteMap(GetPath("MG44 Mark2T"), 39, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 6f);
-            _collisionOffset = new Vec2(-19.5f, -6f);
-            _collisionSize = new Vec2(39f, 12f);
+            _center = new Vec2(20f, 6f);
+            _collisionOffset = new Vec2(-20f, -6f);
+            _collisionSize = new Vec2(39f, 11f);
             _barrelOffsetTL = new Vec2(39f, 3f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
+            _flare = new SpriteMap(GetPath("FlareMG44"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(1.0f, 6f)
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;
@@ -60,9 +60,11 @@ namespace TMGmod.Custom_Guns
             _kickForce = 1.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.6f;
-            _holdOffset = new Vec2(4f, 0f);
+            _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-5f, -2f);
-            _editorName = "Magnium NATOmag";
+            _editorName = "MG44 Mark2T";
+            laserSight = true;
+            _laserOffsetTL = new Vec2(29f, 1f);
             _weight = 6f;
         }
 
