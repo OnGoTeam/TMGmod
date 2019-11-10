@@ -5,7 +5,7 @@ using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
     /// <inheritdoc cref="BaseGun"/>
     /// <inheritdoc cref="IHaveSkin"/>
