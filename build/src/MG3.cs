@@ -92,12 +92,19 @@ namespace TMGmod
             get => BipodsQ();
             set
             {
+                var bipodsstate = BipodsState;
+                if (isServerForObject)
+                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _kickForce = bipods ? 0 : 3.5f;
                 loseAccuracy = bipods ? 0 : 0.1f;
                 maxAccuracyLost = bipods ? 0 : 0.45f;
-                BipodsState += 1f / 10 * (value ? 1: -1);
-                FrameId = FrameId % 20 + 20 * (bipods ? 2 : BipodsState < 0.01f ? 0 : 1);
+                FrameId = FrameId % 20 + 20 * (bipods ? 2 : nobipods ? 0 : 1);
+                if (isServerForObject && bipods && bipodsstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/beepods1"));
+                if (isServerForObject && nobipods && bipodsstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/beepods2"));
             }
         }
         [UsedImplicitly]
