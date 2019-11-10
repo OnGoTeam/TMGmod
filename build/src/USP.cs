@@ -103,6 +103,7 @@ namespace TMGmod
             {
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
+                SFX.Play("quack", -1);
             }
             base.Update();
         }
