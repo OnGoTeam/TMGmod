@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.Emit;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -25,7 +26,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 10;
+            ammo = 15;
             _ammoType = new AT9mmS
             {
                 range = 550f,
@@ -47,8 +48,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.7f;
             _kickForce = 2.85f;
-            loseAccuracy = 0.08f;
-            maxAccuracyLost = 0.15f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.2f;
             _editorName = "Vintorez";
 			_weight = 4.7f;
             MinAccuracy = 0f;
@@ -58,8 +59,26 @@ namespace TMGmod
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }
+        public override void Update()
+        {
+            base.Update();
+            Bipods = Bipods;
+        }
+        public bool Bipods
+        {
+            get => HandleQ();
+            set
+            {
+                _kickForce = value ? 1.5f : 2.85f;
+                loseAccuracy = value ? 0f : 0.1f;
+                maxAccuracyLost = value ? 0f : 0.2f;
+                LambdaAccuracySr = value ? 0f : 0.5f;
+            }
+        }
+        public bool BipodsDisabled => false;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; }
+        public float LambdaAccuracySr { get; set; }
         private void UpdateSkin()
         {
             var bublic = Skin.value;

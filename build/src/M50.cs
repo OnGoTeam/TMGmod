@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
-    public class M50 : BaseGun, ISpeedAccuracy, IAmSr, IHaveSkin
+    public class M50 : BaseGun, ISpeedAccuracy, IAmSr, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -59,8 +59,26 @@ namespace TMGmod
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }
+        public override void Update()
+        {
+            base.Update();
+            Bipods = Bipods;
+        }
+        public bool Bipods
+        {
+            get => HandleQ();
+            set
+            {
+                _kickForce = value ? 1f : 8f;
+                loseAccuracy = value ? 0f : 0.1f;
+                maxAccuracyLost = value ? 0f : 0.3f;
+                LambdaAccuracySr = value ? 0f : 0.5f;
+            }
+        }
+        public bool BipodsDisabled => false;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; }
+        public float LambdaAccuracySr { get; set; }
         private void UpdateSkin()
         {
             var bublic = Skin.value;

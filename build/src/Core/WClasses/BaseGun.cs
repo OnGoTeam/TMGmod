@@ -176,7 +176,7 @@ namespace TMGmod.Core.WClasses
         public static bool HandleQ(Gun gun)
         {
             var duck = gun.duck;
-            return !(duck is null) && !gun.raised && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 0.05f;
+            return !(duck is null) && !gun.raised && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 1f;
         }
 
         public bool BipodsQ()

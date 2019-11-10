@@ -50,7 +50,7 @@ namespace TMGmod
             _kickForce = 6f;
             loseAccuracy = 0.35f;
             maxAccuracyLost = 0.8f;
-            _holdOffset = new Vec2(1f, 0f);
+            _holdOffset = new Vec2(1f, 1f);
             ShellOffset = new Vec2(-6f, -1f);
             _editorName = "AA-12";
 			_weight = 7f;
