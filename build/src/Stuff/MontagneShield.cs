@@ -44,6 +44,7 @@ namespace TMGmod.Stuff
             throwSpeedMultiplier = 0f;
             _canRaise = false;
             flammable = 0;
+            _holdOffset = new Vec2(0, -0.5f);
         }
 
         /// <inheritdoc />
@@ -51,7 +52,8 @@ namespace TMGmod.Stuff
         {
             SFX.Play(bullet.ammo.penetration < thickness ? "metalRebound" : "woodHit");
             Damage(bullet.ammo);
-            return Hit(bullet, hitPos);
+            var res = Hit(bullet, hitPos);
+            return !((hitPos - Offset(new Vec2(0, -7.5f))).length < 3.354102f) && res;
         }
 
         /// <inheritdoc />
