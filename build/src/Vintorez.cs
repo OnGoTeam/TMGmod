@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection.Emit;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -9,13 +8,15 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
-    public class Vintorez : BaseAr, ISpeedAccuracy, IHaveSkin
+    public class Vintorez : BaseAr, ISpeedAccuracy, IHaveSkin, IHaveBipods
     {
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public float randomaticKickforce;
-        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(randomaticKickforce));
+        [UsedImplicitly]
+        public float RandomaticKickforce;
+        [UsedImplicitly]
+        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -65,14 +66,15 @@ namespace TMGmod
         {
             base.Update();
             Bipods = Bipods;
-            randomaticKickforce = Rando.Float(1.1f, 1.7f);
+            RandomaticKickforce = Rando.Float(1.1f, 1.7f);
         }
+        [UsedImplicitly]
         public bool Bipods
         {
             get => HandleQ();
             set
             {
-                _kickForce = value ? randomaticKickforce : 2.85f;
+                _kickForce = value ? RandomaticKickforce : 2.85f;
                 loseAccuracy = value ? 0f : 0.1f;
                 maxAccuracyLost = value ? 0f : 0.2f;
                 LambdaAccuracySr = value ? 0f : 0.5f;
@@ -81,7 +83,7 @@ namespace TMGmod
         public bool BipodsDisabled => false;
         public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; set; }
+        public float LambdaAccuracySr { get; private set; }
         private void UpdateSkin()
         {
             var bublic = Skin.value;
@@ -91,7 +93,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

@@ -12,12 +12,14 @@ namespace TMGmod
     /// <inheritdoc cref="IAmLmg"/>
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44C : BaseGun, IHaveSkin, IAmLmg
+    public class MG44C : BaseGun, IHaveSkin, IAmLmg, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public float randomaticKickforce;
-        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(randomaticKickforce));
+        [UsedImplicitly]
+        public float RandomaticKickforce;
+        [UsedImplicitly]
+        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
         /// <inheritdoc />
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
@@ -73,14 +75,14 @@ namespace TMGmod
         {
             base.Update();
             Bipods = Bipods;
-            randomaticKickforce = Rando.Float(0.9f, 1.5f);
+            RandomaticKickforce = Rando.Float(0.9f, 1.5f);
         }
         public bool Bipods
         {
             get => HandleQ();
             set
             {
-                _kickForce = value ? randomaticKickforce : 1.8f;
+                _kickForce = value ? RandomaticKickforce : 1.8f;
                 loseAccuracy = value ? 0f : 0.1f;
                 maxAccuracyLost = value ? 0f : 0.3f;
             }
