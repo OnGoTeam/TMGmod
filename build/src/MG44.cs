@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -9,20 +10,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : BaseGun, IHaveSkin, IAmLmg
+    public class MG44 : BaseGun, IHaveSkin, IAmLmg, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
-        /*
-        private const float DefaultAccuracy = .75f;
-        private const float MaxRaise = .6f;
-        private const float EpsilonD = .2f;
-        private const float EpsilonK = .1f;
-        private const float EpsilonX = .8f;
-        private const float EpsilonY = EpsilonK / EpsilonX;
-        private const float AcclA = .045f;
-        private const float AcclB = .225f;
-        private float _raisestat;*/
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -61,8 +52,8 @@ namespace TMGmod
             _kickForce = 1.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(6f, 1f);
-            ShellOffset = new Vec2(-5f, -2f);
+            _holdOffset = new Vec2(5f, 1f);
+            ShellOffset = new Vec2(-5f, -3f);
             _editorName = "MG44 Mark2H";
             _weight = 7.5f;
         }
@@ -78,50 +69,20 @@ namespace TMGmod
                     if (_sprite.frame < 20) _sprite.frame += 10;
                     break;
             }
-            /*
-            if (_raisestat > MaxRaise) _raisestat = MaxRaise;
-            if (_raisestat > 0f)
-            {
-                var δα = -EpsilonY - EpsilonK / (_raisestat - EpsilonX);
-
-                if (offDir < 0)
-                {
-                    handAngle = δα;
-                }
-                else
-                {
-                    handAngle = -δα;
-                }
-            }
-            _raisestat -= .015f;
-            if (duck == null)
-            {
-                _raisestat = 0f;
-                handAngle = 0f;
-            }
-            else
-            {
-                if (duck.crouch || duck.sliding) _raisestat -= .005f;
-                if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
-                if (!(_raisestat < 0f)) return;
-                _raisestat = 0f;
-                handAngle = 0f;
-            }
-            */
+            Bipods = Bipods;
         }
-
-        /*
-        public override void Fire()
+        public bool Bipods
         {
-            var wasammo = ammo > 0;
-            _ammoType.accuracy = _raisestat < AcclA ? 1f : DefaultAccuracy;
-            base.Fire();
-            if (!wasammo) return;
-            if (_raisestat < AcclA) _raisestat = AcclB;
-            var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
-            _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
+            get => HandleQ();
+            set
+            {
+                _kickForce = value ? 1f : 1.8f;
+                loseAccuracy = value ? 0f : 0.1f;
+                maxAccuracyLost = value ? 0f : 0.3f;
+            }
         }
-        */
+        public bool BipodsDisabled => false;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         private void UpdateSkin()
         {
             var bublic = Skin.value;

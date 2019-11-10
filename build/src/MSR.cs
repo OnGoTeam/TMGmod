@@ -9,7 +9,7 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class MSR : Sniper, IAmSr, IHaveSkin
+    public class MSR : Sniper, IAmSr, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -52,6 +52,16 @@ namespace TMGmod
             _editorName = "MSR";
 			_weight = 4.65f;
         }
+        public bool Bipods
+        {
+            get => BaseGun.HandleQ(this);
+            set
+            {
+                _kickForce = value ? 1f : 5.5f;
+            }
+        }
+        public bool BipodsDisabled => false;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
 
         public override void Draw()
         {
@@ -85,6 +95,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
+            Bipods = Bipods;
             if (_loadState > -1)
             {
                 if (owner == null)

@@ -60,13 +60,30 @@ namespace TMGmod
             _kickForce = 1.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.6f;
-            _holdOffset = new Vec2(6f, 1f);
-            ShellOffset = new Vec2(-5f, -2f);
+            _holdOffset = new Vec2(5f, 1f);
+            ShellOffset = new Vec2(-5f, -3f);
             _editorName = "MG44 Mark2T";
             laserSight = true;
             _laserOffsetTL = new Vec2(29f, 1f);
             _weight = 6f;
         }
+        public override void Update()
+        {
+            base.Update();
+            Bipods = Bipods;
+        }
+        public bool Bipods
+        {
+            get => HandleQ();
+            set
+            {
+                _kickForce = value ? 1f : 1.8f;
+                loseAccuracy = value ? 0f : 0.1f;
+                maxAccuracyLost = value ? 0f : 0.3f;
+            }
+        }
+        public bool BipodsDisabled => false;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
 
         private void UpdateSkin()
         {
