@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -7,10 +8,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
-    public class FnFcar: BaseAr, IHaveSkin
+    public class FnFcar: BaseAr, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 2;
+        private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -27,7 +28,7 @@ namespace TMGmod
             _ammoType = new ATMagnum
             {
                 range = 550f,
-                accuracy = 0.93f,
+                accuracy = 0.9f,
                 penetration = 1f
             };
             _type = "gun";
@@ -46,7 +47,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -3f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
-            _fireWait = 0.775f;
+            _fireWait = 0.75f;
             _kickForce = 2.4f;
             Kforce2Ar = 0.9f;
             loseAccuracy = 0.15f;
@@ -56,23 +57,37 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(19f, 4f);
 			_weight = 7f;
         }
+        public bool Bipods
+        {
+            get => BipodsQ();
+            set
+            {
+                var bipodsstate = BipodsState;
+                if (isServerForObject)
+                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                var nobipods = BipodsState < 0.01f;
+                var bipods = BipodsState > 0.99f;
+                _ammoType.accuracy = bipods ? 0.95f : 0.9f;
+                _ammoType.bulletSpeed = bipods ? 72f : 36f;
+                _fireWait = bipods ? 1.5f : 0.75f;
+                _kickForce = bipods ? 0 : 2.4f;
+                Kforce2Ar = bipods ? 0 : 0.9f;
+                loseAccuracy = bipods ? 0 : 0.15f;
+                maxAccuracyLost = bipods ? 0 : 0.2f;
+                FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
+                if (isServerForObject && bipods && bipodsstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/beepods1"));
+                if (isServerForObject && nobipods && bipodsstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/beepods2"));
+            }
+        }
 
         public override void Update()
         {
-            if (duck != null && duck.height < 17f)
-            {
-                _kickForce = 0f;
-				loseAccuracy = 0f;
-                maxAccuracyLost = 0f;
-                if (_sprite.frame > -1 && _sprite.frame < 10) _sprite.frame += 10;
-            }
-            else
-            {
-                _kickForce = 2.4f;
-                loseAccuracy = 0.15f;
-                maxAccuracyLost = 0.2f;
-                if (_sprite.frame > 9 && _sprite.frame < 20) _sprite.frame -= 10;
-            }
+            Bipods = Bipods;
+            if (duck == null) BipodsDisabled = false;
+            else if (!BipodsQ(this, true)) BipodsDisabled = false;
+            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
             base.Update();
         }
         public override void OnHoldAction()
@@ -86,6 +101,30 @@ namespace TMGmod
             if (_ammoType.accuracy < 1f) _ammoType.accuracy += 0.1f;
             base.OnReleaseAction();
         }
+
+        public override void Fire()
+        {
+            if (FrameId / 10 == 1) return;
+            base.Fire();
+        }
+        [UsedImplicitly]
+        public float BipodsState
+        {
+            get => duck != null ? _bipodsstate : 0;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _bipodsstate = value;
+            }
+        }
+
+        private float _bipodsstate;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        public bool BipodsDisabled { get; private set; }
+
+        [UsedImplicitly]
+        public StateBinding BsBinding => new StateBinding(nameof(BipodsState));
         private void UpdateSkin()
         {
             var bublic = Skin.value;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
@@ -8,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class SV98 : Sniper, IAmSr, IHaveSkin, I5
+    public class SV98 : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 2;
+        private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -44,13 +45,33 @@ namespace TMGmod
             _fireSound = "sniper";
             _fullAuto = false;
             _kickForce = 4.67f;
-            _holdOffset = new Vec2(2f, 0f);
+            _holdOffset = new Vec2(4f, 2f);
             _editorName = "SV-98";
 			_weight = 4.5f;
             laserSight = true;
-            _laserOffsetTL = new Vec2(18f, 3f);
-			
-		}
+            _laserOffsetTL = new Vec2(18f, 2f);
+
+        }
+        public bool Bipods
+        {
+            get => BaseGun.BipodsQ(this);
+            set
+            {
+                var bipodsstate = BipodsState;
+                if (isServerForObject)
+                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                var nobipods = BipodsState < 0.01f;
+                var bipods = BipodsState > 0.99f;
+                _kickForce = bipods ? 0 : 4.67f;
+                _ammoType.range = bipods ? 2500f : 1250f;
+                _ammoType.bulletSpeed = bipods ? 150f : 48f;
+                FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
+                if (isServerForObject && bipods && bipodsstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/beepods1"));
+                if (isServerForObject && nobipods && bipodsstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/beepods2"));
+            }
+        }
         public override void Draw()
         {
             var ang = angle;
@@ -84,6 +105,10 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
+            Bipods = Bipods;
+            if (duck == null) BipodsDisabled = false;
+            else if (!BaseGun.BipodsQ(this, true)) BipodsDisabled = false;
+            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
             if (_loadState > -1)
             {
                 if (owner == null)
@@ -156,18 +181,32 @@ namespace TMGmod
                 }
             }
             laserSight = true;
-            if (duck != null && duck.height < 17f)
-            {
-                _kickForce = 0f;
-                if (_sprite.frame > -1 && _sprite.frame < 10) _sprite.frame += 10;
-            }
-            else
-            {
-                _kickForce = 4.67f;
-                if (_sprite.frame > 9 && _sprite.frame < 20) _sprite.frame -= 10;
-            }
             OnHoldAction();
         }
+
+        public override void Fire()
+        {
+            if (FrameId / 10 == 1) return;
+            base.Fire();
+        }
+        [UsedImplicitly]
+        public float BipodsState
+        {
+            get => duck != null ? _bipodsstate : 0;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _bipodsstate = value;
+            }
+        }
+
+        private float _bipodsstate;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        public bool BipodsDisabled { get; private set; }
+
+        [UsedImplicitly]
+        public StateBinding BsBinding => new StateBinding(nameof(BipodsState));
         private void UpdateSkin()
         {
             var bublic= Skin.value;
