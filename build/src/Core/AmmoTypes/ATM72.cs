@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATM72 : AmmoType
+    public class ATM72 : AmmoType, IHeavyAmmoType
     {
         public ATM72()
         {

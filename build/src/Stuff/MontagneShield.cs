@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Stuff
 {
@@ -97,6 +98,13 @@ namespace TMGmod.Stuff
             {
                 _sprite.frame = 3;
             }
+
+            if (duck != null && duck.holdObject == this) return;
+            if (Rando.Float(0, 1) > (at is IHeavyAmmoType ? 0.5f : 0.1f)) return;
+            angleDegrees = 90f * offDir;
+            collisionOffset = new Vec2(-11.5f, -2f);
+            collisionSize = new Vec2(23f, 4f);
+            sleeping = false;
         }
 
         /// <inheritdoc />

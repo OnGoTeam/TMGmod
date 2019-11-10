@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Shells;
 
 namespace TMGmod.Core
@@ -7,7 +8,7 @@ namespace TMGmod.Core
     /// <summary>
     /// <see cref="AmmoType"/> with <see cref="ExplosiveBullet"/>
     /// </summary>
-    public class Cal50Explode : AmmoType
+    public class Cal50Explode : AmmoType, IHeavyAmmoType
     {
         /// <inheritdoc />
         public Cal50Explode()

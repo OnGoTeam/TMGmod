@@ -81,6 +81,7 @@
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
+    <Compile Include="src\Core\AmmoTypes\IHeavyAmmoType.cs" />
     <Compile Include="src\Core\ContextSkinRender.cs" />
     <Compile Include="src\Core\I5.cs" />
     <Compile Include="src\Core\IHaveBipods.cs" />
