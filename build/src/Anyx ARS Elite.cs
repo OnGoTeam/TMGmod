@@ -30,7 +30,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 8 });
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
