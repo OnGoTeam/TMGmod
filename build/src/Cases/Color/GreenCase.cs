@@ -46,7 +46,13 @@ namespace TMGmod.Cases.Color
                 typeof(SRM1208),
                 typeof(SKS),
                 typeof(AWS),
-                typeof(PP19)
+                typeof(PP19),
+                typeof(G9M),
+                typeof(AR15Proto),
+                typeof(Vixr),
+                typeof(VSK94),
+                typeof(BarretM98),
+                typeof(BarretM98C)
             };
             CaseId = 8;
         }

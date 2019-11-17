@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class G9M : BaseLmg, IHaveSkin
+    public class G9M : BaseLmg, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -20,7 +20,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
         private int _ammobefore = 71;
         private float _explode;
         private int _uselessinteger = 3;
@@ -53,7 +53,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 1f;
             _kickForce = 2.33f;
-            loseAccuracy = 0.1f;
+            loseAccuracy = 0.2f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
@@ -64,18 +64,20 @@ namespace TMGmod
             Kforce1Lmg = 0.23f;
             Kforce2Lmg = 0.43f;
         }
+        public bool Bipods
+        {
+            get => BipodsQ();
+            set
+            {
+                _kickForce = value ? 0 : 2.33f;
+                loseAccuracy = value ? 0 : 0.2f;
+            }
+        }
         public override void Update()
         {
-            if (duck != null && duck.height < 17f)
-            {
-                _kickForce = 0f;
-				loseAccuracy = 0f;
-            }
-            else
-            {
-                _kickForce = 0.33f;
-                loseAccuracy = 0.07f;
-            }
+            Bipods = Bipods;
+            if (duck == null) BipodsDisabled = false;
+            else if (!BipodsQ(this, true)) BipodsDisabled = false;
             base.Update();
         }
         public override void OnPressAction()
@@ -140,6 +142,8 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        public bool BipodsDisabled { get; private set; }
         public int FrameId
         {
             get => _sprite.frame;

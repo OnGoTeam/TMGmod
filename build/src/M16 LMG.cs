@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class M16LMG : BaseLmg, IHaveSkin
+    public class M16LMG : BaseLmg, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -52,7 +52,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.83f;
             _kickForce = 2.33f;
-            loseAccuracy = 0.07f;
+            loseAccuracy = 0.15f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
@@ -63,18 +63,20 @@ namespace TMGmod
             Kforce1Lmg = 0.23f;
             Kforce2Lmg = 0.43f;
         }
+        public bool Bipods
+        {
+            get => BipodsQ();
+            set
+            {
+                _kickForce = value ? 0 : 2.33f;
+                loseAccuracy = value ? 0 : 0.15f;
+            }
+        }
         public override void Update()
         {
-            if (duck != null && duck.height < 17f)
-            {
-                _kickForce = 0f;
-				loseAccuracy = 0f;
-            }
-            else
-            {
-                _kickForce = 0.33f;
-                loseAccuracy = 0.07f;
-            }
+            Bipods = Bipods;
+            if (duck == null) BipodsDisabled = false;
+            else if (!BipodsQ(this, true)) BipodsDisabled = false;
             base.Update();
         }
 
@@ -138,6 +140,10 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        public bool BipodsDisabled { get; private set; }
+
         public int FrameId
         {
             get => _sprite.frame;
