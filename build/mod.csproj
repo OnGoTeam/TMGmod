@@ -76,6 +76,7 @@
     <Compile Include="src\Bersa 45.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
+    <Compile Include="src\Buddies\FlameThrowerPlus.cs" />
     <Compile Include="src\Buddies\LockedContainer.cs" />
     <Compile Include="src\Buddies\LockedRedCase.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />

@@ -166,7 +166,7 @@ namespace TMGmod.Stuff
 
         public override BinaryClassChunk Serialize()
         {
-            BinaryClassChunk binaryClassChunk = base.Serialize();
+            var binaryClassChunk = base.Serialize();
             binaryClassChunk.AddProperty("Ammo", Ammo);
             return binaryClassChunk;
         }

@@ -13,7 +13,9 @@ namespace TMGmod
     {
         private int _patrons = 12;
         private int _bullets;
+        [UsedImplicitly]
         public bool Stick;
+        [UsedImplicitly]
         public StateBinding StickBinding = new StateBinding(nameof(Stick));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -70,7 +72,7 @@ namespace TMGmod
 		    base.Update();
 			if (ammo < 12)
 			{
-			    _patrons = ammo;	
+			    _patrons = ammo;
 			}
 
             if (duck == null) return;
