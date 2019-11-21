@@ -35,7 +35,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             ammo = 8;
-            _ammoType = new ATSniper {accuracy = 0.9f, penetration = 4f, range = 600};
+            _ammoType = new ATSniper {accuracy = 0.9f, penetration = 4f, range = 600f};
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
             _kickForce = 4.8f;

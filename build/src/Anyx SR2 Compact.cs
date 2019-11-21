@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class VSK94 : BaseAr, IHaveSkin
+    public class VSK94 : BaseAr, IHaveSkin, IHaveBipods
     {
         public float HandAngleOff
         {
@@ -20,6 +20,10 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
+        [UsedImplicitly]
+        public float psevdotimer = 0f;
+        public float floatingKickforce;
+        [UsedImplicitly]
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -70,6 +74,28 @@ namespace TMGmod
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
         }
+        public override void Update()
+        {
+            HandAngleOff = _handAngleOff;
+            base.Update();
+            Bipods = Bipods;
+            if (psevdotimer < 16f) floatingKickforce = 0.5f;
+            else floatingKickforce = 3f;
+        }
+        public bool Bipods
+        {
+            get => HandleQ();
+            set
+            {
+                Kforce1Ar = value ? floatingKickforce : 5.4f;
+                Kforce2Ar = value ? floatingKickforce : 6.85f;
+                _kickForce = value ? floatingKickforce : 5.2f;
+                loseAccuracy = value ? 0f : 0.2f;
+                maxAccuracyLost = value ? 0f : 0.6f;
+            }
+        }
+        public bool BipodsDisabled => false;
+        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         public float MuAccuracySr { get; }
         public float LambdaAccuracySr { get; }
         public override void OnHoldAction()
@@ -77,18 +103,15 @@ namespace TMGmod
             if (ammo > 0) HandAngleOff -= 0.01f;
             else if (ammo < 1) HandAngleOff = 0f;
             _handAngleOff = HandAngleOff;
+            psevdotimer += 1f;
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
         {
+            psevdotimer = 0f;
             HandAngleOff = 0f;
             _handAngleOff = HandAngleOff;
             base.OnReleaseAction();
-        }
-        public override void Update()
-        {
-            HandAngleOff = _handAngleOff;
-            base.Update();
         }
         private void UpdateSkin()
         {

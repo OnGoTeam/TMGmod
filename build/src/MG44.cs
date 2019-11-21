@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
-
 namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]

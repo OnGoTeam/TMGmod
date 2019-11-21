@@ -20,7 +20,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 8 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 8 });
         private int _ammobefore = 21;
         private float _explode;
         private int _uselessinteger = 3;

@@ -35,13 +35,13 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             ammo = 8;
-            _ammoType = new ATSniper {penetration = 4f, range = 850, accuracy = 1};
+            _ammoType = new ATSniper {penetration = 4f, range = 850f, accuracy = 1f};
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
             _kickForce = 6f;
             laserSight = false;
             //_laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(7f, 0f);
+            _holdOffset = new Vec2(7f, -1f);
             _editorName = "Barrett M98";
 			_weight = 7f;
         }

@@ -50,7 +50,7 @@ namespace TMGmod
             _kickForce = 5.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(0f, 1f);
+            _holdOffset = new Vec2(-1f, 1f);
             ShellOffset = new Vec2(-18f, -1f);
             laserSight = true;
             _laserOffsetTL = new Vec2(22f, 3.5f);

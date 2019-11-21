@@ -11,7 +11,7 @@ namespace TMGmod
     public class AN94 : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
         [UsedImplicitly]
-        public bool Stock
+        public bool Laserrod
         {
             get => _sprite.frame < 10;
             set
@@ -19,24 +19,24 @@ namespace TMGmod
                 if (value)
                 {
                     loseAccuracy = 0.15f;
-                    weight = 5.5f;
-                    _fireWait = 2f;
+                    _fireWait = 1.5f;
+                    maxAccuracyLost = 0.45f;
                     _sprite.frame %= 10;
-                    maxAccuracyLost = 0.1f;
+                    laserSight = false;
                 }
                 else
                 {
-                    loseAccuracy = 0.2f;
-                    weight = 2.75f;
-                    _fireWait = 1.5f;
+                    loseAccuracy = 0.1f;
+                    _fireWait = 2.5f;
+                    maxAccuracyLost = 0.1f;
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
-                    maxAccuracyLost = 0.3f;
+                    laserSight = true;
                 }
             }
         }
         [UsedImplicitly]
-        public StateBinding StockBinding = new StateBinding(nameof(Stock));
+        public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -69,14 +69,14 @@ namespace TMGmod
             _ammoType = new ATMagnum { range = 260f, bulletSpeed = 60f, accuracy = 0.87f};
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 2f;
-            Kforce1Ar = 0.07f;
-            _kickForce = 0.9f;
-            Kforce2Ar = 0.9f;
+            _fireWait = 1.5f;
+            Kforce1Ar = 0.5f;
+            _kickForce = 1.6f;
+            Kforce2Ar = 2f;
             loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.1f;
+            maxAccuracyLost = 0.45f;
             _editorName = "AN94";
-            _weight = 5.5f;
+            _weight = 4.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(30f, 2.5f);
             DeltaWait = 0.07f;
@@ -87,7 +87,7 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                Stock = !Stock;
+                Laserrod = !Laserrod;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();

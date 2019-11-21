@@ -41,7 +41,8 @@ namespace TMGmod.Cases.Color
                 typeof(PPK42),
                 typeof(SKS),
                 typeof(SRM1208),
-                typeof(M14)
+                typeof(M14),
+                typeof(AR15Proto)
             };
             CaseId = 2;
         }
