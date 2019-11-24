@@ -10,7 +10,7 @@ namespace TMGmod.Core
         [UsedImplicitly]
         StateBinding StockBinding { get; }
         [UsedImplicitly]
-        bool StockState { get; set; }
+        float StockState { get; set; }
         [UsedImplicitly]
         StateBinding StockStateBinding { get; }
     }

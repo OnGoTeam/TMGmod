@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -8,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AKALFA : BaseAr, IHaveSkin
+    public class AKALFA : BaseAr, IHaveSkin, IHaveStock
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 2;
+        private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -20,31 +21,44 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4, 5 });
+        private bool _stock = true;
         [UsedImplicitly]
         public bool Stock
         {
-            get => _sprite.frame < 10;
+            get => _stock;
             set
             {
-                if (value)
-                {
-                    _sprite.frame %= 10;
-                    _ammoType.accuracy = 1f;
-                    loseAccuracy = 0f;
-                    weight = 5.5f;
-                }
-                else
-                {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    _ammoType.accuracy = 0.92f;
-                    loseAccuracy = 0.1f;
-                    weight = 3.5f;
-                }
+                _stock = value;
+                var stockstate = StockState;
+                if (isServerForObject)
+                    StockState += 1f / 10 * (value ? 1 : -1);
+                var nostock = StockState < 0.01f;
+                var stock = StockState > 0.99f;
+                _ammoType.accuracy = stock ? 1f : 0.92f;
+                loseAccuracy = stock ? 0f : 0.1f;
+                weight = stock ? 5.5f : 3.5f;
+                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
+                if (isServerForObject && stock && stockstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/beepods1"));
+                if (isServerForObject && nostock && stockstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/beepods2"));
             }
         }
+
+        private float _stockstate = 1f;
+        public float StockState {
+            get => _stockstate;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _stockstate = value;
+            }
+        }
+        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+
         [UsedImplicitly]
-        public StateBinding StockBinding = new StateBinding(nameof(Stock));
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(Stock));
 
         public AKALFA (float xval, float yval)
           : base(xval, yval)
@@ -87,12 +101,15 @@ namespace TMGmod
 		}
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
+            base.Update();
+            if (SwitchStockQ() && (Stock || !duck.sliding) && duck.inputProfile.Pressed("QUACK"))
             {
                 Stock = !Stock;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                Mod.Debug.Log(Stock.ToString());
+                SFX.Play("quack", -1);
             }
-            base.Update();
+            else if (duck != null)
+                Stock = Stock;
         }
         private void UpdateSkin()
         {
@@ -113,6 +130,12 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+
+        public override void Fire()
+        {
+            if (FrameId / 10 == 1) return;
+            base.Fire();
         }
     }
 }
