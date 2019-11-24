@@ -78,7 +78,7 @@ namespace TMGmod.Stuff
         private void Damage(AmmoType at)
         {
             thickness = Hp < Hp1 ? Hp * 0.04f : 10000f;
-            Hp -= at.penetration * 5f;
+            Hp -= at is IHeavyAmmoType ? HpMax * 0.49f: at.penetration * 5f;
             if (Hp <= HpMax)
             {
                 _sprite.frame = 0;
