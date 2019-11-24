@@ -101,6 +101,7 @@ namespace TMGmod
         }
 
         /// <inheritdoc />
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

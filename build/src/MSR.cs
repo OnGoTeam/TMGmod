@@ -55,10 +55,7 @@ namespace TMGmod
         public bool Bipods
         {
             get => BaseGun.HandleQ(this);
-            set
-            {
-                _kickForce = value ? 1f : 5.5f;
-            }
+            set => _kickForce = value ? 1f : 5.5f;
         }
         public bool BipodsDisabled => false;
         public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));

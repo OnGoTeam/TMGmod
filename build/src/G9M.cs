@@ -144,6 +144,7 @@ namespace TMGmod
         }
         public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         public bool BipodsDisabled { get; private set; }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

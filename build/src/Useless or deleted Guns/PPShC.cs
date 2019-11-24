@@ -71,6 +71,7 @@ namespace TMGmod.Useless_or_deleted_Guns
         }
 
         /// <inheritdoc />
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

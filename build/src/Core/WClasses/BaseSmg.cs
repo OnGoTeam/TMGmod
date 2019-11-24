@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
 {
@@ -13,6 +14,7 @@ namespace TMGmod.Core.WClasses
         /// <summary>
         /// Kforce delay syncing
         /// </summary>
+        [UsedImplicitly]
         public StateBinding DelaySmgBinding = new StateBinding(nameof(CurrDelaySmg));
 
         /// <inheritdoc />
@@ -29,6 +31,6 @@ namespace TMGmod.Core.WClasses
         public int CurrDelaySmg { get; set; }
 
         /// <inheritdoc />
-        public int MaxDelaySmg { get; set; }
+        public int MaxDelaySmg { get; protected set; }
     }
 }

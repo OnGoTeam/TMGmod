@@ -10,7 +10,9 @@ namespace TMGmod
     public class DaewooK1 : BaseSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public bool Stock;
+        [UsedImplicitly]
         public StateBinding StockBinding = new StateBinding(nameof(Stock));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));

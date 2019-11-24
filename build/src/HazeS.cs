@@ -31,6 +31,7 @@ namespace TMGmod
         /// <summary>
         /// Heatval'ue has effect on acc, bulletSpeed, range
         /// </summary>
+        [UsedImplicitly]
         public float Heatval
         {
             get => _heatval;
@@ -46,6 +47,7 @@ namespace TMGmod
         /// <summary>
         /// HV syncing
         /// </summary>
+        [UsedImplicitly]
         public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
 
         private bool _sighted;
@@ -53,6 +55,7 @@ namespace TMGmod
         /// <summary>
         /// Whether duck is using sights
         /// </summary>
+        [UsedImplicitly]
         public bool Sighted
         {
             get => _sighted;
@@ -173,6 +176,7 @@ namespace TMGmod
         }
 
         /// <inheritdoc />
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

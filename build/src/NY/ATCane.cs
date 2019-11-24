@@ -7,18 +7,13 @@ namespace TMGmod.NY
     /// <inheritdoc />
     public class ATCane : BaseAmmoTypeT
     {
-        /// <summary>
-        /// bullet sprite
-        /// </summary>
-        public readonly SpriteMap SpriteY;
-
         /// <inheritdoc />
         public ATCane()
         {
             bulletType = typeof(CandyCaneBullet);
-            SpriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/candycane"), 18, 7);
-            SpriteY.CenterOrigin();
-            sprite = SpriteY;
+            var spriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/candycane"), 18, 7);
+            spriteY.CenterOrigin();
+            sprite = spriteY;
             bulletLength = 3f;
             bulletSpeed = 15f;
         }

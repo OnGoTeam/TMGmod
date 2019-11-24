@@ -10,19 +10,22 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class VSK94 : BaseAr, IHaveSkin, IHaveBipods
     {
+        [UsedImplicitly]
         public float HandAngleOff
         {
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
         private float _handAngleOff;
+        [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         [UsedImplicitly]
-        public float psevdotimer = 0f;
-        public float floatingKickforce;
+        public float Psevdotimer;
+
+        private float _floatingKickforce;
         [UsedImplicitly]
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
@@ -71,44 +74,39 @@ namespace TMGmod
             BaseAccuracy = 0.9f;
             Kforce1Ar = 5.4f;
             Kforce2Ar = 6.85f;
-            MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.5f;
         }
         public override void Update()
         {
             HandAngleOff = _handAngleOff;
             base.Update();
             Bipods = Bipods;
-            if (psevdotimer < 16f) floatingKickforce = 0.5f;
-            else floatingKickforce = 3f;
+            _floatingKickforce = Psevdotimer < 16f ? 0.5f : 3f;
         }
         public bool Bipods
         {
             get => HandleQ();
             set
             {
-                Kforce1Ar = value ? floatingKickforce : 5.4f;
-                Kforce2Ar = value ? floatingKickforce : 6.85f;
-                _kickForce = value ? floatingKickforce : 5.2f;
+                Kforce1Ar = value ? _floatingKickforce : 5.4f;
+                Kforce2Ar = value ? _floatingKickforce : 6.85f;
+                _kickForce = value ? _floatingKickforce : 5.2f;
                 loseAccuracy = value ? 0f : 0.2f;
                 maxAccuracyLost = value ? 0f : 0.6f;
             }
         }
         public bool BipodsDisabled => false;
         public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
-        public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; }
         public override void OnHoldAction()
         {
             if (ammo > 0) HandAngleOff -= 0.01f;
             else if (ammo < 1) HandAngleOff = 0f;
             _handAngleOff = HandAngleOff;
-            psevdotimer += 1f;
+            Psevdotimer += 1f;
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
         {
-            psevdotimer = 0f;
+            Psevdotimer = 0f;
             HandAngleOff = 0f;
             _handAngleOff = HandAngleOff;
             base.OnReleaseAction();
@@ -122,7 +120,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

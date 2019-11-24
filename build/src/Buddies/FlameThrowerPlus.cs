@@ -1,8 +1,10 @@
 ﻿#if DEBUG
 using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Buddies
 {
+    [PublicAPI]
     [EditorGroup("TMG|DEBUG")]
     public class FlameThrowerPlus: PPSh41
     {

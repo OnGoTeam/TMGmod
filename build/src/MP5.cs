@@ -11,7 +11,9 @@ namespace TMGmod
     public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public bool NonAuto = true;
+        [UsedImplicitly]
         public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -95,7 +97,8 @@ namespace TMGmod
         }
         public float KforceDSmg { get; }
         public int CurrDelaySmg { get; set; }
-        public int MaxDelaySmg { get; set; }
+        public int MaxDelaySmg { get; }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

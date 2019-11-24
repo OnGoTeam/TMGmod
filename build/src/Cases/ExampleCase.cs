@@ -1,4 +1,6 @@
-﻿#if DEBUG
+﻿
+using JetBrains.Annotations;
+#if DEBUG
 using System;
 using System.Collections.Generic;
 using DuckGame;
@@ -6,6 +8,7 @@ using TMGmod.Core;
 
 namespace TMGmod.Cases
 {
+    [UsedImplicitly]
     [BaggedProperty("canSpawn", false)]
     public class ExampleCase:BaseCase
     {

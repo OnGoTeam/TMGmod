@@ -1,9 +1,13 @@
 ﻿#if DEBUG
 using DuckGame;
+using System;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Useless_or_deleted_Guns
 {
+    [UsedImplicitly]
+    [Obsolete]
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [BaggedProperty("canSpawn", false)]
     // ReSharper disable once InconsistentNaming
@@ -67,7 +71,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             base.Update();
             if (_isroundsin) return;
             //else
-            _rs = _rs + 1;
+            _rs += 1;
             if (_rs != 10) return;
             //else
             SFX.Play("Click");
@@ -76,7 +80,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             if (_aammo > _ammo)
             {
                 ammo = _ammo;
-                _aammo = _aammo - _ammo;
+                _aammo -= _ammo;
             }
             else
             {

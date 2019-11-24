@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -67,7 +68,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
@@ -84,10 +85,8 @@ namespace TMGmod
         {
             var contextMenu = base.GetContextMenu();
 #if DEBUG
-            foreach (var allowed in Allowedlst)
+            foreach (var sprite in Allowedlst.Select(allowed => new SpriteMap(GetPath("PPSH41"), 30, 8) {_frame = allowed}))
             {
-                var sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
-                sprite._frame = allowed;
                 contextMenu.AddItem(new ContextSkinRender(null, sprite));
             }
 #endif

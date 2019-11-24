@@ -78,7 +78,7 @@ namespace TMGmod
         public bool BipodsDisabled => false;
         public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; set; }
+        public float LambdaAccuracySr { get; private set; }
         private void UpdateSkin()
         {
             var bublic = Skin.value;
@@ -88,6 +88,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

@@ -12,7 +12,8 @@ namespace TMGmod
     public class SIX12S : BaseGun, IHaveSkin, IAmSg, I5
     {
         private readonly SpriteMap _sprite;
-        public bool Laserino;
+        [UsedImplicitly]
+        public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
@@ -59,13 +60,12 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Laserino)
+                if (laserSight)
                 {
                     FrameId -= 10;
                     loseAccuracy = 0.3f;
                     maxAccuracyLost = 0.5f;
                     laserSight = false;
-                    Laserino = false;
                 }
                 else
                 {
@@ -73,7 +73,6 @@ namespace TMGmod
                     loseAccuracy = 0.45f;
                     maxAccuracyLost = 0.5f;
                     laserSight = true;
-                    Laserino = true;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

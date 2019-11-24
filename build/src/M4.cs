@@ -60,66 +60,16 @@ namespace TMGmod
 			_weight = 4.4f;
             Kforce2Ar = 0.5f;
         }
-        /*public override void OnPressAction()
-        {
-            /*ammo = Rando.Int(0, _ammobefore / 6 * (1 + _counter / 2));
-            if (ammo > _ammobefore) ammo = _ammobefore;
-            _ammobefore -= ammo;#1#
-            base.OnPressAction();
-        }
-        public override void OnReleaseAction()
-        {
-            /*if (ammo > 0) _ammobefore += ammo;
-            if (ammo == 0) _counter += 1;#1#
-            base.OnReleaseAction();
-        }
-        public override void Fire()
-        {
-            /*_explode = Rando.Float(0,1);
-            if (_explode < Explodechance) CreateExplosion(position);#1#
-            base.Fire();
-        }
-        public override void Thrown()
-        {
-            /*if ((ammo < 1) && (_ammobefore > 0)) ammo = _ammobefore;#1#
-            base.Thrown();
-        }*/
-        /*private void CreateExplosion(Vec2 pos)
-        {
-            var cx = pos.x;
-            var cy = pos.y - 2f;
-            Level.Add(new ExplosionPart(cx, cy));
-            var num = 6;
-            if (Graphics.effectsLevel < 2) num = 3;
-            for (var i = 0; i < num; i++)
+        private void UpdateSkin()
             {
-                var dir = i * 60f + Rando.Float(-10f, 10f);
-                var dist = Rando.Float(12f, 20f);
-                var ins = new ExplosionPart(cx + (float)(Math.Cos(Maths.DegToRad(dir)) * dist),
-                    cy - (float)(Math.Sin(Maths.DegToRad(dir)) * dist));
-                Level.Add(ins);
+                var bublic = Skin.value;
+                while (!Allowedlst.Contains(bublic))
+                {
+                    bublic = Rando.Int(0, 9);
+                }
+                _sprite.frame = bublic;
             }
-            for (var i = 0; i < 25; i++)
-            {
-                var dir = i * 18f - 5f + Rando.Float(10f);
-                var shrap = new ATShrapnel { range = 20f + Rando.Float(6f) };
-                var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(dir)) * 6.0),
-                        y - (float)(Math.Sin(Maths.DegToRad(dir)) * 6.0), shrap, dir)
-                { firedFrom = this };
-                Level.Add(bullet);
-            }
-            SFX.Play("explode");
-            Level.Remove(this);
-        }*/
-            private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

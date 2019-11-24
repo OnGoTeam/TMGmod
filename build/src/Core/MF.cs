@@ -83,16 +83,15 @@ namespace TMGmod.Core
 
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
-            if (isServerForObject && with != _owner && !(with is Gun) && with.weight >= 5f)
+            if (!isServerForObject || with == _owner || with is Gun || !(with.weight >= 5f)) return;
+            //ese
+            if (with is PhysicsObject)
             {
-                if (with is PhysicsObject)
-                {
-                    with.hSpeed = hSpeed / 4f;
-                    with.vSpeed -= 1f;
-                }
-                Destroy(new DTImpact(null));
-                with.Burn(position, this);
+                with.hSpeed = hSpeed / 4f;
+                with.vSpeed -= 1f;
             }
+            Destroy(new DTImpact(null));
+            with.Burn(position, this);
         }
     }
 }

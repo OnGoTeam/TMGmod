@@ -6,7 +6,7 @@ namespace TMGmod.Buddies
 {
     [EditorGroup("TMG|DEBUG")]
     [PublicAPI]
-    class LockedRedCase : LockedContainer<Cases.Color.PodarokColorR>
+    internal class LockedRedCase : LockedContainer<Cases.Color.PodarokColorR>
     {
         public LockedRedCase(float xval, float yval) : base(xval, yval)
         {

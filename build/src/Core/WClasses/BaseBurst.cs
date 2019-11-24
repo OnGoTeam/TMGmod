@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
 {
@@ -11,10 +12,12 @@ namespace TMGmod.Core.WClasses
         /// <summary>
         /// Burst countdown
         /// </summary>
+        [UsedImplicitly]
         public int ShotsLeft;
         /// <summary>
         /// For syncing
         /// </summary>
+        [UsedImplicitly]
         public StateBinding ShotsBinding = new StateBinding(nameof(ShotsLeft));
         /// <summary>
         /// Time between two burst shots

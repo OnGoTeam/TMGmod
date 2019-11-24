@@ -111,7 +111,7 @@ namespace TMGmod.Stuff
         public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
         {
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
-            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) && @from == ImpactedFrom.Left || from == ImpactedFrom.Right)
+            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) && from == ImpactedFrom.Left || from == ImpactedFrom.Right)
             {
                 if (duck == null && Math.Abs(with.hSpeed) * with.weight > 40f)
                 {

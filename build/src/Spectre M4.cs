@@ -11,7 +11,9 @@ namespace TMGmod
     public class SpectreM4 : BaseSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public bool Silencer;
+        [UsedImplicitly]
         public StateBinding StockBinding = new StateBinding(nameof(Silencer));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));

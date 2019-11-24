@@ -13,7 +13,9 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
+        [UsedImplicitly]
         public bool Silencer;
+        [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
@@ -106,7 +108,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

@@ -1,9 +1,12 @@
-﻿#if DEBUG
+﻿
+using JetBrains.Annotations;
+#if DEBUG
 using DuckGame;
 using System;
 
 namespace TMGmod.Buddies
 {
+    [PublicAPI]
     [EditorGroup("TMG|DEBUG")]
     public class StingerMissile:Holdable
     {
@@ -33,14 +36,13 @@ namespace TMGmod.Buddies
             if (_target != null)
                 if (Level.CheckLine<Block>(position, _target.position) != null || _target.dead || _target == owner)
                     _target = null;
-            if (_target == null)
+            if (_target != null) return;
+            //else
+            var ducks = Level.CheckCircleAll<Duck>(position, 1000);
+            foreach (var d in ducks)
             {
-                var ducks = Level.CheckCircleAll<Duck>(position, 1000);
-                foreach (var d in ducks)
-                {
-                    if (Level.CheckLine<Block>(position, d.position) == null && d != owner && !d.dead)
-                        _target = d;
-                }
+                if (Level.CheckLine<Block>(position, d.position) == null && d != owner && !d.dead)
+                    _target = d;
             }
         }
 

@@ -1,4 +1,6 @@
-﻿#if DEBUG
+﻿
+using System.Linq;
+#if DEBUG
 using DuckGame;
 using System.Collections.Generic;
 using System;
@@ -17,6 +19,7 @@ namespace TMGmod.Stuff
         private readonly int _trackTicks;
         [UsedImplicitly]
         public int Ammo = 5;
+        [UsedImplicitly]
         public StateBinding AmmoBinding = new StateBinding(nameof(Ammo));
         private readonly int _simTracked;
         public ActiveDefenseSystem(float xpos, float ypos) : base(xpos, ypos)
@@ -39,11 +42,10 @@ namespace TMGmod.Stuff
                 var grenades = Level.CheckCircleAll<Grenade>(position, _range);
                 foreach (var grenade in grenades)
                 {
-                    if (!_grenades.Contains(grenade))
-                    {
-                        _grenades.Add(grenade);
-                        _trackeds.Add(new Tracked(grenade));
-                    }
+                    if (_grenades.Contains(grenade)) continue;
+                    //else
+                    _grenades.Add(grenade);
+                    _trackeds.Add(new Tracked(grenade));
                 }
                 _grenades.RemoveAll(InvalidGrenade);
                 if (_grenades.Count > _simTracked)
@@ -56,12 +58,9 @@ namespace TMGmod.Stuff
                     tracked.Inst.DoHeatUp(0.1f, tracked.Inst.position);
                     tracked.AddLev();
                 }
-                foreach (var tracked in _trackeds)
+                foreach (var tracked in _trackeds.Where(tracked => tracked.TrLev > _trackTicks))
                 {
-                    if (tracked.TrLev > _trackTicks)
-                    {
-                        HitTracked(tracked);
-                    }
+                    HitTracked(tracked);
                 }
             }
             else
@@ -91,12 +90,9 @@ namespace TMGmod.Stuff
         public override void Draw()
         {
             _hitPosList.RemoveAll(OldHit);
-            foreach (var tracked in _trackeds)
+            foreach (var tracked in _trackeds.Where(tracked => tracked.TrLev <= _trackTicks))
             {
-                if (tracked.TrLev <= _trackTicks)
-                {
-                    Graphics.DrawLine(position, tracked.Inst.position, new Color(255, 0, 0));
-                }
+                Graphics.DrawLine(position, tracked.Inst.position, new Color(255, 0, 0));
             }
             foreach (var hitPos in _hitPosList)
             {
@@ -139,8 +135,8 @@ namespace TMGmod.Stuff
 
         private struct AdsHit
         {
-            internal Vec2 Pos;
-            internal int Tick;
+            internal readonly Vec2 Pos;
+            internal readonly int Tick;
             public AdsHit(Vec2 pos, int tick)
             {
                 Pos = pos;

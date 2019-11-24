@@ -84,10 +84,9 @@ namespace TMGmod.Core
                 "DuckGame\\Levels\\TMG Maps v2.1",
                 "DuckGame\\Levels\\TMG v2.1.1"
             });
-            foreach (var dirpath in olddirlist)
+            foreach (var dirpath1 in olddirlist.Select(dirpath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath)).Where(Directory.Exists))
             {
-                var dirpath1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath);
-                if (Directory.Exists(dirpath1)) Directory.Delete(dirpath1, true);
+                Directory.Delete(dirpath1, true);
             }
             // Сначала определяем левелы, и копируем их
             var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");

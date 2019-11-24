@@ -1,5 +1,6 @@
 ﻿using System;
 using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
 {
@@ -13,10 +14,12 @@ namespace TMGmod.Core.WClasses
         /// <summary>
         /// 
         /// </summary>
+        [UsedImplicitly]
         public int LoadProgress;
         /// <summary>
         /// <see cref="LoadProgress"/> syncing
         /// </summary>
+        [UsedImplicitly]
         public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
         private float _loadAnimation = 1f;
         /// <summary>

@@ -13,7 +13,9 @@ namespace TMGmod
     {
 
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public bool NonAuto = true;
+        [UsedImplicitly]
         public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -95,8 +97,9 @@ namespace TMGmod
         public int CurrDelaySmg { get; set; }
         public int CurrDelay { get; set; }
         public int MaxDelayFp { get; }
-        public int MaxDelaySmg { get; set; }
+        public int MaxDelaySmg { get; }
         public float MaxAccuracy { get; }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

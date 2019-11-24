@@ -124,6 +124,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

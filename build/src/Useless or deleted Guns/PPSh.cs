@@ -61,7 +61,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

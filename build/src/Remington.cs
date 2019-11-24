@@ -1,8 +1,10 @@
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class Remington : BasePumpAction
     {

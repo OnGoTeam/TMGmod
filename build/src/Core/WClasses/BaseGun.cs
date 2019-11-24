@@ -179,6 +179,11 @@ namespace TMGmod.Core.WClasses
             return !(duck is null) && !gun.raised && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 1f;
         }
 
+        public static bool SwitchStockQ(Gun gun)
+        {
+            var duck = gun.duck;
+            return !(duck is null) && !duck.sliding;
+        }
         public bool BipodsQ()
         {
             return BipodsQ(this);
@@ -186,6 +191,10 @@ namespace TMGmod.Core.WClasses
         public bool HandleQ()
         {
             return HandleQ(this);
+        }
+        public bool SwitchStockQ()
+        {
+            return SwitchStockQ(this);
         }
     }
 }
