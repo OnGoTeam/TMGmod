@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props" Condition="Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,10 +12,12 @@
     <AssemblyName>TMGmod</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\TMGmod\</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -25,7 +28,7 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>..\..\TMGmod\</OutputPath>
+    <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -36,13 +39,14 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>7.3</LangVersion>
     <DebugSymbols>true</DebugSymbols>
-    <DocumentationFile>..\..\TMGmod\TMGmod.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Workshop|x86'">
-    <OutputPath>..\..\TMGmod\</OutputPath>
+    <OutputPath>bin\x86\Workshop\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>TRACE;WORKSHOP</DefineConstants>
     <Optimize>true</Optimize>
@@ -249,8 +253,10 @@
     <Compile Include="src\X3X.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ILMerge.props" />
     <None Include="packages.config" />
     <None Include="Resources\BuildDate.txt" />
+    <Content Include="ILMergeOrder.txt" />
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -268,30 +274,32 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT $(SolutionDir)  == $(TargetDir)build\ (
+    <PostBuildEvent>SET outdir=%25HOMEPATH%25\Documents\DuckGame\Mods\$(TargetName)
+COPY $(TargetPath) %25outdir%25\$(TargetFileName)
+IF NOT $(SolutionDir)  == $(TargetDir)build\ (
     ECHO Transferring
     CD $(SolutionDir)
     CD ..
-    RMDIR /S /Q $(TargetDir)content\
-    XCOPY content $(TargetDir)content\ /E /Y /Q
-    COPY mod.conf $(TargetDir)mod.conf
+    RMDIR /S /Q %25outdir%25\content\
+    XCOPY content %25outdir%25\content\ /E /Y /Q
+    COPY mod.conf %25outdir%25\mod.conf
     ECHO Transferred
     IF $(ConfigurationName) == Workshop (
-    IF EXIST $(TargetDir)content\deleteco\ (
-    RMDIR /Q /S $(TargetDir)content\deleteco\
+    IF EXIST %25outdir%25\content\deleteco\ (
+    RMDIR /Q /S %25outdir%25\content\deleteco\
         ECHO Deleted deleteco
     )
-    IF EXIST $(TargetDir)content\oldmaps\ (
-    RMDIR /Q /S $(TargetDir)content\oldmaps\
+    IF EXIST %25outdir%25\content\oldmaps\ (
+    RMDIR /Q /S %25outdir%25\content\oldmaps\
         ECHO Deleted oldmaps
     )
-    IF EXIST $(TargetDir)TMGmod.pdb (
-    ERASE $(TargetDir)TMGmod.pdb
+    IF EXIST %25outdir%25\TMGmod.pdb (
+    ERASE %25outdir%25\TMGmod.pdb
     ECHO Deleted TMGmod.pdb
     )
     )
 )
-CD ..
+CD %25outdir%25\..
 IF EXIST TMGmod.zip (
     ERASE TMGmod.zip
     ECHO Deleted TMGmod.zip
@@ -300,6 +308,14 @@ IF EXIST TMGmod.zip (
   <PropertyGroup>
     <PreBuildEvent>echo %25date%25 %25time%25 &gt; "$(ProjectDir)\Resources\BuildDate.txt"</PreBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props'))" />
+    <Error Condition="!Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets'))" />
+  </Target>
+  <Import Project="packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets" Condition="Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
