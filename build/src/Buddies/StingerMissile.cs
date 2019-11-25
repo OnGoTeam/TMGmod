@@ -269,8 +269,8 @@ namespace TMGmod.Buddies
             {
                 4 * pp,
                 -8 * pv,
-                4 * (vv - pg),
-                4 * vg,
+                4 * (vv - pg) + gg - aa,
+                4 * vg + 2 * gg - 2 * aa,
                 gg - aa
             });
             var t = (from r in rar where r.IsRealNonNegative() select r.Real).Concat(new[] { 1e+10 }).Min();
