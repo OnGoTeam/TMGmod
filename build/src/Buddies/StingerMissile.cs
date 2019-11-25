@@ -10,13 +10,14 @@ namespace TMGmod.Buddies
 {
     [PublicAPI]
     [EditorGroup("TMG|DEBUG")]
-    public class StingerMissile:Holdable
+    public class StingerMissile:PhysicsObject
     {
         private readonly List<Vec2> _pList = new List<Vec2>();
-        private const float A = 0.4f;
-        private Duck _target;
-        private bool _activated = true;
-        private readonly Tex2D _laserTex = Content.Load<Tex2D>("pointerLaser");
+        private const float A = 0.22f;
+        private MaterialThing _target;
+        private Vec2 _tlv;
+        private Vec2 _ta;
+        private readonly bool _activated = true;
         public StingerMissile(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
@@ -43,28 +44,30 @@ namespace TMGmod.Buddies
 
         private void UpdateTarget()
         {
+            Level.Add(SmallSmoke.New(x, y));
             if (_target != null)
-                if (Level.CheckLine<Block>(position, _target.position) != null || _target.dead || _target == owner)
+                if (Level.CheckLine<IPlatform>(position, _target.position) != null || _target is Duck duck0 && duck0.dead || _target == owner)
                     _target = null;
             if (_target != null) return;
             //else
             var ducks = Level.CheckCircleAll<Duck>(position, 1000);
             foreach (var d in ducks)
             {
-                if (Level.CheckLine<Block>(position, d.position) == null && !d.dead)
+                if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead)
+                    _target = d;
+            }
+
+            var stgs = Level.CheckCircleAll<StingerMissile>(position, 1000);
+            foreach (var d in stgs)
+            {
+                if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this && !d._destroyed)
                     _target = d;
             }
         }
 
-        public override void OnPressAction()
-        {
-            _activated = true;
-            base.OnPressAction();
-        }
-
         protected override bool OnDestroy(DestroyType dtype = null)
         {
-            if (dtype is DTImpact dti && dti.thing == this) return true;
+            if (_destroyed) return true;
             new ATMissileShrapnel().MakeNetEffect(position);
             Random random = null;
             if (Network.isActive && isLocal)
@@ -139,24 +142,27 @@ namespace TMGmod.Buddies
             if (Network.isActive && isLocal && varBlocks.Count > 0)
                 Send.Message(new NMDestroyBlocks(varBlocks));
             Level.Remove(this);
+            _pList.Clear();
             return true;
         }
 
-        /*public override void OnImpact(MaterialThing with, ImpactedFrom from)
+        public override void OnSolidImpact(MaterialThing with, ImpactedFrom from)
         {
-            base.OnImpact(with, from);
+            base.OnSolidImpact(with, from);
             if (!_activated) return;
             Destroy(new DTImpact(with));
-        }*/
+        }
 
         private void UpdateFlight()
         {
             if (!_activated) return;
             //velocity += OffsetLocal(new Vec2(A, 0));
             if (_target is null) return;
+            _ta = _target.velocity - _tlv;
+            _tlv = _target.velocity;
             var p = _target.position - position;
             var v = _target.velocity - velocity;
-            var g = new Vec2(0, gravity);
+            var g = new Vec2(0, gravity) - _ta;
             var pa = Delta(-v, p, g);
             var maybeangle = Math.Acos(pa.x / pa.length);
             if (pa.y < 0) maybeangle = -maybeangle;
@@ -182,6 +188,7 @@ namespace TMGmod.Buddies
             var p = _target.position - position;
             var v = _target.velocity - velocity;
             var g = new Vec2(0, gravity);
+            var t = Time4(A * A, -v, p, g);
             var pa = Delta(-v, p, g);
             p0 = position;
             var v0 = velocity;
@@ -192,19 +199,33 @@ namespace TMGmod.Buddies
                 v0 += pa + g;
                 p0 = pi;
             }
+            p0 = _target.position;
+            v0 = _target.velocity;
+            for (var i = 0; i < 60; i++)
+            {
+                var pi = p0 + v0;
+                Graphics.DrawLine(p0, pi, Color.Blue);
+                v0 += _ta;
+                p0 = pi;
+            }
+
+            var ipos = position + (pa + g) * t * t / 2 + velocity * t;
+            Graphics.DrawCircle(ipos, 24, Color.Yellow, depth: _target.depth.value + 3f);
         }
 
         public override void Touch(MaterialThing with)
         {
-            if (with is Duck duck0)
+            switch (with)
             {
-                _target = null;
-                UpdateTarget();
-                duck0.ThrowItem();
-                //duck0.Kill(new DTImpact(this));
-                //duck0._jumpValid = 4;
-                //duck0._groundValid = 10;
+                case Duck duck0:
+                    Destroy(new DTImpact(duck0));
+                    break;
+                case StingerMissile stg:
+                    Destroy(new DTImpact(stg));
+                    stg.Destroy(new DTImpact(this));
+                    break;
             }
+
             base.Touch(with);
         }
 
@@ -267,11 +288,6 @@ namespace TMGmod.Buddies
             var av = 2 * p - 2 * v * t - g * t * t;
             av /= t * t;
             return av;
-        }
-
-        public override void DrawGlow()
-        {
-            base.DrawGlow();
         }
     }
 }

@@ -274,8 +274,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET outdir=%25HOMEPATH%25\Documents\DuckGame\Mods\$(TargetName)
+    <PostBuildEvent>SET outdir=%25userprofile%25\Documents\DuckGame\Mods\$(TargetName)
 COPY $(TargetPath) %25outdir%25\$(TargetFileName)
+ECHO %25outdir%25
 IF NOT $(SolutionDir)  == %25outdir%25\build\ (
     ECHO Transferring
     CD $(SolutionDir)
