@@ -66,7 +66,8 @@ namespace TMGmod.Core
             if (d == null) return;
             //else
             d.GiveHoldable(newThing);
-            d.resetAction = true;
+            d.resetAction = true; 
+            SFX.Play(GetPath("sounds/case_opening"));
         }
 
         protected virtual void Spawned(Holdable thing)
