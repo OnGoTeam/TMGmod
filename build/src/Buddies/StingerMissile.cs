@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿#if DEBUG
+using System.Linq;
 using JetBrains.Annotations;
-#if DEBUG
 using DuckGame;
 using System;
 using System.Collections.Generic;
@@ -68,6 +68,7 @@ namespace TMGmod.Buddies
         protected override bool OnDestroy(DestroyType dtype = null)
         {
             if (_destroyed) return true;
+            _destroyed = true;
             new ATMissileShrapnel().MakeNetEffect(position);
             Random random = null;
             if (Network.isActive && isLocal)

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+#if DEBUG
+using System.Linq;    
+#endif
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
