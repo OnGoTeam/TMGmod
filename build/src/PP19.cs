@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
@@ -9,11 +10,10 @@ namespace TMGmod
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class PP19 : BaseGun, IAmSmg, IHaveSkin
+    public class PP19 : BaseGun, IAmSmg, IHaveSkin, IHaveStock
     {
-        public bool Stock;
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 2;
+        private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -22,6 +22,48 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
+
+        private bool _stock = true;
+        [UsedImplicitly]
+        public bool Stock
+        {
+            get => _stock;
+            set
+            {
+                _stock = value;
+                var stockstate = StockState;
+                if (isServerForObject)
+                    StockState += 1f / 10 * (value ? 1 : -1);
+                var nostock = StockState < 0.01f;
+                var stock = StockState > 0.99f;
+                _fireWait = stock ? 0.75f : 0.5f;
+                loseAccuracy = stock ? 0.15f : 0.25f;
+                maxAccuracyLost = stock ? 0.35f : 0.7f;
+                weight = stock ? 1.5f : 1f;
+                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
+                if (isServerForObject && stock && stockstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/tuduc"));
+                if (isServerForObject && nostock && stockstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/tuduc"));
+            }
+        }
+
+        private float _stockstate = 1f;
+        public float StockState
+        {
+            get => _stockstate;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _stockstate = value;
+            }
+        }
+        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+
+        [UsedImplicitly]
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(Stock));
+
         public PP19(float xval, float yval)
           : base(xval, yval)
         {
@@ -60,29 +102,14 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
-            {
-                if (Stock)
-                {
-                    FrameId -= 10;
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.35f;
-                    _fireWait = 0.75f;
-                    _weight = 1.5f;
-                    Stock = false;
-                }
-                else
-                {
-                    FrameId += 10;
-                    loseAccuracy = 0.25f;
-                    maxAccuracyLost = 0.7f;
-                    _fireWait = 0.5f;
-                    _weight = 1f;
-                    Stock = true;
-                }
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
             base.Update();
+            if (SwitchStockQ() && (Stock || !duck.sliding) && duck.inputProfile.Pressed("QUACK"))
+            {
+                Stock = !Stock;
+                SFX.Play("quack", -1);
+            }
+            else if (duck != null)
+                Stock = Stock;
         }
         private void UpdateSkin()
         {
@@ -93,6 +120,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

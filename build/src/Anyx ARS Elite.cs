@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -9,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [PublicAPI]
-    public class Vixr : BaseGun, IAmAr, IHaveSkin
+    public class Vixr : BaseGun, IAmAr, IHaveSkin, IHaveStock
     {
         public float HandAngleOff
         {
@@ -19,10 +20,8 @@ namespace TMGmod
 
         private float _handAngleOff;
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
-        public bool Stockngrip = true;
-        public StateBinding StockBinding = new StateBinding(nameof(Stockngrip));
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 1;
+        private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -31,6 +30,47 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 8 });
+
+        private bool _stock = true;
+        [UsedImplicitly]
+        public bool Stock
+        {
+            get => _stock;
+            set
+            {
+                _stock = value;
+                var stockstate = StockState;
+                if (isServerForObject)
+                    StockState += 1f / 10 * (value ? 1 : -1);
+                var nostock = StockState < 0.01f;
+                var stock = StockState > 0.99f;
+                _fireWait = stock ? 0.75f : 0.6f;
+                loseAccuracy = stock ? 0.15f : 0.2f;
+                maxAccuracyLost = stock ? 0.3f : 0.6f;
+                weight = stock ? 6f : 3.5f;
+                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
+                if (isServerForObject && stock && stockstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/beepods1"));
+                if (isServerForObject && nostock && stockstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/beepods2"));
+            }
+        }
+
+        private float _stockstate = 1f;
+        public float StockState
+        {
+            get => _stockstate;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _stockstate = value;
+            }
+        }
+        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+
+        [UsedImplicitly]
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(Stock));
 
         public Vixr(float xval, float yval)
           : base(xval, yval)
@@ -73,29 +113,14 @@ namespace TMGmod
         public override void Update()
         {
             HandAngleOff = _handAngleOff;
-            if (duck?.inputProfile.Pressed("QUACK") == true)
-            {
-                if (Stockngrip)
-                {
-                    _sprite.frame += 10;
-                    loseAccuracy = 0.3f;
-                    maxAccuracyLost = 0.6f;
-                    _fireWait = 0.5f;
-                    Stockngrip = false;
-                    weight = 3f;
-                }
-                else
-                {
-                    _sprite.frame -= 10;
-                    loseAccuracy = 0.2f;
-                    maxAccuracyLost = 0.4f;
-                    _fireWait = 0.75f;
-                    Stockngrip = true;
-                    weight = 6f;
-                }
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
             base.Update();
+            if (SwitchStockQ() && (Stock || !duck.sliding) && duck.inputProfile.Pressed("QUACK"))
+            {
+                Stock = !Stock;
+                SFX.Play("quack", -1);
+            }
+            else if (duck != null)
+                Stock = Stock;
         }
         public override void OnHoldAction()
         {
@@ -119,6 +144,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

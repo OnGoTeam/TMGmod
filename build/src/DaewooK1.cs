@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -7,14 +8,11 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|PDW")]
-    public class DaewooK1 : BaseSmg, IHaveSkin
+    public class DaewooK1 : BaseSmg, IHaveSkin, IHaveStock
     {
         private readonly SpriteMap _sprite;
         [UsedImplicitly]
-        public bool Stock;
-        [UsedImplicitly]
-        public StateBinding StockBinding = new StateBinding(nameof(Stock));
-        private const int NonSkinFrames = 2;
+        private const int NonSkinFrames = 3;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -23,6 +21,49 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 7 });
+
+
+        private bool _stock = true;
+        [UsedImplicitly]
+        public bool Stock
+        {
+            get => _stock;
+            set
+            {
+                _stock = value;
+                var stockstate = StockState;
+                if (isServerForObject)
+                    StockState += 1f / 10 * (value ? 1 : -1);
+                var nostock = StockState < 0.01f;
+                var stock = StockState > 0.99f;
+                _fireWait = stock ? 0.86f : 0.5f;
+                loseAccuracy = stock ? 0.1f : 0.2f;
+                maxAccuracyLost = stock ? 0.24f : 0.4f;
+                weight = stock ? 4.5f : 3f;
+                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
+                if (isServerForObject && stock && stockstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/beepods1"));
+                if (isServerForObject && nostock && stockstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/beepods2"));
+            }
+        }
+
+        private float _stockstate = 1f;
+        public float StockState
+        {
+            get => _stockstate;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _stockstate = value;
+            }
+        }
+        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+
+        [UsedImplicitly]
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(Stock));
+
         public DaewooK1 (float xval, float yval)
           : base(xval, yval)
         {
@@ -59,34 +100,16 @@ namespace TMGmod
             _editorName = "Daewoo K1";
 			_weight = 4.5f;
         }
-
-        
-
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
-            {
-                if (Stock)
-                {
-                    FrameId -= 10;
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.24f;
-                    _fireWait = 0.86f;
-                    weight = 4.5f;
-                }
-                else
-                {
-                    FrameId += 10;
-                    loseAccuracy = 0.2f;
-                    maxAccuracyLost = 0.36f;
-                    _fireWait = 0.5f;
-                    weight = 3f;
-                }
-
-                Stock = !Stock;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
             base.Update();
+            if (SwitchStockQ() && (Stock || !duck.sliding) && duck.inputProfile.Pressed("QUACK"))
+            {
+                Stock = !Stock;
+                SFX.Play("quack", -1);
+            }
+            else if (duck != null)
+                Stock = Stock;
         }
         private void UpdateSkin()
         {
@@ -97,7 +120,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

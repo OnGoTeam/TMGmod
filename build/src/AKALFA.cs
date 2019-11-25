@@ -39,9 +39,9 @@ namespace TMGmod
                 weight = stock ? 5.5f : 3.5f;
                 FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
                 if (isServerForObject && stock && stockstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
+                    SFX.Play(GetPath("sounds/tuduc"));
                 if (isServerForObject && nostock && stockstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
+                    SFX.Play(GetPath("sounds/tuduc"));
             }
         }
 
