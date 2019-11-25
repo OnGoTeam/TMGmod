@@ -97,9 +97,9 @@ namespace TMGmod
                     _barrelOffsetTL = new Vec2(41f, 3f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
-
+                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                SFX.Play("quack", -1);
             }
             base.Update();
         }

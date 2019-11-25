@@ -75,7 +75,6 @@ namespace TMGmod
                         penetration = 1f
                     };
                     _barrelOffsetTL = new Vec2(10f, 2f);
-                    Silencer = false;
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f)
@@ -91,11 +90,12 @@ namespace TMGmod
                         accuracy = 0.8f
                     };
                     _barrelOffsetTL = new Vec2(16f, 2f);
-                    Silencer = true;
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                 }
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
+                Silencer = !Silencer;
+                SFX.Play("quack", -1);
             }
             base.Update();
         }

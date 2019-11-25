@@ -80,7 +80,6 @@ namespace TMGmod
                     _kickForce = 5.3f;
                     loseAccuracy = 0.1f;
                     _barrelOffsetTL = new Vec2(28f, 3f);
-                    Silencer = false;
                     _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f)
@@ -98,13 +97,14 @@ namespace TMGmod
                     _kickForce = 4.5f;
                     loseAccuracy = 0f;
                     _barrelOffsetTL = new Vec2(39f, 3f);
-                    Silencer = true;
                     _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f)
                     };
                 }
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
+                Silencer = !Silencer;
+                SFX.Play("quack", -1);
             }
             base.Update();
         }

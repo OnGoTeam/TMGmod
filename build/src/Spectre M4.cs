@@ -80,7 +80,6 @@ namespace TMGmod
                     {
                         center = new Vec2(0.0f, 5f)
                     };
-                    Silencer = false;
                 }
                 //TODO: botl
                 else
@@ -98,9 +97,10 @@ namespace TMGmod
                     weight = 3.8f;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    Silencer = true;
                 }
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
+                Silencer = !Silencer;
+                SFX.Play("quack", -1);
             }
             base.Update();
         }

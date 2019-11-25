@@ -97,9 +97,9 @@ namespace TMGmod
                     _barrelOffsetTL = new Vec2(42.5f, 3f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                 }
-
+                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                SFX.Play("quack", -1);
             }
 
             if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
