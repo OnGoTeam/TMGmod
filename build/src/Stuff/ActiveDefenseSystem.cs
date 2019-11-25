@@ -1,6 +1,5 @@
-﻿
+﻿#if DEBUG
 using System.Linq;
-#if DEBUG
 using DuckGame;
 using System.Collections.Generic;
 using System;
