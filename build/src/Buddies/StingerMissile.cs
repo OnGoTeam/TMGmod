@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using DuckGame;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using MathNet.Numerics;
 
 namespace TMGmod.Buddies
@@ -13,11 +12,11 @@ namespace TMGmod.Buddies
     [EditorGroup("TMG|DEBUG")]
     public class StingerMissile:Holdable
     {
-        private List<Vec2> _pList = new List<Vec2>();
-        private const float A = 0.22f;
+        private readonly List<Vec2> _pList = new List<Vec2>();
+        private const float A = 0.4f;
         private Duck _target;
-        private bool _activated;
-        private int _ticks;
+        private bool _activated = true;
+        private readonly Tex2D _laserTex = Content.Load<Tex2D>("pointerLaser");
         public StingerMissile(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
@@ -40,7 +39,6 @@ namespace TMGmod.Buddies
             UpdateFlight();
             base.Update();
             _pList.Add(position);
-            _ticks += 1;
         }
 
         private void UpdateTarget()
@@ -53,7 +51,7 @@ namespace TMGmod.Buddies
             var ducks = Level.CheckCircleAll<Duck>(position, 1000);
             foreach (var d in ducks)
             {
-                if (Level.CheckLine<Block>(position, d.position) == null && d != owner && !d.dead)
+                if (Level.CheckLine<Block>(position, d.position) == null && !d.dead)
                     _target = d;
             }
         }
@@ -200,15 +198,18 @@ namespace TMGmod.Buddies
         {
             if (with is Duck duck0)
             {
-                duck0.Kill(new DTImpact(this));
+                _target = null;
+                UpdateTarget();
+                duck0.ThrowItem();
+                //duck0.Kill(new DTImpact(this));
                 //duck0._jumpValid = 4;
-                //duck0._groundValid = 9999;
+                //duck0._groundValid = 10;
             }
             base.Touch(with);
         }
 
 
-        private float Time5(float aa, Vec2 v, Vec2 p, Vec2 g, float t)
+        /*private float Time5(float aa, Vec2 v, Vec2 p, Vec2 g, float t)
         {
             var res = 0f;
             var gg = Vec2.Dot(g, g);
@@ -227,11 +228,10 @@ namespace TMGmod.Buddies
             res *= t;
             res += 4 * pp;
             return res;
-        }
+        }*/
 
         private float Time4(float aa, Vec2 v, Vec2 p, Vec2 g)
         {
-            /*
             double gg = Vec2.Dot(g, g);
             double vg = Vec2.Dot(v, g);
             double vv = Vec2.Dot(v, v);
@@ -240,25 +240,15 @@ namespace TMGmod.Buddies
             double pp = Vec2.Dot(p, p);
             var rar = FindRoots.Polynomial(new []
             {
-                gg - aa,
-                4 * vg,
-                4 * (vv - pg),
+                4 * pp,
                 -8 * pv,
-                4 * pp
-            });*/
-            var lf = new Func<float, float>(t => Time5(aa, v, p, g, t));
-            var tu = 1e+6f * (float) Math.Sqrt(p.length) / Math.Max(A - gravity, 0.001f);
-            var tb = 0f;
-            for (var i = 0; i < 5000; i++)
-            {
-                var ti = (tb + tu) / 2;
-                if (lf(ti) > 0)
-                    tb = ti;
-                else
-                    tu = ti;
-            }
+                4 * (vv - pg),
+                4 * vg,
+                gg - aa
+            });
+            var t = (from r in rar where r.IsRealNonNegative() select r.Real).Concat(new[] {1e+10}).Min();
 
-            return tb;
+            return (float) t;
         }
 
         private Vec2 Delta(Vec2 v, Vec2 p, Vec2 g)
@@ -268,16 +258,20 @@ namespace TMGmod.Buddies
             const float e = 1e-6f;
             if (t < e)
             {
-                throw new DivideByZeroException();
-                /*var av0 = -g;
+                var av0 = -g;
                 av0 /= g.length;
                 av0 *= A;
-                return av0;*/
+                return av0;
             }
 
             var av = 2 * p - 2 * v * t - g * t * t;
             av /= t * t;
             return av;
+        }
+
+        public override void DrawGlow()
+        {
+            base.DrawGlow();
         }
     }
 }
