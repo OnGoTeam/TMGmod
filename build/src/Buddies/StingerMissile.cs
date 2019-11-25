@@ -17,7 +17,8 @@ namespace TMGmod.Buddies
         private MaterialThing _target;
         private Vec2 _tlv;
         private Vec2 _ta;
-        private readonly bool _activated = true;
+        private bool _activated;
+        private int _ticks;
         public StingerMissile(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
@@ -40,6 +41,10 @@ namespace TMGmod.Buddies
             UpdateFlight();
             base.Update();
             _pList.Add(position);
+            if (_ticks > 10)
+                _activated = true;
+            else
+                _ticks += 1;
         }
 
         private void UpdateTarget()
@@ -53,14 +58,14 @@ namespace TMGmod.Buddies
             var ducks = Level.CheckCircleAll<Duck>(position, 1000);
             foreach (var d in ducks)
             {
-                if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead)
+                if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead && (owner == null || owner.owner != d))
                     _target = d;
             }
 
             var stgs = Level.CheckCircleAll<StingerMissile>(position, 1000);
             foreach (var d in stgs)
             {
-                if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this && !d._destroyed)
+                if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this && !d._destroyed && (owner == null || d._target == owner.owner))
                     _target = d;
             }
         }
@@ -68,6 +73,7 @@ namespace TMGmod.Buddies
         protected override bool OnDestroy(DestroyType dtype = null)
         {
             if (_destroyed) return true;
+            if (!_activated) return false;
             _destroyed = true;
             new ATMissileShrapnel().MakeNetEffect(position);
             Random random = null;
@@ -150,7 +156,6 @@ namespace TMGmod.Buddies
         public override void OnSolidImpact(MaterialThing with, ImpactedFrom from)
         {
             base.OnSolidImpact(with, from);
-            if (!_activated) return;
             Destroy(new DTImpact(with));
         }
 
@@ -252,7 +257,7 @@ namespace TMGmod.Buddies
             return res;
         }*/
 
-        private float Time4(float aa, Vec2 v, Vec2 p, Vec2 g)
+        private double Time4(double aa, Vec2 v, Vec2 p, Vec2 g)
         {
             double gg = Vec2.Dot(g, g);
             double vg = Vec2.Dot(v, g);
@@ -268,14 +273,13 @@ namespace TMGmod.Buddies
                 4 * vg,
                 gg - aa
             });
-            var t = (from r in rar where r.IsRealNonNegative() select r.Real).Concat(new[] {1e+10}).Min();
-
-            return (float) t;
+            var t = (from r in rar where r.IsRealNonNegative() select r.Real).Concat(new[] { 1e+10 }).Min();
+            return t;
         }
 
         private Vec2 Delta(Vec2 v, Vec2 p, Vec2 g)
         {
-            const float aa = A * A;
+            const double aa = A * A;
             var t = Time4(aa, v, p, g);
             const float e = 1e-6f;
             if (t < e)
@@ -286,8 +290,8 @@ namespace TMGmod.Buddies
                 return av0;
             }
 
-            var av = 2 * p - 2 * v * t - g * t * t;
-            av /= t * t;
+            var av = 2 * p - 2 * v * (float) t - g * (float) (t * t);
+            av /= (float) (t * t);
             return av;
         }
     }

@@ -88,6 +88,7 @@
     <Compile Include="src\Buddies\FlameThrowerPlus.cs" />
     <Compile Include="src\Buddies\LockedContainer.cs" />
     <Compile Include="src\Buddies\LockedRedCase.cs" />
+    <Compile Include="src\Buddies\StingerLauncher.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />

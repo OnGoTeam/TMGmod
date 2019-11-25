@@ -1,8 +1,10 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|SMG|MP")]
     // ReSharper disable once InconsistentNaming
     public class ANP73 : BaseGun, IAmHg
