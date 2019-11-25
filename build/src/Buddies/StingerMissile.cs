@@ -194,7 +194,7 @@ namespace TMGmod.Buddies
             var p = _target.position - position;
             var v = _target.velocity - velocity;
             var g = new Vec2(0, gravity);
-            var t = Time4(A * A, -v, p, g);
+            var t = (float) Time4(A * A, -v, p, g);
             var pa = Delta(-v, p, g);
             p0 = position;
             var v0 = velocity;
