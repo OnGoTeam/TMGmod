@@ -13,6 +13,14 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
+        [UsedImplicitly]
+        public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
+        [UsedImplicitly]
+        public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
+        [UsedImplicitly]
+        public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
+        [UsedImplicitly]
+        public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -57,8 +65,22 @@ namespace TMGmod
             get => BaseGun.HandleQ(this);
             set => _kickForce = value ? 1f : 5.5f;
         }
-        public bool BipodsDisabled => false;
-        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        [UsedImplicitly]
+        public BitBuffer BipodsBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Bipods);
+                return b;
+            }
+            set => Bipods = value.ReadBool();
+        }
+
+        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
+        public bool BipodsDisabled { get; private set; }
+
+        [UsedImplicitly]
 
         public override void Draw()
         {

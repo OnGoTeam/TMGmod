@@ -143,12 +143,6 @@ namespace TMGmod
             set => Bipods = value.ReadBool();
         }
 
-        public override void Draw()
-        {
-            base.Draw();
-            Graphics.DrawCircle(position, 8f * _bipodsstate, Color.Red);
-        }
-
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled { get; private set; }
 
