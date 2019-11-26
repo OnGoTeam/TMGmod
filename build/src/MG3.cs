@@ -113,6 +113,7 @@ namespace TMGmod
                     _bipoff.Play();
             }
         }
+
         [UsedImplicitly]
         public float BipodsState
         {
@@ -126,7 +127,19 @@ namespace TMGmod
         }
 
         private float _bipodsstate;
-        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        [UsedImplicitly]
+        public BitBuffer BipodsBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Bipods);
+                return b;
+            }
+            set => Bipods = value.ReadBool();
+        }
+
+        public StateBinding BipodsBinding => new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled { get; private set; }
 
         [UsedImplicitly]
