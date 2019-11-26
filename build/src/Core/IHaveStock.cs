@@ -10,6 +10,8 @@ namespace TMGmod.Core
         [UsedImplicitly]
         StateBinding StockBinding { get; }
         [UsedImplicitly]
+        BitBuffer StockBuffer { get; set; }
+        [UsedImplicitly]
         float StockState { get; set; }
         [UsedImplicitly]
         StateBinding StockStateBinding { get; }
