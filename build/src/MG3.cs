@@ -13,6 +13,8 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 6;
+        private readonly NetSoundEffect _bipon = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
+        private readonly NetSoundEffect _bipoff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -104,9 +106,11 @@ namespace TMGmod
                 maxAccuracyLost = bipods ? 0 : 0.25f;
                 FrameId = FrameId % 20 + 20 * (bipods ? 2 : nobipods ? 0 : 1);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
+                    //SFX.Play(GetPath("sounds/beepods1"));
+                    _bipon.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
+                    //SFX.Play(GetPath("sounds/beepods2"));
+                    _bipoff.Play();
             }
         }
         [UsedImplicitly]
