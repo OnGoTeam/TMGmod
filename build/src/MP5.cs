@@ -11,8 +11,19 @@ namespace TMGmod
     public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
-        public bool NonAuto = true;
+        public bool NonAuto
+        {
+            get => BurstNum == 1;
+            set
+            {
+                BurstNum = value ? 1 : 3;
+                _fireWait = value ? 0.5f : 1.8f;
+                FrameId = FrameId % 10 + (value ? 0 : 10);
+                _ammoType.accuracy = value ? 0.8f : 0.7f;
+            }
+        }
         [UsedImplicitly]
         public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
         private const int NonSkinFrames = 2;
@@ -74,23 +85,7 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (NonAuto)
-                {
-                    NonAuto = false;
-                    BurstNum = 3;
-                    _fireWait = 1.8f;
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    _ammoType.accuracy = 0.7f;
-                }
-                else
-                {
-                    NonAuto = true;
-                    BurstNum = 1;
-                    _fireWait = 0.5f;
-                    _sprite.frame %= 10;
-                    _ammoType.accuracy = 0.8f;
-                }
+                NonAuto = !NonAuto;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();

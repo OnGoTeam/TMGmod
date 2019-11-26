@@ -6,25 +6,37 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
 {
-    /// <inheritdoc cref="BaseBurst"/>
-    /// <inheritdoc cref="IHspeedKforce"/>
-    /// <inheritdoc cref="IAmAr"/>
-    /// <inheritdoc cref="IHaveSkin"/>
-    /// <summary>
-    /// Has switchable laser
-    /// </summary>
     [EditorGroup("TMG|Rifle|Burst|Custom")]
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
-        /// <summary>
-        /// whether laser is on
-        /// </summary>
-        [UsedImplicitly] public bool Laserino;
-        /// <summary>
-        /// Laser syncing
-        /// </summary>
-        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(Laserino));
+        [UsedImplicitly]
+        public bool Laserrod
+        {
+            get => _sprite.frame < 10;
+            set
+            {
+                if (value)
+                {
+                    loseAccuracy = 0.15f;
+                    _fireWait = 1.5f;
+                    maxAccuracyLost = 0.45f;
+                    _sprite.frame %= 10;
+                    laserSight = false;
+                }
+                else
+                {
+                    loseAccuracy = 0.1f;
+                    _fireWait = 2.5f;
+                    maxAccuracyLost = 0.1f;
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    laserSight = true;
+                }
+            }
+        }
+        [UsedImplicitly]
+        public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -37,8 +49,6 @@ namespace TMGmod.Custom_Guns
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
-
-        /// <inheritdoc />
         public AN94C(float xval, float yval)
             : base(xval, yval)
         {
@@ -74,25 +84,11 @@ namespace TMGmod.Custom_Guns
             BurstNum = 2;
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Laserino)
-                {
-                    laserSight = false;
-                    _weight = 5.5f;
-                    _sprite.frame -= 10;
-                    Laserino = false;
-                }
-                else
-                {
-                    laserSight = true;
-                    _weight = 6f;
-                    _sprite.frame += 10;
-                    Laserino = true;
-                }
+                Laserrod = !Laserrod;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
@@ -107,27 +103,20 @@ namespace TMGmod.Custom_Guns
             _sprite.frame = bublic;
         }
 
-        /// <inheritdoc />
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-        /// <summary>
-        /// Updates skin when Skin's changed
-        /// </summary>
-        /// <param name="property"></param>
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
 
-        /// <inheritdoc />
         public float Kforce1Ar { get; }
 
-        /// <inheritdoc />
         public float Kforce2Ar { get; }
     }
 }
