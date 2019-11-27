@@ -109,10 +109,6 @@ namespace TMGmod.Core.WClasses
             base.Update();
         }
 
-        /// <summary>
-        /// <see cref="ShellOffset"/> realization
-        /// </summary>
-        /// <param name="shell"></param>
         public override void Reload(bool shell = true)
         {
             if (ammo != 0)

@@ -111,11 +111,22 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        /// <inheritdoc />
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    ATMG44.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir, FrameId);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
     }
 }

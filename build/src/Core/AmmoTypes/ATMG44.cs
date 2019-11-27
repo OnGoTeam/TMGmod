@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATMG44 : AmmoType
+    public sealed class ATMG44 : AmmoType
     {
         public ATMG44()
         {
@@ -21,9 +21,16 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void PopShell(float x, float y, int dir)
         {
-            var shalker = new MG44Shell(x, y) { hSpeed = 0f + Rando.Float(-0.2f, 0.2f) };
-            shalker.vSpeed = 1f + Rando.Float(-0.5f, 0.5f);
-            shalker.depth = -0.2f - Rando.Float(0.0f, 0.1f);
+            PopShell(x, y, dir, 0);
+        }
+        public static void PopShell(float x, float y, int dir, int frameid)
+        {
+            var shalker = new MG44Shell(x, y, frameid)
+            {
+                hSpeed = 0f + Rando.Float(-0.2f, 0.2f),
+                vSpeed = 1f + Rando.Float(-0.5f, 0.5f),
+                depth = -0.2f - Rando.Float(0.0f, 0.1f)
+            };
             Level.Add(shalker);
         }
     }

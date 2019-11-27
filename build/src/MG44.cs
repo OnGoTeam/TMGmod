@@ -116,5 +116,17 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    ATMG44.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir, FrameId);
+                }
+                --ammo;
+            }
+            loaded = true;
+        }
     }
 }
