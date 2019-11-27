@@ -6,7 +6,7 @@ namespace TMGmod.Stuff
     /// <inheritdoc />
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
-    [PublicAPI]
+    [UsedImplicitly]
     public class C4Skeet : Holdable
     {
         /// <inheritdoc />

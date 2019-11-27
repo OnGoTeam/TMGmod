@@ -5,14 +5,19 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
-    [PublicAPI]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class ScarGL : BaseGun, IAmAr
     {
+        [UsedImplicitly]
         public int Mode;
+        [UsedImplicitly]
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));
+        [UsedImplicitly]
         public int Ammom0 = 20;
+        [UsedImplicitly]
         public int Ammom1 = 1;
+        [UsedImplicitly]
         public int[] Ammom
         {
             get => new[] { Ammom0, Ammom1 };
@@ -22,7 +27,9 @@ namespace TMGmod
                 Ammom1 = value[1];
             }
         }
+        [UsedImplicitly]
         public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
+        [UsedImplicitly]
         public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
@@ -50,7 +57,7 @@ namespace TMGmod
         private readonly float[] _maxAccuracyLostm = {.45f, 0f};
         private readonly SpriteMap[] _flarem;
         private bool _switched;
-
+        [UsedImplicitly]
         public SpriteMap Flare
         {
             get => _flare;

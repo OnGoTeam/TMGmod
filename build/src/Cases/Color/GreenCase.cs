@@ -11,7 +11,7 @@ namespace TMGmod.Cases.Color
 {
     /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class PodarokColorG : BaseCase
     {
         /// <inheritdoc />

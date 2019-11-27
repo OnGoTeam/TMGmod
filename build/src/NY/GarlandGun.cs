@@ -3,20 +3,15 @@ using JetBrains.Annotations;
 
 namespace TMGmod.NY
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class GarlandGun : Gun
     {
         
         private float _sprwait;
-        /// <summary>
-        /// sprite frame id
-        /// </summary>
+        [UsedImplicitly]
         public int FrameId;
-        /// <summary>
-        /// FrameId binding
-        /// </summary>
+        [UsedImplicitly]
         public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
 
         /// <inheritdoc />

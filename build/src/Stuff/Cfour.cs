@@ -10,54 +10,33 @@ namespace TMGmod.Stuff
     /// </summary>
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
-    [PublicAPI]
+    [UsedImplicitly]
     public class Cfour : Holdable
     {
-        /// <summary>
-        /// Time to explode
-        /// </summary>
+        [UsedImplicitly]
         public float ToExplode = -1f;
-        /// <summary>
-        /// <see cref="ToExplode"/> syncing
-        /// </summary>
+        [UsedImplicitly]
         public StateBinding ToExplodeBinding = new StateBinding(nameof(ToExplode));
-        /// <summary>
-        /// Whether is was activated by <see cref="Duck"/>
-        /// </summary>
+        [UsedImplicitly]
         public bool Activated;
-        /// <summary>
-        /// <see cref="Activated"/> syncing
-        /// </summary>
+        [UsedImplicitly]
         public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
-        /// <summary>
-        /// Who/what activated it
-        /// </summary>
+        [UsedImplicitly]
         public MaterialThing Activator;
-        /// <summary>
-        /// <see cref="Activator"/> syncing
-        /// </summary>
+        [UsedImplicitly]
         public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
-        /// <summary>
-        /// what it's stick to
-        /// </summary>
+        [UsedImplicitly]
         public MaterialThing StickThing;
         //public StateBinding StickBinding = new StateBinding(nameof(StickThing));
         private Vec2 _stickyVec2;
-        /// <summary>
-        /// Whether it was thrown by <see cref="Duck"/>
-        /// </summary>
+        [UsedImplicitly]
         public bool WasThrown;
-        /// <summary>
-        /// <see cref="WasThrown"/> syncing
-        /// </summary>
+        [UsedImplicitly]
         public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
-        /// <summary>
-        /// Whether it doesn't explode properly
-        /// </summary>
+        [UsedImplicitly]
         public bool Weak;
         private bool _didboom;
 
-        /// <inheritdoc />
         public Cfour(float xpos, float ypos) : base(xpos, ypos)
         {
             _weight = 3f;

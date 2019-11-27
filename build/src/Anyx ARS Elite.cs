@@ -9,9 +9,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class Vixr : BaseGun, IAmAr, IHaveSkin, IHaveStock
     {
+        [UsedImplicitly]
         public float HandAngleOff
         {
             get => handAngle * offDir;
@@ -19,6 +20,7 @@ namespace TMGmod
         }
 
         private float _handAngleOff;
+        [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -70,7 +72,18 @@ namespace TMGmod
         public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
 
         [UsedImplicitly]
-        public StateBinding StockBinding { get; } = new StateBinding(nameof(Stock));
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
+
+        public BitBuffer StockBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Stock);
+                return b;
+            }
+            set => Stock = value.ReadBool();
+        }
 
         public Vixr(float xval, float yval)
           : base(xval, yval)

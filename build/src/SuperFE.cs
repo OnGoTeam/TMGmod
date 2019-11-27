@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace TMGmod
 {
     [EditorGroup("TMG|Misc")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class SuperFe:FireExtinguisher
     {
         public SuperFe(float xval, float yval) : base(xval, yval)

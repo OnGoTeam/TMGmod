@@ -4,25 +4,18 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
-    /// <summary>
-    /// Mag drop-reload implementator
-    /// </summary>
-    [PublicAPI]
     public class MagBuddy
     {
         private readonly Gun _gun;
         private readonly Type _magType;
         private bool _loaded;
-
-        [PublicAPI]
         public MagBuddy(Gun gun, Type magType=null, bool loaded=true)
         {
             _gun = gun;
             _magType = magType;
             _loaded = loaded;
         }
-
-        [PublicAPI]
+        [UsedImplicitly]
         public bool Disload()
         {
             if (!(_gun is ISupportReload gun)) return false;
@@ -44,24 +37,20 @@ namespace TMGmod.Core
             Level.Remove(mag0);
             return false;
         }
-
+        [UsedImplicitly]
         public bool Doload()
         {
             return !_loaded && _gun is ISupportReload gun && (_loaded = gun.SetMag());
         }
 
-
-        /// <summary>
-        /// interface for guns
-        /// </summary>
-        [PublicAPI]
+        [UsedImplicitly]
         public interface ISupportReload
         {
             /// <summary>
             /// is called when reload finishes
             /// </summary>
             bool SetMag();
-
+            [UsedImplicitly]
             bool DropMag(Thing mag);
 
             //int TicksToR { get; set; }

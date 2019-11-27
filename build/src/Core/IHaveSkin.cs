@@ -3,24 +3,13 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
-    /// <summary>
-    /// Interface for things which
-    /// </summary>
-    [PublicAPI]
     public interface IHaveSkin
     {
-        /// <summary>
-        /// this's sprite's _frame
-        /// </summary>
         [UsedImplicitly]
         int FrameId { set; }
-        /// <summary>
-        /// FrameId syncing
-        /// </summary>
+        [UsedImplicitly]
         StateBinding FrameIdBinding { get; }
-        /// <summary>
-        /// Skin Editor Property
-        /// </summary>
+        [UsedImplicitly]
         EditorProperty<int> Skin { get; }
     }
 }

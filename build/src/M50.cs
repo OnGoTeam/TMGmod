@@ -11,14 +11,6 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        [UsedImplicitly]
-        public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-        [UsedImplicitly]
-        public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
-        [UsedImplicitly]
-        public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
-        [UsedImplicitly]
-        public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -96,7 +88,8 @@ namespace TMGmod
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled { get; private set; }
+        public bool BipodsDisabled => false;
+
         public float MuAccuracySr { get; }
         public float LambdaAccuracySr { get; private set; }
         private void UpdateSkin()

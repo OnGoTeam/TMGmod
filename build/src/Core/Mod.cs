@@ -13,11 +13,13 @@ using TMGmod.Properties;
 namespace TMGmod.Core
 {
     /// <inheritdoc />
-    [PublicAPI]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
     {
+        [UsedImplicitly]
         internal string Bdate = Resources.BuildDate;
+        [UsedImplicitly]
         internal static TMGmod LastInstance;
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         // ReSharper disable once MemberCanBePrivate.Global
@@ -29,7 +31,7 @@ namespace TMGmod.Core
                 CurrentDomain_AssemblyResolve;
             LastInstance = this;
         }
-
+        [UsedImplicitly]
         internal static string AssemblyName { get; private set; }
 		
 		//Приоритет. Мод загружается раньше/позже других модов
@@ -71,7 +73,7 @@ namespace TMGmod.Core
 
         // ReSharper disable once InconsistentNaming
         // Чтобы играть было приятно, пихаем карты в сам мод, и делаем так, чтобы они скачивались вместе с ним
-		private void CreatingTMGLevels()
+		private static void CreatingTMGLevels()
         {
             //Уносим старые нерабочие карты в очко
             var olddirlist = new List<string>(new[]
@@ -119,7 +121,7 @@ namespace TMGmod.Core
             File.WriteAllText(tmgPlaylistLocation, contents);
             SaveAsPlay(tmgPlaylistLocation);
         }
-        private void SaveAsPlay(string path)
+        private static void SaveAsPlay(string path)
         {
             if (MonoMain.disableCloud || MonoMain.cloudNoSave)
                 return;

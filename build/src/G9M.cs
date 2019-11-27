@@ -13,14 +13,6 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        [UsedImplicitly]
-        public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-        [UsedImplicitly]
-        public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
-        [UsedImplicitly]
-        public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
-        [UsedImplicitly]
-        public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -84,8 +76,6 @@ namespace TMGmod
         public override void Update()
         {
             Bipods = Bipods;
-            if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(this, true)) BipodsDisabled = false;
             base.Update();
         }
         public override void OnPressAction()
@@ -177,10 +167,11 @@ namespace TMGmod
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled { get; private set; }
+        public bool BipodsDisabled => false;
 
         [UsedImplicitly]
         public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

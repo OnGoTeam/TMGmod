@@ -7,16 +7,17 @@ namespace TMGmod
 {
     //[yee] switch
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
-    [PublicAPI]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class MP7 : BaseGun, IAmSmg
     {
+        [UsedImplicitly]
         public float HandAngleOff
         {
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
-
+        [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
         public MP7(float xval, float yval)

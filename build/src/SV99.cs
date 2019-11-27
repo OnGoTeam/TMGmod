@@ -7,7 +7,7 @@ using TMGmod.Core;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
-    [PublicAPI]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class SV99 : Sniper, IAmSr, IHaveSkin, I5
     {
@@ -169,7 +169,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

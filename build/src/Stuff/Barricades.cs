@@ -8,7 +8,7 @@ namespace TMGmod.Stuff
     /// </summary>
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("CanSpawn", false)]
-    [PublicAPI]
+    [UsedImplicitly]
     public class Barricades:GreyBlock
     {
         private bool _deployed;

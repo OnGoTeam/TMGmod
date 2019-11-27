@@ -5,66 +5,26 @@ using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
 {
-    /// <summary>
-    /// BaseGun implements some useful features
-    /// Used to not to write smth again and over
-    ///     implements wclasses specs
-    ///         <see cref="IFirstKforce"/>
-    ///         <see cref="IFirstPrecise"/>
-    ///         <see cref="IHspeedKforce"/>
-    ///         <see cref="IRandKforce"/>
-    ///         <see cref="ISpeedAccuracy"/>
-    ///     dynamic holdOffset
-    ///     random cases (<see cref="NewYearCase"/>) dropped from firing
-    /// </summary>
-    [PublicAPI]
+    [UsedImplicitly]
     public abstract class BaseGun:Gun
     {
-        /// <summary>
-        /// Base accuracy used by <see cref="ISpeedAccuracy"/> and <see cref="IFirstPrecise"/>
-        /// </summary>
         protected float BaseAccuracy = 1f;
-        /// <summary>
-        /// Base accuracy used by <see cref="ISpeedAccuracy"/>
-        /// </summary>
         protected float MinAccuracy;
-        /// <summary>
-        /// Used for custom Kforce modifying
-        /// </summary>
+        [UsedImplicitly]
         protected float PrevKforce;
-        /// <summary>
-        /// whether reset Kforce to <see cref="PrevKforce"/>
-        /// </summary>
+        [UsedImplicitly]
         protected bool ToPrevKforce;
-        /// <summary>
-        /// custom shell-drop offset (<seealso cref="Reload"/>)
-        /// </summary>
         protected Vec2 ShellOffset;
-        /// <summary>
-        /// Current hold offset no extra
-        /// </summary>
         protected Vec2 CurrHone;
         private bool _currHoneInit;
-
-        /// <summary>
-        /// Extra holdOffset for sliding
-        /// </summary>
+        [UsedImplicitly]
         protected Vec2 ExtraHoldOffset => duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
-
-        /// <summary>
-        /// holdOffset - <see cref="ExtraHoldOffset"/>
-        /// </summary>
+        [UsedImplicitly]
         protected Vec2 HoldOffsetNoExtra
         {
             get => _holdOffset - ExtraHoldOffset;
             set => _holdOffset = value + ExtraHoldOffset;
         }
-
-        /// <summary>
-        /// stub for TPKF
-        /// </summary>
-        /// <param name="xval"></param>
-        /// <param name="yval"></param>
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
             ToPrevKforce = true;
@@ -179,20 +139,24 @@ namespace TMGmod.Core.WClasses
             return !(duck is null) && !gun.raised && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 1f;
         }
 
+        [UsedImplicitly]
         public static bool SwitchStockQ(Gun gun)
         {
             var duck = gun.duck;
             return !(duck is null) && !duck.sliding;
         }
-        public bool BipodsQ()
+
+        protected bool BipodsQ()
         {
             return BipodsQ(this);
         }
-        public bool HandleQ()
+
+        protected bool HandleQ()
         {
             return HandleQ(this);
         }
-        public bool SwitchStockQ()
+
+        protected bool SwitchStockQ()
         {
             return SwitchStockQ(this);
         }

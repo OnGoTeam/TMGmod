@@ -8,7 +8,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Fully-Automatic")]
-    [PublicAPI]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class PP19 : BaseGun, IAmSmg, IHaveSkin, IHaveStock
     {
@@ -62,7 +62,18 @@ namespace TMGmod
         public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
 
         [UsedImplicitly]
-        public StateBinding StockBinding { get; } = new StateBinding(nameof(Stock));
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
+
+        public BitBuffer StockBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Stock);
+                return b;
+            }
+            set => Stock = value.ReadBool();
+        }
 
         public PP19(float xval, float yval)
           : base(xval, yval)

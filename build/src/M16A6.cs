@@ -18,6 +18,8 @@ namespace TMGmod
             set => _kickForce = value ? 0 : 10;
         }
 
+        public BitBuffer BipodsBuffer { get; set; }
+
         public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
         public bool BipodsDisabled => false;
 

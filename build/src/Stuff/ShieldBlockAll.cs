@@ -7,7 +7,7 @@ namespace TMGmod.Stuff
     /// <summary>
     /// Thing denoting whether shield should block all things
     /// </summary>
-    [PublicAPI]
+    [UsedImplicitly]
     [EditorGroup("TMG|Misc")]
     public class ShieldBlockAll: Thing
     {

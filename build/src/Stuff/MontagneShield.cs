@@ -9,25 +9,18 @@ namespace TMGmod.Stuff
     /// Holdable shield protecting from bullets and impacts
     /// </summary>
     [EditorGroup("TMG|Misc")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class MontagneShield : Holdable, IPlatform, IPathNodeBlocker
     {
         private readonly SpriteMap _sprite;
-        /// <summary>
-        /// hitpoints
-        /// </summary>
+        [UsedImplicitly]
         public float Hp = 250f;
-        /// <summary>
-        /// max <see cref="Hp"/>
-        /// </summary>
-        public float HpMax = 250f;
-        /// <summary>
-        /// Absolute invincibility limit
-        /// </summary>
+
+        private const float HpMax = 250f;
+
+        [UsedImplicitly]
         public float Hp1;
-        /// <summary>
-        /// <see cref="Hp"/> syncing
-        /// </summary>
+        [UsedImplicitly]
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
 
         /// <inheritdoc />

@@ -9,14 +9,18 @@ namespace TMGmod.Stuff
     /// </summary>
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
-    [PublicAPI]
+    [UsedImplicitly]
     public class Wire : PhysicsObject
     {
 
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public int Teksturka;
+        [UsedImplicitly]
         public StateBinding TexBinding = new StateBinding(nameof(Teksturka));
+        [UsedImplicitly]
         public float Hp;
+        [UsedImplicitly]
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
 
         /// <inheritdoc />

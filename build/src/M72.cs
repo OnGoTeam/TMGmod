@@ -6,7 +6,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod
 {
     [EditorGroup("TMG|Grenadelauncher")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class M72 : BaseGun
     {
         private readonly SpriteMap _sprite;

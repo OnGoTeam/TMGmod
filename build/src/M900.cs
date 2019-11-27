@@ -8,7 +8,7 @@ namespace TMGmod
 {
 
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class M900 : BaseGun, IAmSmg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -77,6 +77,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
