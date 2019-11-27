@@ -12,6 +12,7 @@ namespace TMGmod.Core.Shells
         {
             _sprite = new SpriteMap(GetPath("MG44Shell"), 16, 16);
             FrameId = frameid;
+            _graphic = _sprite;
         }
         public override void Update()
         {
