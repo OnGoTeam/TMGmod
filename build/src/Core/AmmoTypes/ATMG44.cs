@@ -21,9 +21,10 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void PopShell(float x, float y, int dir)
         {
-            PopShell(x, y, dir, 0);
+            PopShellSkin(x, y, 0);
         }
-        public static void PopShell(float x, float y, int dir, int frameid)
+
+        public static void PopShellSkin(float x, float y, int frameid)
         {
             var shalker = new MG44Shell(x, y, frameid)
             {

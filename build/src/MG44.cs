@@ -122,7 +122,7 @@ namespace TMGmod
             {
                 if (shell)
                 {
-                    ATMG44.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir, FrameId);
+                    ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId);
                 }
                 --ammo;
             }
