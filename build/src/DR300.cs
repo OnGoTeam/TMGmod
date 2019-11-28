@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
@@ -36,7 +36,7 @@ namespace TMGmod
             ammo = _postrounds;
             _ammoType = new AT9mm
             {
-                range = 555f,
+                range = 667f,
                 accuracy = 0.98f,
                 penetration = 1f,
                 bulletSpeed = 44f
@@ -67,7 +67,7 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if ((_postrounds == 20) & (_sprite.frame > 19) & (_sprite.frame < 9)) _sprite.frame = 10 + _sprite.frame % 10;
+            if ((_postrounds == 20) & !((_sprite.frame > 9) & (_sprite.frame < 20))) _sprite.frame = 10 + _sprite.frame % 10;
             if ((_postrounds == 30) & (_sprite.frame < 19)) _sprite.frame = 20 + _sprite.frame % 10;
             base.Update();
         }
@@ -101,7 +101,6 @@ namespace TMGmod
                     _postrounds = 30;
                     break;
             }
-
             ammo = _postrounds;
             UpdateSkin();
             _sprite.frame = Rounds.value * 10 + _sprite.frame % 10;

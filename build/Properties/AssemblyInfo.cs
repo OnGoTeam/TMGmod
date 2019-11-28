@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 // patch (revision)                 5
 
 #if WORKSHOP
-[assembly: AssemblyVersion("1.1.5.0")]
+[assembly: AssemblyVersion("1.1.5.1")]
 #else
 [assembly: AssemblyVersion("1.102.*")]
 #endif
