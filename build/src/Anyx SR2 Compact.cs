@@ -16,7 +16,10 @@ namespace TMGmod
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
-        private float _handAngleOff;
+        [UsedImplicitly]
+        public float HandAngleOffState;
+        [UsedImplicitly]
+        public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
         [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
@@ -76,7 +79,7 @@ namespace TMGmod
         }
         public override void Update()
         {
-            HandAngleOff = _handAngleOff;
+            HandAngleOff = HandAngleOffState;
             base.Update();
             Bipods = Bipods;
             _floatingKickforce = Psevdotimer < 16f ? 0.5f : 3f;
@@ -112,7 +115,7 @@ namespace TMGmod
         {
             if (ammo > 0) HandAngleOff -= 0.01f;
             else if (ammo < 1) HandAngleOff = 0f;
-            _handAngleOff = HandAngleOff;
+            HandAngleOffState = HandAngleOff;
             Psevdotimer += 1f;
             base.OnHoldAction();
         }
@@ -120,7 +123,7 @@ namespace TMGmod
         {
             Psevdotimer = 0f;
             HandAngleOff = 0f;
-            _handAngleOff = HandAngleOff;
+            HandAngleOffState = HandAngleOff;
             base.OnReleaseAction();
         }
         private void UpdateSkin()

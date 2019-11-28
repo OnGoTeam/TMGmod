@@ -19,7 +19,10 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
-        private float _handAngleOff;
+        [UsedImplicitly]
+        public float HandAngleOffState;
+        [UsedImplicitly]
+        public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
         [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
@@ -125,7 +128,7 @@ namespace TMGmod
         }
         public override void Update()
         {
-            HandAngleOff = _handAngleOff;
+            HandAngleOff = HandAngleOffState;
             base.Update();
             if (SwitchStockQ() && (Stock || duck.grounded) && duck.inputProfile.Pressed("QUACK"))
             {
@@ -139,13 +142,13 @@ namespace TMGmod
         {
             if (ammo > 0) HandAngleOff -= 0.01f;
             else if (ammo < 1) HandAngleOff = 0f;
-            _handAngleOff = HandAngleOff;
+            HandAngleOffState = HandAngleOff;
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
         {
             HandAngleOff = 0f;
-            _handAngleOff = HandAngleOff;
+            HandAngleOffState = HandAngleOff;
             base.OnReleaseAction();
         }
         private void UpdateSkin()
