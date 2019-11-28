@@ -127,7 +127,7 @@ namespace TMGmod
         {
             HandAngleOff = _handAngleOff;
             base.Update();
-            if (SwitchStockQ() && (Stock || !duck.sliding) && duck.inputProfile.Pressed("QUACK"))
+            if (SwitchStockQ() && (Stock || duck.grounded) && duck.inputProfile.Pressed("QUACK"))
             {
                 Stock = !Stock;
                 SFX.Play("quack", -1);
