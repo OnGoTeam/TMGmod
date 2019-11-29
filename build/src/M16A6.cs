@@ -34,7 +34,7 @@ namespace TMGmod
 
         public BitBuffer BipodsBuffer { get; set; }
 
-        public StateBinding BipodsBinding => new StateBinding(nameof(Bipods));
+        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(Bipods));
         public bool BipodsDisabled => false;
 
         public M16A6(float xval, float yval) : base(xval, yval)
