@@ -51,7 +51,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f)
             };
-            _holdOffset = new Vec2(3f, 0f);
+            _holdOffset = new Vec2(3f, 1f);
             ShellOffset = new Vec2(-3f, -3f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
@@ -85,9 +85,9 @@ namespace TMGmod
                 maxAccuracyLost = bipods ? 0f : 0.2f;
                 FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
+                    BipOn.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
+                    BipOff.Play();
             }
         }
 
@@ -98,17 +98,6 @@ namespace TMGmod
             else if (!BipodsQ(this, true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
             base.Update();
-        }
-        public override void OnHoldAction()
-        {
-            //if (_kickForce > 0f && _ammoType.accuracy > 0.1f) { _ammoType.accuracy -= 0.02f; } else { _ammoType.accuracy -= 0.0005f; } - мне это не нравится, фигня просто
-
-            base.OnHoldAction();
-        }
-        public override void OnReleaseAction()
-        {
-            //if (_ammoType.accuracy < 1f) _ammoType.accuracy += 0.1f; - это тоже
-            base.OnReleaseAction();
         }
 
         public override void Fire()

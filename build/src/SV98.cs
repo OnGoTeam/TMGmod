@@ -75,9 +75,9 @@ namespace TMGmod
                 _ammoType.bulletSpeed = bipods ? 150f : 48f;
                 FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
+                    BipOn.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
+                    BipOff.Play();
             }
         }
         public override void Draw()
