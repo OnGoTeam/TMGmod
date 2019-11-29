@@ -43,8 +43,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("FCAR"), 36, 15);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(18f, 7.5f);
-            _collisionOffset = new Vec2(-18f, -7.5f);
+            _center = new Vec2(18f, 8f);
+            _collisionOffset = new Vec2(-18f, -8f);
             _collisionSize = new Vec2(36f, 15f);
             _barrelOffsetTL = new Vec2(36f, 5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
@@ -78,10 +78,11 @@ namespace TMGmod
                 _ammoType.accuracy = bipods ? 0.95f : 0.9f;
                 _ammoType.bulletSpeed = bipods ? 72f : 36f;
                 _fireWait = bipods ? 1.5f : 0.75f;
-                _kickForce = bipods ? 0 : 2.4f;
-                Kforce2Ar = bipods ? 0 : 0.9f;
-                loseAccuracy = bipods ? 0 : 0.15f;
-                maxAccuracyLost = bipods ? 0 : 0.2f;
+                _kickForce = bipods ? 0f : 2.4f;
+                Kforce2Ar = bipods ? 0f : 0.9f;
+                Kforce1Ar = bipods ? 0f : 0.07f;
+                loseAccuracy = bipods ? 0f : 0.15f;
+                maxAccuracyLost = bipods ? 0f : 0.2f;
                 FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     SFX.Play(GetPath("sounds/beepods1"));
@@ -100,13 +101,13 @@ namespace TMGmod
         }
         public override void OnHoldAction()
         {
-            if (_kickForce > 0f && _ammoType.accuracy > 0.1f) { _ammoType.accuracy -= 0.02f; } else { _ammoType.accuracy -= 0.0005f; }
+            //if (_kickForce > 0f && _ammoType.accuracy > 0.1f) { _ammoType.accuracy -= 0.02f; } else { _ammoType.accuracy -= 0.0005f; } - мне это не нравится, фигня просто
 
             base.OnHoldAction();
         }
         public override void OnReleaseAction()
         {
-            if (_ammoType.accuracy < 1f) _ammoType.accuracy += 0.1f;
+            //if (_ammoType.accuracy < 1f) _ammoType.accuracy += 0.1f; - это тоже
             base.OnReleaseAction();
         }
 
