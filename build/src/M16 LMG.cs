@@ -69,6 +69,8 @@ namespace TMGmod
             set
             {
                 _kickForce = value ? 0 : 2.33f;
+                Kforce1Lmg = value ? 0 : 0.23f;
+                Kforce2Lmg = value ? 0 : 0.43f;
                 loseAccuracy = value ? 0 : 0.15f;
             }
         }
