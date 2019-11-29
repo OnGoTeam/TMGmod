@@ -143,5 +143,11 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+
+        public override void Fire()
+        {
+            if (FrameId / 10 == 1) return;
+            base.Fire();
+        }
     }
 }
