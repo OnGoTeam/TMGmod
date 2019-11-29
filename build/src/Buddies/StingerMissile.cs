@@ -8,15 +8,21 @@ using MathNet.Numerics;
 
 namespace TMGmod.Buddies
 {
-    [PublicAPI]
+    [UsedImplicitly]
     [EditorGroup("TMG|DEBUG")]
     public class StingerMissile:PhysicsObject
     {
         private readonly List<Vec2> _pList = new List<Vec2>();
         private const float A = 0.22f;
         private MaterialThing _target;
-        private Vec2 _tlv;
-        private Vec2 _ta;
+        [UsedImplicitly]
+        public Vec2 Tlv;
+        [UsedImplicitly]
+        public StateBinding TlvBinding = new StateBinding(nameof(Tlv));
+        [UsedImplicitly]
+        public Vec2 Ta;
+        [UsedImplicitly]
+        public StateBinding TaBinding = new StateBinding(nameof(Ta));
         private bool _activated;
         private int _ticks;
         public StingerMissile(float xval, float yval) : base(xval, yval)
@@ -33,6 +39,8 @@ namespace TMGmod.Buddies
             airFrictionMult = 0f;
             throwSpeedMultiplier = 5f;
             friction = 0;
+            hMax = 1e+10f;
+            vMax = 1e+10f;
         }
 
         public override void Update()
@@ -164,11 +172,11 @@ namespace TMGmod.Buddies
             if (!_activated) return;
             //velocity += OffsetLocal(new Vec2(A, 0));
             if (_target is null) return;
-            _ta = _target.velocity - _tlv;
-            _tlv = _target.velocity;
+            Ta = _target.velocity - Tlv;
+            Tlv = _target.velocity;
             var p = _target.position - position;
             var v = _target.velocity - velocity;
-            var g = new Vec2(0, gravity) - _ta;
+            var g = new Vec2(0, gravity) - Ta;
             var pa = Delta(-v, p, g);
             var maybeangle = Math.Acos(pa.x / pa.length);
             if (pa.y < 0) maybeangle = -maybeangle;
@@ -211,7 +219,7 @@ namespace TMGmod.Buddies
             {
                 var pi = p0 + v0;
                 Graphics.DrawLine(p0, pi, Color.Blue);
-                v0 += _ta;
+                v0 += Ta;
                 p0 = pi;
             }
 

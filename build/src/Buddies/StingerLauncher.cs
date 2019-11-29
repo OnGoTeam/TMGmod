@@ -1,6 +1,5 @@
-﻿
+﻿#if DEBUG
 using JetBrains.Annotations;
-#if DEBUG
 using DuckGame;
 using TMGmod.Core.WClasses;
 
@@ -26,10 +25,10 @@ namespace TMGmod.Buddies
 
         public override void Fire()
         {
-            var b = Offset(new Vec2(8, 0));
+            var b = Offset(new Vec2(16, 0));
             var stg = new StingerMissile(b.x, b.y)
             {
-                velocity = OffsetLocal(new Vec2(5, 0)) - new Vec2(0f, gravity),
+                velocity = OffsetLocal(new Vec2(10, 0)) + velocity - new Vec2(0f, gravity),
                 owner = this
             };
             Level.Add(stg);
