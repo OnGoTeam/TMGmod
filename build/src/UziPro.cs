@@ -34,7 +34,7 @@ namespace TMGmod
             {
                 range = 70f,
                 accuracy = 0.61f,
-                penetration = 1f
+                penetration = 0.4f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
@@ -72,7 +72,7 @@ namespace TMGmod
                     {
                         range = 70f,
                         accuracy = 0.61f,
-                        penetration = 1f
+                        penetration = 0.4f
                     };
                     _barrelOffsetTL = new Vec2(10f, 2f);
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)

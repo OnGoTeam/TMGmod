@@ -70,8 +70,8 @@ namespace TMGmod
                 {
                     _sprite.frame = 3;
                     _fireWait = 1.5f;
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.4f;
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.3f;
                 }
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }

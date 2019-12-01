@@ -40,7 +40,8 @@ namespace TMGmod.Cases.Color
                 typeof(AUGA1),
                 typeof(PPSh41),
                 typeof(PPK42),
-                typeof(SKS)
+                typeof(SKS),
+                typeof(Glock18)
             };
             CaseId = 4;
         }

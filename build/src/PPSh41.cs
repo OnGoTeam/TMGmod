@@ -31,7 +31,7 @@ namespace TMGmod
             ammo = 71;
             _ammoType = new AT9mm
             {
-                range = 200f,
+                range = 180f,
                 accuracy = 0.73f,
                 penetration = 0.4f
             };
@@ -51,8 +51,8 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.25f;
-            _kickForce = 1.2f;
-            KforceDSmg = 4f;
+            _kickForce = 1.7f;
+            KforceDSmg = 3f;
             MaxDelaySmg = 50;
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(0f, -3f);

@@ -35,8 +35,8 @@ namespace TMGmod
             ammo = 14;
             _ammoType = new ATMagnum
             {
-                range = 550f,
-                accuracy = 0.9f,
+                range = 600f,
+                accuracy = 0.94f,
                 penetration = 1f
             };
             _type = "gun";
@@ -60,7 +60,7 @@ namespace TMGmod
             Kforce2Ar = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.2f;
-            _editorName = "FN FCAR";
+            _editorName = "Belguria Fcar";
             laserSight = true;
             _laserOffsetTL = new Vec2(19f, 4f);
 			_weight = 7f;
@@ -75,7 +75,7 @@ namespace TMGmod
                     BipodsState += 1f / 10 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
-                _ammoType.accuracy = bipods ? 0.95f : 0.9f;
+                _ammoType.accuracy = bipods ? 1f : 0.94f;
                 _ammoType.bulletSpeed = bipods ? 72f : 36f;
                 _fireWait = bipods ? 1.5f : 0.75f;
                 _kickForce = bipods ? 0f : 2.4f;

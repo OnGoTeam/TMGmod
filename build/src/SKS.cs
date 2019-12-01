@@ -35,7 +35,7 @@ namespace TMGmod
             ammo = 11;
             _ammoType = new AT9mm
             {
-                range = 1400f,
+                range = 800f,
                 accuracy = 0.97f,
                 penetration = 1f,
                 bulletSpeed = 95f,
@@ -115,7 +115,7 @@ namespace TMGmod
             ammo = _patrons;
             _ammoType = new AT9mm
             {
-                range = 1400f,
+                range = 800f,
                 accuracy = 0.97f,
                 penetration = 1f,
                 bulletSpeed = 95f,
@@ -143,7 +143,7 @@ namespace TMGmod
                 ammo = _patrons;
 			    _ammoType = new AT9mm
 			    {
-			        range = 1400f,
+			        range = 800f,
 			        accuracy = 0.97f,
 			        penetration = 1f,
 			        bulletSpeed = 95f,

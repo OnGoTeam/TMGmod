@@ -26,9 +26,9 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 125f,
-                accuracy = 0.75f,
-                penetration = 1f
+                range = 110f,
+                accuracy = 0.7f,
+                penetration = 0.45f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PMR30"), 16, 10);
@@ -43,11 +43,11 @@ namespace TMGmod
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 0.5f;
-            _kickForce = 0.55f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.55f;
+            _kickForce = 1.67f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.5f;
             _editorName = "PMR-30";
-			_weight = 1f;
+			_weight = 2.5f;
         }
         private void UpdateSkin()
         {

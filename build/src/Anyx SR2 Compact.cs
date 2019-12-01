@@ -67,7 +67,7 @@ namespace TMGmod
             };
             _fullAuto = true;
             _fireWait = 0.85f;
-            _kickForce = 5.2f;
+            _kickForce = 4.2f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.6f;
             _editorName = "Anyx SR2 Compact";

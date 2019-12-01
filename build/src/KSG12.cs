@@ -15,12 +15,12 @@ namespace TMGmod
 	        _ammoType = new AT9mm
 	        {
 	            range = 185f,
-	            accuracy = 0.35f,
+	            accuracy = 0.4f,
 	            penetration = 1f,
-	            bulletSpeed = 50f,
+	            bulletSpeed = 40f,
 	            bulletThickness = 0.25f
 	        };
-            _numBulletsPerFire = 6;
+            _numBulletsPerFire = 8;
             _type = "gun";
 		    _graphic = new Sprite(GetPath("KSG12"));
 		    _center = new Vec2(18f, 5.5f);

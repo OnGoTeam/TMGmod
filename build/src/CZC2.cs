@@ -57,7 +57,7 @@ namespace TMGmod
             _kickForce = 3.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
-            _editorName = "CZ C2-SAR";
+            _editorName = "CZ-C2 SAR";
             _weight = 4.4f;
             Kforce2Ar = 0.7f;
         }

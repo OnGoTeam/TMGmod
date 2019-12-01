@@ -79,6 +79,7 @@ namespace TMGmod
                     };
                     _kickForce = 5.3f;
                     loseAccuracy = 0.1f;
+                    _weight = 4.5f;
                     _barrelOffsetTL = new Vec2(28f, 3f);
                     _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
                     {
@@ -96,6 +97,7 @@ namespace TMGmod
                     };
                     _kickForce = 4.5f;
                     loseAccuracy = 0f;
+                    _weight = 6.3f;
                     _barrelOffsetTL = new Vec2(39f, 3f);
                     _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
                     {

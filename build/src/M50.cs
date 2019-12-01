@@ -57,7 +57,7 @@ namespace TMGmod
             _editorName = "M50";
             _weight = 6.75f;
             MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.5f;
+            LambdaAccuracySr = 0.67f;
         }
         public override void Update()
         {

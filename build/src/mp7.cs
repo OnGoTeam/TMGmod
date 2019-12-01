@@ -23,10 +23,10 @@ namespace TMGmod
         public MP7(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 40;
+            ammo = 35;
             _ammoType = new AT9mmS
             {
-                range = 190f,
+                range = 175f,
                 accuracy = 0.9f
             };
             BaseAccuracy = 0.9f;
@@ -40,7 +40,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
             _fireWait = 0.5f;
-            _kickForce = 0.5f;
+            _kickForce = 1.5f;
             _holdOffset = new Vec2(3f, 1f);
             ShellOffset = new Vec2(-6f, -2f);
             loseAccuracy = 0.1f;

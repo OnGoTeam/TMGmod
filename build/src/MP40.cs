@@ -28,8 +28,8 @@ namespace TMGmod
             ammo = 32;
             _ammoType = new AT9mm
             {
-                range = 190f,
-                accuracy = 0.5f,
+                range = 215f,
+                accuracy = 0.7f,
                 penetration = 0.7f
             };
             BaseAccuracy = 0.5f;
@@ -48,12 +48,12 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.5f;
-            _kickForce = 0.5f;
+            _kickForce = 1.45f;
             _holdOffset = new Vec2(4f, 4f);
             ShellOffset = new Vec2(-1f, -6f);
             _editorName = "MP40";
 			_weight = 3f;
-            KforceDSmg = 2.5f;
+            KforceDSmg = 2f;
             MaxDelaySmg = 20;
             MaxAccuracy = 1f;
             MaxDelayFp = 10;

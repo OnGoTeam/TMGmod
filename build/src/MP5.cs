@@ -69,7 +69,7 @@ namespace TMGmod
 			_weight = 3f;
             KforceDSmg = 2f;
             MaxDelaySmg = 50;
-            DeltaWait = 0.65f;
+            DeltaWait = 0.45f;
             BurstNum = 1;
         }
         private void UpdateSkin()

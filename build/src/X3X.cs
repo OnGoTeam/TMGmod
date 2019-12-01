@@ -22,7 +22,7 @@ namespace TMGmod
         public X3X (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 5;
+            ammo = 6;
             _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
@@ -36,13 +36,13 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2f;
-            _kickForce = 10f;
-            loseAccuracy = 1.9f;
-            maxAccuracyLost = 2.5f;
+            _kickForce = 8f;
+            loseAccuracy = 1.7f;
+            maxAccuracyLost = 1.7f;
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-4f, -1f);
             _editorName = "Experimental X3X";
-            _bio = "ammo = 5";
+            _bio = "ammo = 1337";
 			_weight = 5.5f;
         }
 

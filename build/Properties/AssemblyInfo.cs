@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // атрибутов. Отредактируйте значения этих атрибутов, чтобы изменить
 // общие сведения об этой сборке.
 [assembly: AssemblyTitle("TMGmod")]
-[assembly: AssemblyDescription("Current update: Modules Update III")]
+[assembly: AssemblyDescription("Modules Update III: Oblivion of Glock")]
 //[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OnGoTeam")]
 [assembly: AssemblyProduct("TMGmod")]

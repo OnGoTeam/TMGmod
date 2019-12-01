@@ -57,9 +57,9 @@ namespace TMGmod
 		    Kforce1Ar = 1.6f;
 		    Kforce2Ar = 1.9f;
             loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.7f;
+            maxAccuracyLost = 0.6f;
             _editorName = "Mk17 with Shield";
-			_weight = 7f;
+			_weight = 5.5f;
         }
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {

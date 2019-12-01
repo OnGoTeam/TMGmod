@@ -41,7 +41,7 @@ namespace TMGmod.Core
         public AT50C()
         {
             accuracy = 1f;
-            range = 120f;
+            range = 200f;
             penetration = 2f;
             combustable = true;
             bulletSpeed = 45f;

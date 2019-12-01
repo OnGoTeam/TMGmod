@@ -37,6 +37,7 @@ namespace TMGmod
                 _ammoType.accuracy = stock ? 1f : 0.92f;
                 loseAccuracy = stock ? 0f : 0.1f;
                 weight = stock ? 5.5f : 3.5f;
+                _kickForce = stock ? 0.65f : 1.2f;
                 FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
                 if (isServerForObject && stock && stockstate <= 0.99f)
                     SFX.Play(GetPath("sounds/tuduc"));

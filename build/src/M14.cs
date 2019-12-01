@@ -27,10 +27,10 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new ATMagnum
             {
-                range = 540f,
-                accuracy = 0.85f
+                range = 666f,
+                accuracy = 0.9f
             };
-            BaseAccuracy = 0.85f;
+            BaseAccuracy = 0.9f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M14"), 46, 11);
             _graphic = _sprite;
@@ -45,14 +45,14 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
-            _fireWait = 0.85f;
+            _fireWait = 1.25f;
             _kickForce = 3.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-13f, -4f);
             _editorName = "M14";
-            _weight = 4.75f;
+            _weight = 4.5f;
         }
         private void UpdateSkin()
         {

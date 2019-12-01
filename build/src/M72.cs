@@ -30,8 +30,8 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _fullAuto = false;
             _fireWait = 1f;
-            _kickForce = 5f;
-            loseAccuracy = 0.8f;
+            _kickForce = 4.5f;
+            loseAccuracy = 0.65f;
             maxAccuracyLost = 1f;
             _editorName = "M72";
             _weight = 4.5f;

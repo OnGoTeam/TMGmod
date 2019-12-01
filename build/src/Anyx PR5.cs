@@ -6,8 +6,9 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|Fully-Automatic")]
-    public class Type89 : BaseAr, IHaveSkin
+    [UsedImplicitly]
+    [EditorGroup("TMG|Handgun|Burst")]
+    public class Glock18 : BaseBurst, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -18,40 +19,43 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
-        public Type89(float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 4 });
+
+        public Glock18(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 26;
-            _ammoType = new AT9mm
-            {
-                range = 366f,
-                accuracy = 0.85f,
-                penetration = 1.3f
-            };
-            _type = "gun";
-            _sprite = new SpriteMap(GetPath("Type 89"), 30, 12);
+            _sprite = new SpriteMap(GetPath("Anyx PR5"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(15f, 6f);
-            _collisionOffset = new Vec2(-15f, -6f);
-            _collisionSize = new Vec2(30f, 12f);
-            _barrelOffsetTL = new Vec2(30f, 4f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            _center = new Vec2(6f, 4f);
+            _collisionOffset = new Vec2(-6f, -4f);
+            _collisionSize = new Vec2(12f, 8f);
+            ammo = 21;
+            _ammoType = new AT9mm
+            {
+                range = 100f,
+                accuracy = 0.8f,
+                penetration = 0.5f
+            };
+            _type = "gun";
+            _barrelOffsetTL = new Vec2(12f, 1f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
             };
-            _fireSound = "deepMachineGun";
-            _fullAuto = true;
-            _fireWait = 0.71f;
-            _kickForce = 2.1f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.25f;
-            _holdOffset = new Vec2(1f, 0f);
-            ShellOffset = new Vec2(-1f, -1f);
-            _editorName = "Type 89";
-			_weight = 4.6f;
+            _fireSound = GetPath("sounds/2.wav");
+            _fullAuto = false;
+            _fireWait = 0.5f;
+            _kickForce = 0.5f;
+            loseAccuracy = 0.2f;
+            maxAccuracyLost = 0.6f;
+            ShellOffset = new Vec2(-1f, -2f);
+            _holdOffset = new Vec2(-1f, 2f);
+            _editorName = "Anyx PR5";
+			_weight = 1.7f;
+            DeltaWait = 0.6f;
+            BurstNum = 3;
         }
         private void UpdateSkin()
         {
@@ -72,6 +76,11 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+        public override void OnHoldAction()
+        {
+            //handAngle = Rando.Float(-0.08f, 0.08f);
+            base.OnHoldAction();
         }
     }
 }

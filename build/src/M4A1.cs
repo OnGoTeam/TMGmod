@@ -33,7 +33,7 @@ namespace TMGmod
             _ammoType = new ATMagnum
             {
                 range = 330f,
-                accuracy = 0.8f,
+                accuracy = 0.86f,
                 penetration = 1f
             };
             _type = "gun";
@@ -50,14 +50,14 @@ namespace TMGmod
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;
-            _fireWait = 0.745f;
-            _kickForce = 1.9f;
+            _fireWait = 0.75f;
+            _kickForce = 1.5f;
             loseAccuracy = 0.07f;
             maxAccuracyLost = 0.21f;
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(-2f, -2f);
             _editorName = "M4A1";
-			_weight = 4.4f;
+			_weight = 4f;
             Kforce2Ar = 0.5f;
         }
         private void UpdateSkin()

@@ -58,7 +58,7 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             MaxDelayFp = 10;
             MaxDelaySmg = 50;
-            DeltaWait = 0.65f;
+            DeltaWait = 0.45f;
             BurstNum = 1;
         }
         private void UpdateSkin()

@@ -60,7 +60,7 @@ namespace TMGmod
             Kforce1Ar = 0.4f;
             Kforce2Ar = 0.85f;
             MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.5f;
+            LambdaAccuracySr = 0.75f;
         }
         public override void Update()
         {

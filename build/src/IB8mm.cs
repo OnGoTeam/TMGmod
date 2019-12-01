@@ -29,9 +29,9 @@ namespace TMGmod
             _ammoType = new AT9mmS
             {
                 range = 425f,
-                accuracy = 0.71f
+                accuracy = 0.8f
             };
-            BaseAccuracy = 0.71f;
+            BaseAccuracy = 0.8f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _graphic = _sprite;
@@ -67,7 +67,6 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

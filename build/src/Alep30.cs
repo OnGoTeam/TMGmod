@@ -25,39 +25,39 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 26;
+            ammo = 18;
             _ammoType = new AT9mm
             {
-                range = 115f,
+                range = 125f,
                 accuracy = 0.6f,
                 penetration = 0.4f,
-                bulletSpeed = 30f
+                bulletSpeed = 20f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Alep30"), 16, 11);
+            _sprite = new SpriteMap(GetPath("Alep30"), 16, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _center = new Vec2(8f, 3f);
-            _collisionOffset = new Vec2(-7.5f, -3.5f);
-            _collisionSize = new Vec2(16f, 11f);
-            _barrelOffsetTL = new Vec2(16f, 1f);
-            _fireSound = GetPath("sounds/2.wav");
+            _center = new Vec2(8f, 5f);
+            _collisionOffset = new Vec2(-8f, -5f);
+            _collisionSize = new Vec2(16f, 9f);
+            _barrelOffsetTL = new Vec2(16f, 2f);
+            _fireSound = GetPath("sounds/smg.wav");
             _fullAuto = true;
-            _fireWait = 0.6f;
-            _kickForce = 1.85f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.6f;
-            _holdOffset = new Vec2(1f, 0f);
-            ShellOffset = new Vec2(-3f, -1f);            
+            _fireWait = 0.45f;
+            _kickForce = 1.5f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.8f;
+            _holdOffset = new Vec2(1f, 2f);
+            ShellOffset = new Vec2(-3f, -3f);            
             _editorName = "Alep 30";
-			_weight = 2.1f;
+			_weight = 2.3f;
         }
 
         /// <inheritdoc />
         public override void OnHoldAction()
         {
-            handAngle = Rando.Float(-0.08f, 0.08f);
+            //handAngle = Rando.Float(-0.08f, 0.08f);
             base.OnHoldAction();
         }
         private void UpdateSkin()

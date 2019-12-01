@@ -53,6 +53,7 @@ namespace TMGmod
                 loseAccuracy = stock ? 0.15f : 0.2f;
                 maxAccuracyLost = stock ? 0.3f : 0.6f;
                 weight = stock ? 6f : 3.5f;
+                _kickForce = stock ? 3f : 4.6f;
                 FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
                 if (isServerForObject && stock && stockstate <= 0.99f)
                     SFX.Play(GetPath("sounds/beepods1"));
@@ -119,7 +120,7 @@ namespace TMGmod
             };
             _fullAuto = true;
             _fireWait = 0.75f;
-            _kickForce = 4.6f;
+            _kickForce = 3f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
             _editorName = "Anyx ARS Elite";

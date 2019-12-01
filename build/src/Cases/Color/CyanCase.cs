@@ -39,7 +39,8 @@ namespace TMGmod.Cases.Color
                 typeof(Lynx),
                 typeof(PPSh41),
                 typeof(PPK42),
-                typeof(SKS)
+                typeof(SKS),
+                typeof(Glock18)
             };
             CaseId = 3;
         }

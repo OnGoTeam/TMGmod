@@ -32,7 +32,7 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new ATMagnum
             {
-                range = 300f,
+                range = 325f,
                 accuracy = 0.9f,
                 penetration = 1f
             };
@@ -54,9 +54,9 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.8f;
             _kickForce = 2.7f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.5f;
-            _editorName = "Hk-417C";
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.45f;
+            _editorName = "Hk 417C";
 			_weight = 3.5f;
         }
         private void UpdateSkin()

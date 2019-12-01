@@ -46,7 +46,8 @@ namespace TMGmod.Cases.Color
                 typeof(PMRC),
                 typeof(BigShot),
                 typeof(SKS),
-                typeof(SRM1208)
+                typeof(SRM1208),
+                typeof(PP19)
             };
             CaseId = 1;
         }

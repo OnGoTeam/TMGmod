@@ -35,10 +35,10 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(26f, 2f);
             _fireSound = "magnum";
             _fullAuto = false;
-            _fireWait = 1.6f;
-            _kickForce = 3.76f;
-            loseAccuracy = 0.5f;
-            maxAccuracyLost = 1f;
+            _fireWait = 1.2f;
+            _kickForce = 2.8f;
+            loseAccuracy = 0.25f;
+            maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(0f, 2f);
             _editorName = "50AE Pistol";
 			_weight = 2.5f;

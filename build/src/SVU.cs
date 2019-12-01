@@ -25,7 +25,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 10;
+            ammo = 12;
             _ammoType = new AT9mmS
             {
                 range = 600f,
@@ -53,7 +53,7 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 0f);
             ShellOffset = new Vec2(-10f, 0f);
             _editorName = "SVU";
-            _weight = 6f;
+            _weight = 5.7f;
         }
         private void UpdateSkin()
         {

@@ -30,7 +30,7 @@ namespace TMGmod
             _ammoType = new ATMagnum
             {
                 range = 125f,
-                accuracy = 0.4f,
+                accuracy = 0.6f,
                 penetration = 1f,
                 bulletThickness = 1.5f
             };

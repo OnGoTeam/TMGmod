@@ -49,15 +49,15 @@ namespace TMGmod.Custom_Guns
         {
             new AT9mm
             {
-                range = 125f,
-                accuracy = 0.75f,
-                penetration = 1f
+                range = 110f,
+                accuracy = 0.7f,
+                penetration = 0.45f
             },
             new AT9mm
             {
                 range = 110f,
                 accuracy = 0.35f,
-                penetration = 1f,
+                penetration = 2f,
                 bulletSpeed = 50f
             }
         };
@@ -77,9 +77,9 @@ namespace TMGmod.Custom_Guns
             ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 125f,
-                accuracy = 0.75f,
-                penetration = 1f
+                range = 110f,
+                accuracy = 0.7f,
+                penetration = 0.45f
             };
             _numBulletsPerFire = 1;
             _type = "gun";
@@ -97,10 +97,10 @@ namespace TMGmod.Custom_Guns
             _fireSoundm[0] = _fireSound;
             _fullAuto = false;
             _fireWait = 0.5f;
-            _kickForce = 0.55f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.55f;
-            _editorName = "PMR30 With SG";
+            _kickForce = 1.67f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.5f;
+            _editorName = "PMR30 Shotgunned";
 			_weight = 1f;
             _graphic = _graphicm[_switched ? Mode : 2];
         }

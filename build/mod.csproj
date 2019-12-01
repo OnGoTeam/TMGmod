@@ -205,11 +205,11 @@
     <Compile Include="src\Anyx SR2 Compact.cs" />
     <Compile Include="src\CZ75.cs" />
     <Compile Include="src\DragoShot.cs" />
-    <Compile Include="src\Glock18.cs" />
+    <Compile Include="src\Anyx PR5.cs" />
     <Compile Include="src\HazeS.cs" />
     <Compile Include="src\Hk417.cs" />
     <Compile Include="src\M16 LMG.cs" />
-    <Compile Include="src\M4.cs" />
+    <Compile Include="src\M4A1.cs" />
     <Compile Include="src\M50.cs" />
     <Compile Include="src\M72.cs" />
     <Compile Include="src\M93R.cs" />
@@ -221,7 +221,7 @@
     <Compile Include="src\SuperFe.cs" />
     <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
-    <Compile Include="src\mp7.cs" />
+    <Compile Include="src\MP7.cs" />
     <Compile Include="src\Vista.cs" />
     <Compile Include="src\MSR.cs" />
     <Compile Include="src\TC12.cs" />

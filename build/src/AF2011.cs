@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AF2011 : BaseGun, IAmHg, IHaveSkin
+    public class AF2011 : BaseGun, IAmHg, IHaveSkin, I5
     {
 
         private readonly SpriteMap _sprite;
@@ -20,7 +20,7 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 9 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 5 });
         public AF2011 (float xval, float yval)
           : base(xval, yval)
         {
@@ -28,7 +28,7 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new ATMagnum
             {
-                range = 110f,
+                range = 130f,
                 accuracy = 0.95f,
                 penetration = 1f
             };
@@ -43,9 +43,9 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(16f, 1f);
             _fireSound = "pistolFire";
             _fullAuto = false;
-            _fireWait = 0.9f;
+            _fireWait = 0.6f;
             _kickForce = 1.7f;
-            loseAccuracy = 0.1f;
+            loseAccuracy = 0.15f;
             maxAccuracyLost = 0.4f;
             _holdOffset = new Vec2(-1f, 1f);
             ShellOffset = new Vec2(0f, 0f);

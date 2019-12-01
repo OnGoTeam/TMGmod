@@ -49,7 +49,7 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.65f;
             _kickForce = 3.1f;
-            loseAccuracy = 0.1f;
+            loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
             _editorName = "Beretta ARX-200";
 			_weight = 6f;

@@ -55,7 +55,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.9f;
             _kickForce = 2.76f;
-            loseAccuracy = 0.1f;
+            loseAccuracy = 0.15f;
             maxAccuracyLost = 0.3f;
             _editorName = "CZ-805 BREN";
 			_weight = 5f;
@@ -92,7 +92,7 @@ namespace TMGmod
                         range = 380f,
                         accuracy = 0.95f
                     };
-                    loseAccuracy = 0.1f;
+                    loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(42.5f, 3f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);

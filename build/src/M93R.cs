@@ -30,20 +30,20 @@ namespace TMGmod
             _center = new Vec2(6f, 2f);
             _collisionOffset = new Vec2(-6f, -2f);
             _collisionSize = new Vec2(12f, 9f);
+            ammo = 15;
+            _ammoType = new ATMagnum { range = 70f, accuracy = 0.6f, penetration = 0.4f, bulletSpeed = 39f };
             _barrelOffsetTL = new Vec2(12f, 1f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
             };
             _holdOffset = new Vec2(-2f, 0f);
-            ammo = 15;
-            _ammoType = new ATMagnum {range = 70f, accuracy = 0.7f, penetration = 0.4f, bulletSpeed = 33f};
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 1.5f;
             _kickForce = 0.24f;
-            loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.6f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.35f;
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "M93R";
 			_weight = 2f;
