@@ -37,8 +37,8 @@ namespace TMGmod.Buddies
             thickness = 0.0f;
             _weight = 3f;
             airFrictionMult = 0f;
-            throwSpeedMultiplier = 5f;
             friction = 0;
+            throwSpeedMultiplier = 5f;
             hMax = 1e+10f;
             vMax = 1e+10f;
         }
@@ -182,7 +182,8 @@ namespace TMGmod.Buddies
             if (pa.y < 0) maybeangle = -maybeangle;
             if (offDir < 0) maybeangle += Math.PI;
             angle = (float) maybeangle;
-            velocity += pa;
+            //velocity += pa;
+            velocity += OffsetLocal(new Vec2(A, 0));
         }
 
         public override void Draw()

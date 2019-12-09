@@ -28,7 +28,7 @@ namespace TMGmod.Buddies
             var b = Offset(new Vec2(16, 0));
             var stg = new StingerMissile(b.x, b.y)
             {
-                velocity = OffsetLocal(new Vec2(10, 0)) + velocity - new Vec2(0f, gravity),
+                velocity = OffsetLocal(new Vec2(10, 0)) + velocity - 2 * new Vec2(0f, gravity),
                 owner = this
             };
             Level.Add(stg);
