@@ -11,12 +11,12 @@ namespace TMGmod.Buddies
     {
         public StingerLauncher(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
+            var sprite = new SpriteMap(GetPath("deleteco/Future/Stinger.png"), 42, 10);
             _graphic = sprite;
-            sprite.frame = 4;
-            _center = new Vec2(7f, 4f);
-            _collisionOffset = new Vec2(-7f, -4f);
-            _collisionSize = new Vec2(14f, 8f);
+            sprite.frame = 0;
+            _center = new Vec2(21f, 5f);
+            _collisionOffset = new Vec2(-21f, -5f);
+            _collisionSize = new Vec2(42f, 10f);
             depth = -0.5f;
             thickness = 0.0f;
             _weight = 3f;
