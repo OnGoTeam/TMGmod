@@ -27,12 +27,12 @@ namespace TMGmod.Buddies
         private int _ticks;
         public StingerMissile(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
+            var sprite = new SpriteMap(GetPath("deleteco/Future/StingerRaketa.png"), 19, 4);
             _graphic = sprite;
-            sprite.frame = 3;
-            _center = new Vec2(7f, 4f);
-            _collisionOffset = new Vec2(-7f, -4f);
-            _collisionSize = new Vec2(14f, 8f);
+            sprite.frame = 0;
+            _center = new Vec2(10f, 2f);
+            _collisionOffset = new Vec2(-10f, -2f);
+            _collisionSize = new Vec2(19f, 4f);
             depth = -0.5f;
             thickness = 0.0f;
             _weight = 3f;
