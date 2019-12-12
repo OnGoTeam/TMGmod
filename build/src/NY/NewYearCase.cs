@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Cases.Color;
-#if DEBUG
-using TMGmod.Useless_or_deleted_Guns;
-#endif
+using TMGmod.Cases;
 
 namespace TMGmod.NY
 {
@@ -18,39 +16,41 @@ namespace TMGmod.NY
         {
             var sprite = new SpriteMap(GetPath("Holiday/HolydayCase"), 14, 8);
             _graphic = sprite;
-            sprite.frame = 0;
+            sprite.frame = Rando.Int(0, 31);
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);
             depth = -0.5f;
             thickness = 0.0f;
-            _weight = 3f;
+            _weight = 4f;
             collideSounds.Add("presentLand");
             _editorName = "Holiday Case";
             Things = new List<Type>
             {
-                typeof(Arx200),
-                typeof(UziPro),
-#if DEBUG
-                typeof(PPSh),
-#endif
-                typeof(PPSh41),
-                typeof(PPK42),
-                typeof(MG44),
-                typeof(SkeetGun),
-                typeof(MP5),
+                   typeof(SkeetGun),
                 typeof(GarlandGun),
                 typeof(CandyCane),
                 typeof(SpruceGun),
                 typeof(SnowMgun),
-                typeof(PodarokColorB),
-                typeof(PodarokColorC),
-                typeof(PodarokColorY),
-                typeof(PodarokColorR),
-                typeof(PodarokColorB),
-                typeof(PodarokColorC),
-                typeof(PodarokColorY),
-                typeof(PodarokColorR)
+                   typeof(SkeetGun),
+                typeof(GarlandGun),
+                typeof(CandyCane),
+                typeof(SpruceGun),
+                typeof(SnowMgun),
+                 typeof(Helmet),
+                 typeof(ChestPlate),
+                typeof(GarlandGun),
+                typeof(CandyCane),
+                typeof(SpruceGun),
+                typeof(SnowMgun),
+                 typeof(Helmet),
+                 typeof(ChestPlate),
+                   typeof(PodarokColorB),
+                   typeof(PodarokColorC),
+                   typeof(PodarokColorY),
+                   typeof(PodarokColorR),
+                   typeof(PodarokColorG),
+                   typeof(PodarokMillitary)
             };
             CaseId = 6;
         }

@@ -12,6 +12,7 @@ namespace TMGmod.Core.WClasses
         protected float MinAccuracy;
         [UsedImplicitly]
         protected float PrevKforce;
+        protected float podarokChance = 2f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%
         [UsedImplicitly]
         protected bool ToPrevKforce;
         protected Vec2 ShellOffset;
@@ -67,7 +68,7 @@ namespace TMGmod.Core.WClasses
             base.Fire();
             if (pammo > ammo)
             {
-                if (Rando.Float(0f, 1f) < 0.001f)
+                if (Rando.Float(0f, 1f) < (podarokChance/100f))
                 {
                     var scase = new NewYearCase(x, y);
                     Level.Add(scase);
