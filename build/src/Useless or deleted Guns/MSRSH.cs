@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Useless_or_deleted_Guns
 {
+    [EditorGroup("TMG|DEBUG")]
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", false)]
     [PublicAPI]
     [Obsolete]
@@ -76,11 +77,11 @@ namespace TMGmod.Useless_or_deleted_Guns
             var ang = angle;
             if (offDir <= 0)
             {
-                angle = angle + _angleOffset;
+                angle += _angleOffset;
             }
             else
             {
-                angle = angle - _angleOffset;
+                angle -= _angleOffset;
             }
             base.Draw();
             angle = ang;
@@ -94,11 +95,10 @@ namespace TMGmod.Useless_or_deleted_Guns
                 base.OnPressAction();
                 return;
             }
-            if (ammo > 0 && _loadState == -1 && _drobovik == false && _snuper)
-            {
-                _loadState = 0;
-                _loadAnimation = 0;
-            }
+
+            if (ammo <= 0 || _loadState != -1 || _drobovik || !_snuper) return;
+            _loadState = 0;
+            _loadAnimation = 0;
         }
 
         public override void Update()
@@ -116,64 +116,65 @@ namespace TMGmod.Useless_or_deleted_Guns
                     _angleOffset = 0f;
                     handOffset = Vec2.Zero;
                 }
-                if (_loadState == 0)
+
+                switch (_loadState)
                 {
-                    if (!Network.isActive)
+                    case 0:
                     {
-                        SFX.Play("loadSniper");
+                        if (!Network.isActive)
+                        {
+                            SFX.Play("loadSniper");
+                        }
+                        else if (isServerForObject)
+                        {
+                            _netLoad.Play();
+                        }
+                        Sniper sniper = this;
+                        sniper._loadState += 1;
+                        break;
                     }
-                    else if (isServerForObject)
-                    {
-                        _netLoad.Play();
-                    }
-                    Sniper sniper = this;
-                    sniper._loadState = sniper._loadState + 1;
-                }
-                else if (_loadState == 1)
-                {
-                    if (_angleOffset >= 0.1f)
+                    case 1 when _angleOffset >= 0.1f:
                     {
                         Sniper sniper1 = this;
-                        sniper1._loadState = sniper1._loadState + 1;
+                        sniper1._loadState += 1;
+                        break;
                     }
-                    else
+                    case 1:
+                        _angleOffset += 0.003f;
+                        break;
+                    case 2:
                     {
-                        _angleOffset = _angleOffset + 0.003f;
+                        handOffset.x -= 0.2f;
+                        if (handOffset.x > 4f)
+                        {
+                            Sniper sniper2 = this;
+                            sniper2._loadState += 1;
+                            Reload();
+                            loaded = false;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 2)
-                {
-                    handOffset.x = handOffset.x - 0.2f;
-                    if (handOffset.x > 4f)
+                    case 3:
                     {
-                        Sniper sniper2 = this;
-                        sniper2._loadState = sniper2._loadState + 1;
-                        Reload();
-                        loaded = false;
+                        handOffset.x += 0.2f;
+                        if (handOffset.x <= 0f)
+                        {
+                            Sniper sniper3 = this;
+                            sniper3._loadState += 1;
+                            handOffset.x = 0f;
+                        }
+
+                        break;
                     }
-                }
-                else if (_loadState == 3)
-                {
-                    handOffset.x = handOffset.x + 0.2f;
-                    if (handOffset.x <= 0f)
-                    {
-                        Sniper sniper3 = this;
-                        sniper3._loadState = sniper3._loadState + 1;
-                        handOffset.x = 0f;
-                    }
-                }
-                else if (_loadState == 4)
-                {
-                    if (_angleOffset <= 0.03f)
-                    {
+                    case 4 when _angleOffset <= 0.03f:
                         _loadState = -1;
                         loaded = true;
                         _angleOffset = 0f;
-                    }
-                    else
-                    {
+                        break;
+                    case 4:
                         _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.15f);
-                    }
+                        break;
                 }
             }
             laserSight = false;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -9,38 +10,73 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
-        public bool Stock = true;
-        public StateBinding StockBinding = new StateBinding(nameof(Stock));
+        [UsedImplicitly]
+        public bool Laserrod
+        {
+            get => _sprite.frame < 10;
+            set
+            {
+                if (value)
+                {
+                    loseAccuracy = 0.15f;
+                    _fireWait = 1.5f;
+                    maxAccuracyLost = 0.45f;
+                    _sprite.frame %= 10;
+                    laserSight = false;
+                }
+                else
+                {
+                    loseAccuracy = 0.1f;
+                    _fireWait = 2.5f;
+                    maxAccuracyLost = 0.1f;
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    laserSight = true;
+                }
+            }
+        }
+        [UsedImplicitly]
+        public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("AN94pattern"), 33, 9);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("AN94"), 33, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(16f, 5f);
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(33f, 9f);
-            _barrelOffsetTL = new Vec2(34f, 3f);
+            _barrelOffsetTL = new Vec2(33f, 2f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _holdOffset = new Vec2(1f, 2f);
+            ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
             _ammoType = new ATMagnum { range = 260f, bulletSpeed = 60f, accuracy = 0.87f};
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 2f;
-            Kforce1Ar = 0.07f;
-            _kickForce = 0.9f;
-            Kforce2Ar = 0.9f;
+            _fireWait = 1.5f;
+            Kforce1Ar = 0.5f;
+            _kickForce = 1.6f;
+            Kforce2Ar = 2f;
             loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.1f;
+            maxAccuracyLost = 0.45f;
             _editorName = "AN94";
-            _weight = 5.5f;
+            _weight = 4.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(30f, 2.5f);
             DeltaWait = 0.07f;
@@ -51,23 +87,7 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (!Stock)
-                {
-                    loseAccuracy = 0.15f;
-                    weight = 5.5f;
-                    _sprite.frame %= 10;
-                    maxAccuracyLost = 0.1f;
-                }
-                else
-                {
-                    loseAccuracy = 0.2f;
-                    weight = 2.75f;
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    maxAccuracyLost = 0.3f;
-                }
-
-                Stock = !Stock;
+                Laserrod = !Laserrod;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
@@ -81,6 +101,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

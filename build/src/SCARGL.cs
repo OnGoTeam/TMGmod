@@ -5,14 +5,19 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
-    [PublicAPI]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class ScarGL : BaseGun, IAmAr
     {
+        [UsedImplicitly]
         public int Mode;
+        [UsedImplicitly]
         public StateBinding ModeBinding = new StateBinding(nameof(Mode));
+        [UsedImplicitly]
         public int Ammom0 = 20;
+        [UsedImplicitly]
         public int Ammom1 = 1;
+        [UsedImplicitly]
         public int[] Ammom
         {
             get => new[] { Ammom0, Ammom1 };
@@ -22,7 +27,9 @@ namespace TMGmod
                 Ammom1 = value[1];
             }
         }
+        [UsedImplicitly]
         public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
+        [UsedImplicitly]
         public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
@@ -48,7 +55,14 @@ namespace TMGmod
         private readonly string[] _fireSoundm = {"sounds/1.wav", "deepMachineGun"};
         private readonly float[] _loseAccuracym = {.1f, 0f};
         private readonly float[] _maxAccuracyLostm = {.45f, 0f};
+        private readonly SpriteMap[] _flarem;
         private bool _switched;
+        [UsedImplicitly]
+        public SpriteMap Flare
+        {
+            get => _flare;
+            set => _flare = value;
+        }
 
         public ScarGL (float xval, float yval)
           : base(xval, yval)
@@ -71,6 +85,18 @@ namespace TMGmod
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 3f);
+            _flarem = new[]
+            {
+                new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
+                {
+                    center = new Vec2(0.0f, 5f)
+                },
+                new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+                {
+                    center = new Vec2(0.0f, 5f)
+                }
+            };
+            _flare = _flarem[Mode];
             _holdOffset = new Vec2(2f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fireSoundm[0] = _fireSound;
@@ -92,6 +118,7 @@ namespace TMGmod
             _fireSound = _fireSoundm[Mode];
             loseAccuracy = _loseAccuracym[Mode];
             maxAccuracyLost = _maxAccuracyLostm[Mode];
+            _flare = _flarem[Mode];
         }
 
         public override void Update()

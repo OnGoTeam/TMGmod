@@ -9,6 +9,7 @@ using TMGmod.Core;
 
 namespace TMGmod.Useless_or_deleted_Guns
 {
+    [EditorGroup("TMG|DEBUG")]
     [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     [Obsolete]

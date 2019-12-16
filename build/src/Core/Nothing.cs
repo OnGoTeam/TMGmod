@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 using JetBrains.Annotations;
 
 namespace TMGmod.Core
@@ -12,3 +13,4 @@ namespace TMGmod.Core
     {
     }
 }
+#endif

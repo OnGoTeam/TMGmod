@@ -12,14 +12,18 @@ using TMGmod.Properties;
 
 namespace TMGmod.Core
 {
-    [PublicAPI]
+    /// <inheritdoc />
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
     {
+        [UsedImplicitly]
         internal string Bdate = Resources.BuildDate;
+        [UsedImplicitly]
         internal static TMGmod LastInstance;
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         // ReSharper disable once MemberCanBePrivate.Global
+        /// <inheritdoc />
         public TMGmod()
         {
             Debug.Log("TMGmod loading");
@@ -27,11 +31,12 @@ namespace TMGmod.Core
                 CurrentDomain_AssemblyResolve;
             LastInstance = this;
         }
-
+        [UsedImplicitly]
         internal static string AssemblyName { get; private set; }
 		
 		//Приоритет. Мод загружается раньше/позже других модов
-		public override Priority priority => Priority.Normal;
+        /// <inheritdoc />
+        public override Priority priority => Priority.Normal;
 
         //Происходит перед запуском мода
         /*protected override void OnPreInitialize()
@@ -48,6 +53,7 @@ namespace TMGmod.Core
         }
 
         //Происходит после запуска мода
+        /// <inheritdoc />
         protected override void OnPostInitialize()
         {
             //Директория
@@ -67,7 +73,7 @@ namespace TMGmod.Core
 
         // ReSharper disable once InconsistentNaming
         // Чтобы играть было приятно, пихаем карты в сам мод, и делаем так, чтобы они скачивались вместе с ним
-		private void CreatingTMGLevels()
+		private static void CreatingTMGLevels()
         {
             //Уносим старые нерабочие карты в очко
             var olddirlist = new List<string>(new[]
@@ -80,10 +86,9 @@ namespace TMGmod.Core
                 "DuckGame\\Levels\\TMG Maps v2.1",
                 "DuckGame\\Levels\\TMG v2.1.1"
             });
-            foreach (var dirpath in olddirlist)
+            foreach (var dirpath1 in olddirlist.Select(dirpath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath)).Where(Directory.Exists))
             {
-                var dirpath1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath);
-                if (Directory.Exists(dirpath1)) Directory.Delete(dirpath1, true);
+                Directory.Delete(dirpath1, true);
             }
             // Сначала определяем левелы, и копируем их
             var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
@@ -116,7 +121,7 @@ namespace TMGmod.Core
             File.WriteAllText(tmgPlaylistLocation, contents);
             SaveAsPlay(tmgPlaylistLocation);
         }
-        private void SaveAsPlay(string path)
+        private static void SaveAsPlay(string path)
         {
             if (MonoMain.disableCloud || MonoMain.cloudNoSave)
                 return;

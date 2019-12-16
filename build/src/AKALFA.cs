@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -7,20 +9,73 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AKALFA : BaseAr, IHaveSkin
+    public class AKALFA : BaseAr, IHaveSkin, IHaveStock
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        private const int NonSkinFrames = 3;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4, 5 });
-        public bool Stock = true;
-        public StateBinding StockBinding = new StateBinding(nameof(Stock));
+        private bool _stock = true;
+        [UsedImplicitly]
+        public bool Stock
+        {
+            get => _stock;
+            set
+            {
+                _stock = value;
+                var stockstate = StockState;
+                if (isServerForObject)
+                    StockState += 1f / 10 * (value ? 1 : -1);
+                var nostock = StockState < 0.01f;
+                var stock = StockState > 0.99f;
+                _ammoType.accuracy = stock ? 1f : 0.92f;
+                loseAccuracy = stock ? 0f : 0.1f;
+                weight = stock ? 5.5f : 3.5f;
+                _kickForce = stock ? 0.65f : 1.2f;
+                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
+                if (isServerForObject && stock && stockstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/tuduc"));
+                if (isServerForObject && nostock && stockstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/tuduc"));
+            }
+        }
+
+        private float _stockstate = 1f;
+        public float StockState {
+            get => _stockstate;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _stockstate = value;
+            }
+        }
+        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+
+        [UsedImplicitly]
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
+
+        public BitBuffer StockBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Stock);
+                return b;
+            }
+            set => Stock = value.ReadBool();
+        }
 
         public AKALFA (float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new AT9mm
             {
@@ -31,15 +86,20 @@ namespace TMGmod
                 bulletThickness = 0.87f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("ALFApattern"), 38, 9);
+            _sprite = new SpriteMap(GetPath("ALFA"), 38, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
             _graphic = _sprite;
-            _center = new Vec2(19f, 4.5f);
-            _collisionOffset = new Vec2(-19f, -4.5f);
+            _center = new Vec2(19f, 5f);
+            _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(38f, 9f);
-            _barrelOffsetTL = new Vec2(38f, 2.5f);
-            _holdOffset = new Vec2(5f, 0f);
+            _barrelOffsetTL = new Vec2(38f, 2f);
+            _holdOffset = new Vec2(5f, 1f);
+            ShellOffset = new Vec2(-3f, -2f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.75f;
@@ -50,33 +110,17 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";
 			_weight = 5.5f;
-            _laserOffsetTL = new Vec2(31f, 4f);
-            laserSight = true;
 		}
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
-            {
-                if (!Stock)
-                {
-                    _sprite.frame %= 10;
-                    _ammoType.accuracy = 1f;
-                    loseAccuracy = 0f;
-                    weight = 5.5f;
-                }
-                else
-                {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    _ammoType.accuracy = 0.92f;
-                    loseAccuracy = 0.1f;
-                    weight = 3.5f;
-                }
-
-                Stock = !Stock;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
             base.Update();
+            if (SwitchStockQ() && (Stock || duck.grounded) && duck.inputProfile.Pressed("QUACK"))
+            {
+                Stock = !Stock;
+                SFX.Play("quack", -1);
+            }
+            else if (duck != null)
+                Stock = Stock;
         }
         private void UpdateSkin()
         {
@@ -87,6 +131,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
@@ -96,6 +141,12 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+
+        public override void Fire()
+        {
+            if (FrameId / 10 == 1) return;
+            base.Fire();
         }
     }
 }

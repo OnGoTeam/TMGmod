@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // атрибутов. Отредактируйте значения этих атрибутов, чтобы изменить
 // общие сведения об этой сборке.
 [assembly: AssemblyTitle("TMGmod")]
-[assembly: AssemblyDescription("Current update: Violent Balance")]
+[assembly: AssemblyDescription("Modules Update III: Oblivion of Glock")]
 //[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OnGoTeam")]
 [assembly: AssemblyProduct("TMGmod")]
@@ -29,8 +29,14 @@ using System.Runtime.InteropServices;
 //      Редакция
 //
 
+// proposed system:
+// major                            1
+// minor*100 + major milestone    203
+// minor milestone                  4
+// patch (revision)                 5
+
 #if WORKSHOP
-[assembly: AssemblyVersion("1.1.1.5")]
+[assembly: AssemblyVersion("1.1.5.1")]
 #else
-[assembly: AssemblyVersion("1.101.*")]
+[assembly: AssemblyVersion("1.102.*")]
 #endif

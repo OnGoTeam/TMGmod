@@ -3,17 +3,23 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
+    /// <summary>
+    /// <see cref="Barricade"/>s spawner
+    /// </summary>
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("CanSpawn", false)]
-    [PublicAPI]
+    [UsedImplicitly]
     public class Barricades:GreyBlock
     {
         private bool _deployed;
+
+        /// <inheritdoc />
         public Barricades(float xpos, float ypos) : base(xpos, ypos)
         {
             _editorName = "Barricades";
         }
 
+        /// <inheritdoc />
         public override void Update()
         {
             if (!_deployed) Deploy(position + new Vec2(0f, -10f));
@@ -31,6 +37,8 @@ namespace TMGmod.Stuff
                 Level.Add(barricade);
             }
         }
+
+        /// <inheritdoc />
         public override void Draw()
         {
             if (Level.activeLevel is Editor)

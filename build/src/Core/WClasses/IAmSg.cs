@@ -1,8 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace TMGmod.Core.WClasses
+﻿namespace TMGmod.Core.WClasses
 {
-    [PublicAPI]
+    /// <summary>
+    /// Interface for shotguns
+    /// </summary>
     public interface IAmSg
     {
     }

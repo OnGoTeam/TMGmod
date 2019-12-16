@@ -1,5 +1,24 @@
-R.I.P
-Haze X
-MAP Fire
-Iron Bird
-Maxim MG
+Ёти бойцы вели славную битву за право быть частью TMG! Ќо пали... потому, что ничего интересного из себ€ не представл€ли. ћожет быть рушили баланс в игре, может просто выгл€дили убого.
+ ак бы то не было, пом€нем...
+
+R. I. P.
+Name: PTP1   Class: Autopistol      Years of Life:     Alpha 0.0.1 - Alpha 0.0.2
+Name: Haze R   Class: Autopistol      Years of Life:     Alpha 0.0.1 - Beta 0.2.3
+Name: MAP Fire   Class: SMG      Years of Life:     Veryfirst Build - 1.1 "New Year Update" //still alive in debug
+Name: MPA27   Class: SMG      Years of Life:     Veryfirst Build R2 - 1.1 "New Year Update"
+Name: SCAR Mk20   Class: Sniper      Years of Life:     0.5 "The Modules Update 2" - 1.1 "New Year Update"
+Name: SCAR PDW   Class: AR      Years of Life:     0.5 "The Modules Update 2" - 1.1 "New Year Update"
+Name: SCAR SSR   Class: Sniper      Years of Life:     0.5 "The Modules Update 2" - 1.1 "New Year Update"
+Name: SCAR-L   Class: AR      Years of Life:     0.5 "The Modules Update 2" - 1.1 "New Year Update"
+Name: MAP   Class: SMG      Years of Life:     Veryfirst Build - 1.1.1 "Skins in pills"
+Name: Nellegalja   Class: DMR      Years of Life:     Veryfirst Build - 1.1.1 "Skins in pills"
+Name: M4A1 Custom   Class: AR      Years of Life:     Beta 0.1 - 1.1.1 "Skins in pills"
+Name: P90   Class: SMG      Years of Life:     Veryfirst Build R2 - 1.1.2 "Armory Upgrade"
+Name: AKwAR   Class: AR      Years of Life:     Alpha 0.0.8 - 1.1.2 "Armory Upgrade"
+Name: TR-21   Class: Shotgun      Years of Life:     Beta 0.2.2 - 1.1.2 "Armory Upgrade"
+Name: VAG-73   Class: Autopistol      Years of Life:     1.0 "Release" - 1.1.2 "Armory Upgrade"
+Name: Long MP   Class: SMG      Years of Life:     Never lived
+Name: K-50M   Class: SMG      Years of Life:     Never lived
+Name: Maxim MG   Class: LMG      Years of Life:     Never lived
+
+F

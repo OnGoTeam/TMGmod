@@ -2,9 +2,11 @@
 
 namespace TMGmod.NY
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
     public class SpruceGun:Gun
     {
+        /// <inheritdoc />
         public SpruceGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 15;
@@ -29,11 +31,15 @@ namespace TMGmod.NY
             _editorName = "Tree-12";
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
         }
+
+        /// <inheritdoc />
         public override void Update()
         {
             _ammoType.bulletSpeed = Rando.Float(0.1f, 7f);
             base.Update();
         }
+
+        /// <inheritdoc />
         public override void OnReleaseAction()
         {
             _ammoType.accuracy = Rando.Float(0f, 0.9f);

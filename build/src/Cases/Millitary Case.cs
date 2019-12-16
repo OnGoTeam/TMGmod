@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
@@ -6,6 +7,7 @@ using TMGmod.Custom_Guns;
 
 namespace TMGmod.Cases
 {
+    [EditorGroup("TMG|DEBUG")]
     [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Mpodarok : Holdable, IPlatform
@@ -37,18 +39,18 @@ namespace TMGmod.Cases
         typeof(CZ805),	
         typeof(DragoShot),	
         typeof(Glock18),
-        typeof(Glock18C),	
+        typeof(Alep30),	
         typeof(HazeS),	
         typeof(M4A1),
-        typeof(M960),
+        typeof(M950),
         typeof(MG44C),	
         typeof(MP40),	
-        typeof(P90),	
+        typeof(PP19),	
         typeof(FnFcar),	
         typeof(DaewooK1),	
         typeof(SIX12),	
         typeof(SIX12S),	
-        typeof(Vag)	
+        typeof(ANP73)	
 		};
 		_contains = things[Rando.Int(things.Count - 1)];
 	}
@@ -82,3 +84,4 @@ namespace TMGmod.Cases
 	}
     }
 }
+#endif

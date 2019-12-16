@@ -8,17 +8,17 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Useless_or_deleted_Guns
 {
-
+    [EditorGroup("TMG|DEBUG")]
     [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", true)]
     [PublicAPI]
     [Obsolete]
     public class RaidGun : Gun
     {
-
+        private float _dwait;
         public RaidGun(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 71;
+            ammo = 60000;
             _ammoType = new ATShotgun
             {
                 accuracy = 0.9f,
@@ -33,13 +33,35 @@ namespace TMGmod.Useless_or_deleted_Guns
             _barrelOffsetTL = new Vec2(23f, 2f);
             _fireSound = "shotgun";
             _fullAuto = true;
-            _fireWait = 0.25f;
+            _fireWait = 0.001f;
             _kickForce = 0.9f;
             _holdOffset = new Vec2(0f, 2f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _editorName = "RaidGun";
             _numBulletsPerFire = 5;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            _dwait -= 1f / 60f;
+            if (_dwait < 0) _dwait = 0;
+        }
+
+        public override void Fire()
+        {
+            while (_dwait <= 1f / 60f)
+            {
+                _dwait += Math.Max(_fireWait, 0.00001f);
+                _wait = 0;
+                base.Fire();
+            }
+        }
+
+        public override void Reload(bool shell = true)
+        {
+            base.Reload(false);
         }
     }
 }

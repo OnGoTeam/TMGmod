@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -10,15 +11,20 @@ namespace TMGmod
     public class CZ75 : BaseGun, IAmHg, IHaveSkin
     {
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
         private int _fdelay;
         public CZ75(float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
             _ammoType = new AT9mm
             {
@@ -27,14 +33,19 @@ namespace TMGmod
                 penetration = 0.4f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("CZ75pattern"), 12, 8);
+            _sprite = new SpriteMap(GetPath("CZ75"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(8f, 3f);
-            _collisionOffset = new Vec2(-7.5f, -3.5f);
-            _collisionSize = new Vec2(15f, 9f);
-            _barrelOffsetTL = new Vec2(16f, 1f);
-            _holdOffset = new Vec2(1f, 0f);
+            _center = new Vec2(6f, 4f);
+            _collisionOffset = new Vec2(-6f, -4f);
+            _collisionSize = new Vec2(12f, 8f);
+            _barrelOffsetTL = new Vec2(12f, 1f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
+            _holdOffset = new Vec2(-1f, 2f);
+            ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 0.75f;
@@ -64,7 +75,7 @@ namespace TMGmod
                         Level.Add(new Czmag(x + 5, y));
                     else
                         Level.Add(new Czmag(x - 5, y));
-                        _sprite.frame = 10;
+                    _sprite.frame = 10;
                     _fdelay = 40;
                     break;
                 default:
@@ -94,6 +105,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

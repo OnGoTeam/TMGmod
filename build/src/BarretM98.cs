@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -10,28 +11,37 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
 
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("BarretM98pattern"), 50, 13);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("BarretM98"), 50, 13);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(25f, 6.5f);
             _collisionOffset = new Vec2(-25f, -6.5f);
             _collisionSize = new Vec2(50f, 13f);
-            _barrelOffsetTL = new Vec2(50f, 6f);
+            _barrelOffsetTL = new Vec2(50f, 5f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             ammo = 8;
-            _ammoType = new ATSniper {penetration = 4f, range = 850, accuracy = 1};
+            _ammoType = new ATSniper {penetration = 4f, range = 850f, accuracy = 1f};
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
             _kickForce = 6f;
             laserSight = false;
             //_laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(7f, 0f);
+            _holdOffset = new Vec2(7f, -1f);
             _editorName = "Barrett M98";
 			_weight = 7f;
         }
@@ -41,11 +51,11 @@ namespace TMGmod
             var ang = angle;
             if (offDir <= 0)
             {
-                angle = angle + _angleOffset;
+                angle += _angleOffset;
             }
             else
             {
-                angle = angle - _angleOffset;
+                angle -= _angleOffset;
             }
             base.Draw();
             angle = ang;
@@ -95,25 +105,25 @@ namespace TMGmod
                             _netLoad.Play();
                         }
                         Sniper sniper = this;
-                        sniper._loadState = sniper._loadState + 1;
+                        sniper._loadState += 1;
                         break;
                     }
                     case 1 when _angleOffset >= 0.1f:
                     {
                         Sniper sniper1 = this;
-                        sniper1._loadState = sniper1._loadState + 1;
+                        sniper1._loadState += 1;
                         break;
                     }
                     case 1:
-                        _angleOffset = _angleOffset + 0.003f;
+                        _angleOffset += 0.003f;
                         break;
                     case 2:
                     {
-                        handOffset.x = handOffset.x - 0.2f;
+                        handOffset.x -= 0.2f;
                         if (handOffset.x > 4f)
                         {
                             Sniper sniper2 = this;
-                            sniper2._loadState = sniper2._loadState + 1;
+                            sniper2._loadState += 1;
                             Reload();
                             loaded = false;
                         }
@@ -122,11 +132,11 @@ namespace TMGmod
                     }
                     case 3:
                     {
-                        handOffset.x = handOffset.x + 0.2f;
+                        handOffset.x += 0.2f;
                         if (handOffset.x <= 0f)
                         {
                             Sniper sniper3 = this;
-                            sniper3._loadState = sniper3._loadState + 1;
+                            sniper3._loadState += 1;
                             handOffset.x = 0f;
                         }
 
@@ -153,6 +163,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

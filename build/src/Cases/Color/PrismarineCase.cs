@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
-using TMGmod.Custom_Guns;
+#if DEBUG
+using TMGmod.Useless_or_deleted_Guns;
+#endif
 
 namespace TMGmod.Cases.Color
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
+    [UsedImplicitly]
     public class PodarokPrismarine : BaseCase
     {
+        /// <inheritdoc />
         public PodarokPrismarine(float xval, float yval) : base(xval, yval)
         {
             _graphic = new Sprite(GetPath("PrismarineCase"));
@@ -26,8 +32,12 @@ namespace TMGmod.Cases.Color
                 typeof(SIX12),
                 typeof(Arx200),
                 typeof(UziPro),
+#if DEBUG
                 typeof(PPSh),
-                typeof(PPShC),
+                typeof(PPShC), 
+#endif
+                typeof(PPSh41),
+                typeof(PPK42),
                 typeof(MG44),
                 typeof(SkeetGun),
                 typeof(MP5),
@@ -36,7 +46,8 @@ namespace TMGmod.Cases.Color
                 typeof(AUGA1),
                 typeof(AN94),
                 typeof(Vixr),
-                typeof(SpectreM4)
+                typeof(SpectreM4),
+                typeof(SKS)
             };
             CaseId = 6;
         }

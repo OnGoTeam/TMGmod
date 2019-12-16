@@ -1,58 +1,58 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
-
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : BaseGun, IHaveSkin, IAmLmg
+    public class MG44 : BaseGun, IHaveSkin, IAmLmg, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
-        /*
-        private const float DefaultAccuracy = .75f;
-        private const float MaxRaise = .6f;
-        private const float EpsilonD = .2f;
-        private const float EpsilonK = .1f;
-        private const float EpsilonX = .8f;
-        private const float EpsilonY = EpsilonK / EpsilonX;
-        private const float AcclA = .045f;
-        private const float AcclB = .225f;
-        private float _raisestat;*/
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        public float RandomaticKickforce;
+        [UsedImplicitly]
+        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 6, 7 });
         public MG44(float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 60;
-            _ammoType = new ATMagnum
-            {
-                range = 380f,
-                accuracy = 0.75f,
-                penetration = 1.5f
-            };
+            _ammoType = new ATMG44();
             BaseAccuracy = 0.75f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("mg44reqpattern"), 39, 12);
+            _sprite = new SpriteMap(GetPath("MG44 Mark2H"), 39, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 6f);
-            _collisionOffset = new Vec2(-19.5f, -6f);
-            _collisionSize = new Vec2(39f, 12f);
-            _barrelOffsetTL = new Vec2(40f, 4f);
+            _center = new Vec2(20f, 6f);
+            _collisionOffset = new Vec2(-20f, -6f);
+            _collisionSize = new Vec2(39f, 11f);
+            _barrelOffsetTL = new Vec2(39f, 3f);
+            _flare = new SpriteMap(GetPath("FlareMG44"), 13, 10)
+            {
+                center = new Vec2(1.0f, 6f)
+            };
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.9f;
             _kickForce = 1.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(4f, 0f);
-            _editorName = "Magnium";
+            _holdOffset = new Vec2(5f, 1f);
+            ShellOffset = new Vec2(-5f, -3f);
+            _editorName = "MG44 Mark2H";
             _weight = 7.5f;
         }
         public override void Update()
@@ -67,50 +67,34 @@ namespace TMGmod
                     if (_sprite.frame < 20) _sprite.frame += 10;
                     break;
             }
-            /*
-            if (_raisestat > MaxRaise) _raisestat = MaxRaise;
-            if (_raisestat > 0f)
-            {
-                var δα = -EpsilonY - EpsilonK / (_raisestat - EpsilonX);
-
-                if (offDir < 0)
-                {
-                    handAngle = δα;
-                }
-                else
-                {
-                    handAngle = -δα;
-                }
-            }
-            _raisestat -= .015f;
-            if (duck == null)
-            {
-                _raisestat = 0f;
-                handAngle = 0f;
-            }
-            else
-            {
-                if (duck.crouch || duck.sliding) _raisestat -= .005f;
-                if (duck.vSpeed > 0f || _raisestat > AcclB) _raisestat += 0.05f * duck.vSpeed;
-                if (!(_raisestat < 0f)) return;
-                _raisestat = 0f;
-                handAngle = 0f;
-            }
-            */
+            Bipods = Bipods;
+            RandomaticKickforce = Rando.Float(0.9f, 1.5f);
         }
-
-        /*
-        public override void Fire()
+        public bool Bipods
         {
-            var wasammo = ammo > 0;
-            _ammoType.accuracy = _raisestat < AcclA ? 1f : DefaultAccuracy;
-            base.Fire();
-            if (!wasammo) return;
-            if (_raisestat < AcclA) _raisestat = AcclB;
-            var raisek = (MaxRaise - EpsilonD * _raisestat) / MaxRaise;
-            _raisestat += Rando.Float(.10f * (_kickForce / weight) * raisek, .15f * (_kickForce / weight) * raisek + 0.01f);
+            get => HandleQ();
+            set
+            {
+                _kickForce = value ? RandomaticKickforce : 1.8f;
+                loseAccuracy = value ? 0f : 0.1f;
+                maxAccuracyLost = value ? 0f : 0.3f;
+            }
         }
-        */
+        [UsedImplicitly]
+        public BitBuffer BipodsBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Bipods);
+                return b;
+            }
+            set => Bipods = value.ReadBool();
+        }
+
+        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
+        public bool BipodsDisabled => false;
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
@@ -120,7 +104,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
@@ -131,6 +115,18 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
     }
 }

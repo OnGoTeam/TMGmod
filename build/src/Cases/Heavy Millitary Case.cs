@@ -1,11 +1,13 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Custom_Guns;
+using TMGmod.Useless_or_deleted_Guns;
 
 namespace TMGmod.Cases
 {
+    [EditorGroup("TMG|DEBUG")]
     [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     public class Hpodarok : Holdable, IPlatform
@@ -44,11 +46,11 @@ namespace TMGmod.Cases
             typeof(Lynx),	
             typeof(SV98),	
             typeof(SVU),	
-            typeof(SVUC),		
-            typeof(TR21),	
-            typeof(TR21C),	
+            typeof(IB8mm),		
+            typeof(AA12),	
+            typeof(SRM1208),	
             typeof(Vintorez),
-            typeof(VintorezC),
+            typeof(VSK94),
             typeof(X3X)
 		    };
 		    _contains = things[Rando.Int(things.Count - 1)];
@@ -83,3 +85,4 @@ namespace TMGmod.Cases
 	    }
     }
 }
+#endif

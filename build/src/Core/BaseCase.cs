@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
-    [PublicAPI]
     public abstract class BaseCase:Holdable,IPlatform
     {
         private Type _contains;
@@ -47,15 +45,21 @@ namespace TMGmod.Core
             }
             newThing.x = o.x;
             newThing.y = o.y;
-            if (newThing is IHaveSkin skinThing)
-            {
-                skinThing.FrameId = CaseId;
-            }
+            Spawned(newThing);
             Level.Add(newThing);
             if (d == null) return;
             //else
             d.GiveHoldable(newThing);
-            d.resetAction = true;
+            d.resetAction = true; 
+            SFX.Play(GetPath("sounds/case_opening"));
+        }
+
+        protected virtual void Spawned(Holdable thing)
+        {
+            if (thing is IHaveSkin skinThing)
+            {
+                skinThing.FrameId = CaseId;
+            }
         }
     }
 }

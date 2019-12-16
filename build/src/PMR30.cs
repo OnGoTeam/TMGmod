@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 namespace TMGmod
@@ -10,37 +11,43 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 5, 9 });
         public PMRC(float xval, float yval)
           : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new AT9mm
             {
-                range = 125f,
-                accuracy = 0.75f,
-                penetration = 1f
+                range = 110f,
+                accuracy = 0.7f,
+                penetration = 0.45f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PMR30pattern"), 16, 10);
+            _sprite = new SpriteMap(GetPath("PMR30"), 16, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
-            _barrelOffsetTL = new Vec2(16f, 2.5f);
+            _barrelOffsetTL = new Vec2(16f, 2f);
             _holdOffset = new Vec2(0f, 2f);
+            ShellOffset = new Vec2(-2f, -3f);
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 0.5f;
-            _kickForce = 0.55f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.55f;
+            _kickForce = 1.67f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.5f;
             _editorName = "PMR-30";
-			_weight = 1f;
+			_weight = 2.5f;
         }
         private void UpdateSkin()
         {
@@ -51,9 +58,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
-        public int MaxDelaySmg { get; set; }
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core;
-using TMGmod.Custom_Guns;
+#if DEBUG
+using TMGmod.Useless_or_deleted_Guns;
+#endif
 
 namespace TMGmod.Cases.Color
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorR : BaseCase
     {
+        /// <inheritdoc />
         public PodarokColorR(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
@@ -27,15 +31,23 @@ namespace TMGmod.Cases.Color
                 typeof(SIX12S),
                 typeof(SIX12),
                 typeof(DaewooK1),
+                typeof(AUGA1),
                 typeof(AUGA3),
                 typeof(SkeetGun),
+#if DEBUG
                 typeof(PPSh),
                 typeof(PPShC),
+#endif
+                typeof(PPSh41),
+                typeof(PPK42),
                 typeof(HK417),
                 typeof(Vintorez),
-                typeof(VintorezC),
+                typeof(VSK94),
                 typeof(PMRC),
-                typeof(BigShot)
+                typeof(BigShot),
+                typeof(SKS),
+                typeof(SRM1208),
+                typeof(PP19)
             };
             CaseId = 1;
         }

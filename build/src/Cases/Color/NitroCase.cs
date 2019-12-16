@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Custom_Guns;
+#if DEBUG
+using TMGmod.Useless_or_deleted_Guns;
+#endif
 
 namespace TMGmod.Cases.Color
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
+    [UsedImplicitly]
     public class PodarokNitro : BaseCase
     {
+        /// <inheritdoc />
         public PodarokNitro(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("NitroCase"));
+            var sprite = new SpriteMap(GetPath("NitroCase"), 14, 8);
+            _graphic = sprite;
+            sprite.frame = 0;
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);
@@ -25,8 +34,12 @@ namespace TMGmod.Cases.Color
                 typeof(SIX12S),
                 typeof(SIX12),
                 typeof(AWS),
+#if DEBUG
                 typeof(PPSh),
                 typeof(PPShC),
+#endif
+                typeof(PPSh41),
+                typeof(PPK42),
                 typeof(MG44),
                 typeof(SkeetGun),
                 typeof(MP5),
@@ -34,14 +47,17 @@ namespace TMGmod.Cases.Color
                 typeof(DaewooK1),
                 typeof(USP),
                 typeof(Vintorez),
-                typeof(VintorezC),
+                typeof(VSK94),
                 typeof(BigShot),
                 typeof(Arx200),
                 typeof(AN94C),
                 typeof(Type89),
                 typeof(Rfb),
                 typeof(FnFcar),
-                typeof(HazeS)
+                typeof(HazeS),
+                typeof(AA12),
+                typeof(MP40),
+                typeof(SKS)
             };
             CaseId = 7;
         }

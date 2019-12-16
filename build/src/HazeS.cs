@@ -1,21 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-
+    /// <inheritdoc cref="BaseGun" />
+    /// <inheritdoc cref="IAmHg"/>
+    /// <inheritdoc cref="IHaveSkin"/>
+    /// <summary>
+    /// Hg with Heatval and Sighted features
+    /// </summary>
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class HazeS : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
         private float _heatval;
+        /// <summary>
+        /// Heatval'ue has effect on acc, bulletSpeed, range
+        /// </summary>
+        [UsedImplicitly]
         public float Heatval
         {
             get => _heatval;
@@ -28,10 +44,18 @@ namespace TMGmod
                 Sighted = _sighted;
             }
         }
+        /// <summary>
+        /// HV syncing
+        /// </summary>
+        [UsedImplicitly]
         public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
 
         private bool _sighted;
 
+        /// <summary>
+        /// Whether duck is using sights
+        /// </summary>
+        [UsedImplicitly]
         public bool Sighted
         {
             get => _sighted;
@@ -45,10 +69,11 @@ namespace TMGmod
             }
         }
 
+        /// <inheritdoc />
         public HazeS(float xval, float yval) :
             base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
             _ammoType = new AT9mmS
             {
@@ -58,13 +83,13 @@ namespace TMGmod
                 bulletSpeed = 60f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("HazeSpattern"), 24, 12);
+            _sprite = new SpriteMap(GetPath("HazeS"), 24, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(12f, 3f);
             _collisionOffset = new Vec2(-12f, -3f);
             _collisionSize = new Vec2(24f, 12f);
-            _barrelOffsetTL = new Vec2(25f, 2f);
+            _barrelOffsetTL = new Vec2(24f, 2f);
             _fireSound = GetPath("sounds/SilencedPistol.wav");
             _fullAuto = true;
             _fireWait = 0.9f;
@@ -76,9 +101,13 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
 			_weight = 2f;
-            _flare = new SpriteMap(GetPath("hazeFlare"), 13, 10) {center = new Vec2(0.0f, 5f)};
+            _flare = new SpriteMap(GetPath("FlareHazeS"), 13, 10) {center = new Vec2(0.0f, 5f)};
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Updates Heatval and Sighted
+        /// </summary>
         public override void Update()
         {
             base.Update();
@@ -115,6 +144,10 @@ namespace TMGmod
             CurrHone = HoldOffsetNoExtra;
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Updates post-fire _heatval
+        /// </summary>
         public override void Fire()
         {
             if (ammo > 0)
@@ -142,12 +175,18 @@ namespace TMGmod
             _sprite.frame = bublic;
         }
 
+        /// <inheritdoc />
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
+        /// <summary>
+        /// Updates skin when Skin's changed
+        /// </summary>
+        /// <param name="property"></param>
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

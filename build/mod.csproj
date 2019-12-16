@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props" Condition="Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,10 +12,12 @@
     <AssemblyName>TMGmod</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\TMGmod\</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -25,7 +28,7 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>..\..\TMGmod\</OutputPath>
+    <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -36,12 +39,14 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>7.3</LangVersion>
     <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Workshop|x86'">
-    <OutputPath>..\..\TMGmod\</OutputPath>
+    <OutputPath>bin\x86\Workshop\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>TRACE;WORKSHOP</DefineConstants>
     <Optimize>true</Optimize>
@@ -52,13 +57,19 @@
   </PropertyGroup>
   <Import Project="dglink.csproj" />
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=2018.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>packages\JetBrains.Annotations.2018.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=2019.1.3.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.Annotations.2019.1.3\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.9.0.0, Culture=neutral, processorArchitecture=MSIL" Condition="'$(Configuration)'=='Debug'">
+      <HintPath>packages\MathNet.Numerics.4.9.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,25 +82,54 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="src\44db.cs" />
+    <Compile Include="src\AR9SX.cs" />
+    <Compile Include="src\Bersa 45.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
-    <Compile Include="src\AKwAR.cs" />
+    <Compile Include="src\Buddies\FlameThrowerPlus.cs" />
+    <Compile Include="src\Buddies\LockedContainer.cs" />
+    <Compile Include="src\Buddies\LockedRedCase.cs" />
+    <Compile Include="src\Buddies\StingerLauncher.cs" />
+    <Compile Include="src\Buddies\StingerMissile.cs" />
+    <Compile Include="src\Cases\MillitaryCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATMG44.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATM16.cs" />
+    <Compile Include="src\Core\AmmoTypes\IHeavyAmmoType.cs" />
+    <Compile Include="src\Core\ContextSkinRender.cs" />
+    <Compile Include="src\Core\I5.cs" />
+    <Compile Include="src\Core\IHaveBipods.cs" />
+    <Compile Include="src\Core\IHaveStock.cs" />
+    <Compile Include="src\Core\Shells\M50shell.cs" />
+    <Compile Include="src\Core\Shells\MG44shell.cs" />
+    <Compile Include="src\Core\Shells\M72shell.cs" />
+    <Compile Include="src\Core\Shells\X3Xshell.cs" />
+    <Compile Include="src\DR300.cs" />
+    <Compile Include="src\M16A6.cs" />
+    <Compile Include="src\Stuff\ActiveDefenseSystem.cs" />
+    <Compile Include="src\Useless or deleted Guns\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
+    <Compile Include="src\AR15 Proto.cs" />
     <Compile Include="src\AUGA1.cs" />
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
-    <Compile Include="src\Buddies\MagBuddy.cs" />
-    <Compile Include="src\Buddies\AKwARv2.cs" />
+    <Compile Include="src\Core\ArwaMag.cs" />
+    <Compile Include="src\Core\MagBuddy.cs" />
+    <Compile Include="src\ARwA.cs" />
     <Compile Include="src\Buddies\SuperArmor.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
+    <Compile Include="src\Cases\Color\GreenCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\SRM2.cs" />
+    <Compile Include="src\Core\AmmoTypes\SRM1.cs" />
     <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
-    <Compile Include="src\Core\ATx3x.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATx3x.cs" />
     <Compile Include="src\Core\Nothing.cs" />
     <Compile Include="src\Core\WClasses\IAmAr.cs" />
     <Compile Include="src\Core\WClasses\IAmLmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSmg.cs" />
     <Compile Include="src\Core\WClasses\IAmSr.cs" />
+    <Compile Include="src\G9M.cs" />
     <Compile Include="src\MK17.cs" />
     <Compile Include="src\NY\ATCane.cs" />
     <Compile Include="src\NY\ATIgla.cs" />
@@ -131,12 +171,14 @@
     <Compile Include="src\NY\SnowBullet.cs" />
     <Compile Include="src\NY\SnowMgun.cs" />
     <Compile Include="src\NY\SpruceGun.cs" />
+    <Compile Include="src\PPK42.cs" />
+    <Compile Include="src\PPSh41.cs" />
     <Compile Include="src\SkeetGun.cs" />
     <Compile Include="src\Spectre M4.cs" />
     <Compile Include="src\Stuff\C4Pack.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
-    <Compile Include="src\Core\AT9mmSilenced.cs" />
-    <Compile Include="src\Core\ATNotBullet.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT9mmSilenced.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATNotBullet.cs" />
     <Compile Include="src\Core\Cal50Explode.cs" />
     <Compile Include="src\Core\Caliber50Bullet.cs" />
     <Compile Include="src\Core\Czmag.cs" />
@@ -150,28 +192,28 @@
     <Compile Include="src\AUGA3.cs" />
     <Compile Include="src\BarretM98C.cs" />
     <Compile Include="src\CZC2.cs" />
-    <Compile Include="src\Custom Guns\Glock17C.cs" />
+    <Compile Include="src\Alep30.cs" />
     <Compile Include="src\Stuff\Greyfinite.cs" />
     <Compile Include="src\Stuff\ShieldBlockAll.cs" />
     <Compile Include="src\Type 89.cs" />
     <Compile Include="src\M900.cs" />
-    <Compile Include="src\Custom Guns\MG44C.cs" />
-    <Compile Include="src\Custom Guns\PPShC.cs" />
-    <Compile Include="src\SVUC.cs" />
-    <Compile Include="src\SVUC1.cs" />
-    <Compile Include="src\TR-21C.cs" />
-    <Compile Include="src\VintorezC.cs" />
+    <Compile Include="src\MG44C.cs" />
+    <Compile Include="src\Useless or deleted Guns\PPShC.cs" />
+    <Compile Include="src\M14.cs" />
+    <Compile Include="src\IB8mm.cs" />
+    <Compile Include="src\AA12.cs" />
+    <Compile Include="src\Anyx SR2 Compact.cs" />
     <Compile Include="src\CZ75.cs" />
     <Compile Include="src\DragoShot.cs" />
-    <Compile Include="src\Glock18.cs" />
+    <Compile Include="src\Anyx PR5.cs" />
     <Compile Include="src\HazeS.cs" />
     <Compile Include="src\Hk417.cs" />
     <Compile Include="src\M16 LMG.cs" />
-    <Compile Include="src\M4.cs" />
+    <Compile Include="src\M4A1.cs" />
     <Compile Include="src\M50.cs" />
     <Compile Include="src\M72.cs" />
     <Compile Include="src\M93R.cs" />
-    <Compile Include="src\M960.cs" />
+    <Compile Include="src\M950.cs" />
     <Compile Include="src\MG3.cs" />
     <Compile Include="src\MG44.cs" />
     <Compile Include="src\SMG9.cs" />
@@ -179,14 +221,14 @@
     <Compile Include="src\SuperFe.cs" />
     <Compile Include="src\UziPro.cs" />
     <Compile Include="src\MP40.cs" />
-    <Compile Include="src\mp7.cs" />
+    <Compile Include="src\MP7.cs" />
     <Compile Include="src\Vista.cs" />
     <Compile Include="src\MSR.cs" />
     <Compile Include="src\TC12.cs" />
-    <Compile Include="src\p90.cs" />
+    <Compile Include="src\PP19.cs" />
     <Compile Include="src\PMR30.cs" />
     <Compile Include="src\Custom Guns\PMR30SH.cs" />
-    <Compile Include="src\PPSh.cs" />
+    <Compile Include="src\Useless or deleted Guns\PPSh.cs" />
     <Compile Include="src\Remington.cs" />
     <Compile Include="src\RemingtonTactical.cs" />
     <Compile Include="src\SCARGL.cs" />
@@ -205,18 +247,21 @@
     <Compile Include="src\SV98.cs" />
     <Compile Include="src\SV99.cs" />
     <Compile Include="src\SVU.cs" />
-    <Compile Include="src\TR-21.cs" />
+    <Compile Include="src\SRM1208.cs" />
     <Compile Include="src\Useless or deleted Guns\MAPF.cs" />
     <Compile Include="src\Useless or deleted Guns\MSRSH.cs" />
     <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />
     <Compile Include="src\USP.cs" />
-    <Compile Include="src\VAG73.cs" />
+    <Compile Include="src\ANP-73.cs" />
     <Compile Include="src\Vintorez.cs" />
-    <Compile Include="src\Vixr.cs" />
+    <Compile Include="src\Anyx ARS Elite.cs" />
     <Compile Include="src\X3X.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ILMerge.props" />
+    <None Include="packages.config" />
     <None Include="Resources\BuildDate.txt" />
+    <Content Include="ILMergeOrder.txt" />
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -224,7 +269,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -235,30 +279,33 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT $(SolutionDir)  == $(TargetDir)build\ (
+    <PostBuildEvent>SET outdir=%25userprofile%25\Documents\DuckGame\Mods\$(TargetName)
+COPY $(TargetPath) %25outdir%25\$(TargetFileName)
+ECHO %25outdir%25
+IF NOT $(SolutionDir)  == %25outdir%25\build\ (
     ECHO Transferring
     CD $(SolutionDir)
     CD ..
-    RMDIR /S /Q $(TargetDir)content\
-    XCOPY content $(TargetDir)content\ /E /Y /Q
-    COPY mod.conf $(TargetDir)mod.conf
+    RMDIR /S /Q %25outdir%25\content\
+    XCOPY content %25outdir%25\content\ /E /Y /Q
+    COPY mod.conf %25outdir%25\mod.conf
     ECHO Transferred
     IF $(ConfigurationName) == Workshop (
-    IF EXIST $(TargetDir)content\deleteco\ (
-    RMDIR /Q /S $(TargetDir)content\deleteco\
+    IF EXIST %25outdir%25\content\deleteco\ (
+    RMDIR /Q /S %25outdir%25\content\deleteco\
         ECHO Deleted deleteco
     )
-    IF EXIST $(TargetDir)content\oldmaps\ (
-    RMDIR /Q /S $(TargetDir)content\oldmaps\
+    IF EXIST %25outdir%25\content\oldmaps\ (
+    RMDIR /Q /S %25outdir%25\content\oldmaps\
         ECHO Deleted oldmaps
     )
-    IF EXIST $(TargetDir)TMGmod.pdb (
-    ERASE $(TargetDir)TMGmod.pdb
+    IF EXIST %25outdir%25\TMGmod.pdb (
+    ERASE %25outdir%25\TMGmod.pdb
     ECHO Deleted TMGmod.pdb
     )
     )
 )
-CD ..
+CD %25outdir%25\..
 IF EXIST TMGmod.zip (
     ERASE TMGmod.zip
     ECHO Deleted TMGmod.zip
@@ -267,6 +314,14 @@ IF EXIST TMGmod.zip (
   <PropertyGroup>
     <PreBuildEvent>echo %25date%25 %25time%25 &gt; "$(ProjectDir)\Resources\BuildDate.txt"</PreBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props'))" />
+    <Error Condition="!Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets'))" />
+  </Target>
+  <Import Project="packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets" Condition="Exists('packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,18 +1,29 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Stuff
 {
+    /// <summary>
+    /// Holdable shield protecting from bullets and impacts
+    /// </summary>
     [EditorGroup("TMG|Misc")]
-    [PublicAPI]
+    [UsedImplicitly]
     public class MontagneShield : Holdable, IPlatform, IPathNodeBlocker
     {
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public float Hp = 250f;
-        public float HpMax = 250f;
+
+        private const float HpMax = 250f;
+
+        [UsedImplicitly]
         public float Hp1;
+        [UsedImplicitly]
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
+
+        /// <inheritdoc />
         public MontagneShield(float xpos, float ypos) : base(xpos, ypos)
         {
             Hp1 = Hp * 0.9f;
@@ -27,15 +38,19 @@ namespace TMGmod.Stuff
             throwSpeedMultiplier = 0f;
             _canRaise = false;
             flammable = 0;
+            _holdOffset = new Vec2(0, -0.5f);
         }
 
+        /// <inheritdoc />
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             SFX.Play(bullet.ammo.penetration < thickness ? "metalRebound" : "woodHit");
             Damage(bullet.ammo);
-            return Hit(bullet, hitPos);
+            var res = Hit(bullet, hitPos);
+            return !((hitPos - Offset(new Vec2(0, -7.5f))).length < 3.354102f) && res;
         }
 
+        /// <inheritdoc />
         public override void Thrown()
         {
             if (duck == null) return;
@@ -56,32 +71,40 @@ namespace TMGmod.Stuff
         private void Damage(AmmoType at)
         {
             thickness = Hp < Hp1 ? Hp * 0.04f : 10000f;
-            Hp -= at.penetration * 5f;
+            Hp -= at is IHeavyAmmoType ? HpMax * 0.49f: at.penetration * 5f;
             if (Hp <= HpMax)
             {
                 _sprite.frame = 0;
             }
 
-            if (Hp <= (HpMax * 0.75f))
+            if (Hp <= HpMax * 0.75f)
             {
                 _sprite.frame = 1;
             }
 
-            if (Hp <= (HpMax * 0.5f))
+            if (Hp <= HpMax * 0.5f)
             {
                 _sprite.frame = 2;
             }
 
-            if (Hp <= (HpMax * 0.25f))
+            if (Hp <= HpMax * 0.25f)
             {
                 _sprite.frame = 3;
             }
+
+            if (duck != null && duck.holdObject == this) return;
+            if (Rando.Float(0, 1) > (at is IHeavyAmmoType ? 0.5f : 0.1f)) return;
+            angleDegrees = 90f * offDir;
+            collisionOffset = new Vec2(-11.5f, -2f);
+            collisionSize = new Vec2(23f, 4f);
+            sleeping = false;
         }
-        
+
+        /// <inheritdoc />
         public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
         {
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
-            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) && (from == ImpactedFrom.Left) || from == ImpactedFrom.Right)
+            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) && from == ImpactedFrom.Left || from == ImpactedFrom.Right)
             {
                 if (duck == null && Math.Abs(with.hSpeed) * with.weight > 40f)
                 {
@@ -95,6 +118,7 @@ namespace TMGmod.Stuff
             base.Impact(with, from, solidImpact);
         }
 
+        /// <inheritdoc />
         public override void Update()
         {
             var hspd = duck?.hSpeed ?? hSpeed;
@@ -106,8 +130,7 @@ namespace TMGmod.Stuff
                 fire.hSpeed = hspd;
             }
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
-            if (collisionSize.x < 5f)
-            foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
+            if (collisionSize.x < 5f) foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
             {
                 if (thing == duck || thing == this || thing is IDontMove || thing is Block || thing is Teleporter) continue;
                 if (!(thing is IAmADuck || doblock)) continue;

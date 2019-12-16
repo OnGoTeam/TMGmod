@@ -5,30 +5,35 @@ using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
 {
-    [PublicAPI]
+    [UsedImplicitly]
     public abstract class BaseGun:Gun
     {
         protected float BaseAccuracy = 1f;
         protected float MinAccuracy;
+        [UsedImplicitly]
         protected float PrevKforce;
+        protected float podarokChance = 2f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%
+        [UsedImplicitly]
         protected bool ToPrevKforce;
         protected Vec2 ShellOffset;
         protected Vec2 CurrHone;
         private bool _currHoneInit;
-
+        [UsedImplicitly]
         protected Vec2 ExtraHoldOffset => duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
-
+        [UsedImplicitly]
         protected Vec2 HoldOffsetNoExtra
         {
             get => _holdOffset - ExtraHoldOffset;
             set => _holdOffset = value + ExtraHoldOffset;
         }
-
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
             ToPrevKforce = true;
         }
 
+        /// <summary>
+        /// <see cref="Gun.Fire"/> modification/reimplementation
+        /// </summary>
         public override void Fire()
         {
             PrevKforce = _kickForce;
@@ -63,7 +68,7 @@ namespace TMGmod.Core.WClasses
             base.Fire();
             if (pammo > ammo)
             {
-                if (Rando.Float(0f, 1f) < 0.001f)
+                if (Rando.Float(0f, 1f) < (podarokChance/100f))
                 {
                     var scase = new NewYearCase(x, y);
                     Level.Add(scase);
@@ -72,7 +77,10 @@ namespace TMGmod.Core.WClasses
             if (ToPrevKforce)
                 _kickForce = PrevKforce;
         }
-        
+
+        /// <summary>
+        /// <see cref="Gun.Update"/> modification/reimplementation
+        /// </summary>
         public override void Update()
         {
             if (!_currHoneInit)
@@ -108,11 +116,46 @@ namespace TMGmod.Core.WClasses
             {
                 if (shell)
                 {
-                    _ammoType.PopShell(x + ShellOffset.x, y + ShellOffset.y, -offDir);
+                    _ammoType.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir);
                 }
                 --ammo;
             }
             loaded = true;
+        }
+
+        public static bool BipodsQ(Gun gun, bool bypassihb=false)
+        {
+            var duck = gun.duck;
+            if (!bypassihb && gun is IHaveBipods ihb && ihb.BipodsDisabled) return false;
+            return !(duck is null) && !gun.raised && (duck.crouch || duck.sliding) && duck.grounded && Math.Abs(duck.hSpeed) < 0.05f;
+        }
+
+        public static bool HandleQ(Gun gun)
+        {
+            var duck = gun.duck;
+            return !(duck is null) && !gun.raised && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 1f;
+        }
+
+        [UsedImplicitly]
+        public static bool SwitchStockQ(Gun gun)
+        {
+            var duck = gun.duck;
+            return !(duck is null) && !duck.sliding;
+        }
+
+        protected bool BipodsQ()
+        {
+            return BipodsQ(this);
+        }
+
+        protected bool HandleQ()
+        {
+            return HandleQ(this);
+        }
+
+        protected bool SwitchStockQ()
+        {
+            return SwitchStockQ(this);
         }
     }
 }

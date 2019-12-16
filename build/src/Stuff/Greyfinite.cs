@@ -18,12 +18,10 @@ namespace TMGmod.Stuff
         public override void Update()
         {
             base.Update();
-            if (!_added && (Level.CheckCircle<Duck>(position, 128) != null ||
-                            Level.CheckCircle<Holdable>(position, 128) != null))
-            {
-                _added = true;
-                Level.Add(new Greyfinite(x + 16, y));
-            }
+            if (_added || Level.CheckCircle<Duck>(position, 128) == null &&
+                Level.CheckCircle<Holdable>(position, 128) == null) return;
+            _added = true;
+            Level.Add(new Greyfinite(x + 16, y));
         }
     }
 }

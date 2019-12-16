@@ -1,5 +1,6 @@
 ﻿using DuckGame;
-using TMGmod.Core;
+using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -8,67 +9,60 @@ namespace TMGmod
     [BaggedProperty("isSuperWeapon", true)]
     public sealed class X3X : BaseGun
     {
+        [UsedImplicitly]
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % 3;
+        }
+
         private readonly SpriteMap _sprite;
         public X3X (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 5;
+            ammo = 6;
             _ammoType = new ATx3x();
             _type = "gun";
             //this.graphic = new Sprite(GetPath("X3X"));
-            _sprite = new SpriteMap(GetPath("X3Xa"), 28, 15);
+            _sprite = new SpriteMap(GetPath("X3X"), 27, 14);
             _graphic = _sprite;
+            _sprite.frame = 0;
             _center = new Vec2(14f, 9f);
             _collisionOffset = new Vec2(-11.5f, -9f);
-            _collisionSize = new Vec2(23f, 15f);
-            _barrelOffsetTL = new Vec2(28f, 5f);
+            _collisionSize = new Vec2(27f, 14f);
+            _barrelOffsetTL = new Vec2(27f, 5f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
-            _fireWait = 2.5f;
-            _kickForce = 10f;
-            loseAccuracy = 1.9f;
-            maxAccuracyLost = 2.5f;
+            _fireWait = 2f;
+            _kickForce = 8f;
+            loseAccuracy = 1.7f;
+            maxAccuracyLost = 1.7f;
             _holdOffset = new Vec2(0f, 2f);
-            _editorName = "X3X";
-            _bio = "ammo = 5";
+            ShellOffset = new Vec2(-4f, -1f);
+            _editorName = "Experimental X3X";
+            _bio = "ammo = 1337";
 			_weight = 5.5f;
-            _manualLoad = true;
-            _sprite.AddAnimation("idle", 0.3f, false, 0);
-            _sprite.AddAnimation("fire", 0.3f, false, 1);
-            _sprite.AddAnimation("empty", 1f, true, 1);
-        }
-
-        public override void Fire()
-        {
-            //base.Fire();
-        }
-        public override void Update()
-        {
-            if (_sprite.currentAnimation == "fire" && _sprite.finished)
-            {
-                _sprite.SetAnimation("idle");
-            }
-            base.Update();
         }
 
         public override void OnPressAction()
         {
-            if (ammo == 0)
+            if ((ammo > 0) & (_sprite.frame == 0))
             {
-                _sprite.SetAnimation("empty");
+                _sprite.frame = 1;
+                Fire();
             }
-            if (loaded)
+            else if (_sprite.frame == 1)
             {
-                base.Fire();
+                _sprite.frame = 0;
+                SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-            else
-            {
-                SFX.Play("Click");
-                _sprite.SetAnimation("fire");
-                Reload();
-            }
-            base.OnPressAction();
+
+            if (!((ammo < 1) & (_sprite.frame == 0))) return;
+            //else
+            _sprite.frame = 2;
+            SFX.Play(GetPath("sounds/tuduc.wav"));
         }
-        
     }
 }

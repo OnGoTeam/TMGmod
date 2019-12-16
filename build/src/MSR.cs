@@ -7,25 +7,33 @@ using TMGmod.Core;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
-    [PublicAPI]
     // ReSharper disable once InconsistentNaming
-    public class MSR : Sniper, IAmSr, IHaveSkin
+    public class MSR : Sniper, IAmSr, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding = new StateBinding(nameof(FrameId));
-        public readonly EditorProperty<int> Skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        /// <inheritdoc />
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 9 });
         public MSR(float xval, float yval) : base(xval, yval)
         {
-            Skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("MSRpattern"), 47, 12);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            _sprite = new SpriteMap(GetPath("MSR"), 47, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(28.5f, 6f);
             _collisionOffset = new Vec2(-28.5f, -6f);
             _collisionSize = new Vec2(47f, 12f);
-            _barrelOffsetTL = new Vec2(48f, 5f);
+            _barrelOffsetTL = new Vec2(47f, 4f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             ammo = 5;
             _ammoType = new ATSniper
             {
@@ -43,17 +51,38 @@ namespace TMGmod
             _editorName = "MSR";
 			_weight = 4.65f;
         }
+        public bool Bipods
+        {
+            get => BaseGun.HandleQ(this);
+            set => _kickForce = value ? 1f : 5.5f;
+        }
+        [UsedImplicitly]
+        public BitBuffer BipodsBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Bipods);
+                return b;
+            }
+            set => Bipods = value.ReadBool();
+        }
+
+        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
+        public bool BipodsDisabled => false;
+
+        [UsedImplicitly]
 
         public override void Draw()
         {
             var ang = angle;
             if (offDir <= 0)
             {
-                angle = angle + _angleOffset;
+                angle += _angleOffset;
             }
             else
             {
-                angle = angle - _angleOffset;
+                angle -= _angleOffset;
             }
             base.Draw();
             angle = ang;
@@ -76,6 +105,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
+            Bipods = Bipods;
             if (_loadState > -1)
             {
                 if (owner == null)
@@ -102,25 +132,25 @@ namespace TMGmod
                             _netLoad.Play();
                         }
                         Sniper sniper = this;
-                        sniper._loadState = sniper._loadState + 1;
+                        sniper._loadState += 1;
                         break;
                     }
                     case 1 when _angleOffset >= 0.1f:
                     {
                         Sniper sniper1 = this;
-                        sniper1._loadState = sniper1._loadState + 1;
+                        sniper1._loadState += 1;
                         break;
                     }
                     case 1:
-                        _angleOffset = _angleOffset + 0.003f;
+                        _angleOffset += 0.003f;
                         break;
                     case 2:
                     {
-                        handOffset.x = handOffset.x - 0.2f;
+                        handOffset.x -= 0.2f;
                         if (handOffset.x > 4f)
                         {
                             Sniper sniper2 = this;
-                            sniper2._loadState = sniper2._loadState + 1;
+                            sniper2._loadState += 1;
                             Reload();
                             loaded = false;
                         }
@@ -129,11 +159,11 @@ namespace TMGmod
                     }
                     case 3:
                     {
-                        handOffset.x = handOffset.x + 0.2f;
+                        handOffset.x += 0.2f;
                         if (handOffset.x <= 0f)
                         {
                             Sniper sniper3 = this;
-                            sniper3._loadState = sniper3._loadState + 1;
+                            sniper3._loadState += 1;
                             handOffset.x = 0f;
                         }
 
@@ -160,7 +190,7 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

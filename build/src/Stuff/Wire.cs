@@ -4,17 +4,26 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
+    /// <summary>
+    /// <see cref="PhysicsObject"/> slowing down <see cref="Duck"/>s
+    /// </summary>
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
-    [PublicAPI]
+    [UsedImplicitly]
     public class Wire : PhysicsObject
     {
 
         private readonly SpriteMap _sprite;
+        [UsedImplicitly]
         public int Teksturka;
+        [UsedImplicitly]
         public StateBinding TexBinding = new StateBinding(nameof(Teksturka));
+        [UsedImplicitly]
         public float Hp;
+        [UsedImplicitly]
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
+
+        /// <inheritdoc />
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
             Hp = 25f;
@@ -28,6 +37,8 @@ namespace TMGmod.Stuff
             _weight = 40f;
             throwSpeedMultiplier = 0f;
         }
+
+        /// <inheritdoc />
         public override void Update()
         {
             if (Hp <= 0f) Hp = 0f;
@@ -57,6 +68,8 @@ namespace TMGmod.Stuff
             }
             base.Update();
         }
+
+        /// <inheritdoc />
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             if (bullet.ammo.penetration < 10f) Damage(bullet.ammo);
@@ -72,6 +85,8 @@ namespace TMGmod.Stuff
             graphic = new Sprite(GetPath("WireNot"));
             collisionSize = new Vec2(48f, 4f);
         }
+
+        /// <inheritdoc />
         public override void Draw()
         {
             _sprite.frame = Teksturka;

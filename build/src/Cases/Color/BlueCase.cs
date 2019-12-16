@@ -5,9 +5,11 @@ using TMGmod.Core;
 
 namespace TMGmod.Cases.Color
 {
+    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorB : BaseCase
     {
+        /// <inheritdoc />
         public PodarokColorB(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
@@ -34,7 +36,13 @@ namespace TMGmod.Cases.Color
                 typeof(BigShot),
                 typeof(Vista),
                 typeof(DragoShot),
-                typeof(AUGA1)
+                typeof(AUGA1),
+                typeof(PPSh41),
+                typeof(PPK42),
+                typeof(SKS),
+                typeof(SRM1208),
+                typeof(M14),
+                typeof(AR15Proto)
             };
             CaseId = 2;
         }
