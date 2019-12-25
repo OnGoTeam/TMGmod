@@ -62,7 +62,7 @@ namespace TMGmod
         }
         public override void Reload(bool shell = true)
         {
-            base.Reload(ammo > 0);
+            base.Reload(ammo > 1);
         }
         private void UpdateSkin()
         {
