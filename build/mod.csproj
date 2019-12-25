@@ -92,6 +92,7 @@
     <Compile Include="src\Buddies\StingerLauncher.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT44DB.cs" />
     <Compile Include="src\Core\AmmoTypes\ATMG44.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM16.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="src\Core\IHaveBipods.cs" />
     <Compile Include="src\Core\IHaveStock.cs" />
     <Compile Include="src\Core\Shells\M50shell.cs" />
+    <Compile Include="src\Core\Shells\44DBshell.cs" />
     <Compile Include="src\Core\Shells\MG44shell.cs" />
     <Compile Include="src\Core\Shells\M72shell.cs" />
     <Compile Include="src\Core\Shells\X3Xshell.cs" />

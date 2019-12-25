@@ -3,6 +3,8 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Shells;
 
 namespace TMGmod
 {
@@ -25,13 +27,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
-            _ammoType = new ATMagnum
-            {
-                range = 100f,
-                accuracy = 0.1f,
-                penetration = 4f,
-                bulletThickness = 2f
-            };
+            _ammoType = new AT44DB();
             BaseAccuracy = 0.1f;
             _numBulletsPerFire = 44;
             _type = "gun";
@@ -45,7 +41,7 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(-6f, -7f);
             _fireSound = "shotgun";
-            _fullAuto = false;
+            _manualLoad = true;
             _fireWait = 4f;
             _kickForce = 9f;
             loseAccuracy = 0.25f;
@@ -53,14 +49,22 @@ namespace TMGmod
             _editorName = "You Scared Ded Twice";
 			_weight = 4.25f;
         }
-		public override void Update()
+        public override void OnPressAction()
         {
-			if (ammo < 2)
+            if (!loaded && ammo > 0)
             {
-                _sprite.frame %= 10;
-                _sprite.frame += 10;
+                _sprite.frame = _sprite.frame % 10 + 10;
+                Reload();
             }
-            base.Update();
+            else if (loaded)
+            {
+                Fire();
+                loaded = false;
+            }
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo > 0 ) base.Reload(shell);
         }
         private void UpdateSkin()
         {
