@@ -2,9 +2,10 @@ using DuckGame;
 
 namespace TMGmod.Core.Shells
 {
-    public class _44DBShell : EjectedShell
+    // ReSharper disable once InconsistentNaming
+    public class DB44Shell : EjectedShell
     {
-        public _44DBShell(float xpos, float ypos)
+        public DB44Shell(float xpos, float ypos)
           : base(xpos, ypos, Mod.GetPath<TMGmod>("44dbShell"))
         {
         }

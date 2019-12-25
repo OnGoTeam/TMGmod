@@ -19,7 +19,7 @@ namespace TMGmod.Core.AmmoTypes
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var shell = new _44DBShell(x, y)
+            var shell = new DB44Shell(x, y)
             {
                 hSpeed = -2.5f + Rando.Float(-0.2f, 0.2f),
                 vSpeed = 1f + Rando.Float(-0.5f, 0.5f),

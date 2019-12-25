@@ -102,7 +102,7 @@
     <Compile Include="src\Core\IHaveBipods.cs" />
     <Compile Include="src\Core\IHaveStock.cs" />
     <Compile Include="src\Core\Shells\M50shell.cs" />
-    <Compile Include="src\Core\Shells\44DBshell.cs" />
+    <Compile Include="src\Core\Shells\DB44Shell.cs" />
     <Compile Include="src\Core\Shells\MG44shell.cs" />
     <Compile Include="src\Core\Shells\M72shell.cs" />
     <Compile Include="src\Core\Shells\X3Xshell.cs" />

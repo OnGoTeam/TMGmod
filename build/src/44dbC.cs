@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Shells;
 
 namespace TMGmod
 {
@@ -59,12 +58,11 @@ namespace TMGmod
             else if (loaded)
             {
                 Fire();
-                loaded = false;
             }
         }
         public override void Reload(bool shell = true)
         {
-            if (ammo > 0 ) base.Reload(shell);
+            base.Reload(ammo > 0);
         }
         private void UpdateSkin()
         {
