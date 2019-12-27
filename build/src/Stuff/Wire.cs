@@ -27,7 +27,7 @@ namespace TMGmod.Stuff
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
             Hp = 25f;
-            _sprite = new SpriteMap(GetPath("WireYesNY"), 48, 6); //if ny then NY else _
+            _sprite = new SpriteMap(GetPath("Holiday/WireYesNY"), 48, 6); //if ny then NY else _
             _graphic = _sprite;
             Teksturka = Rando.Int(0, 3);
             _center = new Vec2(24f, 3f);
@@ -82,7 +82,7 @@ namespace TMGmod.Stuff
             if (!(Hp < 1f)) return;
             //else
             thickness = 0.1f;
-            graphic = new Sprite(GetPath("WireNotNY"));
+            graphic = new Sprite(GetPath("Holiday/WireNotNY"));
             collisionSize = new Vec2(48f, 4f);
         }
 
