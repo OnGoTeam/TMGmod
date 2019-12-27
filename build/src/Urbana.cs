@@ -204,6 +204,11 @@ namespace TMGmod
             }
             laserSight = false;
         }
+        public override void Fire()
+        {
+            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
+            base.Fire();
+        }
 
         [UsedImplicitly]
         public float BipodsState

@@ -83,6 +83,7 @@ namespace TMGmod
 
         public override void Fire()
         {
+            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
             UpdCds();
             base.Fire();
             if (Bipods && _wait >= _fireWait) _cdstate += 49;
