@@ -11,6 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SV98 : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
     {
+        private Vec2 fakeshelloffset = new Vec2(-1f, -2f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         [UsedImplicitly]
@@ -53,12 +54,24 @@ namespace TMGmod
             _fireSound = "sniper";
             _fullAuto = false;
             _kickForce = 4.67f;
-            _holdOffset = new Vec2(4f, 2f);
+            _holdOffset = new Vec2(3f, 1f);
             _editorName = "SV-98";
 			_weight = 4.5f;
             laserSight = true;
             _laserOffsetTL = new Vec2(18f, 2f);
 
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(fakeshelloffset).x, Offset(fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
         public bool Bipods
         {

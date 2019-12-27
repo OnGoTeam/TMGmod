@@ -12,6 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AWS : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
     {
+        private Vec2 fakeshelloffset = new Vec2(-3f, -2f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         [UsedImplicitly]
@@ -54,12 +55,24 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
             _kickForce = 4.75f;
-            _holdOffset = new Vec2(2f, 0f);
+            _holdOffset = new Vec2(2f, 1f);
             _editorName = "AWS";
 			_weight = 5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(18f, 3f);
 
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(fakeshelloffset).x, Offset(fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
         public bool Bipods
         {

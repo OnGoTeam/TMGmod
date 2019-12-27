@@ -10,6 +10,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MSR : Sniper, IAmSr, IHaveSkin, IHaveBipods
     {
+        private Vec2 fakeshelloffset = new Vec2(-9f, -1.5f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -47,9 +48,21 @@ namespace TMGmod
             _kickForce = 5.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(14f, 0f);
+            _holdOffset = new Vec2(10f, 0f);
             _editorName = "MSR";
 			_weight = 4.65f;
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(fakeshelloffset).x, Offset(fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
         public bool Bipods
         {
