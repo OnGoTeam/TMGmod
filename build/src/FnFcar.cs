@@ -148,8 +148,14 @@ namespace TMGmod
         public int FrameId
         {
             get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
+
+            set
+            {
+                const int total = 10 * NonSkinFrames;
+                _sprite.frame = (value % total + total) % total;
+            }
         }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
