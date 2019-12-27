@@ -11,7 +11,7 @@ namespace TMGmod
     public class FnFcar: BaseAr, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 3;
+        private const int NonSkinFrames = 5;
         [UsedImplicitly]
         public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
         [UsedImplicitly]
@@ -72,18 +72,18 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                    BipodsState += 1f / 30 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _ammoType.accuracy = bipods ? 1f : 0.94f;
                 _ammoType.bulletSpeed = bipods ? 72f : 36f;
-                _fireWait = bipods ? 1.5f : 0.75f;
+                _fireWait = bipods ? 0.25f : 0.75f;
                 _kickForce = bipods ? 0f : 2.4f;
                 Kforce2Ar = bipods ? 0f : 0.9f;
                 Kforce1Ar = bipods ? 0f : 0.07f;
                 loseAccuracy = bipods ? 0f : 0.15f;
                 maxAccuracyLost = bipods ? 0f : 0.2f;
-                FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
+                FrameId = FrameId % 10 + 10 * (bipods ? 4 : nobipods ? 0 : bipodsstate < 0.33f ? 1 : bipodsstate < 0.67f ? 2 : 3);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     BipOn.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)

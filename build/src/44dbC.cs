@@ -50,6 +50,7 @@ namespace TMGmod
         }
         public override void OnPressAction()
         {
+            if (!loaded && ammo > 1) SFX.Play(GetPath("sounds/tuduc.wav"));
             if (!loaded && ammo > 0)
             {
                 _sprite.frame = _sprite.frame % 10 + 10;

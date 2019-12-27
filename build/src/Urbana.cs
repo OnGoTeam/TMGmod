@@ -4,16 +4,16 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
-using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
+    public class Urbana : Sniper, IAmSr, IHaveSkin, IHaveBipods
     {
+        private Vec2 fakeshelloffset = new Vec2(-9f, -2f);
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 3;
+        private const int NonSkinFrames = 4;
         [UsedImplicitly]
         public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
         [UsedImplicitly]
@@ -29,37 +29,37 @@ namespace TMGmod
         /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
-        public AWS(float xval, float yval)
-          : base(xval, yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 9 });
+        public Urbana(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("AWS"), 33, 11);
+            _sprite = new SpriteMap(GetPath("Urbana"), 53, 15);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(17f, 6f);
-            _collisionOffset = new Vec2(-17f, -6f);
-            _collisionSize = new Vec2(33f, 11f);
-            _barrelOffsetTL = new Vec2(33f, 4f);
-            ammo = 6;
-            _ammoType = new AT9mmS
-            {
-                range = 550f,
-                accuracy = 0.97f
-            };
-            _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
+            _center = new Vec2(27f, 8f);
+            _collisionOffset = new Vec2(-27f, -8f);
+            _collisionSize = new Vec2(53f, 15f);
+            _barrelOffsetTL = new Vec2(53f, 5f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
             };
-            _fireSound = GetPath("sounds/Silenced1.wav");
+            ammo = 6;
+            _ammoType = new ATSniper
+            {
+                bulletSpeed = 75f,
+                range = 1200f,
+                penetration = 2f,
+                accuracy = 1f
+            };
+            _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
-            _kickForce = 4.75f;
-            _holdOffset = new Vec2(2f, 0f);
-            _editorName = "AWS";
-			_weight = 5f;
+            _kickForce = 5f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(18f, 3f);
-
+            _laserOffsetTL = new Vec2(31f, 9f);
+            _holdOffset = new Vec2(9f, 1f);
+            _editorName = "Urbana";
+			_weight = 5.6f;
         }
         public bool Bipods
         {
@@ -68,19 +68,30 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 7 * (value ? 1 : -1);
+                    BipodsState += 1f / 14 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
-                _kickForce = bipods ? 0 : 4.75f;
-                _ammoType.range = bipods ? 1100f : 550f;
-                _ammoType.bulletSpeed = bipods ? 150f : 37f;
-                _ammoType.accuracy = bipods ? 1f : 0.97f;
-                FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
+                _kickForce = bipods ? 0 : 5f;
+                _ammoType.range = bipods ? 1800f : 1200f;
+                _ammoType.bulletSpeed = bipods ? 200f : 75f;
+                FrameId = FrameId % 10 + 10 * (bipods ? 3 : nobipods ? 0 : (bipodsstate < 0.5f) ? 1 : 2);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     BipOn.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)
                     BipOff.Play();
             }
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(fakeshelloffset).x, Offset(fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
         public override void Draw()
         {
@@ -107,7 +118,6 @@ namespace TMGmod
             }
 
             if (ammo <= 0 || _loadState != -1) return;
-            //else
             _loadState = 0;
             _loadAnimation = 0;
         }
@@ -144,7 +154,8 @@ namespace TMGmod
                         {
                             _netLoad.Play();
                         }
-                        _loadState++;
+                        Sniper sniper = this;
+                        sniper._loadState += 1;
                         break;
                     }
                     case 1 when _angleOffset >= 0.1f:
@@ -161,7 +172,8 @@ namespace TMGmod
                         handOffset.x -= 0.2f;
                         if (handOffset.x > 4f)
                         {
-                            _loadState++;
+                            Sniper sniper2 = this;
+                            sniper2._loadState += 1;
                             Reload();
                             loaded = false;
                         }
@@ -191,13 +203,6 @@ namespace TMGmod
                 }
             }
             laserSight = false;
-            OnHoldAction();
-        }
-
-        public override void Fire()
-        {
-            if (FrameId / 10 == 1) return;
-            base.Fire();
         }
 
         [UsedImplicitly]
@@ -232,14 +237,14 @@ namespace TMGmod
         public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
         private void UpdateSkin()
         {
-            var bublic = Skin.value;
+            var bublic= Skin.value;
             while (!Allowedlst.Contains(bublic))
             {
                 bublic = Rando.Int(0, 9);
             }
             _sprite.frame = bublic;
         }
-
+        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

@@ -108,6 +108,7 @@
     <Compile Include="src\Core\Shells\X3Xshell.cs" />
     <Compile Include="src\DR300.cs" />
     <Compile Include="src\M16A6.cs" />
+    <Compile Include="src\Urbana.cs" />
     <Compile Include="src\Stuff\ActiveDefenseSystem.cs" />
     <Compile Include="src\Useless or deleted Guns\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />

@@ -12,7 +12,7 @@ namespace TMGmod
     public class Lynx : BaseGun, IAmDmr, ISpeedAccuracy, IHaveSkin, I5, IHaveBipods
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 3;
+        private const int NonSkinFrames = 4;
         [UsedImplicitly]
         public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
         [UsedImplicitly]
@@ -72,7 +72,7 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                    BipodsState += 1f / 8 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _ammoType.range = bipods ? 2400f : 1200f;
@@ -81,7 +81,7 @@ namespace TMGmod
                 _kickForce = bipods ? 0 : 5.8f;
                 loseAccuracy = bipods ? 0 : 0.1f;
                 maxAccuracyLost = bipods ? 0 : 0.3f;
-                FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
+                FrameId = FrameId % 10 + 10 * (bipods ? 3 : nobipods ? 0 : (bipodsstate < 0.5f) ? 1 : 2);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     BipOn.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)

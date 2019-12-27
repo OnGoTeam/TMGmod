@@ -102,7 +102,7 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                    BipodsState += 1f / 15 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _ammoType.range = bipods ? 550f : 480f;
