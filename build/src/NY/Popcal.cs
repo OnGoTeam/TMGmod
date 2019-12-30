@@ -1,5 +1,4 @@
 ﻿using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
@@ -50,9 +49,5 @@ namespace TMGmod.NY
             if (ammo < 1) _sprite.frame = 8;
             base.Update();
         }
-        [UsedImplicitly]
-        public int CurrDelay { get; set; }
-        public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
     }
 }

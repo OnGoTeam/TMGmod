@@ -7,12 +7,15 @@ namespace TMGmod.NY
     [UsedImplicitly]
     public class CandyCane:Gun
     {
-        private bool _dropped;
+        [UsedImplicitly]
+        public bool Dropped;
+        [UsedImplicitly]
+        public StateBinding DroppedBinding = new StateBinding(nameof(Dropped));
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
             ammo = 1;
             _graphic = new Sprite(GetPath("Holiday/candycane"));
-            _ammoType = new ATCane(this)
+            _ammoType = new ATCane(_graphic)
             {
                 range = 500f,
                 accuracy = 0.95f
@@ -43,14 +46,18 @@ namespace TMGmod.NY
             Level.Remove(this);
         }
 
-        public virtual void Drop(float x1, float y1, bool force=false, float p=0.75f)
+        public virtual void Drop(Vec2 pos, bool force=false, float p=0.75f)
         {
-            if (_dropped) return;
-            _dropped = true;
+            if (Dropped) return;
+            Dropped = true;
             if (!force && !(Rando.Float(1) < p)) return;
             //else
-            var c = new CandyCane(x1, y1);
-            Level.Add(c);
+            var ctor = GetType().GetConstructor(new[] {typeof(float), typeof(float)});
+            if (ctor == null) return;
+            //else
+            if (!(ctor.Invoke(new object[] {pos.x, pos.y}) is Thing t)) return;
+            //else
+            Level.Add(t);
         }
     }
 }

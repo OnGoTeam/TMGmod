@@ -22,7 +22,10 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 8 });
         private int _ammobefore = 21;
-        private float _explode;
+        [UsedImplicitly]
+        public float Explode;
+        [UsedImplicitly]
+        public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
         private int _uselessinteger = 3;
         private const double Explodechance = 0.006;
 
@@ -77,8 +80,8 @@ namespace TMGmod
         }
         public override void Fire()
         {
-            _explode = Rando.Float(0,1);
-            if (_explode < Explodechance) CreateExplosion(position);
+            Explode = Rando.Float(0,1);
+            if (Explode < Explodechance) CreateExplosion(position);
             base.Fire();
         }
         public override void Thrown()

@@ -91,7 +91,7 @@ namespace TMGmod
 
         public override void Fire()
         {
-            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
+            if ((FrameId + 20) % (10 * NonSkinFrames) >= 40) return;
             base.Fire();
         }
 
