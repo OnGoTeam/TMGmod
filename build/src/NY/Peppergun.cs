@@ -11,7 +11,7 @@ namespace TMGmod.NY
           : base(xval, yval)
         {
             ammo = 70;
-            _ammoType = new ATCane(_graphic = new SpriteMap(GetPath("Holiday/candycane"), 18, 7));
+            _ammoType = new ATCane();
             _type = "gun";
             _graphic = new SpriteMap(GetPath("Holiday/Peppergun"), 18, 7);
             _center = new Vec2(9f, 4f);

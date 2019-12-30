@@ -15,7 +15,7 @@ namespace TMGmod.NY
         {
             ammo = 1;
             _graphic = new Sprite(GetPath("Holiday/candycane"));
-            _ammoType = new ATCane(_graphic)
+            _ammoType = new ATCane
             {
                 range = 500f,
                 accuracy = 0.95f
@@ -39,11 +39,18 @@ namespace TMGmod.NY
 
         public override void Reload(bool shell = true)
         {
-            if (ammo != 0)
+            if (ammo > 0)
             {
                 --ammo;
             }
             loaded = true;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            if (ammo > 0 || !loaded) return;
+            //else
             duck?.ThrowItem(false);
             Level.Remove(this);
         }
