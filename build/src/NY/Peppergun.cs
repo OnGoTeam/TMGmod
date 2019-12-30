@@ -23,9 +23,9 @@ namespace TMGmod.NY
             _collisionOffset = new Vec2(-9f, -4f);
             _collisionSize = new Vec2(18f, 7f);
             _barrelOffsetTL = new Vec2(18f, 0f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0f, 0f)
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;
@@ -33,7 +33,7 @@ namespace TMGmod.NY
             _kickForce = 0.33f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(1f, -3f);
+            _holdOffset = new Vec2(-8f, 3f);
             _editorName = "Big Sweat Gun";
 			_weight = 2f;
         }
