@@ -31,7 +31,7 @@ namespace TMGmod.NY
         {
             range = 1000f;
             accuracy = 1f;
-            bulletSpeed = 3f;
+            bulletSpeed = 5.5f;
             penetration = 0.4f;
             speedVariation = 0f;
             bulletType = typeof(GarlandBullet);

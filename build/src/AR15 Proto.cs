@@ -49,7 +49,7 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 5f);
+            _center = new Vec2(19f, 5f);
             _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(27f, 10f);
             _barrelOffsetTL = new Vec2(27f, 3f);
@@ -63,7 +63,7 @@ namespace TMGmod
             _kickForce = 1.9f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.21f;
-            _holdOffset = new Vec2(7f, 1f);
+            _holdOffset = new Vec2(5f, 0f);
             ShellOffset = new Vec2(-7f, -1f);
             _editorName = "AR15 Proto";
 			_weight = 4.2f;

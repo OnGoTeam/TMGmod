@@ -27,39 +27,42 @@ namespace TMGmod.NY
             _editorName = "Holiday Case";
             Things = new List<Type>
             {
-                   typeof(SkeetGun),  //x2
-                typeof(GarlandGun),  //x3
-                typeof(CandyCane),  //x3
-                typeof(SpruceGun),  //x3
-                typeof(Popcal),  //x3
-                typeof(Icer),  //x3
-                typeof(SnowMgun),  //x3
-                   typeof(SkeetGun),  //x2
-                typeof(GarlandGun),  //x3
-                typeof(CandyCane),  //x3
-                typeof(CandyCaneOrange),  //x1
-                typeof(CandyCaneLime),  //x2
-                typeof(SpruceGun),  //x3
-                typeof(Popcal),  //x3
-                typeof(Icer),  //x3
-                typeof(SnowMgun),  //x3
-                 typeof(Helmet),  //x2
-                 typeof(ChestPlate),  //x2
-                typeof(GarlandGun),  //x3
-                typeof(CandyCane),  //x3
-                typeof(CandyCaneLime),  //x2
-                typeof(SpruceGun),  //x3
-                typeof(Popcal),  //x3
-                typeof(Icer),  //x3
-                typeof(SnowMgun),  //x3
-                 typeof(Helmet),  //x2
-                 typeof(ChestPlate),  //x2
-                   typeof(PodarokColorB),  //x1
-                   typeof(PodarokColorC),  //x1
-                   typeof(PodarokColorY),  //x1
-                   typeof(PodarokColorR),  //x1
-                   typeof(PodarokColorG),  //x1
-                   typeof(PodarokMillitary)  //x1
+                //x4
+                typeof(CandyCane),
+                typeof(CandyCane),
+                typeof(CandyCane),
+                typeof(CandyCane),
+                 //x3
+                 typeof(GarlandGun),
+                 typeof(GarlandGun),
+                 typeof(GarlandGun),
+                 typeof(Popcal),
+                 typeof(Popcal),
+                 typeof(Popcal),
+                 typeof(Icer),
+                 typeof(Icer),
+                 typeof(Icer),
+                 typeof(SnowMgun),
+                 typeof(SnowMgun),  
+                 typeof(SnowMgun),   
+                  //x2
+                  typeof(CandyCaneLime),
+                  typeof(CandyCaneLime),
+                  typeof(SkeetGun),  
+                  typeof(SkeetGun),  
+                  typeof(Helmet),
+                  typeof(Helmet),  
+                  typeof(ChestPlate),
+                  typeof(ChestPlate), 
+                   //x1
+                   typeof(SpruceGun),
+                   typeof(CandyCaneOrange), 
+                   typeof(PodarokColorB),  
+                   typeof(PodarokColorC),  
+                   typeof(PodarokColorY),  
+                   typeof(PodarokColorR),  
+                   typeof(PodarokColorG),  
+                   typeof(PodarokMillitary)  
             };
             CaseId = 6;
         }
