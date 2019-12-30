@@ -59,6 +59,8 @@ namespace TMGmod.NY
                 _graphic = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Icer Bullet"));
                 _graphic.CenterOrigin();
                 _weight = 1f;
+                _collisionSize = new Vec2(16f, 5f);
+                _collisionOffset = new Vec2(-8f, -3f);
             }
 
             internal static Icicle FromStick(Vec2 pos, float angle, Vec2 vel, MaterialThing stick)
