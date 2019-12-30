@@ -53,13 +53,6 @@ namespace TMGmod
             _editorName = "Alep 30";
 			_weight = 2.3f;
         }
-
-        /// <inheritdoc />
-        public override void OnHoldAction()
-        {
-            //handAngle = Rando.Float(-0.08f, 0.08f);
-            base.OnHoldAction();
-        }
         private void UpdateSkin()
         {
             var bublic = Skin.value;

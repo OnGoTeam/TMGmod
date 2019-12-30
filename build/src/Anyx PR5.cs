@@ -77,10 +77,5 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public override void OnHoldAction()
-        {
-            //handAngle = Rando.Float(-0.08f, 0.08f);
-            base.OnHoldAction();
-        }
     }
 }
