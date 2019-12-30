@@ -1,4 +1,5 @@
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.NY
@@ -10,8 +11,9 @@ namespace TMGmod.NY
         /// <inheritdoc />
         public ATIcer()
         {
-            var spriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/Icer Bullet"), 16, 5);
+            var spriteY = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Icer Bullet"));
             spriteY.CenterOrigin();
+            bulletType = typeof(IcerBullet);
             sprite = spriteY;
             penetration = 0f;
             accuracy = 1f;
@@ -19,6 +21,108 @@ namespace TMGmod.NY
             range = 1000f;
             bulletLength = 5f;
             bulletThickness = 3f;
+            immediatelyDeadly = false;
+        }
+
+        private class IcerBullet: Bullet
+        {
+            public IcerBullet(float xval, float yval, AmmoType type, float ang = -1, Thing owner = null, bool rbound = false, float distance = -1, bool tracer = false, bool network = true) : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
+            {
+            }
+
+            public override void OnCollide(Vec2 pos, Thing t, bool willBeStopped)
+            {
+                base.OnCollide(pos, t, willBeStopped);
+                if (!willBeStopped) return;
+                if (!(t is MaterialThing mt)) return;
+                Level.Add(Icicle.FromStick(pos, ammo.sprite.angle, travelDirNormalized * bulletSpeed, mt));
+            }
+        }
+
+        private class Icicle: PhysicsObject, IPlatform
+        {
+            [UsedImplicitly]
+            public float StickAngleOffset;
+            [UsedImplicitly]
+            public StateBinding SaoBinding = new StateBinding(nameof(StickAngleOffset));
+            [UsedImplicitly]
+            public Vec2 StickOffset;
+            [UsedImplicitly]
+            public StateBinding SoBinding = new StateBinding(nameof(StickOffset));
+            [UsedImplicitly]
+            public sbyte OffDirOffset = 1;
+            [UsedImplicitly]
+            public StateBinding OdoBinding = new StateBinding(nameof(OffDirOffset));
+            private MaterialThing _stick;
+            public Icicle(float xval, float yval) : base(xval, yval)
+            {
+                _graphic = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Icer Bullet"));
+                _graphic.CenterOrigin();
+                _weight = 1f;
+            }
+
+            internal static Icicle FromStick(Vec2 pos, float angle, Vec2 vel, MaterialThing stick)
+            {
+                var i = new Icicle(pos.x, pos.y) { _stick = stick, _angle = angle, velocity = vel };
+                i.InitiateStick();
+                return i;
+            }
+
+            public override void Touch(MaterialThing with)
+            {
+                base.Touch(with);
+                UpdateStickable();
+                if (!(_stick is null)) return;
+                if (with is Duck d)
+                {
+                    d.Kill();
+                    return;
+                }
+                _stick = with;
+                InitiateStick();
+            }
+
+            private void UpdateStickable()
+            {
+                if (_stick == null) return;
+                if (_stick._destroyed)
+                {
+                    _stick = null;
+                    return;
+                }
+
+                if (_stick is FeatherVolume || _stick is Duck)
+                {
+                    _stick = null;
+                }
+            }
+
+            public override void Update()
+            {
+                UpdateStick();
+                base.Update();
+                UpdateStick();
+            }
+
+            private void UpdateStick()
+            {
+                UpdateStickable();
+                if (_stick == null) return;
+                if (_stick.destroyed) return;
+                angle = _stick.angle + StickAngleOffset * OffDirOffset * _stick.offDir;
+                position = _stick.Offset(StickOffset);
+                offDir = (sbyte)(OffDirOffset * _stick.offDir);
+                velocity = _stick.velocity;
+            }
+
+            private void InitiateStick()
+            {
+                if (_stick == null) return;
+                if (_stick.destroyed) return;
+                StickAngleOffset = angle - _stick.angle;
+                StickOffset = _stick.ReverseOffset(position);
+                OffDirOffset = (sbyte)(offDir * _stick.offDir);
+            }
         }
     }
 }
