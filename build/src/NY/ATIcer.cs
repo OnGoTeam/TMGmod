@@ -78,7 +78,7 @@ namespace TMGmod.NY
                 if (!(_stick is null)) return;
                 if (with is Duck d)
                 {
-                    d.Kill();
+                    d.Kill(new DTImpact(this));
                     return;
                 }
                 _stick = with;
