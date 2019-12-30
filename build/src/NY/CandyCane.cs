@@ -35,13 +35,15 @@ namespace TMGmod.NY
             _holdOffset = new Vec2(-1f, 1f);
             _editorName = "CandyCane";
             _weight = 2.5f;
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
         }
 
-        /// <inheritdoc />
         public override void Reload(bool shell = true)
         {
-            if (loaded) return;
+            if (ammo != 0)
+            {
+                --ammo;
+            }
+            loaded = true;
             duck?.ThrowItem(false);
             Level.Remove(this);
         }

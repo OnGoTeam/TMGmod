@@ -17,16 +17,21 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 8 });
-        private int _ammobefore = 21;
+        [UsedImplicitly]
+        public int Ammobefore = 21;
+        [UsedImplicitly]
+        public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
         [UsedImplicitly]
         public float Explode;
         [UsedImplicitly]
         public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
-        private int _uselessinteger = 3;
+        [UsedImplicitly]
+        public int Uselessinteger = 3;
+        [UsedImplicitly]
+        public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
         private const double Explodechance = 0.006;
 
         public AR15Proto(float xval, float yval)
@@ -66,16 +71,16 @@ namespace TMGmod
         }
         public override void OnPressAction()
         {
-            ammo = Rando.Int(0, _ammobefore / _uselessinteger);
-            if (ammo > _ammobefore) ammo = _ammobefore;
-            _ammobefore -= ammo;
-            if (ammo < 1 && _ammobefore < 1) CreateExplosion(position);
+            ammo = Rando.Int(0, Ammobefore / Uselessinteger);
+            if (ammo > Ammobefore) ammo = Ammobefore;
+            Ammobefore -= ammo;
+            if (ammo < 1 && Ammobefore < 1) CreateExplosion(position);
             base.OnPressAction();
         }
         public override void OnReleaseAction()
         {
-            if (ammo > 0) _ammobefore += ammo;
-            _uselessinteger = 1;
+            if (ammo > 0) Ammobefore += ammo;
+            Uselessinteger = 1;
             base.OnReleaseAction();
         }
         public override void Fire()
@@ -86,7 +91,7 @@ namespace TMGmod
         }
         public override void Thrown()
         {
-            if (ammo < 1 && _ammobefore > 0) ammo = _ammobefore;
+            if (ammo < 1 && Ammobefore > 0) ammo = Ammobefore;
             base.Thrown();
         }
         private void CreateExplosion(Vec2 pos)

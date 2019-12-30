@@ -12,6 +12,7 @@ namespace TMGmod.NY
             sprite = cc;
             bulletLength = 3f;
             bulletSpeed = 15f;
+            range = 500f;
         }
 
         public override void OnHit(bool destroyed, Bullet b)

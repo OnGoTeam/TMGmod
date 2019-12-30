@@ -35,5 +35,11 @@ namespace TMGmod.NY
                 c.Drop(end, true);
             }
         }
+
+        public override void Draw()
+        {
+            base.Draw();
+            Graphics.DrawCircle(end, 32f, Color.Red, 5f);
+        }
     }
 }
