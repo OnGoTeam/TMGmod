@@ -110,6 +110,7 @@
     <Compile Include="src\M16A6.cs" />
     <Compile Include="src\NY\ATPopcorn.cs" />
     <Compile Include="src\NY\CandyCaneOrange.cs" />
+    <Compile Include="src\NY\Peppergun.cs" />
     <Compile Include="src\NY\Popcal.cs" />
     <Compile Include="src\NY\ATIcer.cs" />
     <Compile Include="src\NY\Icer.cs" />
