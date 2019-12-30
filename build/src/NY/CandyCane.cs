@@ -1,22 +1,23 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.NY
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
+    [UsedImplicitly]
     public class CandyCane:Gun
     {
-        /// <inheritdoc />
+        private bool _dropped;
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
             ammo = 1;
-            _ammoType = new ATCane
+            _graphic = new Sprite(GetPath("Holiday/candycane"));
+            _ammoType = new ATCane(this)
             {
                 range = 500f,
                 accuracy = 0.95f
             };
             _type = "gun";
-            _graphic = new Sprite(GetPath("Holiday/candycane"));
             _center = new Vec2(9f, 3.5f);
             _collisionOffset = new Vec2(-9f, -3.5f);
             _collisionSize = new Vec2(18f, 7f);
@@ -40,6 +41,16 @@ namespace TMGmod.NY
             if (loaded) return;
             duck?.ThrowItem(false);
             Level.Remove(this);
+        }
+
+        public virtual void Drop(float x1, float y1, bool force=false, float p=0.75f)
+        {
+            if (_dropped) return;
+            _dropped = true;
+            if (!force && !(Rando.Float(1) < p)) return;
+            //else
+            var c = new CandyCane(x1, y1);
+            Level.Add(c);
         }
     }
 }
