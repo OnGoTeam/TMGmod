@@ -27,30 +27,36 @@ namespace TMGmod.NY
             _editorName = "Holiday Case";
             Things = new List<Type>
             {
-                   typeof(SkeetGun),
-                typeof(GarlandGun),
-                typeof(CandyCane),
-                typeof(SpruceGun),
-                typeof(SnowMgun),
-                   typeof(SkeetGun),
-                typeof(GarlandGun),
-                typeof(CandyCane),
-                typeof(SpruceGun),
-                typeof(SnowMgun),
-                 typeof(Helmet),
-                 typeof(ChestPlate),
-                typeof(GarlandGun),
-                typeof(CandyCane),
-                typeof(SpruceGun),
-                typeof(SnowMgun),
-                 typeof(Helmet),
-                 typeof(ChestPlate),
-                   typeof(PodarokColorB),
-                   typeof(PodarokColorC),
-                   typeof(PodarokColorY),
-                   typeof(PodarokColorR),
-                   typeof(PodarokColorG),
-                   typeof(PodarokMillitary)
+                   typeof(SkeetGun),  //x2
+                typeof(GarlandGun),  //x3
+                typeof(CandyCane),  //x3
+                typeof(SpruceGun),  //x3
+                typeof(Popcal),  //x3
+                typeof(Icer),  //x3
+                typeof(SnowMgun),  //x3
+                   typeof(SkeetGun),  //x2
+                typeof(GarlandGun),  //x3
+                typeof(CandyCane),  //x3
+                typeof(SpruceGun),  //x3
+                typeof(Popcal),  //x3
+                typeof(Icer),  //x3
+                typeof(SnowMgun),  //x3
+                 typeof(Helmet),  //x2
+                 typeof(ChestPlate),  //x2
+                typeof(GarlandGun),  //x3
+                typeof(CandyCane),  //x3
+                typeof(SpruceGun),  //x3
+                typeof(Popcal),  //x3
+                typeof(Icer),  //x3
+                typeof(SnowMgun),  //x3
+                 typeof(Helmet),  //x2
+                 typeof(ChestPlate),  //x2
+                   typeof(PodarokColorB),  //x1
+                   typeof(PodarokColorC),  //x1
+                   typeof(PodarokColorY),  //x1
+                   typeof(PodarokColorR),  //x1
+                   typeof(PodarokColorG),  //x1
+                   typeof(PodarokMillitary)  //x1
             };
             CaseId = 6;
         }
