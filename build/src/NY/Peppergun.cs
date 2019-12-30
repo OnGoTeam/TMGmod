@@ -10,8 +10,13 @@ namespace TMGmod.NY
         public PPLMG (float xval, float yval)
           : base(xval, yval)
         {
-            ammo = 70;
-            _ammoType = new ATCane();
+            ammo = 7;
+            _numBulletsPerFire = 12;
+            _ammoType = new ATCane 
+            { 
+                range = 100f,
+                accuracy = 0.11f            
+            };
             _type = "gun";
             _graphic = new SpriteMap(GetPath("Holiday/Peppergun"), 18, 7);
             _center = new Vec2(9f, 4f);
@@ -24,12 +29,12 @@ namespace TMGmod.NY
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;
-            _fireWait = 0.83f;
+            _fireWait = 0.6f;
             _kickForce = 0.33f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(-2f, 0f);
-            _editorName = "Peppermint Machinegun";
+            _holdOffset = new Vec2(1f, -3f);
+            _editorName = "Big Sweat Gun";
 			_weight = 2f;
         }
     }

@@ -37,6 +37,8 @@ namespace TMGmod.NY
                    typeof(SkeetGun),  //x2
                 typeof(GarlandGun),  //x3
                 typeof(CandyCane),  //x3
+                typeof(CandyCaneOrange),  //x1
+                typeof(CandyCaneLime),  //x2
                 typeof(SpruceGun),  //x3
                 typeof(Popcal),  //x3
                 typeof(Icer),  //x3
@@ -45,6 +47,7 @@ namespace TMGmod.NY
                  typeof(ChestPlate),  //x2
                 typeof(GarlandGun),  //x3
                 typeof(CandyCane),  //x3
+                typeof(CandyCaneLime),  //x2
                 typeof(SpruceGun),  //x3
                 typeof(Popcal),  //x3
                 typeof(Icer),  //x3

@@ -14,7 +14,7 @@ namespace TMGmod.NY
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
             ammo = 1;
-            _graphic = new Sprite(GetPath("Holiday/candycane"));
+            _graphic = new Sprite(GetPath("Holiday/Peppermint Classic"));
             _ammoType = new ATCane
             {
                 range = 500f,
@@ -33,7 +33,7 @@ namespace TMGmod.NY
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
             _holdOffset = new Vec2(-1f, 1f);
-            _editorName = "CandyCane";
+            _editorName = "Peppermint Classic";
             _weight = 2.5f;
         }
 

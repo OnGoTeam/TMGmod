@@ -12,7 +12,7 @@ namespace TMGmod.NY
             bulletSpeed = 15f;
             range = 500f;
             accuracy = 0.95f;
-            sprite = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/candycane"));
+            sprite = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Peppermint Classic"));
         }
 
         public override void OnHit(bool destroyed, Bullet b)

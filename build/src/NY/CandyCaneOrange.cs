@@ -9,9 +9,9 @@ namespace TMGmod.NY
     {
         public CandyCaneOrange(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("Holiday/Peppetmint Orange"));
+            _graphic = new Sprite(GetPath("Holiday/Peppermint Orange"));
             _ammoType = new ATCaneOrange();
-            _editorName = "CandyCaneOrange";
+            _editorName = "Peppermint Orange";
         }
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -19,10 +19,11 @@ namespace TMGmod.NY
         {
             public ATCaneOrange()
             {
-                sprite = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Peppetmint Orange"));
+                range = 320f;
+                bulletSpeed = 10f;
+                sprite = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Peppermint Orange"));
             }
         }
-
         public override void Drop(Vec2 pos, bool force = false, float p = 0.75f)
         {
             base.Drop(pos, false, -1f);
