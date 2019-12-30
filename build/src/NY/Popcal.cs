@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
@@ -36,7 +37,45 @@ namespace TMGmod.NY
 			_weight = 3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
+            thickness = 0f;
         }
+
+        public override bool Hit(Bullet bullet, Vec2 hitPos)
+        {
+            var hit = base.Hit(bullet, hitPos);
+            var hitpos = Offset(new Vec2(0, 0));
+            var dp = bullet.position - hitpos;
+            var v = bullet.bulletSpeed * bullet.travelDirNormalized;
+            var u = new Vec2(v.y, -v.x).normalized;
+            if (Math.Abs(Vec2.Dot(dp, u)) < 3f)
+            {
+                Destroy(new DTShot(bullet));
+            }
+            return hit;
+        }
+
+        public override bool Destroy(DestroyType type1 = null)
+        {
+            var hitpos = Offset(new Vec2(0, 0));
+            for (var index = 0; index < ammo; ++index)
+            {
+                var num2 = (float)(index * 18.0 - 5.0) + Rando.Float(10f);
+                var atPopcorn = new ATPopcorn {bulletSpeed = 4f};
+                var bullet = new Bullet(hitpos.x + (float)(Math.Cos(Maths.DegToRad(num2)) * 6.0),
+                        hitpos.y - (float)(Math.Sin(Maths.DegToRad(num2)) * 6.0), atPopcorn, num2)
+                    { firedFrom = this };
+                firedBullets.Add(bullet);
+                Level.Add(bullet);
+            }
+            bulletFireIndex += (byte) ammo;
+            ammo = 0;
+            if (!Network.isActive) return base.Destroy(type1);
+            Send.Message(new NMFireGun(this, firedBullets, bulletFireIndex, false),
+                NetMessagePriority.ReliableOrdered);
+            firedBullets.Clear();
+            return base.Destroy(type1);
+        }
+
         public override void Update()
         {
             if ((ammo > 13) & (ammo < 15)) _sprite.frame = 1;

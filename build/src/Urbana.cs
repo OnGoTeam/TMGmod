@@ -11,7 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Urbana : Sniper, IAmSr, IHaveSkin, IHaveBipods
     {
-        private Vec2 fakeshelloffset = new Vec2(-9f, -2f);
+        private readonly Vec2 _fakeshelloffset = new Vec2(-9f, -2f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 4;
         [UsedImplicitly]
@@ -87,7 +87,7 @@ namespace TMGmod
             {
                 if (shell)
                 {
-                    _ammoType.PopShell(Offset(fakeshelloffset).x, Offset(fakeshelloffset).y, -offDir);
+                    _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
                 }
                 --ammo;
             }
