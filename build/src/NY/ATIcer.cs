@@ -116,6 +116,7 @@ namespace TMGmod.NY
                 position = _stick.Offset(StickOffset);
                 offDir = (sbyte)(OffDirOffset * _stick.offDir);
                 velocity = _stick.velocity;
+                _grounded = _stick.grounded || _stick is IPlatform || velocity.length < 0.01f;
             }
 
             private void InitiateStick()
