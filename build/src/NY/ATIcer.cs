@@ -35,7 +35,8 @@ namespace TMGmod.NY
                 base.OnCollide(pos, t, willBeStopped);
                 if (!willBeStopped) return;
                 if (!(t is MaterialThing mt)) return;
-                Level.Add(Icicle.FromStick(pos, ammo.sprite.angle, travelDirNormalized * bulletSpeed, mt));
+                var pos0 = pos - travelDirNormalized * 10;
+                Level.Add(Icicle.FromStick(pos0, ammo.sprite.angle, travelDirNormalized * bulletSpeed, mt));
             }
         }
 
