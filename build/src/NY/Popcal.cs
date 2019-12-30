@@ -43,7 +43,7 @@ namespace TMGmod.NY
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
             var hit = base.Hit(bullet, hitPos);
-            var hitpos = Offset(new Vec2(0, 0));
+            var hitpos = Offset(new Vec2(0, -3));
             var dp = bullet.position - hitpos;
             var v = bullet.bulletSpeed * bullet.travelDirNormalized;
             var u = new Vec2(v.y, -v.x).normalized;
