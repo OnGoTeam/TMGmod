@@ -6,47 +6,19 @@ using TMGmod.Core.Particles;
 
 namespace TMGmod.Stuff
 {
-    /// <summary>
-    /// Breakable barricade
-    /// </summary>
     [BaggedProperty("CanSpawn", false)]
     [PublicAPI]
     public class Barricade:Block
     {
-        /// <summary>
-        /// whether it stands on smth
-        /// </summary>
         public bool Anchored;
-        /// <summary>
-        /// <see cref="Anchored"/> syncing
-        /// </summary>
         public StateBinding AnchoredBinding = new StateBinding(nameof(Anchored));
-        /// <summary>
-        /// hitpoints
-        /// </summary>
         public float Hp;
-        /// <summary>
-        /// <see cref="Hp"/> syncing
-        /// </summary>
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
-        /// <summary>
-        /// Speed of last impact
-        /// </summary>
         public float ImpactSpeed;
-        /// <summary>
-        /// <see cref="ImpactSpeed"/> syncing
-        /// </summary>
         public StateBinding ImpactSpeedBinding = new StateBinding(nameof(ImpactSpeed));
-        /// <summary>
-        /// cooldown from last duck impact
-        /// </summary>
         public float Duckcooldown;
-        /// <summary>
-        /// <see cref="Duckcooldown"/> syncing
-        /// </summary>
         public StateBinding DcdBinding = new StateBinding(nameof(Duckcooldown));
 
-        /// <inheritdoc />
         public Barricade(float x, float y) : base(x, y)
         {
             Anchored = true;
@@ -59,9 +31,6 @@ namespace TMGmod.Stuff
             _graphic = new Sprite(GetPath("barr"));
             flammable = 0.6f;
             _isStateObject = true;
-            //if (!(owner is Duck duck)) return;
-            //duck.clip.Add(this);
-            //clip.Add(duck);
         }
 
         private bool CheckBlocks()
@@ -79,7 +48,6 @@ namespace TMGmod.Stuff
             return Anchored || blocks.Any(block => block != this);
         }
 
-        /// <inheritdoc />
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
             SFX.Play("woodHit");
@@ -101,7 +69,6 @@ namespace TMGmod.Stuff
             Hp -= dValue;
         }
 
-        /// <inheritdoc />
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
             ImpactSpeed = with.hSpeed;
@@ -123,7 +90,6 @@ namespace TMGmod.Stuff
             base.OnImpact(with, from);
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             Duckcooldown -= 0.1f;
@@ -136,7 +102,6 @@ namespace TMGmod.Stuff
             thickness = 0.2f * Hp;
         }
 
-        /// <inheritdoc />
         protected override bool OnDestroy(DestroyType type0 = null)
         {
             if (!(Level.activeLevel is Editor))
@@ -157,7 +122,6 @@ namespace TMGmod.Stuff
             return true;
         }
 
-        /// <inheritdoc />
         public override void Regenerate()
         {
         }

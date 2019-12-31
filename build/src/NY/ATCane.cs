@@ -1,21 +1,27 @@
 using DuckGame;
-using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    /// <inheritdoc />
-    public class ATCane : BaseAmmoTypeT
+    public class ATCane : AmmoType
     {
-        /// <inheritdoc />
         public ATCane()
         {
             bulletType = typeof(CandyCaneBullet);
-            var spriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/candycane"), 18, 7);
-            spriteY.CenterOrigin();
-            sprite = spriteY;
             bulletLength = 3f;
             bulletSpeed = 15f;
+            range = 500f;
+            accuracy = 0.95f;
+            sprite = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Peppermint Classic"));
+        }
+
+        public override void OnHit(bool destroyed, Bullet b)
+        {
+            base.OnHit(destroyed, b);
+            if (b is CandyCaneBullet cb && destroyed && b.firedFrom is CandyCane c)
+            {
+                c.Drop(cb.end - cb.travelDirNormalized * cb.bulletSpeed);
+            }
         }
     }
 }

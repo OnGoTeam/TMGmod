@@ -10,12 +10,10 @@ using TMGmod.Useless_or_deleted_Guns;
 
 namespace TMGmod.Cases.Color
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
     [UsedImplicitly]
     public class PodarokNitro : BaseCase
     {
-        /// <inheritdoc />
         public PodarokNitro(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("NitroCase"), 14, 8);

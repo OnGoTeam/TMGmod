@@ -7,11 +7,9 @@ using TMGmod.Cases;
 
 namespace TMGmod.NY
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
     public class NewYearCase : BaseCase
     {
-        /// <inheritdoc />
         public NewYearCase(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("Holiday/HolydayCase"), 14, 8);
@@ -27,30 +25,43 @@ namespace TMGmod.NY
             _editorName = "Holiday Case";
             Things = new List<Type>
             {
-                   typeof(SkeetGun),
-                typeof(GarlandGun),
+                //x4
                 typeof(CandyCane),
-                typeof(SpruceGun),
-                typeof(SnowMgun),
-                   typeof(SkeetGun),
-                typeof(GarlandGun),
                 typeof(CandyCane),
-                typeof(SpruceGun),
-                typeof(SnowMgun),
-                 typeof(Helmet),
-                 typeof(ChestPlate),
-                typeof(GarlandGun),
                 typeof(CandyCane),
-                typeof(SpruceGun),
-                typeof(SnowMgun),
-                 typeof(Helmet),
-                 typeof(ChestPlate),
-                   typeof(PodarokColorB),
-                   typeof(PodarokColorC),
-                   typeof(PodarokColorY),
-                   typeof(PodarokColorR),
-                   typeof(PodarokColorG),
-                   typeof(PodarokMillitary)
+                typeof(CandyCane),
+                 //x3
+                 typeof(GarlandGun),
+                 typeof(GarlandGun),
+                 typeof(GarlandGun),
+                 typeof(Popcal),
+                 typeof(Popcal),
+                 typeof(Popcal),
+                 typeof(Icer),
+                 typeof(Icer),
+                 typeof(Icer),
+                 typeof(SnowMgun),
+                 typeof(SnowMgun),  
+                 typeof(SnowMgun),   
+                  //x2
+                  typeof(CandyCaneLime),
+                  typeof(CandyCaneLime),
+                  typeof(SkeetGun),  
+                  typeof(SkeetGun),  
+                  typeof(Helmet),
+                  typeof(Helmet),  
+                  typeof(ChestPlate),
+                  typeof(ChestPlate), 
+                   //x1
+                   typeof(SpruceGun),
+                   typeof(CandyCaneOrange),
+                   typeof(PPLMG),
+                   typeof(PodarokColorB),  
+                   typeof(PodarokColorC),  
+                   typeof(PodarokColorY),  
+                   typeof(PodarokColorR),  
+                   typeof(PodarokColorG),  
+                   typeof(PodarokMillitary)  
             };
             CaseId = 6;
         }

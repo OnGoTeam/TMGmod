@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using DuckGame;
@@ -12,7 +11,6 @@ using TMGmod.Properties;
 
 namespace TMGmod.Core
 {
-    /// <inheritdoc />
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
@@ -21,21 +19,14 @@ namespace TMGmod.Core
         internal string Bdate = Resources.BuildDate;
         [UsedImplicitly]
         internal static TMGmod LastInstance;
-        // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        // ReSharper disable once MemberCanBePrivate.Global
-        /// <inheritdoc />
         public TMGmod()
         {
             Debug.Log("TMGmod loading");
-            AppDomain.CurrentDomain.AssemblyResolve +=
-                CurrentDomain_AssemblyResolve;
+            /*AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;*/
             LastInstance = this;
         }
-        [UsedImplicitly]
-        internal static string AssemblyName { get; private set; }
 		
 		//Приоритет. Мод загружается раньше/позже других модов
-        /// <inheritdoc />
         public override Priority priority => Priority.Normal;
 
         //Происходит перед запуском мода
@@ -44,16 +35,15 @@ namespace TMGmod.Core
             base.OnPreInitialize();
         }*/
 
-        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        /*private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             var assemblyname = new AssemblyName(args.Name).Name;
             var assemblyFileName = Path.Combine(configuration.directory, assemblyname + ".dll");
             var assembly = Assembly.LoadFrom(assemblyFileName);
             return assembly;
-        }
+        }*/
 
-        //Происходит после запуска мода
-        /// <inheritdoc />
+        //Происходит после запуска мода>
         protected override void OnPostInitialize()
         {
             //Директория
@@ -94,12 +84,12 @@ namespace TMGmod.Core
             var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
             if (!Directory.Exists(levels)) Directory.CreateDirectory(levels);
             IList<string> levelslist = new List<string>();
-
+            const string takefrom = "\\content\\maps\\";
             foreach (var s in Directory.GetFiles(GetPath<TMGmod>("maps")))
             {
-                var takefrom = AssemblyName + "\\content\\maps\\";
                 var firstlocated = s.Replace('/', '\\');
-                var copyto = levels + firstlocated.Substring(firstlocated.IndexOf(takefrom, StringComparison.Ordinal) + takefrom.Length);
+                var fname = firstlocated.Substring(firstlocated.IndexOf(takefrom, StringComparison.Ordinal) + takefrom.Length);
+                var copyto = Path.Combine(levels, fname);
                 if (!File.Exists(copyto) || !GetMD5Hash(File.ReadAllBytes(firstlocated)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(copyto)))) File.Copy(firstlocated, copyto, true);
                 levelslist.Add(copyto);
             }

@@ -25,7 +25,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
@@ -91,7 +90,7 @@ namespace TMGmod
 
         public override void Fire()
         {
-            if (FrameId / 20 == 1) return;
+            if ((FrameId + 20) % (10 * NonSkinFrames) >= 40) return;
             base.Fire();
         }
 
@@ -102,7 +101,7 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                    BipodsState += 1f / 15 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _ammoType.range = bipods ? 550f : 480f;

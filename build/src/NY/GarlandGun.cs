@@ -14,17 +14,16 @@ namespace TMGmod.NY
         [UsedImplicitly]
         public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
 
-        /// <inheritdoc />
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
-            ammo = 24;
+            ammo = 27;
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/Garlandun"));
-            _center = new Vec2(11f, 3f);
-            _collisionOffset = new Vec2(-7.5f, -3.5f);
+            _center = new Vec2(11f, 6f);
+            _collisionOffset = new Vec2(-11f, -6f);
             _collisionSize = new Vec2(22f, 11f);
-            _barrelOffsetTL = new Vec2(22f, 6f);
-            _holdOffset = new Vec2(2f, -1f);
+            _barrelOffsetTL = new Vec2(22f, 5f);
+            _holdOffset = new Vec2(4f, 3f);
             _fireSound = GetPath("sounds/2.wav");
             _fullAuto = true;
             _fireWait = 0.65f;
@@ -37,7 +36,6 @@ namespace TMGmod.NY
             _ammoType = new AT9mmParasha();
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             _sprwait -= 0.11f;

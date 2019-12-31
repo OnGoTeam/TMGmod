@@ -6,9 +6,6 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    /// <inheritdoc cref="BaseBurst"/>
-    /// <inheritdoc cref="IAmDmr"/>
-    /// <inheritdoc cref="IHaveSkin"/>
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
     public class HK417 : BaseGun, IAmDmr, IHaveSkin
@@ -19,12 +16,10 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 7 });
 
-        /// <inheritdoc />
         public HK417 (float xval, float yval)
           : base(xval, yval)
         {
@@ -69,17 +64,12 @@ namespace TMGmod
             _sprite.frame = bublic;
         }
 
-        /// <inheritdoc />
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-        /// <summary>
-        /// Updates skin when Skin's changed
-        /// </summary>
-        /// <param name="property"></param>
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

@@ -6,8 +6,6 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    /// <inheritdoc cref="BaseGun"/>
-    /// /// <inheritdoc cref="IAmHg"/>
     [EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class Alep30 : BaseGun, IAmHg, IHaveSkin
     {
@@ -17,7 +15,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
@@ -52,13 +49,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -3f);            
             _editorName = "Alep 30";
 			_weight = 2.3f;
-        }
-
-        /// <inheritdoc />
-        public override void OnHoldAction()
-        {
-            //handAngle = Rando.Float(-0.08f, 0.08f);
-            base.OnHoldAction();
         }
         private void UpdateSkin()
         {

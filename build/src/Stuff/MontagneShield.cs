@@ -5,9 +5,6 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Stuff
 {
-    /// <summary>
-    /// Holdable shield protecting from bullets and impacts
-    /// </summary>
     [EditorGroup("TMG|Misc")]
     [UsedImplicitly]
     public class MontagneShield : Holdable, IPlatform, IPathNodeBlocker
@@ -23,7 +20,6 @@ namespace TMGmod.Stuff
         [UsedImplicitly]
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
 
-        /// <inheritdoc />
         public MontagneShield(float xpos, float ypos) : base(xpos, ypos)
         {
             Hp1 = Hp * 0.9f;
@@ -41,7 +37,6 @@ namespace TMGmod.Stuff
             _holdOffset = new Vec2(0, -0.5f);
         }
 
-        /// <inheritdoc />
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             SFX.Play(bullet.ammo.penetration < thickness ? "metalRebound" : "woodHit");
@@ -50,7 +45,6 @@ namespace TMGmod.Stuff
             return !((hitPos - Offset(new Vec2(0, -7.5f))).length < 3.354102f) && res;
         }
 
-        /// <inheritdoc />
         public override void Thrown()
         {
             if (duck == null) return;
@@ -100,7 +94,6 @@ namespace TMGmod.Stuff
             sleeping = false;
         }
 
-        /// <inheritdoc />
         public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
         {
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
@@ -118,7 +111,6 @@ namespace TMGmod.Stuff
             base.Impact(with, from, solidImpact);
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             var hspd = duck?.hSpeed ?? hSpeed;
@@ -159,10 +151,5 @@ namespace TMGmod.Stuff
             }
             base.Update();
         }
-
-        /*public override void Touch(MaterialThing with)
-        {
-            base.Touch(with);
-        }*/
     }
 }

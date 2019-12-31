@@ -26,7 +26,7 @@ namespace TMGmod
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _ammoType = new AT9mmS
                     {
-                        range = 130f,
+                        range = 1500f,
                         accuracy = 0.9f
                     };
                     _barrelOffsetTL = new Vec2(23f, 2f);
@@ -55,7 +55,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 4, 7 });

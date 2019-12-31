@@ -23,6 +23,14 @@ namespace TMGmod.Buddies
         public Vec2 Ta;
         [UsedImplicitly]
         public StateBinding TaBinding = new StateBinding(nameof(Ta));
+        [UsedImplicitly]
+        public Vec2 G;
+        [UsedImplicitly]
+        public StateBinding GBinding = new StateBinding(nameof(G));
+        [UsedImplicitly]
+        public Vec2 Av;
+        [UsedImplicitly]
+        public StateBinding AvBinding = new StateBinding(nameof(Av));
         private bool _activated;
         private int _ticks;
         public StingerMissile(float xval, float yval) : base(xval, yval)
@@ -37,7 +45,7 @@ namespace TMGmod.Buddies
             thickness = 0.0f;
             _weight = 3f;
             airFrictionMult = 0f;
-            friction = 0;
+            //friction = 0;
             throwSpeedMultiplier = 5f;
             hMax = 1e+10f;
             vMax = 1e+10f;
@@ -45,9 +53,15 @@ namespace TMGmod.Buddies
 
         public override void Update()
         {
+            var vr = Rando.Float(0f, velocity.length);
+            var p = Offset(new Vec2(-vr, Rando.Float(-vr, vr)));
+            Level.Add(SmallSmoke.New(p.x, p.y));
             UpdateTarget();
             UpdateFlight();
+            var v = velocity;
             base.Update();
+            var dv = velocity - v;
+            G = dv;
             _pList.Add(position);
             if (_ticks > 10)
                 _activated = true;
@@ -57,20 +71,19 @@ namespace TMGmod.Buddies
 
         private void UpdateTarget()
         {
-            Level.Add(SmallSmoke.New(x, y));
             if (_target != null)
                 if (Level.CheckLine<IPlatform>(position, _target.position) != null || _target is Duck duck0 && duck0.dead || _target == owner)
                     _target = null;
             if (_target != null) return;
             //else
-            var ducks = Level.CheckCircleAll<Duck>(position, 1000);
+            var ducks = Level.CheckCircleAll<Duck>(position, 8192);
             foreach (var d in ducks)
             {
                 if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead && (owner == null || owner.owner != d))
                     _target = d;
             }
 
-            var stgs = Level.CheckCircleAll<StingerMissile>(position, 1000);
+            var stgs = Level.CheckCircleAll<StingerMissile>(position, 8192);
             foreach (var d in stgs)
             {
                 if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this && !d._destroyed && (owner == null || d._target == owner.owner))
@@ -167,26 +180,35 @@ namespace TMGmod.Buddies
             Destroy(new DTImpact(with));
         }
 
+        private void UpdateAv()
+        {
+            Av = OffsetLocal(new Vec2(A, 0));
+            velocity += Av;
+        }
+
         private void UpdateFlight()
         {
             if (!_activated) return;
-            //velocity += OffsetLocal(new Vec2(A, 0));
-            if (_target is null) return;
+            if (_target is null)
+            {
+                UpdateAv();
+                return;
+            }
             Ta = _target.velocity - Tlv;
             Tlv = _target.velocity;
             var p = _target.position - position;
             var v = _target.velocity - velocity;
-            var g = new Vec2(0, gravity) - Ta;
+            //var g = new Vec2(0, gravity) - Ta;
+            var g = G;
             var pa = Delta(-v, p, g);
             var maybeangle = Math.Acos(pa.x / pa.length);
             if (pa.y < 0) maybeangle = -maybeangle;
             if (offDir < 0) maybeangle += Math.PI;
             angle = (float) maybeangle;
-            //velocity += pa;
-            velocity += OffsetLocal(new Vec2(A, 0));
+            UpdateAv();
         }
 
-        public override void Draw()
+        private void DrawDebug()
         {
             if (_target != null)
                 Graphics.DrawCircle(_target.position, 16, Color.Red, depth: _target.depth.value + 3f);
@@ -202,8 +224,9 @@ namespace TMGmod.Buddies
             if (_target is null) return;
             var p = _target.position - position;
             var v = _target.velocity - velocity;
-            var g = new Vec2(0, gravity);
-            var t = (float) Time4(A * A, -v, p, g);
+            //var g = new Vec2(0, gravity);
+            var g = G;
+            var t = (float)Time4(A * A, -v, p, g);
             var pa = Delta(-v, p, g);
             p0 = position;
             var v0 = velocity;
@@ -226,6 +249,11 @@ namespace TMGmod.Buddies
 
             var ipos = position + (pa + g) * t * t / 2 + velocity * t;
             Graphics.DrawCircle(ipos, 24, Color.Yellow, depth: _target.depth.value + 3f);
+        }
+
+        public override void Draw()
+        {
+            DrawDebug();
         }
 
         public override void Touch(MaterialThing with)
@@ -266,7 +294,7 @@ namespace TMGmod.Buddies
             return res;
         }*/
 
-        private double Time4(double aa, Vec2 v, Vec2 p, Vec2 g)
+        private static double Time4(double aa, Vec2 v, Vec2 p, Vec2 g)
         {
             double gg = Vec2.Dot(g, g);
             double vg = Vec2.Dot(v, g);
@@ -286,7 +314,7 @@ namespace TMGmod.Buddies
             return t;
         }
 
-        private Vec2 Delta(Vec2 v, Vec2 p, Vec2 g)
+        private static Vec2 Delta(Vec2 v, Vec2 p, Vec2 g)
         {
             const double aa = A * A;
             var t = Time4(aa, v, p, g);

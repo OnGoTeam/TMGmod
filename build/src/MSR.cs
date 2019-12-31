@@ -10,13 +10,13 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MSR : Sniper, IAmSr, IHaveSkin, IHaveBipods
     {
+        private readonly Vec2 _fakeshelloffset = new Vec2(-9f, -1.5f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 9 });
@@ -26,8 +26,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("MSR"), 47, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(28.5f, 6f);
-            _collisionOffset = new Vec2(-28.5f, -6f);
+            _center = new Vec2(24f, 6f);
+            _collisionOffset = new Vec2(-24f, -6f);
             _collisionSize = new Vec2(47f, 12f);
             _barrelOffsetTL = new Vec2(47f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
@@ -47,9 +47,21 @@ namespace TMGmod
             _kickForce = 5.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(14f, 0f);
+            _holdOffset = new Vec2(10f, 0f);
             _editorName = "MSR";
 			_weight = 4.65f;
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
         public bool Bipods
         {
@@ -119,6 +131,7 @@ namespace TMGmod
                     handOffset = Vec2.Zero;
                 }
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_loadState)
                 {
                     case 0:

@@ -12,6 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AWS : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
     {
+        private readonly Vec2 _fakeshelloffset = new Vec2(-3f, -2f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         [UsedImplicitly]
@@ -26,7 +27,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
@@ -54,12 +54,24 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
             _kickForce = 4.75f;
-            _holdOffset = new Vec2(2f, 0f);
+            _holdOffset = new Vec2(2f, 1f);
             _editorName = "AWS";
 			_weight = 5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(18f, 3f);
 
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
         public bool Bipods
         {
@@ -68,7 +80,7 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                    BipodsState += 1f / 7 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _kickForce = bipods ? 0 : 4.75f;
@@ -132,6 +144,7 @@ namespace TMGmod
                     handOffset = Vec2.Zero;
                 }
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_loadState)
                 {
                     case 0:
@@ -196,7 +209,7 @@ namespace TMGmod
 
         public override void Fire()
         {
-            if (FrameId / 10 == 1) return;
+            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
             base.Fire();
         }
 

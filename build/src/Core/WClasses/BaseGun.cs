@@ -12,7 +12,7 @@ namespace TMGmod.Core.WClasses
         protected float MinAccuracy;
         [UsedImplicitly]
         protected float PrevKforce;
-        protected float podarokChance = 2f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%
+        private const float PChance = 2f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%
         [UsedImplicitly]
         protected bool ToPrevKforce;
         protected Vec2 ShellOffset;
@@ -31,9 +31,6 @@ namespace TMGmod.Core.WClasses
             ToPrevKforce = true;
         }
 
-        /// <summary>
-        /// <see cref="Gun.Fire"/> modification/reimplementation
-        /// </summary>
         public override void Fire()
         {
             PrevKforce = _kickForce;
@@ -68,7 +65,7 @@ namespace TMGmod.Core.WClasses
             base.Fire();
             if (pammo > ammo)
             {
-                if (Rando.Float(0f, 1f) < (podarokChance/100f))
+                if (Rando.Float(0f, 1f) < PChance/100f)
                 {
                     var scase = new NewYearCase(x, y);
                     Level.Add(scase);
@@ -78,9 +75,6 @@ namespace TMGmod.Core.WClasses
                 _kickForce = PrevKforce;
         }
 
-        /// <summary>
-        /// <see cref="Gun.Update"/> modification/reimplementation
-        /// </summary>
         public override void Update()
         {
             if (!_currHoneInit)

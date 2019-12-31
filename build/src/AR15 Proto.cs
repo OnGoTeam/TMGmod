@@ -17,13 +17,21 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 8 });
-        private int _ammobefore = 21;
-        private float _explode;
-        private int _uselessinteger = 3;
+        [UsedImplicitly]
+        public int Ammobefore = 21;
+        [UsedImplicitly]
+        public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
+        [UsedImplicitly]
+        public float Explode;
+        [UsedImplicitly]
+        public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
+        [UsedImplicitly]
+        public int Uselessinteger = 3;
+        [UsedImplicitly]
+        public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
         private const double Explodechance = 0.006;
 
         public AR15Proto(float xval, float yval)
@@ -41,7 +49,7 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 5f);
+            _center = new Vec2(19f, 5f);
             _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(27f, 10f);
             _barrelOffsetTL = new Vec2(27f, 3f);
@@ -55,7 +63,7 @@ namespace TMGmod
             _kickForce = 1.9f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.21f;
-            _holdOffset = new Vec2(7f, 1f);
+            _holdOffset = new Vec2(5f, 0f);
             ShellOffset = new Vec2(-7f, -1f);
             _editorName = "AR15 Proto";
 			_weight = 4.2f;
@@ -63,27 +71,27 @@ namespace TMGmod
         }
         public override void OnPressAction()
         {
-            ammo = Rando.Int(0, _ammobefore / _uselessinteger);
-            if (ammo > _ammobefore) ammo = _ammobefore;
-            _ammobefore -= ammo;
-            if (ammo < 1 && _ammobefore < 1) CreateExplosion(position);
+            ammo = Rando.Int(0, Ammobefore / Uselessinteger);
+            if (ammo > Ammobefore) ammo = Ammobefore;
+            Ammobefore -= ammo;
+            if (ammo < 1 && Ammobefore < 1) CreateExplosion(position);
             base.OnPressAction();
         }
         public override void OnReleaseAction()
         {
-            if (ammo > 0) _ammobefore += ammo;
-            _uselessinteger = 1;
+            if (ammo > 0) Ammobefore += ammo;
+            Uselessinteger = 1;
             base.OnReleaseAction();
         }
         public override void Fire()
         {
-            _explode = Rando.Float(0,1);
-            if (_explode < Explodechance) CreateExplosion(position);
+            Explode = Rando.Float(0,1);
+            if (Explode < Explodechance) CreateExplosion(position);
             base.Fire();
         }
         public override void Thrown()
         {
-            if (ammo < 1 && _ammobefore > 0) ammo = _ammobefore;
+            if (ammo < 1 && Ammobefore > 0) ammo = Ammobefore;
             base.Thrown();
         }
         private void CreateExplosion(Vec2 pos)

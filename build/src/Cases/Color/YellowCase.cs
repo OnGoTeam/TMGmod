@@ -5,11 +5,9 @@ using TMGmod.Core;
 
 namespace TMGmod.Cases.Color
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorY : BaseCase
     {
-        /// <inheritdoc />
         public PodarokColorY(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);

@@ -5,12 +5,8 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    /// <summary>
-    /// <see cref="AmmoType"/> for <see cref="X3X"/>
-    /// </summary>
     public class ATM16 : AmmoType
     {
-        /// <inheritdoc />
         public ATM16()
         {
             bulletLength = 30f;

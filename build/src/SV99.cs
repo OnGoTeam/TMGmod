@@ -17,7 +17,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 5, 8 });
@@ -47,7 +46,7 @@ namespace TMGmod
             _kickForce = 1.7f;
             loseAccuracy = 0.5f;
             maxAccuracyLost = 1.5f;
-            _holdOffset = new Vec2(1f, 0f);
+            _holdOffset = new Vec2(-1f, 0f);
 			_manualLoad = true;
             _editorName = "SV-99";
 			_weight = 2f;
@@ -69,6 +68,7 @@ namespace TMGmod
 					handOffset = Vec2.Zero;
 				}
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_loadState)
                 {
                     case 0:

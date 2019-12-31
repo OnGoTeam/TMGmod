@@ -3,13 +3,11 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
     public class SnowMgun : BaseSmg
     {
         private readonly SpriteMap _sprite;
 
-        /// <inheritdoc />
         public SnowMgun(float xval, float yval) : base(xval, yval)
         {
             ammo = 40;
@@ -18,10 +16,10 @@ namespace TMGmod.NY
             _sprite = new SpriteMap(GetPath("Holiday/SnowMachineGun"), 17, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(9.5f, 4.5f);
-            _collisionOffset = new Vec2(-9.5f, -4.5f);
+            _center = new Vec2(10f, 5f);
+            _collisionOffset = new Vec2(-10f, -5f);
             _collisionSize = new Vec2(19f, 9f);
-            _barrelOffsetTL = new Vec2(17f, 4.5f);
+            _barrelOffsetTL = new Vec2(17f, 2f);
             _holdOffset = new Vec2(-2f, 1f);
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
@@ -33,7 +31,6 @@ namespace TMGmod.NY
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             if (ammo > 20 && ammo <= 30 && _sprite.frame < 1) _sprite.frame += 1;

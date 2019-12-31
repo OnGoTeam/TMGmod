@@ -92,6 +92,7 @@
     <Compile Include="src\Buddies\StingerLauncher.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT44DB.cs" />
     <Compile Include="src\Core\AmmoTypes\ATMG44.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM16.cs" />
@@ -101,11 +102,21 @@
     <Compile Include="src\Core\IHaveBipods.cs" />
     <Compile Include="src\Core\IHaveStock.cs" />
     <Compile Include="src\Core\Shells\M50shell.cs" />
+    <Compile Include="src\Core\Shells\DB44Shell.cs" />
     <Compile Include="src\Core\Shells\MG44shell.cs" />
     <Compile Include="src\Core\Shells\M72shell.cs" />
     <Compile Include="src\Core\Shells\X3Xshell.cs" />
     <Compile Include="src\DR300.cs" />
     <Compile Include="src\M16A6.cs" />
+    <Compile Include="src\NY\ATPopcorn.cs" />
+    <Compile Include="src\NY\CandyCaneLime.cs" />
+    <Compile Include="src\NY\CandyCaneOrange.cs" />
+    <Compile Include="src\NY\Peppergun.cs" />
+    <Compile Include="src\NY\Popcal.cs" />
+    <Compile Include="src\NY\ATIcer.cs" />
+    <Compile Include="src\NY\Icer.cs" />
+    <Compile Include="src\NY\PopBullet.cs" />
+    <Compile Include="src\Urbana.cs" />
     <Compile Include="src\Stuff\ActiveDefenseSystem.cs" />
     <Compile Include="src\Useless or deleted Guns\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
@@ -144,7 +155,6 @@
     <Compile Include="src\Cases\Color\RedCase.cs" />
     <Compile Include="src\Cases\Color\YellowCase.cs" />
     <Compile Include="src\Cases\Heavy Millitary Case.cs" />
-    <Compile Include="src\Cases\Millitary Case.cs" />
     <Compile Include="src\Core\BaseCase.cs" />
     <Compile Include="src\Core\IHaveSkin.cs" />
     <Compile Include="src\Core\WClasses\BaseBurst.cs" />

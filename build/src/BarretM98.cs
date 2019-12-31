@@ -9,13 +9,13 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     public class BarretM98 : Sniper, IAmSr, IHaveSkin
     {
+        private readonly Vec2 _fakeshelloffset = new Vec2(-6f, -3f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
@@ -26,8 +26,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("BarretM98"), 50, 13);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(25f, 6.5f);
-            _collisionOffset = new Vec2(-25f, -6.5f);
+            _center = new Vec2(25f, 7f);
+            _collisionOffset = new Vec2(-25f, -7f);
             _collisionSize = new Vec2(50f, 13f);
             _barrelOffsetTL = new Vec2(50f, 5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
@@ -41,11 +41,22 @@ namespace TMGmod
             _kickForce = 6f;
             laserSight = false;
             //_laserOffsetTL = new Vec2(31f, 9f);
-            _holdOffset = new Vec2(7f, -1f);
+            _holdOffset = new Vec2(7f, 0f);
             _editorName = "Barrett M98";
 			_weight = 7f;
         }
-
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
+        }
         public override void Draw()
         {
             var ang = angle;
@@ -92,6 +103,7 @@ namespace TMGmod
                     handOffset = Vec2.Zero;
                 }
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_loadState)
                 {
                     case 0:

@@ -11,6 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SV98 : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
     {
+        private readonly Vec2 _fakeshelloffset = new Vec2(-1f, -2f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         [UsedImplicitly]
@@ -25,7 +26,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5, 8 });
@@ -53,12 +53,24 @@ namespace TMGmod
             _fireSound = "sniper";
             _fullAuto = false;
             _kickForce = 4.67f;
-            _holdOffset = new Vec2(4f, 2f);
+            _holdOffset = new Vec2(3f, 1f);
             _editorName = "SV-98";
 			_weight = 4.5f;
             laserSight = true;
             _laserOffsetTL = new Vec2(18f, 2f);
 
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                if (shell)
+                {
+                    _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
+                }
+                --ammo;
+            }
+            loaded = true;
         }
         public bool Bipods
         {
@@ -130,6 +142,7 @@ namespace TMGmod
                     handOffset = Vec2.Zero;
                 }
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_loadState)
                 {
                     case 0:
@@ -194,7 +207,7 @@ namespace TMGmod
 
         public override void Fire()
         {
-            if (FrameId / 10 == 1) return;
+            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
             base.Fire();
         }
         [UsedImplicitly]

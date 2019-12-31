@@ -46,9 +46,6 @@ namespace TMGmod.Core
         [UsedImplicitly]
         public interface ISupportReload
         {
-            /// <summary>
-            /// is called when reload finishes
-            /// </summary>
             bool SetMag();
             [UsedImplicitly]
             bool DropMag(Thing mag);

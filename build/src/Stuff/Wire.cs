@@ -4,9 +4,6 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
-    /// <summary>
-    /// <see cref="PhysicsObject"/> slowing down <see cref="Duck"/>s
-    /// </summary>
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
     [UsedImplicitly]
@@ -23,11 +20,10 @@ namespace TMGmod.Stuff
         [UsedImplicitly]
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
 
-        /// <inheritdoc />
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
             Hp = 25f;
-            _sprite = new SpriteMap(GetPath("WireYes"), 48, 6);
+            _sprite = new SpriteMap(GetPath("Holiday/WireYesNY"), 48, 6); //if ny then NY else _
             _graphic = _sprite;
             Teksturka = Rando.Int(0, 3);
             _center = new Vec2(24f, 3f);
@@ -38,7 +34,6 @@ namespace TMGmod.Stuff
             throwSpeedMultiplier = 0f;
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             if (Hp <= 0f) Hp = 0f;
@@ -69,7 +64,6 @@ namespace TMGmod.Stuff
             base.Update();
         }
 
-        /// <inheritdoc />
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             if (bullet.ammo.penetration < 10f) Damage(bullet.ammo);
@@ -82,11 +76,10 @@ namespace TMGmod.Stuff
             if (!(Hp < 1f)) return;
             //else
             thickness = 0.1f;
-            graphic = new Sprite(GetPath("WireNot"));
+            graphic = new Sprite(GetPath("Holiday/WireNotNY"));
             collisionSize = new Vec2(48f, 4f);
         }
 
-        /// <inheritdoc />
         public override void Draw()
         {
             _sprite.frame = Teksturka;
