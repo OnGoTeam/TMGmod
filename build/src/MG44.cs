@@ -21,7 +21,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 6, 7 });
@@ -58,6 +57,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (ammo)
             {
                 case 1:

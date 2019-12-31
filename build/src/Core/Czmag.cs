@@ -3,12 +3,8 @@
 
 namespace TMGmod.Core
 {
-    /// <summary>
-    /// <see cref="PhysicsParticle"/> dropped from <see cref="CZ75"/> when it reloads
-    /// </summary>
     public class Czmag : PhysicsParticle
     {
-        /// <inheritdoc />
         public Czmag(float xpos, float ypos)
             : base(xpos, ypos)
         {

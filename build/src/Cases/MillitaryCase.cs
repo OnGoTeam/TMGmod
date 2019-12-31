@@ -6,12 +6,10 @@ using TMGmod.Core;
 
 namespace TMGmod.Cases
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
     [UsedImplicitly]
     public class PodarokMillitary : BaseCase
     {
-        /// <inheritdoc />
         public PodarokMillitary(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("MillitaryCase"), 14, 8);

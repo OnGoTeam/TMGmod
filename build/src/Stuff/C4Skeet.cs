@@ -3,13 +3,11 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc")]
     [BaggedProperty("canSpawn", false)]
     [UsedImplicitly]
     public class C4Skeet : Holdable
     {
-        /// <inheritdoc />
         public C4Skeet(float xpos, float ypos) : base(xpos, ypos)
         {
             _weight = 8f;
@@ -19,7 +17,6 @@ namespace TMGmod.Stuff
             _collisionSize = new Vec2(8f, 4f);
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             base.Update();

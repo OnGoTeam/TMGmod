@@ -8,9 +8,6 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    /// <inheritdoc cref="BaseGun"/>
-    /// <inheritdoc cref="IHaveSkin"/>
-    /// <inheritdoc cref="IAmLmg"/>
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
     public class MG44C : BaseGun, IHaveSkin, IAmLmg, IHaveBipods
@@ -103,7 +100,6 @@ namespace TMGmod
             _sprite.frame = bublic;
         }
 
-        /// <inheritdoc />
         [UsedImplicitly]
         public int FrameId
         {

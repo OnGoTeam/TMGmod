@@ -11,7 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SV98 : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
     {
-        private Vec2 fakeshelloffset = new Vec2(-1f, -2f);
+        private readonly Vec2 _fakeshelloffset = new Vec2(-1f, -2f);
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         [UsedImplicitly]
@@ -26,7 +26,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5, 8 });
@@ -67,7 +66,7 @@ namespace TMGmod
             {
                 if (shell)
                 {
-                    _ammoType.PopShell(Offset(fakeshelloffset).x, Offset(fakeshelloffset).y, -offDir);
+                    _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
                 }
                 --ammo;
             }
@@ -143,6 +142,7 @@ namespace TMGmod
                     handOffset = Vec2.Zero;
                 }
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (_loadState)
                 {
                     case 0:

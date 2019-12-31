@@ -4,13 +4,8 @@ using TMGmod.Core.Shells;
 
 namespace TMGmod.Core
 {
-
-    /// <summary>
-    /// <see cref="AmmoType"/> with <see cref="ExplosiveBullet"/>
-    /// </summary>
     public class Cal50Explode : AmmoType, IHeavyAmmoType
     {
-        /// <inheritdoc />
         public Cal50Explode()
         {
             accuracy = 0.9f;

@@ -5,11 +5,9 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    /// <inheritdoc />
     public class ATPopcorn : BaseAmmoTypeT
     {
         private readonly SpriteMap _sprite;
-        /// <inheritdoc />
         public ATPopcorn()
         {
             bulletType = typeof(PopBullet);

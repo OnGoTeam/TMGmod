@@ -31,9 +31,6 @@ namespace TMGmod.Core.WClasses
             ToPrevKforce = true;
         }
 
-        /// <summary>
-        /// <see cref="Gun.Fire"/> modification/reimplementation
-        /// </summary>
         public override void Fire()
         {
             PrevKforce = _kickForce;
@@ -78,9 +75,6 @@ namespace TMGmod.Core.WClasses
                 _kickForce = PrevKforce;
         }
 
-        /// <summary>
-        /// <see cref="Gun.Update"/> modification/reimplementation
-        /// </summary>
         public override void Update()
         {
             if (!_currHoneInit)

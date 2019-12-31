@@ -5,10 +5,8 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    /// <inheritdoc />
     public class ATIcer : BaseAmmoTypeT
     {
-        /// <inheritdoc />
         public ATIcer()
         {
             var spriteY = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Icer Bullet"));

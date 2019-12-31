@@ -1,9 +1,11 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc|Holiday")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class PPLMG : BaseLmg
     {

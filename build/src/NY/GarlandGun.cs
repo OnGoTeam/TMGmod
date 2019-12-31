@@ -14,7 +14,6 @@ namespace TMGmod.NY
         [UsedImplicitly]
         public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
 
-        /// <inheritdoc />
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 27;
@@ -37,7 +36,6 @@ namespace TMGmod.NY
             _ammoType = new AT9mmParasha();
         }
 
-        /// <inheritdoc />
         public override void Update()
         {
             _sprwait -= 0.11f;

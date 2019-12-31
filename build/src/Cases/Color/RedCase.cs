@@ -8,11 +8,9 @@ using TMGmod.Useless_or_deleted_Guns;
 
 namespace TMGmod.Cases.Color
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorR : BaseCase
     {
-        /// <inheritdoc />
         public PodarokColorR(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);

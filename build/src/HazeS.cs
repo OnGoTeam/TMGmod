@@ -8,12 +8,6 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    /// <inheritdoc cref="BaseGun" />
-    /// <inheritdoc cref="IAmHg"/>
-    /// <inheritdoc cref="IHaveSkin"/>
-    /// <summary>
-    /// Hg with Heatval and Sighted features
-    /// </summary>
     [BaggedProperty("isInDemo", true), EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class HazeS : BaseGun, IAmHg, IHaveSkin
     {
@@ -23,14 +17,10 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
         private float _heatval;
-        /// <summary>
-        /// Heatval'ue has effect on acc, bulletSpeed, range
-        /// </summary>
         [UsedImplicitly]
         public float Heatval
         {
@@ -44,17 +34,11 @@ namespace TMGmod
                 Sighted = _sighted;
             }
         }
-        /// <summary>
-        /// HV syncing
-        /// </summary>
         [UsedImplicitly]
         public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
 
         private bool _sighted;
 
-        /// <summary>
-        /// Whether duck is using sights
-        /// </summary>
         [UsedImplicitly]
         public bool Sighted
         {
@@ -69,7 +53,6 @@ namespace TMGmod
             }
         }
 
-        /// <inheritdoc />
         public HazeS(float xval, float yval) :
             base(xval, yval)
         {
@@ -104,10 +87,6 @@ namespace TMGmod
             _flare = new SpriteMap(GetPath("FlareHazeS"), 13, 10) {center = new Vec2(0.0f, 5f)};
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Updates Heatval and Sighted
-        /// </summary>
         public override void Update()
         {
             base.Update();
@@ -144,10 +123,6 @@ namespace TMGmod
             CurrHone = HoldOffsetNoExtra;
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Updates post-fire _heatval
-        /// </summary>
         public override void Fire()
         {
             if (ammo > 0)
@@ -175,7 +150,6 @@ namespace TMGmod
             _sprite.frame = bublic;
         }
 
-        /// <inheritdoc />
         [UsedImplicitly]
         public int FrameId
         {
@@ -183,10 +157,6 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        /// <summary>
-        /// Updates skin when Skin's changed
-        /// </summary>
-        /// <param name="property"></param>
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

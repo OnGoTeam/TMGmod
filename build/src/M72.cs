@@ -38,6 +38,7 @@ namespace TMGmod
         }
         public override void Update()
         {
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (ammo)
             {
                 case 4:

@@ -4,10 +4,8 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    /// <inheritdoc />
     public class ATIglu : BaseAmmoTypeT
     {
-        /// <inheritdoc />
         public ATIglu()
         {
             var spriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/Igolka"), 4, 1);

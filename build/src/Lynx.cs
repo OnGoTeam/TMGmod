@@ -25,7 +25,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 5 });
@@ -81,7 +80,7 @@ namespace TMGmod
                 _kickForce = bipods ? 0 : 5.8f;
                 loseAccuracy = bipods ? 0 : 0.1f;
                 maxAccuracyLost = bipods ? 0 : 0.3f;
-                FrameId = FrameId % 10 + 10 * (bipods ? 3 : nobipods ? 0 : (bipodsstate < 0.5f) ? 1 : 2);
+                FrameId = FrameId % 10 + 10 * (bipods ? 3 : nobipods ? 0 : bipodsstate < 0.5f ? 1 : 2);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     BipOn.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)

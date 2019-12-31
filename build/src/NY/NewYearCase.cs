@@ -7,11 +7,9 @@ using TMGmod.Cases;
 
 namespace TMGmod.NY
 {
-    /// <inheritdoc />
     [EditorGroup("TMG|Misc|Holiday")]
     public class NewYearCase : BaseCase
     {
-        /// <inheritdoc />
         public NewYearCase(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("Holiday/HolydayCase"), 14, 8);

@@ -4,10 +4,8 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    /// <inheritdoc />
     public class ATSneg : BaseAmmoTypeT
     {
-        /// <inheritdoc />
         public ATSneg()
         {
             bulletType = typeof(SnowBullet);

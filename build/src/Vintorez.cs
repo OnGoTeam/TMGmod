@@ -20,8 +20,8 @@ namespace TMGmod
         [UsedImplicitly]
         public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
         // ReSharper disable once InconsistentNaming
+        [UsedImplicitly]
         private readonly EditorProperty<int> skin;
-        /// <inheritdoc />
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7 });
