@@ -25,8 +25,6 @@ namespace TMGmod.Core
             /*AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;*/
             LastInstance = this;
         }
-        [UsedImplicitly]
-        internal static string AssemblyName { get; private set; }
 		
 		//Приоритет. Мод загружается раньше/позже других модов
         public override Priority priority => Priority.Normal;
@@ -86,12 +84,12 @@ namespace TMGmod.Core
             var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
             if (!Directory.Exists(levels)) Directory.CreateDirectory(levels);
             IList<string> levelslist = new List<string>();
-
+            const string takefrom = "\\content\\maps\\";
             foreach (var s in Directory.GetFiles(GetPath<TMGmod>("maps")))
             {
-                var takefrom = AssemblyName + "\\content\\maps\\";
                 var firstlocated = s.Replace('/', '\\');
-                var copyto = levels + firstlocated.Substring(firstlocated.IndexOf(takefrom, StringComparison.Ordinal) + takefrom.Length);
+                var fname = firstlocated.Substring(firstlocated.IndexOf(takefrom, StringComparison.Ordinal) + takefrom.Length);
+                var copyto = Path.Combine(levels, fname);
                 if (!File.Exists(copyto) || !GetMD5Hash(File.ReadAllBytes(firstlocated)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(copyto)))) File.Copy(firstlocated, copyto, true);
                 levelslist.Add(copyto);
             }
