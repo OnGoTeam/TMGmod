@@ -24,8 +24,6 @@ namespace TMGmod.Stuff
         public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
         [UsedImplicitly]
         public MaterialThing StickThing;
-        [UsedImplicitly]
-        public StateBinding StickBinding = new StateBinding(nameof(StickThing));
         private Vec2 _stickyVec2;
         [UsedImplicitly]
         public bool WasThrown;
