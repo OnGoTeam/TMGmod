@@ -69,7 +69,7 @@ namespace TMGmod.NY
             }
             bulletFireIndex += (byte)ammo;
             ammo = 0;
-            if (!Network.isActive) return base.Destroy(type1);
+            if (!Network.isActive) return true;
             Send.Message(new NMFireGun(this, firedBullets, bulletFireIndex, false),
                 NetMessagePriority.ReliableOrdered);
             firedBullets.Clear();
