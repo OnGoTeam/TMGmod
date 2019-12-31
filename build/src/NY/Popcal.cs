@@ -54,26 +54,26 @@ namespace TMGmod.NY
             return hit;
         }
 
-        public override bool Destroy(DestroyType type1 = null)
+        protected override bool OnDestroy(DestroyType type1 = null)
         {
             var hitpos = Offset(new Vec2(0, 0));
             for (var index = 0; index < ammo; ++index)
             {
                 var num2 = (float)(index * 18.0 - 5.0) + Rando.Float(10f);
-                var atPopcorn = new ATPopcorn {bulletSpeed = 2f};
+                var atPopcorn = new ATPopcorn { bulletSpeed = 2f };
                 var bullet = new Bullet(hitpos.x + (float)(Math.Cos(Maths.DegToRad(num2)) * 6.0),
                         hitpos.y - (float)(Math.Sin(Maths.DegToRad(num2)) * 6.0), atPopcorn, num2)
                     { firedFrom = this };
                 firedBullets.Add(bullet);
                 Level.Add(bullet);
             }
-            bulletFireIndex += (byte) ammo;
+            bulletFireIndex += (byte)ammo;
             ammo = 0;
             if (!Network.isActive) return base.Destroy(type1);
             Send.Message(new NMFireGun(this, firedBullets, bulletFireIndex, false),
                 NetMessagePriority.ReliableOrdered);
             firedBullets.Clear();
-            return base.Destroy(type1);
+            return true;
         }
 
         public override void Update()
