@@ -54,7 +54,8 @@ namespace TMGmod.NY
                   typeof(ChestPlate), 
                    //x1
                    typeof(SpruceGun),
-                   typeof(CandyCaneOrange), 
+                   typeof(CandyCaneOrange),
+                   typeof(PPLMG),
                    typeof(PodarokColorB),  
                    typeof(PodarokColorC),  
                    typeof(PodarokColorY),  
