@@ -9,4 +9,4 @@ Developers/разработчики:
 "GamerPTA" - codemaker
 Exel "EXsess" Shustrov - art-director, a bit codemaker
 
-[i]50ae.Pistol, Haze S, Alfa, CZ C2, SMG-9, Vista, 44db, DragoShot, FN FCAR, M72, MG44Req, ARW-A, Experimental ANP-73, Experimental X3X, G9M, IB-8mm Sniper, Anyx SR2 Compact, Anyx ARS Elite [/i] © 2017-2019 OnGoTeam
+[i]50ae.Pistol, Haze S, Alfa, CZ C2, SMG-9, Vista, 44db, DragoShot, FN FCAR, M72, MG44Req, MG44 Mark2H, MG44 Mark2T ARW-A, Experimental ANP-73, Experimental X3X, G9M, IB-8mm Sniper, Anyx SR2 Compact, Anyx ARS Elite, Anyx PR5 [/i] © 2017-2020 OnGoTeam
