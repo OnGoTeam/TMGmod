@@ -23,9 +23,11 @@ namespace TMGmod.Core.WClasses
             LoadProgress = LoadFin;
         }
 
-        private bool AtPop()
+        private void UpdateAtPopReload()
         {
-            return LoadProgress >= LoadPop && LoadProgress < LoadPop + LoadSpeed;
+            if (LoadProgress < LoadPop) return;
+            if (loaded) return;
+            Reload();
         }
 
         private void UpdateLoad()
@@ -37,11 +39,7 @@ namespace TMGmod.Core.WClasses
             }
 
             if (LoadProgress < 0) return;
-            if (AtPop() && ammo != 0)
-            {
-                _ammoType.PopShell(x, y, -offDir);
-                Reload(false);
-            }
+            UpdateAtPopReload();
             LoadProgress = Math.Min(LoadProgress + LoadSpeed, LoadFin);
         }
 
@@ -53,16 +51,11 @@ namespace TMGmod.Core.WClasses
 
         public override void OnPressAction()
         {
-            if (loaded)
-            {
-                base.OnPressAction();
-                LoadProgress = LoadNo;
-            }
-            else
-            {
-                if (LoadProgress == LoadNo)
-                    LoadProgress = LoadStart;
-            }
+            if (LoadProgress == LoadNo)
+                LoadProgress = LoadStart;
+            if (!loaded) return;
+            base.OnPressAction();
+            LoadProgress = LoadNo;
         }
 
         public override void Draw()
