@@ -80,6 +80,7 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f)
                     };
                 }
+                //TODO: botl
                 else
                 {
                     FrameId += 10;
