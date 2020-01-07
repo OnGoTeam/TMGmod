@@ -20,7 +20,7 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        private bool _stock = false;
+        private bool _stock;
         [UsedImplicitly]
         public bool Stock
         {
@@ -44,7 +44,7 @@ namespace TMGmod
             }
         }
 
-        private float _stockstate = 1f;
+        private float _stockstate;
         public float StockState
         {
             get => _stockstate;
@@ -111,7 +111,15 @@ namespace TMGmod
             EpsilonA = 50;
             EpsilonB = 100;
             Loaddx = 4f;
+            Stock = false;
         }
+
+        public override void Initialize()
+        {
+            Stock = false;
+            base.Initialize();
+        }
+
         public override void Update()
         {
             base.Update();
