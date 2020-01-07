@@ -33,9 +33,9 @@ namespace TMGmod
                     StockState += 1f / 10 * (value ? 1 : -1);
                 var nostock = StockState < 0.01f;
                 var stock = StockState > 0.99f;
-                _fireWait = stock ? 0.45f : 0.15f;
-                _kickForce = stock ? 2.3f : 1.9f;
-                EpsilonB = stock ? 100 : 60;
+                _fireWait = stock ? 0f : 1.5f;
+                _kickForce = stock ? 1.1f : 2.8f;
+                EpsilonB = stock ? 60 : 100;
                 FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
                 if (isServerForObject && stock && stockstate <= 0.99f)
                     SFX.Play(GetPath("sounds/beepods1"));
@@ -84,7 +84,7 @@ namespace TMGmod
             };
             _numBulletsPerFire = 6;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Remington 440 Raid"), 26, 8); //
+            _sprite = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);
             _graphic = _sprite;
             _sprite.frame = 20;
             _center = new Vec2(13f, 4f);
@@ -97,13 +97,13 @@ namespace TMGmod
             };
             _holdOffset = new Vec2(0f, 1f);
             _fireSound = "shotgunFire2";
-            _kickForce = 2.3f;
+            _kickForce = 2.8f;
             _manualLoad = true;
-            _fireWait = 0.45f;
+            _fireWait = 1.5f;
             _laserOffsetTL = new Vec2(22f, 1f);
             laserSight = true;
-            _editorName = "Remington 440 Raid";
-            LoaderSprite = new SpriteMap(GetPath("Remington 440 RaidPump"), 6, 8)
+            _editorName = "Remington 870 Raid";
+            LoaderSprite = new SpriteMap(GetPath("Remington 870 RaidPump"), 6, 8)
             {
                 center = new Vec2(3f, 4f)
             };
