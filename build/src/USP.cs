@@ -12,6 +12,7 @@ namespace TMGmod
     public class USP : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 2;
         [UsedImplicitly]
         public bool Silencer
         {
@@ -50,7 +51,6 @@ namespace TMGmod
         }
         [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-        private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
