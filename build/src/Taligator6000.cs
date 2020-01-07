@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [UsedImplicitly]
-    [EditorGroup("TMG|Shotgun|Full-Auto")]
+    [EditorGroup("TMG|Shotgun|Fully-Automatic")]
     public class Taligator6000 : BaseGun, IAmSg
     {
 	    public Taligator6000(float xval, float yval) : base(xval, yval)

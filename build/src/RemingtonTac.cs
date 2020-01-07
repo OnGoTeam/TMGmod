@@ -107,7 +107,7 @@ namespace TMGmod
             {
                 center = new Vec2(3f, 4f)
             };
-            LoaderVec2 = new Vec2(10f, -0.5f);
+            LoaderVec2 = new Vec2(7f, -0.5f);
             Loaddx = 3f;
             Stock = false;
         }

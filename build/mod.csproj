@@ -116,6 +116,7 @@
     <Compile Include="src\NY\ATIcer.cs" />
     <Compile Include="src\NY\Icer.cs" />
     <Compile Include="src\NY\PopBullet.cs" />
+    <Compile Include="src\KS-23.cs" />
     <Compile Include="src\Taligator6000.cs" />
     <Compile Include="src\Urbana.cs" />
     <Compile Include="src\Stuff\ActiveDefenseSystem.cs" />
