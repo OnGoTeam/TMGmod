@@ -12,7 +12,50 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         [UsedImplicitly]
-        public bool Silencer;
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _ammoType = new AT9mmS
+                    {
+                        range = 167f,
+                        accuracy = 0.92f,
+                        penetration = 1f
+                    };
+                    _barrelOffsetTL = new Vec2(16f, 1f);
+                    loseAccuracy = 0.07f;
+                    maxAccuracyLost = 0.3f;
+                    weight = 3.8f;
+                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _flare = new SpriteMap("smallFlare", 11, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                    _fireSound = GetPath("sounds/smg.wav");
+                    _ammoType = new AT9mm
+                    {
+                        range = 145f,
+                        accuracy = 0.76f,
+                        penetration = 1f,
+                        bulletSpeed = 16f
+                    };
+                    _barrelOffsetTL = new Vec2(13f, 1f);
+                    loseAccuracy = 0.1f;
+                    maxAccuracyLost = 0.34f;
+                    _weight = 3.3f;
+                }
+            }
+        }
         [UsedImplicitly]
         public StateBinding StockBinding = new StateBinding(nameof(Silencer));
         private const int NonSkinFrames = 2;
@@ -44,6 +87,10 @@ namespace TMGmod
             _collisionSize = new Vec2(19f, 10f);
             _barrelOffsetTL = new Vec2(13f, 1f);
             _fireSound = GetPath("sounds/smg.wav");
+            _flare = new SpriteMap("smallFlare", 11, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
             _fullAuto = true;
             _fireWait = 0.31f;
             _kickForce = 0.8f;
@@ -60,43 +107,6 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer)
-                {
-                    FrameId -= 10;
-                    _ammoType = new AT9mm
-                    {
-                        range = 145f,
-                        accuracy = 0.76f,
-                        penetration = 1f,
-                        bulletSpeed = 16f
-                    };
-                    _barrelOffsetTL = new Vec2(13f, 1f);
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.34f;
-                    weight = 3.3f;
-                    _fireSound = GetPath("sounds/smg.wav");
-                    _flare = new SpriteMap("smallFlare", 11, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                }
-                //TODO: botl
-                else
-                {
-                    FrameId += 10;
-                    _ammoType = new AT9mmS
-                    {
-                        range = 167f,
-                        accuracy = 0.92f,
-                        penetration = 1f
-                    };
-                    _barrelOffsetTL = new Vec2(16f, 1f);
-                    loseAccuracy = 0.07f;
-                    maxAccuracyLost = 0.3f;
-                    weight = 3.8f;
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                }
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);

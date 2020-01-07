@@ -28,9 +28,9 @@ namespace TMGmod
                 if (!value)
                 {
                     _sprite.frame %= 10;
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.3f;
-                    _ammoType.accuracy = 0.85f;
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.35f;
+                    _ammoType.accuracy = 0.8f;
                 }
                 else
                 {
@@ -38,7 +38,7 @@ namespace TMGmod
                     _sprite.frame += 10;
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.2f;
-                    _ammoType.accuracy = 0.95f;
+                    _ammoType.accuracy = 0.97f;
                 }
             }
         }

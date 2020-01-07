@@ -14,7 +14,42 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         [UsedImplicitly]
-        public bool Silencer;
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _ammoType = new AT9mmS
+                    {
+                        range = 100f,
+                        accuracy = 0.8f
+                    };
+                    _barrelOffsetTL = new Vec2(16f, 2f);
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _ammoType = new AT9mm
+                    {
+                        range = 70f,
+                        accuracy = 0.61f,
+                        penetration = 0.4f
+                    };
+                    _barrelOffsetTL = new Vec2(10f, 2f);
+                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                    _fireSound = GetPath("sounds/smg.wav");
+                }
+            }
+        }
         [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -28,7 +63,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 20;
+            ammo = 24;
             _ammoType = new AT9mm
             {
                 range = 70f,
@@ -64,34 +99,6 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer)
-                {
-                    _sprite.frame -= 10;
-                    _ammoType = new AT9mm
-                    {
-                        range = 70f,
-                        accuracy = 0.61f,
-                        penetration = 0.4f
-                    };
-                    _barrelOffsetTL = new Vec2(10f, 2f);
-                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                    _fireSound = GetPath("sounds/smg.wav");
-                }
-                else
-                {
-                    _sprite.frame += 10;
-                    _ammoType = new AT9mmS
-                    {
-                        range = 100f,
-                        accuracy = 0.8f
-                    };
-                    _barrelOffsetTL = new Vec2(16f, 2f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
-                }
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);
