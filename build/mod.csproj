@@ -240,7 +240,7 @@
     <Compile Include="src\Custom Guns\PMR30SH.cs" />
     <Compile Include="src\Useless or deleted Guns\PPSh.cs" />
     <Compile Include="src\Remington.cs" />
-    <Compile Include="src\RemingtonTactical.cs" />
+    <Compile Include="src\RemingtonTac.cs" />
     <Compile Include="src\SCARGL.cs" />
     <Compile Include="src\Rfb.cs" />
     <Compile Include="src\Arx200.cs" />

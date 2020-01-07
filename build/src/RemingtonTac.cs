@@ -35,7 +35,7 @@ namespace TMGmod
                 var stock = StockState > 0.99f;
                 _fireWait = stock ? 0f : 1.5f;
                 _kickForce = stock ? 1.1f : 2.8f;
-                EpsilonB = stock ? 60 : 100;
+                LoadSpeed = (sbyte)(stock ? 20 : 10);
                 FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
                 if (isServerForObject && stock && stockstate <= 0.99f)
                     SFX.Play(GetPath("sounds/beepods1"));
@@ -108,8 +108,6 @@ namespace TMGmod
                 center = new Vec2(3f, 4f)
             };
             LoaderVec2 = new Vec2(10f, -0.5f);
-            EpsilonA = 50;
-            EpsilonB = 100;
             Loaddx = 4f;
             Stock = false;
         }

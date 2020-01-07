@@ -39,8 +39,6 @@ namespace TMGmod
             };
             _editorName = "KSG-12";
             LoaderVec2 = new Vec2(2f, 1f);
-	        EpsilonA = 50;
-	        EpsilonB = 100;
 	        Loaddx = 2f;
 	    }
     }
