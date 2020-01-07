@@ -14,7 +14,51 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         [UsedImplicitly]
-        public bool Silencer;
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/Silenced3.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _fireSound = GetPath("sounds/Silenced3.wav");
+                    _ammoType = new AT9mmS
+                    {
+                        range = 330f,
+                        accuracy = 0.97f
+                    };
+                    _kickForce = 4.5f;
+                    loseAccuracy = 0f;
+                    _weight = 6.3f;
+                    _barrelOffsetTL = new Vec2(39f, 3f);
+                    _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _fireSound = "deepMachineGun2";
+                    _ammoType = new AT9mm
+                    {
+                        range = 270f,
+                        accuracy = 0.91f,
+                        penetration = 1f
+                    };
+                    _kickForce = 5.3f;
+                    loseAccuracy = 0.1f;
+                    _weight = 4.5f;
+                    _barrelOffsetTL = new Vec2(28f, 3f);
+                    _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                }
+            }
+        }
         [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -66,43 +110,6 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer)
-                {
-                    FrameId -= 10;
-                    _fireSound = "deepMachineGun2";
-                    _ammoType = new AT9mm
-                    {
-                        range = 270f,
-                        accuracy = 0.91f,
-                        penetration = 1f
-                    };
-                    _kickForce = 5.3f;
-                    loseAccuracy = 0.1f;
-                    _weight = 4.5f;
-                    _barrelOffsetTL = new Vec2(28f, 3f);
-                    _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                }
-                else
-                {
-                    FrameId += 10;
-                    _fireSound = GetPath("sounds/Silenced3.wav");
-                    _ammoType = new AT9mmS
-                    {
-                        range = 330f,
-                        accuracy = 0.97f
-                    };
-                    _kickForce = 4.5f;
-                    loseAccuracy = 0f;
-                    _weight = 6.3f;
-                    _barrelOffsetTL = new Vec2(39f, 3f);
-                    _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                }
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);
