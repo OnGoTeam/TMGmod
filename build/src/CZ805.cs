@@ -15,7 +15,46 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 10;
         [UsedImplicitly]
-        public bool Silencer;
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/Silenced2.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 50;
+                    _sprite.frame += 50;
+                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    _ammoType = new AT9mmS
+                    {
+                        range = 380f,
+                        accuracy = 0.95f
+                    };
+                    _barrelOffsetTL = new Vec2(42.5f, 3f);
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.35f;
+                }
+                else
+                {
+                    _sprite.frame %= 50;
+                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                    _fireSound = "deepMachineGun2";
+                    _ammoType = new AT9mm
+                    {
+                        range = 330f,
+                        accuracy = 0.87f,
+                        penetration = 1f
+                    };
+                    _barrelOffsetTL = new Vec2(39f, 3f);
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.25f;
+                }
+            }
+        }
         [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -55,7 +94,7 @@ namespace TMGmod
             _fireWait = 0.9f;
             _kickForce = 2.76f;
             loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.3f;
+            maxAccuracyLost = 0.25f;
             _editorName = "CZ-805 BREN";
 			_weight = 5f;
 		    Kforce2Ar = 0.7f;
@@ -64,43 +103,10 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer)
-                {
-                    FrameId %= 50;
-                    _fireSound = "deepMachineGun2";
-                    _ammoType = new AT9mm
-                    {
-                        range = 330f,
-                        accuracy = 0.87f
-                    };
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.35f;
-                    _barrelOffsetTL = new Vec2(39f, 3f);
-                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                }
-                else
-                {
-                    FrameId %= 50;
-                    FrameId += 50;
-                    _fireSound = GetPath("sounds/Silenced2.wav");
-                    _ammoType = new AT9mmS
-                    {
-                        range = 380f,
-                        accuracy = 0.95f
-                    };
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.3f;
-                    _barrelOffsetTL = new Vec2(42.5f, 3f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                }
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);
             }
-
             if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
             if (ammo > 12 && ammo <= 20 && FrameId / 10 % 5 != 2) _sprite.frame += 10;
             if (ammo > 5 && ammo <= 12 && FrameId / 10 % 5 != 3) _sprite.frame += 10;
