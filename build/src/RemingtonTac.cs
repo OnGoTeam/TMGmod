@@ -33,7 +33,7 @@ namespace TMGmod
                     StockState += 1f / 10 * (value ? 1 : -1);
                 var nostock = StockState < 0.01f;
                 var stock = StockState > 0.99f;
-                _fireWait = stock ? 0f : 1.5f;
+                _fireWait = stock ? 0f : 2.75f;
                 _kickForce = stock ? 1.1f : 2.8f;
                 LoadSpeed = (sbyte)(stock ? 20 : 10);
                 FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
@@ -108,7 +108,7 @@ namespace TMGmod
                 center = new Vec2(3f, 4f)
             };
             LoaderVec2 = new Vec2(10f, -0.5f);
-            Loaddx = 4f;
+            Loaddx = 3f;
             Stock = false;
         }
 

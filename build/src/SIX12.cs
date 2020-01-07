@@ -39,8 +39,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("SIX12"), 29, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 5f);
-            _collisionOffset = new Vec2(-19.5f, -5f);
+            _center = new Vec2(19f, 5f);
+            _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(29f, 10f);
             _barrelOffsetTL = new Vec2(29f, 3f);
             _fireSound = "shotgunFire";
@@ -50,7 +50,7 @@ namespace TMGmod
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.4f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(24f, 7f);
+            _laserOffsetTL = new Vec2(24f, 7.5f);
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "SIX12";
 			_weight = 4f;

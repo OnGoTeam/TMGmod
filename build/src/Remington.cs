@@ -30,12 +30,14 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f)
             };
-            _holdOffset = new Vec2(-1f, 2f);
+            _holdOffset = new Vec2(3f, 2f);
 		    _fireSound = "shotgunFire2";
-		    _kickForce = 2.75f;
+		    _kickForce = 4.5f;
+            loseAccuracy = 0.6f;
+            maxAccuracyLost = 0.9f;
             _fullAuto = true;
 //		    _manualLoad = true;
-            _fireWait = 2f;
+            _fireWait = 2.75f;
             _editorName = "Taligator 6000 SX";
 //          LoaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
 //          {

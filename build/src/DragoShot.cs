@@ -57,7 +57,7 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             laserSight = true;
             _laserOffsetTL = new Vec2(23f, 3f);
-            _holdOffset = new Vec2(0f, 3f);
+            _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-6f, -3f);
             _editorName = "DragoShot";
 			_weight = 5f;

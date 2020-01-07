@@ -23,11 +23,11 @@ namespace TMGmod
             _numBulletsPerFire = 8;
             _type = "gun";
 		    _graphic = new Sprite(GetPath("KSG12"));
-		    _center = new Vec2(18f, 5.5f);
-		    _collisionOffset = new Vec2(-18f, -5.5f);
+		    _center = new Vec2(18f, 6f);
+		    _collisionOffset = new Vec2(-18f, -6f);
 		    _collisionSize = new Vec2(36f, 11f);
 		    _barrelOffsetTL = new Vec2(36f, 3f);
-            _holdOffset = new Vec2(-1f, 0f);
+            _holdOffset = new Vec2(-1f, 1f);
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = "shotgunFire2";
 		    _kickForce = 3.75f;
@@ -39,7 +39,7 @@ namespace TMGmod
             };
             _editorName = "KSG-12";
             LoaderVec2 = new Vec2(2f, 1f);
-	        Loaddx = 2f;
+	        Loaddx = 2.5f;
 	    }
     }
 }

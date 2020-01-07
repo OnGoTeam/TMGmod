@@ -39,8 +39,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("SIX12S"), 29, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 5f);
-            _collisionOffset = new Vec2(-19.5f, -5f);
+            _center = new Vec2(19f, 5f);
+            _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(29f, 10f);
             _barrelOffsetTL = new Vec2(29f, 4f);
             _fireSound = "shotgunFire";
