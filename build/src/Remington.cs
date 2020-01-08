@@ -10,14 +10,14 @@ namespace TMGmod
     public class Remington : BasePumpAction, IHaveSkin
     {
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 3;
+        private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1 });
         public Remington(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -34,7 +34,11 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 10);
             _graphic = _sprite;
-            _sprite.frame = 0;
+            LoaderSprite = new SpriteMap(GetPath("Fabarm FP-6Pump"), 9, 4)
+            {
+                center = new Vec2(5f, 2f)
+            };
+            FrameId = 0;
             _center = new Vec2(17f, 5f);
 		    _collisionOffset = new Vec2(-17f, -5f);
 		    _collisionSize = new Vec2(33f, 10f);
@@ -51,10 +55,6 @@ namespace TMGmod
 		    _manualLoad = true;
             _fireWait = 3f;
             _editorName = "Fabarm FP-6";
-            LoaderSprite = new SpriteMap(GetPath("Fabarm FP-6Pump"), 9, 4)
-            {
-                    center = new Vec2(5f, 2f)
-            };
             LoaderVec2 = new Vec2(9f, -1f);
             Loaddx = 3f;
             LoadSpeed = 15;
@@ -66,7 +66,7 @@ namespace TMGmod
             {
                 bublic = Rando.Int(0, 9);
             }
-            _sprite.frame = bublic;
+            FrameId = bublic;
         }
         [UsedImplicitly]
         public int FrameId
