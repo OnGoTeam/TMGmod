@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
@@ -22,7 +21,7 @@ namespace TMGmod
         public Remington(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 5;
+            ammo = 6;
 	        _ammoType = new AT9mm
 	        {
 	            range = 120f,
@@ -33,7 +32,7 @@ namespace TMGmod
 	        };
             _numBulletsPerFire = 5;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 10); //
+            _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(17f, 5f);
@@ -73,7 +72,11 @@ namespace TMGmod
         public int FrameId
         {
             get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
+            set
+            {
+                _sprite.frame = value % (10 * NonSkinFrames);
+                LoaderSprite.frame = (value % 10 + 10) % 10;
+            }
         }
 
         public override void EditorPropertyChanged(object property)

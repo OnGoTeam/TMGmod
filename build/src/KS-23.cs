@@ -8,20 +8,21 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class KS23 : BasePumpAction
     {
-        bool calculo;
+        public bool shootwasyes;
         [UsedImplicitly]
         public float HandAngleOff
         {
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
-
         [UsedImplicitly]
         public float HandAngleOffState;
         [UsedImplicitly]
         public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
         [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly]
+        public StateBinding ShootwasyesBinding = new StateBinding(nameof(shootwasyes));
         [UsedImplicitly]
         public KS23(float xval, float yval) : base(xval, yval)
 	    {
@@ -63,19 +64,19 @@ namespace TMGmod
         }
         public override void Fire()
         {
-            calculo = true;
-            if (ammo < 1) calculo = false;
+            shootwasyes = true;
+            if (ammo < 1) shootwasyes = false;
             base.Fire();
         }
         public override void Update()
         {
             HandAngleOff = HandAngleOffState;
             base.Update();
-            if (calculo) HandAngleOff -= 0.075f;
-            if (((HandAngleOff > -1f) & (HandAngleOff < -0.8f)) || ((!calculo) & (HandAngleOff < 0f)))
+            if (shootwasyes) HandAngleOff -= 0.075f;
+            if (((HandAngleOff > -1f) & (HandAngleOff < -0.8f)) || ((!shootwasyes) & (HandAngleOff < 0f)))
             {
-                HandAngleOff += 0.0367f;
-                calculo = false;
+                HandAngleOff += Rando.Float(0.02f, 0.0367f);
+                shootwasyes = false;
             }
             if (HandAngleOff > 0f) HandAngleOff = 0f;
             HandAngleOffState = HandAngleOff;
