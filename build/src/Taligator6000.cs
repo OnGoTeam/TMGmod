@@ -49,6 +49,7 @@ namespace TMGmod
             _editorName = "Taligator 6000 SX";
             ShellOffset = new Vec2(-6f, -1f);
             FrameId = 0;
+            _weight = 3f;
         }
         private void UpdateSkin()
         {

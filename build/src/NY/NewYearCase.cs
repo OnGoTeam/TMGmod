@@ -51,17 +51,23 @@ namespace TMGmod.NY
                   typeof(Helmet),
                   typeof(Helmet),  
                   typeof(ChestPlate),
-                  typeof(ChestPlate), 
+                  typeof(ChestPlate),
+                   typeof(PodarokColorB),
+                   typeof(PodarokColorB),
+                   typeof(PodarokColorC),
+                   typeof(PodarokColorC),
+                   typeof(PodarokColorY),
+                   typeof(PodarokColorY),
+                   typeof(PodarokColorR),
+                   typeof(PodarokColorR),
+                   typeof(PodarokColorG),
+                   typeof(PodarokColorG),
+                   typeof(PodarokMillitary),
+                   typeof(PodarokMillitary),
                    //x1
                    typeof(SpruceGun),
                    typeof(CandyCaneOrange),
-                   typeof(PPLMG),
-                   typeof(PodarokColorB),  
-                   typeof(PodarokColorC),  
-                   typeof(PodarokColorY),  
-                   typeof(PodarokColorR),  
-                   typeof(PodarokColorG),  
-                   typeof(PodarokMillitary)  
+                   typeof(PPLMG),  
             };
             CaseId = 6;
         }

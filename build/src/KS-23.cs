@@ -69,6 +69,7 @@ namespace TMGmod
             LoaderVec2 = new Vec2(2f, 0f);
             Loaddx = 3f;
             LoadSpeed = 4;
+            _weight = 4.2f;
         }
         public override void Fire()
         {

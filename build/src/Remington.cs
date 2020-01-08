@@ -58,6 +58,7 @@ namespace TMGmod
             LoaderVec2 = new Vec2(9f, -1f);
             Loaddx = 3f;
             LoadSpeed = 15;
+            _weight = 3.2f;
         }
         private void UpdateSkin()
         {
