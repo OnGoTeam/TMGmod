@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -17,22 +18,20 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2 });
         public Remington(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
-	        _ammoType = new AT9mm
-	        {
-	            range = 120f,
+	        _ammoType = new AT12Gauge
+            {
+	            range = 110f,
 	            accuracy = 0.67f,
-	            penetration = 1f,
-	            bulletSpeed = 23f,
 	            bulletThickness = 1.5f
 	        };
             _numBulletsPerFire = 5;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 10);
+            _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
             _graphic = _sprite;
             LoaderSprite = new SpriteMap(GetPath("Fabarm FP-6Pump"), 9, 4)
             {
@@ -41,7 +40,7 @@ namespace TMGmod
             FrameId = 0;
             _center = new Vec2(17f, 5f);
 		    _collisionOffset = new Vec2(-17f, -5f);
-		    _collisionSize = new Vec2(33f, 10f);
+		    _collisionSize = new Vec2(33f, 9f);
 		    _barrelOffsetTL = new Vec2(33f, 1f);
             _flare = new SpriteMap(GetPath("FlareBase2"), 13, 10)
             {
@@ -55,6 +54,7 @@ namespace TMGmod
 		    _manualLoad = true;
             _fireWait = 3f;
             _editorName = "Fabarm FP-6";
+            ShellOffset = new Vec2(0f, -3f);
             LoaderVec2 = new Vec2(9f, -1f);
             Loaddx = 3f;
             LoadSpeed = 15;

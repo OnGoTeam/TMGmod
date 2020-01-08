@@ -92,6 +92,12 @@
     <Compile Include="src\Buddies\StingerLauncher.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATSkeetGun.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATDragoshot.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATKSG12.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATTG6000.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT12GaugeS.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT12Gauge.cs" />
     <Compile Include="src\Core\AmmoTypes\AT44DB.cs" />
     <Compile Include="src\Core\AmmoTypes\ATMG44.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
@@ -101,6 +107,8 @@
     <Compile Include="src\Core\I5.cs" />
     <Compile Include="src\Core\IHaveBipods.cs" />
     <Compile Include="src\Core\IHaveStock.cs" />
+    <Compile Include="src\Core\Shells\Taligator6000Shell.cs" />
+    <Compile Include="src\Core\Shells\Gauge12Shell.cs" />
     <Compile Include="src\Core\Shells\M50shell.cs" />
     <Compile Include="src\Core\Shells\DB44Shell.cs" />
     <Compile Include="src\Core\Shells\MG44shell.cs" />

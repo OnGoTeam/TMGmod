@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 
 namespace TMGmod
@@ -25,14 +26,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
-            _ammoType = new ATShotgun
-            {
-                accuracy = 0.9f,
-                bulletColor = new Color(255, 0, 0),
-                range = 250f,
-                bulletSpeed = 50f,
-                penetration = 1.5f
-            };
+            _ammoType = new ATSkeetGun();
             BaseAccuracy = 0.9f;
             _numBulletsPerFire = 10;
             _sprite = new SpriteMap(GetPath("SkeetDouble"), 41, 7);

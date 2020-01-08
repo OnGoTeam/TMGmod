@@ -4,6 +4,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -74,11 +75,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 4;
-            _ammoType = new AT9mm
+            _ammoType = new AT12Gauge
             {
                 range = 125f,
                 accuracy = 0.69f,
-                penetration = 1f,
                 bulletSpeed = 25f,
                 bulletThickness = 0.5f
             };
@@ -86,7 +86,6 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);
             _graphic = _sprite;
-            _sprite.frame = 20;
             _center = new Vec2(13f, 4f);
             _collisionOffset = new Vec2(-13f, -4f);
             _collisionSize = new Vec2(26f, 8f);
@@ -103,11 +102,13 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(22f, 1f);
             laserSight = true;
             _editorName = "Remington 870 Raid";
-            LoaderSprite = new SpriteMap(GetPath("Remington 870 RaidPump"), 6, 8)
+            LoaderSprite = new SpriteMap(GetPath("Remington 870 RaidPump"), 5, 2)
             {
-                center = new Vec2(3f, 4f)
+                center = new Vec2(3f, 1f)
             };
-            LoaderVec2 = new Vec2(7f, -0.5f);
+            FrameId = 20;
+            ShellOffset = new Vec2(2f, -2f);
+            LoaderVec2 = new Vec2(8f, -0.5f);
             Loaddx = 3f;
             Stock = false;
         }
@@ -136,7 +137,7 @@ namespace TMGmod
             {
                 bublic = Rando.Int(0, 9);
             }
-            _sprite.frame = bublic;
+            FrameId = bublic;
         }
         [UsedImplicitly]
         public int FrameId
@@ -144,8 +145,8 @@ namespace TMGmod
             get => _sprite.frame;
             set
             {
-                _sprite.frame = value % (10 * NonSkinFrames);
-                LoaderSprite.frame = (value % 10 + 10) % 10;
+                Ssmfid(_sprite, value, 10 * NonSkinFrames);
+                Ssmfid(LoaderSprite, value, 10);
             }
         }
 

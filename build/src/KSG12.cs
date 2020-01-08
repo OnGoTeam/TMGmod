@@ -1,45 +1,78 @@
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
     [UsedImplicitly]
     [EditorGroup("TMG|Shotgun|Pump-Action")]
-    public class Ksg12 : BasePumpAction
+    public class Ksg12 : BasePumpAction, IHaveSkin
     {
-	    public Ksg12(float xval, float yval)
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public Ksg12(float xval, float yval)
 		    : base(xval, yval)
-	    {
-		    ammo = 15;
-	        _ammoType = new AT9mm
-	        {
-	            range = 185f,
-	            accuracy = 0.4f,
-	            penetration = 1f,
-	            bulletSpeed = 40f,
-	            bulletThickness = 0.25f
-	        };
+        {
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            ammo = 15;
+	        _ammoType = new ATKSG12();
             _numBulletsPerFire = 8;
             _type = "gun";
-		    _graphic = new Sprite(GetPath("KSG12"));
-		    _center = new Vec2(18f, 6f);
+            _sprite = new SpriteMap(GetPath("KSG12"), 36, 11);
+            _graphic = _sprite;
+            _center = new Vec2(18f, 6f);
 		    _collisionOffset = new Vec2(-18f, -6f);
 		    _collisionSize = new Vec2(36f, 11f);
 		    _barrelOffsetTL = new Vec2(36f, 3f);
             _holdOffset = new Vec2(-1f, 1f);
-            ShellOffset = new Vec2(0f, 0f);
             _fireSound = "shotgunFire2";
 		    _kickForce = 3.75f;
 		    _manualLoad = true;
             _fireWait = 2.5f;
-            LoaderSprite = new SpriteMap(GetPath("KSG12Pimp"), 19, 9)
+            LoaderSprite = new SpriteMap(GetPath("KSG12Pimp"), 14, 6)
             {
-                center = new Vec2(3f, 4f)
+                center = new Vec2(7f, 3f)
             };
+            FrameId = 0;
+            ShellOffset = new Vec2(-8f, 0f);
             _editorName = "KSG-12";
-            LoaderVec2 = new Vec2(2f, 1f);
+            LoaderVec2 = new Vec2(6f, 0f);
 	        Loaddx = 2.5f;
-	    }
+        }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            FrameId = bublic;
+        }
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set
+            {
+                Ssmfid(_sprite, value, 10 * NonSkinFrames);
+                Ssmfid(LoaderSprite, value, 10);
+            }
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
     }
 }

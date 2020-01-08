@@ -1,6 +1,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -11,13 +12,8 @@ namespace TMGmod
 	    public Taligator6000(float xval, float yval) : base(xval, yval)
 	    {
 		    ammo = 11;
-	        _ammoType = new AT9mm
-	        {
-	            range = 120f,
-	            accuracy = 0.47f,
-	            penetration = 1f,
-	            bulletSpeed = 16f,
-	            bulletThickness = 0.6f
+	        _ammoType = new ATTG6000
+            {
 	        };
             _numBulletsPerFire = 13;
             _type = "gun";
@@ -38,6 +34,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 2.75f;
             _editorName = "Taligator 6000 SX";
+            ShellOffset = new Vec2(-6f, -1f);
         }
     }
 }

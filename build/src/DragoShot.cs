@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -33,13 +34,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(-1, this, -1f, 9f, 0.5f);
             ammo = 16;
-            _ammoType = new ATMagnum
-            {
-                range = 120f,
-                accuracy = 0.7f,
-                penetration = 2f,
-                bulletThickness = 0.8f
-            };
+            _ammoType = new ATDragoshot();
             _numBulletsPerFire = 8;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Dragoshot"), 29, 11);

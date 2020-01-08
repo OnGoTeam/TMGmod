@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -26,14 +27,13 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 12;
-            _ammoType = new ATMagnum
+            _ammoType = new AT12Gauge
             {
                 range = 125f,
                 accuracy = 0.6f,
-                penetration = 1f,
                 bulletThickness = 1.5f
             };
-            BaseAccuracy = 0.8f;
+            BaseAccuracy = 0.6f;
             _numBulletsPerFire = 12;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AA12"), 34, 13);
@@ -50,7 +50,7 @@ namespace TMGmod
             loseAccuracy = 0.35f;
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(1f, 1f);
-            ShellOffset = new Vec2(-6f, -1f);
+            ShellOffset = new Vec2(-14f, -5f);
             _editorName = "AA-12";
 			_weight = 7f;
         }

@@ -1,13 +1,24 @@
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Pump-Action")]
-    public class KS23 : BasePumpAction
+    public class KS23 : BasePumpAction, IHaveSkin
     {
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         public bool shootwasyes;
         [UsedImplicitly]
         public float HandAngleOff
@@ -25,20 +36,15 @@ namespace TMGmod
         public StateBinding ShootwasyesBinding = new StateBinding(nameof(shootwasyes));
         [UsedImplicitly]
         public KS23(float xval, float yval) : base(xval, yval)
-	    {
-		    ammo = 6;
-	        _ammoType = new AT9mmS
-	        {
-	            range = 169f,
-	            accuracy = 0.33f,
-	            penetration = 1f,
-	            bulletSpeed = 50f,
-	            bulletThickness = 0.6f
-	        };
+        {
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            ammo = 6;
+	        _ammoType = new AT12GaugeS();
             _numBulletsPerFire = 16;
             _type = "gun";
-		    _graphic = new SpriteMap(GetPath("KS-23"), 35, 8);
-		    _center = new Vec2(18f, 4f);
+            _sprite = new SpriteMap(GetPath("KS-23"), 35, 8);
+            _graphic = _sprite;
+            _center = new Vec2(18f, 4f);
 		    _collisionOffset = new Vec2(-18f, -4f);
 		    _collisionSize = new Vec2(35f, 8f);
 		    _barrelOffsetTL = new Vec2(35f, 1f);
@@ -58,6 +64,8 @@ namespace TMGmod
             {
                     center = new Vec2(4f, 2f)
             };
+            FrameId = 0;
+            ShellOffset = new Vec2(-7f, -2f);
             LoaderVec2 = new Vec2(2f, 0f);
             Loaddx = 3f;
             LoadSpeed = 4;
@@ -80,6 +88,31 @@ namespace TMGmod
             }
             if (HandAngleOff > 0f) HandAngleOff = 0f;
             HandAngleOffState = HandAngleOff;
+        }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            FrameId = bublic;
+        }
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set
+            {
+                Ssmfid(_sprite, value, 10 * NonSkinFrames);
+                Ssmfid(LoaderSprite, value, 10);
+            }
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }
