@@ -151,5 +151,12 @@ namespace TMGmod.Core.WClasses
         {
             return SwitchStockQ(this);
         }
+
+        [PublicAPI]
+        public static void Ssmfid(SpriteMap sm, int value, int m)
+        {
+            value = (value % m + m) % m;
+            sm.frame = value;
+        }
     }
 }
