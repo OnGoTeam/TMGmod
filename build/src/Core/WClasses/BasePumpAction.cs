@@ -61,7 +61,9 @@ namespace TMGmod.Core.WClasses
         public override void Draw()
         {
             base.Draw();
-            var num = (float)Math.Sin(LoadProgress * 0.031415) * Loaddx;
+            var lp = LoadProgress;
+            if (lp < 0) lp = 0;
+            var num = (float)Math.Sin(lp * 0.031415) * Loaddx;
             Draw(LoaderSprite, new Vec2(LoaderVec2.x - num, LoaderVec2.y));
         }
     }
