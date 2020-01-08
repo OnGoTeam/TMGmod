@@ -142,7 +142,11 @@ namespace TMGmod
         public int FrameId
         {
             get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
+            set
+            {
+                _sprite.frame = value % (10 * NonSkinFrames);
+                LoaderSprite.frame = (value % 10 + 10) % 10;
+            }
         }
 
         public override void EditorPropertyChanged(object property)
