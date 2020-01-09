@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // атрибутов. Отредактируйте значения этих атрибутов, чтобы изменить
 // общие сведения об этой сборке.
 [assembly: AssemblyTitle("TMGmod")]
-[assembly: AssemblyDescription("Modules Update III: Oblivion of Glock + Happy 2020 Update")]
+[assembly: AssemblyDescription("Grandful Management: Shotguns")]
 //[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OnGoTeam")]
 [assembly: AssemblyProduct("TMGmod")]
-[assembly: AssemblyCopyright("Copyright © 2019 OGT")]
+[assembly: AssemblyCopyright("Copyright © 2020 OGT")]
 //[assembly: AssemblyTrademark("")]
 //[assembly: AssemblyCulture("")]
 
@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 // patch (revision)                 5
 
 #if WORKSHOP
-[assembly: AssemblyVersion("1.1.6.0")]
+[assembly: AssemblyVersion("1.1.6.1")]
 #else
 [assembly: AssemblyVersion("1.102.*")]
 #endif
