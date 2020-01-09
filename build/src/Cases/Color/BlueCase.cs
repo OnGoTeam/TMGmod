@@ -40,7 +40,9 @@ namespace TMGmod.Cases.Color
                 typeof(SKS),
                 typeof(SRM1208),
                 typeof(M14),
-                typeof(AR15Proto)
+                typeof(AR15Proto),
+                typeof(Remington),
+                typeof(RemingtonTac)
             };
             CaseId = 2;
         }

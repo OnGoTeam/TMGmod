@@ -28,9 +28,9 @@ namespace TMGmod
             _ammoType = new AT9mmS
             {
                 range = 425f,
-                accuracy = 0.8f
+                accuracy = 0.85f
             };
-            BaseAccuracy = 0.8f;
+            BaseAccuracy = 0.85f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _graphic = _sprite;
@@ -45,7 +45,7 @@ namespace TMGmod
             _fireWait = 0.45f;
             _kickForce = 1.8f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.45f;
+            maxAccuracyLost = 0.4f;
             _holdOffset = new Vec2(-2f, 0f);
             ShellOffset = new Vec2(-3f, 0f);
             _editorName = "IB-8mm Sniper";
