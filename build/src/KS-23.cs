@@ -8,6 +8,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Pump-Action")]
+    // ReSharper disable once InconsistentNaming
     public class KS23 : BasePumpAction, IHaveSkin
     {
         private readonly SpriteMap _sprite;
@@ -19,7 +20,7 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        public bool shootwasyes;
+        private bool _shootwasyes;
         [UsedImplicitly]
         public float HandAngleOff
         {
@@ -33,7 +34,7 @@ namespace TMGmod
         [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         [UsedImplicitly]
-        public StateBinding ShootwasyesBinding = new StateBinding(nameof(shootwasyes));
+        public StateBinding ShootwasyesBinding = new StateBinding(nameof(_shootwasyes));
         [UsedImplicitly]
         public KS23(float xval, float yval) : base(xval, yval)
         {
@@ -72,19 +73,19 @@ namespace TMGmod
         }
         public override void Fire()
         {
-            shootwasyes = true;
-            if (ammo < 1) shootwasyes = false;
+            _shootwasyes = true;
+            if (ammo < 1) _shootwasyes = false;
             base.Fire();
         }
         public override void Update()
         {
             HandAngleOff = HandAngleOffState;
             base.Update();
-            if (shootwasyes) HandAngleOff -= 0.075f;
-            if (((HandAngleOff > -1f) & (HandAngleOff < -0.8f)) || ((!shootwasyes) & (HandAngleOff < 0f)))
+            if (_shootwasyes) HandAngleOff -= 0.075f;
+            if (((HandAngleOff > -1f) & (HandAngleOff < -0.8f)) || ((!_shootwasyes) & (HandAngleOff < 0f)))
             {
                 HandAngleOff += Rando.Float(0.02f, 0.0367f);
-                shootwasyes = false;
+                _shootwasyes = false;
             }
             if (HandAngleOff > 0f) HandAngleOff = 0f;
             HandAngleOffState = HandAngleOff;

@@ -14,6 +14,7 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
+        private const float Rmax = 6.206401f;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -128,8 +129,14 @@ namespace TMGmod
                 SFX.Play("quack", -1);
             }
             else if (duck != null)
+            {
                 Stock = Stock;
+                duck.runMax = Rmax;
+                duck.UpdateMove();
+                duck.runMax = 3.1f;
+            }
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;

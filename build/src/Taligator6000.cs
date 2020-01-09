@@ -12,9 +12,7 @@ namespace TMGmod
 	    public Taligator6000(float xval, float yval) : base(xval, yval)
 	    {
 		    ammo = 11;
-	        _ammoType = new ATTG6000
-            {
-	        };
+	        _ammoType = new ATTG6000();
             _numBulletsPerFire = 13;
             _type = "gun";
 		    _graphic = new SpriteMap(GetPath("Taligator 6000 SX"), 31, 12);
