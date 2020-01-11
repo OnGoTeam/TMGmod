@@ -37,7 +37,7 @@ namespace TMGmod
             {
                 range = 1200f,
                 accuracy = 1f,
-                penetration = 1f
+                penetration = 2f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Lynx"), 31, 11);
