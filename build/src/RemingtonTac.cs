@@ -123,7 +123,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            if (SwitchStockQ() && (Stock || duck.grounded) && duck.inputProfile.Pressed("QUACK"))
+            if (SwitchStockQ() && (Stock || duck?.grounded == true) && duck?.inputProfile.Pressed("QUACK") == true)
             {
                 Stock = !Stock;
                 SFX.Play("quack", -1);
