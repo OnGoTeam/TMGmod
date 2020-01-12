@@ -52,7 +52,7 @@ namespace TMGmod
             };
             _fireSound = "sniper";
             _fullAuto = false;
-            _kickForce = 4.67f;
+            _kickForce = 4.25f;
             _holdOffset = new Vec2(3f, 1f);
             _editorName = "SV-98";
 			_weight = 4.5f;

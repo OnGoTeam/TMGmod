@@ -73,7 +73,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 10;
+            ammo = 11;
             _ammoType = new AT9mm
             {
                 range = 270f,
@@ -85,8 +85,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 5f);
-            _collisionOffset = new Vec2(-19.5f, -5f);
+            _center = new Vec2(20f, 5f);
+            _collisionOffset = new Vec2(-20f, -5f);
             _collisionSize = new Vec2(39f, 12f);
             _barrelOffsetTL = new Vec2(28f, 3f);
             _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)

@@ -29,12 +29,12 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 15;
+            ammo = 16;
             _ammoType = new AT9mmS
             {
                 range = 550f,
-                accuracy = 0.9f,
-                bulletSpeed = 25f
+                accuracy = 0.95f,
+                bulletSpeed = 17f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);

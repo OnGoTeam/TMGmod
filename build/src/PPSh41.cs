@@ -30,8 +30,8 @@ namespace TMGmod
             ammo = 71;
             _ammoType = new AT9mm
             {
-                range = 180f,
-                accuracy = 0.73f,
+                range = 160f,
+                accuracy = 0.67f,
                 penetration = 0.4f
             };
             BaseAccuracy = 0.73f;

@@ -45,7 +45,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-6f, -2f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
-            _editorName = "MP7";
+            _editorName = "HK MP7";
             _weight = 3f;
         }
 

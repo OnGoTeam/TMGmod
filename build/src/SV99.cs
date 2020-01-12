@@ -37,13 +37,13 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new AT9mm
             {
-                penetration = 1f,
+                penetration = 1.5f,
                 range = 800f,
                 accuracy = 0.9f
             };
             _fireSound = GetPath("sounds/Silenced3.wav");
             _fullAuto = false;
-            _kickForce = 1.7f;
+            _kickForce = 1.8f;
             loseAccuracy = 0.5f;
             maxAccuracyLost = 1.5f;
             _holdOffset = new Vec2(-1f, 0f);

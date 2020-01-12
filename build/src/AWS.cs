@@ -44,6 +44,7 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new AT9mmS
             {
+                penetration = 1f,
                 range = 550f,
                 accuracy = 0.97f
             };
@@ -53,7 +54,7 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
-            _kickForce = 4.75f;
+            _kickForce = 3.8f;
             _holdOffset = new Vec2(2f, 1f);
             _editorName = "AWS";
 			_weight = 5f;
