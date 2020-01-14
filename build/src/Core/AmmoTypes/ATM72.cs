@@ -14,9 +14,9 @@ namespace TMGmod.Core.AmmoTypes
             range = 2000f;
             deadly = true;
             weight = 5f;
-            barrelAngleDegrees = -5f;
+            barrelAngleDegrees = -2.5f;
             bulletThickness = 2f;
-            bulletColor = Color.White;
+            bulletColor = Color.Yellow;
             bulletType = typeof(GrenadeBullet);
             immediatelyDeadly = true;
             sprite = new Sprite("launcherGrenade");
