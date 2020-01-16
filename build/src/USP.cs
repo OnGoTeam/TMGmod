@@ -27,7 +27,7 @@ namespace TMGmod
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _ammoType = new AT9mmS
                     {
-                        range = 1500f,
+                        range = 750f,
                         accuracy = 0.9f
                     };
                     _barrelOffsetTL = new Vec2(23f, 2f);
