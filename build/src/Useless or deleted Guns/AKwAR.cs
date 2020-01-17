@@ -25,7 +25,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             ammo = 30;
             _ammo = 30;
             _aammo = 30;
-            _ammoType = new ATMagnum
+            _ammoType = new AT9mm
             {
                 range = 500f,
                 accuracy = 0.85f,

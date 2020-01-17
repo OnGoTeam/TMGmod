@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
 
@@ -21,11 +22,10 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATMagnum
+            _ammoType = new AT762NATO
             {
                 range = 500f,
-                accuracy = 0.85f,
-                penetration = 2f
+                accuracy = 0.85f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARW-A"), 27, 9);

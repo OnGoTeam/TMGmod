@@ -35,7 +35,7 @@ namespace TMGmod
             ammo = _postrounds;
             _ammoType = new AT9mm
             {
-                range = 667f,
+                range = 567f,
                 accuracy = 0.98f,
                 penetration = 1f,
                 bulletSpeed = 44f

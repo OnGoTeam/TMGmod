@@ -20,7 +20,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new ATMagnum
+            _ammoType = new AT9mm
             {
                 combustable = true,
                 range = 0f,

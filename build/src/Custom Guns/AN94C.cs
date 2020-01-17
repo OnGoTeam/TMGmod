@@ -66,7 +66,7 @@ namespace TMGmod.Custom_Guns
             _holdOffset = new Vec2(3f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
-            _ammoType = new ATMagnum { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
+            _ammoType = new AT9mm { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2f;

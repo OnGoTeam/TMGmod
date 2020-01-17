@@ -50,7 +50,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             ammo = 42;
-            _ammoType = new ATMagnum
+            _ammoType = new AT9mm
             {
                 range = 325f,
                 accuracy = 0.85f,

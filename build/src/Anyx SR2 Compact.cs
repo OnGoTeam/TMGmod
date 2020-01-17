@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -42,12 +43,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new AT9mm
+            _ammoType = new AT762NATO
             {
                 range = 560f,
                 accuracy = 0.95f,
-                bulletSpeed = 55f,
-                penetration = 2f
+                bulletSpeed = 55f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);

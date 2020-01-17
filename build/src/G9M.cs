@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 using System;
 
@@ -39,7 +40,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 70;
-            _ammoType = new ATMagnum
+            _ammoType = new AT762NATO
             {
                 range = 400f,
                 accuracy = 0.8f,

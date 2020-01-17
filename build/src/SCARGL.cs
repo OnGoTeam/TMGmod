@@ -33,7 +33,7 @@ namespace TMGmod
         public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
-            new ATMagnum
+            new AT9mm
             {
                 range = 400f,
                 accuracy = 0.9f,
@@ -68,7 +68,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new ATMagnum
+            _ammoType = new AT9mm
             {
                 range = 400f,
                 accuracy = 0.9f,

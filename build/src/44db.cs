@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -25,7 +26,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 1;
-            _ammoType = new ATMagnum
+            _ammoType = new AT12Gauge
             {
                 range = 100f,
                 accuracy = 0.1f,
@@ -71,6 +72,14 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                --ammo;
+            }
+            loaded = true;
         }
     }
 }
