@@ -12,7 +12,7 @@ namespace TMGmod.Core.WClasses
         protected float MinAccuracy;
         [UsedImplicitly]
         protected float PrevKforce;
-        private const float PChance = 2f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%
+        private const float PChance = 0.5f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
         [UsedImplicitly]
         protected bool ToPrevKforce;
         protected Vec2 ShellOffset;
