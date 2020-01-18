@@ -57,13 +57,13 @@ namespace TMGmod
             _flare.center = new Vec2(0f, 5f);
             _fullAuto = false;
             _fireWait = 1.55f;
-            _kickForce = 4.8f;
+            _kickForce = 3.8f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
             _editorName = "SKS";
 			_weight = 6f;
             MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.75f;
+            LambdaAccuracySr = 0.9f;
         }
         public override void Update()
         {

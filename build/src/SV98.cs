@@ -57,7 +57,7 @@ namespace TMGmod
             _editorName = "SV-98";
 			_weight = 4.5f;
             laserSight = true;
-            _laserOffsetTL = new Vec2(18f, 2f);
+            _laserOffsetTL = new Vec2(22f, 4f);
 
         }
         public override void Reload(bool shell = true)

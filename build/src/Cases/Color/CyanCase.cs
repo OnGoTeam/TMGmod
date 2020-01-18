@@ -33,6 +33,7 @@ namespace TMGmod.Cases.Color
                 typeof(CZ805),
                 typeof(AF2011),
                 typeof(MG44),
+                typeof(MG44C),
                 typeof(SV99),
                 typeof(Lynx),
                 typeof(PPSh41),

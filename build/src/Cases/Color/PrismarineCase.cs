@@ -37,6 +37,7 @@ namespace TMGmod.Cases.Color
                 typeof(PPSh41),
                 typeof(PPK42),
                 typeof(MG44),
+                typeof(MG44C),
                 typeof(SkeetGun),
                 typeof(MP5),
                 typeof(MP5SD),

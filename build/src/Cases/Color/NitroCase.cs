@@ -39,6 +39,7 @@ namespace TMGmod.Cases.Color
                 typeof(PPSh41),
                 typeof(PPK42),
                 typeof(MG44),
+                typeof(MG44C),
                 typeof(SkeetGun),
                 typeof(MP5),
                 typeof(MP5SD),
@@ -55,7 +56,10 @@ namespace TMGmod.Cases.Color
                 typeof(HazeS),
                 typeof(AA12),
                 typeof(MP40),
-                typeof(SKS)
+                typeof(SKS),
+                typeof(MP7),
+                typeof(CZ805),
+                typeof(HK417)
             };
             CaseId = 7;
         }

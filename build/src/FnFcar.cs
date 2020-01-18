@@ -60,7 +60,7 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.2f;
             _editorName = "Belguria Fcar";
-            laserSight = true;
+            laserSight = false;
             _laserOffsetTL = new Vec2(19f, 4f);
 			_weight = 7f;
         }
@@ -71,7 +71,7 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 30 * (value ? 1 : -1);
+                    BipodsState += 1f / 22 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _ammoType.accuracy = bipods ? 1f : 0.94f;
