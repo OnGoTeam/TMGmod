@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class IB8mm : BaseGun, IAmSmg, IHaveSkin
+    public class IB8mm : BaseGun, IFirstPrecise, IFirstKforce, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -24,13 +24,13 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 20;
+            ammo = 26;
             _ammoType = new AT9mmS
             {
-                range = 425f,
-                accuracy = 0.85f
+                range = 450f,
+                accuracy = 0.82f
             };
-            BaseAccuracy = 0.85f;
+            BaseAccuracy = 0.82f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _graphic = _sprite;
@@ -43,9 +43,13 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced2.wav");
             _fullAuto = true;
             _fireWait = 0.45f;
-            _kickForce = 1.8f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.4f;
+            _kickForce = 1.5f;
+            KforceDSmg = 2.1f;
+            MaxDelaySmg = 11;
+            MaxAccuracy = 1f;
+            MaxDelayFp = 15;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.15f;
             _holdOffset = new Vec2(-2f, 0f);
             ShellOffset = new Vec2(-3f, 0f);
             _editorName = "IB-8mm Sniper";
@@ -66,6 +70,12 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+        public float KforceDSmg { get; }
+        public int CurrDelaySmg { get; set; }
+        public int MaxDelaySmg { get; }
+        public int CurrDelay { get; set; }
+        public int MaxDelayFp { get; }
+        public float MaxAccuracy { get; }
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

@@ -31,7 +31,7 @@ namespace TMGmod
                 accuracy = 0.7f,
                 penetration = 0.7f
             };
-            BaseAccuracy = 0.5f;
+            BaseAccuracy = 0.7f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP40"), 23, 14);
             _graphic = _sprite;
@@ -55,7 +55,7 @@ namespace TMGmod
             KforceDSmg = 2f;
             MaxDelaySmg = 20;
             MaxAccuracy = 1f;
-            MaxDelayFp = 10;
+            MaxDelayFp = 20;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
         }
