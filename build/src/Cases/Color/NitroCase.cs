@@ -49,7 +49,7 @@ namespace TMGmod.Cases.Color
                 typeof(VSK94),
                 typeof(BigShot),
                 typeof(Arx200),
-                typeof(AN94C),
+                typeof(AN94),
                 typeof(Type89),
                 typeof(Rfb),
                 typeof(FnFcar),

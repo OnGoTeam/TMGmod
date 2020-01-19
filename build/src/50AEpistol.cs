@@ -17,7 +17,7 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 2, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 2, 5, 7 });
         public BigShot (float xval, float yval)
           : base(xval, yval)
         {
