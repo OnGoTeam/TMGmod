@@ -12,7 +12,7 @@ namespace TMGmod
     public class SKS : BaseGun, IHaveSkin, ISpeedAccuracy, I5
     {
         private int _patrons = 12;
-        //private int _bullets;
+        private int _bullets;
         [UsedImplicitly]
         public bool Stick;
         [UsedImplicitly]
@@ -72,9 +72,7 @@ namespace TMGmod
             {
                 _patrons = ammo;
             }
-
-            //штык удалён до лучших времён - до переработки
-            /*if (duck == null) return;
+            if (duck == null) return;
             //else
             if (duck.inputProfile.Pressed("QUACK"))
             {
@@ -84,16 +82,14 @@ namespace TMGmod
                     _bullets = _patrons + 20;
                     ammo += 20;
                 }
+                _fireSound = "";
                 _flare = new SpriteMap(GetPath("takezis"), 4, 4)
                 {
                     center = new Vec2(0f, 0f)
                 };
                 _ammoType = new ATNB();
-                _fullAuto = false;
-                _fireWait = 0.1f;
-                _numBulletsPerFire = 1;
+                _fireWait = 10f;
                 _barrelOffsetTL = new Vec2(0f, 6f);
-                _fireSound = "";
                 loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
                 _kickForce = 0f;
@@ -112,17 +108,14 @@ namespace TMGmod
             if (!duck.inputProfile.Released("QUACK")) return;
             //else
             ammo = _patrons;
-            _ammoType = new AT9mm
+            _ammoType = new AT762NATO
             {
                 range = 800f,
                 accuracy = 0.97f,
-                penetration = 1f,
                 bulletSpeed = 95f,
                 bulletThickness = 1.5f
             };
-            _fullAuto = false;
             _fireWait = 1.3f;
-            _numBulletsPerFire = 1;
             _barrelOffsetTL = new Vec2(42f, 4f);
             _fireSound = GetPath("sounds/scar.wav");
             _holdOffset = new Vec2(8f, 0f);
@@ -133,7 +126,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f)
             };
-            Stick = false;*/
+            Stick = false;
         }
         public override void Thrown()
         {
@@ -147,9 +140,7 @@ namespace TMGmod
 			        bulletSpeed = 95f,
 			        bulletThickness = 1.5f
 			    };
-			    _fullAuto = false;
                 _fireWait = 1.55f;
-				_numBulletsPerFire = 1;
                 _barrelOffsetTL = new Vec2(42f, 4f);
                 _fireSound = GetPath("sounds/scar.wav");
                 _holdOffset = new Vec2(8f, 0f);
