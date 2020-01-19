@@ -26,10 +26,10 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 450f,
-                accuracy = 0.95f,
+                accuracy = 0.94f,
                 penetration = 1f
             };
-            BaseAccuracy = 0.95f;
+            BaseAccuracy = 0.94f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARX200"), 33, 14);
             _graphic = _sprite;

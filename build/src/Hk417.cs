@@ -24,11 +24,11 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
-            ammo = 10;
+            ammo = 11;
             _ammoType = new AT9mm
             {
-                range = 325f,
-                accuracy = 0.9f,
+                range = 375f,
+                accuracy = 0.98f,
                 penetration = 1f
             };
             _type = "gun";
@@ -48,9 +48,9 @@ namespace TMGmod
             _fireSound = GetPath("sounds/HeavyRifle.wav");
             _fullAuto = false;
             _fireWait = 0.8f;
-            _kickForce = 2.7f;
+            _kickForce = 2.1f;
             loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.45f;
+            maxAccuracyLost = 0.15f;
             _editorName = "Hk 417C";
 			_weight = 3.5f;
         }
