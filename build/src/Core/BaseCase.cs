@@ -14,7 +14,7 @@ namespace TMGmod.Core
 
         protected BaseCase(float xval, float yval) : base(xval, yval)
         {
-
+            physicsMaterial = PhysicsMaterial.Metal;
         }
 
         public override void Initialize()
@@ -24,7 +24,7 @@ namespace TMGmod.Core
 
         public override void OnPressAction()
         {
-            if (owner == null) return;
+            if (owner == null || owner is MagnetGun) return;
             //else
             var o = owner;
             var d = duck;
