@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
-using TMGmod.Custom_Guns;
 #if DEBUG
 using TMGmod.Useless_or_deleted_Guns;
 #endif
