@@ -103,7 +103,7 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.5f;
             _holdOffset = new Vec2(0f, 1f);
-            ShellOffset = new Vec2(-13f, -4f);
+            ShellOffset = new Vec2(-9f, -4f);
             _editorName = "M14 Sawed-Off";
             _weight = 2.5f;
             MaxAccuracy = 1f;

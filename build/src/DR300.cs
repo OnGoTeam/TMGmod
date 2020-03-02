@@ -59,7 +59,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(2f, 3f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-7f, -2f);
             _editorName = "Daewoo DR300";
             laserSight = false;
 			_weight = 3.5f;
