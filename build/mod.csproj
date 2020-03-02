@@ -303,6 +303,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET outdir=%25userprofile%25\Documents\DuckGame\Mods\$(TargetName)
+IF NOT EXIST %25outdir%25 (
+    MKDIR %25outdir%25
+)
 COPY $(TargetPath) %25outdir%25\$(TargetFileName)
 ECHO %25outdir%25
 IF NOT $(SolutionDir)  == %25outdir%25\build\ (
