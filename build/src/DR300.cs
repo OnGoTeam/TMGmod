@@ -41,7 +41,7 @@ namespace TMGmod
                 bulletSpeed = 44f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("deleteco/Future/DR300.png"), 37, 11);
+            _sprite = new SpriteMap(GetPath("DR300"), 37, 11);
             _graphic = _sprite;
             _sprite.frame = Postframe;
             _center = new Vec2(18f, 6f);
@@ -60,7 +60,7 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(2f, 3f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "DR-300";
+            _editorName = "Daewoo DR300";
             laserSight = false;
 			_weight = 3.5f;
         }

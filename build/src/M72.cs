@@ -5,7 +5,7 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Grenadelauncher")]
+    [EditorGroup("TMG|Explosive|Grenadelauncher")]
     [UsedImplicitly]
     public class M72 : BaseGun
     {

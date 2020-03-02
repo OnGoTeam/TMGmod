@@ -32,7 +32,7 @@ namespace TMGmod
                 bulletSpeed = 25f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("deleteco/Future/Bersa45.png"), 12, 8);
+            _sprite = new SpriteMap(GetPath("Bersa45"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(6f, 4f);

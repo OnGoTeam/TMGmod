@@ -33,7 +33,7 @@ namespace TMGmod
                 bulletSpeed = 32f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("deleteco/Future/AR9SX.png"), 36, 10);
+            _sprite = new SpriteMap(GetPath("AR9SX"), 36, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(18f, 5f);

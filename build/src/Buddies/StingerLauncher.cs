@@ -6,7 +6,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod.Buddies
 {
     [PublicAPI]
-    [EditorGroup("TMG|DEBUG")]
+    [EditorGroup("TMG|Explosive|Rocketlauncher")]
     public class StingerLauncher:BaseGun
     {
         public StingerLauncher(float xval, float yval) : base(xval, yval)
@@ -17,10 +17,12 @@ namespace TMGmod.Buddies
             _center = new Vec2(21f, 5f);
             _collisionOffset = new Vec2(-21f, -5f);
             _collisionSize = new Vec2(42f, 10f);
+            _holdOffset = new Vec2(-12f, 0f);
             depth = -0.5f;
             thickness = 0.0f;
             _weight = 3f;
             ammo = 1;
+            _kickForce = 7f;  //netu
         }
 
         public override void Fire()
@@ -33,7 +35,11 @@ namespace TMGmod.Buddies
                 offDir = offDir,
                 angle = angle
             };
-            Level.Add(stg);
+            if (ammo > 0)
+            {
+                Level.Add(stg);
+                ammo -= 1;
+            };
         }
     }
 }
