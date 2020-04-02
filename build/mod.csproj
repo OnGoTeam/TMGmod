@@ -92,6 +92,8 @@
     <Compile Include="src\Buddies\StingerLauncher.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT556NATO.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT545NATO.cs" />
     <Compile Include="src\Core\AmmoTypes\AT762NATO.cs" />
     <Compile Include="src\Core\AmmoTypes\ATSkeetGun.cs" />
     <Compile Include="src\Core\AmmoTypes\ATDragoshot.cs" />
@@ -108,6 +110,9 @@
     <Compile Include="src\Core\I5.cs" />
     <Compile Include="src\Core\IHaveBipods.cs" />
     <Compile Include="src\Core\IHaveStock.cs" />
+    <Compile Include="src\Core\Shells\AT556NATOshell.cs" />
+    <Compile Include="src\Core\Shells\AT762NATOshell.cs" />
+    <Compile Include="src\Core\Shells\AT545NATOshell.cs" />
     <Compile Include="src\Core\Shells\Taligator6000Shell.cs" />
     <Compile Include="src\Core\Shells\Gauge12Shell.cs" />
     <Compile Include="src\Core\Shells\M50shell.cs" />

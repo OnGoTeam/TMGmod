@@ -8,6 +8,7 @@ namespace TMGmod.Core.Shells
         public DB44Shell(float xpos, float ypos)
           : base(xpos, ypos, Mod.GetPath<TMGmod>("44dbShell"))
         {
+            scale *= 0.707f;
         }
     }
 }

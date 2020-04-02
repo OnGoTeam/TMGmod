@@ -4,6 +4,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -34,11 +35,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 80;
-            _ammoType = new AT9mm
+            _ammoType = new AT556NATO
             {
                 range = 480f,
-                accuracy = 0.8f,
-                penetration = 1.5f
+                accuracy = 0.8f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg3"), 39, 11);

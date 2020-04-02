@@ -21,7 +21,7 @@ namespace TMGmod
                 BurstNum = value ? 1 : 3;
                 _fireWait = value ? 0.5f : 1.8f;
                 FrameId = FrameId % 10 + (value ? 0 : 10);
-                _ammoType.accuracy = value ? 0.8f : 0.7f;
+                _ammoType.accuracy = value ? 0.7f : 0.9f;
             }
         }
         [UsedImplicitly]
@@ -42,10 +42,10 @@ namespace TMGmod
             _ammoType = new AT9mm
             {
                 range = 215f,
-                accuracy = 0.8f,
+                accuracy = 0.7f,
                 penetration = 1f
             };
-            BaseAccuracy = 0.8f;
+            BaseAccuracy = 0.7f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5"), 27, 12);
             _graphic = _sprite;
@@ -67,6 +67,8 @@ namespace TMGmod
             _editorName = "MP5";
 			_weight = 3f;
             KforceDSmg = 2f;
+            MaxAccuracy = 0.9f;
+            MaxDelayFp = 10;
             MaxDelaySmg = 50;
             DeltaWait = 0.45f;
             BurstNum = 1;
@@ -91,7 +93,9 @@ namespace TMGmod
         }
         public float KforceDSmg { get; }
         public int CurrDelaySmg { get; set; }
+        public int MaxDelayFp { get; }
         public int MaxDelaySmg { get; }
+        public float MaxAccuracy { get; }
         [UsedImplicitly]
         public int FrameId
         {

@@ -39,7 +39,7 @@ namespace TMGmod
                 {
                     _sprite.frame %= 10;
                     _fireSound = "deepMachineGun2";
-                    _ammoType = new AT9mm
+                    _ammoType = new AT545NATO
                     {
                         range = 310f,
                         accuracy = 0.87f
@@ -68,11 +68,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 23;
-            _ammoType = new AT9mm
+            _ammoType = new AT545NATO
             {
                 range = 310f,
-                accuracy = 0.87f,
-                penetration = 1f
+                accuracy = 0.87f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("CZC2"), 41, 11);

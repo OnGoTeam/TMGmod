@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -33,7 +34,7 @@ namespace TMGmod
         public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
-            new AT9mm
+            new AT556NATO
             {
                 range = 400f,
                 accuracy = 0.9f,
@@ -68,11 +69,10 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new AT9mm
+            _ammoType = new AT556NATO
             {
                 range = 400f,
                 accuracy = 0.9f,
-                penetration = 1f,
                 bulletSpeed = 35f,
                 barrelAngleDegrees = 0f
             };

@@ -1,5 +1,5 @@
 using DuckGame;
-//using TMGmod.Core.Shells;
+using TMGmod.Core.Shells;
 
 namespace TMGmod.Core.AmmoTypes
 {
@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
         public AT762NATO()
         {
             penetration = 2f;
-            bulletSpeed = 44f; //same as ATMagnum (!)
+            bulletSpeed = 44f;
             deadly = true;
             bulletThickness = 1.5f;
             bulletLength = 40f;
@@ -17,8 +17,12 @@ namespace TMGmod.Core.AmmoTypes
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var pistolShell = new PistolShell(x, y) { hSpeed = dir * (1.5f + Rando.Float(1f)) };
-            Level.Add(pistolShell);
+            var Shell = new AT762NATOShell(x, y)
+            {
+                hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
+                vSpeed = (2.25f + Rando.Float(-0.4f, 0.4f)) * dir
+            };
+            Level.Add(Shell);
         }
     }
 }

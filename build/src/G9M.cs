@@ -22,7 +22,7 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
         [UsedImplicitly]
-        public int Ammobefore = 21;
+        public int Ammobefore = 71;
         [UsedImplicitly]
         public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
         [UsedImplicitly]
@@ -40,11 +40,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 70;
-            _ammoType = new AT762NATO
+            _ammoType = new AT556NATO
             {
                 range = 400f,
-                accuracy = 0.8f,
-                penetration = 1.5f
+                accuracy = 0.8f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("G9M"), 38, 11);

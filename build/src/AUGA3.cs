@@ -28,7 +28,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT762NATO
+            _ammoType = new AT556NATO
             {
                 range = 370f,
                 accuracy = 0.9f

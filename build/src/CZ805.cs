@@ -43,11 +43,10 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f)
                     };
                     _fireSound = "deepMachineGun2";
-                    _ammoType = new AT9mm
+                    _ammoType = new AT545NATO
                     {
                         range = 330f,
-                        accuracy = 0.87f,
-                        penetration = 1f
+                        accuracy = 0.87f
                     };
                     _barrelOffsetTL = new Vec2(39f, 3f);
                     loseAccuracy = 0.15f;
@@ -69,11 +68,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-		    _ammoType = new AT9mm
+		    _ammoType = new AT545NATO
 		    {
 		        range = 330f,
-		        accuracy = 0.87f,
-		        penetration = 1f
+		        accuracy = 0.87f
 		    };
 		    _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ805Bren"), 41, 11);

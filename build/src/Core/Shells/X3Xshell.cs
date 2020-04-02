@@ -7,6 +7,7 @@ namespace TMGmod.Core.Shells
         public X3XShell(float xpos, float ypos)
           : base(xpos, ypos, Mod.GetPath<TMGmod>("X3XShell"))
         {
+            scale *= 0.707f;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new AT762NATO
+            _ammoType = new AT556NATO
             {
                 range = 500f,
                 accuracy = 0.85f
