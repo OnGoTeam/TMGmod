@@ -7,9 +7,9 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|DMR")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class HK417 : BaseGun, IAmDmr, IHaveSkin
+    public class Foucus : BaseAr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -19,40 +19,41 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
 
-        public HK417 (float xval, float yval)
+        public Foucus(float xval, float yval)
           : base(xval, yval)
         {
-            skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
-            ammo = 11;
-            _ammoType = new AT556NATO
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            ammo = 20;
+            _ammoType = new AT556NATO //556S in future
             {
-                range = 375f,
-                accuracy = 0.98f
+                range = 405f,
+                accuracy = 0.85f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Hk417"), 30, 10);
+            _sprite = new SpriteMap(GetPath("Foucus"), 37, 13);
             _graphic = _sprite;
-            _sprite.frame = 4;
-            _center = new Vec2(15f, 5f);
-            _collisionOffset = new Vec2(-15f, -5f);
-            _collisionSize = new Vec2(30f, 10f);
-            _barrelOffsetTL = new Vec2(30f, 2f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            _sprite.frame = 0;
+            _center = new Vec2(19f, 7f);
+            _collisionOffset = new Vec2(-19f, -7f);
+            _collisionSize = new Vec2(37f, 13f);
+            _barrelOffsetTL = new Vec2(34f, 3f);
+            _flare = new SpriteMap(GetPath("FlareFoucus"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
             };
-            _holdOffset = new Vec2(0f, 1f);
+            _holdOffset = new Vec2(3f, 2f);
             ShellOffset = new Vec2(-3f, -2f);
-            _fireSound = GetPath("sounds/HeavyRifle.wav");
-            _fullAuto = false;
-            _fireWait = 0.8f;
-            _kickForce = 2.1f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.15f;
-            _editorName = "Hk 417C";
-			_weight = 3.5f;
+            _fireSound = GetPath("sounds/Silenced1.wav");
+            _fullAuto = true;
+            _fireWait = 0.7f;
+            Kforce1Ar = 3f;
+            Kforce2Ar = 4.5f;
+            loseAccuracy = 0.275f;
+            maxAccuracyLost = 0.275f;
+            _editorName = "Foucus";
+			_weight = 8f;
         }
         private void UpdateSkin()
         {

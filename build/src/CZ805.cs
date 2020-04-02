@@ -90,12 +90,12 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.9f;
-            _kickForce = 2.76f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.25f;
             _editorName = "CZ-805 BREN";
 			_weight = 5f;
-		    Kforce2Ar = 0.7f;
+            Kforce1Ar = 1.5f;
+            Kforce2Ar = 2.76f;
         }
         public override void Update()
         {

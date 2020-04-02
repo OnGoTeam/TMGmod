@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class HK417 : BaseGun, IAmDmr, IHaveSkin
+    public class SLK8 : BaseGun, IAmDmr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -19,40 +19,37 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
 
-        public HK417 (float xval, float yval)
+        public SLK8(float xval, float yval)
           : base(xval, yval)
         {
-            skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
-            ammo = 11;
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            ammo = 14;
             _ammoType = new AT556NATO
             {
-                range = 375f,
-                accuracy = 0.98f
+                range = 520f,
+                accuracy = 1f
             };
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Hk417"), 30, 10);
+            _sprite = new SpriteMap(GetPath("SLK8"), 41, 11);
             _graphic = _sprite;
-            _sprite.frame = 4;
-            _center = new Vec2(15f, 5f);
-            _collisionOffset = new Vec2(-15f, -5f);
-            _collisionSize = new Vec2(30f, 10f);
-            _barrelOffsetTL = new Vec2(30f, 2f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f)
-            };
-            _holdOffset = new Vec2(0f, 1f);
-            ShellOffset = new Vec2(-3f, -2f);
-            _fireSound = GetPath("sounds/HeavyRifle.wav");
+            _sprite.frame = 0;
+            _center = new Vec2(21f, 6f);
+            _collisionOffset = new Vec2(-21f, -6f);
+            _collisionSize = new Vec2(41f, 11f);
+            _barrelOffsetTL = new Vec2(41f, 5f);
+            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _holdOffset = new Vec2(5f, 0f);
+            ShellOffset = new Vec2(-7f, 0f);
+            _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
-            _fireWait = 0.8f;
-            _kickForce = 2.1f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.15f;
-            _editorName = "Hk 417C";
-			_weight = 3.5f;
+            _fireWait = 1f;
+            _kickForce = 3.5f;
+            loseAccuracy = 0.22f;
+            maxAccuracyLost = 0.22f;
+            _editorName = "HK SLK8";
+			_weight = 7.5f;
         }
         private void UpdateSkin()
         {

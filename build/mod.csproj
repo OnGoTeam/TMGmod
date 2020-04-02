@@ -121,6 +121,8 @@
     <Compile Include="src\Core\Shells\M72shell.cs" />
     <Compile Include="src\Core\Shells\X3Xshell.cs" />
     <Compile Include="src\DR300.cs" />
+    <Compile Include="src\Foucus.cs" />
+    <Compile Include="src\SLK8.cs" />
     <Compile Include="src\M14SO.cs" />
     <Compile Include="src\M16A6.cs" />
     <Compile Include="src\NY\ATPopcorn.cs" />
