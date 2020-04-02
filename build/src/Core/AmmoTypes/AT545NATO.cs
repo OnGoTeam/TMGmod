@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
         public AT545NATO()
         {
             penetration = 1f;
-            bulletSpeed = 51f;
+            bulletSpeed = 37f;
             deadly = true;
             bulletThickness = 1f;
             bulletLength = 50f;

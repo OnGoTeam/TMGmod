@@ -92,6 +92,7 @@
     <Compile Include="src\Buddies\StingerLauncher.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT556NATOS.cs" />
     <Compile Include="src\Core\AmmoTypes\AT556NATO.cs" />
     <Compile Include="src\Core\AmmoTypes\AT545NATO.cs" />
     <Compile Include="src\Core\AmmoTypes\AT762NATO.cs" />

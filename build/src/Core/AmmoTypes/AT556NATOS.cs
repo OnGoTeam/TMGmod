@@ -5,15 +5,15 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT556NATO : AmmoType
+    public class AT556NATOS : AmmoType
     {
-        public AT556NATO()
+        public AT556NATOS()
         {
             penetration = 2.1f;
-            bulletSpeed = 34f;
+            bulletSpeed = 31f;
             deadly = true;
             bulletThickness = 1f;
-            bulletLength = 50f;
+            bulletLength = 0f;
             immediatelyDeadly = true;
             bulletType = typeof(Bullet556);
         }

@@ -13,6 +13,8 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
+        private int Legacy = 0;
+        public StateBinding LegacyBinding { get; } = new StateBinding(nameof(Legacy));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -26,7 +28,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
-            _ammoType = new AT556NATO //556S in future
+            _ammoType = new AT556NATOS
             {
                 range = 405f,
                 accuracy = 0.85f
@@ -48,8 +50,8 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = true;
             _fireWait = 0.7f;
-            Kforce1Ar = 3f;
-            Kforce2Ar = 4.5f;
+            Kforce1Ar = 2f;
+            Kforce2Ar = 5f;
             loseAccuracy = 0.275f;
             maxAccuracyLost = 0.275f;
             _editorName = "Foucus";
@@ -75,6 +77,16 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+        public override void Fire()
+        {
+            base.Fire();
+            if (ammo < 1) return;
+            if (duck == null) return;
+            if (duck.ragdoll != null) return;
+            if ((Legacy == 0) & (duck.vSpeed > -1f) & (duck.vSpeed < 1f)) duck.vSpeed += Rando.Float(-0.7f, -0.2f);
+            else duck.vSpeed += Rando.Float(0.2f, 0.6f);
+            Legacy = Rando.ChooseInt(0, 1);
         }
     }
 }

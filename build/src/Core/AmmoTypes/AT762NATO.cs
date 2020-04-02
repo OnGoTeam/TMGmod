@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
         public AT762NATO()
         {
             penetration = 2f;
-            bulletSpeed = 44f;
+            bulletSpeed = 29f;
             deadly = true;
             bulletThickness = 1.5f;
             bulletLength = 40f;
