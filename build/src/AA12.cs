@@ -79,12 +79,11 @@ namespace TMGmod
         {
             if (duck?.sliding == true) _accuracyLost = 0;
             base.Fire();
-            if ((owner as Duck)?.ragdoll != null) return;
-            if (owner == null) return;
             if (duck == null) return;
+            if (duck.ragdoll != null) return;
             if (!duck.sliding) return;
             if (!duck.grounded) return;
-            owner.vSpeed = 0f;
+            duck.vSpeed = 0f;
         }
     }
 }
