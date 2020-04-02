@@ -4,9 +4,9 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT556NATO : AmmoType
+    public class AT545NATO : AmmoType
     {
-        public AT556NATO()
+        public AT545NATO()
         {
             penetration = 1f;
             bulletSpeed = 51f;
@@ -17,12 +17,12 @@ namespace TMGmod.Core.AmmoTypes
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var Shell = new AT545NATOShell(x, y)
+            var shell = new AT545NATOShell(x, y)
             {
                 hSpeed = (2.5f + Rando.Float(-0.2f, 0.2f)) * dir,
                 vSpeed = (2f + Rando.Float(-0.3f, 0.3f)) * dir
             };
-            Level.Add(Shell);
+            Level.Add(shell);
         }
     }
 }

@@ -120,7 +120,8 @@ namespace TMGmod.Stuff
             if (!Activated) return;
             StickThing = with;
             StickThing.Fondle(this);
-            _stickyVec2 = position - with.position;
+            _stickyVec2 = with.ReverseOffset(position);
+            _stickyVec2.x *= with.offDir;
             //enablePhysics = false;
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (from)
@@ -167,7 +168,7 @@ namespace TMGmod.Stuff
             if (StickThing != null)
             {
                 sleeping = true;
-                position = StickThing.position + _stickyVec2;
+                position = StickThing.Offset(_stickyVec2);
                 hSpeed = StickThing.hSpeed;
                 vSpeed = StickThing.vSpeed;
             }

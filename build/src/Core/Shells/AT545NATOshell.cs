@@ -2,6 +2,7 @@ using DuckGame;
 
 namespace TMGmod.Core.Shells
 {
+    // ReSharper disable once InconsistentNaming
     public class AT545NATOShell : EjectedShell
     {
         public AT545NATOShell(float xpos, float ypos)

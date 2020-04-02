@@ -1,28 +1,44 @@
 using DuckGame;
+using TMGmod.Core.Bullets;
 using TMGmod.Core.Shells;
 
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT545NATO : AmmoType
+    public class AT556NATO : AmmoType
     {
-        public AT545NATO()
+        public AT556NATO()
         {
-            penetration = 1f;
+            penetration = 2.1f;
             bulletSpeed = 51f;
             deadly = true;
             bulletThickness = 1f;
             bulletLength = 50f;
             immediatelyDeadly = true;
+            bulletType = typeof(Bullet556);
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var Shell = new AT545NATOShell(x, y)
+            var shell = new AT556NATOShell(x, y)
             {
                 hSpeed = (2.5f + Rando.Float(-0.2f, 0.2f)) * dir,
                 vSpeed = (2f + Rando.Float(-0.3f, 0.3f)) * dir
             };
-            Level.Add(Shell);
+            Level.Add(shell);
+        }
+        public AT556NATO MemberWiseClone()
+        {
+            return (AT556NATO) MemberwiseClone();
+        }
+
+        public override void WriteAdditionalData(BitBuffer b)
+        {
+            b.Write(penetration);
+        }
+
+        public override void ReadAdditionalData(BitBuffer b)
+        {
+            penetration = b.ReadFloat();
         }
     }
 }

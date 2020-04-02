@@ -106,6 +106,7 @@
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM16.cs" />
     <Compile Include="src\Core\AmmoTypes\IHeavyAmmoType.cs" />
+    <Compile Include="src\Core\Bullets\Bullet556.cs" />
     <Compile Include="src\Core\ContextSkinRender.cs" />
     <Compile Include="src\Core\I5.cs" />
     <Compile Include="src\Core\IHaveBipods.cs" />
@@ -292,9 +293,7 @@
     <Content Include="ILMergeOrder.txt" />
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Core\Bullets\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
