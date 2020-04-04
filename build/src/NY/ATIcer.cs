@@ -123,6 +123,7 @@ namespace TMGmod.NY
                 if (_stick.destroyed) return;
                 StickAngleOffset = angle - _stick.angle;
                 StickOffset = _stick.ReverseOffset(position);
+                StickOffset.x *= _stick.offDir;
                 OffDirOffset = (sbyte)(offDir * _stick.offDir);
             }
         }

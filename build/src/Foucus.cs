@@ -13,7 +13,9 @@ namespace TMGmod
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        private int Legacy = 0;
+        [UsedImplicitly]
+        public int Legacy;
+        [UsedImplicitly]
         public StateBinding LegacyBinding { get; } = new StateBinding(nameof(Legacy));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
