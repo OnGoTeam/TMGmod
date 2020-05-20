@@ -6,12 +6,32 @@ namespace TMGmod.Buddies
 {
     [EditorGroup("TMG|Misc")]
     [PublicAPI]
-    public class SuperArmor:ChestPlate
+    public class SuperArmor:Equipment
     {
+        private SpriteMap _sprite;
+        private SpriteMap _spriteOver;
+        private Sprite _pickupSprite;
+
         public SuperArmor(float xpos, float ypos) : base(xpos, ypos)
         {
             _equippedThickness = 3f;
-            _hitPoints = 100f;
+            _hitPoints = 2f;
+            _sprite = new SpriteMap("chestPlateAnim", 32, 32);
+            _spriteOver = new SpriteMap("chestPlateAnimOver", 32, 32);
+            _pickupSprite = new Sprite("chestPlatePickup");
+            _pickupSprite.CenterOrigin();
+            _graphic = _pickupSprite;
+            _collisionOffset = new Vec2(-6f, -4f);
+            _collisionSize = new Vec2(11f, 8f);
+            _equippedCollisionOffset = new Vec2(-7f, -5f);
+            _equippedCollisionSize = new Vec2(12f, 11f);
+            _hasEquippedCollision = true;
+            _center = new Vec2(8f, 8f);
+            physicsMaterial = PhysicsMaterial.Metal;
+            _equippedDepth = 2;
+            _wearOffset = new Vec2(1f, 1f);
+            _isArmor = true;
+            _equippedThickness = 3f;
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)

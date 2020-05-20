@@ -125,6 +125,7 @@ namespace TMGmod
 
         public override void Fire()
         {
+            if (duck?.inputProfile.Down("QUACK") == true && !Sighted) return;
             if (ammo > 0)
             {
                 Heatval = Heatval;
