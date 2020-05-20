@@ -68,37 +68,47 @@ namespace TMGmod
         {
             base.Update();
 
-            if ((duck?.inputProfile.Down("RIGHT") == true) & (duck?.inputProfile.Down("LEFT") == true) & (ducklookleft == true))
+            if (offDir > 0)
             {
-                ducklookleft = false;
+                if (ducklookleft == true)
+                {
+                    HandAngleOff = -HandAngleOff;
+                    ducklookleft = false;
+                }
+                if (duck?.inputProfile.Down("UP") == true && !_raised)
+                {
+                    if (HandAngleOff > -0.7f) HandAngleOff -= 0.05f;
+
+                    return;
+                }
+
+                if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
+                {
+                    if (HandAngleOff < 0.7f) HandAngleOff += 0.05f;
+
+                    return;
+                }
             }
-
-            if ((duck?.inputProfile.Pressed("LEFT") == true) & (duck?.inputProfile.Down("RIGHT") != true) & (ducklookleft == false))
+            else if (offDir < 0)
             {
-                HandAngleOff = -HandAngleOff;
-                ducklookleft = true;
+                if (ducklookleft == false)
+                {
+                    HandAngleOff = -HandAngleOff;
+                    ducklookleft = true;
+                }
+                if (duck?.inputProfile.Down("UP") == true && !_raised)
+                {
+                    if (HandAngleOff > -0.7f) HandAngleOff -= 0.05f;
 
-                return;
-            }
+                    return;
+                }
 
-            if ((duck?.inputProfile.Down("RIGHT") == true) & (ducklookleft == true))
-            {
-                HandAngleOff = -HandAngleOff;
-                ducklookleft = false;
-            }
+                if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
+                {
+                    if (HandAngleOff < 0.7f) HandAngleOff += 0.05f;
 
-            if (duck?.inputProfile.Down("UP") == true && !_raised)
-            {
-                if (HandAngleOff > -0.7f) HandAngleOff -= 0.05f;
-
-                return;
-            }
-
-            if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
-            {
-                if (HandAngleOff < 0.7f) HandAngleOff += 0.05f;
-
-                return;
+                    return;
+                }
             }
 
             if (handAngle > 0f) handAngle -= 0.1f;
