@@ -23,6 +23,7 @@ namespace TMGmod
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
+        public bool ducklookleft = false;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -66,21 +67,43 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
+
+            if ((duck?.inputProfile.Down("RIGHT") == true) & (duck?.inputProfile.Down("LEFT") == true) & (ducklookleft == true))
+            {
+                ducklookleft = false;
+            }
+
+            if ((duck?.inputProfile.Pressed("LEFT") == true) & (duck?.inputProfile.Down("RIGHT") != true) & (ducklookleft == false))
+            {
+                HandAngleOff = -HandAngleOff;
+                ducklookleft = true;
+
+                return;
+            }
+
+            if ((duck?.inputProfile.Down("RIGHT") == true) & (ducklookleft == true))
+            {
+                HandAngleOff = -HandAngleOff;
+                ducklookleft = false;
+            }
+
             if (duck?.inputProfile.Down("UP") == true && !_raised)
             {
-                HandAngleOff = -0.5f;
+                if (HandAngleOff > -0.7f) HandAngleOff -= 0.05f;
 
                 return;
             }
 
             if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
             {
-                HandAngleOff = 0.5f;
+                if (HandAngleOff < 0.7f) HandAngleOff += 0.05f;
 
                 return;
             }
 
-            handAngle = 0f;
+            if (handAngle > 0f) handAngle -= 0.1f;
+            else if (handAngle < 0f) handAngle += 0.1f;
+            if ((handAngle > -0.1f) & (handAngle < 0.1f) & (handAngle != 0f)) handAngle = 0f;
         }
         private void UpdateSkin()
         {

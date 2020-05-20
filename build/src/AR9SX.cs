@@ -46,7 +46,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             _fullAuto = true;
-            _fireWait = 0.3f;
+            _fireWait = 0.45f;
             _kickForce = 1.3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;

@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AR9SX.cs" />
+    <Compile Include="src\OracleAR10.cs" />
     <Compile Include="src\Bersa 45.cs" />
     <Compile Include="src\AF2011.cs" />
     <Compile Include="src\AKALFA.cs" />
