@@ -59,8 +59,8 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f)
             };
-            _holdOffset = new Vec2(1f, -1f);
-            ShellOffset = new Vec2(-4f, -2f);
+            _holdOffset = new Vec2(-1f, 0f);
+            ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
             _fireWait = 0.7f;
@@ -68,7 +68,7 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(0f, 0f);
+            _laserOffsetTL = new Vec2(17f, 1.5f);
             _editorName = "Oracle AR-10";
 			_weight = 5f;
         }
@@ -88,7 +88,8 @@ namespace TMGmod
                 _ammoType.bulletSpeed = bipods ? 69f : 37f;
                 loseAccuracy = bipods ? 0 : 0.15f;
                 maxAccuracyLost = bipods ? 0 : 0.15f;
-                HandAngleOff += bipods ? 0.1f : 0f;
+                _kickForce = bipods ? 0f : 2f;
+                //HandAngleOff += bipods ? 0.1f : 0f;
                 laserSight = bipods ? true : false;
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     BipOn.Play();
@@ -103,11 +104,6 @@ namespace TMGmod
             else if (!BipodsQ(this, true)) BipodsDisabled = false;
             base.Update();
         }
-        public override void UpdateOnFire()
-        {
-            loseAccuracy += 0.15f;
-            base.UpdateOnFire();
-        }
         private void UpdateSkin()
         {
             var bublic = Skin.value;
@@ -116,12 +112,6 @@ namespace TMGmod
                 bublic = Rando.Int(0, 9);
             }
             _sprite.frame = bublic;
-        }
-
-        public override void Fire()
-        {
-            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
-            base.Fire();
         }
 
         [UsedImplicitly]

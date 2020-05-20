@@ -25,7 +25,7 @@ namespace TMGmod
             ammo = 6;
 	        _ammoType = new AT12Gauge
             {
-	            range = 110f,
+	            range = 180f,
 	            accuracy = 0.67f,
 	            bulletThickness = 1.5f
 	        };

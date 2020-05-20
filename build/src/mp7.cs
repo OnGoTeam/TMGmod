@@ -98,14 +98,14 @@ namespace TMGmod
                 }
                 if (duck?.inputProfile.Down("UP") == true && !_raised)
                 {
-                    if (HandAngleOff > -0.7f) HandAngleOff -= 0.05f;
+                    if (HandAngleOff > -0.6f) HandAngleOff -= 0.05f;
 
                     return;
                 }
 
                 if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
                 {
-                    if (HandAngleOff < 0.7f) HandAngleOff += 0.05f;
+                    if (HandAngleOff < 0.6f) HandAngleOff += 0.05f;
 
                     return;
                 }

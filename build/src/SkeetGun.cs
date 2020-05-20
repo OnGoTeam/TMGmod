@@ -15,6 +15,7 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
+        public bool ducklookleft = false;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -55,25 +56,38 @@ namespace TMGmod
             {
                 if (duck.sliding || duck.crouch)
                 {
-                    handAngle = 0f;
+                    if (handAngle > 0f) handAngle -= 0.075f;
+                    else if (handAngle < 0f) handAngle += 0.075f;
+                    if ((handAngle > -0.075f) & (handAngle < 0.075f) & (handAngle != 0f)) handAngle = 0f;
                     return;
                 }
                 if (duck.inputProfile.Down("UP") && !_raised)
                 {
                     if (offDir < 0)
                     {
-                        handAngle = 0.5f;
+                        if (ducklookleft == false)
+                        {
+                            handAngle = -handAngle;
+                            ducklookleft = true;
+                        }
+                        if (handAngle < 0.5f) handAngle += 0.05f;
                     }
                     else
                     {
-                        handAngle = -0.5f;
+                        if (ducklookleft == true)
+                        {
+                            handAngle = -handAngle;
+                            ducklookleft = false;
+                        }
+                        if (handAngle > -0.5f) handAngle -= 0.05f;
                     }
 
                     return;
                 }
             }
-
-            handAngle = 0f;
+            if (handAngle > 0f) handAngle -= 0.075f;
+            else if (handAngle < 0f) handAngle += 0.075f;
+            if ((handAngle > -0.075f) & (handAngle < 0.075f) & (handAngle != 0f)) handAngle = 0f;
         }
         private void UpdateSkin()
         {
