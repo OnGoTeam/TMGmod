@@ -45,7 +45,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-7f, 0f);
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
-            _fireWait = 1f;
+            _fireWait = 2f;
             _kickForce = 3.5f;
             loseAccuracy = 0.22f;
             maxAccuracyLost = 0.22f;
