@@ -41,7 +41,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
-            _ammoType = new AT545NATO
+            _ammoType = new AT556NATO //may be 545 nato to destroy doors immediately
             {
                 range = 333f,
                 accuracy = 0.91f
