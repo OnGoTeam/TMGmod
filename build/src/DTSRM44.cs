@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if DEBUG
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
@@ -7,7 +8,7 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Sniper|Bolt-Action")]
+    [EditorGroup("TMG|NOTRELEASEDYET|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
     public class DTSRM44 : Sniper, IAmSr, IHaveSkin
     {
@@ -196,3 +197,4 @@ namespace TMGmod
         }
     }
 }
+#endif

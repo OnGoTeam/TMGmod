@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -75,4 +74,3 @@ namespace TMGmod
         }
     }
 }
-#endif

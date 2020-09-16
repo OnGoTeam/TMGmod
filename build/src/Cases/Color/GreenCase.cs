@@ -51,7 +51,8 @@ namespace TMGmod.Cases.Color
                 typeof(VSK94),
                 typeof(BarretM98),
                 typeof(BarretM98C),
-                typeof(RemingtonTac)
+                typeof(RemingtonTac),
+                typeof(DTSR44)
             };
             CaseId = 8;
         }

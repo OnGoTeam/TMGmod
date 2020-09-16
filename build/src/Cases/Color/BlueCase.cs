@@ -42,7 +42,8 @@ namespace TMGmod.Cases.Color
                 typeof(M14),
                 typeof(AR15Proto),
                 typeof(Remington),
-                typeof(RemingtonTac)
+                typeof(RemingtonTac),
+                typeof(DTSR44)
             };
             CaseId = 2;
         }
