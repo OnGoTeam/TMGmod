@@ -3,7 +3,7 @@ using DuckGame;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATSkeetGun : AmmoType
+    public class ATSkeetGun : AmmoType, IDamage
     {
         public ATSkeetGun()
         {
@@ -14,6 +14,10 @@ namespace TMGmod.Core.AmmoTypes
             bulletSpeed = 50f;
             deadly = true;
             immediatelyDeadly = true;
+            Bulletdamage = 12f;
+            Deltadamage = 0.3f;
         }
+        public float Bulletdamage { get; }
+        public float Deltadamage { get; }
     }
 }

@@ -42,7 +42,7 @@ namespace TMGmod
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             ammo = 6;
-            _ammoType = new AT9mmS
+            _ammoType = new AT50SniperS
             {
                 penetration = 1f,
                 range = 550f,

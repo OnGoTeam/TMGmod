@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATTG6000 : AmmoType
+    public class ATTG6000 : AmmoType, IDamage
     {
         public ATTG6000()
         {
@@ -16,6 +16,8 @@ namespace TMGmod.Core.AmmoTypes
             deadly = true;
             weight = 5f;
             immediatelyDeadly = true;
+            Bulletdamage = 5f;
+            Deltadamage = 0.5f;
         }
         public override void PopShell(float x, float y, int dir)
         {
@@ -27,5 +29,7 @@ namespace TMGmod.Core.AmmoTypes
             };
             Level.Add(shell);
         }
+        public float Bulletdamage { get; }
+        public float Deltadamage { get; }
     }
 }

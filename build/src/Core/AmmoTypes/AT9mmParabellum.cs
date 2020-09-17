@@ -4,17 +4,17 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT9mmS : AmmoType, IDamage
+    public class AT9mmParabellum : AmmoType, IDamage
     {
-        public AT9mmS()
+        public AT9mmParabellum()
         {
-            penetration = 0.4f;
-            bulletSpeed = 37f;
+            penetration = 0.6f;
+            bulletSpeed = 24f;
             deadly = true;
             bulletThickness = 0.8f;
-            bulletLength = 0f;
+            bulletLength = 15f;
             immediatelyDeadly = true;
-            Bulletdamage = 19f;
+            Bulletdamage = 14f;
             Deltadamage = 0.4f;
         }
         public override void PopShell(float x, float y, int dir)
