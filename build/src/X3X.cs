@@ -50,18 +50,16 @@ namespace TMGmod
         {
             if ((ammo > 0) & (_sprite.frame == 0))
             {
-                _sprite.frame = 1;
                 Fire();
+                if (ammo < 1) _sprite.frame = 2; 
+                else _sprite.frame = 1;
             }
             else if (_sprite.frame == 1)
             {
                 _sprite.frame = 0;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
-
             if (!((ammo < 1) & (_sprite.frame == 0))) return;
-            //else
-            _sprite.frame = 2;
             SFX.Play(GetPath("sounds/tuduc.wav"));
         }
     }
