@@ -34,8 +34,8 @@ namespace TMGmod.Core.AmmoTypes
             var q = bullet.bulletDistance / Math.Max(1, bullet.ammo.range);
             q = Math.Min(1f, q);
             q = Math.Max(0f, q);  // [0;1]
-            var x = 1 + q * 0.4142135623730951;  // [1;1.41421]
-            var r = 2 / x / x - 1;  // [0;1]
+            var x = .5 + q * 0.9142135623730951;  // [0.5;1.41421]
+            var r = .5 / x / x - 1;  // [0;1]
             var s = 1 - q * q;  // [0;1]
             const float z = -100f;
             var rc = Math.Exp(+z);
