@@ -15,7 +15,7 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public bool ducklookleft = false;
+        private bool _ducklookleft;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -58,26 +58,26 @@ namespace TMGmod
                 {
                     if (handAngle > 0f) handAngle -= 0.075f;
                     else if (handAngle < 0f) handAngle += 0.075f;
-                    if ((handAngle > -0.075f) & (handAngle < 0.075f) & (handAngle != 0f)) handAngle = 0f;
+                    if ((handAngle > -0.075f) & (handAngle < 0.075f)) handAngle = 0f;
                     return;
                 }
                 if (duck.inputProfile.Down("UP") && !_raised)
                 {
                     if (offDir < 0)
                     {
-                        if (ducklookleft == false)
+                        if (!_ducklookleft)
                         {
                             handAngle = -handAngle;
-                            ducklookleft = true;
+                            _ducklookleft = true;
                         }
                         if (handAngle < 0.5f) handAngle += 0.05f;
                     }
                     else
                     {
-                        if (ducklookleft == true)
+                        if (_ducklookleft)
                         {
                             handAngle = -handAngle;
-                            ducklookleft = false;
+                            _ducklookleft = false;
                         }
                         if (handAngle > -0.5f) handAngle -= 0.05f;
                     }
@@ -87,7 +87,7 @@ namespace TMGmod
             }
             if (handAngle > 0f) handAngle -= 0.075f;
             else if (handAngle < 0f) handAngle += 0.075f;
-            if ((handAngle > -0.075f) & (handAngle < 0.075f) & (handAngle != 0f)) handAngle = 0f;
+            if ((handAngle > -0.075f) & (handAngle < 0.075f)) handAngle = 0f;
         }
         private void UpdateSkin()
         {

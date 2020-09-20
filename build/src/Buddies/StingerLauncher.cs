@@ -35,11 +35,9 @@ namespace TMGmod.Buddies
                 offDir = offDir,
                 angle = angle
             };
-            if (ammo > 0)
-            {
-                Level.Add(stg);
-                ammo -= 1;
-            };
+            if (ammo <= 0) return;
+            Level.Add(stg);
+            ammo -= 1;
         }
     }
 }

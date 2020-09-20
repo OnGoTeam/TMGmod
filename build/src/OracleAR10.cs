@@ -9,6 +9,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
+    // ReSharper disable once InconsistentNaming
     public class OracleAR10 : BaseGun, IHaveSkin, IAmDmr, IHaveBipods
     {
         [UsedImplicitly]
@@ -90,7 +91,7 @@ namespace TMGmod
                 maxAccuracyLost = bipods ? 0 : 0.15f;
                 _kickForce = bipods ? 0f : 2f;
                 //HandAngleOff += bipods ? 0.1f : 0f;
-                laserSight = bipods ? true : false;
+                laserSight = bipods;
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     BipOn.Play();
                 if (isServerForObject && nobipods && bipodsstate >= 0.01f)

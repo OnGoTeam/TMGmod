@@ -23,7 +23,7 @@ namespace TMGmod
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
-        public bool ducklookleft = false;
+        private bool _ducklookleft;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -70,10 +70,10 @@ namespace TMGmod
 
             if (offDir > 0)
             {
-                if (ducklookleft == true)
+                if (_ducklookleft)
                 {
                     HandAngleOff = -HandAngleOff;
-                    ducklookleft = false;
+                    _ducklookleft = false;
                 }
                 if (duck?.inputProfile.Down("UP") == true && !_raised)
                 {
@@ -91,10 +91,10 @@ namespace TMGmod
             }
             else if (offDir < 0)
             {
-                if (ducklookleft == false)
+                if (!_ducklookleft)
                 {
                     HandAngleOff = -HandAngleOff;
-                    ducklookleft = true;
+                    _ducklookleft = true;
                 }
                 if (duck?.inputProfile.Down("UP") == true && !_raised)
                 {
@@ -113,7 +113,7 @@ namespace TMGmod
 
             if (handAngle > 0f) handAngle -= 0.1f;
             else if (handAngle < 0f) handAngle += 0.1f;
-            if ((handAngle > -0.1f) & (handAngle < 0.1f) & (handAngle != 0f)) handAngle = 0f;
+            if ((handAngle > -0.1f) & (handAngle < 0.1f)) handAngle = 0f;
         }
         private void UpdateSkin()
         {

@@ -12,11 +12,12 @@ namespace TMGmod.Core.AmmoTypes
     }
     public static class Damage
     {
-        public static float GetDamage(AmmoType ammo)
+        private static float GetDamage(AmmoType ammo)
         {
             return ammo is IDamage damage ? damage.Bulletdamage : 50f;
         }
-        public static float GetDelta(AmmoType ammo)
+
+        private static float GetDelta(AmmoType ammo)
         {
             return ammo is IDamage damage ? damage.Deltadamage : 1f;
         }
