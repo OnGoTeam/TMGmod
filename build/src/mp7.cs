@@ -19,11 +19,12 @@ namespace TMGmod
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
+
+        private float _handleAngleOff;
         [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
-        private bool _ducklookleft;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -66,54 +67,31 @@ namespace TMGmod
 
         public override void Update()
         {
+            HandAngleOff = _handleAngleOff;
             base.Update();
-
-            if (offDir > 0)
+            if (duck is null)
             {
-                if (_ducklookleft)
-                {
-                    HandAngleOff = -HandAngleOff;
-                    _ducklookleft = false;
-                }
-                if (duck?.inputProfile.Down("UP") == true && !_raised)
-                {
-                    if (HandAngleOff > -0.7f) HandAngleOff -= 0.05f;
-
-                    return;
-                }
-
-                if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
-                {
-                    if (HandAngleOff < 0.7f) HandAngleOff += 0.05f;
-
-                    return;
-                }
-            }
-            else if (offDir < 0)
-            {
-                if (!_ducklookleft)
-                {
-                    HandAngleOff = -HandAngleOff;
-                    _ducklookleft = true;
-                }
-                if (duck?.inputProfile.Down("UP") == true && !_raised)
-                {
-                    if (HandAngleOff > -0.6f) HandAngleOff -= 0.05f;
-
-                    return;
-                }
-
-                if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
-                {
-                    if (HandAngleOff < 0.6f) HandAngleOff += 0.05f;
-
-                    return;
-                }
+                _handleAngleOff = 0f;
+                return;
             }
 
-            if (handAngle > 0f) handAngle -= 0.1f;
-            else if (handAngle < 0f) handAngle += 0.1f;
-            if ((handAngle > -0.1f) & (handAngle < 0.1f)) handAngle = 0f;
+            if (duck?.inputProfile.Down("UP") == true && !_raised)
+            {
+                if (_handleAngleOff > -0.7f) _handleAngleOff -= 0.05f;
+
+                return;
+            }
+
+            if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
+            {
+                if (_handleAngleOff < 0.7f) _handleAngleOff += 0.05f;
+
+                return;
+            }
+
+            if (_handleAngleOff > 0f) _handleAngleOff -= 0.1f;
+            else if (_handleAngleOff < 0f) _handleAngleOff += 0.1f;
+            if ((_handleAngleOff > -0.1f) & (_handleAngleOff < 0.1f)) _handleAngleOff = 0f;
         }
         private void UpdateSkin()
         {
