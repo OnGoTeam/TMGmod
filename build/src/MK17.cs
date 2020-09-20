@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class MK17 : BaseAr, IHaveSkin
+    public class MK17 : BaseAr, IHaveSkin, IDamage
     {
         private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -19,14 +19,15 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        private float _damaged = 1;
+        private float CalculateSide;
         private readonly SpriteMap _sprite;
 
         public MK17(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            thickness = 6f;
+            _hitPoints = 49f;
+            thickness = 12f;
             ammo = 20;
             _ammoType = new AT556NATO
             {
@@ -62,16 +63,17 @@ namespace TMGmod
         }
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
-            _damaged = bullet.ammo.penetration;
-            Damage();
+            CalculateSide = Damage.Calculate(bullet.ammo);
+            MakeDamage();
             return Hit(bullet, hitPos);
         }
-        private void Damage()
+        private void MakeDamage()
         {
-            thickness -= _damaged;
-            if (!(thickness <= 0f)) return;
+            _hitPoints -= CalculateSide;
+            if (!(_hitPoints <= 0f)) return;
             _sprite.frame %= 10;
             _sprite.frame += 10;
+            thickness = 0f;
         }
         private void UpdateSkin()
         {
@@ -93,5 +95,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public float Bulletdamage { get; }
+        public float Deltadamage { get; }
+
     }
 }
