@@ -8,11 +8,11 @@ namespace TMGmod.Buddies
 {
     [EditorGroup("TMG|Misc")]
     [PublicAPI]
-    public class SuperArmor : Equipment, IDamage
+    public class SuperArmor : Equipment
     {
         private SpriteMap _sprite;
         private SpriteMap _spriteOver;
-        private Sprite _pickupSprite;
+        private readonly Sprite _pickupSprite;
 
         public override Vec2 collisionSize
         {
@@ -50,9 +50,11 @@ namespace TMGmod.Buddies
             set => base.right = value;
         }
 
+        private const float HpMax = 99f;
+
         public SuperArmor(float xpos, float ypos) : base(xpos, ypos)
         {
-            _hitPoints = 99f;
+            _hitPoints = HpMax;
             _sprite = new SpriteMap("chestPlateAnim", 32, 32);
             _spriteOver = new SpriteMap("chestPlateAnimOver", 32, 32);
             _pickupSprite = new Sprite("chestPlatePickup");
@@ -64,7 +66,7 @@ namespace TMGmod.Buddies
             _equippedCollisionSize = new Vec2(12f, 22f);
             _hasEquippedCollision = true;
             _center = new Vec2(8f, 8f);
-            physicsMaterial = PhysicsMaterial.Metal;
+            physicsMaterial = PhysicsMaterial.Duck;
             _equippedDepth = 2;
             _wearOffset = new Vec2(0, 0);
             _isArmor = true;
@@ -75,7 +77,7 @@ namespace TMGmod.Buddies
         {
             if (_equippedDuck == null || bullet.owner == _equippedDuck || !bullet.isLocal)
                 return false;
-            _hitPoints -= Damage.Calculate(bullet.ammo);
+            _hitPoints -= Damage.Calculate(bullet);
             if (_hitPoints < 0)
             {
                 var equippedDuck1 = _equippedDuck;
@@ -91,8 +93,6 @@ namespace TMGmod.Buddies
                 Level.Add(Spark.New(x, y, bullet.travelDirNormalized));
             return true;
         }
-        public float Bulletdamage { get; }
-        public float Deltadamage { get; }
 
         public override void Draw()
         {

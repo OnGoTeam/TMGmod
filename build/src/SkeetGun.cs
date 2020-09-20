@@ -24,7 +24,6 @@ namespace TMGmod
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        private bool _ducklookleft;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -67,7 +66,7 @@ namespace TMGmod
                 _handleAngleOff = 0f;
                 return;
             }
-            if (duck.inputProfile.Down("UP") == true && !_raised)
+            if (duck.inputProfile.Down("UP") && !_raised)
             {
                 if (_handleAngleOff > -0.5f) _handleAngleOff -= 0.05f;
                 return;
