@@ -28,10 +28,6 @@ namespace TMGmod.Core.AmmoTypes
             };
             Level.Add(shell);
         }
-        public AT556NATO MemberWiseClone()
-        {
-            return (AT556NATO) MemberwiseClone();
-        }
 
         public override void WriteAdditionalData(BitBuffer b)
         {
