@@ -19,14 +19,14 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4, 1, 7 });
 
         public HK417 (float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new AT556NATO
+            _ammoType = new ATHk417
             {
                 range = 375f,
                 accuracy = 0.98f
