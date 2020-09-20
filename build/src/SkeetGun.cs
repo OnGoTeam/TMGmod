@@ -24,7 +24,6 @@ namespace TMGmod
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        private bool _ducklookleft;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
