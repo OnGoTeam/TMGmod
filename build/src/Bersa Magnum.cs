@@ -3,11 +3,12 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
-    public class Bersa45 : BaseGun, IAmHg, IHaveSkin
+    public class BersaMagnum : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -17,40 +18,34 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 3, 4, 6, 8 });
-        public Bersa45(float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public BersaMagnum(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 11;
-            _ammoType = new AT9mm
-            {
-                range = 90f,
-                accuracy = 0.76f,
-                penetration = 0.4f,
-                bulletSpeed = 25f
-            };
+            ammo = 7;
+            _ammoType = new ATBersaMagnum();
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Bersa45"), 12, 8);
+            _sprite = new SpriteMap(GetPath("BersaMagnum"), 13, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(6f, 4f);
-            _collisionOffset = new Vec2(-6f, -4f);
-            _collisionSize = new Vec2(12f, 8f);
-            _barrelOffsetTL = new Vec2(12f, 1.5f);
+            _center = new Vec2(7f, 4f);
+            _collisionOffset = new Vec2(-7f, -4f);
+            _collisionSize = new Vec2(13f, 8f);
+            _barrelOffsetTL = new Vec2(13f, 1.5f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _fireSound = GetPath("sounds/1.wav");
+            _fireSound = GetPath("sounds/heavy_pistol.wav");
             _fullAuto = false;
-            _fireWait = 0.3f;
-            _kickForce = 1f;
-            loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.9f;
+            _fireWait = 1.2f;
+            _kickForce = 2.1f;
+            loseAccuracy = 0.3f;
+            maxAccuracyLost = 0.7f;
             _holdOffset = new Vec2(-1f, 2f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "Bersa 45";
-            _laserOffsetTL = new Vec2(9f, 4f);
+            _editorName = "Bersa Magnum";
+            _laserOffsetTL = new Vec2(12f, 0f);
             laserSight = true;
-			_weight = 1f;
+			_weight = 2.4f;
         }
         private void UpdateSkin()
         {

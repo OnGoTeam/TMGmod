@@ -83,11 +83,15 @@
     </Compile>
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AR9SX.cs" />
+    <Compile Include="src\Bersa Magnum.cs" />
     <Compile Include="src\Core\AmmoTypes\AT50SniperS.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATBersaMagnum.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATMP7.cs" />
     <Compile Include="src\Core\AmmoTypes\ATHk417.cs" />
     <Compile Include="src\Core\AmmoTypes\ATVista.cs" />
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\AmmoTypes\IDamage.cs" />
+    <Compile Include="src\Core\Shells\ATMP7shell.cs" />
     <Compile Include="src\DTSRM44.cs" />
     <Compile Include="src\DTSR44.cs" />
     <Compile Include="src\OracleAR10.cs" />

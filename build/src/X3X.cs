@@ -33,7 +33,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-11.5f, -9f);
             _collisionSize = new Vec2(27f, 14f);
             _barrelOffsetTL = new Vec2(27f, 5f);
-            _fireSound = "deepMachineGun2";
+            _fireSound = GetPath("sounds/x3xshsnd.wav");
             _fullAuto = false;
             _fireWait = 2f;
             _kickForce = 8f;

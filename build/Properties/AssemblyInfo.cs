@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // атрибутов. Отредактируйте значения этих атрибутов, чтобы изменить
 // общие сведения об этой сборке.
 [assembly: AssemblyTitle("TMGmod")]
-[assembly: AssemblyDescription("Grandful Management 2: Maps")]
+[assembly: AssemblyDescription("The Born of HealthBar")]
 //[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OnGoTeam")]
 [assembly: AssemblyProduct("TMGmod")]
@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 // patch (revision)                 5
 
 #if WORKSHOP
-[assembly: AssemblyVersion("1.1.6.2")]
+[assembly: AssemblyVersion("1.2.0.0")]
 #else
 [assembly: AssemblyVersion("1.102.*")]
 #endif
