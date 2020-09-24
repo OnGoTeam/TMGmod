@@ -156,7 +156,6 @@
     <Compile Include="src\Taligator6000.cs" />
     <Compile Include="src\Urbana.cs" />
     <Compile Include="src\Stuff\ActiveDefenseSystem.cs" />
-    <Compile Include="src\Useless or deleted Guns\AKwAR.cs" />
     <Compile Include="src\AN94.cs" />
     <Compile Include="src\AR15 Proto.cs" />
     <Compile Include="src\AUGA1.cs" />
