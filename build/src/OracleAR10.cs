@@ -49,7 +49,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.91f;
             MinAccuracy = 0.35f;
-            RhoAccuracyDmr = 0.075f;
+            RhoAccuracyDmr = 0.005f;
             DeltaAccuracyDmr = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
@@ -86,8 +86,8 @@ namespace TMGmod
                     BipodsState += 1f / 8 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
-                _ammoType.accuracy = bipods ? 1f : 0.91f;
                 BaseAccuracy = bipods ? 1f : 0.91f;
+                MinAccuracy = bipods ? 1f : 0.35f;
                 _ammoType.range = bipods ? 666f : 333f;
                 _ammoType.bulletSpeed = bipods ? 69f : 37f;
                 loseAccuracy = bipods ? 0 : 0.15f;
