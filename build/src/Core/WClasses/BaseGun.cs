@@ -53,7 +53,7 @@ namespace TMGmod.Core.WClasses
             switch (this)
             {
                 case ISpeedAccuracy thisSr:
-                    ammoType.accuracy = duck != null ? Math.Min(Math.Max(MinAccuracy, BaseAccuracy + thisSr.MuAccuracySr - (Math.Abs(duck.hSpeed) + Math.Abs(duck.vSpeed) * thisSr.LambdaAccuracySr)), BaseAccuracy): BaseAccuracy;
+                    ammoType.accuracy = duck != null ? SaneAccuracy(BaseAccuracy + thisSr.MuAccuracySr - (Math.Abs(duck.hSpeed) + Math.Abs(duck.vSpeed) * thisSr.LambdaAccuracySr)) : BaseAccuracy;
                     break;
                 case IFirstPrecise thisFirstPrecise:
                     ammoType.accuracy = thisFirstPrecise.CurrDelay <= 0f ? thisFirstPrecise.MaxAccuracy : BaseAccuracy;
@@ -65,6 +65,13 @@ namespace TMGmod.Core.WClasses
             base.Fire();
             if (pammo > ammo)
             {
+                switch (this)
+                {
+                    case ILoseAccuracy thisDmr:
+                        ammoType.accuracy = SaneAccuracy(ammoType.accuracy - thisDmr.DeltaAccuracyDmr);
+                        break;
+                }
+
                 if (Rando.Float(0f, 1f) < PChance/100f)
                 {
                     var scase = new NewYearCase(x, y);
@@ -73,6 +80,11 @@ namespace TMGmod.Core.WClasses
             }
             if (ToPrevKforce)
                 _kickForce = PrevKforce;
+        }
+
+        private float SaneAccuracy(float accuracy)
+        {
+            return Math.Min(BaseAccuracy, Math.Max(MinAccuracy, accuracy));
         }
 
         public override void Update()
@@ -97,6 +109,9 @@ namespace TMGmod.Core.WClasses
 
             switch (this)
             {
+                case ILoseAccuracy thisDmr:
+                    ammoType.accuracy = SaneAccuracy(ammoType.accuracy + thisDmr.RhoAccuracyDmr);
+                    break;
                 case IFirstPrecise thisFirstPrecise:
                     thisFirstPrecise.CurrDelay = Math.Max(thisFirstPrecise.CurrDelay - 1, 0);
                     break;

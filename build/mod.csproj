@@ -93,6 +93,8 @@
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\AmmoTypes\IDamage.cs" />
     <Compile Include="src\Core\Shells\ATMP7shell.cs" />
+    <Compile Include="src\Core\WClasses\BaseDmr.cs" />
+    <Compile Include="src\Core\WClasses\ILoseAccuracy.cs" />
     <Compile Include="src\DTSRM44.cs" />
     <Compile Include="src\DTSR44.cs" />
     <Compile Include="src\OracleAR10.cs" />
