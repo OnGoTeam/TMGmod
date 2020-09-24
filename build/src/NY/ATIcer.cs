@@ -5,7 +5,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATIcer : BaseAmmoTypeT
+    public class ATIcer : BaseAmmoType
     {
         public ATIcer()
         {

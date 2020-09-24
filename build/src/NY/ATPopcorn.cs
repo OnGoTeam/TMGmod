@@ -5,7 +5,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATPopcorn : BaseAmmoTypeT
+    public class ATPopcorn : BaseAmmoType
     {
         private readonly SpriteMap _sprite;
         public ATPopcorn()

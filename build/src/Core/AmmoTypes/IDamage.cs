@@ -7,20 +7,31 @@ namespace TMGmod.Core.AmmoTypes
     // ReSharper disable once InconsistentNaming
     public interface IDamage
     {
-        float Bulletdamage { get; }
-        float Deltadamage{ get; }
-        //float Distancefactor { get; } - падение урона с дистанцией
+        float BulletDamage { get; }
+        float DeltaDamage{ get; }
+        float DistanceConvexity { get; }
+        float AlphaDamage { get; }
     }
     public static class Damage
     {
         private static float GetDamage(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.Bulletdamage : ammo is ATShrapnel ? 30f : 50f;
+            return ammo is IDamage damage ? damage.BulletDamage : ammo is ATShrapnel ? 30f : 50f;
         }
 
         private static float GetDelta(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.Deltadamage : 1f;
+            return ammo is IDamage damage ? damage.DeltaDamage : 1f;
+        }
+
+        private static float GetConvexity(AmmoType ammo)
+        {
+            return ammo is IDamage damage ? damage.DistanceConvexity : 0f;
+        }
+
+        private static float GetAlpha(AmmoType ammo)
+        {
+            return ammo is IDamage damage ? damage.AlphaDamage: 0f;
         }
 
         private static float CalculateBase(AmmoType ammo)
@@ -31,16 +42,16 @@ namespace TMGmod.Core.AmmoTypes
 
         private static float CalculateCoeff(Bullet bullet)
         {
+            var z = GetConvexity(bullet.ammo);
             var q = bullet.bulletDistance / Math.Max(1, bullet.ammo.range);
             q = Math.Min(1f, q);
-            q = Math.Max(0f, q);  // [0;1]
-            var x = .5 + q * .9142135623730951;  // [0.5;1.41421]
-            var r = .2857142857142857 / x / x - .14285714285714285;  // [0;1]
-            var s = 1 - q * q;  // [0;1]
-            const float z = -100f;
+            q = Math.Max(0f, q);
+            var x = .5 + q * .9142135623730951;
+            var r = .2857142857142857 / x / x - .14285714285714285;
+            var s = 1 - q * q;
             var rc = Math.Exp(+z);
             var sc = Math.Exp(-z);
-            var c = (rc * r + sc * s) / (rc + sc);  // [0;1]
+            var c = (rc * r + sc * s) / (rc + sc);
             c = Math.Min(1f, c);
             c = Math.Max(0f, c);
             return (float) c;

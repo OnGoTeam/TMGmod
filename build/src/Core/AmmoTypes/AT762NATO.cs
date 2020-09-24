@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT762NATO : AmmoType, IDamage
+    public class AT762NATO : BaseAmmoType
     {
         public AT762NATO()
         {
@@ -14,8 +14,8 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 1.5f;
             bulletLength = 40f;
             immediatelyDeadly = true;
-            Bulletdamage = 40f;
-            Deltadamage = 0.2f;
+            BulletDamage = 40f;
+            DeltaDamage = 0.2f;
         }
         public override void PopShell(float x, float y, int dir)
         {
@@ -26,7 +26,5 @@ namespace TMGmod.Core.AmmoTypes
             };
             Level.Add(shell);
         }
-        public float Bulletdamage { get; }
-        public float Deltadamage { get; }
     }
 }

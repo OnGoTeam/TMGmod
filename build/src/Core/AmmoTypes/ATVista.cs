@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATVista : AmmoType, IDamage
+    public class ATVista : BaseAmmoType
     {
         public ATVista()
         {
@@ -14,8 +14,8 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 0.8f;
             bulletLength = 6f;
             immediatelyDeadly = true;
-            Bulletdamage = 10f;
-            Deltadamage = 0.33f;
+            BulletDamage = 10f;
+            DeltaDamage = 0.33f;
         }
         public override void PopShell(float x, float y, int dir)
         {
@@ -26,7 +26,5 @@ namespace TMGmod.Core.AmmoTypes
             };
             Level.Add(shell);
         }
-        public float Bulletdamage { get; }
-        public float Deltadamage { get; }
     }
 }

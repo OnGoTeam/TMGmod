@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATBersa45 : AmmoType, IDamage
+    public class ATBersa45 : BaseAmmoType
     {
         public ATBersa45()
         {
@@ -16,8 +16,8 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 2f;
             bulletLength = 64f;
             immediatelyDeadly = true;
-            Bulletdamage = 32f;
-            Deltadamage = 0.2f;
+            BulletDamage = 32f;
+            DeltaDamage = 0.2f;
         }
         public override void PopShell(float x, float y, int dir)
         {
@@ -28,7 +28,5 @@ namespace TMGmod.Core.AmmoTypes
             };
             Level.Add(shell);
         }
-        public float Bulletdamage { get; }
-        public float Deltadamage { get; }
     }
 }

@@ -169,7 +169,7 @@
     <Compile Include="src\Cases\Color\GreenCase.cs" />
     <Compile Include="src\Core\AmmoTypes\SRM2.cs" />
     <Compile Include="src\Core\AmmoTypes\SRM1.cs" />
-    <Compile Include="src\Core\AmmoTypes\BaseAmmoTypeT.cs" />
+    <Compile Include="src\Core\AmmoTypes\BaseAmmoType.cs" />
     <Compile Include="src\Core\AmmoTypes\ATx3x.cs" />
     <Compile Include="src\Core\Nothing.cs" />
     <Compile Include="src\Core\WClasses\IAmAr.cs" />

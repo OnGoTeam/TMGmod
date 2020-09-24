@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT9mmParabellum : AmmoType, IDamage
+    public class AT9mmParabellum : BaseAmmoType
     {
         public AT9mmParabellum()
         {
@@ -14,8 +14,8 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 0.8f;
             bulletLength = 15f;
             immediatelyDeadly = true;
-            Bulletdamage = 14f;
-            Deltadamage = 0.4f;
+            BulletDamage = 14f;
+            DeltaDamage = 0.4f;
         }
         public override void PopShell(float x, float y, int dir)
         {
@@ -26,7 +26,5 @@ namespace TMGmod.Core.AmmoTypes
             };
             Level.Add(shell);
         }
-        public float Bulletdamage { get; }
-        public float Deltadamage { get; }
     }
 }
