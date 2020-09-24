@@ -39,6 +39,10 @@ namespace TMGmod
                 accuracy = 1f,
                 penetration = 2f
             };
+            BaseAccuracy = 1f;
+            MinAccuracy = 0.3f;
+            RhoAccuracyDmr = 0.01f;
+            DeltaAccuracyDmr = 0.3f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Lynx"), 31, 11);
             _graphic = _sprite;
@@ -63,8 +67,6 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
 			_weight = 6f;
-            RhoAccuracyDmr = 0.01f;
-            DeltaAccuracyDmr = 0.3f;
         }
         public bool Bipods
         {

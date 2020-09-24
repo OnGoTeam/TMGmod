@@ -81,6 +81,9 @@ namespace TMGmod
                 penetration = 1f
             };
             BaseAccuracy = 0.91f;
+            MinAccuracy = 0.91f;
+            RhoAccuracyDmr = 0.004f;
+            DeltaAccuracyDmr = 0.15f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
             _graphic = _sprite;
@@ -105,8 +108,6 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(26f, 5.5f);
             _editorName = "TC-12";
 			_weight = 4.5f;
-            RhoAccuracyDmr = 0.004f;
-            DeltaAccuracyDmr = 0.15f;
         }
         public override void Update()
         {

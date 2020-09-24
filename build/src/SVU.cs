@@ -25,13 +25,9 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 12;
-            _ammoType = new AT9mmS
-            {
-                range = 600f,
-                accuracy = 0.95f
-            };
+            _ammoType = new ATSVU();
             BaseAccuracy = 0.95f;
-            MinAccuracy = 0.1f;
+            MinAccuracy = 0.2f;
             RhoAccuracyDmr = 0.017f;
             DeltaAccuracyDmr = 0.3f;
             _type = "gun";

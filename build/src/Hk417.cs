@@ -31,7 +31,7 @@ namespace TMGmod
                 range = 375f,
                 accuracy = 0.98f
             };
-            RhoAccuracyDmr = 0.003f;
+            RhoAccuracyDmr = 0.015f;
             DeltaAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417"), 30, 10);

@@ -85,6 +85,7 @@
     <Compile Include="src\AR9SX.cs" />
     <Compile Include="src\Bersa Magnum.cs" />
     <Compile Include="src\Core\AmmoTypes\AT50SniperS.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATSVU.cs" />
     <Compile Include="src\Core\AmmoTypes\ATBersa45.cs" />
     <Compile Include="src\Core\AmmoTypes\ATBersaMagnum.cs" />
     <Compile Include="src\Core\AmmoTypes\ATMP7.cs" />

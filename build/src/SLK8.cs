@@ -32,6 +32,10 @@ namespace TMGmod
                 accuracy = 1f,
                 bulletSpeed = 90f
             };
+            BaseAccuracy = 1f;
+            MinAccuracy = 0.3f;
+            RhoAccuracyDmr = 0.02f;
+            DeltaAccuracyDmr = 0.3f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SLK8"), 41, 11);
             _graphic = _sprite;
@@ -51,8 +55,6 @@ namespace TMGmod
             maxAccuracyLost = 0.22f;
             _editorName = "HK SLK8";
 			_weight = 7.5f;
-            RhoAccuracyDmr = 0.005f;
-            DeltaAccuracyDmr = 0.2f;
         }
         private void UpdateSkin()
         {

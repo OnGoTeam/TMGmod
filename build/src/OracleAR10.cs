@@ -48,6 +48,9 @@ namespace TMGmod
                 accuracy = 0.91f
             };
             BaseAccuracy = 0.91f;
+            MinAccuracy = 0.35f;
+            RhoAccuracyDmr = 0.075f;
+            DeltaAccuracyDmr = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
             _graphic = _sprite;
@@ -64,7 +67,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
-            _fireWait = 0.7f;
+            _fireWait = 0.5f;
             _kickForce = 2f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
@@ -72,8 +75,6 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(17f, 1.5f);
             _editorName = "Oracle AR-10";
 			_weight = 5f;
-            RhoAccuracyDmr = 0.0075f;
-            DeltaAccuracyDmr = 0.2f;
         }
         public bool Bipods
         {
