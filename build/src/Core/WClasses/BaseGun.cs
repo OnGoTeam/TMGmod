@@ -176,19 +176,28 @@ namespace TMGmod.Core.WClasses
             base.Draw();
 #if DEBUG
             if (Level.activeLevel is Editor) return;
-            var start = barrelPosition + OffsetLocal(new Vec2(0, -64));
-            var x1 = OffsetLocal(new Vec2(ammoType.range, 0));
-            var y1 = OffsetLocal(new Vec2(0, -64));
-            var last = start + 0 * x1 + 1 * y1;
-            for (var i = 0; i < 100; ++i)
             {
-                var q = (i + 1) / 100f;
-                var next = start + q * x1 + Damage.CalculateCoeff(ammoType, q) * y1;
-                Graphics.DrawLine(last, next, Color.Lime);
-                last = next;
+                var a = (1 - ammoType.accuracy) / 2;
+                var v = OffsetLocal(new Vec2(64, 0));
+                Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(a, Vec2.Zero), Color.Red);
+                Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(-a, Vec2.Zero), Color.Red);
             }
-            Graphics.DrawLine(start, start + x1, Color.MediumPurple);
-            Graphics.DrawLine(start, start + y1, Color.MediumPurple);
+            {
+                var start = barrelPosition + new Vec2(0, -64);
+                var x1 = OffsetLocal(new Vec2(ammoType.range, 0));
+                var y1 = new Vec2(0, -64);
+                var last = start + 0 * x1 + 1 * y1;
+                for (var i = 0; i < 100; ++i)
+                {
+                    var q = (i + 1) / 100f;
+                    var next = start + q * x1 + Damage.CalculateCoeff(ammoType, q) * y1;
+                    Graphics.DrawLine(last, next, Color.Lime);
+                    last = next;
+                }
+
+                Graphics.DrawLine(start, start + x1, Color.MediumPurple);
+                Graphics.DrawLine(start, start + y1, Color.MediumPurple);
+            }
 #endif
         }
     }
