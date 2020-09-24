@@ -12,7 +12,10 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DR300 : BaseGun, IAmAr, IHaveSkin
     {
-        private int _postrounds = Rando.ChooseInt(20, 30);
+        [UsedImplicitly]
+        public int PostRounds { get; private set; }
+        [UsedImplicitly]
+        public StateBinding PostRoundsBinding { get; } = new StateBinding(nameof(PostRounds));
         private const int Postframe = 8;
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -33,7 +36,8 @@ namespace TMGmod
         {
             Rounds = new EditorProperty<int>(0, this, 0, 2, 1);
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
-            ammo = _postrounds;
+            PostRounds = Rando.ChooseInt(20, 30);
+            ammo = PostRounds;
             _ammoType = new AT556NATO
             {
                 range = 567f,
@@ -66,8 +70,8 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if ((_postrounds == 20) & !((_sprite.frame > 9) & (_sprite.frame < 20))) _sprite.frame = 10 + _sprite.frame % 10;
-            if ((_postrounds == 30) & (_sprite.frame < 19)) _sprite.frame = 20 + _sprite.frame % 10;
+            if ((PostRounds == 20) & !((_sprite.frame > 9) & (_sprite.frame < 20))) _sprite.frame = 10 + _sprite.frame % 10;
+            if ((PostRounds == 30) & (_sprite.frame < 19)) _sprite.frame = 20 + _sprite.frame % 10;
             base.Update();
         }
         private void UpdateSkin()
@@ -91,16 +95,16 @@ namespace TMGmod
             switch (Rounds.value)
             {
                 case 0:
-                    _postrounds = Rando.ChooseInt(20, 30);
+                    PostRounds = Rando.ChooseInt(20, 30);
                     break;
                 case 1:
-                    _postrounds = 20;
+                    PostRounds = 20;
                     break;
                 case 2:
-                    _postrounds = 30;
+                    PostRounds = 30;
                     break;
             }
-            ammo = _postrounds;
+            ammo = PostRounds;
             UpdateSkin();
             _sprite.frame = Rounds.value * 10 + _sprite.frame % 10;
             base.EditorPropertyChanged(property);
