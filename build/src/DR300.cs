@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -10,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class DR300 : BaseGun, IAmAr, IHaveSkin
+    public class DR300 : BaseDmr, IAmAr, IHaveSkin
     {
         private int _postrounds = Rando.ChooseInt(20, 30);
         private const int Postframe = 8;
@@ -40,6 +39,10 @@ namespace TMGmod
                 accuracy = 0.98f,
                 bulletSpeed = 44f
             };
+            BaseAccuracy = 0.98f;
+            MinAccuracy = 0.65f;
+            RhoAccuracyDmr = 0.025f;
+            DeltaAccuracyDmr = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("DR300"), 37, 11);
             _graphic = _sprite;
@@ -107,4 +110,3 @@ namespace TMGmod
         }
     }
 }
-#endif
