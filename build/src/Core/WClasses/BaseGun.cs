@@ -51,17 +51,6 @@ namespace TMGmod.Core.WClasses
                     break;
             }
 
-            switch (this)
-            {
-                case ISpeedAccuracy thisSr:
-                    ammoType.accuracy = duck != null ? SaneAccuracy(BaseAccuracy + thisSr.MuAccuracySr - (Math.Abs(duck.hSpeed) + Math.Abs(duck.vSpeed) * thisSr.LambdaAccuracySr)) : BaseAccuracy;
-                    break;
-                case IFirstPrecise thisFirstPrecise:
-                    ammoType.accuracy = thisFirstPrecise.CurrDelay <= 0f ? thisFirstPrecise.MaxAccuracy : BaseAccuracy;
-                    thisFirstPrecise.CurrDelay = thisFirstPrecise.MaxDelayFp;
-                    break;
-            }
-
             var pammo = ammo;
             base.Fire();
             if (pammo > ammo)
@@ -70,6 +59,9 @@ namespace TMGmod.Core.WClasses
                 {
                     case ILoseAccuracy thisDmr:
                         ammoType.accuracy = SaneAccuracy(ammoType.accuracy - thisDmr.DeltaAccuracyDmr);
+                        break;
+                    case IFirstPrecise thisFirstPrecise:
+                        thisFirstPrecise.CurrDelay = thisFirstPrecise.MaxDelayFp;
                         break;
                 }
 
@@ -110,11 +102,15 @@ namespace TMGmod.Core.WClasses
 
             switch (this)
             {
+                case ISpeedAccuracy thisSr:
+                    ammoType.accuracy = duck != null ? SaneAccuracy(BaseAccuracy + thisSr.MuAccuracySr - (Math.Abs(duck.hSpeed) + Math.Abs(duck.vSpeed) * thisSr.LambdaAccuracySr)) : BaseAccuracy;
+                    break;
                 case ILoseAccuracy thisDmr:
                     ammoType.accuracy = SaneAccuracy(ammoType.accuracy + thisDmr.RhoAccuracyDmr);
                     break;
                 case IFirstPrecise thisFirstPrecise:
                     thisFirstPrecise.CurrDelay = Math.Max(thisFirstPrecise.CurrDelay - 1, 0);
+                    ammoType.accuracy = thisFirstPrecise.CurrDelay <= 0f ? thisFirstPrecise.MaxAccuracy : BaseAccuracy;
                     break;
             }
             base.Update();
