@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
-    [EditorGroup("TMG|Misc")]
+    //[EditorGroup("TMG|Misc")]
     [BaggedProperty("CanSpawn", false)]
     [UsedImplicitly]
     public class Barricades:GreyBlock
