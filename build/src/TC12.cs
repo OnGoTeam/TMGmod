@@ -81,7 +81,7 @@ namespace TMGmod
                 penetration = 1f
             };
             BaseAccuracy = 0.91f;
-            MinAccuracy = 0.91f;
+            MinAccuracy = 0.45f;
             RhoAccuracyDmr = 0.004f;
             DeltaAccuracyDmr = 0.15f;
             _type = "gun";
