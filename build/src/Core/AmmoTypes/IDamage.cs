@@ -40,21 +40,32 @@ namespace TMGmod.Core.AmmoTypes
             return Rando.Float(1 - delta, 1 + delta) * GetDamage(ammo);
         }
 
-        private static float CalculateCoeff(Bullet bullet)
+        public static double CalculateCoeff(double a, double z, double q)
         {
-            var z = GetConvexity(bullet.ammo);
-            var q = bullet.bulletDistance / Math.Max(1, bullet.ammo.range);
             q = Math.Min(1f, q);
             q = Math.Max(0f, q);
-            var x = .5 + q * .9142135623730951;
-            var r = .2857142857142857 / x / x - .14285714285714285;
-            var s = 1 - q * q;
+            var r = a;
+            if (Math.Abs((a - 1) * a) > 0)
+            {
+                var k = (Math.Sqrt(a) + a) / (1 - a);
+                r = (k * k) / (q + k) / (q + k);
+            }
+            var s = 1 - (1 - a) * q * q;
             var rc = Math.Exp(+z);
             var sc = Math.Exp(-z);
             var c = (rc * r + sc * s) / (rc + sc);
             c = Math.Min(1f, c);
             c = Math.Max(0f, c);
-            return (float) c;
+            return c;
+        }
+
+        private static float CalculateCoeff(Bullet bullet)
+        {
+            return (float) CalculateCoeff(
+                GetAlpha(bullet.ammo),
+                GetConvexity(bullet.ammo),
+                bullet.bulletDistance / Math.Max(1, bullet.ammo.range
+                ));
         }
         public static float Calculate(Bullet bullet)
         {

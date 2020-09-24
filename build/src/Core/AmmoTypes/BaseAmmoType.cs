@@ -4,10 +4,10 @@ namespace TMGmod.Core.AmmoTypes
 {
     public abstract class BaseAmmoType : AmmoType, IDamage
     {
-        public float BulletDamage { get; protected set; }
-        public float DeltaDamage { get; protected set; }
-        public float DistanceConvexity { get; protected set; }
-        public float AlphaDamage { get; protected set; }
+        public float BulletDamage { get; set; }
+        public float DeltaDamage { get; set; }
+        public float DistanceConvexity { get; set; }
+        public float AlphaDamage { get; set; }
 
         protected BaseAmmoType()
         {
