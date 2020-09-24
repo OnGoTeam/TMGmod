@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class CZC2 : BaseAr, IAmDmr, IHaveSkin
+    public class CZC2 : BaseAr, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;

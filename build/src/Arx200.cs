@@ -8,7 +8,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
-    public class Arx200 : BaseGun, IHaveSkin, IAmDmr
+    public class Arx200 : BaseDmr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -52,6 +52,8 @@ namespace TMGmod
             maxAccuracyLost = 0.15f;
             _editorName = "Beretta ARX-200";
 			_weight = 6f;
+            RhoAccuracyDmr = 0.01f;
+            DeltaAccuracyDmr = 0.15f;
         }
         private void UpdateSkin()
         {

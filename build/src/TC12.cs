@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class TC12 : BaseGun, IAmDmr, IHaveSkin
+    public class TC12 : BaseDmr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
@@ -105,6 +105,8 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(26f, 5.5f);
             _editorName = "TC-12";
 			_weight = 4.5f;
+            RhoAccuracyDmr = 0.004f;
+            DeltaAccuracyDmr = 0.15f;
         }
         public override void Update()
         {

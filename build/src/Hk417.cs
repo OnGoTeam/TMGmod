@@ -31,6 +31,8 @@ namespace TMGmod
                 range = 375f,
                 accuracy = 0.98f
             };
+            RhoAccuracyDmr = 0.003f;
+            DeltaAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417"), 30, 10);
             _graphic = _sprite;
@@ -53,8 +55,6 @@ namespace TMGmod
             maxAccuracyLost = 0.15f;
             _editorName = "Hk 417C";
 			_weight = 3.5f;
-            RhoAccuracyDmr = 0.003f;
-            DeltaAccuracyDmr = 0.1f;
         }
         private void UpdateSkin()
         {

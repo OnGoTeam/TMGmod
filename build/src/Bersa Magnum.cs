@@ -34,13 +34,13 @@ namespace TMGmod
             _collisionSize = new Vec2(13f, 8f);
             _barrelOffsetTL = new Vec2(13f, 1.5f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _fireSound = GetPath("sounds/heavy_pistol.wav");
+            _fireSound = "magnum";
             _fullAuto = false;
             _fireWait = 1.2f;
             _kickForce = 2.1f;
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.7f;
-            _holdOffset = new Vec2(-1f, 2f);
+            _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "Bersa Magnum";
             _laserOffsetTL = new Vec2(12f, 0f);

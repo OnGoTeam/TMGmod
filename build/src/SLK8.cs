@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class SLK8 : BaseGun, IAmDmr, IHaveSkin
+    public class SLK8 : BaseDmr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -51,6 +51,8 @@ namespace TMGmod
             maxAccuracyLost = 0.22f;
             _editorName = "HK SLK8";
 			_weight = 7.5f;
+            RhoAccuracyDmr = 0.005f;
+            DeltaAccuracyDmr = 0.2f;
         }
         private void UpdateSkin()
         {
