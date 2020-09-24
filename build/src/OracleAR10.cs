@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class OracleAR10 : BaseGun, IHaveSkin, IAmDmr, IHaveBipods
+    public class OracleAR10 : BaseDmr, IHaveSkin, IHaveBipods
     {
         [UsedImplicitly]
         public float HandAngleOff
@@ -72,6 +72,8 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(17f, 1.5f);
             _editorName = "Oracle AR-10";
 			_weight = 5f;
+            RhoAccuracyDmr = 0.0075f;
+            DeltaAccuracyDmr = 0.2f;
         }
         public bool Bipods
         {

@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -9,7 +8,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Combined")]
-    public class ValmetM76 : BaseBurst, IAmDmr, IHaveSkin
+    public class ValmetM76 : BaseBurst, ILoseAccuracy, IHaveSkin
     {
         private readonly SpriteMap _sprite;
 
@@ -25,6 +24,8 @@ namespace TMGmod
                 loseAccuracy = value ? 0.2f : 0f;
                 _kickForce = value ? 3f : 6.5f;
                 _ammoType.accuracy = value ? 0.89f : 1f;
+                RhoAccuracyDmr = value ? 0.005f : 0f;
+                DeltaAccuracyDmr = value ? 0.2f : 0f;
             }
         }
         private const int NonSkinFrames = 2;
@@ -99,6 +100,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+
+        public float RhoAccuracyDmr { get; private set; }
+        public float DeltaAccuracyDmr { get; private set; }
     }
 }
-#endif

@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class Lynx : BaseGun, IAmDmr, ISpeedAccuracy, IHaveSkin, I5, IHaveBipods
+    public class Lynx : BaseDmr, ISpeedAccuracy, IHaveSkin, I5, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 4;
@@ -53,7 +53,7 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
-            _fireWait = 4f;
+            _fireWait = 2f;
             _kickForce = 5.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
@@ -63,6 +63,8 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
 			_weight = 6f;
+            RhoAccuracyDmr = 0.01f;
+            DeltaAccuracyDmr = 0.3f;
         }
         public bool Bipods
         {

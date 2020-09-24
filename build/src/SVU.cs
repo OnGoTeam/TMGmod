@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SVU : BaseGun, IAmDmr, IHaveSkin
+    public class SVU : BaseDmr, IHaveSkin
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -31,6 +31,9 @@ namespace TMGmod
                 accuracy = 0.95f
             };
             BaseAccuracy = 0.95f;
+            MinAccuracy = 0.1f;
+            RhoAccuracyDmr = 0.017f;
+            DeltaAccuracyDmr = 0.3f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;
@@ -43,7 +46,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
             _barrelOffsetTL = new Vec2(37f, 5f);
-            _fireSound = GetPath("sounds/HeavyRifle.wav");
+            _fireSound = GetPath("sounds/Rifle.wav");
             _fullAuto = true;
             _fireWait = 1.2f;
             _kickForce = 2.8f;
