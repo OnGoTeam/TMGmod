@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT12Gauge : AmmoType
+    public class AT12Gauge : BaseAmmoType
     {
         public AT12Gauge()
         {
@@ -16,6 +16,7 @@ namespace TMGmod.Core.AmmoTypes
             weight = 5f;
             bulletThickness = 2f;
             immediatelyDeadly = true;
+            DistanceConvexity = 1;
         }
         public override void PopShell(float x, float y, int dir)
         {

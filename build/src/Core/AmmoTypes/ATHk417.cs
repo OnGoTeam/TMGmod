@@ -18,6 +18,7 @@ namespace TMGmod.Core.AmmoTypes
             bulletType = typeof(Bullet556);
             BulletDamage = 64f;
             DeltaDamage = 0.2f;
+            DistanceConvexity = -1f;
         }
         public override void PopShell(float x, float y, int dir)
         {

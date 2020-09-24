@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
@@ -172,6 +173,27 @@ namespace TMGmod.Core.WClasses
         {
             value = (value % m + m) % m;
             sm.frame = value;
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
+#if DEBUG
+            if (Level.activeLevel is Editor) return;
+            var start = barrelPosition + OffsetLocal(new Vec2(0, -64));
+            var x1 = OffsetLocal(new Vec2(ammoType.range, 0));
+            var y1 = OffsetLocal(new Vec2(0, -64));
+            var last = start + 0 * x1 + 1 * y1;
+            for (var i = 0; i < 100; ++i)
+            {
+                var q = (i + 1) / 100f;
+                var next = start + q * x1 + Damage.CalculateCoeff(ammoType, q) * y1;
+                Graphics.DrawLine(last, next, Color.Lime);
+                last = next;
+            }
+            Graphics.DrawLine(start, start + x1, Color.MediumPurple);
+            Graphics.DrawLine(start, start + y1, Color.MediumPurple);
+#endif
         }
     }
 }

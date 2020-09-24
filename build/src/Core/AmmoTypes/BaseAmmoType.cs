@@ -14,7 +14,7 @@ namespace TMGmod.Core.AmmoTypes
             BulletDamage = 50f;
             DeltaDamage = 1f;
             DistanceConvexity = 0f;
-            AlphaDamage = 0f;
+            AlphaDamage = 0.01f;
         }
     }
 }

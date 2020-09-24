@@ -31,7 +31,7 @@ namespace TMGmod.Core.AmmoTypes
 
         private static float GetAlpha(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.AlphaDamage: 0f;
+            return ammo is IDamage damage ? damage.AlphaDamage: 0.01f;
         }
 
         private static float CalculateBase(AmmoType ammo)
@@ -40,7 +40,7 @@ namespace TMGmod.Core.AmmoTypes
             return Rando.Float(1 - delta, 1 + delta) * GetDamage(ammo);
         }
 
-        public static double CalculateCoeff(double a, double z, double q)
+        private static double CalculateCoeff(double a, double z, double q)
         {
             q = Math.Min(1f, q);
             q = Math.Max(0f, q);
@@ -59,13 +59,14 @@ namespace TMGmod.Core.AmmoTypes
             return c;
         }
 
+        public static float CalculateCoeff(AmmoType ammo, float q)
+        {
+            return (float) CalculateCoeff(GetAlpha(ammo), GetConvexity(ammo), q);
+        }
+
         private static float CalculateCoeff(Bullet bullet)
         {
-            return (float) CalculateCoeff(
-                GetAlpha(bullet.ammo),
-                GetConvexity(bullet.ammo),
-                bullet.bulletDistance / Math.Max(1, bullet.ammo.range
-                ));
+            return CalculateCoeff(bullet.ammo, bullet.bulletDistance / Math.Max(1, bullet.ammo.range));
         }
         public static float Calculate(Bullet bullet)
         {
