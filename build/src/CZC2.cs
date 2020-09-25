@@ -25,7 +25,7 @@ namespace TMGmod
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
                     _fireSound = GetPath("sounds/Silenced2.wav");
-                    _ammoType = new AT9mmS
+                    _ammoType = new AT9mmS //self AT
                     {
                         range = 350f,
                         accuracy = 0.95f

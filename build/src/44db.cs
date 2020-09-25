@@ -26,13 +26,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 1;
-            _ammoType = new AT12Gauge
-            {
-                range = 100f,
-                accuracy = 0.1f,
-                penetration = 4f,
-                bulletThickness = 2f
-            };
+            _ammoType = new AT12Gauge();
             BaseAccuracy = 0.1f;
             _numBulletsPerFire = 44;
             _type = "gun";

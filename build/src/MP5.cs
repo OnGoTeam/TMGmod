@@ -3,12 +3,13 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
-    public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
+    public class MP5 : BaseBurst, IFirstKforce, IFirstPrecise, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
 
@@ -39,12 +40,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT9mm
-            {
-                range = 215f,
-                accuracy = 0.7f,
-                penetration = 1f
-            };
+            _ammoType = new ATMP5();
             BaseAccuracy = 0.7f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5"), 27, 12);
@@ -64,7 +60,7 @@ namespace TMGmod
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
             ShellOffset = new Vec2(2f, -4f);
-            _editorName = "MP5";
+            _editorName = "MP5A3";
 			_weight = 3f;
             KforceDSmg = 2f;
             MaxAccuracy = 0.9f;
@@ -93,6 +89,7 @@ namespace TMGmod
         }
         public float KforceDSmg { get; }
         public int CurrDelaySmg { get; set; }
+        public int CurrDelay { get; set; }
         public int MaxDelayFp { get; }
         public int MaxDelaySmg { get; }
         public float MaxAccuracy { get; }

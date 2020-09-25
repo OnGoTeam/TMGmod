@@ -43,12 +43,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new AT762NATO
-            {
-                range = 560f,
-                accuracy = 0.95f,
-                bulletSpeed = 55f
-            };
+            _ammoType = new ATSR2C();
+            BaseAccuracy = 0.9f;
+            MinAccuracy = 0.5f;
+            Kforce1Ar = 5.4f;
+            Kforce2Ar = 6.85f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);
             _graphic = _sprite;
@@ -71,10 +70,6 @@ namespace TMGmod
             maxAccuracyLost = 0.6f;
             _editorName = "Anyx SR2 Compact";
             _weight = 5.5f;
-            MinAccuracy = 0f;
-            BaseAccuracy = 0.9f;
-            Kforce1Ar = 5.4f;
-            Kforce2Ar = 6.85f;
         }
         public override void Update()
         {

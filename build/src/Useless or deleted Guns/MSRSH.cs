@@ -2,6 +2,7 @@
 using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -40,7 +41,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             _barrelOffsetTl2 = new Vec2(14f, 6f);
             ammo = 5;
             _ammo2 = 4;
-            _ammoType = new ATSniper
+            _ammoType = new ATBoltAction
             {
                 bulletSpeed = 85f
             };

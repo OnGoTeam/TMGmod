@@ -9,13 +9,15 @@ namespace TMGmod.Core.AmmoTypes
         public AT9mmS()
         {
             penetration = 0.4f;
-            bulletSpeed = 37f;
+            bulletSpeed = 31f;
             deadly = true;
             bulletThickness = 0.8f;
             bulletLength = 0f;
             immediatelyDeadly = true;
-            BulletDamage = 19f;
-            DeltaDamage = 0.4f;
+            BulletDamage = 17f;
+            DeltaDamage = 0.3f;
+            AlphaDamage = 0.4f;
+            DistanceConvexity = -1f;
         }
         public override void PopShell(float x, float y, int dir)
         {

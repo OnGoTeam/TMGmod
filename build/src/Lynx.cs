@@ -4,6 +4,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -33,16 +34,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
-            _ammoType = new ATSniper
-            {
-                range = 1200f,
-                accuracy = 1f,
-                penetration = 2f
-            };
+            _ammoType = new ATLynx();
             BaseAccuracy = 1f;
             MinAccuracy = 0.3f;
             RhoAccuracyDmr = 0.01f;
-            DeltaAccuracyDmr = 0.3f;
+            DeltaAccuracyDmr = 0.6f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Lynx"), 31, 11);
             _graphic = _sprite;
@@ -98,11 +94,6 @@ namespace TMGmod
             else if (!BipodsQ(this, true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
             base.Update();
-        }
-        public override void UpdateOnFire()
-        {
-            loseAccuracy += 0.15f;
-            base.UpdateOnFire();
         }
         private void UpdateSkin()
         {

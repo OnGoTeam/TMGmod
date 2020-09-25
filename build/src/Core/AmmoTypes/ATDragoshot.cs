@@ -3,7 +3,7 @@ using DuckGame;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATDragoshot : AmmoType
+    public class ATDragoshot : BaseAmmoType
     {
         public ATDragoshot()
         {
@@ -14,6 +14,10 @@ namespace TMGmod.Core.AmmoTypes
             bulletSpeed = 36f;
             deadly = true;
             immediatelyDeadly = true;
+            BulletDamage = 21f;
+            DeltaDamage = 0.2f;
+            AlphaDamage = 0.5f;
+            DistanceConvexity = 1;
         }
     }
 }

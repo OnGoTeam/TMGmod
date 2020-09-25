@@ -34,7 +34,7 @@ namespace TMGmod
             _collisionSize = new Vec2(29f, 12f);
             _barrelOffsetTL = new Vec2(29f, 5f);
             ammo = 6;
-            _ammoType = new AT762NATO
+            _ammoType = new AT50SniperS
             {
                 range = 713f,
                 accuracy = 0.92f

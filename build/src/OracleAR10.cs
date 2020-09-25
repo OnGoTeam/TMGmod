@@ -42,15 +42,15 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
-            _ammoType = new AT556NATO //may be 545 nato to destroy doors immediately
+            _ammoType = new AT556NATO
             {
                 range = 333f,
                 accuracy = 0.91f
             };
             BaseAccuracy = 0.91f;
             MinAccuracy = 0.35f;
-            RhoAccuracyDmr = 0.005f;
-            DeltaAccuracyDmr = 0.2f;
+            RhoAccuracyDmr = 0.015f;
+            DeltaAccuracyDmr = 0.3f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
             _graphic = _sprite;

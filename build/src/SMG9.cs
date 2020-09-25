@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -24,12 +25,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
-            _ammoType = new AT9mm
+            _ammoType = new ATSMG9
             {
-                range = 100f,
-                accuracy = 0.6f,
-                penetration = 0.4f
             };
+            KforceDSmg = 3.5f;
+            MaxDelaySmg = 15;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SMG9"), 16, 15);
             _graphic = _sprite;
@@ -45,9 +45,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = true;
             _fireWait = 0.35f;
-            _kickForce = 2f;
-            KforceDSmg = 3.2f;
-            MaxDelaySmg = 5;
+            _kickForce = 1.6f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.57f;
             _holdOffset = new Vec2(-1f, 2f);

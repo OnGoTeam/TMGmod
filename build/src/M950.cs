@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -25,11 +26,9 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 50;
-            _ammoType = new AT9mm
+            _ammoType = new ATCalico
             {
-                range = Rando.Float(0f, 70f),
-                accuracy = 0.4f,
-                penetration = 0.4f
+                range = Rando.Float(10f, 70f)
             };
             BaseAccuracy = 0.4f;
             _type = "gun";

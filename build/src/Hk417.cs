@@ -26,12 +26,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new ATHk417
-            {
-                range = 375f,
-                accuracy = 0.98f
-            };
-            RhoAccuracyDmr = 0.015f;
+            _ammoType = new ATHk417();
+            BaseAccuracy = 0.93f;
+            MinAccuracy = 0.75f;
+            RhoAccuracyDmr = 0.004f;
             DeltaAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417"), 30, 10);

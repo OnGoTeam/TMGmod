@@ -9,6 +9,8 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATHk417()
         {
+            range = 375f;
+            accuracy = 0.93f;
             penetration = 2.1f;
             bulletSpeed = 34f;
             deadly = true;
@@ -18,6 +20,7 @@ namespace TMGmod.Core.AmmoTypes
             bulletType = typeof(Bullet556);
             BulletDamage = 64f;
             DeltaDamage = 0.2f;
+            AlphaDamage = 0.67f;
             DistanceConvexity = -1f;
         }
         public override void PopShell(float x, float y, int dir)

@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -14,12 +15,8 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 33;
-            _ammoType = new AT9mm
+            _ammoType = new ATANP73
             {
-                range = 195f,
-                accuracy = 0.81f,
-                penetration = 1f,
-                bulletSpeed = 12f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);

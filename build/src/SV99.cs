@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -35,11 +36,8 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             ammo = 6;
-            _ammoType = new AT9mm
+            _ammoType = new ATSV99
             {
-                penetration = 1.5f,
-                range = 800f,
-                accuracy = 0.9f
             };
             _fireSound = GetPath("sounds/Silenced3.wav");
             _fullAuto = false;

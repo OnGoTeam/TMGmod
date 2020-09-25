@@ -39,6 +39,8 @@ namespace TMGmod
                 bulletSpeed = 95f,
                 bulletThickness = 1.5f
             };
+            BaseAccuracy = 0.97f;
+            MinAccuracy = 0.6f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SKS"), 46, 11);
             _graphic = _sprite;
@@ -63,7 +65,7 @@ namespace TMGmod
             _editorName = "SKS";
 			_weight = 6f;
             MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.9f;
+            LambdaAccuracySr = 0.15f;
         }
         public override void Update()
         {

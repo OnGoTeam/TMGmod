@@ -26,16 +26,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 14;
-            _ammoType = new AT556NATO
-            {
-                range = 520f,
-                accuracy = 1f,
-                bulletSpeed = 90f
-            };
+            _ammoType = new ATSLK8();
             BaseAccuracy = 1f;
             MinAccuracy = 0.3f;
             RhoAccuracyDmr = 0.02f;
-            DeltaAccuracyDmr = 0.3f;
+            DeltaAccuracyDmr = 0.45f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SLK8"), 41, 11);
             _graphic = _sprite;

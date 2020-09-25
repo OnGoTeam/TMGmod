@@ -44,7 +44,6 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new AT50SniperS
             {
-                penetration = 1f,
                 range = 550f,
                 accuracy = 0.97f
             };
