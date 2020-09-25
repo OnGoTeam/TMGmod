@@ -66,21 +66,22 @@ namespace TMGmod.Buddies
             canPickUp = false;
         }
 
-        private bool QHit(Bullet bullet, Vec2 hitPos)
+        private bool QHit(Bullet bullet)
         {
-            DotMarker.Show(position);
+            var hit = bullet.end;
             var v = bullet.bulletSpeed * bullet.travelDirNormalized;
             var u = new Vec2(v.y, -v.x).normalized;
             
-            return Vec2.Dot(u, (_equippedDuck.topLeft - hitPos).normalized) * Vec2.Dot(u, (_equippedDuck.bottomRight - hitPos).normalized) < 0.5f &&
-                   Vec2.Dot(u, (_equippedDuck.topRight - hitPos).normalized) * Vec2.Dot(u, (_equippedDuck.bottomLeft - hitPos).normalized) < 0.5f;
+            return Vec2.Dot(u, (_equippedDuck.topLeft - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomRight - hit).normalized) < 0.1f &&
+                   Vec2.Dot(u, (_equippedDuck.topRight - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomLeft - hit).normalized) < 0.1f;
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
+            DotMarker.Show(bullet.end);
             if (_equippedDuck == null || bullet.owner == _equippedDuck || !bullet.isLocal)
                 return false;
-            if (!QHit(bullet, hitPos))
+            if (!QHit(bullet))
                 return false;
             _equippedDuck.hSpeed *= 0.25f;
             _hitPoints -= Damage.Calculate(bullet);
@@ -123,8 +124,14 @@ namespace TMGmod.Buddies
 
         public override void Update()
         {
-            if (_equippedDuck is null) Level.Remove(this);
             base.Update();
+            if (_equippedDuck is null)
+            {
+                Level.Remove(this);
+                return;
+            }
+
+            _hitPoints = Math.Min(_hitPoints, HpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
         }
     }
 }
