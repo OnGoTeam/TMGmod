@@ -1,5 +1,6 @@
 ﻿#if DEBUG
 using System;
+using System.Globalization;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
@@ -110,6 +111,7 @@ namespace TMGmod.Buddies
             Graphics.DrawRect(start, start + new Vec2(64, -8), Color.Red, 0.0f);
             Graphics.DrawRect(start, start + new Vec2(0, -8) + new Vec2(64, 0) * Math.Max(_hitPoints / HpMax, 0), Color.Green, 0.1f);
 #if DEBUG
+            Graphics.DrawString(_hitPoints.ToString(CultureInfo.InvariantCulture), position + new Vec2(0, -16), Color.GreenYellow);
             Graphics.DrawRect(_equippedDuck.rectangle, new Color(0, 0, 255, 128));
 #endif
         }
