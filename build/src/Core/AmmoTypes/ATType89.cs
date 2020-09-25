@@ -4,10 +4,12 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT545NATO : BaseAmmoType
+    public class ATType89 : BaseAmmoType
     {
-        public AT545NATO()
+        public ATType89()
         {
+            range = 366f;
+            accuracy = 0.85f;
             penetration = 1f;
             bulletSpeed = 37f;
             deadly = true;
@@ -17,6 +19,7 @@ namespace TMGmod.Core.AmmoTypes
             BulletDamage = 22f;
             DeltaDamage = 0.15f;
             AlphaDamage = 0.5f;
+            DistanceConvexity = -1f;
         }
         public override void PopShell(float x, float y, int dir)
         {

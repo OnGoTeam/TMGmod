@@ -51,11 +51,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             ammo = 42;
-            _ammoType = new AT545NATO
-            {
-                range = 325f,
-                accuracy = 0.85f
-            };
+            _ammoType = new ATAUGA1();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AUGA1"), 30, 12);
             _graphic = _sprite;

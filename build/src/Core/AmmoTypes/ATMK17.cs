@@ -5,9 +5,9 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT556NATO : BaseAmmoType
+    public class ATMK17 : BaseAmmoType
     {
-        public AT556NATO()
+        public ATMK17()
         {
             penetration = 2.1f;
             bulletSpeed = 34f;
@@ -16,9 +16,9 @@ namespace TMGmod.Core.AmmoTypes
             bulletLength = 50f;
             immediatelyDeadly = true;
             bulletType = typeof(Bullet556);
-            BulletDamage = 36f;
+            BulletDamage = 38f;
             DeltaDamage = 0.18f;
-            AlphaDamage = 0.75f;
+            AlphaDamage = 0.67f;
             DistanceConvexity = 0f;
         }
         public override void PopShell(float x, float y, int dir)

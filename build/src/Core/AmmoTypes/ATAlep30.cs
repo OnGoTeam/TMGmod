@@ -8,15 +8,17 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATAlep30()
         {
-            penetration = 1f;
-            bulletSpeed = 46f;
+            range = 125f;
+            accuracy = 0.6f;
+            penetration = 0.4f;
+            bulletSpeed = 20f;
             deadly = true;
             bulletThickness = 0.8f;
             bulletLength = 15f;
             immediatelyDeadly = true;
-            BulletDamage = 31f;
-            DeltaDamage = 0.3f;
-            AlphaDamage = 0.64f;
+            BulletDamage = 21f;
+            DeltaDamage = 0.1f;
+            AlphaDamage = 0.44f;
             DistanceConvexity = -0.2f;
         }
         public override void PopShell(float x, float y, int dir)

@@ -93,13 +93,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 21;
-            _ammoType = new AT9mmS
-            {
-               range = 350f,
-               accuracy = 0.81f,
-               bulletSpeed = 40f,
-               penetration = 1f
-            };
+            _ammoType = new ATARS();
             BaseAccuracy = 0.81f;
             _type = "gun";
             //THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends

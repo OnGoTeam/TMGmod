@@ -21,12 +21,7 @@ namespace TMGmod
                 {
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
-                    _ammoType = new AT9mmS
-                    {
-                        range = 167f,
-                        accuracy = 0.92f,
-                        penetration = 1f
-                    };
+                    _ammoType = new ATSpectreM4S();
                     _barrelOffsetTL = new Vec2(16f, 1f);
                     loseAccuracy = 0.07f;
                     maxAccuracyLost = 0.3f;
@@ -42,13 +37,7 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f)
                     };
                     _fireSound = GetPath("sounds/smg.wav");
-                    _ammoType = new AT9mmParabellum //selfAT
-                    {
-                        range = 145f,
-                        accuracy = 0.76f,
-                        penetration = 1f,
-                        bulletSpeed = 16f
-                    };
+                    _ammoType = new ATSpectreM4();
                     _barrelOffsetTL = new Vec2(13f, 1f);
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.34f;
@@ -71,13 +60,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT9mmParabellum //selfAT
-            {
-                range = 145f,
-                accuracy = 0.76f,
-                penetration = 1f,
-                bulletSpeed = 16f
-            };
+            _ammoType = new ATSpectreM4();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SpectreM4"), 19, 10);
             _graphic = _sprite;

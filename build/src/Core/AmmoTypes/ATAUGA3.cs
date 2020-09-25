@@ -5,10 +5,12 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT556NATO : BaseAmmoType
+    public class ATAUGA3 : BaseAmmoType
     {
-        public AT556NATO()
+        public ATAUGA3()
         {
+            range = 370f;
+            accuracy = 0.9f;
             penetration = 2.1f;
             bulletSpeed = 34f;
             deadly = true;

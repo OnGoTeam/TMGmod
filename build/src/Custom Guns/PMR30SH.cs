@@ -25,18 +25,14 @@ namespace TMGmod.Custom_Guns
         [UsedImplicitly] public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
-            new AT9mm //self AT
-            {
-                range = 110f,
-                accuracy = 0.7f,
-                penetration = 0.45f
-            },
-            new AT12Gauge //self AT 2
+            new ATPMR30(),
+            new AT12Gauge
             {
                 range = 110f,
                 accuracy = 0.35f,
                 penetration = 2f,
-                bulletSpeed = 50f
+                bulletSpeed = 50f,
+                BulletDamage = 15f
             }
         };
 
@@ -52,12 +48,7 @@ namespace TMGmod.Custom_Guns
           : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new AT9mm
-            {
-                range = 110f,
-                accuracy = 0.7f,
-                penetration = 0.45f
-            };
+            _ammoType = new ATPMR30();
             _numBulletsPerFire = 1;
             _type = "gun";
             //graphic = new Sprite(GetPath("PMR30"));

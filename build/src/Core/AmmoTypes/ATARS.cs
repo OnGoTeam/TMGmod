@@ -4,26 +4,26 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATANP73 : BaseAmmoType
+    public class ATARS : BaseAmmoType
     {
-        public ATANP73()
+        public ATARS()
         {
-            range = 195f;
+            range = 350f;
             accuracy = 0.81f;
+            bulletSpeed = 40f;
             penetration = 1f;
-            bulletSpeed = 12f;
             deadly = true;
             bulletThickness = 0.8f;
-            bulletLength = 15f;
+            bulletLength = 0f;
             immediatelyDeadly = true;
-            BulletDamage = 34f;
-            DeltaDamage = 0.6f;
-            AlphaDamage = 0f;
+            BulletDamage = 40f;
+            DeltaDamage = 0.11f;
+            AlphaDamage = 0.5f;
             DistanceConvexity = -1f;
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var shell = new AT9mmShell(x, y)
+            var shell = new AT762NATOShell(x, y)
             {
                 hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
                 vSpeed = -2.25f + Rando.Float(-0.4f, 0.4f)

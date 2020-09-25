@@ -8,7 +8,7 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|NOTRELEASEDYET|Sniper|Bolt-Action")]
+    [EditorGroup("TMG|NOTRELEASEDYET")]
     // ReSharper disable once InconsistentNaming
     public class DTSRM44 : Sniper, IAmSr, IHaveSkin
     {

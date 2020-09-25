@@ -8,7 +8,7 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    [EditorGroup("TMG|NOTRELEASEDYET")]
     [UsedImplicitly]
     public class M16A6 : BaseGun, IHaveSkin, IHaveBipods
     {

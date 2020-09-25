@@ -26,11 +26,7 @@ namespace TMGmod
                     _sprite.frame += 50;
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _ammoType = new AT9mmS //self AT same as CZC2
-                    {
-                        range = 380f,
-                        accuracy = 0.95f
-                    };
+                    _ammoType = new ATCZS();
                     _barrelOffsetTL = new Vec2(42.5f, 3f);
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.35f;
@@ -43,11 +39,7 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f)
                     };
                     _fireSound = "deepMachineGun2";
-                    _ammoType = new AT545NATO
-                    {
-                        range = 330f,
-                        accuracy = 0.87f
-                    };
+                    _ammoType = new ATCZ();
                     _barrelOffsetTL = new Vec2(39f, 3f);
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.25f;
@@ -68,11 +60,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-		    _ammoType = new AT545NATO
-		    {
-		        range = 330f,
-		        accuracy = 0.87f
-		    };
+		    _ammoType = new ATCZ();
 		    _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ805Bren"), 41, 11);
             _graphic = _sprite;

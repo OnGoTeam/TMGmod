@@ -1,4 +1,3 @@
-using DuckGame;
 
 namespace TMGmod.Core.AmmoTypes
 {

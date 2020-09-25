@@ -4,29 +4,29 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATAR9SX : BaseAmmoType
+    public class ATDaewooK1 : BaseAmmoType
     {
-        public ATAR9SX()
+        public ATDaewooK1()
         {
-            range = 224f;
-            accuracy = 0.88f;
-            penetration = 0.4f;
-            bulletSpeed = 44f;
+            range = 245f;
+            accuracy = 0.83f;
+            penetration = 1f;
+            bulletSpeed = 33f;
             deadly = true;
             bulletThickness = 0.8f;
             bulletLength = 10f;
             immediatelyDeadly = true;
-            BulletDamage = 27f;
-            DeltaDamage = 0.2f;
+            BulletDamage = 28f;
+            DeltaDamage = 0.12f;
             AlphaDamage = 0.4f;
-            DistanceConvexity = -0.8f;
+            DistanceConvexity = -0.2f;
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var shell = new AT9mmShell(x, y)
+            var shell = new AT545NATOShell(x, y)
             {
-                hSpeed = (1.5f + Rando.Float(-0.2f, 0.2f)) * dir,
-                vSpeed = -1.5f + Rando.Float(-0.2f, 0.2f)
+                hSpeed = (1f + Rando.Float(-0.1f, 0.1f)) * dir,
+                vSpeed = -1.25f + Rando.Float(-0.4f, 0.4f)
             };
             Level.Add(shell);
         }

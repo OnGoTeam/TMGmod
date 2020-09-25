@@ -18,7 +18,7 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
         private float _calculateSide;
         private readonly SpriteMap _sprite;
 
@@ -29,7 +29,7 @@ namespace TMGmod
             _hitPoints = 49f;
             thickness = 12f;
             ammo = 20;
-            _ammoType = new AT556NATO
+            _ammoType = new ATMK17
             {
                 range = 345f,
                 accuracy = 0.84f,

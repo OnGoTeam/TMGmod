@@ -23,7 +23,7 @@ namespace TMGmod.Core.AmmoTypes
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var shell = new AT762NATOShell(x, y) //spinershell
+            var shell = new AT9mmShell(x, y)
             {
                 hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
                 vSpeed = -2.25f + Rando.Float(-0.4f, 0.4f)

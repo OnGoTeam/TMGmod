@@ -24,13 +24,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 18;
-            _ammoType = new ATAlep30
-            {
-                range = 125f,
-                accuracy = 0.6f,
-                penetration = 0.4f,
-                bulletSpeed = 20f
-            };
+            _ammoType = new ATAlep30();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Alep30"), 16, 9);
             _graphic = _sprite;

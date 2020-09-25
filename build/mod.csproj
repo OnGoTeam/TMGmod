@@ -85,6 +85,16 @@
     <Compile Include="src\AR9SX.cs" />
     <Compile Include="src\Bersa Magnum.cs" />
     <Compile Include="src\Buddies\HpGiver.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATDaewooK1.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATType89.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATMK17.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATAUGA1.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATAUGA3.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATSpectreM4S.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATSpectreM4.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATCZS.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATCZ.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATARS.cs" />
     <Compile Include="src\Core\AmmoTypes\ATUSP.cs" />
     <Compile Include="src\Core\AmmoTypes\ATUSPS.cs" />
     <Compile Include="src\Core\AmmoTypes\ATPMR30.cs" />
@@ -149,7 +159,7 @@
     <Compile Include="src\Buddies\StingerLauncher.cs" />
     <Compile Include="src\Buddies\StingerMissile.cs" />
     <Compile Include="src\Cases\MillitaryCase.cs" />
-    <Compile Include="src\Core\AmmoTypes\AT556NATOS.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATFOUCUS.cs" />
     <Compile Include="src\Core\AmmoTypes\AT556NATO.cs" />
     <Compile Include="src\Core\AmmoTypes\AT545NATO.cs" />
     <Compile Include="src\Core\AmmoTypes\AT762NATO.cs" />
