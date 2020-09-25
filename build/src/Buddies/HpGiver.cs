@@ -22,6 +22,7 @@ namespace TMGmod.Buddies
         public override void Update()
         {
             base.Update();
+            if (!isServerForObject) return;
             if (_given) return;
             foreach (var thing in Level.current.things[typeof(Duck)])
             {

@@ -47,11 +47,12 @@ namespace TMGmod.Buddies
             set => base.right = value;
         }
 
-        private const float HpMax = 99f;
+        private readonly float _hpMax;
 
-        public HpArmor(float xpos, float ypos) : base(xpos, ypos)
+        public HpArmor(float xpos, float ypos, float hpMax = 99f) : base(xpos, ypos)
         {
-            _hitPoints = HpMax;
+            _hpMax = hpMax;
+            _hitPoints = _hpMax;
             _collisionOffset = new Vec2(-6f, -4f);
             _collisionSize = new Vec2(11f, 8f);
             _equippedCollisionOffset = new Vec2(-6f, -11f);
@@ -79,6 +80,7 @@ namespace TMGmod.Buddies
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
             DotMarker.Show(bullet.end);
+            StrokeMarker.Show(hitPos, bullet.end);
             if (_equippedDuck == null || bullet.owner == _equippedDuck || !bullet.isLocal)
                 return false;
             if (!QHit(bullet))
@@ -110,7 +112,7 @@ namespace TMGmod.Buddies
             if (_equippedDuck == null) return;
             var start = (_equippedDuck.topLeft + _equippedDuck.topRight) / 2 + new Vec2(-32, 0);
             Graphics.DrawRect(start, start + new Vec2(64, -8), Color.Red, 0.0f);
-            Graphics.DrawRect(start, start + new Vec2(0, -8) + new Vec2(64, 0) * Math.Max(_hitPoints / HpMax, 0), Color.Green, 0.1f);
+            Graphics.DrawRect(start, start + new Vec2(0, -8) + new Vec2(64, 0) * Math.Max(_hitPoints / _hpMax, 0), Color.Green, 0.1f);
 #if DEBUG
             Graphics.DrawString(_hitPoints.ToString(CultureInfo.InvariantCulture), start + new Vec2(64, -8), Color.GreenYellow);
             Graphics.DrawRect(_equippedDuck.rectangle, new Color(0, 0, 255, 128));
@@ -131,7 +133,7 @@ namespace TMGmod.Buddies
                 return;
             }
 
-            _hitPoints = Math.Min(_hitPoints, HpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
+            _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
         }
     }
 }

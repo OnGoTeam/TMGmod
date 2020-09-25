@@ -122,5 +122,25 @@ namespace TMGmod.Core.AmmoTypes
             Level.Add(new DotMarker(position));
         }
     }
+
+    public class StrokeMarker : Thing
+    {
+        private readonly Vec2 _pos2;
+
+        private StrokeMarker(Vec2 position, Vec2 pos2) : base(position.x, position.y)
+        {
+            _pos2 = pos2;
+        }
+
+        public override void Draw()
+        {
+            Graphics.DrawLine(position, _pos2, Color.Gold);
+        }
+
+        public static void Show(Vec2 position, Vec2 pos2)
+        {
+            Level.Add(new StrokeMarker(position, pos2));
+        }
+    }
 #endif
 }
