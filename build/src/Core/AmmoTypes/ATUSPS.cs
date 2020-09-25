@@ -4,29 +4,29 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATBersa45 : BaseAmmoType
+    public class ATUSPS : BaseAmmoType
     {
-        public ATBersa45()
+        public ATUSPS()
         {
-            range = 90f;
-            accuracy = 0.76f;
+            range = 750f;
+            accuracy = 0.9f;
             penetration = 0.4f;
-            bulletSpeed = 25f;
+            bulletSpeed = 39f;
             deadly = true;
-            bulletThickness = 2f;
-            bulletLength = 64f;
+            bulletThickness = 1.2f;
+            bulletLength = 15f;
             immediatelyDeadly = true;
-            BulletDamage = 32f;
+            BulletDamage = 28f;
             DeltaDamage = 0.2f;
-            AlphaDamage = 0.64f;
+            AlphaDamage = 0.6f;
             DistanceConvexity = -0.2f;
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var shell = new AT762NATOShell(x, y)
+            var shell = new AT9mmShell(x, y)
             {
-                hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
-                vSpeed = 2.25f + Rando.Float(-0.4f, 0.4f)
+                hSpeed = (1.5f + Rando.Float(-0.3f, 0.3f)) * dir,
+                vSpeed = -1.5f + Rando.Float(-0.2f, 0.2f)
             };
             Level.Add(shell);
         }

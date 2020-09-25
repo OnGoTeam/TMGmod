@@ -18,6 +18,8 @@ namespace TMGmod.Core.AmmoTypes
             immediatelyDeadly = true;
             BulletDamage = 59f;
             DeltaDamage = 0.55f;
+            AlphaDamage = 0.64f;
+            DistanceConvexity = -0.2f;
         }
         public override void PopShell(float x, float y, int dir)
         {

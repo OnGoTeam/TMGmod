@@ -23,12 +23,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
-	        _ammoType = new AT12Gauge
-            {
-	            range = 180f,
-	            accuracy = 0.67f,
-	            bulletThickness = 1.5f
-	        };
+	        _ammoType = new ATRemington();
             _numBulletsPerFire = 5;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);

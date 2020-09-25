@@ -76,13 +76,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 4;
-            _ammoType = new AT12Gauge
-            {
-                range = 125f,
-                accuracy = 0.69f,
-                bulletSpeed = 25f,
-                bulletThickness = 0.5f
-            };
+            _ammoType = new ATFABARM();
             _numBulletsPerFire = 6;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);

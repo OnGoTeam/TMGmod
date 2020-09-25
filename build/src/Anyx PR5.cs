@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -31,12 +32,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-6f, -4f);
             _collisionSize = new Vec2(12f, 8f);
             ammo = 21;
-            _ammoType = new AT9mm
-            {
-                range = 100f,
-                accuracy = 0.8f,
-                penetration = 0.5f
-            };
+            _ammoType = new ATPR5();
             _type = "gun";
             _barrelOffsetTL = new Vec2(12f, 1f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)

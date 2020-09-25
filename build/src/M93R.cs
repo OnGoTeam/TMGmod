@@ -31,9 +31,9 @@ namespace TMGmod
             _collisionOffset = new Vec2(-6f, -2f);
             _collisionSize = new Vec2(12f, 9f);
             ammo = 15;
-            _ammoType = new AT9mmParabellum { range = 70f, accuracy = 0.6f, penetration = 0.4f, bulletSpeed = 39f };
-            _barrelOffsetTL = new Vec2(12f, 1f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
+            _ammoType = new ATM93R();
+            _barrelOffsetTL = new Vec2(13f, 1f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 12, 10)
             {
                 center = new Vec2(0.0f, 5f)
             };

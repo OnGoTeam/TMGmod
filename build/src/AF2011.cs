@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -25,12 +26,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
-            _ammoType = new AT9mm
-            {
-                range = 130f,
-                accuracy = 0.95f,
-                penetration = 1f
-            };
+            _ammoType = new ATAF2011();
             _numBulletsPerFire = 2;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AF2011"), 16, 9);

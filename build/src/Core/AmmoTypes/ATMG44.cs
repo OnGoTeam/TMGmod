@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public sealed class ATMG44 : AmmoType
+    public sealed class ATMG44 : BaseAmmoType
     {
         public ATMG44()
         {
@@ -17,6 +17,10 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 1f;
             bulletLength = 130f;
             immediatelyDeadly = true;
+            BulletDamage = 27f;
+            DeltaDamage = 0.09f;
+            AlphaDamage = 0.6f;
+            DistanceConvexity = -1f;
         }
 
         public override void PopShell(float x, float y, int dir)

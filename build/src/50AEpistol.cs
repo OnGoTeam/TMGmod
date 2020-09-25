@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
-    public class BigShot : BaseGun, IAmHg, IHaveSkin
+    public class BigShot : BaseGun, IAmHg, IHaveSkin, ILoseAccuracy
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -24,6 +24,10 @@ namespace TMGmod
             skin = new EditorProperty<int>(1, this, -1f, 9f, 0.5f);
             ammo = 7;
             _ammoType = new AT50C();
+            BaseAccuracy = 1f;
+            MinAccuracy = 0.6f;
+            RhoAccuracyDmr = 0.05f;
+            DeltaAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             _graphic = _sprite;
@@ -62,5 +66,7 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public float RhoAccuracyDmr { get; private set; }
+        public float DeltaAccuracyDmr { get; private set; }
     }
 }

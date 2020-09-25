@@ -25,11 +25,7 @@ namespace TMGmod
                     _sprite.frame += 10;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _ammoType = new AT9mmS
-                    {
-                        range = 750f,
-                        accuracy = 0.9f
-                    };
+                    _ammoType = new ATUSPS();
                     _barrelOffsetTL = new Vec2(23f, 2f);
                 }
                 else
@@ -40,11 +36,7 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f)
                     };
                     _fireSound = GetPath("sounds/1.wav");
-                    _ammoType = new AT9mmParabellum
-                    {
-                        range = 100f,
-                        accuracy = 0.8f
-                    };
+                    _ammoType = new ATUSP();
                     _barrelOffsetTL = new Vec2(14f, 2f);
                 }
             }
@@ -63,12 +55,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 13;
-            _ammoType = new AT9mmParabellum
-            {
-                range = 100f,
-                accuracy = 0.8f,
-                penetration = 1f
-            };
+            _ammoType = new ATUSP();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("USP"), 23, 9);
             _graphic = _sprite;

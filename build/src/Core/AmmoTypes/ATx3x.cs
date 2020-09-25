@@ -17,6 +17,7 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 4f;
             BulletDamage = 365f;
             DeltaDamage = 0f;
+            AlphaDamage = 1f;
         }
         public override void PopShell(float x, float y, int dir)
         {

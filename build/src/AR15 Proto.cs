@@ -40,10 +40,9 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
-            _ammoType = new AT545NATO
+            _ammoType = new ATLowQammos
             {
-                range = 330f,
-                accuracy = 0.8f
+                range = 330f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);

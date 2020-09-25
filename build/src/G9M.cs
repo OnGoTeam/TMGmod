@@ -40,11 +40,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 70;
-            _ammoType = new AT556NATO
-            {
-                range = 400f,
-                accuracy = 0.8f
-            };
+            _ammoType = new ATLowQammos();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("G9M"), 38, 11);
             _graphic = _sprite;

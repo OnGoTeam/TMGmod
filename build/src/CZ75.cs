@@ -26,12 +26,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
-            _ammoType = new AT9mmParabellum
-            {
-                range = 80f,
-                accuracy = 0.75f,
-                penetration = 0.4f
-            };
+            _ammoType = new ATCZ75();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ75"), 12, 8);
             _graphic = _sprite;

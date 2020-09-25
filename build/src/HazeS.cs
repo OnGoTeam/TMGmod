@@ -58,13 +58,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
-            _ammoType = new AT9mmS //self AT
-            {
-                accuracy = 0.9f,
-                range = 150f,
-                combustable = true,
-                bulletSpeed = 60f
-            };
+            _ammoType = new ATHazeS();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("HazeS"), 24, 12);
             _graphic = _sprite;

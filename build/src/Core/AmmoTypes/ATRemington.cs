@@ -4,22 +4,22 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT12GaugeS : BaseAmmoType
+    public class ATRemington : BaseAmmoType
     {
-        public AT12GaugeS() //KS-23' selfAT
+        public ATRemington()
         {
-            range = 169f;
-	        accuracy = 0.33f;
+            range = 180f;
+	        accuracy = 0.67f;
+	        bulletThickness = 1.5f;
             penetration = 1f;
-            bulletSpeed = 50f;
+            bulletSpeed = 25f;
             deadly = true;
             weight = 5f;
-            bulletThickness = 0f;
-            bulletLength = 0f;
             immediatelyDeadly = true;
-            BulletDamage = 22f;
-            AlphaDamage = 0.67f;
-            DistanceConvexity = 1;
+            BulletDamage = 26f;
+            DeltaDamage = 0.5f;
+            AlphaDamage = 1f;
+            DistanceConvexity = 1.2f;
         }
         public override void PopShell(float x, float y, int dir)
         {
