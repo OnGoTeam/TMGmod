@@ -1,5 +1,5 @@
 ﻿#if DEBUG
-using System.Globalization;
+using System;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
@@ -7,13 +7,9 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.Buddies
 {
     [EditorGroup("TMG|Misc")]
-    [PublicAPI]
-    public class SuperArmor : Equipment
+    [UsedImplicitly]
+    public class HpArmor : Equipment
     {
-        private SpriteMap _sprite;
-        private SpriteMap _spriteOver;
-        private readonly Sprite _pickupSprite;
-
         public override Vec2 collisionSize
         {
             get => _equippedDuck?.collisionSize ?? _collisionSize;
@@ -28,38 +24,33 @@ namespace TMGmod.Buddies
 
         public override float top
         {
-            get => _equippedDuck?.top ?? base.top;
+            get => -1.0f + _equippedDuck?.top ?? base.top;
             set => base.top = value;
         }
 
         public override float left
         {
-            get => _equippedDuck?.left ?? base.left;
+            get => -1.0f +  _equippedDuck?.left ?? base.left;
             set => base.left = value;
         }
 
         public override float bottom
         {
-            get => _equippedDuck?.bottom ?? base.bottom;
+            get => +1.0f + _equippedDuck?.bottom ?? base.bottom;
             set => base.bottom = value;
         }
 
         public override float right
         {
-            get => _equippedDuck?.right ?? base.right;
+            get => +1.0f + _equippedDuck?.right ?? base.right;
             set => base.right = value;
         }
 
         private const float HpMax = 99f;
 
-        public SuperArmor(float xpos, float ypos) : base(xpos, ypos)
+        public HpArmor(float xpos, float ypos) : base(xpos, ypos)
         {
             _hitPoints = HpMax;
-            _sprite = new SpriteMap("chestPlateAnim", 32, 32);
-            _spriteOver = new SpriteMap("chestPlateAnimOver", 32, 32);
-            _pickupSprite = new Sprite("chestPlatePickup");
-            _pickupSprite.CenterOrigin();
-            _graphic = _pickupSprite;
             _collisionOffset = new Vec2(-6f, -4f);
             _collisionSize = new Vec2(11f, 8f);
             _equippedCollisionOffset = new Vec2(-6f, -11f);
@@ -71,15 +62,30 @@ namespace TMGmod.Buddies
             _wearOffset = new Vec2(0, 0);
             _isArmor = true;
             _equippedThickness = 666f;
+            canPickUp = false;
+        }
+
+        private bool QHit(Bullet bullet, Vec2 hitPos)
+        {
+            DotMarker.Show(position);
+            var v = bullet.bulletSpeed * bullet.travelDirNormalized;
+            var u = new Vec2(v.y, -v.x).normalized;
+            
+            return Vec2.Dot(u, (_equippedDuck.topLeft - hitPos).normalized) * Vec2.Dot(u, (_equippedDuck.bottomRight - hitPos).normalized) < 0.5f &&
+                   Vec2.Dot(u, (_equippedDuck.topRight - hitPos).normalized) * Vec2.Dot(u, (_equippedDuck.bottomLeft - hitPos).normalized) < 0.5f;
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)
         {
             if (_equippedDuck == null || bullet.owner == _equippedDuck || !bullet.isLocal)
                 return false;
+            if (!QHit(bullet, hitPos))
+                return false;
+            _equippedDuck.hSpeed *= 0.25f;
             _hitPoints -= Damage.Calculate(bullet);
             if (_hitPoints < 0)
             {
+                Mod.Debug.Log("destroyed");
                 var equippedDuck1 = _equippedDuck;
                 equippedDuck1.KnockOffEquipment(this, true, bullet);
                 Fondle(this, DuckNetwork.localConnection);
@@ -96,9 +102,27 @@ namespace TMGmod.Buddies
 
         public override void Draw()
         {
-            Graphics.DrawString(_hitPoints.ToString(CultureInfo.InvariantCulture), position + new Vec2(0, -16), Color.GreenYellow);
+#if DEBUG
             Graphics.DrawRect(rectangle, new Color(255, 0, 0, 128));
-            if (_equippedDuck != null) Graphics.DrawRect(_equippedDuck.rectangle, new Color(0, 0, 255, 128));
+#endif
+            if (_equippedDuck == null) return;
+            var start = (_equippedDuck.topLeft + _equippedDuck.topRight) / 2 + new Vec2(-32, 0);
+            Graphics.DrawRect(start, start + new Vec2(64, -8), Color.Red, 0.0f);
+            Graphics.DrawRect(start, start + new Vec2(0, -8) + new Vec2(64, 0) * Math.Max(_hitPoints / HpMax, 0), Color.Green, 0.1f);
+#if DEBUG
+            Graphics.DrawRect(_equippedDuck.rectangle, new Color(0, 0, 255, 128));
+#endif
+        }
+
+        public override bool Destroy(DestroyType type1 = null)
+        {
+            return base.Destroy(type1);
+        }
+
+        public override void Update()
+        {
+            if (_equippedDuck is null) Level.Remove(this);
+            base.Update();
         }
     }
 }

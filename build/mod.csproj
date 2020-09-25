@@ -84,6 +84,7 @@
     <Compile Include="src\44db.cs" />
     <Compile Include="src\AR9SX.cs" />
     <Compile Include="src\Bersa Magnum.cs" />
+    <Compile Include="src\Buddies\HpGiver.cs" />
     <Compile Include="src\Core\AmmoTypes\AT50SniperS.cs" />
     <Compile Include="src\Core\AmmoTypes\ATSVU.cs" />
     <Compile Include="src\Core\AmmoTypes\ATBersa45.cs" />
@@ -165,7 +166,7 @@
     <Compile Include="src\Core\ArwaMag.cs" />
     <Compile Include="src\Core\MagBuddy.cs" />
     <Compile Include="src\ARwA.cs" />
-    <Compile Include="src\Buddies\SuperArmor.cs" />
+    <Compile Include="src\Buddies\HpArmor.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
     <Compile Include="src\Cases\Color\PrismarineCase.cs" />
     <Compile Include="src\Cases\Color\GreenCase.cs" />

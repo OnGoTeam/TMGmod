@@ -44,7 +44,7 @@ namespace TMGmod.NY
         {
             var hit = base.Hit(bullet, hitPos);
             var hitpos = Offset(new Vec2(0, -3));
-            var dp = bullet.position - hitpos;
+            var dp = hitPos - hitpos;
             var v = bullet.bulletSpeed * bullet.travelDirNormalized;
             var u = new Vec2(v.y, -v.x).normalized;
             if (Math.Abs(Vec2.Dot(dp, u)) < 3f)

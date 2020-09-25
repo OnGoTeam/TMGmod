@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using DuckGame;
 
 namespace TMGmod.Core.AmmoTypes
@@ -21,17 +20,17 @@ namespace TMGmod.Core.AmmoTypes
 
         private static float GetDelta(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.DeltaDamage : 1f;
+            return ammo is IDamage damage ? damage.DeltaDamage : ammo is ATShrapnel ? 1f : 0.5f;
         }
 
         private static float GetConvexity(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.DistanceConvexity : 0f;
+            return ammo is IDamage damage ? damage.DistanceConvexity : ammo is ATShrapnel ? 1f : 0f;
         }
 
         private static float GetAlpha(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.AlphaDamage: 0.01f;
+            return ammo is IDamage damage ? damage.AlphaDamage : ammo is ATShrapnel ? 0.8f : 0.01f;
         }
 
         private static float CalculateBase(AmmoType ammo)
@@ -70,17 +69,17 @@ namespace TMGmod.Core.AmmoTypes
         }
         public static float Calculate(Bullet bullet)
         {
-            Level.Add(new DamageDealt(bullet.end.x, bullet.end.y, CalculateCoeff(bullet)));
+            StringMarker.Show(bullet.end, CalculateCoeff(bullet));
             return CalculateBase(bullet.ammo) * CalculateCoeff(bullet);
         }
     }
-
-    public class DamageDealt : Thing
+#if DEBUG
+    public class StringMarker : Thing
     {
-        private readonly float _d;
+        private readonly object _d;
         private float _alive = 1f;
 
-        public DamageDealt(float x, float y, float d): base(x, y)
+        private StringMarker(Vec2 position, object d): base(position.x, position.y)
         {
             _d = d;
             _hSpeed = Rando.Float(-1f, 1f);
@@ -97,7 +96,31 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void Draw()
         {
-            Graphics.DrawString(_d.ToString(CultureInfo.InvariantCulture), position, new Color(Rando.Int(192, 255), Rando.Int(0, 63), 0, 128), 2f);
+            Graphics.DrawString(_d.ToString(), position, new Color(Rando.Int(192, 255), Rando.Int(0, 63), 0, 128), 2f);
+        }
+
+        public static void Show(Vec2 position, object d)
+        {
+            Level.Add(new StringMarker(position, d));
         }
     }
+
+    public class DotMarker : Thing
+    {
+        private DotMarker(Vec2 position) : base(position.x, position.y)
+        {
+
+        }
+
+        public override void Draw()
+        {
+            Graphics.DrawCircle(position, 2, Color.Purple);
+        }
+
+        public static void Show(Vec2 position)
+        {
+            Level.Add(new DotMarker(position));
+        }
+    }
+#endif
 }
