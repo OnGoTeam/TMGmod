@@ -14,15 +14,17 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 0.8f;
             bulletLength = 6f;
             immediatelyDeadly = true;
-            BulletDamage = 10f;
+            BulletDamage = 24f;
             DeltaDamage = 0.33f;
+            AlphaDamage = 0.33f;
+            DistanceConvexity = -2f;
         }
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new AT762NATOShell(x, y) //AT9mmParabellumShell
             {
-                hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
-                vSpeed = 2.25f + Rando.Float(-0.4f, 0.4f)
+                hSpeed = (1.5f + Rando.Float(-0.1f, 0.1f)) * dir,
+                vSpeed = -3f + Rando.Float(-0.4f, 0.4f)
             };
             Level.Add(shell);
         }

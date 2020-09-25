@@ -16,6 +16,8 @@ namespace TMGmod.Core.AmmoTypes
             weight = 5f;
             bulletThickness = 2f;
             immediatelyDeadly = true;
+            BulletDamage = 11f;
+            AlphaDamage = 0.5f;
             DistanceConvexity = 1;
         }
         public override void PopShell(float x, float y, int dir)

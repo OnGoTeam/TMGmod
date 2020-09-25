@@ -26,7 +26,7 @@ namespace TMGmod
                     _sprite.frame += 50;
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _ammoType = new AT9mmS
+                    _ammoType = new AT9mmS //self AT same as CZC2
                     {
                         range = 380f,
                         accuracy = 0.95f

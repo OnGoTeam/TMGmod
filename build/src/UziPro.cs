@@ -23,11 +23,7 @@ namespace TMGmod
                 {
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
-                    _ammoType = new AT9mmS
-                    {
-                        range = 100f,
-                        accuracy = 0.8f
-                    };
+                    _ammoType = new ATUziS();
                     _barrelOffsetTL = new Vec2(16f, 2f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
@@ -35,12 +31,7 @@ namespace TMGmod
                 else
                 {
                     _sprite.frame %= 10;
-                    _ammoType = new AT9mm
-                    {
-                        range = 70f,
-                        accuracy = 0.61f,
-                        penetration = 0.4f
-                    };
+                    _ammoType = new ATUzi();
                     _barrelOffsetTL = new Vec2(10f, 2f);
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
                     {
@@ -64,12 +55,9 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
-            _ammoType = new AT9mm
-            {
-                range = 70f,
-                accuracy = 0.61f,
-                penetration = 0.4f
-            };
+            _ammoType = new ATUzi();
+            MaxDelaySmg = 25;
+            KforceDSmg = 4f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
             _graphic = _sprite;

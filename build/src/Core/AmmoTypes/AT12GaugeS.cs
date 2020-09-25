@@ -4,9 +4,9 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT12GaugeS : AmmoType
+    public class AT12GaugeS : BaseAmmoType
     {
-        public AT12GaugeS()
+        public AT12GaugeS() //KS-23' selfAT
         {
             range = 169f;
 	        accuracy = 0.33f;
@@ -17,6 +17,9 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 0f;
             bulletLength = 0f;
             immediatelyDeadly = true;
+            BulletDamage = 19f;
+            AlphaDamage = 0.5f;
+            DistanceConvexity = 1;
         }
         public override void PopShell(float x, float y, int dir)
         {

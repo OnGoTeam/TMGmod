@@ -14,8 +14,9 @@ namespace TMGmod.Core.AmmoTypes
             bulletSpeed = 50f;
             deadly = true;
             immediatelyDeadly = true;
-            BulletDamage = 12f;
+            BulletDamage = 18f;
             DeltaDamage = 0.3f;
+            AlphaDamage = 0.4f;
         }
     }
 }

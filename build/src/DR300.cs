@@ -37,15 +37,10 @@ namespace TMGmod
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             PostRounds = Rando.ChooseInt(20, 30);
             ammo = PostRounds;
-            _ammoType = new AT556NATO
-            {
-                range = 567f,
-                accuracy = 0.98f,
-                bulletSpeed = 44f
-            };
+            _ammoType = new ATDR300();
             BaseAccuracy = 0.98f;
             MinAccuracy = 0.65f;
-            RhoAccuracyDmr = 0.025f;
+            RhoAccuracyDmr = 0.02f;
             DeltaAccuracyDmr = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("DR300"), 37, 11);
@@ -64,7 +59,7 @@ namespace TMGmod
             _fireWait = 0.3f;
             _kickForce = 3.7f;
             loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.3f;
+            maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(2f, 3f);
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "Daewoo DR300";

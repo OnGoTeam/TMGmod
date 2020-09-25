@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -25,13 +26,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT9mm
-            {
-                range = 200f,
-                accuracy = 0.8f,
-                penetration = 0.5f
-            };
+            _ammoType = new ATPPK42();
             BaseAccuracy = 0.8f;
+            KforceDSmg = 2.5f;
+            MaxDelaySmg = 20;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PPK42"), 25, 11);
             _graphic = _sprite;
@@ -48,8 +46,6 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.45f;
             _kickForce = 1.5f;
-            KforceDSmg = 2.5f;
-            MaxDelaySmg = 20;
             _holdOffset = new Vec2(4f, 2f);
             ShellOffset = new Vec2(-3f, -4f);
             loseAccuracy = 0.1f;

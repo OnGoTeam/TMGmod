@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class Vista : BaseBurst, IAmSmg, IHaveSkin, I5
+    public class Vista : BaseBurst, IFirstPrecise, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -32,6 +32,8 @@ namespace TMGmod
                 range = 105f,
                 accuracy = 0.75f
             };
+            MaxDelayFp = 30;
+            MaxAccuracy = 1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
             _graphic = _sprite;
@@ -73,5 +75,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public int CurrDelay { get; set; }
+        public int MaxDelayFp { get; }
+        public float MaxAccuracy { get; }
     }
 }

@@ -24,12 +24,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
-            _ammoType = new AT545NATO
-            {
-                range = 450f,
-                accuracy = 0.94f
-            };
-            BaseAccuracy = 0.94f;
+            _ammoType = new ATArx200();
+            BaseAccuracy = 0.98f;
+            MinAccuracy = 0.6f;
+            RhoAccuracyDmr = 0.009f;
+            DeltaAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARX200"), 33, 14);
             _graphic = _sprite;
@@ -52,8 +51,6 @@ namespace TMGmod
             maxAccuracyLost = 0.15f;
             _editorName = "Beretta ARX-200";
 			_weight = 6f;
-            RhoAccuracyDmr = 0.01f;
-            DeltaAccuracyDmr = 0.15f;
         }
         private void UpdateSkin()
         {

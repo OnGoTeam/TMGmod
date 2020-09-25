@@ -4,7 +4,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class AT44DB : AmmoType
+    public class AT44DB : BaseAmmoType
     {
         public AT44DB()
         {
@@ -16,6 +16,10 @@ namespace TMGmod.Core.AmmoTypes
             weight = 5f;
             bulletThickness = 2f;
             immediatelyDeadly = true;
+            BulletDamage = 10f;
+            DeltaDamage = 0.1f;
+            AlphaDamage = 0.8f;
+            DistanceConvexity = -0.2f;
         }
         public override void PopShell(float x, float y, int dir)
         {

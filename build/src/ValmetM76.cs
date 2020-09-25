@@ -24,8 +24,9 @@ namespace TMGmod
                 loseAccuracy = value ? 0.2f : 0f;
                 _kickForce = value ? 3f : 6.5f;
                 _ammoType.accuracy = value ? 0.89f : 1f;
-                RhoAccuracyDmr = value ? 0.005f : 0f;
-                DeltaAccuracyDmr = value ? 0.2f : 0f;
+                RhoAccuracyDmr = value ? 0.025f : 0f;
+                DeltaAccuracyDmr = value ? 0.15f : 0f;
+                BaseAccuracy = value ? 0.89f : 1f;
             }
         }
         private const int NonSkinFrames = 2;
@@ -41,11 +42,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
-            _ammoType = new AT545NATO
-            {
-                range = 410f,
-                accuracy = 0.89f
-            };
+            _ammoType = new ATM76();
+            BaseAccuracy = 0.89f;
+            MinAccuracy = 0.5f;
+            RhoAccuracyDmr = 0.025f;
+            DeltaAccuracyDmr = 0.15f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Valmet M76"), 33, 10);
             _graphic = _sprite;

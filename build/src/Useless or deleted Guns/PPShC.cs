@@ -4,6 +4,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Useless_or_deleted_Guns
 {
@@ -29,7 +30,7 @@ namespace TMGmod.Useless_or_deleted_Guns
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 35;
-            _ammoType = new AT9mm
+            _ammoType = new AT9mmParabellum
             {
                 range = 300f,
                 accuracy = 0.9f,

@@ -40,7 +40,7 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f)
                     };
                     _fireSound = GetPath("sounds/1.wav");
-                    _ammoType = new AT9mm
+                    _ammoType = new AT9mmParabellum
                     {
                         range = 100f,
                         accuracy = 0.8f
@@ -63,7 +63,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 13;
-            _ammoType = new AT9mm
+            _ammoType = new AT9mmParabellum
             {
                 range = 100f,
                 accuracy = 0.8f,

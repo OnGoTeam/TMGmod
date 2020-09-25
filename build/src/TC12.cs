@@ -24,11 +24,7 @@ namespace TMGmod
                     _sprite.frame %= 10;
                     _sprite.frame += 10;
                     _fireSound = GetPath("sounds/Silenced3.wav");
-                    _ammoType = new AT9mmS
-                    {
-                        range = 330f,
-                        accuracy = 0.97f
-                    };
+                    _ammoType = new ATTC12S();
                     _kickForce = 4.5f;
                     loseAccuracy = 0f;
                     _weight = 6.3f;
@@ -42,12 +38,7 @@ namespace TMGmod
                 {
                     _sprite.frame %= 10;
                     _fireSound = "deepMachineGun2";
-                    _ammoType = new AT9mm
-                    {
-                        range = 270f,
-                        accuracy = 0.91f,
-                        penetration = 1f
-                    };
+                    _ammoType = new ATTC12();
                     _kickForce = 5.3f;
                     loseAccuracy = 0.1f;
                     _weight = 4.5f;
@@ -74,15 +65,10 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new AT9mm
-            {
-                range = 270f,
-                accuracy = 0.91f,
-                penetration = 1f
-            };
-            BaseAccuracy = 0.91f;
+            _ammoType = new ATTC12();
+            //BaseAccuracy = 0.91f;
             MinAccuracy = 0.45f;
-            RhoAccuracyDmr = 0.004f;
+            RhoAccuracyDmr = 0.007f;
             DeltaAccuracyDmr = 0.15f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);

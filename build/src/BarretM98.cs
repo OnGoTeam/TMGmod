@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -35,7 +36,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             ammo = 8;
-            _ammoType = new ATSniper {penetration = 4f, range = 850f, accuracy = 1f};
+            _ammoType = new ATBoltAction { penetration = 4f, range = 850f};
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
             _kickForce = 6f;

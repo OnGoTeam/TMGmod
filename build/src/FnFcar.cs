@@ -33,11 +33,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 14;
-            _ammoType = new AT556NATO
-            {
-                range = 600f,
-                accuracy = 0.94f
-            };
+            _ammoType = new ATFCAR();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("FCAR"), 36, 15);
             _graphic = _sprite;
@@ -56,6 +52,7 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.75f;
             _kickForce = 2.4f;
+            Kforce1Ar = 2.4f;
             Kforce2Ar = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.2f;

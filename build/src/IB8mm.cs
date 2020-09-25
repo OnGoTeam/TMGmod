@@ -25,12 +25,9 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
-            _ammoType = new AT9mmS
-            {
-                range = 450f,
-                accuracy = 0.82f
-            };
+            _ammoType = new ATIB8();
             BaseAccuracy = 0.82f;
+            MinAccuracy = 0.24f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _graphic = _sprite;
@@ -47,7 +44,7 @@ namespace TMGmod
             KforceDSmg = 2.1f;
             MaxDelaySmg = 11;
             MaxAccuracy = 1f;
-            MaxDelayFp = 15;
+            MaxDelayFp = 20;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
             _holdOffset = new Vec2(-2f, 0f);

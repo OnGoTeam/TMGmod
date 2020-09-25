@@ -78,12 +78,15 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 18;
-            _ammoType = new AT762NATO
+            _ammoType = new ATM14
             {
                 range = 333f,
                 accuracy = 0.8f
             };
             BaseAccuracy = 0.8f;
+            MinAccuracy = 0.3f;
+            MaxAccuracy = 1f;
+            MaxDelayFp = 40;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Sawed-Off M14"), 31, 11);
             _graphic = _sprite;
@@ -106,8 +109,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-9f, -4f);
             _editorName = "M14 Sawed-Off";
             _weight = 2.5f;
-            MaxAccuracy = 1f;
-            MaxDelayFp = 12;
         }
         public override void Update()
         {

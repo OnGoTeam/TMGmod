@@ -4,6 +4,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
@@ -44,12 +45,11 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             ammo = 6;
-            _ammoType = new ATSniper
+            _ammoType = new ATBoltAction
             {
                 bulletSpeed = 75f,
                 range = 1200f,
-                penetration = 2f,
-                accuracy = 1f
+                penetration = 2f
             };
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;

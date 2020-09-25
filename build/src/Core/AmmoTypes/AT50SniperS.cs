@@ -16,13 +16,14 @@ namespace TMGmod.Core.AmmoTypes
             immediatelyDeadly = true;
             BulletDamage = 106f;
             DeltaDamage = 0.07f;
+            AlphaDamage = 1f;
         }
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new AT762NATOShell(x, y) //spinershell
             {
                 hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
-                vSpeed = 2.25f + Rando.Float(-0.4f, 0.4f)
+                vSpeed = -2.25f + Rando.Float(-0.4f, 0.4f)
             };
             Level.Add(shell);
         }
