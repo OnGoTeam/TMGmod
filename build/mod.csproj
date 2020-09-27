@@ -143,6 +143,8 @@
     <Compile Include="src\Core\AmmoTypes\ATVista.cs" />
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\AmmoTypes\IDamage.cs" />
+    <Compile Include="src\Core\Shells\AT40ACPshell.cs" />
+    <Compile Include="src\Core\Shells\ATSP6shell.cs" />
     <Compile Include="src\Core\Shells\AT9mmshell.cs" />
     <Compile Include="src\Core\Shells\ATMP7shell.cs" />
     <Compile Include="src\Core\WClasses\BaseDmr.cs" />

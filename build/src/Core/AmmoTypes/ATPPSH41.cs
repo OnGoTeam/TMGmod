@@ -23,7 +23,7 @@ namespace TMGmod.Core.AmmoTypes
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var shell = new AT556NATOShell(x, y) //AT40ACPShell
+            var shell = new AT40ACPShell(x, y)
             {
                 hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
                 vSpeed = -1.5f + Rando.Float(-0.5f, 0.5f)
