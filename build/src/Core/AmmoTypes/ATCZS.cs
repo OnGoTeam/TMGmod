@@ -31,6 +31,7 @@ namespace TMGmod.Core.AmmoTypes
             Level.Add(shell);
         }
     }
+    // ReSharper disable once InconsistentNaming
     public class ATCZS2 : BaseAmmoType
     {
         public ATCZS2()

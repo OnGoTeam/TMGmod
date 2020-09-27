@@ -15,9 +15,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 33;
-            _ammoType = new ATANP73
-            {
-            };
+            _ammoType = new ATANP73();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);
             _graphic = _sprite;

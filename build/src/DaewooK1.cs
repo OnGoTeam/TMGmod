@@ -80,9 +80,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 32;
-            _ammoType = new ATDaewooK1
-            {
-            };
+            _ammoType = new ATDaewooK1();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("DaewooK1"), 28, 11);
             _graphic = _sprite;
