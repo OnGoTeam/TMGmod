@@ -48,6 +48,7 @@ namespace TMGmod.Buddies
         }
 
         private readonly float _hpMax;
+        [UsedImplicitly]
         public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
 
         public HpArmor(float xpos, float ypos, float hpMax = 99f) : base(xpos, ypos)
@@ -82,7 +83,7 @@ namespace TMGmod.Buddies
         {
             DotMarker.Show(bullet.end);
             StrokeMarker.Show(hitPos, bullet.end);
-            if (_equippedDuck == null || bullet.owner == _equippedDuck || !bullet.isLocal)
+            if (_equippedDuck == null || bullet.owner == _equippedDuck || !bullet.isLocal || duck != _equippedDuck)
                 return false;
             if (!QHit(bullet))
                 return false;
