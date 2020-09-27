@@ -48,6 +48,7 @@ namespace TMGmod.Buddies
         }
 
         private readonly float _hpMax;
+        public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
 
         public HpArmor(float xpos, float ypos, float hpMax = 99f) : base(xpos, ypos)
         {
