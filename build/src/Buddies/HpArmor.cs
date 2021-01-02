@@ -1,8 +1,8 @@
 ﻿#if DEBUG
-using System;
-using System.Globalization;
 using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Globalization;
 using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Buddies
@@ -31,7 +31,7 @@ namespace TMGmod.Buddies
 
         public override float left
         {
-            get => -1.0f +  _equippedDuck?.left ?? base.left;
+            get => -1.0f + _equippedDuck?.left ?? base.left;
             set => base.left = value;
         }
 
@@ -74,7 +74,7 @@ namespace TMGmod.Buddies
             var hit = bullet.end;
             var v = bullet.bulletSpeed * bullet.travelDirNormalized;
             var u = new Vec2(v.y, -v.x).normalized;
-            
+
             return Vec2.Dot(u, (_equippedDuck.topLeft - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomRight - hit).normalized) < 0.1f &&
                    Vec2.Dot(u, (_equippedDuck.topRight - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomLeft - hit).normalized) < 0.1f;
         }
@@ -98,8 +98,9 @@ namespace TMGmod.Buddies
                 equippedDuck1.Destroy(new DTShot(bullet));
                 //kill owner
             }
+
             if (bullet.isLocal && Network.isActive)
-                _netTing.Play();
+                NetSoundEffect.Play("equipmentTing");
             Level.Add(MetalRebound.New(hitPos.x, hitPos.y, bullet.travelDirNormalized.x > 0 ? 1 : -1));
             for (var index = 0; index < 6; ++index)
                 Level.Add(Spark.New(x, y, bullet.travelDirNormalized));
@@ -131,7 +132,7 @@ namespace TMGmod.Buddies
             base.Update();
             if (_equippedDuck is null)
             {
-                Level.Remove(this);
+                // Level.Remove(this);
                 return;
             }
 

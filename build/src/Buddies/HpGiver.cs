@@ -1,13 +1,15 @@
-﻿using DuckGame;
+﻿/*#if DEBUG
+using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 
 namespace TMGmod.Buddies
 {
     [UsedImplicitly]
     [EditorGroup("TMG|Misc")]
-    public class HpGiver: Thing
+    public class HpGiver : Thing
     {
-        private bool _given;
+        private readonly HashSet<Duck> _given = new HashSet<Duck>();
 
         public HpGiver()
         {
@@ -17,21 +19,25 @@ namespace TMGmod.Buddies
             _collisionOffset = new Vec2(-8f, -8f);
             _canFlip = false;
             _visibleInGame = false;
+            // serverOnly = true;
         }
 
         public override void Update()
         {
             base.Update();
-            if (!isServerForObject) return;
-            if (_given) return;
             foreach (var thing in Level.current.things[typeof(Duck)])
             {
                 if (!(thing is Duck duck)) continue;
+                if (!duck.isServerForObject) continue;
+                if (_given.Contains(duck)) continue;
                 var hp = new HpArmor(duck.x, duck.y);
                 Level.Add(hp);
+                // duck.Equip(hp, default, true);
                 duck.Equip(hp);
-                _given = true;
+                _given.Add(duck);
             }
         }
     }
 }
+#endif
+*/
