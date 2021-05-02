@@ -52,8 +52,8 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.75f;
             _kickForce = 2.4f;
-            Kforce1Ar = 2.4f;
-            Kforce2Ar = 0.9f;
+            KickForceSlowAr = 2.4f;
+            KickForceFastAr = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.2f;
             _editorName = "Belguria Fcar";
@@ -75,8 +75,8 @@ namespace TMGmod
                 _ammoType.bulletSpeed = bipods ? 72f : 36f;
                 _fireWait = bipods ? 0.25f : 0.75f;
                 _kickForce = bipods ? 0f : 2.4f;
-                Kforce2Ar = bipods ? 0f : 0.9f;
-                Kforce1Ar = bipods ? 0f : 0.07f;
+                KickForceFastAr = bipods ? 0f : 0.9f;
+                KickForceSlowAr = bipods ? 0f : 0.07f;
                 loseAccuracy = bipods ? 0f : 0.15f;
                 maxAccuracyLost = bipods ? 0f : 0.2f;
                 FrameId = FrameId % 10 + 10 * (bipods ? 4 : nobipods ? 0 : bipodsstate < 0.33f ? 1 : bipodsstate < 0.67f ? 2 : 3);

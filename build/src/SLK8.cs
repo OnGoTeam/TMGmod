@@ -29,8 +29,8 @@ namespace TMGmod
             _ammoType = new ATSLK8();
             BaseAccuracy = 1f;
             MinAccuracy = 0.3f;
-            RhoAccuracyDmr = 0.02f;
-            DeltaAccuracyDmr = 0.45f;
+            RegenAccuracyDmr = 0.02f;
+            DrainAccuracyDmr = 0.45f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SLK8"), 41, 11);
             _graphic = _sprite;

@@ -21,7 +21,7 @@ namespace TMGmod.Buddies
                     break;
             }
 
-            if (key == null) return; //For Clarity Sake
+            if (key == null) return;
             var newThing = Editor.CreateThing(typeof(T));
             if (newThing == null) return;
             newThing.position = Offset(SpawnPos);

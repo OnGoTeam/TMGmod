@@ -68,8 +68,8 @@ namespace TMGmod
             _ammoType = new ATTC12();
             //BaseAccuracy = 0.91f;
             MinAccuracy = 0.45f;
-            RhoAccuracyDmr = 0.007f;
-            DeltaAccuracyDmr = 0.15f;
+            RegenAccuracyDmr = 0.007f;
+            DrainAccuracyDmr = 0.15f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
             _graphic = _sprite;

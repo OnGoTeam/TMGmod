@@ -4,11 +4,11 @@
     {
         protected BaseDmr(float xval, float yval) : base(xval, yval)
         {
-            RhoAccuracyDmr = 0f;
-            DeltaAccuracyDmr = 0f;
+            RegenAccuracyDmr = 0f;
+            DrainAccuracyDmr = 0f;
         }
 
-        public float RhoAccuracyDmr { get; protected set; }
-        public float DeltaAccuracyDmr { get; protected set; }
+        public float RegenAccuracyDmr { get; protected set; }
+        public float DrainAccuracyDmr { get; protected set; }
     }
 }

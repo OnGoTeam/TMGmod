@@ -32,10 +32,6 @@ namespace TMGmod.Cases
             physicsObjects.RemoveAll(t => !(t.IsSubclassOf(typeof(Gun)) &&
                                             t.Assembly == typeof(Core.TMGmod).Assembly &&
                                             t.Namespace != typeof(NY.CandyCane).Namespace));
-            Things = new List<Type>
-            {
-                typeof(X3X) //здесь должно быть всё оружие
-            };
             Things = physicsObjects;
             base.Initialize();
         }

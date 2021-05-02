@@ -21,8 +21,7 @@ namespace TMGmod.Stuff
 
         public override void Draw()
         {
-            if (!(Level.activeLevel is Editor)) return;
-            base.Draw();
+            if (Level.activeLevel is Editor) base.Draw();
         }
     }
 }

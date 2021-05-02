@@ -66,7 +66,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-7f, -1f);
             _editorName = "AR15 Proto";
 			_weight = 4.2f;
-            Kforce2Ar = 0.5f;
+            KickForceFastAr = 0.5f;
         }
         public override void OnPressAction()
         {

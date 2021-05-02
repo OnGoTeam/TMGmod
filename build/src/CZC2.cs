@@ -82,8 +82,8 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _editorName = "CZ-C2 SAR";
             _weight = 4.4f;
-            Kforce1Ar = 1.5f;
-            Kforce2Ar = 3.1f;
+            KickForceSlowAr = 1.5f;
+            KickForceFastAr = 3.1f;
         }
         public override void Update()
         {

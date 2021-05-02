@@ -2,7 +2,7 @@
 {
     public interface ILoseAccuracy
     {
-        float RhoAccuracyDmr { get; }  // regen
-        float DeltaAccuracyDmr { get; }  // drain
+        float RegenAccuracyDmr { get; }
+        float DrainAccuracyDmr { get; }
     }
 }

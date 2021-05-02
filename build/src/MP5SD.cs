@@ -59,8 +59,8 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "MP5SD";
 			_weight = 3f;
-            KforceDSmg = 2f;
-            MaxAccuracy = 0.9f;
+            KickForceDeltaSmg = 2f;
+            MaxAccuracyFp = 0.9f;
             MaxDelayFp = 10;
             MaxDelaySmg = 50;
             DeltaWait = 0.45f;
@@ -84,12 +84,12 @@ namespace TMGmod
             }
             base.Update();
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
-        public int CurrDelay { get; set; }
+        public float KickForceDeltaSmg { get; }
+        public int CurrentDelaySmg { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
         public int MaxDelaySmg { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
         [UsedImplicitly]
         public int FrameId
         {

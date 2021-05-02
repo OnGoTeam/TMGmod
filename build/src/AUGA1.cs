@@ -74,7 +74,7 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A1";
 			_weight = 5.5f;
-            Kforce2Ar = 0.7f;
+            KickForceFastAr = 0.7f;
         }
         public override void Update()
         {

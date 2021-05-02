@@ -1,4 +1,4 @@
-﻿#if DEBUG
+﻿/*#if DEBUG
 using DuckGame;
 using JetBrains.Annotations;
 using System;
@@ -141,3 +141,4 @@ namespace TMGmod.Buddies
     }
 }
 #endif
+*/

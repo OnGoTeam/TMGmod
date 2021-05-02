@@ -20,10 +20,6 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        //private int _ammobefore = 51;
-        //private int _counter;
-        //private float _explode;
-        //private const double Explodechance = 0;
 
         public M16LMG (float xval, float yval)
           : base(xval, yval)
@@ -60,8 +56,8 @@ namespace TMGmod
 			_weight = 6f;
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.7f;
-            Kforce1Lmg = 0.23f;
-            Kforce2Lmg = 0.43f;
+            KickForce1Lmg = 0.23f;
+            KickForce2Lmg = 0.43f;
         }
         public bool Bipods
         {
@@ -69,8 +65,8 @@ namespace TMGmod
             set
             {
                 _kickForce = value ? 0 : 2.33f;
-                Kforce1Lmg = value ? 0 : 0.23f;
-                Kforce2Lmg = value ? 0 : 0.43f;
+                KickForce1Lmg = value ? 0 : 0.23f;
+                KickForce2Lmg = value ? 0 : 0.43f;
                 loseAccuracy = value ? 0 : 0.15f;
             }
         }

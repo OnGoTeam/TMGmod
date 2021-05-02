@@ -50,8 +50,6 @@ namespace TMGmod.Core
             [UsedImplicitly]
             bool DropMag(Thing mag);
 
-            //int TicksToR { get; set; }
-
             Vec2 SpawnPos { get; }
         }
     }

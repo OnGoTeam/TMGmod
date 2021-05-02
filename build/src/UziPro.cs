@@ -57,7 +57,7 @@ namespace TMGmod
             ammo = 24;
             _ammoType = new ATUzi();
             MaxDelaySmg = 25;
-            KforceDSmg = 4f;
+            KickForceDeltaSmg = 4f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
             _graphic = _sprite;

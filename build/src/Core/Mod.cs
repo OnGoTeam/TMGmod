@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DuckGame;
+using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Xml.Linq;
-using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Properties;
 
 
@@ -25,25 +25,14 @@ namespace TMGmod.Core
             /*AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;*/
             LastInstance = this;
         }
-		
-		//Приоритет. Мод загружается раньше/позже других модов
+
         public override Priority priority => Priority.Normal;
 
-        //Происходит перед запуском мода
         /*protected override void OnPreInitialize()
         {
             base.OnPreInitialize();
         }*/
 
-        /*private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            var assemblyname = new AssemblyName(args.Name).Name;
-            var assemblyFileName = Path.Combine(configuration.directory, assemblyname + ".dll");
-            var assembly = Assembly.LoadFrom(assemblyFileName);
-            return assembly;
-        }*/
-
-        //Происходит после запуска мода>
         protected override void OnPostInitialize()
         {
             //Директория
@@ -51,7 +40,7 @@ namespace TMGmod.Core
             if (!Directory.Exists(tmgModDirectory))
                 Directory.CreateDirectory(tmgModDirectory);
 
-            CreatingTMGLevels();
+            SetupPlaylist();
             base.OnPostInitialize();
         }
 
@@ -61,11 +50,8 @@ namespace TMGmod.Core
             return new MD5CryptoServiceProvider().ComputeHash(sourceBytes);
         }
 
-        // ReSharper disable once InconsistentNaming
-        // Чтобы играть было приятно, пихаем карты в сам мод, и делаем так, чтобы они скачивались вместе с ним
-		private static void CreatingTMGLevels()
+        private static void DeleteOldLevels()
         {
-            //Уносим старые нерабочие карты в очко
             var olddirlist = new List<string>(new[]
             {
                 "DuckGame\\Levels\\New TMG Maps",
@@ -80,42 +66,70 @@ namespace TMGmod.Core
             {
                 Directory.Delete(dirpath1, true);
             }
-            // Сначала определяем левелы, и копируем их
-            var levels = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
-            if (!Directory.Exists(levels)) Directory.CreateDirectory(levels);
-            IList<string> levelslist = new List<string>();
-            const string takefrom = "\\content\\maps\\";
+        }
+
+        private static IEnumerable<string> SetupLevels()
+        {
+            var levelsTarget = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
+            if (!Directory.Exists(levelsTarget))
+                Directory.CreateDirectory(levelsTarget);
+            IList<string> levels = new List<string>();
+            const string levelsSource = "\\content\\maps\\";
             foreach (var s in Directory.GetFiles(GetPath<TMGmod>("maps")))
             {
-                var firstlocated = s.Replace('/', '\\');
-                var fname = firstlocated.Substring(firstlocated.IndexOf(takefrom, StringComparison.Ordinal) + takefrom.Length);
-                var copyto = Path.Combine(levels, fname);
-                if (!File.Exists(copyto) || !GetMD5Hash(File.ReadAllBytes(firstlocated)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(copyto)))) File.Copy(firstlocated, copyto, true);
-                levelslist.Add(copyto);
+                var fileSource = s.Replace('/', '\\');
+                var fileName = fileSource.Substring(fileSource.IndexOf(levelsSource, StringComparison.Ordinal) + levelsSource.Length);
+                var fileTarget = Path.Combine(levelsTarget, fileName);
+                if (!File.Exists(fileTarget) || !GetMD5Hash(File.ReadAllBytes(fileSource)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(fileTarget))))
+                    File.Copy(fileSource, fileTarget, true);
+                levels.Add(fileTarget);
             }
-            // Потом создаём плейлист
-            var tmgPlaylistLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play");
+
+            return levels;
+        }
+
+        private static XDocument Playlist(IEnumerable<string> levels)
+        {
             var playlistElement = new XElement("playlist");
-            foreach (var s in levelslist)
+            foreach (var s in levels)
             {
                 var levelElement = new XElement("element", s.Replace('\\', '/'));
                 playlistElement.Add(levelElement);
             }
-            var playlist = new XDocument();
-            playlist.Add(playlistElement);
+            return new XDocument(playlistElement);
+        }
+
+        private static void SavePlaylistToFile(XDocument playlist, string path)
+        {
             var contents = playlist.ToString();
             if (string.IsNullOrWhiteSpace(contents))
-                throw new Exception("Blank XML (" + tmgPlaylistLocation + ")");
-            if (File.Exists(tmgPlaylistLocation) && File.ReadAllText(tmgPlaylistLocation).Equals(contents)) return;
+                throw new Exception("Blank XML (" + path + ")");
+            if (File.Exists(path) && File.ReadAllText(path).Equals(contents)) return;
             //else
-            File.WriteAllText(tmgPlaylistLocation, contents);
-            SaveAsPlay(tmgPlaylistLocation);
-        }
-        private static void SaveAsPlay(string path)
-        {
+            File.WriteAllText(path, contents);
             if (MonoMain.disableCloud || MonoMain.cloudNoSave)
                 return;
             File.ReadAllBytes(path);
+        }
+
+        private static void SaveLevelsAsPlaylist(IEnumerable<string> levels)
+        {
+            SavePlaylistToFile(
+                Playlist(levels),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play")
+                );
+        }
+
+        // ReSharper disable once InconsistentNaming
+        // Чтобы играть было приятно, пихаем карты в сам мод, и делаем так, чтобы они скачивались вместе с ним
+        private static void SetupPlaylist()
+        {
+            //Уносим старые нерабочие карты в очко
+            DeleteOldLevels();
+            // Сначала определяем левелы, и копируем их
+            var levels = SetupLevels();
+            // Потом создаём плейлист
+            SaveLevelsAsPlaylist(levels);
         }
     }
 }

@@ -20,10 +20,6 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        //private int _ammobefore = 31;
-        //private int _counter;
-        //private float _explode;
-        //private const double Explodechance = 0.0025;
 
         public M4A1 (float xval, float yval)
           : base(xval, yval)
@@ -57,7 +53,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-2f, -2f);
             _editorName = "M4A1";
 			_weight = 4f;
-            Kforce2Ar = 0.5f;
+            KickForceFastAr = 0.5f;
         }
         private void UpdateSkin()
             {

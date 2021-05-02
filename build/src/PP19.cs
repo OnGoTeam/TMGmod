@@ -83,7 +83,7 @@ namespace TMGmod
             _ammoType = new ATBizon();
             BaseAccuracy = 0.6f;
             MinAccuracy = 0.2f;
-            MaxAccuracy = 0.8f;
+            MaxAccuracyFp = 0.8f;
             MaxDelayFp = 25;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PP19Bizon"), 28, 9);
@@ -145,8 +145,8 @@ namespace TMGmod
             if (FrameId / 10 == 1) return;
             base.Fire();
         }
-        public int CurrDelay { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
     }
 }

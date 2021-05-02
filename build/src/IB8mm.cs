@@ -41,9 +41,9 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.45f;
             _kickForce = 1.5f;
-            KforceDSmg = 2.1f;
+            KickForceDeltaSmg = 2.1f;
             MaxDelaySmg = 11;
-            MaxAccuracy = 1f;
+            MaxAccuracyFp = 1f;
             MaxDelayFp = 20;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
@@ -67,12 +67,12 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
+        public float KickForceDeltaSmg { get; }
+        public int CurrentDelaySmg { get; set; }
         public int MaxDelaySmg { get; }
-        public int CurrDelay { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

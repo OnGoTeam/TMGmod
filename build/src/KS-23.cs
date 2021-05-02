@@ -106,8 +106,8 @@ namespace TMGmod
             get => _sprite.frame;
             set
             {
-                Ssmfid(_sprite, value, 10 * NonSkinFrames);
-                Ssmfid(LoaderSprite, value, 10);
+                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
+                SetSpriteMapFrameId(LoaderSprite, value, 10);
             }
         }
 

@@ -71,9 +71,9 @@ namespace TMGmod.Custom_Guns
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2f;
-            Kforce1Ar = 0.07f;
+            KickForceSlowAr = 0.07f;
             _kickForce = 0.9f;
-            Kforce2Ar = 0.9f;
+            KickForceFastAr = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
             _editorName = "AN94 with Wooden Stock";
@@ -115,8 +115,8 @@ namespace TMGmod.Custom_Guns
             base.EditorPropertyChanged(property);
         }
 
-        public float Kforce1Ar { get; }
+        public float KickForceSlowAr { get; }
 
-        public float Kforce2Ar { get; }
+        public float KickForceFastAr { get; }
     }
 }

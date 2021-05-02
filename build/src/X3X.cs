@@ -25,7 +25,6 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new ATx3x();
             _type = "gun";
-            //this.graphic = new Sprite(GetPath("X3X"));
             _sprite = new SpriteMap(GetPath("X3X"), 27, 14);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -51,8 +50,7 @@ namespace TMGmod
             if ((ammo > 0) & (_sprite.frame == 0))
             {
                 Fire();
-                if (ammo < 1) _sprite.frame = 2; 
-                else _sprite.frame = 1;
+                _sprite.frame = ammo < 1 ? 2 : 1;
             }
             else if (_sprite.frame == 1)
             {

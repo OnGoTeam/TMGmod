@@ -65,8 +65,8 @@ namespace TMGmod
 			_weight = 6f;
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.7f;
-            Kforce1Lmg = 0.23f;
-            Kforce2Lmg = 0.43f;
+            KickForce1Lmg = 0.23f;
+            KickForce2Lmg = 0.43f;
         }
         public bool Bipods
         {
@@ -74,8 +74,8 @@ namespace TMGmod
             set
             {
                 _kickForce = value ? 0 : 2.33f;
-                Kforce1Lmg = value ? 0 : 0.23f;
-                Kforce2Lmg = value ? 0 : 0.43f;
+                KickForce1Lmg = value ? 0 : 0.23f;
+                KickForce2Lmg = value ? 0 : 0.43f;
                 loseAccuracy = value ? 0 : 0.2f;
             }
         }
@@ -124,16 +124,6 @@ namespace TMGmod
                     cy - (float)(Math.Sin(Maths.DegToRad(dir)) * dist));
                 Level.Add(ins);
             }
-            /*
-            for (var i = 0; i < 25; i++)
-            {
-                var dir = i * 18f - 5f + Rando.Float(10f);
-                var shrap = new ATShrapnel { range = 20f + Rando.Float(6f) };
-                var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(dir)) * 6.0),
-                        y - (float)(Math.Sin(Maths.DegToRad(dir)) * 6.0), shrap, dir)
-                { firedFrom = this };
-                Level.Add(bullet);
-            }*/
             SFX.Play("explode");
             Level.Remove(this);
         }

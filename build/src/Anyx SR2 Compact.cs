@@ -46,8 +46,8 @@ namespace TMGmod
             _ammoType = new ATSR2C();
             BaseAccuracy = 0.9f;
             MinAccuracy = 0.5f;
-            Kforce1Ar = 5.4f;
-            Kforce2Ar = 6.85f;
+            KickForceSlowAr = 5.4f;
+            KickForceFastAr = 6.85f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);
             _graphic = _sprite;
@@ -83,8 +83,8 @@ namespace TMGmod
             get => HandleQ();
             set
             {
-                Kforce1Ar = value ? _floatingKickforce : 5.4f;
-                Kforce2Ar = value ? _floatingKickforce : 6.85f;
+                KickForceSlowAr = value ? _floatingKickforce : 5.4f;
+                KickForceFastAr = value ? _floatingKickforce : 6.85f;
                 _kickForce = value ? _floatingKickforce : 5.2f;
                 loseAccuracy = value ? 0f : 0.2f;
                 maxAccuracyLost = value ? 0f : 0.6f;

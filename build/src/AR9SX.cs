@@ -28,7 +28,7 @@ namespace TMGmod
             ammo = 17;
             _ammoType = new ATAR9SX();
             BaseAccuracy = 0.88f;
-            MaxAccuracy = 1f;
+            MaxAccuracyFp = 1f;
             MaxDelayFp = 18;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AR9SX"), 36, 10);
@@ -75,9 +75,9 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public int CurrDelay { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
     }
 }
 #endif

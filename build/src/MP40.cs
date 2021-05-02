@@ -28,9 +28,9 @@ namespace TMGmod
             ammo = 32;
             _ammoType = new ATMP40();
             BaseAccuracy = 0.7f;
-            KforceDSmg = 2f;
+            KickForceDeltaSmg = 2f;
             MaxDelaySmg = 20;
-            MaxAccuracy = 1f;
+            MaxAccuracyFp = 1f;
             MaxDelayFp = 20;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP40"), 23, 14);
@@ -75,8 +75,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public int CurrDelay { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
     }
 }

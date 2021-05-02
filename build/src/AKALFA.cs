@@ -103,8 +103,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.75f;
             _kickForce = 0.65f;
-		    Kforce1Ar = 0.05f;
-		    Kforce2Ar = 0.75f;
+		    KickForceSlowAr = 0.05f;
+		    KickForceFastAr = 0.75f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";

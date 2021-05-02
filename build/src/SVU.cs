@@ -28,8 +28,8 @@ namespace TMGmod
             _ammoType = new ATSVU();
             BaseAccuracy = 0.95f;
             MinAccuracy = 0.2f;
-            RhoAccuracyDmr = 0.017f;
-            DeltaAccuracyDmr = 0.3f;
+            RegenAccuracyDmr = 0.017f;
+            DrainAccuracyDmr = 0.3f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;

@@ -37,8 +37,8 @@ namespace TMGmod
             _ammoType = new ATLynx();
             BaseAccuracy = 1f;
             MinAccuracy = 0.3f;
-            RhoAccuracyDmr = 0.01f;
-            DeltaAccuracyDmr = 0.6f;
+            RegenAccuracyDmr = 0.01f;
+            DrainAccuracyDmr = 0.6f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Lynx"), 31, 11);
             _graphic = _sprite;

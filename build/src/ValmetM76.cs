@@ -24,8 +24,8 @@ namespace TMGmod
                 loseAccuracy = value ? 0.2f : 0f;
                 _kickForce = value ? 3f : 6.5f;
                 _ammoType.accuracy = value ? 0.89f : 1f;
-                RhoAccuracyDmr = value ? 0.025f : 0f;
-                DeltaAccuracyDmr = value ? 0.15f : 0f;
+                RegenAccuracyDmr = value ? 0.025f : 0f;
+                DrainAccuracyDmr = value ? 0.15f : 0f;
                 BaseAccuracy = value ? 0.89f : 1f;
             }
         }
@@ -45,8 +45,8 @@ namespace TMGmod
             _ammoType = new ATM76();
             BaseAccuracy = 0.89f;
             MinAccuracy = 0.5f;
-            RhoAccuracyDmr = 0.025f;
-            DeltaAccuracyDmr = 0.15f;
+            RegenAccuracyDmr = 0.025f;
+            DrainAccuracyDmr = 0.15f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Valmet M76"), 33, 10);
             _graphic = _sprite;
@@ -102,7 +102,7 @@ namespace TMGmod
             base.EditorPropertyChanged(property);
         }
 
-        public float RhoAccuracyDmr { get; private set; }
-        public float DeltaAccuracyDmr { get; private set; }
+        public float RegenAccuracyDmr { get; private set; }
+        public float DrainAccuracyDmr { get; private set; }
     }
 }

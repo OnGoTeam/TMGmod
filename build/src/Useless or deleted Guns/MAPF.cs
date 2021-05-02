@@ -45,33 +45,6 @@ namespace TMGmod.Useless_or_deleted_Guns
             weight = 2.5f;
         }
 
-        /*public override void OnPressAction()
-        {
-            base.OnPressAction();
-            if (this.ammo > 0)
-            {
-                this.ammo--;
-                SFX.Play("netGunFire", 0.5f, -0.4f + Rando.Float(0.2f), 0f, false);
-                base.ApplyKick();
-                if (!this.receivingPress && base.isServerForObject)
-                {
-                    Vec2 pos = this.Offset(base.barrelOffset);
-                    MF d = new MF(pos.x, pos.y, this, 8);
-                    base.Fondle(d);
-                    Vec2 travelDir = Maths.AngleToVec(base.barrelAngle);
-                    d.hSpeed = travelDir.x * 14f;
-                    d.vSpeed = travelDir.y * 14f;
-                    Level.Add(d);
-                    return;
-                }
-            }
-            else
-            {
-                base.DoAmmoClick();
-            }
-
-        }*/
-
         public override void Fire()
         {
             if (ammo > 0)

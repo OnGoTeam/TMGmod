@@ -82,8 +82,8 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _editorName = "CZ-805 BREN";
 			_weight = 5f;
-            Kforce1Ar = 1.5f;
-            Kforce2Ar = 2.76f;
+            KickForceSlowAr = 1.5f;
+            KickForceFastAr = 2.76f;
         }
         public override void Update()
         {

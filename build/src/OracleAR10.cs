@@ -49,8 +49,8 @@ namespace TMGmod
             };
             BaseAccuracy = 0.91f;
             MinAccuracy = 0.35f;
-            RhoAccuracyDmr = 0.015f;
-            DeltaAccuracyDmr = 0.3f;
+            RegenAccuracyDmr = 0.015f;
+            DrainAccuracyDmr = 0.3f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
             _graphic = _sprite;
@@ -93,7 +93,6 @@ namespace TMGmod
                 loseAccuracy = bipods ? 0 : 0.15f;
                 maxAccuracyLost = bipods ? 0 : 0.15f;
                 _kickForce = bipods ? 0f : 2f;
-                //HandAngleOff += bipods ? 0.1f : 0f;
                 laserSight = bipods;
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)
                     BipOn.Play();

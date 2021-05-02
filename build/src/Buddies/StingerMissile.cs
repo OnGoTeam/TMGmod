@@ -1,19 +1,20 @@
 ﻿#if DEBUG
-using System.Linq;
-using JetBrains.Annotations;
 using DuckGame;
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
-using MathNet.Numerics;
+using System.Linq;
+using TMGmod.SolvePoly;
 
 namespace TMGmod.Buddies
 {
     [UsedImplicitly]
     [EditorGroup("TMG|DEBUG")]
-    public class StingerMissile:PhysicsObject
+    public class StingerMissile : PhysicsObject
     {
         private readonly List<Vec2> _pList = new List<Vec2>();
         private const float A = 0.22f;
+        private const float HomingRange = 8192;
         private MaterialThing _target;
         [UsedImplicitly]
         public Vec2 Tlv;
@@ -76,15 +77,13 @@ namespace TMGmod.Buddies
                     _target = null;
             if (_target != null) return;
             //else
-            var ducks = Level.CheckCircleAll<Duck>(position, 8192);
-            foreach (var d in ducks)
+            foreach (var d in Level.CheckCircleAll<Duck>(position, HomingRange))
             {
                 if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead && (owner == null || owner.owner != d))
                     _target = d;
             }
 
-            var stgs = Level.CheckCircleAll<StingerMissile>(position, 8192);
-            foreach (var d in stgs)
+            foreach (var d in Level.CheckCircleAll<StingerMissile>(position, HomingRange))
             {
                 if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this && !d._destroyed && (owner == null || d._target == owner.owner))
                     _target = d;
@@ -122,7 +121,7 @@ namespace TMGmod.Buddies
             }
             if (Network.isActive && isLocal)
                 Rando.generator = random;
-            foreach (var window in Level.CheckCircleAll<DuckGame.Window>(position, 30f))
+            foreach (var window in Level.CheckCircleAll<Window>(position, 30f))
             {
                 if (isLocal)
                     Fondle(window, DuckNetwork.localConnection);
@@ -201,10 +200,10 @@ namespace TMGmod.Buddies
             //var g = new Vec2(0, gravity) - Ta;
             var g = G;
             var pa = Delta(-v, p, g);
-            var maybeangle = Math.Acos(pa.x / pa.length);
-            if (pa.y < 0) maybeangle = -maybeangle;
-            if (offDir < 0) maybeangle += Math.PI;
-            angle = (float) maybeangle;
+            var preAngle = Math.Acos(pa.x / pa.length);
+            if (pa.y < 0) preAngle = -preAngle;
+            if (offDir < 0) preAngle += Math.PI;
+            angle = (float)preAngle;
             UpdateAv();
         }
 
@@ -302,7 +301,7 @@ namespace TMGmod.Buddies
             double pg = Vec2.Dot(p, g);
             double pv = Vec2.Dot(p, v);
             double pp = Vec2.Dot(p, p);
-            var rar = FindRoots.Polynomial(new []
+            var rar = Solver.Solve(new[]
             {
                 4 * pp,
                 -8 * pv,
@@ -310,7 +309,7 @@ namespace TMGmod.Buddies
                 4 * vg + 2 * gg - 2 * aa,
                 gg - aa
             });
-            var t = (from r in rar where r.IsRealNonNegative() select r.Real).Concat(new[] { 1e+10 }).Min();
+            var t = (from r in rar where r >= 0 select r).Concat(new[] { 1e+10 }).Min();
             return t;
         }
 
@@ -327,8 +326,8 @@ namespace TMGmod.Buddies
                 return av0;
             }
 
-            var av = 2 * p - 2 * v * (float) t - g * (float) (t * t);
-            av /= (float) (t * t);
+            var av = 2 * p - 2 * v * (float)t - g * (float)(t * t);
+            av /= (float)(t * t);
             return av;
         }
     }

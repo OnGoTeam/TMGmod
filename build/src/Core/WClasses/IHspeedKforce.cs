@@ -2,7 +2,7 @@
 {
     public interface IHspeedKforce
     {
-        float Kforce1Ar { get; }
-        float Kforce2Ar { get; }
+        float KickForceSlowAr { get; }
+        float KickForceFastAr { get; }
     }
 }

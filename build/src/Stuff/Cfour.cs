@@ -57,9 +57,8 @@ namespace TMGmod.Stuff
             Graphics.FlashScreen();
             for (var index = 0; index < 1; ++index)
             {
-                var explosionPart = new ExplosionPart(x - 8f + Rando.Float(16f), y - 8f + Rando.Float(16f));
-                explosionPart.xscale *= 0.7f;
-                explosionPart.yscale *= 0.7f;
+                var explosionPart = new ExplosionPart(x + Rando.Float(-8f, +8f), y + Rando.Float(-8f, +8f));
+                explosionPart.scale *= 0.7f;
                 Level.Add(explosionPart);
             }
             SFX.Play("explode");

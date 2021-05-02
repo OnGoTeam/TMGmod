@@ -51,7 +51,7 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _editorName = "RFB";
 			_weight = 5.5f;
-		    Kforce2Ar = 0.7f;
+		    KickForceFastAr = 0.7f;
         }
         public override void Update()
         {

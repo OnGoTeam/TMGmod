@@ -27,8 +27,8 @@ namespace TMGmod
             _ammoType = new ATArx200();
             BaseAccuracy = 0.98f;
             MinAccuracy = 0.6f;
-            RhoAccuracyDmr = 0.009f;
-            DeltaAccuracyDmr = 0.1f;
+            RegenAccuracyDmr = 0.009f;
+            DrainAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARX200"), 33, 14);
             _graphic = _sprite;

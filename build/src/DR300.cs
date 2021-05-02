@@ -40,8 +40,8 @@ namespace TMGmod
             _ammoType = new ATDR300();
             BaseAccuracy = 0.98f;
             MinAccuracy = 0.65f;
-            RhoAccuracyDmr = 0.02f;
-            DeltaAccuracyDmr = 0.2f;
+            RegenAccuracyDmr = 0.02f;
+            DrainAccuracyDmr = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("DR300"), 37, 11);
             _graphic = _sprite;

@@ -85,7 +85,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.3f;
-            MaxAccuracy = 1f;
+            MaxAccuracyFp = 1f;
             MaxDelayFp = 40;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Sawed-Off M14"), 31, 11);
@@ -147,9 +147,9 @@ namespace TMGmod
             if (FrameId / 10 == 1) return;
             base.Fire();
         }
-        public int CurrDelay { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
     }
 }
 #endif

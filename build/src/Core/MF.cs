@@ -53,31 +53,15 @@ namespace TMGmod.Core
 
         public override void Update()
         {
-            if (Rando.Float(2f) < 0.3f)
-            {
-                vSpeed += -2f + Rando.Float(3.5f);
-            }
-            if (Rando.Float(9f) < 0.1f)
-            {
-                vSpeed += -3f + Rando.Float(3.1f);
-            }
-            if (Rando.Float(14f) < 0.1f)
-            {
-                vSpeed += -5f + Rando.Float(4f);
-            }
-            if (Rando.Float(25f) < 0.1f)
-            {
-                vSpeed += -7f + Rando.Float(6f);
-            }
+            if (Rando.Float(2f) < 0.3f) vSpeed += -2f + Rando.Float(3.5f);
+            if (Rando.Float(9f) < 0.1f) vSpeed += -3f + Rando.Float(3.1f);
+            if (Rando.Float(14f) < 0.1f) vSpeed += -5f + Rando.Float(4f);
+            if (Rando.Float(25f) < 0.1f) vSpeed += -7f + Rando.Float(6f);
             Level.Add(SmallSmoke.New(x, y));
             if (hSpeed > 0f)
-            {
                 _sprite.angleDegrees = 90f;
-            }
-            else if (hSpeed < 0f)
-            {
-                _sprite.angleDegrees = -90f;
-            }
+            else if (hSpeed < 0f) _sprite.angleDegrees = -90f;
+
             base.Update();
         }
 

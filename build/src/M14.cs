@@ -32,7 +32,7 @@ namespace TMGmod
             };
             BaseAccuracy = 0.9f;
             MinAccuracy = 0.5f;
-            MaxAccuracy = 1f;
+            MaxAccuracyFp = 1f;
             MaxDelayFp = 30;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M14"), 46, 11);
@@ -78,8 +78,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public int CurrDelay { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
     }
 }

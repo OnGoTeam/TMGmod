@@ -51,7 +51,6 @@ namespace TMGmod.Custom_Guns
             _ammoType = new ATPMR30();
             _numBulletsPerFire = 1;
             _type = "gun";
-            //graphic = new Sprite(GetPath("PMR30"));
             _graphicm[0] = new Sprite(GetPath("PMR301"));
             _graphicm[1] = new Sprite(GetPath("PMR302"));
             _graphicm[2] = new Sprite(GetPath("PMR300"));

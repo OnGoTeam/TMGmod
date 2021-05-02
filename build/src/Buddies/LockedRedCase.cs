@@ -10,9 +10,7 @@ namespace TMGmod.Buddies
     {
         public LockedRedCase(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
-            _graphic = sprite;
-            sprite.frame = 3;
+            _graphic = new SpriteMap(GetPath("ColoredCases"), 14, 8) { frame = 3 };
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);

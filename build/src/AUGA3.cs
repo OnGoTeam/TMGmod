@@ -51,7 +51,7 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A3";
 			_weight = 5f;
-            Kforce2Ar = 0.7f;
+            KickForceFastAr = 0.7f;
         }
         private void UpdateSkin()
         {

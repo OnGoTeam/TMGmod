@@ -26,8 +26,8 @@ namespace TMGmod
             _ammoType = new AT50C();
             BaseAccuracy = 1f;
             MinAccuracy = 0.6f;
-            RhoAccuracyDmr = 0.05f;
-            DeltaAccuracyDmr = 0.1f;
+            RegenAccuracyDmr = 0.05f;
+            DrainAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             _graphic = _sprite;
@@ -66,7 +66,7 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public float RhoAccuracyDmr { get; private set; }
-        public float DeltaAccuracyDmr { get; private set; }
+        public float RegenAccuracyDmr { get; }
+        public float DrainAccuracyDmr { get; }
     }
 }

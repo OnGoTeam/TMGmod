@@ -70,9 +70,9 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 1.5f;
-            Kforce1Ar = 0.5f;
+            KickForceSlowAr = 0.5f;
             _kickForce = 1.6f;
-            Kforce2Ar = 2f;
+            KickForceFastAr = 2f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.45f;
             _editorName = "AN94";
@@ -112,7 +112,7 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public float Kforce1Ar { get; }
-        public float Kforce2Ar { get; }
+        public float KickForceSlowAr { get; }
+        public float KickForceFastAr { get; }
     }
 }

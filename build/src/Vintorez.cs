@@ -33,8 +33,8 @@ namespace TMGmod
             _ammoType = new ATVintorez();
             MinAccuracy = 0f;
             BaseAccuracy = 0.9f;
-            Kforce1Ar = 0.4f;
-            Kforce2Ar = 0.85f;
+            KickForceSlowAr = 0.4f;
+            KickForceFastAr = 0.85f;
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.5f;
             _type = "gun";

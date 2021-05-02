@@ -26,7 +26,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
             _ammoType = new ATSMG9();
-            KforceDSmg = 3.5f;
+            KickForceDeltaSmg = 3.5f;
             MaxDelaySmg = 15;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SMG9"), 16, 15);

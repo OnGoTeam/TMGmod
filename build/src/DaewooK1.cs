@@ -99,7 +99,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.86f;
             _kickForce = 0.5f;
-            KforceDSmg = 2.5f;
+            KickForceDeltaSmg = 2.5f;
             MaxDelaySmg = 50;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.24f;
