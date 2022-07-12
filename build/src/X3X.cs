@@ -19,7 +19,7 @@ namespace TMGmod
         }
 
         private readonly SpriteMap _sprite;
-        public X3X (float xval, float yval)
+        public X3X(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 6;
@@ -42,7 +42,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-4f, -1f);
             _editorName = "Experimental X3X";
             _bio = "ammo = 1337";
-			_weight = 5.5f;
+            _weight = 5.5f;
         }
 
         public override void OnPressAction()

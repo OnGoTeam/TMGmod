@@ -1,5 +1,5 @@
-﻿using System;
-using DuckGame;
+﻿using DuckGame;
+using System;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
@@ -34,7 +34,7 @@ namespace TMGmod.NY
             _kickForce = 1.45f;
             _holdOffset = new Vec2(0f, 0f);
             _editorName = "Popcal 9mm";
-			_weight = 3f;
+            _weight = 3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             thickness = 0f;
@@ -63,7 +63,7 @@ namespace TMGmod.NY
                 var atPopcorn = new ATPopcorn { bulletSpeed = 2f };
                 var bullet = new Bullet(hitpos.x + (float)(Math.Cos(Maths.DegToRad(num2)) * 6.0),
                         hitpos.y - (float)(Math.Sin(Maths.DegToRad(num2)) * 6.0), atPopcorn, num2)
-                    { firedFrom = this };
+                { firedFrom = this };
                 firedBullets.Add(bullet);
                 Level.Add(bullet);
             }

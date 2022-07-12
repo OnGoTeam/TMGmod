@@ -1,10 +1,10 @@
-﻿using System;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BasePumpAction:BaseGun, IAmSg
+    public abstract class BasePumpAction : BaseGun, IAmSg
     {
         [UsedImplicitly]
         public int LoadProgress;

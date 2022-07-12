@@ -2,10 +2,10 @@
 
 namespace TMGmod.NY
 {
-    public class CandyCaneBullet:Bullet
+    public class CandyCaneBullet : Bullet
     {
         public CandyCaneBullet(float xval, float yval, AmmoType type, float ang = -1, Thing owner = null,
-            bool rbound = false, float distance = -1, bool tracer = false, bool network = true):
+            bool rbound = false, float distance = -1, bool tracer = false, bool network = true) :
             base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
         {
             _tracer = false;
@@ -21,7 +21,7 @@ namespace TMGmod.NY
             //else
             var v = travelDirNormalized * bulletSpeed;
             v *= 0.3f;
-            Level.Add(SmallFire.New(end.x, end.y, v.x, v.y, firedFrom:this));
+            Level.Add(SmallFire.New(end.x, end.y, v.x, v.y, firedFrom: this));
         }
 
         public override void Terminate()

@@ -5,7 +5,7 @@ namespace TMGmod.Stuff
 {
     [UsedImplicitly]
     [EditorGroup("TMG|Misc")]
-    public class ShieldBlockAll: Thing
+    public class ShieldBlockAll : Thing
     {
         public ShieldBlockAll()
         {

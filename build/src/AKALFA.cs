@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -47,7 +47,8 @@ namespace TMGmod
         }
 
         private float _stockstate = 1f;
-        public float StockState {
+        public float StockState
+        {
             get => _stockstate;
             set
             {
@@ -72,7 +73,7 @@ namespace TMGmod
             set => Stock = value.ReadBool();
         }
 
-        public AKALFA (float xval, float yval)
+        public AKALFA(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -103,13 +104,13 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.75f;
             _kickForce = 0.65f;
-		    KickForceSlowAr = 0.05f;
-		    KickForceFastAr = 0.75f;
+            KickForceSlowAr = 0.05f;
+            KickForceFastAr = 0.75f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.3f;
             _editorName = "Alfa";
-			_weight = 5.5f;
-		}
+            _weight = 5.5f;
+        }
         public override void Update()
         {
             base.Update();

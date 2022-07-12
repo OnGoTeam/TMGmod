@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -55,13 +55,13 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 4, 5, 7 });
-        public CZ805 (float xval, float yval)
+        public CZ805(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-		    _ammoType = new ATCZ();
-		    _type = "gun";
+            _ammoType = new ATCZ();
+            _type = "gun";
             _sprite = new SpriteMap(GetPath("CZ805Bren"), 41, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -81,7 +81,7 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.25f;
             _editorName = "CZ-805 BREN";
-			_weight = 5f;
+            _weight = 5f;
             KickForceSlowAr = 1.5f;
             KickForceFastAr = 2.76f;
         }

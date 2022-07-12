@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -50,7 +50,7 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 6, 8 });
-        public UziPro (float xval, float yval)
+        public UziPro(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -81,7 +81,7 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(9f, 6f);
             _editorName = "Uzi Pro";
-			_weight = 2.5f;
+            _weight = 2.5f;
         }
         public override void Update()
         {

@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseSmg:BaseGun, IFirstKforce, IAmSmg
+    public abstract class BaseSmg : BaseGun, IFirstKforce, IAmSmg
     {
         [UsedImplicitly]
         public StateBinding DelaySmgBinding = new StateBinding(nameof(CurrentDelaySmg));

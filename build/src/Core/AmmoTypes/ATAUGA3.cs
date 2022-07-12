@@ -37,10 +37,12 @@ namespace TMGmod.Core.AmmoTypes
         public override void WriteAdditionalData(BitBuffer b)
         {
             b.Write(penetration);
+            base.WriteAdditionalData(b);
         }
 
         public override void ReadAdditionalData(BitBuffer b)
         {
+            base.ReadAdditionalData(b);
             penetration = b.ReadFloat();
         }
     }

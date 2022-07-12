@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Break-Action")]
     [BaggedProperty("canSpawn", false)]
-    public class SkeetGun:BaseGun, IHaveSkin, IAmSg
+    public class SkeetGun : BaseGun, IHaveSkin, IAmSg
     {
         [UsedImplicitly]
         public float HandAngleOff

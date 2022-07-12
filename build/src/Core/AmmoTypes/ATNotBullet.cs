@@ -7,13 +7,13 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATNB()
         {
-			bulletLength = 1f;
+            bulletLength = 1f;
             bulletThickness = 0.1f;
             accuracy = 1f;
             combustable = true;
             bulletSpeed = 5f;
-			range = 50f;
-			penetration = 228f;
+            range = 50f;
+            penetration = 228f;
         }
     }
 }

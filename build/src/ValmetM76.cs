@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -68,7 +68,7 @@ namespace TMGmod
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
             _editorName = "Valmet M76";
-			_weight = 4f;
+            _weight = 4f;
             DeltaWait = 0.15f;
             BurstNum = 1;
         }

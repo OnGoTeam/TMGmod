@@ -6,7 +6,7 @@ namespace TMGmod.Stuff
     //[EditorGroup("TMG|Misc")]
     [BaggedProperty("CanSpawn", false)]
     [UsedImplicitly]
-    public class Barricades:GreyBlock
+    public class Barricades : GreyBlock
     {
         private bool _deployed;
 
@@ -36,7 +36,7 @@ namespace TMGmod.Stuff
         public override void Draw()
         {
             if (Level.activeLevel is Editor)
-                Graphics.DrawRect(position + new Vec2(1, -8), position + new Vec2(-1,-40),new Color(63, 127, 0, 127));
+                Graphics.DrawRect(position + new Vec2(1, -8), position + new Vec2(-1, -40), new Color(63, 127, 0, 127));
             base.Draw();
         }
     }

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -29,7 +29,7 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 5 });
-        public Lynx (float xval, float yval)
+        public Lynx(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -62,7 +62,7 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
-			_weight = 6f;
+            _weight = 6f;
         }
         public bool Bipods
         {

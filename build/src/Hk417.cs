@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -21,7 +21,7 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4, 1, 7 });
 
-        public HK417 (float xval, float yval)
+        public HK417(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
@@ -52,7 +52,7 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
             _editorName = "Hk 417C";
-			_weight = 3.5f;
+            _weight = 3.5f;
         }
         private void UpdateSkin()
         {

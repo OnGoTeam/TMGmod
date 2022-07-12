@@ -5,7 +5,7 @@ namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc|Holiday")]
     [UsedImplicitly]
-    public class CandyCane:Gun
+    public class CandyCane : Gun
     {
         [UsedImplicitly]
         public bool Dropped;
@@ -55,16 +55,16 @@ namespace TMGmod.NY
             Level.Remove(this);
         }
 
-        public virtual void Drop(Vec2 pos, bool force=false, float p=0.75f)
+        public virtual void Drop(Vec2 pos, bool force = false, float p = 0.75f)
         {
             if (Dropped) return;
             Dropped = true;
             if (!force && !(Rando.Float(1) < p)) return;
             //else
-            var ctor = GetType().GetConstructor(new[] {typeof(float), typeof(float)});
+            var ctor = GetType().GetConstructor(new[] { typeof(float), typeof(float) });
             if (ctor == null) return;
             //else
-            if (!(ctor.Invoke(new object[] {pos.x, pos.y}) is Thing t)) return;
+            if (!(ctor.Invoke(new object[] { pos.x, pos.y }) is Thing t)) return;
             //else
             Level.Add(t);
         }

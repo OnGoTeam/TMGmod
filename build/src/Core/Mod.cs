@@ -50,24 +50,6 @@ namespace TMGmod.Core
             return new MD5CryptoServiceProvider().ComputeHash(sourceBytes);
         }
 
-        private static void DeleteOldLevels()
-        {
-            var olddirlist = new List<string>(new[]
-            {
-                "DuckGame\\Levels\\New TMG Maps",
-                "DuckGame\\Levels\\New TMG Levels",
-                "DuckGame\\Levels\\New TMG Maps (PLS DONT USE OLD MAPS)",
-                "DuckGame\\Levels\\TMG",
-                "DuckGame\\Levels\\TMG Maps v2.0",
-                "DuckGame\\Levels\\TMG Maps v2.1",
-                "DuckGame\\Levels\\TMG v2.1.1"
-            });
-            foreach (var dirpath1 in olddirlist.Select(dirpath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dirpath)).Where(Directory.Exists))
-            {
-                Directory.Delete(dirpath1, true);
-            }
-        }
-
         private static IEnumerable<string> SetupLevels()
         {
             var levelsTarget = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
@@ -117,15 +99,13 @@ namespace TMGmod.Core
             SavePlaylistToFile(
                 Playlist(levels),
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play")
-                );
+            );
         }
 
         // ReSharper disable once InconsistentNaming
         // Чтобы играть было приятно, пихаем карты в сам мод, и делаем так, чтобы они скачивались вместе с ним
         private static void SetupPlaylist()
         {
-            //Уносим старые нерабочие карты в очко
-            DeleteOldLevels();
             // Сначала определяем левелы, и копируем их
             var levels = SetupLevels();
             // Потом создаём плейлист

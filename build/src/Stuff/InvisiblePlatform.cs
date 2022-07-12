@@ -5,7 +5,7 @@ namespace TMGmod.Stuff
 {
     [EditorGroup("TMG|Misc")]
     [UsedImplicitly]
-    public class InvisiblePlatform: MaterialThing, IPlatform
+    public class InvisiblePlatform : MaterialThing, IPlatform
     {
         public InvisiblePlatform(float x, float y) : base(x, y)
         {

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -19,7 +19,7 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
-        public Rfb (float xval, float yval)
+        public Rfb(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -50,8 +50,8 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _editorName = "RFB";
-			_weight = 5.5f;
-		    KickForceFastAr = 0.7f;
+            _weight = 5.5f;
+            KickForceFastAr = 0.7f;
         }
         public override void Update()
         {

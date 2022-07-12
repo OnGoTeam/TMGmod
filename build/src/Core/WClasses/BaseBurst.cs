@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseBurst:BaseGun
+    public abstract class BaseBurst : BaseGun
     {
         [UsedImplicitly]
         public int ShotsLeft;

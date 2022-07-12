@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
-using TMGmod.Core;
-using TMGmod.Core.WClasses;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
+using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -52,7 +52,7 @@ namespace TMGmod
             loseAccuracy = 0.01f;
             maxAccuracyLost = 0.05f;
             _editorName = "Calico M900";
-			_weight = 1f;
+            _weight = 1f;
             handAngle = 0f;
         }
         public override void OnHoldAction()

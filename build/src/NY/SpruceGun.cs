@@ -3,7 +3,7 @@
 namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc|Holiday")]
-    public class SpruceGun:Gun
+    public class SpruceGun : Gun
     {
         public SpruceGun(float xval, float yval) : base(xval, yval)
         {

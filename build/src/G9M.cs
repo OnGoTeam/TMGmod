@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
-using System;
 
 namespace TMGmod
 {
@@ -62,7 +62,7 @@ namespace TMGmod
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "G9M";
-			_weight = 6f;
+            _weight = 6f;
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.7f;
             KickForce1Lmg = 0.23f;

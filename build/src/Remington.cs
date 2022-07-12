@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -23,7 +23,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
-	        _ammoType = new ATRemington();
+            _ammoType = new ATRemington();
             _numBulletsPerFire = 5;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
@@ -34,9 +34,9 @@ namespace TMGmod
             };
             FrameId = 0;
             _center = new Vec2(17f, 5f);
-		    _collisionOffset = new Vec2(-17f, -5f);
-		    _collisionSize = new Vec2(33f, 9f);
-		    _barrelOffsetTL = new Vec2(33f, 1f);
+            _collisionOffset = new Vec2(-17f, -5f);
+            _collisionSize = new Vec2(33f, 9f);
+            _barrelOffsetTL = new Vec2(33f, 1f);
             _flare = new SpriteMap(GetPath("FlareBase2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
@@ -46,7 +46,7 @@ namespace TMGmod
             _kickForce = 3f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.8f;
-		    _manualLoad = true;
+            _manualLoad = true;
             _fireWait = 3f;
             _editorName = "Fabarm FP-6";
             ShellOffset = new Vec2(0f, -3f);

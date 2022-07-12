@@ -1,6 +1,6 @@
-﻿using System;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
 using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Stuff

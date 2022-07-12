@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -75,7 +75,7 @@ namespace TMGmod
             set => Stock = value.ReadBool();
         }
 
-        public DaewooK1 (float xval, float yval)
+        public DaewooK1(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -104,7 +104,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.24f;
             _editorName = "Daewoo K1";
-			_weight = 4.5f;
+            _weight = 4.5f;
         }
         public override void Update()
         {

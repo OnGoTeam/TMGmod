@@ -1,6 +1,6 @@
-using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
+using System.Linq;
 
 namespace TMGmod.Stuff
 {

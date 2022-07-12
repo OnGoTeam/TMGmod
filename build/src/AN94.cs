@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -66,7 +66,7 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
-            _ammoType = new AT545NATO { range = 260f, bulletSpeed = 60f, accuracy = 0.87f};
+            _ammoType = new AT545NATO { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 1.5f;

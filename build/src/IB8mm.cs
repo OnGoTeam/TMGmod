@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -20,7 +20,7 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        public IB8mm (float xval, float yval)
+        public IB8mm(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -50,7 +50,7 @@ namespace TMGmod
             _holdOffset = new Vec2(-2f, 0f);
             ShellOffset = new Vec2(-3f, 0f);
             _editorName = "IB-8mm Sniper";
-			_weight = 3f;
+            _weight = 3f;
         }
         private void UpdateSkin()
         {

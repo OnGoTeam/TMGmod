@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -72,7 +72,7 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             ShellOffset = new Vec2(-3f, -1f);
             _editorName = "USP-S";
-			_weight = 1f;
+            _weight = 1f;
         }
         private void UpdateSkin()
         {

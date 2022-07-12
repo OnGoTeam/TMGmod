@@ -1,5 +1,5 @@
-using System;
 using DuckGame;
+using System;
 
 namespace TMGmod.Core.AmmoTypes
 {
@@ -7,7 +7,7 @@ namespace TMGmod.Core.AmmoTypes
     public interface IDamage
     {
         float BulletDamage { get; }
-        float DeltaDamage{ get; }
+        float DeltaDamage { get; }
         float DistanceConvexity { get; }
         float AlphaDamage { get; }
     }
@@ -60,7 +60,7 @@ namespace TMGmod.Core.AmmoTypes
 
         public static float CalculateCoeff(AmmoType ammo, float q)
         {
-            return (float) CalculateCoeff(GetAlpha(ammo), GetConvexity(ammo), q);
+            return (float)CalculateCoeff(GetAlpha(ammo), GetConvexity(ammo), q);
         }
 
         private static float CalculateCoeff(Bullet bullet)
@@ -69,7 +69,9 @@ namespace TMGmod.Core.AmmoTypes
         }
         public static float Calculate(Bullet bullet)
         {
+#if DEBUG
             StringMarker.Show(bullet.end, CalculateCoeff(bullet));
+#endif
             return CalculateBase(bullet.ammo) * CalculateCoeff(bullet);
         }
     }

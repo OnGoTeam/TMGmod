@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -27,7 +27,7 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
 
-        public SKS (float xval, float yval)
+        public SKS(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -63,7 +63,7 @@ namespace TMGmod
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
             _editorName = "SKS";
-			_weight = 6f;
+            _weight = 6f;
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.15f;
         }
@@ -132,16 +132,16 @@ namespace TMGmod
         }
         public override void Thrown()
         {
-			if (ammo != 0)
-			{
+            if (ammo != 0)
+            {
                 ammo = _patrons;
-			    _ammoType = new AT762NATO
-			    {
-			        range = 800f,
-			        accuracy = 0.97f,
-			        bulletSpeed = 95f,
-			        bulletThickness = 1.5f
-			    };
+                _ammoType = new AT762NATO
+                {
+                    range = 800f,
+                    accuracy = 0.97f,
+                    bulletSpeed = 95f,
+                    bulletThickness = 1.5f
+                };
                 _fireWait = 1.55f;
                 _barrelOffsetTL = new Vec2(42f, 4f);
                 _fireSound = GetPath("sounds/scar.wav");
@@ -154,10 +154,10 @@ namespace TMGmod
                     center = new Vec2(0.0f, 5f)
                 };
             }
-			if (Stick && _patrons == 0)
-			{
-				ammo = 0;
-			}
+            if (Stick && _patrons == 0)
+            {
+                ammo = 0;
+            }
             base.Thrown();
         }
         private void UpdateSkin()

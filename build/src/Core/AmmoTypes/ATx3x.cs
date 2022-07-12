@@ -8,7 +8,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATx3x()
         {
-			bulletLength = 45f;
+            bulletLength = 45f;
             combustable = true;
             bulletSpeed = 15f;
             range = 800f;
@@ -21,7 +21,7 @@ namespace TMGmod.Core.AmmoTypes
         }
         public override void PopShell(float x, float y, int dir)
         {
-            var flyingtoilet = new X3XShell(x, y) {hSpeed = dir * (7f + Rando.Float(1f))};
+            var flyingtoilet = new X3XShell(x, y) { hSpeed = dir * (7f + Rando.Float(1f)) };
             Level.Add(flyingtoilet);
         }
     }

@@ -9,8 +9,8 @@ namespace TMGmod.Core.AmmoTypes
         public ATRemington()
         {
             range = 180f;
-	        accuracy = 0.67f;
-	        bulletThickness = 1.5f;
+            accuracy = 0.67f;
+            bulletThickness = 1.5f;
             penetration = 1f;
             bulletSpeed = 25f;
             deadly = true;

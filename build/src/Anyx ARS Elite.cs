@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -117,7 +117,7 @@ namespace TMGmod
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
             _editorName = "Anyx ARS Elite";
-			_weight = 6f;
+            _weight = 6f;
             handAngle = 0f;
         }
         public override void Update()

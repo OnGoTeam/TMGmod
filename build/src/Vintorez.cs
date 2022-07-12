@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -55,7 +55,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.2f;
             _editorName = "Vintorez";
-			_weight = 4.7f;
+            _weight = 4.7f;
         }
         public override void Update()
         {

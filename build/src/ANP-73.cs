@@ -1,7 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -34,7 +34,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             _editorName = "Experimental ANP-73";
-			_weight = 2f;
+            _weight = 2f;
         }
         public override void Update()
         {
@@ -71,6 +71,6 @@ namespace TMGmod
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
-		}
+        }
     }
 }

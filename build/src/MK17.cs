@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -54,12 +54,12 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.81f;
             _kickForce = 2.35f;
-		    KickForceSlowAr = 1.6f;
-		    KickForceFastAr = 1.9f;
+            KickForceSlowAr = 1.6f;
+            KickForceFastAr = 1.9f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.6f;
             _editorName = "Mk17 with Shield";
-			_weight = 4.5f;
+            _weight = 4.5f;
         }
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {

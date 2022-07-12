@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -50,7 +50,7 @@ namespace TMGmod
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A3";
-			_weight = 5f;
+            _weight = 5f;
             KickForceFastAr = 0.7f;
         }
         private void UpdateSkin()

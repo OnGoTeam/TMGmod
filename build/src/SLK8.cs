@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -49,7 +49,7 @@ namespace TMGmod
             loseAccuracy = 0.22f;
             maxAccuracyLost = 0.22f;
             _editorName = "HK SLK8";
-			_weight = 7.5f;
+            _weight = 7.5f;
         }
         private void UpdateSkin()
         {

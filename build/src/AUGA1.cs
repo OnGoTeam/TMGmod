@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -46,7 +46,7 @@ namespace TMGmod
         [UsedImplicitly]
         public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
-        public AUGA1 (float xval, float yval)
+        public AUGA1(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
@@ -73,7 +73,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A1";
-			_weight = 5.5f;
+            _weight = 5.5f;
             KickForceFastAr = 0.7f;
         }
         public override void Update()

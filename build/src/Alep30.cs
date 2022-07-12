@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -41,9 +41,9 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(1f, 2f);
-            ShellOffset = new Vec2(-3f, -3f);            
+            ShellOffset = new Vec2(-3f, -3f);
             _editorName = "Alep 30";
-			_weight = 2.3f;
+            _weight = 2.3f;
         }
         private void UpdateSkin()
         {

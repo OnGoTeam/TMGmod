@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -61,7 +61,7 @@ namespace TMGmod
             _holdOffset = new Vec2(-1f, 2f);
             ShellOffset = new Vec2(2f, -4f);
             _editorName = "MP5A3";
-			_weight = 3f;
+            _weight = 3f;
             KickForceDeltaSmg = 2f;
             MaxAccuracyFp = 0.9f;
             MaxDelayFp = 10;

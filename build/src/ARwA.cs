@@ -1,14 +1,14 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
-using TMGmod.Core;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class ARwA: BaseGun, IAmAr, MagBuddy.ISupportReload
+    public class ARwA : BaseGun, IAmAr, MagBuddy.ISupportReload
     {
         private readonly SpriteMap _sprite;
         private readonly MagBuddy _magBuddy;
@@ -60,7 +60,7 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (ammo <= 0 ) _magBuddy.Disload();
+            if (ammo <= 0) _magBuddy.Disload();
             if (ammo <= 0 && Mags <= 0) _sprite.frame = 2;
             base.Update();
         }

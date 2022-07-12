@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DuckGame;
+using System;
 using System.Collections.Generic;
-using DuckGame;
 
 namespace TMGmod.Core
 {
-    public abstract class BaseCase:Holdable,IPlatform
+    public abstract class BaseCase : Holdable, IPlatform
     {
         private Type _contains;
 
@@ -50,7 +50,7 @@ namespace TMGmod.Core
             if (d == null) return;
             //else
             d.GiveHoldable(newThing);
-            d.resetAction = true; 
+            d.resetAction = true;
             SFX.Play(GetPath("sounds/case_opening"));
         }
 

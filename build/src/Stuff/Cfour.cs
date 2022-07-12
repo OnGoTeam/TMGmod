@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace TMGmod.Stuff
 {
@@ -72,7 +72,7 @@ namespace TMGmod.Stuff
                 var atShrapnel = new ATShrapnel { range = 30f + Rando.Float(0f, Rando.Float(70f)) };
                 var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(num)) * 8.0),
                         y - (float)(Math.Sin(Maths.DegToRad(num)) * 8.0), atShrapnel, num)
-                    { firedFrom = this };
+                { firedFrom = this };
                 varBullets.Add(bullet);
                 Level.Add(bullet);
             }

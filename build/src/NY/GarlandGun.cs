@@ -7,7 +7,7 @@ namespace TMGmod.NY
     [UsedImplicitly]
     public class GarlandGun : Gun
     {
-        
+
         private float _sprwait;
         [UsedImplicitly]
         public int FrameId;
@@ -42,7 +42,7 @@ namespace TMGmod.NY
             if (_sprwait <= 0f)
             {
                 var randres = Rando.Int(0, 29);
-                while (randres == ((AT9mmParasha) ammoType).SpriteY.frame)
+                while (randres == ((AT9mmParasha)ammoType).SpriteY.frame)
                 {
                     randres = Rando.Int(0, 29);
                 }
@@ -50,7 +50,7 @@ namespace TMGmod.NY
                 _sprwait += 1.0f;
             }
 
-            ((AT9mmParasha) ammoType).SpriteY.frame = FrameId;
+            ((AT9mmParasha)ammoType).SpriteY.frame = FrameId;
             base.Update();
         }
     }

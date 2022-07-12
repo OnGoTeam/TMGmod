@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Linq;
 using TMGmod.Core.Particles;
 
 namespace TMGmod.Stuff
 {
     [BaggedProperty("CanSpawn", false)]
     [PublicAPI]
-    public class Barricade:Block
+    public class Barricade : Block
     {
         public bool Anchored;
         public StateBinding AnchoredBinding = new StateBinding(nameof(Anchored));
@@ -42,7 +42,7 @@ namespace TMGmod.Stuff
                 if (block is Barricade barricade && !barricade.Anchored) continue;
                 //else
                 Anchored = true;
-                
+
             }
             blocks = Level.CheckLineAll<Block>(new Vec2(x, y), new Vec2(x, y - 4));
             return Anchored || blocks.Any(block => block != this);
@@ -86,7 +86,7 @@ namespace TMGmod.Stuff
                 Damage(Math.Abs(with.hSpeed) * 0.2f);
             }
 
-            
+
             base.OnImpact(with, from);
         }
 

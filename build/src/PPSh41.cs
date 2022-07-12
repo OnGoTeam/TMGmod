@@ -54,7 +54,7 @@ namespace TMGmod
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.4f;
             _editorName = "PPSh 41";
-			_weight = 3.5f;
+            _weight = 3.5f;
         }
         private void UpdateSkin()
         {

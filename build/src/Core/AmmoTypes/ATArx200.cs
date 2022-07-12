@@ -7,7 +7,7 @@ namespace TMGmod.Core.AmmoTypes
     // ReSharper disable once InconsistentNaming
     public class ATArx200 : BaseAmmoType
     {
-        public ATArx200 ()
+        public ATArx200()
         {
             range = 450f;
             accuracy = 0.98f;
@@ -37,10 +37,12 @@ namespace TMGmod.Core.AmmoTypes
         public override void WriteAdditionalData(BitBuffer b)
         {
             b.Write(penetration);
+            base.WriteAdditionalData(b);
         }
 
         public override void ReadAdditionalData(BitBuffer b)
         {
+            base.ReadAdditionalData(b);
             penetration = b.ReadFloat();
         }
     }

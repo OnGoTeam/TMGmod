@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -22,7 +22,7 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7, 8, 9 });
 
-        public AA12 (float xval, float yval)
+        public AA12(float xval, float yval)
             : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -52,7 +52,7 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 1f);
             ShellOffset = new Vec2(-14f, -5f);
             _editorName = "AA-12";
-			_weight = 7f;
+            _weight = 7f;
         }
         private void UpdateSkin()
         {

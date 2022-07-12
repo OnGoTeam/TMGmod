@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core;
-using TMGmod.Core.WClasses;
-using TMGmod.Core.AmmoTypes;
 using System;
+using System.Collections.Generic;
+using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -65,7 +65,7 @@ namespace TMGmod
             _holdOffset = new Vec2(5f, 0f);
             ShellOffset = new Vec2(-7f, -1f);
             _editorName = "AR15 Proto";
-			_weight = 4.2f;
+            _weight = 4.2f;
             KickForceFastAr = 0.5f;
         }
         public override void OnPressAction()
@@ -84,7 +84,7 @@ namespace TMGmod
         }
         public override void Fire()
         {
-            Explode = Rando.Float(0,1);
+            Explode = Rando.Float(0, 1);
             if (Explode < Explodechance) CreateExplosion(position);
             base.Fire();
         }

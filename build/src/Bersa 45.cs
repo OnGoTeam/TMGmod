@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -45,7 +45,7 @@ namespace TMGmod
             _editorName = "Bersa 45";
             _laserOffsetTL = new Vec2(9f, 4f);
             laserSight = true;
-			_weight = 1f;
+            _weight = 1f;
         }
         private void UpdateSkin()
         {

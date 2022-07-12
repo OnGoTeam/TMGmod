@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
         public AT12GaugeS() //KS-23' selfAT
         {
             range = 169f;
-	        accuracy = 0.33f;
+            accuracy = 0.33f;
             penetration = 1f;
             bulletSpeed = 50f;
             deadly = true;

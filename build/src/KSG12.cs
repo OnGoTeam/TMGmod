@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -21,23 +21,23 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         public Ksg12(float xval, float yval)
-		    : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 15;
-	        _ammoType = new ATKSG12();
+            _ammoType = new ATKSG12();
             _numBulletsPerFire = 8;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("KSG12"), 36, 11);
             _graphic = _sprite;
             _center = new Vec2(18f, 6f);
-		    _collisionOffset = new Vec2(-18f, -6f);
-		    _collisionSize = new Vec2(36f, 11f);
-		    _barrelOffsetTL = new Vec2(36f, 3f);
+            _collisionOffset = new Vec2(-18f, -6f);
+            _collisionSize = new Vec2(36f, 11f);
+            _barrelOffsetTL = new Vec2(36f, 3f);
             _holdOffset = new Vec2(-1f, 1f);
             _fireSound = "shotgunFire2";
-		    _kickForce = 3.75f;
-		    _manualLoad = true;
+            _kickForce = 3.75f;
+            _manualLoad = true;
             _fireWait = 2.5f;
             LoaderSprite = new SpriteMap(GetPath("KSG12Pimp"), 14, 6)
             {
@@ -47,7 +47,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-8f, 0f);
             _editorName = "KSG-12";
             LoaderVec2 = new Vec2(6f, 0f);
-	        Loaddx = 2.5f;
+            Loaddx = 2.5f;
         }
         private void UpdateSkin()
         {

@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core.Bullets
 {
-    public class Bullet556:Bullet
+    public class Bullet556 : Bullet
     {
         [UsedImplicitly]
         public StateBinding TracerBinding = new StateBinding(nameof(Tracer));

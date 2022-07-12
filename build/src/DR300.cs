@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -64,7 +64,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "Daewoo DR300";
             laserSight = false;
-			_weight = 3.5f;
+            _weight = 3.5f;
         }
         public override void Update()
         {

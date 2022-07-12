@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -40,15 +40,15 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
-	        _ammoType = new AT12GaugeS();
+            _ammoType = new AT12GaugeS();
             _numBulletsPerFire = 16;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("KS-23"), 35, 8);
             _graphic = _sprite;
             _center = new Vec2(18f, 4f);
-		    _collisionOffset = new Vec2(-18f, -4f);
-		    _collisionSize = new Vec2(35f, 8f);
-		    _barrelOffsetTL = new Vec2(35f, 1f);
+            _collisionOffset = new Vec2(-18f, -4f);
+            _collisionSize = new Vec2(35f, 8f);
+            _barrelOffsetTL = new Vec2(35f, 1f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
@@ -58,12 +58,12 @@ namespace TMGmod
             _kickForce = 9f;
             loseAccuracy = 0.4f;
             maxAccuracyLost = 0.9f;
-		    _manualLoad = true;
+            _manualLoad = true;
             _fireWait = 4f;
             _editorName = "KS-23";
             LoaderSprite = new SpriteMap(GetPath("KS-23Pump"), 7, 4)
             {
-                    center = new Vec2(4f, 2f)
+                center = new Vec2(4f, 2f)
             };
             FrameId = 0;
             ShellOffset = new Vec2(-7f, -2f);

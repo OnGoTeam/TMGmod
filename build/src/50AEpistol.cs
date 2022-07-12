@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -18,7 +18,7 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 2, 5, 7 });
-        public BigShot (float xval, float yval)
+        public BigShot(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(1, this, -1f, 9f, 0.5f);
@@ -44,7 +44,7 @@ namespace TMGmod
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(0f, 2f);
             _editorName = "50AE Pistol";
-			_weight = 2.5f;
+            _weight = 2.5f;
         }
         private void UpdateSkin()
         {
