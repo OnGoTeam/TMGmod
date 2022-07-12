@@ -29,7 +29,7 @@
     <LangVersion>7.3</LangVersion>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Dev|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -394,18 +394,19 @@ IF NOT $(SolutionDir)  == %25outdir%25\build\ (
     COPY mod.conf %25outdir%25\mod.conf
     ECHO Transferred
     IF $(ConfigurationName) == Workshop (
-    IF EXIST %25outdir%25\content\deleteco\ (
-    RMDIR /Q /S %25outdir%25\content\deleteco\
-        ECHO Deleted deleteco
-    )
-    IF EXIST %25outdir%25\content\oldmaps\ (
-    RMDIR /Q /S %25outdir%25\content\oldmaps\
-        ECHO Deleted oldmaps
-    )
-    IF EXIST %25outdir%25\TMGmod.pdb (
-    ERASE %25outdir%25\TMGmod.pdb
-    ECHO Deleted TMGmod.pdb
-    )
+        COPY mod_workshop.conf %25outdir%25\mod.conf
+        IF EXIST %25outdir%25\content\deleteco\ (
+        RMDIR /Q /S %25outdir%25\content\deleteco\
+            ECHO Deleted deleteco
+        )
+        IF EXIST %25outdir%25\content\oldmaps\ (
+            RMDIR /Q /S %25outdir%25\content\oldmaps\
+            ECHO Deleted oldmaps
+        )
+        IF EXIST %25outdir%25\TMGmod.pdb (
+            ERASE %25outdir%25\TMGmod.pdb
+            ECHO Deleted TMGmod.pdb
+        )
     )
 )
 CD %25outdir%25\..
