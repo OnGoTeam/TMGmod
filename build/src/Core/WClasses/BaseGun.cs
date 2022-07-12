@@ -8,7 +8,7 @@ using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
 {
-    internal abstract class BaseGun : Gun
+    public abstract class BaseGun : Gun
     {
         protected float BaseAccuracy = 1f;
         protected float MinAccuracy;
