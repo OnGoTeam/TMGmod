@@ -396,7 +396,7 @@ IF NOT $(SolutionDir)  == %25outdir%25\build\ (
     IF $(ConfigurationName) == Workshop (
         COPY mod_workshop.conf %25outdir%25\mod.conf
         IF EXIST %25outdir%25\content\deleteco\ (
-        RMDIR /Q /S %25outdir%25\content\deleteco\
+            RMDIR /Q /S %25outdir%25\content\deleteco\
             ECHO Deleted deleteco
         )
         IF EXIST %25outdir%25\content\oldmaps\ (
