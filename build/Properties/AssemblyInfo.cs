@@ -2,7 +2,13 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("TMGmod")]
-[assembly: AssemblyDescription("[1.2] QoL Patches")]
+#if WORKSHOP
+[assembly: AssemblyDescription("[1.1.7] QoL Patches")]
+#elif DEBUG
+[assembly: AssemblyDescription("[1.2] HP")]
+#else
+[assembly: AssemblyDescription("[1.107] QoL Patches")]
+#endif
 //[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OnGoTeam")]
 [assembly: AssemblyProduct("TMGmod")]
@@ -14,14 +20,8 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("190a2e48-c24a-4075-89ae-2e60aea4c0f1")]
 
-// proposed system:
-// major                            1
-// minor*100 + major milestone    203
-// minor milestone                  4
-// patch (revision)                 5
-
 #if WORKSHOP
-[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.1.7.0")]
 #else
-[assembly: AssemblyVersion("1.102.*")]
+[assembly: AssemblyVersion("1.107.*")]
 #endif
