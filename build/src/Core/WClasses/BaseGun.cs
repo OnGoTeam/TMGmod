@@ -32,7 +32,6 @@ namespace TMGmod.Core.WClasses
         {
             ToPrevKforce = true;
         }
-
         public override void Fire()
         {
             PrevKforce = _kickForce;
