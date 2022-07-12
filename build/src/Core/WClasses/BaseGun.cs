@@ -1,6 +1,9 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using System;
+#if DEBUG
+using TMGmod.Core.AmmoTypes;
+#endif
 using TMGmod.NY;
 
 namespace TMGmod.Core.WClasses
