@@ -16,6 +16,7 @@ namespace TMGmod.Core.AmmoTypes
             weight = 5f;
             barrelAngleDegrees = -2.5f;
             bulletThickness = 2f;
+            affectedByGravity = true;
             bulletColor = Color.Yellow;
             bulletType = typeof(GrenadeBullet);
             immediatelyDeadly = true;
