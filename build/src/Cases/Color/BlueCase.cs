@@ -1,6 +1,6 @@
-﻿using System;
+﻿using DuckGame;
+using System;
 using System.Collections.Generic;
-using DuckGame;
 using TMGmod.Core;
 
 namespace TMGmod.Cases.Color
@@ -40,7 +40,10 @@ namespace TMGmod.Cases.Color
                 typeof(SKS),
                 typeof(SRM1208),
                 typeof(M14),
-                typeof(AR15Proto)
+                typeof(AR15Proto),
+                typeof(Remington),
+                typeof(RemingtonTac),
+                typeof(DTSR44)
             };
             CaseId = 2;
         }

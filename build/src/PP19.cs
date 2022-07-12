@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
-using DuckGame;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -10,7 +11,7 @@ namespace TMGmod
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
-    public class PP19 : BaseGun, IAmSmg, IHaveSkin, IHaveStock
+    public class PP19 : BaseGun, IFirstPrecise, IHaveSkin, IHaveStock
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
@@ -79,13 +80,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 64;
-            _ammoType = new AT9mm
-            {
-                range = 115f,
-                accuracy = 0.4f,
-                penetration = 1f
-            };
+            _ammoType = new ATBizon();
             BaseAccuracy = 0.6f;
+            MinAccuracy = 0.2f;
+            MaxAccuracyFp = 0.8f;
+            MaxDelayFp = 25;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PP19Bizon"), 28, 9);
             _graphic = _sprite;
@@ -108,7 +107,7 @@ namespace TMGmod
             handOffset = new Vec2(2f, 0f);
             ShellOffset = new Vec2(-1f, -2f);
             _editorName = "PP-19 Bizon";
-			_weight = 1.5f;
+            _weight = 1.5f;
         }
         public override void Update()
         {
@@ -141,11 +140,13 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-
         public override void Fire()
         {
             if (FrameId / 10 == 1) return;
             base.Fire();
         }
+        public int CurrentDelayFp { get; set; }
+        public int MaxDelayFp { get; }
+        public float MaxAccuracyFp { get; }
     }
 }

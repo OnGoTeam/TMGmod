@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -14,7 +14,33 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         [UsedImplicitly]
-        public bool Silencer;
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _ammoType = new ATUziS();
+                    _barrelOffsetTL = new Vec2(16f, 2f);
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _ammoType = new ATUzi();
+                    _barrelOffsetTL = new Vec2(10f, 2f);
+                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                    _fireSound = GetPath("sounds/smg.wav");
+                }
+            }
+        }
         [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -24,17 +50,14 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 6, 8 });
-        public UziPro (float xval, float yval)
+        public UziPro(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 20;
-            _ammoType = new AT9mm
-            {
-                range = 70f,
-                accuracy = 0.61f,
-                penetration = 0.4f
-            };
+            ammo = 24;
+            _ammoType = new ATUzi();
+            MaxDelaySmg = 25;
+            KickForceDeltaSmg = 4f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
             _graphic = _sprite;
@@ -58,40 +81,12 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(9f, 6f);
             _editorName = "Uzi Pro";
-			_weight = 2.5f;
+            _weight = 2.5f;
         }
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer)
-                {
-                    _sprite.frame -= 10;
-                    _ammoType = new AT9mm
-                    {
-                        range = 70f,
-                        accuracy = 0.61f,
-                        penetration = 0.4f
-                    };
-                    _barrelOffsetTL = new Vec2(10f, 2f);
-                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                    _fireSound = GetPath("sounds/smg.wav");
-                }
-                else
-                {
-                    _sprite.frame += 10;
-                    _ammoType = new AT9mmS
-                    {
-                        range = 100f,
-                        accuracy = 0.8f
-                    };
-                    _barrelOffsetTL = new Vec2(16f, 2f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
-                }
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);

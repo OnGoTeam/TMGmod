@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -77,8 +77,16 @@ namespace TMGmod
                 Loaded = false;
                 _sprite.frame %= 10;
             }
-            if (Yeeenabled) Yee -= 1;
-            if (!Yeeenabled && Yee < 20) Yee = 20;
+            switch (Yeeenabled)
+            {
+                case true:
+                    Yee -= 1;
+                    break;
+                case false when Yee < 20:
+                    Yee = 20;
+                    break;
+            }
+
             if (Yee <= 0)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));

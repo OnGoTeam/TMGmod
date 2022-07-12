@@ -4,7 +4,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATSneg : BaseAmmoTypeT
+    public class ATSneg : BaseAmmoType
     {
         public ATSneg()
         {

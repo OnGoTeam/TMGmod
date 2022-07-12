@@ -8,7 +8,7 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    [EditorGroup("TMG|NOTRELEASEDYET")]
     [UsedImplicitly]
     public class M16A6 : BaseGun, IHaveSkin, IHaveBipods
     {
@@ -43,7 +43,7 @@ namespace TMGmod
             _ammoType = new ATM16();
             BaseAccuracy = 0.91f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("deleteco/Future/LSTK16v6.png"), 33, 13);
+            _sprite = new SpriteMap(GetPath("LSTK16v6"), 33, 13);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(17f, 7f);
@@ -103,7 +103,6 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -44,21 +45,20 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             ammo = 6;
-            _ammoType = new ATSniper
+            _ammoType = new ATBoltAction
             {
                 bulletSpeed = 75f,
                 range = 1200f,
-                penetration = 2f,
-                accuracy = 1f
+                penetration = 2f
             };
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
-            _kickForce = 5f;
+            _kickForce = 5.25f;
             laserSight = false;
             _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(9f, 1f);
             _editorName = "Urbana";
-			_weight = 5.6f;
+            _weight = 5.6f;
         }
         public bool Bipods
         {
@@ -145,53 +145,53 @@ namespace TMGmod
                 switch (_loadState)
                 {
                     case 0:
-                    {
-                        if (!Network.isActive)
                         {
-                            SFX.Play("loadSniper");
+                            if (!Network.isActive)
+                            {
+                                SFX.Play("loadSniper");
+                            }
+                            else if (isServerForObject)
+                            {
+                                _netLoad.Play();
+                            }
+                            Sniper sniper = this;
+                            sniper._loadState += 1;
+                            break;
                         }
-                        else if (isServerForObject)
-                        {
-                            _netLoad.Play();
-                        }
-                        Sniper sniper = this;
-                        sniper._loadState += 1;
-                        break;
-                    }
                     case 1 when _angleOffset >= 0.1f:
-                    {
-                        Sniper sniper1 = this;
-                        sniper1._loadState += 1;
-                        break;
-                    }
+                        {
+                            Sniper sniper1 = this;
+                            sniper1._loadState += 1;
+                            break;
+                        }
                     case 1:
                         _angleOffset += 0.003f;
                         break;
                     case 2:
-                    {
-                        handOffset.x -= 0.2f;
-                        if (handOffset.x > 4f)
                         {
-                            Sniper sniper2 = this;
-                            sniper2._loadState += 1;
-                            Reload();
-                            loaded = false;
-                        }
+                            handOffset.x -= 0.2f;
+                            if (handOffset.x > 4f)
+                            {
+                                Sniper sniper2 = this;
+                                sniper2._loadState += 1;
+                                Reload();
+                                loaded = false;
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
                     case 3:
-                    {
-                        handOffset.x += 0.2f;
-                        if (handOffset.x <= 0f)
                         {
-                            Sniper sniper3 = this;
-                            sniper3._loadState += 1;
-                            handOffset.x = 0f;
-                        }
+                            handOffset.x += 0.2f;
+                            if (handOffset.x <= 0f)
+                            {
+                                Sniper sniper3 = this;
+                                sniper3._loadState += 1;
+                                handOffset.x = 0f;
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
                     case 4 when _angleOffset <= 0.03f:
                         _loadState = -1;
                         loaded = true;
@@ -242,7 +242,7 @@ namespace TMGmod
         public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
         private void UpdateSkin()
         {
-            var bublic= Skin.value;
+            var bublic = Skin.value;
             while (!Allowedlst.Contains(bublic))
             {
                 bublic = Rando.Int(0, 9);

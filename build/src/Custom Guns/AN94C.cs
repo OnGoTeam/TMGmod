@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
@@ -66,13 +67,13 @@ namespace TMGmod.Custom_Guns
             _holdOffset = new Vec2(3f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
-            _ammoType = new ATMagnum { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
+            _ammoType = new AT545NATO { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2f;
-            Kforce1Ar = 0.07f;
+            KickForceSlowAr = 0.07f;
             _kickForce = 0.9f;
-            Kforce2Ar = 0.9f;
+            KickForceFastAr = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
             _editorName = "AN94 with Wooden Stock";
@@ -114,8 +115,8 @@ namespace TMGmod.Custom_Guns
             base.EditorPropertyChanged(property);
         }
 
-        public float Kforce1Ar { get; }
+        public float KickForceSlowAr { get; }
 
-        public float Kforce2Ar { get; }
+        public float KickForceFastAr { get; }
     }
 }

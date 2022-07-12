@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 
@@ -9,9 +10,18 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Break-Action")]
     [BaggedProperty("canSpawn", false)]
-    public class SkeetGun:BaseGun, IHaveSkin, IAmSg
+    public class SkeetGun : BaseGun, IHaveSkin, IAmSg
     {
+        [UsedImplicitly]
+        public float HandAngleOff
+        {
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
+        }
 
+        private float _handleAngleOff;
+        [UsedImplicitly]
+        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -25,14 +35,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
-            _ammoType = new ATShotgun
-            {
-                accuracy = 0.9f,
-                bulletColor = new Color(255, 0, 0),
-                range = 250f,
-                bulletSpeed = 50f,
-                penetration = 1.5f
-            };
+            _ammoType = new ATSkeetGun();
             BaseAccuracy = 0.9f;
             _numBulletsPerFire = 10;
             _sprite = new SpriteMap(GetPath("SkeetDouble"), 41, 7);
@@ -55,31 +58,22 @@ namespace TMGmod
 
         public override void Update()
         {
+            HandAngleOff = _handleAngleOff;
             base.Update();
             _barrelOffsetTL = ammo % 2 == 0 ? new Vec2(41f, 0f) : new Vec2(41f, 2f);
-            if (duck != null)
+            if (duck is null)
             {
-                if (duck.sliding || duck.crouch)
-                {
-                    handAngle = 0f;
-                    return;
-                }
-                if (duck.inputProfile.Down("UP") && !_raised)
-                {
-                    if (offDir < 0)
-                    {
-                        handAngle = 0.5f;
-                    }
-                    else
-                    {
-                        handAngle = -0.5f;
-                    }
-
-                    return;
-                }
+                _handleAngleOff = 0f;
+                return;
             }
-
-            handAngle = 0f;
+            if (duck.inputProfile.Down("UP") && !_raised)
+            {
+                if (_handleAngleOff > -0.5f) _handleAngleOff -= 0.05f;
+                return;
+            }
+            if (_handleAngleOff > 0f) _handleAngleOff -= 0.025f;
+            else if (_handleAngleOff < 0f) _handleAngleOff += 0.025f;
+            if ((_handleAngleOff > -0.025f) & (_handleAngleOff < 0.025f)) _handleAngleOff = 0f;
         }
         private void UpdateSkin()
         {

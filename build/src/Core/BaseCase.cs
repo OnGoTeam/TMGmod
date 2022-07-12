@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DuckGame;
+using System;
 using System.Collections.Generic;
-using DuckGame;
 
 namespace TMGmod.Core
 {
-    public abstract class BaseCase:Holdable,IPlatform
+    public abstract class BaseCase : Holdable, IPlatform
     {
         private Type _contains;
 
@@ -14,7 +14,7 @@ namespace TMGmod.Core
 
         protected BaseCase(float xval, float yval) : base(xval, yval)
         {
-
+            physicsMaterial = PhysicsMaterial.Metal;
         }
 
         public override void Initialize()
@@ -24,7 +24,7 @@ namespace TMGmod.Core
 
         public override void OnPressAction()
         {
-            if (owner == null) return;
+            if (owner == null || owner is MagnetGun) return;
             //else
             var o = owner;
             var d = duck;
@@ -50,7 +50,7 @@ namespace TMGmod.Core
             if (d == null) return;
             //else
             d.GiveHoldable(newThing);
-            d.resetAction = true; 
+            d.resetAction = true;
             SFX.Play(GetPath("sounds/case_opening"));
         }
 

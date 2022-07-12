@@ -1,9 +1,7 @@
-using DuckGame;
-
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATSRM1 : AmmoType
+    public class ATSRM1 : BaseAmmoType
     {
         public ATSRM1()
         {
@@ -11,9 +9,12 @@ namespace TMGmod.Core.AmmoTypes
             accuracy = 0.6f;
             bulletThickness = 0.7f;
             combustable = true;
-            bulletSpeed = 35f;
+            bulletSpeed = 71f;
             penetration = 1f;
-            barrelAngleDegrees = 8f;
+            barrelAngleDegrees = -6.5f;
+            BulletDamage = 15f;
+            DeltaDamage = 0.3f;
+            AlphaDamage = 0.5f;
         }
     }
 }

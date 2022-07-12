@@ -1,4 +1,5 @@
 using DuckGame;
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Core
 {
@@ -27,7 +28,7 @@ namespace TMGmod.Core
         }
     }
     // ReSharper disable once InconsistentNaming
-    public class AT50C : AmmoType
+    public class AT50C : BaseAmmoType
     {
         public AT50C()
         {
@@ -38,6 +39,10 @@ namespace TMGmod.Core
             bulletSpeed = 45f;
             bulletType = typeof(AntiProp);
             bulletThickness = 3.5f;
+            BulletDamage = 64f;
+            DeltaDamage = 0.2f;
+            AlphaDamage = 0.5f;
+            DistanceConvexity = -1f;
         }
     }
 }

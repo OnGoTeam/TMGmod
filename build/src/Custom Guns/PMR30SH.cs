@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Custom_Guns
@@ -12,10 +13,12 @@ namespace TMGmod.Custom_Guns
         [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
         [UsedImplicitly] public int Ammom0 = 30;
         [UsedImplicitly] public int Ammom1 = 1;
-        [UsedImplicitly] public int[] Ammom
+        [UsedImplicitly]
+        public int[] Ammom
         {
-            get => new[] {Ammom0, Ammom1};
-            set {
+            get => new[] { Ammom0, Ammom1 };
+            set
+            {
                 Ammom0 = value[0];
                 Ammom1 = value[1];
             }
@@ -24,42 +27,32 @@ namespace TMGmod.Custom_Guns
         [UsedImplicitly] public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
-            new AT9mm
-            {
-                range = 110f,
-                accuracy = 0.7f,
-                penetration = 0.45f
-            },
-            new AT9mm
+            new ATPMR30(),
+            new AT12Gauge
             {
                 range = 110f,
                 accuracy = 0.35f,
                 penetration = 2f,
-                bulletSpeed = 50f
+                bulletSpeed = 50f,
+                BulletDamage = 15f
             }
         };
 
-        private readonly Sprite[] _graphicm = {new Sprite(), new Sprite(), new Sprite()};
-        private readonly Vec2[] _barrelOffsetTLm = {new Vec2(16f, 2f), new Vec2(14f, 6f)};
-        private readonly string[] _fireSoundm = {"sounds/1.wav", "littleGun"};
-        private readonly float[] _loseAccuracym = {.1f, 0f};
-        private readonly float[] _maxAccuracyLostm = {.55f, 0f};
-        private readonly int[] _numBulletsPerFirem = {1, 16};
+        private readonly Sprite[] _graphicm = { new Sprite(), new Sprite(), new Sprite() };
+        private readonly Vec2[] _barrelOffsetTLm = { new Vec2(16f, 2f), new Vec2(14f, 6f) };
+        private readonly string[] _fireSoundm = { "sounds/1.wav", "littleGun" };
+        private readonly float[] _loseAccuracym = { .1f, 0f };
+        private readonly float[] _maxAccuracyLostm = { .55f, 0f };
+        private readonly int[] _numBulletsPerFirem = { 1, 16 };
         private bool _switched;
 
         public PMR(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new AT9mm
-            {
-                range = 110f,
-                accuracy = 0.7f,
-                penetration = 0.45f
-            };
+            _ammoType = new ATPMR30();
             _numBulletsPerFire = 1;
             _type = "gun";
-            //graphic = new Sprite(GetPath("PMR30"));
             _graphicm[0] = new Sprite(GetPath("PMR301"));
             _graphicm[1] = new Sprite(GetPath("PMR302"));
             _graphicm[2] = new Sprite(GetPath("PMR300"));
@@ -77,7 +70,7 @@ namespace TMGmod.Custom_Guns
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.5f;
             _editorName = "PMR30 Shotgunned";
-			_weight = 1f;
+            _weight = 1f;
             _graphic = _graphicm[_switched ? Mode : 2];
         }
 
@@ -102,7 +95,7 @@ namespace TMGmod.Custom_Guns
             }
             UpdateMode();
             base.Update();
-		}
+        }
 
         public override void Fire()
         {
@@ -117,6 +110,6 @@ namespace TMGmod.Custom_Guns
                 Ammom1 = ammo;
             }
             ammo = Ammom[0] + Ammom[1];
-        }		
-	}
+        }
+    }
 }

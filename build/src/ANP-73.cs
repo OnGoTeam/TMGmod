@@ -1,5 +1,6 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -14,13 +15,7 @@ namespace TMGmod
           : base(xval, yval)
         {
             ammo = 33;
-            _ammoType = new AT9mm
-            {
-                range = 195f,
-                accuracy = 0.81f,
-                penetration = 1f,
-                bulletSpeed = 12f
-            };
+            _ammoType = new ATANP73();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);
             _graphic = _sprite;
@@ -39,7 +34,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             _editorName = "Experimental ANP-73";
-			_weight = 2f;
+            _weight = 2f;
         }
         public override void Update()
         {
@@ -76,6 +71,6 @@ namespace TMGmod
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
-		}
+        }
     }
 }

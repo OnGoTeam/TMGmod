@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseBurst:BaseGun
+    public abstract class BaseBurst : BaseGun
     {
         [UsedImplicitly]
         public int ShotsLeft;
@@ -27,7 +27,7 @@ namespace TMGmod.Core.WClasses
         public override void Update()
         {
             base.Update();
-            if (_wait > 0f || ShotsLeft <= 0) return;
+            if (!isLocal || _wait > 0f || ShotsLeft <= 0) return;
             base.Fire();
             ShotsLeft -= 1;
             if (ShotsLeft > 0) _wait = DeltaWait;

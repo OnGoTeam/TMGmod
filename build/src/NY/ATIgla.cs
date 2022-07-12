@@ -4,7 +4,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATIglu : BaseAmmoTypeT
+    public class ATIglu : BaseAmmoType
     {
         public ATIglu()
         {

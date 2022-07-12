@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -23,13 +24,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 18;
-            _ammoType = new AT9mm
-            {
-                range = 125f,
-                accuracy = 0.6f,
-                penetration = 0.4f,
-                bulletSpeed = 20f
-            };
+            _ammoType = new ATAlep30();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Alep30"), 16, 9);
             _graphic = _sprite;
@@ -46,9 +41,9 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(1f, 2f);
-            ShellOffset = new Vec2(-3f, -3f);            
+            ShellOffset = new Vec2(-3f, -3f);
             _editorName = "Alep 30";
-			_weight = 2.3f;
+            _weight = 2.3f;
         }
         private void UpdateSkin()
         {

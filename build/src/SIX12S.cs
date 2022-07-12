@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -21,17 +21,13 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[]{ 0, 1, 2, 3, 4, 5, 6, 7, 9 });
-        public SIX12S (float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
+        public SIX12S(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
-            _ammoType = new AT9mmS
-            {
-                range = 180f,
-                accuracy = 0.9f
-            };
+            _ammoType = new ATSIX12S();
             BaseAccuracy = 0.9f;
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
@@ -39,8 +35,8 @@ namespace TMGmod
             _sprite = new SpriteMap(GetPath("SIX12S"), 29, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
-            _center = new Vec2(19.5f, 5f);
-            _collisionOffset = new Vec2(-19.5f, -5f);
+            _center = new Vec2(19f, 5f);
+            _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(29f, 10f);
             _barrelOffsetTL = new Vec2(29f, 4f);
             _fireSound = "shotgunFire";
@@ -53,7 +49,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(24f, 7.5f);
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "SIX12 Silenced";
-			_weight = 4f;
+            _weight = 4f;
         }
         public override void Update()
         {

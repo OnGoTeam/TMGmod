@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
-using TMGmod.Custom_Guns;
 #if DEBUG
 using TMGmod.Useless_or_deleted_Guns;
 #endif
@@ -39,6 +38,7 @@ namespace TMGmod.Cases.Color
                 typeof(PPSh41),
                 typeof(PPK42),
                 typeof(MG44),
+                typeof(MG44C),
                 typeof(SkeetGun),
                 typeof(MP5),
                 typeof(MP5SD),
@@ -48,14 +48,18 @@ namespace TMGmod.Cases.Color
                 typeof(VSK94),
                 typeof(BigShot),
                 typeof(Arx200),
-                typeof(AN94C),
+                typeof(AN94),
                 typeof(Type89),
                 typeof(Rfb),
                 typeof(FnFcar),
                 typeof(HazeS),
                 typeof(AA12),
                 typeof(MP40),
-                typeof(SKS)
+                typeof(SKS),
+                typeof(MP7),
+                typeof(CZ805),
+                typeof(HK417),
+                typeof(Foucus)
             };
             CaseId = 7;
         }

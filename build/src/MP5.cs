@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
-    public class MP5 : BaseBurst, IFirstKforce, IHaveSkin, IAmSmg
+    public class MP5 : BaseBurst, IFirstKforce, IFirstPrecise, IHaveSkin, IAmSmg
     {
         private readonly SpriteMap _sprite;
 
@@ -21,7 +22,7 @@ namespace TMGmod
                 BurstNum = value ? 1 : 3;
                 _fireWait = value ? 0.5f : 1.8f;
                 FrameId = FrameId % 10 + (value ? 0 : 10);
-                _ammoType.accuracy = value ? 0.8f : 0.7f;
+                _ammoType.accuracy = value ? 0.7f : 0.9f;
             }
         }
         [UsedImplicitly]
@@ -39,13 +40,8 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT9mm
-            {
-                range = 215f,
-                accuracy = 0.8f,
-                penetration = 1f
-            };
-            BaseAccuracy = 0.8f;
+            _ammoType = new ATMP5();
+            BaseAccuracy = 0.7f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5"), 27, 12);
             _graphic = _sprite;
@@ -64,9 +60,11 @@ namespace TMGmod
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
             ShellOffset = new Vec2(2f, -4f);
-            _editorName = "MP5";
-			_weight = 3f;
-            KforceDSmg = 2f;
+            _editorName = "MP5A3";
+            _weight = 3f;
+            KickForceDeltaSmg = 2f;
+            MaxAccuracyFp = 0.9f;
+            MaxDelayFp = 10;
             MaxDelaySmg = 50;
             DeltaWait = 0.45f;
             BurstNum = 1;
@@ -89,9 +87,12 @@ namespace TMGmod
             }
             base.Update();
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
+        public float KickForceDeltaSmg { get; }
+        public int CurrentDelaySmg { get; set; }
+        public int CurrentDelayFp { get; set; }
+        public int MaxDelayFp { get; }
         public int MaxDelaySmg { get; }
+        public float MaxAccuracyFp { get; }
         [UsedImplicitly]
         public int FrameId
         {

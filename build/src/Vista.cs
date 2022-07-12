@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 
@@ -9,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class Vista : BaseBurst, IAmSmg, IHaveSkin, I5
+    public class Vista : BaseBurst, IFirstPrecise, IHaveSkin, I5
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -26,13 +27,13 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(5, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT9mm
+            _ammoType = new ATVista
             {
                 range = 105f,
-                accuracy = 0.75f,
-                penetration = 0.6f,
-                bulletSpeed = 55f
+                accuracy = 0.75f
             };
+            MaxDelayFp = 30;
+            MaxAccuracyFp = 1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
             _graphic = _sprite;
@@ -74,5 +75,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public int CurrentDelayFp { get; set; }
+        public int MaxDelayFp { get; }
+        public float MaxAccuracyFp { get; }
     }
 }

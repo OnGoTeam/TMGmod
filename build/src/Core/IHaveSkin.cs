@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
-    public interface IHaveSkin:IHaveFrameId
+    public interface IHaveSkin : IHaveFrameId
     {
         [UsedImplicitly]
         EditorProperty<int> Skin { get; }

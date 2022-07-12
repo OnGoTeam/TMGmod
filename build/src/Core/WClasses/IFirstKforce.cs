@@ -2,8 +2,8 @@
 {
     public interface IFirstKforce
     {
-        float KforceDSmg { get; }
-        int CurrDelaySmg { get; set; }
+        float KickForceDeltaSmg { get; }
+        int CurrentDelaySmg { get; set; }
         int MaxDelaySmg { get; }
     }
 }

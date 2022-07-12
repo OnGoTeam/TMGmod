@@ -2,6 +2,7 @@
 using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
@@ -28,7 +29,7 @@ namespace TMGmod.Useless_or_deleted_Guns
         private bool _drobovik;
         private bool _snuper = true;
         //Are you see that? This is a sniper rifle with underbarrel shotgun. But it does not work. R.I.P.
-        //Wait.. what are you doing here?!	
+        //Wait.. what are you doing here?!
         public MSRC(float xval, float yval) : base(xval, yval)
         {
             graphic = new Sprite(GetPath("MSRSH"));
@@ -40,7 +41,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             _barrelOffsetTl2 = new Vec2(14f, 6f);
             ammo = 5;
             _ammo2 = 4;
-            _ammoType = new ATSniper
+            _ammoType = new ATBoltAction
             {
                 bulletSpeed = 85f
             };

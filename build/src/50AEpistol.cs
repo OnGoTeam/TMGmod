@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
-    public class BigShot : BaseGun, IAmHg, IHaveSkin
+    public class BigShot : BaseGun, IAmHg, IHaveSkin, ILoseAccuracy
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -17,13 +17,17 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 2, 7 });
-        public BigShot (float xval, float yval)
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 2, 5, 7 });
+        public BigShot(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(1, this, -1f, 9f, 0.5f);
             ammo = 7;
             _ammoType = new AT50C();
+            BaseAccuracy = 1f;
+            MinAccuracy = 0.6f;
+            RegenAccuracyDmr = 0.05f;
+            DrainAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             _graphic = _sprite;
@@ -40,7 +44,7 @@ namespace TMGmod
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(0f, 2f);
             _editorName = "50AE Pistol";
-			_weight = 2.5f;
+            _weight = 2.5f;
         }
         private void UpdateSkin()
         {
@@ -62,5 +66,7 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public float RegenAccuracyDmr { get; }
+        public float DrainAccuracyDmr { get; }
     }
 }

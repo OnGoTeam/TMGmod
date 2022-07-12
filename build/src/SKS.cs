@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -27,19 +27,20 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
 
-        public SKS (float xval, float yval)
+        public SKS(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new AT9mm
+            _ammoType = new AT762NATO
             {
                 range = 800f,
                 accuracy = 0.97f,
-                penetration = 1f,
                 bulletSpeed = 95f,
                 bulletThickness = 1.5f
             };
+            BaseAccuracy = 0.97f;
+            MinAccuracy = 0.6f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SKS"), 46, 11);
             _graphic = _sprite;
@@ -58,22 +59,21 @@ namespace TMGmod
             _flare.center = new Vec2(0f, 5f);
             _fullAuto = false;
             _fireWait = 1.55f;
-            _kickForce = 4.8f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.8f;
+            _kickForce = 3.8f;
+            loseAccuracy = 0.2f;
+            maxAccuracyLost = 0.4f;
             _editorName = "SKS";
-			_weight = 6f;
+            _weight = 6f;
             MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.5f;
+            LambdaAccuracySr = 0.15f;
         }
         public override void Update()
         {
-		    base.Update();
-			if (ammo < 12)
-			{
-			    _patrons = ammo;
-			}
-
+            base.Update();
+            if (ammo < 12)
+            {
+                _patrons = ammo;
+            }
             if (duck == null) return;
             //else
             if (duck.inputProfile.Pressed("QUACK"))
@@ -84,16 +84,14 @@ namespace TMGmod
                     _bullets = _patrons + 20;
                     ammo += 20;
                 }
+                _fireSound = "";
                 _flare = new SpriteMap(GetPath("takezis"), 4, 4)
                 {
                     center = new Vec2(0f, 0f)
                 };
                 _ammoType = new ATNB();
-                _fullAuto = false;
-                _fireWait = 0.1f;
-                _numBulletsPerFire = 1;
+                _fireWait = 10f;
                 _barrelOffsetTL = new Vec2(0f, 6f);
-                _fireSound = "";
                 loseAccuracy = 0f;
                 maxAccuracyLost = 0f;
                 _kickForce = 0f;
@@ -112,17 +110,14 @@ namespace TMGmod
             if (!duck.inputProfile.Released("QUACK")) return;
             //else
             ammo = _patrons;
-            _ammoType = new AT9mm
+            _ammoType = new AT762NATO
             {
                 range = 800f,
                 accuracy = 0.97f,
-                penetration = 1f,
                 bulletSpeed = 95f,
                 bulletThickness = 1.5f
             };
-            _fullAuto = false;
             _fireWait = 1.3f;
-            _numBulletsPerFire = 1;
             _barrelOffsetTL = new Vec2(42f, 4f);
             _fireSound = GetPath("sounds/scar.wav");
             _holdOffset = new Vec2(8f, 0f);
@@ -134,38 +129,35 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             Stick = false;
-        }	
+        }
         public override void Thrown()
         {
-			if (ammo != 0)
-			{
+            if (ammo != 0)
+            {
                 ammo = _patrons;
-			    _ammoType = new AT9mm
-			    {
-			        range = 800f,
-			        accuracy = 0.97f,
-			        penetration = 1f,
-			        bulletSpeed = 95f,
-			        bulletThickness = 1.5f
-			    };
-			    _fullAuto = false;
-                _fireWait = 1.3f;
-				_numBulletsPerFire = 1;
+                _ammoType = new AT762NATO
+                {
+                    range = 800f,
+                    accuracy = 0.97f,
+                    bulletSpeed = 95f,
+                    bulletThickness = 1.5f
+                };
+                _fireWait = 1.55f;
                 _barrelOffsetTL = new Vec2(42f, 4f);
                 _fireSound = GetPath("sounds/scar.wav");
                 _holdOffset = new Vec2(8f, 0f);
-                loseAccuracy = 0.1f;
-                maxAccuracyLost = 0.8f;
                 _kickForce = 4.8f;
+                loseAccuracy = 0.2f;
+                maxAccuracyLost = 0.4f;
                 _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
                 {
                     center = new Vec2(0.0f, 5f)
                 };
             }
-			if (Stick && _patrons == 0)
-			{
-				ammo = 0;
-			}
+            if (Stick && _patrons == 0)
+            {
+                ammo = 0;
+            }
             base.Thrown();
         }
         private void UpdateSkin()

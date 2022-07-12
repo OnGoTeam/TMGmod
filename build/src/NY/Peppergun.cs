@@ -9,15 +9,15 @@ namespace TMGmod.NY
     // ReSharper disable once InconsistentNaming
     public class PPLMG : BaseLmg
     {
-        public PPLMG (float xval, float yval)
+        public PPLMG(float xval, float yval)
           : base(xval, yval)
         {
             ammo = 7;
             _numBulletsPerFire = 12;
-            _ammoType = new ATCane 
-            { 
+            _ammoType = new ATCane
+            {
                 range = 100f,
-                accuracy = 0.11f            
+                accuracy = 0.11f
             };
             _type = "gun";
             _graphic = new SpriteMap(GetPath("Holiday/Peppergun"), 18, 7);
@@ -37,7 +37,7 @@ namespace TMGmod.NY
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(-8f, 3f);
             _editorName = "Big Sweat Gun";
-			_weight = 2f;
+            _weight = 2f;
         }
     }
 }

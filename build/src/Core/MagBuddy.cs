@@ -1,6 +1,6 @@
-﻿using System;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
 
 namespace TMGmod.Core
 {
@@ -9,7 +9,7 @@ namespace TMGmod.Core
         private readonly Gun _gun;
         private readonly Type _magType;
         private bool _loaded;
-        public MagBuddy(Gun gun, Type magType=null, bool loaded=true)
+        public MagBuddy(Gun gun, Type magType = null, bool loaded = true)
         {
             _gun = gun;
             _magType = magType;
@@ -49,8 +49,6 @@ namespace TMGmod.Core
             bool SetMag();
             [UsedImplicitly]
             bool DropMag(Thing mag);
-
-            //int TicksToR { get; set; }
 
             Vec2 SpawnPos { get; }
         }

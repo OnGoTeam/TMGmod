@@ -5,19 +5,19 @@ namespace TMGmod.Core
 {
     public class ContextSkinRender : ContextMenu
     {
-        private readonly SpriteMap _image;
+        private readonly SpriteMap _imag;
         public ContextSkinRender(IContextListener owner, SpriteMap img, bool hasToproot = false, Vec2 topRoot = default) : base(owner, null, hasToproot, topRoot)
         {
-            _image = img;
+            _imag = img;
         }
 
         public override void Draw()
         {
-            _image.depth = depth + 3;
-            _image.x = x + (float) _image.width / 2;
-            _image.y = y + (float) _image.height / 2;
-            _image.color = Color.White;
-            _image.Draw();
+            _imag.depth = depth + 3;
+            _imag.x = x + (float) _imag.width / 2;
+            _imag.y = y + (float) _imag.height / 2;
+            _imag.color = Color.White;
+            _imag.Draw();
             base.Draw();
         }
     }

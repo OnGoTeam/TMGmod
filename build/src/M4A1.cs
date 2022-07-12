@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
-using TMGmod.Core;
-using TMGmod.Core.WClasses;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
+using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -19,21 +20,16 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        //private int _ammobefore = 31;
-        //private int _counter;
-        //private float _explode;
-        //private const double Explodechance = 0.0025;
 
-        public M4A1 (float xval, float yval)
+        public M4A1(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new ATMagnum
+            _ammoType = new AT545NATO
             {
                 range = 330f,
-                accuracy = 0.86f,
-                penetration = 1f
+                accuracy = 0.86f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M4A1"), 30, 11);
@@ -56,18 +52,18 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(-2f, -2f);
             _editorName = "M4A1";
-			_weight = 4f;
-            Kforce2Ar = 0.5f;
+            _weight = 4f;
+            KickForceFastAr = 0.5f;
         }
         private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
             {
-                var bublic = Skin.value;
-                while (!Allowedlst.Contains(bublic))
-                {
-                    bublic = Rando.Int(0, 9);
-                }
-                _sprite.frame = bublic;
+                bublic = Rando.Int(0, 9);
             }
+            _sprite.frame = bublic;
+        }
         [UsedImplicitly]
         public int FrameId
         {

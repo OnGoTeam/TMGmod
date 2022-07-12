@@ -1,8 +1,8 @@
-﻿#if DEBUG
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -18,21 +18,15 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 3, 4, 6, 8 });
         public Bersa45(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new AT9mm
-            {
-                range = 90f,
-                accuracy = 0.76f,
-                penetration = 0.4f,
-                bulletSpeed = 25f
-            };
+            _ammoType = new ATBersa45();
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("deleteco/Future/Bersa45.png"), 12, 8);
+            _sprite = new SpriteMap(GetPath("Bersa45"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(6f, 4f);
@@ -51,7 +45,7 @@ namespace TMGmod
             _editorName = "Bersa 45";
             _laserOffsetTL = new Vec2(9f, 4f);
             laserSight = true;
-			_weight = 1f;
+            _weight = 1f;
         }
         private void UpdateSkin()
         {
@@ -75,4 +69,3 @@ namespace TMGmod
         }
     }
 }
-#endif

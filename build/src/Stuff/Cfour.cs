@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace TMGmod.Stuff
 {
@@ -57,9 +57,8 @@ namespace TMGmod.Stuff
             Graphics.FlashScreen();
             for (var index = 0; index < 1; ++index)
             {
-                var explosionPart = new ExplosionPart(x - 8f + Rando.Float(16f), y - 8f + Rando.Float(16f));
-                explosionPart.xscale *= 0.7f;
-                explosionPart.yscale *= 0.7f;
+                var explosionPart = new ExplosionPart(x + Rando.Float(-8f, +8f), y + Rando.Float(-8f, +8f));
+                explosionPart.scale *= 0.7f;
                 Level.Add(explosionPart);
             }
             SFX.Play("explode");
@@ -73,7 +72,7 @@ namespace TMGmod.Stuff
                 var atShrapnel = new ATShrapnel { range = 30f + Rando.Float(0f, Rando.Float(70f)) };
                 var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(num)) * 8.0),
                         y - (float)(Math.Sin(Maths.DegToRad(num)) * 8.0), atShrapnel, num)
-                    { firedFrom = this };
+                { firedFrom = this };
                 varBullets.Add(bullet);
                 Level.Add(bullet);
             }
@@ -120,7 +119,8 @@ namespace TMGmod.Stuff
             if (!Activated) return;
             StickThing = with;
             StickThing.Fondle(this);
-            _stickyVec2 = position - with.position;
+            _stickyVec2 = with.ReverseOffset(position);
+            _stickyVec2.x *= with.offDir;
             //enablePhysics = false;
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (from)
@@ -167,7 +167,7 @@ namespace TMGmod.Stuff
             if (StickThing != null)
             {
                 sleeping = true;
-                position = StickThing.position + _stickyVec2;
+                position = StickThing.Offset(_stickyVec2);
                 hSpeed = StickThing.hSpeed;
                 vSpeed = StickThing.vSpeed;
             }

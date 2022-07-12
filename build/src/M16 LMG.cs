@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using DuckGame;
-using TMGmod.Core;
-using TMGmod.Core.WClasses;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
+using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -19,17 +20,13 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        //private int _ammobefore = 51;
-        //private int _counter;
-        //private float _explode;
-        //private const double Explodechance = 0;
 
-        public M16LMG (float xval, float yval)
+        public M16LMG(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 50;
-            _ammoType = new ATMagnum
+            _ammoType = new AT556NATO
             {
                 range = 400f,
                 accuracy = 0.8f,
@@ -56,11 +53,11 @@ namespace TMGmod
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "M16 LMG";
-			_weight = 6f;
+            _weight = 6f;
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.7f;
-            Kforce1Lmg = 0.23f;
-            Kforce2Lmg = 0.43f;
+            KickForce1Lmg = 0.23f;
+            KickForce2Lmg = 0.43f;
         }
         public bool Bipods
         {
@@ -68,8 +65,8 @@ namespace TMGmod
             set
             {
                 _kickForce = value ? 0 : 2.33f;
-                Kforce1Lmg = value ? 0 : 0.23f;
-                Kforce2Lmg = value ? 0 : 0.43f;
+                KickForce1Lmg = value ? 0 : 0.23f;
+                KickForce2Lmg = value ? 0 : 0.43f;
                 loseAccuracy = value ? 0 : 0.15f;
             }
         }

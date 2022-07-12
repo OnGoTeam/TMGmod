@@ -21,7 +21,7 @@ namespace TMGmod.Core.Particles
         public override void Update()
         {
             _tick += 1;
-            if (_tick == 32)
+            if (_tick >= 32)
             {
                 sleeping = false;
                 _tick = 0;

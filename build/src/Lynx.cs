@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class Lynx : BaseGun, IAmDmr, ISpeedAccuracy, IHaveSkin, I5, IHaveBipods
+    public class Lynx : BaseDmr, ISpeedAccuracy, IHaveSkin, I5, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 4;
@@ -28,17 +29,16 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 5 });
-        public Lynx (float xval, float yval)
+        public Lynx(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
-            _ammoType = new ATSniper
-            {
-                range = 1200f,
-                accuracy = 1f,
-                penetration = 1f
-            };
+            _ammoType = new ATLynx();
+            BaseAccuracy = 1f;
+            MinAccuracy = 0.3f;
+            RegenAccuracyDmr = 0.01f;
+            DrainAccuracyDmr = 0.6f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Lynx"), 31, 11);
             _graphic = _sprite;
@@ -53,7 +53,7 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;
-            _fireWait = 4f;
+            _fireWait = 2f;
             _kickForce = 5.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
@@ -62,7 +62,7 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
-			_weight = 6f;
+            _weight = 6f;
         }
         public bool Bipods
         {
@@ -94,11 +94,6 @@ namespace TMGmod
             else if (!BipodsQ(this, true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
             base.Update();
-        }
-        public override void UpdateOnFire()
-        {
-            loseAccuracy += 0.15f;
-            base.UpdateOnFire();
         }
         private void UpdateSkin()
         {

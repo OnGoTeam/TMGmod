@@ -1,15 +1,17 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
+using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     //[yee] switch
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|SMG|Fully-Automatic")]
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
-    public class MP7 : BaseGun, IAmSmg
+    public class MP7 : BaseGun, IAmSmg, IHaveSkin
     {
         [UsedImplicitly]
         public float HandAngleOff
@@ -17,21 +19,31 @@ namespace TMGmod
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
+
+        private float _handleAngleOff;
         [UsedImplicitly]
         public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 3;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
 
         public MP7(float xval, float yval)
             : base(xval, yval)
         {
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 35;
-            _ammoType = new AT9mmS
-            {
-                range = 175f,
-                accuracy = 0.9f
-            };
+            _ammoType = new ATMP7();
             BaseAccuracy = 0.9f;
             _type = "gun";
-            _graphic = new Sprite(GetPath("MP7"));
+            _sprite = new SpriteMap(GetPath("MP7"), 20, 10);
+            _graphic = _sprite;
+            _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(12f, 4f);
             _collisionOffset = new Vec2(-12f, -4f);
@@ -45,29 +57,57 @@ namespace TMGmod
             ShellOffset = new Vec2(-6f, -2f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
-            _editorName = "MP7";
+            _editorName = "HK MP7";
             _weight = 3f;
         }
 
         public override void Update()
         {
+            HandAngleOff = _handleAngleOff;
             base.Update();
+            if (duck is null)
+            {
+                _handleAngleOff = 0f;
+                return;
+            }
+
             if (duck?.inputProfile.Down("UP") == true && !_raised)
             {
-                HandAngleOff = -0.5f;
+                if (_handleAngleOff > -0.7f) _handleAngleOff -= 0.05f;
 
                 return;
             }
 
             if (duck?.inputProfile.Down("QUACK") == true && !_raised && !duck.sliding)
             {
-                HandAngleOff = 0.5f;
+                if (_handleAngleOff < 0.7f) _handleAngleOff += 0.05f;
 
                 return;
             }
 
-            handAngle = 0f;
+            if (_handleAngleOff > 0f) _handleAngleOff -= 0.1f;
+            else if (_handleAngleOff < 0f) _handleAngleOff += 0.1f;
+            if ((_handleAngleOff > -0.1f) & (_handleAngleOff < 0.1f)) _handleAngleOff = 0f;
         }
-
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
+            {
+                bublic = Rando.Int(0, 9);
+            }
+            _sprite.frame = bublic;
+        }
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
+        }
     }
 }

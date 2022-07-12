@@ -7,6 +7,7 @@ namespace TMGmod.Core.Shells
         public M50Shell(float xpos, float ypos)
           : base(xpos, ypos, Mod.GetPath<TMGmod>("M50Shell"))
         {
+            scale *= 0.707f;
         }
     }
 }

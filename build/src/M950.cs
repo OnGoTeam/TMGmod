@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -25,11 +26,9 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 50;
-            _ammoType = new AT9mm
+            _ammoType = new ATCalico
             {
-                range = Rando.Float(0f, 70f),
-                accuracy = 0.4f,
-                penetration = 0.4f
+                range = Rando.Float(10f, 70f)
             };
             BaseAccuracy = 0.4f;
             _type = "gun";
@@ -53,7 +52,7 @@ namespace TMGmod
             loseAccuracy = 0.01f;
             maxAccuracyLost = 0.05f;
             _editorName = "Calico M950A";
-			_weight = 1f;
+            _weight = 1f;
             handAngle = 0f;
         }
         public override void OnHoldAction()

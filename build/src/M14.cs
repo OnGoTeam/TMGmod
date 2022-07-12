@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class M14 : BaseGun, IHaveSkin
+    public class M14 : BaseGun, IHaveSkin, IFirstPrecise
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
@@ -24,12 +25,15 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
-            _ammoType = new ATMagnum
+            _ammoType = new ATM14
             {
                 range = 666f,
                 accuracy = 0.9f
             };
             BaseAccuracy = 0.9f;
+            MinAccuracy = 0.5f;
+            MaxAccuracyFp = 1f;
+            MaxDelayFp = 30;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M14"), 46, 11);
             _graphic = _sprite;
@@ -74,5 +78,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+        public int CurrentDelayFp { get; set; }
+        public int MaxDelayFp { get; }
+        public float MaxAccuracyFp { get; }
     }
 }

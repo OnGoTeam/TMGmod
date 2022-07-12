@@ -1,6 +1,6 @@
-﻿using System;
+﻿using DuckGame;
+using System;
 using System.Collections.Generic;
-using DuckGame;
 using TMGmod.Core;
 #if DEBUG
 using TMGmod.Useless_or_deleted_Guns;
@@ -45,7 +45,8 @@ namespace TMGmod.Cases.Color
                 typeof(BigShot),
                 typeof(SKS),
                 typeof(SRM1208),
-                typeof(PP19)
+                typeof(PP19),
+                typeof(RemingtonTac)
             };
             CaseId = 1;
         }

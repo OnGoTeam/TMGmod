@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -28,18 +29,12 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-        public DragoShot (float xval, float yval)
+        public DragoShot(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(-1, this, -1f, 9f, 0.5f);
             ammo = 16;
-            _ammoType = new ATMagnum
-            {
-                range = 120f,
-                accuracy = 0.7f,
-                penetration = 2f,
-                bulletThickness = 0.8f
-            };
+            _ammoType = new ATDragoshot();
             _numBulletsPerFire = 8;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Dragoshot"), 29, 11);
@@ -57,10 +52,10 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             laserSight = true;
             _laserOffsetTL = new Vec2(23f, 3f);
-            _holdOffset = new Vec2(0f, 3f);
+            _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-6f, -3f);
             _editorName = "DragoShot";
-			_weight = 5f;
+            _weight = 5f;
             DeltaWait = 0.15f;
             BurstNum = 1;
         }

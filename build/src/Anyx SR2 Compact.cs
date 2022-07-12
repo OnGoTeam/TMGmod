@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -42,13 +43,11 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
-            _ammoType = new AT9mm
-            {
-                range = 560f,
-                accuracy = 0.95f,
-                bulletSpeed = 55f,
-                penetration = 2f
-            };
+            _ammoType = new ATSR2C();
+            BaseAccuracy = 0.9f;
+            MinAccuracy = 0.5f;
+            KickForceSlowAr = 5.4f;
+            KickForceFastAr = 6.85f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);
             _graphic = _sprite;
@@ -71,10 +70,6 @@ namespace TMGmod
             maxAccuracyLost = 0.6f;
             _editorName = "Anyx SR2 Compact";
             _weight = 5.5f;
-            MinAccuracy = 0f;
-            BaseAccuracy = 0.9f;
-            Kforce1Ar = 5.4f;
-            Kforce2Ar = 6.85f;
         }
         public override void Update()
         {
@@ -88,8 +83,8 @@ namespace TMGmod
             get => HandleQ();
             set
             {
-                Kforce1Ar = value ? _floatingKickforce : 5.4f;
-                Kforce2Ar = value ? _floatingKickforce : 6.85f;
+                KickForceSlowAr = value ? _floatingKickforce : 5.4f;
+                KickForceFastAr = value ? _floatingKickforce : 6.85f;
                 _kickForce = value ? _floatingKickforce : 5.2f;
                 loseAccuracy = value ? 0f : 0.2f;
                 maxAccuracyLost = value ? 0f : 0.6f;

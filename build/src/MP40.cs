@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -25,13 +26,12 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 32;
-            _ammoType = new AT9mm
-            {
-                range = 215f,
-                accuracy = 0.7f,
-                penetration = 0.7f
-            };
-            BaseAccuracy = 0.5f;
+            _ammoType = new ATMP40();
+            BaseAccuracy = 0.7f;
+            KickForceDeltaSmg = 2f;
+            MaxDelaySmg = 20;
+            MaxAccuracyFp = 1f;
+            MaxDelayFp = 20;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP40"), 23, 14);
             _graphic = _sprite;
@@ -51,11 +51,7 @@ namespace TMGmod
             _holdOffset = new Vec2(4f, 4f);
             ShellOffset = new Vec2(-1f, -6f);
             _editorName = "MP40";
-			_weight = 3f;
-            KforceDSmg = 2f;
-            MaxDelaySmg = 20;
-            MaxAccuracy = 1f;
-            MaxDelayFp = 10;
+            _weight = 3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
         }
@@ -79,8 +75,8 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public int CurrDelay { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
     }
 }

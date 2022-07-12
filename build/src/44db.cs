@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -25,13 +26,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 1;
-            _ammoType = new ATMagnum
-            {
-                range = 100f,
-                accuracy = 0.1f,
-                penetration = 4f,
-                bulletThickness = 2f
-            };
+            _ammoType = new AT12Gauge();
             BaseAccuracy = 0.1f;
             _numBulletsPerFire = 44;
             _type = "gun";
@@ -71,6 +66,14 @@ namespace TMGmod
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
+        }
+        public override void Reload(bool shell = true)
+        {
+            if (ammo != 0)
+            {
+                --ammo;
+            }
+            loaded = true;
         }
     }
 }

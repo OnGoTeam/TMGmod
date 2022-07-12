@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 
@@ -27,12 +28,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new ATMagnum
-            {
-                range = 370f,
-                accuracy = 0.9f,
-                penetration = 1f
-            };
+            _ammoType = new ATAUGA3();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AUGA3"), 30, 12);
             _graphic = _sprite;
@@ -54,8 +50,8 @@ namespace TMGmod
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.2f;
             _editorName = "AUG A3";
-			_weight = 5f;
-            Kforce2Ar = 0.7f;
+            _weight = 5f;
+            KickForceFastAr = 0.7f;
         }
         private void UpdateSkin()
         {

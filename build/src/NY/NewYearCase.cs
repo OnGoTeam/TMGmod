@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DuckGame;
+using System;
 using System.Collections.Generic;
-using DuckGame;
-using TMGmod.Core;
-using TMGmod.Cases.Color;
 using TMGmod.Cases;
+using TMGmod.Cases.Color;
+using TMGmod.Core;
 
 namespace TMGmod.NY
 {
@@ -41,27 +41,33 @@ namespace TMGmod.NY
                  typeof(Icer),
                  typeof(Icer),
                  typeof(SnowMgun),
-                 typeof(SnowMgun),  
+                 typeof(SnowMgun),
                  typeof(SnowMgun),   
                   //x2
                   typeof(CandyCaneLime),
                   typeof(CandyCaneLime),
-                  typeof(SkeetGun),  
-                  typeof(SkeetGun),  
+                  typeof(SkeetGun),
+                  typeof(SkeetGun),
                   typeof(Helmet),
-                  typeof(Helmet),  
+                  typeof(Helmet),
                   typeof(ChestPlate),
-                  typeof(ChestPlate), 
+                  typeof(ChestPlate),
+                   typeof(PodarokColorB),
+                   typeof(PodarokColorB),
+                   typeof(PodarokColorC),
+                   typeof(PodarokColorC),
+                   typeof(PodarokColorY),
+                   typeof(PodarokColorY),
+                   typeof(PodarokColorR),
+                   typeof(PodarokColorR),
+                   typeof(PodarokColorG),
+                   typeof(PodarokColorG),
+                   typeof(PodarokMillitary),
+                   typeof(PodarokMillitary),
                    //x1
                    typeof(SpruceGun),
                    typeof(CandyCaneOrange),
                    typeof(PPLMG),
-                   typeof(PodarokColorB),  
-                   typeof(PodarokColorC),  
-                   typeof(PodarokColorY),  
-                   typeof(PodarokColorR),  
-                   typeof(PodarokColorG),  
-                   typeof(PodarokMillitary)  
             };
             CaseId = 6;
         }

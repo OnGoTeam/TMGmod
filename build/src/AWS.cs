@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -42,7 +42,7 @@ namespace TMGmod
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             ammo = 6;
-            _ammoType = new AT9mmS
+            _ammoType = new AT50SniperS
             {
                 range = 550f,
                 accuracy = 0.97f
@@ -53,10 +53,10 @@ namespace TMGmod
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
-            _kickForce = 4.75f;
+            _kickForce = 3.8f;
             _holdOffset = new Vec2(2f, 1f);
             _editorName = "AWS";
-			_weight = 5f;
+            _weight = 5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(18f, 3f);
 
@@ -148,51 +148,51 @@ namespace TMGmod
                 switch (_loadState)
                 {
                     case 0:
-                    {
-                        if (!Network.isActive)
                         {
-                            SFX.Play("loadSniper");
+                            if (!Network.isActive)
+                            {
+                                SFX.Play("loadSniper");
+                            }
+                            else if (isServerForObject)
+                            {
+                                _netLoad.Play();
+                            }
+                            _loadState++;
+                            break;
                         }
-                        else if (isServerForObject)
-                        {
-                            _netLoad.Play();
-                        }
-                        _loadState++;
-                        break;
-                    }
                     case 1 when _angleOffset >= 0.1f:
-                    {
-                        Sniper sniper1 = this;
-                        sniper1._loadState += 1;
-                        break;
-                    }
+                        {
+                            Sniper sniper1 = this;
+                            sniper1._loadState += 1;
+                            break;
+                        }
                     case 1:
                         _angleOffset += 0.003f;
                         break;
                     case 2:
-                    {
-                        handOffset.x -= 0.2f;
-                        if (handOffset.x > 4f)
                         {
-                            _loadState++;
-                            Reload();
-                            loaded = false;
-                        }
+                            handOffset.x -= 0.2f;
+                            if (handOffset.x > 4f)
+                            {
+                                _loadState++;
+                                Reload();
+                                loaded = false;
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
                     case 3:
-                    {
-                        handOffset.x += 0.2f;
-                        if (handOffset.x <= 0f)
                         {
-                            Sniper sniper3 = this;
-                            sniper3._loadState += 1;
-                            handOffset.x = 0f;
-                        }
+                            handOffset.x += 0.2f;
+                            if (handOffset.x <= 0f)
+                            {
+                                Sniper sniper3 = this;
+                                sniper3._loadState += 1;
+                                handOffset.x = 0f;
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
                     case 4 when _angleOffset <= 0.03f:
                         _loadState = -1;
                         loaded = true;

@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -74,17 +75,12 @@ namespace TMGmod
             set => Stock = value.ReadBool();
         }
 
-        public DaewooK1 (float xval, float yval)
+        public DaewooK1(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 32;
-            _ammoType = new ATMagnum
-            {
-                range = 245f,
-                accuracy = 0.83f,
-                penetration = 1f
-            };
+            _ammoType = new ATDaewooK1();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("DaewooK1"), 28, 11);
             _graphic = _sprite;
@@ -98,17 +94,17 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f)
             };
             _holdOffset = new Vec2(-2f, 1f);
-            ShellOffset = new Vec2(0f, -1f);
+            ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.86f;
             _kickForce = 0.5f;
-            KforceDSmg = 2.5f;
+            KickForceDeltaSmg = 2.5f;
             MaxDelaySmg = 50;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.24f;
             _editorName = "Daewoo K1";
-			_weight = 4.5f;
+            _weight = 4.5f;
         }
         public override void Update()
         {

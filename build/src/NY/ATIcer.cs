@@ -5,7 +5,7 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATIcer : BaseAmmoTypeT
+    public class ATIcer : BaseAmmoType
     {
         public ATIcer()
         {
@@ -22,7 +22,7 @@ namespace TMGmod.NY
             immediatelyDeadly = false;
         }
 
-        private class IcerBullet: Bullet
+        private class IcerBullet : Bullet
         {
             public IcerBullet(float xval, float yval, AmmoType type, float ang = -1, Thing owner = null, bool rbound = false, float distance = -1, bool tracer = false, bool network = true) : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
             {
@@ -38,7 +38,7 @@ namespace TMGmod.NY
             }
         }
 
-        private class Icicle: PhysicsObject, IPlatform
+        private class Icicle : PhysicsObject, IPlatform
         {
             [UsedImplicitly]
             public float StickAngleOffset;
@@ -123,6 +123,7 @@ namespace TMGmod.NY
                 if (_stick.destroyed) return;
                 StickAngleOffset = angle - _stick.angle;
                 StickOffset = _stick.ReverseOffset(position);
+                StickOffset.x *= _stick.offDir;
                 OffDirOffset = (sbyte)(offDir * _stick.offDir);
             }
         }

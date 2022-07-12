@@ -1,11 +1,11 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Grenadelauncher")]
+    [EditorGroup("TMG|Explosive|Grenadelauncher")]
     [UsedImplicitly]
     public class M72 : BaseGun
     {

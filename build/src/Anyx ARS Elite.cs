@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -93,13 +93,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 21;
-            _ammoType = new AT9mmS
-            {
-               range = 350f,
-               accuracy = 0.81f,
-               bulletSpeed = 40f,
-               penetration = 1f
-            };
+            _ammoType = new ATARS();
             BaseAccuracy = 0.81f;
             _type = "gun";
             //THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends
@@ -123,7 +117,7 @@ namespace TMGmod
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
             _editorName = "Anyx ARS Elite";
-			_weight = 6f;
+            _weight = 6f;
             handAngle = 0f;
         }
         public override void Update()

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -23,12 +24,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
-            _ammoType = new AT9mm
-            {
-                range = 366f,
-                accuracy = 0.85f,
-                penetration = 1.3f
-            };
+            _ammoType = new ATType89();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Type 89"), 30, 12);
             _graphic = _sprite;
@@ -50,7 +46,7 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 0f);
             ShellOffset = new Vec2(-1f, -1f);
             _editorName = "Type 89";
-			_weight = 4.6f;
+            _weight = 4.6f;
         }
         private void UpdateSkin()
         {

@@ -30,7 +30,7 @@ namespace TMGmod.Stuff
             _range = 128f;
             _trackTicks = 10;
             _simTracked = 2;
-            _editorName = "ADS";
+            _editorName = "Active Defence System";
         }
 
         public override void Update()
@@ -72,7 +72,7 @@ namespace TMGmod.Stuff
 
         private bool OldHit(AdsHit adsHit)
         {
-            return _ticks - adsHit.Tick > 30;
+            return _ticks - adsHit.Tick > 5;
         }
 
         private bool InvalidTracked(Tracked tracked)
@@ -116,7 +116,7 @@ namespace TMGmod.Stuff
             var grenade = tracked.Inst;
             float maxcount = 20;
             maxcount /= Math.Max(maxcount * (grenade.position - position).Length() / (_range * 5), 1);
-            for (var i = 0; i < maxcount; ++i)
+            for (var i = 1; i < maxcount; ++i)
             {
                 Level.Add(SmallSmoke.New(grenade.x, grenade.y));
             }
@@ -128,7 +128,7 @@ namespace TMGmod.Stuff
         public override ContextMenu GetContextMenu()
         {
             var contextMenu = base.GetContextMenu();
-            contextMenu.AddItem(new ContextSlider("ZARYADY", null, new FieldBinding(this, "Ammo", -1, 20, 1), 1, "INF"));
+            contextMenu.AddItem(new ContextSlider("Charges", null, new FieldBinding(this, "Ammo", -1, 20, 1), 1, "INF"));
             return contextMenu;
         }
 

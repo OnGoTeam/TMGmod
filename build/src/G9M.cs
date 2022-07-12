@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using System;
+using System.Collections.Generic;
+using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -21,7 +22,7 @@ namespace TMGmod
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
         [UsedImplicitly]
-        public int Ammobefore = 21;
+        public int Ammobefore = 71;
         [UsedImplicitly]
         public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
         [UsedImplicitly]
@@ -39,12 +40,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 70;
-            _ammoType = new ATMagnum
-            {
-                range = 400f,
-                accuracy = 0.8f,
-                penetration = 1.5f
-            };
+            _ammoType = new ATLowQammos();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("G9M"), 38, 11);
             _graphic = _sprite;
@@ -66,11 +62,11 @@ namespace TMGmod
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "G9M";
-			_weight = 6f;
+            _weight = 6f;
             BaseAccuracy = 0.8f;
             MinAccuracy = 0.7f;
-            Kforce1Lmg = 0.23f;
-            Kforce2Lmg = 0.43f;
+            KickForce1Lmg = 0.23f;
+            KickForce2Lmg = 0.43f;
         }
         public bool Bipods
         {
@@ -78,8 +74,8 @@ namespace TMGmod
             set
             {
                 _kickForce = value ? 0 : 2.33f;
-                Kforce1Lmg = value ? 0 : 0.23f;
-                Kforce2Lmg = value ? 0 : 0.43f;
+                KickForce1Lmg = value ? 0 : 0.23f;
+                KickForce2Lmg = value ? 0 : 0.43f;
                 loseAccuracy = value ? 0 : 0.2f;
             }
         }
@@ -128,16 +124,6 @@ namespace TMGmod
                     cy - (float)(Math.Sin(Maths.DegToRad(dir)) * dist));
                 Level.Add(ins);
             }
-            /*
-            for (var i = 0; i < 25; i++)
-            {
-                var dir = i * 18f - 5f + Rando.Float(10f);
-                var shrap = new ATShrapnel { range = 20f + Rando.Float(6f) };
-                var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(dir)) * 6.0),
-                        y - (float)(Math.Sin(Maths.DegToRad(dir)) * 6.0), shrap, dir)
-                { firedFrom = this };
-                Level.Add(bullet);
-            }*/
             SFX.Play("explode");
             Level.Remove(this);
         }

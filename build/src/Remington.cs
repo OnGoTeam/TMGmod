@@ -1,49 +1,84 @@
 using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
+using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [UsedImplicitly]
     [EditorGroup("TMG|Shotgun|Pump-Action")]
-    public class Remington : BasePumpAction
+    public class Remington : BasePumpAction, IHaveSkin
     {
-	    public Remington(float xval, float yval) : base(xval, yval)
-	    {
-		    ammo = 3;
-	        _ammoType = new AT9mm
-	        {
-	            range = 115f,
-	            accuracy = 0.57f,
-	            penetration = 1f,
-	            bulletSpeed = 25f,
-	            bulletThickness = 0.6f
-	        };
+        private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 1;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4 });
+        public Remington(float xval, float yval) : base(xval, yval)
+        {
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            ammo = 6;
+            _ammoType = new ATRemington();
             _numBulletsPerFire = 5;
             _type = "gun";
-		    _graphic = new Sprite(GetPath("Remington"));
-		    _center = new Vec2(12f, 4f);
-		    _collisionOffset = new Vec2(-12f, -4f);
-		    _collisionSize = new Vec2(24f, 7f);
-		    _barrelOffsetTL = new Vec2(24f, 1f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+            _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
+            _graphic = _sprite;
+            LoaderSprite = new SpriteMap(GetPath("Fabarm FP-6Pump"), 9, 4)
+            {
+                center = new Vec2(5f, 2f)
+            };
+            FrameId = 0;
+            _center = new Vec2(17f, 5f);
+            _collisionOffset = new Vec2(-17f, -5f);
+            _collisionSize = new Vec2(33f, 9f);
+            _barrelOffsetTL = new Vec2(33f, 1f);
+            _flare = new SpriteMap(GetPath("FlareBase2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f)
             };
-            _holdOffset = new Vec2(-1f, 2f);
-		    _fireSound = "shotgunFire2";
-		    _kickForce = 2.75f;
-		    _manualLoad = true;
-            _fireWait = 5f;
-            _editorName = "Remington";
-            LoaderSprite = new SpriteMap(GetPath("RemingtonPimp"), 6, 8)
+            _holdOffset = new Vec2(1f, 2f);
+            _fireSound = "shotgunFire";
+            _kickForce = 3f;
+            loseAccuracy = 0.2f;
+            maxAccuracyLost = 0.8f;
+            _manualLoad = true;
+            _fireWait = 3f;
+            _editorName = "Fabarm FP-6";
+            ShellOffset = new Vec2(0f, -3f);
+            LoaderVec2 = new Vec2(9f, -1f);
+            Loaddx = 3f;
+            LoadSpeed = 15;
+            _weight = 3.2f;
+        }
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic))
             {
-                 center = new Vec2(3f, 4f)
-            };
-            LoaderVec2 = new Vec2(8f, 0f);
-            EpsilonA = 50;
-            EpsilonB = 100;
-            Loaddx = 2f;
+                bublic = Rando.Int(0, 9);
+            }
+            FrameId = bublic;
+        }
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set
+            {
+                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
+                SetSpriteMapFrameId(LoaderSprite, value, 10);
+            }
+        }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            UpdateSkin();
+            base.EditorPropertyChanged(property);
         }
     }
 }

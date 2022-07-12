@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
-    public class FnFcar: BaseAr, IHaveSkin, IHaveBipods
+    public class FnFcar : BaseAr, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 5;
@@ -27,17 +28,12 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
-        public FnFcar (float xval, float yval)
+        public FnFcar(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 14;
-            _ammoType = new ATMagnum
-            {
-                range = 600f,
-                accuracy = 0.94f,
-                penetration = 1f
-            };
+            _ammoType = new ATFCAR();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("FCAR"), 36, 15);
             _graphic = _sprite;
@@ -56,13 +52,14 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.75f;
             _kickForce = 2.4f;
-            Kforce2Ar = 0.9f;
+            KickForceSlowAr = 2.4f;
+            KickForceFastAr = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.2f;
             _editorName = "Belguria Fcar";
-            laserSight = true;
+            laserSight = false;
             _laserOffsetTL = new Vec2(19f, 4f);
-			_weight = 7f;
+            _weight = 7f;
         }
         public bool Bipods
         {
@@ -71,15 +68,15 @@ namespace TMGmod
             {
                 var bipodsstate = BipodsState;
                 if (isServerForObject)
-                    BipodsState += 1f / 30 * (value ? 1 : -1);
+                    BipodsState += 1f / 22 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
                 _ammoType.accuracy = bipods ? 1f : 0.94f;
                 _ammoType.bulletSpeed = bipods ? 72f : 36f;
                 _fireWait = bipods ? 0.25f : 0.75f;
                 _kickForce = bipods ? 0f : 2.4f;
-                Kforce2Ar = bipods ? 0f : 0.9f;
-                Kforce1Ar = bipods ? 0f : 0.07f;
+                KickForceFastAr = bipods ? 0f : 0.9f;
+                KickForceSlowAr = bipods ? 0f : 0.07f;
                 loseAccuracy = bipods ? 0f : 0.15f;
                 maxAccuracyLost = bipods ? 0f : 0.2f;
                 FrameId = FrameId % 10 + 10 * (bipods ? 4 : nobipods ? 0 : bipodsstate < 0.33f ? 1 : bipodsstate < 0.67f ? 2 : 3);

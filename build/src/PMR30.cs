@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
+
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
@@ -23,12 +25,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT9mm
-            {
-                range = 110f,
-                accuracy = 0.7f,
-                penetration = 0.45f
-            };
+            _ammoType = new ATPMR30();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PMR30"), 16, 10);
             _graphic = _sprite;
@@ -42,11 +39,11 @@ namespace TMGmod
             _fireSound = GetPath("sounds/1.wav");
             _fullAuto = false;
             _fireWait = 0.5f;
-            _kickForce = 1.67f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.5f;
+            _kickForce = 1.5f;
+            loseAccuracy = 0.2f;
+            maxAccuracyLost = 0.35f;
             _editorName = "PMR-30";
-			_weight = 2.5f;
+            _weight = 2.5f;
         }
         private void UpdateSkin()
         {

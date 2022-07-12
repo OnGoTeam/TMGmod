@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -12,6 +12,7 @@ namespace TMGmod
     public class USP : BaseGun, IAmHg, IHaveSkin
     {
         private readonly SpriteMap _sprite;
+        private const int NonSkinFrames = 2;
         [UsedImplicitly]
         public bool Silencer
         {
@@ -24,11 +25,7 @@ namespace TMGmod
                     _sprite.frame += 10;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _ammoType = new AT9mmS
-                    {
-                        range = 1500f,
-                        accuracy = 0.9f
-                    };
+                    _ammoType = new ATUSPS();
                     _barrelOffsetTL = new Vec2(23f, 2f);
                 }
                 else
@@ -39,18 +36,13 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f)
                     };
                     _fireSound = GetPath("sounds/1.wav");
-                    _ammoType = new AT9mm
-                    {
-                        range = 100f,
-                        accuracy = 0.8f
-                    };
+                    _ammoType = new ATUSP();
                     _barrelOffsetTL = new Vec2(14f, 2f);
                 }
             }
         }
         [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-        private const int NonSkinFrames = 2;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -63,12 +55,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 13;
-            _ammoType = new AT9mm
-            {
-                range = 100f,
-                accuracy = 0.8f,
-                penetration = 1f
-            };
+            _ammoType = new ATUSP();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("USP"), 23, 9);
             _graphic = _sprite;
@@ -85,7 +72,7 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             ShellOffset = new Vec2(-3f, -1f);
             _editorName = "USP-S";
-			_weight = 1f;
+            _weight = 1f;
         }
         private void UpdateSkin()
         {

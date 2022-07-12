@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -30,9 +31,9 @@ namespace TMGmod
             _collisionOffset = new Vec2(-6f, -2f);
             _collisionSize = new Vec2(12f, 9f);
             ammo = 15;
-            _ammoType = new ATMagnum { range = 70f, accuracy = 0.6f, penetration = 0.4f, bulletSpeed = 39f };
-            _barrelOffsetTL = new Vec2(12f, 1f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
+            _ammoType = new ATM93R();
+            _barrelOffsetTL = new Vec2(13f, 1f);
+            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 12, 10)
             {
                 center = new Vec2(0.0f, 5f)
             };
@@ -45,7 +46,7 @@ namespace TMGmod
             maxAccuracyLost = 0.35f;
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "M93R";
-			_weight = 2f;
+            _weight = 2f;
             DeltaWait = 0.3f;
             BurstNum = 3;
         }

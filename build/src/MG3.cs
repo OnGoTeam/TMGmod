@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -28,17 +29,16 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
-		
-		public MG3 (float xval, float yval)
+
+        public MG3(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 80;
-            _ammoType = new AT9mm
+            _ammoType = new AT556NATO
             {
                 range = 480f,
-                accuracy = 0.8f,
-                penetration = 1.5f
+                accuracy = 0.8f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg3"), 39, 11);
@@ -57,7 +57,7 @@ namespace TMGmod
             _holdOffset = new Vec2(4f, 1.5f);
             ShellOffset = new Vec2(-2f, -3f);
             _editorName = "MG3";
-			_weight = 7f;
+            _weight = 7f;
         }
         public override void Update()
         {

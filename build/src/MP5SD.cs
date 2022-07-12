@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -14,7 +14,17 @@ namespace TMGmod
 
         private readonly SpriteMap _sprite;
         [UsedImplicitly]
-        public bool NonAuto = true;
+        public bool NonAuto
+        {
+            get => BurstNum == 1;
+            set
+            {
+                BurstNum = value ? 1 : 3;
+                _fireWait = value ? 0.5f : 1.8f;
+                FrameId = FrameId % 10 + (value ? 0 : 10);
+                _ammoType.accuracy = value ? 0.77f : 0.92f;
+            }
+        }
         [UsedImplicitly]
         public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
         private const int NonSkinFrames = 2;
@@ -30,12 +40,8 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new AT9mmS
-            {
-                range = 235f,
-                accuracy = 0.8f
-            };
-            BaseAccuracy = 0.8f;
+            _ammoType = new ATMP5SD();
+            BaseAccuracy = 0.77f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _graphic = _sprite;
@@ -52,9 +58,9 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "MP5SD";
-			_weight = 3f;
-            KforceDSmg = 2f;
-            MaxAccuracy = 0.9f;
+            _weight = 3f;
+            KickForceDeltaSmg = 2f;
+            MaxAccuracyFp = 0.9f;
             MaxDelayFp = 10;
             MaxDelaySmg = 50;
             DeltaWait = 0.45f;
@@ -73,31 +79,17 @@ namespace TMGmod
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (NonAuto)
-                {
-                    NonAuto = false;
-                    BurstNum = 3;
-                    _fireWait = 1.8f;
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                }
-                else
-                {
-                    NonAuto = true;
-                    BurstNum = 1;
-                    _fireWait = 0.5f;
-                    _sprite.frame %= 10;
-                }
+                NonAuto = !NonAuto;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
             base.Update();
         }
-        public float KforceDSmg { get; }
-        public int CurrDelaySmg { get; set; }
-        public int CurrDelay { get; set; }
+        public float KickForceDeltaSmg { get; }
+        public int CurrentDelaySmg { get; set; }
+        public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
         public int MaxDelaySmg { get; }
-        public float MaxAccuracy { get; }
+        public float MaxAccuracyFp { get; }
         [UsedImplicitly]
         public int FrameId
         {

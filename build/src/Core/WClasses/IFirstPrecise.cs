@@ -2,8 +2,8 @@
 {
     public interface IFirstPrecise
     {
-        int CurrDelay { get; set; }
+        int CurrentDelayFp { get; set; }
         int MaxDelayFp { get; }
-        float MaxAccuracy { get; }
+        float MaxAccuracyFp { get; }
     }
 }

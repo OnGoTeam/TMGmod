@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -58,13 +58,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
-            _ammoType = new AT9mmS
-            {
-                accuracy = 0.9f,
-                range = 150f,
-                combustable = true,
-                bulletSpeed = 60f
-            };
+            _ammoType = new ATHazeS();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("HazeS"), 24, 12);
             _graphic = _sprite;
@@ -83,8 +77,8 @@ namespace TMGmod
             _editorName = "AF Haze";
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
-			_weight = 2f;
-            _flare = new SpriteMap(GetPath("FlareHazeS"), 13, 10) {center = new Vec2(0.0f, 5f)};
+            _weight = 2f;
+            _flare = new SpriteMap(GetPath("FlareHazeS"), 13, 10) { center = new Vec2(0.0f, 5f) };
         }
 
         public override void Update()
@@ -117,7 +111,7 @@ namespace TMGmod
             else
             {
                 _sighted = false;
-                _holdOffset = new Vec2(1f,0f);
+                _holdOffset = new Vec2(1f, 0f);
             }
 
             CurrHone = HoldOffsetNoExtra;
@@ -125,6 +119,7 @@ namespace TMGmod
 
         public override void Fire()
         {
+            if (duck?.inputProfile.Down("QUACK") == true && !Sighted) return;
             if (ammo > 0)
             {
                 Heatval = Heatval;

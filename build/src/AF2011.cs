@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -20,17 +21,12 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 5 });
-        public AF2011 (float xval, float yval)
+        public AF2011(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
-            _ammoType = new ATMagnum
-            {
-                range = 130f,
-                accuracy = 0.95f,
-                penetration = 1f
-            };
+            _ammoType = new ATAF2011();
             _numBulletsPerFire = 2;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AF2011"), 16, 9);
@@ -49,7 +45,7 @@ namespace TMGmod
             _holdOffset = new Vec2(-1f, 1f);
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "AF-2011";
-			_weight = 2.5f;
+            _weight = 2.5f;
         }
 
         public override void Fire()

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -17,21 +18,21 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
-        private float _damaged = 1;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
+        private float _calculateSide;
         private readonly SpriteMap _sprite;
 
         public MK17(float xval, float yval)
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            thickness = 6f;
+            _hitPoints = 49f;
+            thickness = 12f;
             ammo = 20;
-            _ammoType = new AT9mm
+            _ammoType = new ATMK17
             {
                 range = 345f,
                 accuracy = 0.84f,
-                penetration = 1f,
                 bulletSpeed = 35f,
                 bulletThickness = 0.6f
             };
@@ -53,25 +54,26 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.81f;
             _kickForce = 2.35f;
-		    Kforce1Ar = 1.6f;
-		    Kforce2Ar = 1.9f;
+            KickForceSlowAr = 1.6f;
+            KickForceFastAr = 1.9f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.6f;
             _editorName = "Mk17 with Shield";
-			_weight = 5.5f;
+            _weight = 4.5f;
         }
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
-            _damaged = bullet.ammo.penetration;
-            Damage();
+            _calculateSide = Damage.Calculate(bullet);
+            MakeDamage();
             return Hit(bullet, hitPos);
         }
-        private void Damage()
+        private void MakeDamage()
         {
-            thickness -= _damaged;
-            if (!(thickness <= 0f)) return;
+            _hitPoints -= _calculateSide;
+            if (!(_hitPoints <= 0f)) return;
             _sprite.frame %= 10;
             _sprite.frame += 10;
+            thickness = 0f;
         }
         private void UpdateSkin()
         {
@@ -93,5 +95,6 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+
     }
 }

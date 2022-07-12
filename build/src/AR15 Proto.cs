@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using System;
+using System.Collections.Generic;
+using TMGmod.Core;
+using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -39,11 +40,9 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
-            _ammoType = new ATMagnum
+            _ammoType = new ATLowQammos
             {
-                range = 330f,
-                accuracy = 0.8f,
-                penetration = 1f
+                range = 330f
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);
@@ -66,8 +65,8 @@ namespace TMGmod
             _holdOffset = new Vec2(5f, 0f);
             ShellOffset = new Vec2(-7f, -1f);
             _editorName = "AR15 Proto";
-			_weight = 4.2f;
-            Kforce2Ar = 0.5f;
+            _weight = 4.2f;
+            KickForceFastAr = 0.5f;
         }
         public override void OnPressAction()
         {
@@ -85,7 +84,7 @@ namespace TMGmod
         }
         public override void Fire()
         {
-            Explode = Rando.Float(0,1);
+            Explode = Rando.Float(0, 1);
             if (Explode < Explodechance) CreateExplosion(position);
             base.Fire();
         }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -29,13 +29,14 @@ namespace TMGmod
           : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 15;
-            _ammoType = new AT9mmS
-            {
-                range = 550f,
-                accuracy = 0.9f,
-                bulletSpeed = 25f
-            };
+            ammo = 16;
+            _ammoType = new ATVintorez();
+            MinAccuracy = 0f;
+            BaseAccuracy = 0.9f;
+            KickForceSlowAr = 0.4f;
+            KickForceFastAr = 0.85f;
+            MuAccuracySr = 1f;
+            LambdaAccuracySr = 0.5f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);
             _graphic = _sprite;
@@ -54,13 +55,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.2f;
             _editorName = "Vintorez";
-			_weight = 4.7f;
-            MinAccuracy = 0f;
-            BaseAccuracy = 0.9f;
-            Kforce1Ar = 0.4f;
-            Kforce2Ar = 0.85f;
-            MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.75f;
+            _weight = 4.7f;
         }
         public override void Update()
         {

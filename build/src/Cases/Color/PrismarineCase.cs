@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 using TMGmod.Core;
 #if DEBUG
 using TMGmod.Useless_or_deleted_Guns;
@@ -37,6 +37,7 @@ namespace TMGmod.Cases.Color
                 typeof(PPSh41),
                 typeof(PPK42),
                 typeof(MG44),
+                typeof(MG44C),
                 typeof(SkeetGun),
                 typeof(MP5),
                 typeof(MP5SD),

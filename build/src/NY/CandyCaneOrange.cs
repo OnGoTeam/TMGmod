@@ -5,7 +5,7 @@ namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc|Holiday")]
     [UsedImplicitly]
-    public class CandyCaneOrange:CandyCane
+    public class CandyCaneOrange : CandyCane
     {
         public CandyCaneOrange(float xval, float yval) : base(xval, yval)
         {

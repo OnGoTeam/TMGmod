@@ -14,9 +14,9 @@ namespace TMGmod.Core.AmmoTypes
             range = 2000f;
             deadly = true;
             weight = 5f;
-            barrelAngleDegrees = -5f;
+            barrelAngleDegrees = -2.5f;
             bulletThickness = 2f;
-            bulletColor = Color.White;
+            bulletColor = Color.Yellow;
             bulletType = typeof(GrenadeBullet);
             immediatelyDeadly = true;
             sprite = new Sprite("launcherGrenade");
@@ -25,7 +25,7 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void PopShell(float x, float y, int dir)
         {
-            var shalker = new M72Shell(x, y) {hSpeed = dir * (3.5f + Rando.Float(1f))};
+            var shalker = new M72Shell(x, y) { hSpeed = dir * (3.5f + Rando.Float(1f)) };
             Level.Add(shalker);
         }
     }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -9,13 +9,43 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class CZC2 : BaseAr, IAmDmr, IHaveSkin
+    public class CZC2 : BaseAr, IHaveSkin
     {
 
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
         [UsedImplicitly]
-        public bool Silencer;
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/Silenced2.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    _ammoType = new ATCZS2();
+                    loseAccuracy = 0.15f;
+                    maxAccuracyLost = 0.28f;
+                    _barrelOffsetTL = new Vec2(41f, 3f);
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _fireSound = "deepMachineGun2";
+                    _ammoType = new ATCZ2();
+                    loseAccuracy = 0.1f;
+                    maxAccuracyLost = 0.3f;
+                    _barrelOffsetTL = new Vec2(37f, 3f);
+                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                }
+            }
+        }
         [UsedImplicitly]
         public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -30,12 +60,7 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 23;
-            _ammoType = new AT9mm
-            {
-                range = 310f,
-                accuracy = 0.87f,
-                penetration = 1f
-            };
+            _ammoType = new ATCZ2();
             _type = "gun";
             _sprite = new SpriteMap(GetPath("CZC2"), 41, 11);
             _graphic = _sprite;
@@ -53,49 +78,17 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 0.9f;
-            _kickForce = 3.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _editorName = "CZ-C2 SAR";
             _weight = 4.4f;
-            Kforce2Ar = 0.7f;
+            KickForceSlowAr = 1.5f;
+            KickForceFastAr = 3.1f;
         }
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (Silencer)
-                {
-                    FrameId %= 10;
-                    _fireSound = "deepMachineGun2";
-                    _ammoType = new AT9mm
-                    {
-                        range = 310f,
-                        accuracy = 0.87f
-                    };
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.3f;
-                    _barrelOffsetTL = new Vec2(37f, 3f);
-                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                }
-                else
-                {
-                    FrameId %= 10;
-                    FrameId += 10;
-                    _fireSound = GetPath("sounds/Silenced2.wav");
-                    _ammoType = new AT9mmS
-                    {
-                        range = 350f,
-                        accuracy = 0.95f
-                    };
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.28f;
-                    _barrelOffsetTL = new Vec2(41f, 3f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                }
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);

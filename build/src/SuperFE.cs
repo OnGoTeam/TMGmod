@@ -5,7 +5,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Misc")]
     [UsedImplicitly]
-    public class SuperFe:FireExtinguisher
+    public class SuperFe : FireExtinguisher
     {
         public SuperFe(float xval, float yval) : base(xval, yval)
         {
