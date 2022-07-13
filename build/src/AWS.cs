@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -10,11 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
+    public class AWS : BaseBolt, IHaveSkin, I5, IHaveBipods
     {
         private const int NonSkinFrames = 3;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
-        private readonly Vec2 _fakeshelloffset = new Vec2(-3f, -2f);
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -58,27 +56,22 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 1f);
             _editorName = "AWS";
             _weight = 5f;
-            laserSight = false;
             _laserOffsetTL = new Vec2(18f, 3f);
+            ShellOffset = new Vec2(-3f, -2f);
         }
 
         [UsedImplicitly]
         public float BipodsState
         {
             get => duck != null ? _bipodsstate : 0;
-            set
-            {
-                value = Math.Max(value, 0f);
-                value = Math.Min(value, 1f);
-                _bipodsstate = value;
-            }
+            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
 
         public bool Bipods
         {
-            get => BaseGun.BipodsQ(this);
+            get => BipodsQ(this);
             set
             {
                 var bipodsstate = BipodsState;
@@ -123,117 +116,13 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        public override void Reload(bool shell = true)
-        {
-            if (ammo != 0)
-            {
-                if (shell) _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
-                --ammo;
-            }
-
-            loaded = true;
-        }
-
-        public override void Draw()
-        {
-            var ang = angle;
-            if (offDir <= 0)
-                angle += _angleOffset;
-            else
-                angle -= _angleOffset;
-            base.Draw();
-            angle = ang;
-            laserSight = false;
-        }
-
-        public override void OnPressAction()
-        {
-            if (loaded)
-            {
-                base.OnPressAction();
-                return;
-            }
-
-            if (ammo <= 0 || _loadState != -1) return;
-            //else
-            _loadState = 0;
-            _loadAnimation = 0;
-        }
-
         public override void Update()
         {
-            base.Update();
             Bipods = Bipods;
             if (duck == null) BipodsDisabled = false;
-            else if (!BaseGun.BipodsQ(this, true)) BipodsDisabled = false;
+            else if (!BipodsQ(this, true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-            if (_loadState > -1)
-            {
-                if (owner == null)
-                {
-                    if (_loadState == 3) loaded = true;
-                    _loadState = -1;
-                    _angleOffset = 0f;
-                    handOffset = Vec2.Zero;
-                }
-
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (_loadState)
-                {
-                    case 0:
-                    {
-                        if (!Network.isActive)
-                            SFX.Play("loadSniper");
-                        else if (isServerForObject) _netLoad.Play();
-                        _loadState++;
-                        break;
-                    }
-                    case 1 when _angleOffset >= 0.1f:
-                    {
-                        Sniper sniper1 = this;
-                        sniper1._loadState += 1;
-                        break;
-                    }
-                    case 1:
-                        _angleOffset += 0.003f;
-                        break;
-                    case 2:
-                    {
-                        handOffset.x -= 0.2f;
-                        if (handOffset.x > 4f)
-                        {
-                            _loadState++;
-                            Reload();
-                            loaded = false;
-                        }
-
-                        break;
-                    }
-                    case 3:
-                    {
-                        handOffset.x += 0.2f;
-                        if (handOffset.x <= 0f)
-                        {
-                            Sniper sniper3 = this;
-                            sniper3._loadState += 1;
-                            handOffset.x = 0f;
-                        }
-
-                        break;
-                    }
-                    case 4 when _angleOffset <= 0.03f:
-                        _loadState = -1;
-                        loaded = true;
-                        _angleOffset = 0f;
-                        break;
-                    case 4:
-                        _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.15f);
-                        break;
-                }
-            }
-
-            laserSight = false;
-            OnHoldAction();
+            base.Update();
         }
 
         public override void Fire()

@@ -148,8 +148,7 @@ namespace TMGmod.Buddies
             foreach (var blockGroup1 in Level.CheckCircleAll<BlockGroup>(position, 50f))
             {
                 if (blockGroup1 == null) continue;
-                var blockGroup2 = blockGroup1;
-                foreach (var block in blockGroup2.blocks.Where(
+                foreach (var block in blockGroup1.blocks.Where(
                     block => Collision.Circle(position, 28f, block.rectangle)))
                 {
                     block.shouldWreck = true;
@@ -157,7 +156,7 @@ namespace TMGmod.Buddies
                         varBlocks.Add(autoBlock.blockIndex);
                 }
 
-                blockGroup2.Wreck();
+                blockGroup1.Wreck();
             }
 
             foreach (var block in Level.CheckCircleAll<Block>(position, 28f))

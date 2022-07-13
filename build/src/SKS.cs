@@ -63,8 +63,6 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             _editorName = "SKS";
             _weight = 6f;
-            MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.15f;
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -79,8 +77,9 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; }
+        public float SpeedAccuracyThreshold => 1f;
+        public float SpeedAccuracyHorizontal => 1f;
+        public float SpeedAccuracyVertical => 0.15f;
 
         public override void Update()
         {

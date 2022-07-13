@@ -30,8 +30,8 @@ namespace TMGmod
             BaseAccuracy = 0.9f;
             KickForceSlowAr = 0.4f;
             KickForceFastAr = 0.85f;
-            MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.5f;
+            SpeedAccuracyThreshold = 1f;
+            SpeedAccuracyVertical = 0.5f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);
             _graphic = _sprite;
@@ -65,7 +65,7 @@ namespace TMGmod
                 _kickForce = value ? RandomaticKickforce : 2.85f;
                 loseAccuracy = value ? 0f : 0.1f;
                 maxAccuracyLost = value ? 0f : 0.2f;
-                LambdaAccuracySr = value ? 0f : 0.5f;
+                SpeedAccuracyVertical = value ? 0f : 0.5f;
             }
         }
 
@@ -96,9 +96,9 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        [UsedImplicitly] public float MuAccuracySr { get; }
-
-        public float LambdaAccuracySr { get; private set; }
+        [UsedImplicitly] public float SpeedAccuracyThreshold { get; }
+        public float SpeedAccuracyHorizontal => 1;
+        public float SpeedAccuracyVertical { get; private set; }
 
         public override void Update()
         {

@@ -73,12 +73,7 @@ namespace TMGmod
         public float BipodsState
         {
             get => duck != null ? _bipodsstate : 0;
-            set
-            {
-                value = Math.Max(value, 0f);
-                value = Math.Min(value, 1f);
-                _bipodsstate = value;
-            }
+            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));

@@ -115,10 +115,7 @@ namespace TMGmod.Stuff
                     if (!(thing is IAmADuck || doblock)) continue;
                     //else
                     thing.hSpeed = hspd;
-                    var dx = Math.Abs(thing.x - x) > 0.01f ? (thing is Duck ? 2 : 4) / (thing.x - x) : 0;
-                    dx = Math.Min(2, dx);
-                    dx = Math.Max(-2, dx);
-                    thing.x += dx;
+                    thing.x += Maths.Clamp(Math.Abs(thing.x - x) > 0.01f ? (thing is Duck ? 2 : 4) / (thing.x - x) : 0, -2f, 2f);
                     if (Math.Abs(hspd) < 0.1f) continue;
                     //else
                     var hvk = Math.Abs(thing.x - x) / 2f;

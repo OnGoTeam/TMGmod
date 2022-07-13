@@ -3,7 +3,8 @@
 {
     public interface ISpeedAccuracy
     {
-        float MuAccuracySr { get; }
-        float LambdaAccuracySr { get; }
+        float SpeedAccuracyThreshold { get; }
+        float SpeedAccuracyHorizontal { get; }
+        float SpeedAccuracyVertical { get; }
     }
 }

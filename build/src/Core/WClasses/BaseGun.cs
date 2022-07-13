@@ -41,53 +41,86 @@ namespace TMGmod.Core.WClasses
             set => _holdOffset = value + ExtraHoldOffset;
         }
 
-        public override void Fire()
+        private void FireHSpeedKforce(IHspeedKforce target)
         {
-            PrevKforce = _kickForce;
+            if (duck != null)
+                _kickForce = Math.Abs(duck.hSpeed) < 0.1f ? target.KickForceSlowAr : target.KickForceFastAr;
+        }
+
+        private void FireRandKforce(IRandKforce target)
+        {
+            _kickForce = Rando.Float(target.KickForce1Lmg, target.KickForce2Lmg);
+        }
+
+        private void FireFirstKforce(IFirstKforce target)
+        {
+            if (target.CurrentDelaySmg <= 0)
+                _kickForce += target.KickForceDeltaSmg;
+            target.CurrentDelaySmg = target.MaxDelaySmg;
+        }
+
+        private void FireKforce()
+        {
             switch (this)
             {
                 case IHspeedKforce thisAr:
-                    if (duck != null)
-                        _kickForce = Math.Abs(duck.hSpeed) < 0.1f ? thisAr.KickForceSlowAr : thisAr.KickForceFastAr;
+                    FireHSpeedKforce(thisAr);
                     break;
                 case IRandKforce thisLmg:
-                    _kickForce = Rando.Float(thisLmg.KickForce1Lmg, thisLmg.KickForce2Lmg);
+                    FireRandKforce(thisLmg);
                     break;
                 case IFirstKforce thisSmg:
-                    if (thisSmg.CurrentDelaySmg <= 0)
-                        _kickForce += thisSmg.KickForceDeltaSmg;
-                    thisSmg.CurrentDelaySmg = thisSmg.MaxDelaySmg;
+                    FireFirstKforce(thisSmg);
                     break;
             }
+        }
 
-            var pammo = ammo;
-            base.Fire();
-            if (pammo > ammo)
+        private void AddNyCase() => Level.Add(new NewYearCase(x, y));
+
+        private void FireAccuracy()
+        {
+            switch (this)
             {
-                switch (this)
-                {
-                    case ILoseAccuracy thisDmr:
-                        ammoType.accuracy = ClipAccuracy(ammoType.accuracy - thisDmr.DrainAccuracyDmr);
-                        break;
-                    case IFirstPrecise thisFirstPrecise:
-                        thisFirstPrecise.CurrentDelayFp = thisFirstPrecise.MaxDelayFp;
-                        break;
-                }
-
-                if (Rando.Float(0f, 1f) < PresentChancePercent / 100f)
-                {
-                    var scase = new NewYearCase(x, y);
-                    Level.Add(scase);
-                }
+                case ILoseAccuracy thisDmr:
+                    ammoType.accuracy = ClipAccuracy(ammoType.accuracy - thisDmr.DrainAccuracyDmr);
+                    break;
+                case IFirstPrecise thisFirstPrecise:
+                    thisFirstPrecise.CurrentDelayFp = thisFirstPrecise.MaxDelayFp;
+                    break;
             }
+        }
 
+        private void MaybeAddNyCase()
+        {
+            if (Rando.Float(0f, 1f) < PresentChancePercent / 100f) AddNyCase();
+        }
+
+        private void OnAmmoSpent()
+        {
+            FireAccuracy();
+            MaybeAddNyCase();
+        }
+
+        private void FireWithKforce()
+        {
+            var previousAmmo = ammo;
+            base.Fire();
+            if (ammo < previousAmmo)
+                OnAmmoSpent();
+        }
+
+        public override void Fire()
+        {
+            PrevKforce = _kickForce;
+            FireKforce();
+            FireWithKforce();
             if (ToPrevKforce)
                 _kickForce = PrevKforce;
         }
 
         private float ClipAccuracy(float accuracy)
         {
-            return Math.Min(BaseAccuracy, Math.Max(MinAccuracy, accuracy));
+            return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
         }
 
         public override void Update()
@@ -114,8 +147,17 @@ namespace TMGmod.Core.WClasses
             {
                 case ISpeedAccuracy thisSr:
                     ammoType.accuracy = duck != null
-                        ? ClipAccuracy(BaseAccuracy + thisSr.MuAccuracySr -
-                                       (Math.Abs(duck.hSpeed) + Math.Abs(duck.vSpeed) * thisSr.LambdaAccuracySr))
+                        ? ClipAccuracy(
+                            BaseAccuracy
+                            +
+                            thisSr.SpeedAccuracyThreshold
+                            -
+                            (
+                                Math.Abs(duck.hSpeed) * thisSr.SpeedAccuracyHorizontal
+                                +
+                                Math.Abs(duck.vSpeed) * thisSr.SpeedAccuracyVertical
+                            )
+                        )
                         : BaseAccuracy;
                     break;
                 case ILoseAccuracy thisDmr:

@@ -61,15 +61,13 @@ namespace TMGmod
         public override void OnPressAction()
         {
             if (!loaded && ammo > 1) SFX.Play(GetPath("sounds/tuduc.wav"));
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (!loaded && ammo > 0)
             {
                 _sprite.frame = _sprite.frame % 10 + 10;
                 Reload();
             }
-            else if (loaded)
-            {
-                Fire();
-            }
+            else if (loaded) Fire();
         }
 
         public override void Reload(bool shell = true)

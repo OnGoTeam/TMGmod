@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
@@ -70,12 +69,7 @@ namespace TMGmod
         public float BipodsState
         {
             get => duck != null ? _bipodsstate : 0;
-            set
-            {
-                value = Math.Max(value, 0f);
-                value = Math.Min(value, 1f);
-                _bipodsstate = value;
-            }
+            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
@@ -129,8 +123,9 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        public float MuAccuracySr => 0;
-        public float LambdaAccuracySr => 0;
+        public float SpeedAccuracyThreshold => 0f;
+        public float SpeedAccuracyHorizontal => 1f;
+        public float SpeedAccuracyVertical => 0f;
 
         public override void Update()
         {

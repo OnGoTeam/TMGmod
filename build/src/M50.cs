@@ -53,8 +53,8 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(31f, 9f);
             _editorName = "M50";
             _weight = 6.75f;
-            MuAccuracySr = 1f;
-            LambdaAccuracySr = 0.67f;
+            SpeedAccuracyThreshold = 1f;
+            SpeedAccuracyVertical = 0.67f;
         }
 
         public bool Bipods
@@ -65,7 +65,7 @@ namespace TMGmod
                 _kickForce = value ? 1f : 8f;
                 loseAccuracy = value ? 0f : 0.1f;
                 maxAccuracyLost = value ? 0f : 0.3f;
-                LambdaAccuracySr = value ? 0f : 0.5f;
+                SpeedAccuracyVertical = value ? 0f : 0.5f;
             }
         }
 
@@ -95,8 +95,9 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; private set; }
+        public float SpeedAccuracyThreshold { get; }
+        public float SpeedAccuracyHorizontal => 1f;
+        public float SpeedAccuracyVertical { get; private set; }
 
         public override void Update()
         {

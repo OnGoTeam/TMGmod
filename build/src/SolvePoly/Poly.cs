@@ -3,6 +3,7 @@
 
 #define LINE_HOOK
 #define ODD_HOOK
+using System.Collections.Generic;
 using static System.Double;
 
 namespace TMGmod.SolvePoly
@@ -91,6 +92,7 @@ namespace TMGmod.SolvePoly
         {
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             while (_n > 0 && this[_n] == 0) solution[--_n] = NaN;
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (_n == 0)
             {
                 roots = 0;
@@ -192,7 +194,7 @@ namespace TMGmod.SolvePoly
 
     public static class Solver
     {
-        public static double[] Solve(double[] coeff)
+        public static IEnumerable<double> Solve(double[] coeff)
         {
             var n = (uint)coeff.Length - 1;
             var solution = new double[n];
@@ -205,6 +207,7 @@ namespace TMGmod.SolvePoly
             return res;
         }
 
+        // ReSharper disable once UnusedMember.Global
         public static double Apply(double[] coeff, double x)
         {
             return new Poly(0, coeff).Apply(x);

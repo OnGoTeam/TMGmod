@@ -1,5 +1,4 @@
 ﻿#if DEBUG
-using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
@@ -105,12 +104,7 @@ namespace TMGmod
         public float StockState
         {
             get => _stockstate;
-            set
-            {
-                value = Math.Max(value, 0f);
-                value = Math.Min(value, 1f);
-                _stockstate = value;
-            }
+            set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
 
         public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
