@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TMGmod")]
 #if WORKSHOP
 [assembly: AssemblyDescription("[1.1.7] QoL Patches")]
-#elif DEBUG
+#elif FEATURES_1_2
 [assembly: AssemblyDescription("[1.2] HP")]
 #else
 [assembly: AssemblyDescription("[1.107] QoL Patches")]

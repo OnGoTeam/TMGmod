@@ -1,4 +1,4 @@
-﻿#if DEBUG
+﻿#if FEATURES_1_2
 using DuckGame;
 using JetBrains.Annotations;
 using System;
