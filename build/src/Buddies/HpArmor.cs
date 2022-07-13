@@ -93,6 +93,7 @@ namespace TMGmod.Buddies
             {
                 Mod.Debug.Log("destroyed");
                 var equippedDuck1 = _equippedDuck;
+                equippedDuck1.invincible = false;
                 equippedDuck1.KnockOffEquipment(this, true, bullet);
                 Fondle(this, DuckNetwork.localConnection);
                 equippedDuck1.Destroy(new DTShot(bullet));
