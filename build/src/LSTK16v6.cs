@@ -1,4 +1,5 @@
 ﻿#if DEBUG
+using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
@@ -10,10 +11,18 @@ namespace TMGmod
 {
     [EditorGroup("TMG|NOTRELEASEDYET")]
     [UsedImplicitly]
-    public class M16A6 : BaseGun, IHaveSkin, IHaveBipods
+    public class LSTK16v6 : BaseGun, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 9;
+        [UsedImplicitly]
+        public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
+        [UsedImplicitly]
+        public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
+        [UsedImplicitly]
+        public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
+        [UsedImplicitly]
+        public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -28,27 +37,37 @@ namespace TMGmod
         public bool Bipods
         {
             get => BipodsQ(this);
-            set => _kickForce = value ? 0 : 5.5f;
+            set
+            {
+                var bipodsstate = BipodsState;
+                if (isServerForObject)
+                    BipodsState += 1f / 10 * (value ? 1 : -1);
+                var nobipods = BipodsState < 0.01f;
+                var bipods = BipodsState > 0.99f;
+                _kickForce = value ? 0 : 5.5f;
+                FrameId = FrameId % 10 + 30 * (bipods ? 2 : nobipods ? 0 : 1);
+            }
         }
 
         public BitBuffer BipodsBuffer { get; set; }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(Bipods));
-        public bool BipodsDisabled => false;
 
-        public M16A6(float xval, float yval) : base(xval, yval)
+        public bool BipodsDisabled { get; private set; }
+
+        public LSTK16v6(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 25;
             _ammoType = new ATM16();
             BaseAccuracy = 0.91f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("LSTK16v6"), 33, 13);
+            _sprite = new SpriteMap(GetPath("LSTK16v6"), 33, 14);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-17f, -7f);
-            _collisionSize = new Vec2(33f, 13f);
+            _collisionSize = new Vec2(33f, 14f);
             _barrelOffsetTL = new Vec2(34f, 5f);
             _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
             {
@@ -75,9 +94,12 @@ namespace TMGmod
 
         public override void Update()
         {
+            base.Update();
+            if (duck == null) BipodsDisabled = false;
+            else if (!BipodsQ(this, true)) BipodsDisabled = false;
+            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
             if (_cdstate > 0) _cdstate -= 1;
             UpdCds();
-            base.Update();
         }
 
         public override void Fire()
@@ -97,6 +119,19 @@ namespace TMGmod
             }
             _sprite.frame = bublic;
         }
+
+        private float _bipodsstate;
+        public float BipodsState
+        {
+            get => duck != null ? _bipodsstate : 0;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _bipodsstate = value;
+            }
+        }
+
         [UsedImplicitly]
         public int FrameId
         {
