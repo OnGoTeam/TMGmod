@@ -8,7 +8,7 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseGun : Gun
+    public abstract class BaseGun : Gun, IAmAGun
     {
         private const float
             PresentChancePercent =
@@ -41,51 +41,64 @@ namespace TMGmod.Core.WClasses
             set => _holdOffset = value + ExtraHoldOffset;
         }
 
-        private void FireHSpeedKforce(IHspeedKforce target)
+        private float FireHSpeedKforce(IHspeedKforce target, float kickForce)
         {
-            if (duck != null)
-                _kickForce = Math.Abs(duck.hSpeed) < 0.1f ? target.KickForceSlowAr : target.KickForceFastAr;
+            return duck != null
+                ? Math.Abs(duck.hSpeed) < 0.1f ? target.KickForceSlowAr : target.KickForceFastAr
+                : kickForce;
         }
 
-        private void FireRandKforce(IRandKforce target)
+        private static float FireRandKforce(IRandKforce target)
         {
-            _kickForce = Rando.Float(target.KickForce1Lmg, target.KickForce2Lmg);
+            return Rando.Float(target.KickForce1Lmg, target.KickForce2Lmg);
         }
 
-        private void FireFirstKforce(IFirstKforce target)
+        private static float FireFirstKforce(IFirstKforce target, float kickForce)
         {
-            if (target.CurrentDelaySmg <= 0)
-                _kickForce += target.KickForceDeltaSmg;
             target.CurrentDelaySmg = target.MaxDelaySmg;
+            return target.CurrentDelaySmg <= 0 ? kickForce + target.KickForceDeltaSmg : kickForce;
         }
 
-        private void FireKforce()
+        protected virtual float CalculateKForce(float kickForce)
         {
             switch (this)
             {
-                case IHspeedKforce thisAr:
-                    FireHSpeedKforce(thisAr);
-                    break;
-                case IRandKforce thisLmg:
-                    FireRandKforce(thisLmg);
-                    break;
-                case IFirstKforce thisSmg:
-                    FireFirstKforce(thisSmg);
-                    break;
+                case IHspeedKforce ihskf:
+                    return FireHSpeedKforce(ihskf, kickForce);
+                case IRandKforce irkf:
+                    return FireRandKforce(irkf);
+                case IFirstKforce ifkf:
+                    return FireFirstKforce(ifkf, kickForce);
+                default:
+                    return kickForce;
             }
+        }
+        private void FireSetKforce()
+        {
+            _kickForce = CalculateKForce(_kickForce);
         }
 
         private void AddNyCase() => Level.Add(new NewYearCase(x, y));
+
+        private void FireLoseAccuracy(ILoseAccuracy target)
+        {
+            ammoType.accuracy = ClipAccuracy(ammoType.accuracy - target.DrainAccuracyDmr);
+        }
+
+        private static void FireFirstPrecise(IFirstPrecise target)
+        {
+            target.CurrentDelayFp = target.MaxDelayFp;
+        }
 
         private void FireAccuracy()
         {
             switch (this)
             {
-                case ILoseAccuracy thisDmr:
-                    ammoType.accuracy = ClipAccuracy(ammoType.accuracy - thisDmr.DrainAccuracyDmr);
+                case ILoseAccuracy ila:
+                    FireLoseAccuracy(ila);
                     break;
-                case IFirstPrecise thisFirstPrecise:
-                    thisFirstPrecise.CurrentDelayFp = thisFirstPrecise.MaxDelayFp;
+                case IFirstPrecise ifp:
+                    FireFirstPrecise(ifp);
                     break;
             }
         }
@@ -101,21 +114,44 @@ namespace TMGmod.Core.WClasses
             MaybeAddNyCase();
         }
 
+        protected virtual void RealFire() => base.Fire();
+
         private void FireWithKforce()
         {
             var previousAmmo = ammo;
-            base.Fire();
+            RealFire();
             if (ammo < previousAmmo)
                 OnAmmoSpent();
         }
 
-        public override void Fire()
+        protected virtual bool CanFire()
+        {
+            switch (this)
+            {
+                case ISwitchBipods switching when switching.SwitchingBipods():
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
+        private void SetKforceAndFire()
+        {
+            FireSetKforce();
+            FireWithKforce();
+        }
+
+        private void DoFire()
         {
             PrevKforce = _kickForce;
-            FireKforce();
-            FireWithKforce();
+            SetKforceAndFire();
             if (ToPrevKforce)
                 _kickForce = PrevKforce;
+        }
+
+        public override void Fire()
+        {
+            if (CanFire()) DoFire();
         }
 
         private float ClipAccuracy(float accuracy)
@@ -123,7 +159,70 @@ namespace TMGmod.Core.WClasses
             return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
         }
 
-        public override void Update()
+        private static void UpdateFirstKforce(IFirstKforce target)
+        {
+            target.CurrentDelaySmg -= 1;
+            if (target.CurrentDelaySmg < 0)
+                target.CurrentDelaySmg = 0;
+        }
+
+        private void UpdateKforce()
+        {
+            switch (this)
+            {
+                case IFirstKforce ifkf:
+                    UpdateFirstKforce(ifkf);
+                    break;
+            }
+        }
+
+        private void UpdateSpeedAccuracy(ISpeedAccuracy target)
+        {
+            ammoType.accuracy = duck != null
+                ? ClipAccuracy(
+                    BaseAccuracy
+                    +
+                    target.SpeedAccuracyThreshold
+                    -
+                    (
+                        Math.Abs(duck.hSpeed) * target.SpeedAccuracyHorizontal
+                        +
+                        Math.Abs(duck.vSpeed) * target.SpeedAccuracyVertical
+                    )
+                )
+                : BaseAccuracy;
+        }
+
+        private void UpdateLoseAccuracy(ILoseAccuracy target)
+        {
+            ammoType.accuracy = ClipAccuracy(ammoType.accuracy + target.RegenAccuracyDmr);
+        }
+
+        private void UpdateFirstPrecise(IFirstPrecise target)
+        {
+            target.CurrentDelayFp = Math.Max(target.CurrentDelayFp - 1, 0);
+            ammoType.accuracy = target.CurrentDelayFp <= 0f
+                ? target.MaxAccuracyFp
+                : BaseAccuracy;
+        }
+
+        private void UpdateAccuracy()
+        {
+            switch (this)
+            {
+                case ISpeedAccuracy isa:
+                    UpdateSpeedAccuracy(isa);
+                    break;
+                case ILoseAccuracy ila:
+                    UpdateLoseAccuracy(ila);
+                    break;
+                case IFirstPrecise ifp:
+                    UpdateFirstPrecise(ifp);
+                    break;
+            }
+        }
+
+        private void UpdateHone()
         {
             if (!_currHoneInit)
             {
@@ -133,44 +232,24 @@ namespace TMGmod.Core.WClasses
 
             HoldOffsetNoExtra = CurrHone;
             CurrHone = HoldOffsetNoExtra;
+        }
 
-            switch (this)
-            {
-                case IFirstKforce thisSmg:
-                    thisSmg.CurrentDelaySmg -= 1;
-                    if (thisSmg.CurrentDelaySmg < 0)
-                        thisSmg.CurrentDelaySmg = 0;
-                    break;
-            }
+        private void UpdateCanonicalParametres()
+        {
+            UpdateHone();
+            UpdateKforce();
+            UpdateAccuracy();
+        }
 
-            switch (this)
-            {
-                case ISpeedAccuracy thisSr:
-                    ammoType.accuracy = duck != null
-                        ? ClipAccuracy(
-                            BaseAccuracy
-                            +
-                            thisSr.SpeedAccuracyThreshold
-                            -
-                            (
-                                Math.Abs(duck.hSpeed) * thisSr.SpeedAccuracyHorizontal
-                                +
-                                Math.Abs(duck.vSpeed) * thisSr.SpeedAccuracyVertical
-                            )
-                        )
-                        : BaseAccuracy;
-                    break;
-                case ILoseAccuracy thisDmr:
-                    ammoType.accuracy = ClipAccuracy(ammoType.accuracy + thisDmr.RegenAccuracyDmr);
-                    break;
-                case IFirstPrecise thisFirstPrecise:
-                    thisFirstPrecise.CurrentDelayFp = Math.Max(thisFirstPrecise.CurrentDelayFp - 1, 0);
-                    ammoType.accuracy = thisFirstPrecise.CurrentDelayFp <= 0f
-                        ? thisFirstPrecise.MaxAccuracyFp
-                        : BaseAccuracy;
-                    break;
-            }
-
+        private void UpdateFeatures()
+        {
+            if (this is ICanDisableBipods icdb)
+                icdb.UpdateSwitchableBipods();
+        }
+        public override void Update()
+        {
+            UpdateCanonicalParametres();
+            UpdateFeatures();
             base.Update();
         }
 
@@ -206,9 +285,9 @@ namespace TMGmod.Core.WClasses
             return !(duck is null) && !duck.sliding;
         }
 
-        protected bool BipodsQ()
+        protected bool BipodsQ(bool bypassihb = false)
         {
-            return BipodsQ(this);
+            return BipodsQ(this, bypassihb);
         }
 
         protected bool HandleQ()
@@ -227,37 +306,61 @@ namespace TMGmod.Core.WClasses
             value = (value % m + m) % m;
             sm.frame = value;
         }
+#if DEBUG
+        private void DrawAccuracy()
+        {
+            if (ammoType is null) return;
+            var a = (1 - ammoType.accuracy) / 2;
+            var v = OffsetLocal(new Vec2(64, 0));
+            Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(a, Vec2.Zero), Color.Red);
+            Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(-a, Vec2.Zero), Color.Red);
+        }
+
+        private void DrawDamage()
+        {
+            if (ammoType is null) return;
+            var start = barrelPosition + new Vec2(0, -64);
+            var x1 = OffsetLocal(new Vec2(ammoType.range, 0));
+            var y1 = new Vec2(0, -64);
+            var last = start + 0 * x1 + 1 * y1;
+            for (var i = 0; i < 100; ++i)
+            {
+                var q = (i + 1) / 100f;
+                var next = start + q * x1 + Damage.CalculateCoeff(ammoType, q) * y1;
+                Graphics.DrawLine(last, next, Color.Lime);
+                last = next;
+            }
+
+            Graphics.DrawLine(start, start + x1, Color.MediumPurple);
+            Graphics.DrawLine(start, start + y1, Color.MediumPurple);
+        }
+
+        private void DrawDebug()
+        {
+            if (Level.activeLevel is Editor) return;
+            if (duck is null) return;
+            DrawAccuracy();
+            DrawDamage();
+        }
+#endif
 
         public override void Draw()
         {
             base.Draw();
 #if DEBUG
-            if (Level.activeLevel is Editor) return;
-            if (duck is null) return;
-            {
-                if (ammoType is null) return;
-                var a = (1 - ammoType.accuracy) / 2;
-                var v = OffsetLocal(new Vec2(64, 0));
-                Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(a, Vec2.Zero), Color.Red);
-                Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(-a, Vec2.Zero), Color.Red);
-            }
-            {
-                var start = barrelPosition + new Vec2(0, -64);
-                var x1 = OffsetLocal(new Vec2(ammoType.range, 0));
-                var y1 = new Vec2(0, -64);
-                var last = start + 0 * x1 + 1 * y1;
-                for (var i = 0; i < 100; ++i)
-                {
-                    var q = (i + 1) / 100f;
-                    var next = start + q * x1 + Damage.CalculateCoeff(ammoType, q) * y1;
-                    Graphics.DrawLine(last, next, Color.Lime);
-                    last = next;
-                }
-
-                Graphics.DrawLine(start, start + x1, Color.MediumPurple);
-                Graphics.DrawLine(start, start + y1, Color.MediumPurple);
-            }
+            DrawDebug();
 #endif
         }
+
+        public override void EditorPropertyChanged(object property)
+        {
+            if (this is IHaveAllowedSkins iha)
+            {
+                iha.UpdateSkin();
+            }
+            base.EditorPropertyChanged(property);
+        }
+
+        public Gun AsAGun() => this;
     }
 }

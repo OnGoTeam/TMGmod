@@ -72,23 +72,20 @@ namespace TMGmod.Core.AmmoTypes
 
         public static float Calculate(Bullet bullet)
         {
-#if DEBUG
-            StringMarker.Show(bullet.end, CalculateCoeff(bullet));
-#endif
             return CalculateBase(bullet.ammo) * CalculateCoeff(bullet);
         }
     }
 #if DEBUG
     public class StringMarker : Thing
     {
-        private readonly object _d;
+        private readonly string _string;
         private float _alive = 1f;
 
-        private StringMarker(Vec2 position, object d) : base(position.x, position.y)
+        private StringMarker(Vec2 pos, string @string) : base(pos.x, pos.y)
         {
-            _d = d;
+            _string = @string;
             _hSpeed = Rando.Float(-1f, 1f);
-            _vSpeed = Rando.Float(-1f, 1f);
+            _vSpeed = Rando.Float(-.5f, 1f);
         }
 
         public override void Update()
@@ -101,12 +98,12 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void Draw()
         {
-            Graphics.DrawString(_d.ToString(), position, new Color(Rando.Int(192, 255), Rando.Int(0, 63), 0, 128), 2f);
+            Graphics.DrawString(_string, position, new Color(Rando.Int(192, 255), Rando.Int(0, 63), 0));
         }
 
-        public static void Show(Vec2 position, object d)
+        public static void Show(Vec2 position, string @string)
         {
-            Level.Add(new StringMarker(position, d));
+            Level.Add(new StringMarker(position, @string));
         }
     }
 

@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using DuckGame;
+﻿using DuckGame;
 using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
@@ -13,6 +12,11 @@ namespace TMGmod.Core.WClasses
         [UsedImplicitly] public int LoadState = -1;
         [UsedImplicitly] public float AngleOffset;
         protected virtual bool HasLaser() => false;
+        protected virtual float MaxAngle() => 0.16f;
+        protected virtual float MaxOffset() => 4f;
+        protected virtual float ReloadSpeed() => 1f;
+        private float AngleSpeed() => .15f * ReloadSpeed();
+        private float OffsetSpeed() => .1f * MaxOffset() * ReloadSpeed();
 
         protected BaseBolt(float xval, float yval, string netLoad="loadSniper") : base(xval, yval)
         {
@@ -58,16 +62,16 @@ namespace TMGmod.Core.WClasses
                         ++LoadState;
                         break;
                     }
-                    case 1 when AngleOffset < 0.16f:
-                        AngleOffset = MathHelper.Lerp(AngleOffset, 0.2f, 0.15f);
+                    case 1 when AngleOffset < MaxAngle():
+                        AngleOffset = MathHelper.Lerp(AngleOffset, 1.25f * MaxAngle(), AngleSpeed());
                         break;
                     case 1:
                         ++LoadState;
                         break;
                     case 2:
                     {
-                        handOffset.x += 0.4f;
-                        if (handOffset.x > 4.0f)
+                        handOffset.x += OffsetSpeed();
+                        if (handOffset.x > MaxOffset())
                         {
                             ++LoadState;
                             Reload();
@@ -78,7 +82,7 @@ namespace TMGmod.Core.WClasses
                     }
                     case 3:
                     {
-                        handOffset.x -= 0.4f;
+                        handOffset.x -= OffsetSpeed();
                         if (handOffset.x <= 0.0f)
                         {
                             ++LoadState;
@@ -87,8 +91,8 @@ namespace TMGmod.Core.WClasses
 
                         break;
                     }
-                    case 4 when AngleOffset > 0.04f:
-                        AngleOffset = MathHelper.Lerp(AngleOffset, 0.0f, 0.15f);
+                    case 4 when AngleOffset > .25 * MaxAngle():
+                        AngleOffset = MathHelper.Lerp(AngleOffset, 0.0f, AngleSpeed());
                         break;
                     case 4:
                         LoadState = -1;
@@ -128,4 +132,3 @@ namespace TMGmod.Core.WClasses
         }
     }
 }
-#endif

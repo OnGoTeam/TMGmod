@@ -11,30 +11,6 @@ namespace TMGmod.Buddies
     [UsedImplicitly]
     public class HpArmor : Equipment
     {
-        /*public override float top
-        {
-            get => -1.0f + _equippedDuck?.top ?? base.top;
-            set => base.top = value;
-        }
-
-        public override float left
-        {
-            get => -1.0f + _equippedDuck?.left ?? base.left;
-            set => base.left = value;
-        }
-
-        public override float bottom
-        {
-            get => +1.0f + _equippedDuck?.bottom ?? base.bottom;
-            set => base.bottom = value;
-        }
-
-        public override float right
-        {
-            get => +1.0f + _equippedDuck?.right ?? base.right;
-            set => base.right = value;
-        }*/
-
         private readonly float _hpMax;
 
         [UsedImplicitly] public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
@@ -90,7 +66,11 @@ namespace TMGmod.Buddies
             if (!QHit(bullet))
                 return false;
             _equippedDuck.hSpeed *= 0.25f;
-            _hitPoints -= Damage.Calculate(bullet);
+            var damage = Damage.Calculate(bullet);
+            _hitPoints -= damage;
+#if DEBUG
+            StringMarker.Show(position, damage.ToString(CultureInfo.InvariantCulture));
+#endif
             if (_hitPoints < 0)
             {
                 Mod.Debug.Log("destroyed");
@@ -99,7 +79,7 @@ namespace TMGmod.Buddies
                 equippedDuck1.KnockOffEquipment(this, true, bullet);
                 Fondle(this, DuckNetwork.localConnection);
                 equippedDuck1.Destroy(new DTShot(bullet));
-                //kill owner
+                Level.Remove(this);
             }
 
             if (bullet.isLocal && Network.isActive)
@@ -121,8 +101,11 @@ namespace TMGmod.Buddies
             Graphics.DrawRect(start, start + new Vec2(0, -8) + new Vec2(64, 0) * Math.Max(_hitPoints / _hpMax, 0),
                 Color.Green, 0.1f);
 #if DEBUG
-            Graphics.DrawString(_hitPoints.ToString(CultureInfo.InvariantCulture), start + new Vec2(64, -8),
-                Color.GreenYellow);
+            Graphics.DrawString(
+                _hitPoints.ToString(CultureInfo.InvariantCulture),
+                start + new Vec2(64, -8),
+                Color.GreenYellow
+            );
             Graphics.DrawRect(_equippedDuck.rectangle, new Color(0, 0, 255, 128));
 #endif
         }
@@ -136,9 +119,10 @@ namespace TMGmod.Buddies
         {
             base.Update();
             if (_equippedDuck is null)
-                // Level.Remove(this);
+            {
+                Level.Remove(this);
                 return;
-
+            }
             _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
         }
 
@@ -150,7 +134,11 @@ namespace TMGmod.Buddies
 
         public override void UnEquip()
         {
-            _equippedDuck.invincible = false;
+            if (_equippedDuck != null)
+            {
+                _equippedDuck.invincible = false;
+                _equippedDuck.Destroy(new DTCrush(this));
+            }
             base.UnEquip();
         }
     }

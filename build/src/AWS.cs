@@ -9,10 +9,12 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : BaseBolt, IHaveSkin, I5, IHaveBipods
+    public class AWS : BaseBolt, IHaveAllowedSkins, I5, IHaveBipodState, ICanDisableBipods, ISwitchBipods
     {
+        // Amazon Web Services
+
         private const int NonSkinFrames = 3;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
+        public ICollection<int> AllowedSkins => new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -69,42 +71,40 @@ namespace TMGmod
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
 
+        public void UpdateStats(float old)
+        {
+            var nobipods = BipodsState < 0.01f;
+            var bipods = BipodsState > 0.99f;
+            _kickForce = bipods ? 0 : 4.75f;
+            _ammoType.range = bipods ? 1100f : 550f;
+            _ammoType.bulletSpeed = bipods ? 150f : 37f;
+            _ammoType.accuracy = bipods ? 1f : 0.97f;
+            FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
+            if (isServerForObject && bipods && old <= 0.99f)
+                BipOn.Play();
+            if (isServerForObject && nobipods && old >= 0.01f)
+                BipOff.Play();
+        }
+
+        public float BipodSpeed => 1f / 7;
+
         public bool Bipods
         {
-            get => BipodsQ(this);
-            set
-            {
-                var bipodsstate = BipodsState;
-                if (isServerForObject)
-                    BipodsState += 1f / 7 * (value ? 1 : -1);
-                var nobipods = BipodsState < 0.01f;
-                var bipods = BipodsState > 0.99f;
-                _kickForce = bipods ? 0 : 4.75f;
-                _ammoType.range = bipods ? 1100f : 550f;
-                _ammoType.bulletSpeed = bipods ? 150f : 37f;
-                _ammoType.accuracy = bipods ? 1f : 0.97f;
-                FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
-                if (isServerForObject && bipods && bipodsstate <= 0.99f)
-                    BipOn.Play();
-                if (isServerForObject && nobipods && bipodsstate >= 0.01f)
-                    BipOff.Play();
-            }
+            get => BipodsQ();
+            set => this.SetBipods(value);
         }
 
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled { get; private set; }
+
+        public void SetBipodsDisabled(bool disabled) => BipodsDisabled = disabled;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
@@ -116,32 +116,12 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        public override void Update()
-        {
-            Bipods = Bipods;
-            if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(this, true)) BipodsDisabled = false;
-            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-            base.Update();
-        }
+        public bool SwitchingBipods() => (FrameId + 10) % (10 * NonSkinFrames) >= 20;
 
-        public override void Fire()
-        {
-            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
-            base.Fire();
-        }
+        protected override bool HasLaser() => false;
+        protected override float MaxAngle() => Bipods ? .05f : .25f;
 
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
+        protected override float MaxOffset() => 3.0f;
+        protected override float ReloadSpeed() => Bipods ? 2.0f : 1.5f;
     }
 }
