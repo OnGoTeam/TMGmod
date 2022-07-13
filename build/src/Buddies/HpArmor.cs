@@ -1,4 +1,4 @@
-﻿/*#if DEBUG
+﻿#if DEBUG
 using DuckGame;
 using JetBrains.Annotations;
 using System;
@@ -23,7 +23,7 @@ namespace TMGmod.Buddies
             set => _collisionOffset = value;
         }
 
-        public override float top
+        /*public override float top
         {
             get => -1.0f + _equippedDuck?.top ?? base.top;
             set => base.top = value;
@@ -45,7 +45,7 @@ namespace TMGmod.Buddies
         {
             get => +1.0f + _equippedDuck?.right ?? base.right;
             set => base.right = value;
-        }
+        }*/
 
         private readonly float _hpMax;
         [UsedImplicitly]
@@ -55,10 +55,10 @@ namespace TMGmod.Buddies
         {
             _hpMax = hpMax;
             _hitPoints = _hpMax;
-            _collisionOffset = new Vec2(-6f, -4f);
-            _collisionSize = new Vec2(11f, 8f);
-            _equippedCollisionOffset = new Vec2(-6f, -11f);
-            _equippedCollisionSize = new Vec2(12f, 22f);
+            _collisionOffset = new Vec2(-4f, -4f);
+            _collisionSize = new Vec2(8f, 8f);
+            _equippedCollisionOffset = new Vec2(-12f, -12f);
+            _equippedCollisionSize = new Vec2(24f, 24f);
             _hasEquippedCollision = true;
             _center = new Vec2(8f, 8f);
             physicsMaterial = PhysicsMaterial.Duck;
@@ -75,8 +75,8 @@ namespace TMGmod.Buddies
             var v = bullet.bulletSpeed * bullet.travelDirNormalized;
             var u = new Vec2(v.y, -v.x).normalized;
 
-            return Vec2.Dot(u, (_equippedDuck.topLeft - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomRight - hit).normalized) < 0.1f &&
-                   Vec2.Dot(u, (_equippedDuck.topRight - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomLeft - hit).normalized) < 0.1f;
+            return Vec2.Dot(u, (_equippedDuck.topLeft - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomRight - hit).normalized) < 0.001f &&
+                   Vec2.Dot(u, (_equippedDuck.topRight - hit).normalized) * Vec2.Dot(u, (_equippedDuck.bottomLeft - hit).normalized) < 0.001f;
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)
@@ -138,7 +138,18 @@ namespace TMGmod.Buddies
 
             _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
         }
+
+        public override void Equip(Duck d)
+        {
+            base.Equip(d);
+            _equippedDuck.invincible = true;
+        }
+
+        public override void UnEquip()
+        {
+            _equippedDuck.invincible = false;
+            base.UnEquip();
+        }
     }
 }
 #endif
-*/
