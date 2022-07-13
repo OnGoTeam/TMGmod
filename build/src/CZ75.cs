@@ -58,25 +58,25 @@ namespace TMGmod
                 Fire();
             }
             else switch (ammo)
-                {
-                    case 0:
-                        DoAmmoClick();
-                        break;
-                    case 12 when _sprite.frame == 0:
-                        SFX.Play("click");
-                        if (_raised)
-                            Level.Add(new Czmag(x, y + 1));
-                        else if (offDir < 0)
-                            Level.Add(new Czmag(x + 5, y));
-                        else
-                            Level.Add(new Czmag(x - 5, y));
-                        _sprite.frame = 10;
-                        _fdelay = 40;
-                        break;
-                    default:
-                        DoAmmoClick();
-                        break;
-                }
+            {
+                case 0:
+                    DoAmmoClick();
+                    break;
+                case 12 when _sprite.frame == 0:
+                    SFX.Play("click");
+                    if (_raised)
+                        Level.Add(new Czmag(x, y + 1));
+                    else if (offDir < 0)
+                        Level.Add(new Czmag(x + 5, y));
+                    else
+                        Level.Add(new Czmag(x - 5, y));
+                    _sprite.frame = 10;
+                    _fdelay = 40;
+                    break;
+                default:
+                    DoAmmoClick();
+                    break;
+            }
         }
         public override void Update()
         {

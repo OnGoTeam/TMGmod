@@ -11,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|NOTRELEASEDYET")]
     [UsedImplicitly]
-    public class LSTK16v6 : BaseGun, IHaveSkin, IHaveBipods
+    public class Lstk16V6 : BaseGun, IHaveSkin, IHaveBipods
     {
         private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 9;
@@ -39,7 +39,6 @@ namespace TMGmod
             get => BipodsQ(this);
             set
             {
-                var bipodsstate = BipodsState;
                 if (isServerForObject)
                     BipodsState += 1f / 10 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
@@ -55,7 +54,7 @@ namespace TMGmod
 
         public bool BipodsDisabled { get; private set; }
 
-        public LSTK16v6(float xval, float yval) : base(xval, yval)
+        public Lstk16V6(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 25;
@@ -85,13 +84,6 @@ namespace TMGmod
             _weight = 6.7f;
         }
 
-        //private void UpdCds()
-        //{
-        //    if (100 < _cdstate && _cdstate < 150) _cdstate = 300;
-        //    if (150 < _cdstate && _cdstate < 200) _cdstate = 0;
-        //    Bipods = Bipods;
-        //}
-
         public override void Update()
         {
             base.Update();
@@ -99,16 +91,12 @@ namespace TMGmod
             if (duck == null) BipodsDisabled = false;
             else if (!BipodsQ(this, true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-            //if (_cdstate > 0) _cdstate -= 1;
-            //UpdCds();
         }
 
         public override void Fire()
         {
             if ((29 < FrameId) && (FrameId < 60)) return;
-            //UpdCds();
             base.Fire();
-            //if (Bipods && _wait >= _fireWait) _cdstate += 49;
         }
 
         private void UpdateSkin()
