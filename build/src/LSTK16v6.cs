@@ -31,8 +31,8 @@ namespace TMGmod
         [UsedImplicitly]
         public EditorProperty<int> Skin => skin;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 6, 7 });
-        [UsedImplicitly]
-        private uint _cdstate;
+        //[UsedImplicitly]
+        //private uint _cdstate;
         [UsedImplicitly]
         public bool Bipods
         {
@@ -85,29 +85,30 @@ namespace TMGmod
             _weight = 6.7f;
         }
 
-        private void UpdCds()
-        {
-            if (100 < _cdstate && _cdstate < 150) _cdstate = 300;
-            if (150 < _cdstate && _cdstate < 200) _cdstate = 0;
-            Bipods = Bipods;
-        }
+        //private void UpdCds()
+        //{
+        //    if (100 < _cdstate && _cdstate < 150) _cdstate = 300;
+        //    if (150 < _cdstate && _cdstate < 200) _cdstate = 0;
+        //    Bipods = Bipods;
+        //}
 
         public override void Update()
         {
             base.Update();
+            Bipods = Bipods;
             if (duck == null) BipodsDisabled = false;
             else if (!BipodsQ(this, true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-            if (_cdstate > 0) _cdstate -= 1;
-            UpdCds();
+            //if (_cdstate > 0) _cdstate -= 1;
+            //UpdCds();
         }
 
         public override void Fire()
         {
-            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
-            UpdCds();
+            if ((29 < FrameId) && (FrameId < 60)) return;
+            //UpdCds();
             base.Fire();
-            if (Bipods && _wait >= _fireWait) _cdstate += 49;
+            //if (Bipods && _wait >= _fireWait) _cdstate += 49;
         }
 
         private void UpdateSkin()
