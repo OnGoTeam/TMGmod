@@ -57,7 +57,7 @@ namespace TMGmod
             };
             _fullAuto = false;
             _fireWait = 0.3f;
-            _kickForce = 3.7f;
+            _kickForce = 2.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(2f, 3f);
