@@ -6,7 +6,7 @@ namespace TMGmod.Core.Shells
     public class DB44Shell : EjectedShell
     {
         public DB44Shell(float xpos, float ypos)
-          : base(xpos, ypos, Mod.GetPath<TMGmod>("44dbShell"))
+            : base(xpos, ypos, Mod.GetPath<TMGmod>("44dbShell"))
         {
             scale *= 0.707f;
         }

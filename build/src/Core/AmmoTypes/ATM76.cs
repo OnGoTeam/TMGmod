@@ -23,6 +23,7 @@ namespace TMGmod.Core.AmmoTypes
             AlphaDamage = 0.6f;
             DistanceConvexity = 0.5f;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new AT556NATOShell(x, y)

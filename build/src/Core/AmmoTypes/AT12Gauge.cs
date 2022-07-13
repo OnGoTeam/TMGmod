@@ -20,6 +20,7 @@ namespace TMGmod.Core.AmmoTypes
             AlphaDamage = 0.5f;
             DistanceConvexity = 1;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new Gauge12Shell(x, y)

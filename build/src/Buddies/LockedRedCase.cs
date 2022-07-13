@@ -1,12 +1,13 @@
 ﻿#if DEBUG
-using JetBrains.Annotations;
 using DuckGame;
+using JetBrains.Annotations;
+using TMGmod.Cases.Color;
 
 namespace TMGmod.Buddies
 {
     [EditorGroup("TMG|DEBUG")]
     [PublicAPI]
-    internal class LockedRedCase : LockedContainer<Cases.Color.PodarokColorR>
+    internal class LockedRedCase : LockedContainer<PodarokColorR>
     {
         public LockedRedCase(float xval, float yval) : base(xval, yval)
         {

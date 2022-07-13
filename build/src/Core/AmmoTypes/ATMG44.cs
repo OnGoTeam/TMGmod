@@ -27,6 +27,7 @@ namespace TMGmod.Core.AmmoTypes
         {
             PopShellSkin(x, y, 0);
         }
+
         public static void PopShellSkin(float x, float y, int frameid)
         {
             var shalker = new MG44Shell(x, y, frameid)

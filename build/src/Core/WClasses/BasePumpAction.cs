@@ -1,23 +1,25 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using JetBrains.Annotations;
-using System;
 
 namespace TMGmod.Core.WClasses
 {
     public abstract class BasePumpAction : BaseGun, IAmSg
     {
-        [UsedImplicitly]
-        public int LoadProgress;
-        [UsedImplicitly]
-        public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
-        protected SpriteMap LoaderSprite;
-        protected Vec2 LoaderVec2;
-        protected float Loaddx = 3f;
         private const sbyte LoadStart = -100;
         private const sbyte LoadNo = -1;
         private const sbyte LoadPop = 50;
         private const sbyte LoadFin = 100;
+        protected float Loaddx = 3f;
+        protected SpriteMap LoaderSprite;
+        protected Vec2 LoaderVec2;
+
+        [UsedImplicitly] public int LoadProgress;
+
+        [UsedImplicitly] public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
+
         protected sbyte LoadSpeed = 10;
+
         protected BasePumpAction(float xval, float yval) : base(xval, yval)
         {
             LoadProgress = LoadFin;

@@ -1,7 +1,7 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -12,31 +12,27 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AR15Proto : BaseAr, IHaveSkin
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private const double Explodechance = 0.006;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 8 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 8 });
-        [UsedImplicitly]
-        public int Ammobefore = 21;
-        [UsedImplicitly]
-        public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
-        [UsedImplicitly]
-        public float Explode;
-        [UsedImplicitly]
-        public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
-        [UsedImplicitly]
-        public int Uselessinteger = 3;
-        [UsedImplicitly]
-        public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
-        private const double Explodechance = 0.006;
+
+        [UsedImplicitly] public int Ammobefore = 21;
+
+        [UsedImplicitly] public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
+
+        [UsedImplicitly] public float Explode;
+
+        [UsedImplicitly] public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
+
+        [UsedImplicitly] public int Uselessinteger = 3;
 
         public AR15Proto(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
@@ -68,6 +64,21 @@ namespace TMGmod
             _weight = 4.2f;
             KickForceFastAr = 0.5f;
         }
+
+        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void OnPressAction()
         {
             ammo = Rando.Int(0, Ammobefore / Uselessinteger);
@@ -76,23 +87,27 @@ namespace TMGmod
             if (ammo < 1 && Ammobefore < 1) CreateExplosion(position);
             base.OnPressAction();
         }
+
         public override void OnReleaseAction()
         {
             if (ammo > 0) Ammobefore += ammo;
             Uselessinteger = 1;
             base.OnReleaseAction();
         }
+
         public override void Fire()
         {
             Explode = Rando.Float(0, 1);
             if (Explode < Explodechance) CreateExplosion(position);
             base.Fire();
         }
+
         public override void Thrown()
         {
             if (ammo < 1 && Ammobefore > 0) ammo = Ammobefore;
             base.Thrown();
         }
+
         private void CreateExplosion(Vec2 pos)
         {
             var cx = pos.x;
@@ -108,6 +123,7 @@ namespace TMGmod
                     cy - (float)(Math.Sin(Maths.DegToRad(dir)) * dist));
                 Level.Add(ins);
             }
+
             /*
             for (var i = 0; i < 25; i++)
             {
@@ -122,21 +138,14 @@ namespace TMGmod
             SFX.Play("explode");
             Level.Remove(this);
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

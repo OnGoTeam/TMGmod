@@ -1,6 +1,5 @@
 ﻿using DuckGame;
 
-
 namespace TMGmod.Core
 {
     public class Czmag : PhysicsParticle

@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -10,17 +10,16 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|DMR")]
     public class Arx200 : BaseDmr, IHaveSkin
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5, 6, 7, 9 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5, 6, 7, 9 });
+
         public Arx200(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
@@ -52,20 +51,24 @@ namespace TMGmod
             _editorName = "Beretta ARX-200";
             _weight = 6f;
         }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
         }
 
         public override void EditorPropertyChanged(object property)

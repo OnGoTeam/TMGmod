@@ -1,9 +1,9 @@
 ﻿#if FEATURES_1_3
-using DuckGame;
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.SolvePoly;
 
 namespace TMGmod.Buddies
@@ -12,28 +12,29 @@ namespace TMGmod.Buddies
     [EditorGroup("TMG|DEBUG")]
     public class StingerMissile : PhysicsObject
     {
-        private readonly List<Vec2> _pList = new List<Vec2>();
         private const float A = 0.22f;
         private const float HomingRange = 8192;
-        private MaterialThing _target;
-        [UsedImplicitly]
-        public Vec2 Tlv;
-        [UsedImplicitly]
-        public StateBinding TlvBinding = new StateBinding(nameof(Tlv));
-        [UsedImplicitly]
-        public Vec2 Ta;
-        [UsedImplicitly]
-        public StateBinding TaBinding = new StateBinding(nameof(Ta));
-        [UsedImplicitly]
-        public Vec2 G;
-        [UsedImplicitly]
-        public StateBinding GBinding = new StateBinding(nameof(G));
-        [UsedImplicitly]
-        public Vec2 Av;
-        [UsedImplicitly]
-        public StateBinding AvBinding = new StateBinding(nameof(Av));
+        private readonly List<Vec2> _pList = new List<Vec2>();
         private bool _activated;
+        private MaterialThing _target;
         private int _ticks;
+
+        [UsedImplicitly] public Vec2 Av;
+
+        [UsedImplicitly] public StateBinding AvBinding = new StateBinding(nameof(Av));
+
+        [UsedImplicitly] public Vec2 G;
+
+        [UsedImplicitly] public StateBinding GBinding = new StateBinding(nameof(G));
+
+        [UsedImplicitly] public Vec2 Ta;
+
+        [UsedImplicitly] public StateBinding TaBinding = new StateBinding(nameof(Ta));
+
+        [UsedImplicitly] public Vec2 Tlv;
+
+        [UsedImplicitly] public StateBinding TlvBinding = new StateBinding(nameof(Tlv));
+
         public StingerMissile(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("deleteco/Future/StingerRaketa.png"), 19, 4);
@@ -73,21 +74,20 @@ namespace TMGmod.Buddies
         private void UpdateTarget()
         {
             if (_target != null)
-                if (Level.CheckLine<IPlatform>(position, _target.position) != null || _target is Duck duck0 && duck0.dead || _target == owner)
+                if (Level.CheckLine<IPlatform>(position, _target.position) != null ||
+                    (_target is Duck duck0 && duck0.dead) || _target == owner)
                     _target = null;
             if (_target != null) return;
             //else
             foreach (var d in Level.CheckCircleAll<Duck>(position, HomingRange))
-            {
-                if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead && (owner == null || owner.owner != d))
+                if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead &&
+                    (owner == null || owner.owner != d))
                     _target = d;
-            }
 
             foreach (var d in Level.CheckCircleAll<StingerMissile>(position, HomingRange))
-            {
-                if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this && !d._destroyed && (owner == null || d._target == owner.owner))
+                if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this &&
+                    !d._destroyed && (owner == null || d._target == owner.owner))
                     _target = d;
-            }
         }
 
         protected override bool OnDestroy(DestroyType dtype = null)
@@ -102,6 +102,7 @@ namespace TMGmod.Buddies
                 random = Rando.generator;
                 Rando.generator = new Random(NetRand.currentSeed);
             }
+
             var varBullets = new List<Bullet>();
             for (var index = 0; index < 12; ++index)
             {
@@ -111,14 +112,18 @@ namespace TMGmod.Buddies
                 var bullet = new Bullet(x + vec2.x * 8f, y - vec2.y * 8f, atMissileShrapnel, num) { firedFrom = this };
                 varBullets.Add(bullet);
                 Level.Add(bullet);
-                Level.Add(Spark.New(x + Rando.Float(-8f, 8f), y + Rando.Float(-8f, 8f), vec2 + new Vec2(Rando.Float(-0.1f, 0.1f), Rando.Float(-0.1f, 0.1f))));
-                Level.Add(SmallSmoke.New(x + vec2.x * 8f + Rando.Float(-8f, 8f), y + vec2.y * 8f + Rando.Float(-8f, 8f)));
+                Level.Add(Spark.New(x + Rando.Float(-8f, 8f), y + Rando.Float(-8f, 8f),
+                    vec2 + new Vec2(Rando.Float(-0.1f, 0.1f), Rando.Float(-0.1f, 0.1f))));
+                Level.Add(
+                    SmallSmoke.New(x + vec2.x * 8f + Rando.Float(-8f, 8f), y + vec2.y * 8f + Rando.Float(-8f, 8f)));
             }
+
             if (Network.isActive && isLocal)
             {
                 Send.Message(new NMFireGun(null, varBullets, 0, false), NetMessagePriority.ReliableOrdered);
                 varBullets.Clear();
             }
+
             if (Network.isActive && isLocal)
                 Rando.generator = random;
             foreach (var window in Level.CheckCircleAll<Window>(position, 30f))
@@ -128,6 +133,7 @@ namespace TMGmod.Buddies
                 if (Level.CheckLine<Block>(position, window.position, window) == null)
                     window.Destroy(new DTImpact(this));
             }
+
             foreach (var physicsObject in Level.CheckCircleAll<PhysicsObject>(position, 70f))
             {
                 if (isLocal && owner == null)
@@ -137,21 +143,24 @@ namespace TMGmod.Buddies
                 physicsObject.sleeping = false;
                 physicsObject.vSpeed = -2f;
             }
+
             var varBlocks = new HashSet<ushort>();
             foreach (var blockGroup1 in Level.CheckCircleAll<BlockGroup>(position, 50f))
             {
                 if (blockGroup1 == null) continue;
                 var blockGroup2 = blockGroup1;
-                foreach (var block in blockGroup2.blocks.Where(block => Collision.Circle(position, 28f, block.rectangle)))
+                foreach (var block in blockGroup2.blocks.Where(
+                    block => Collision.Circle(position, 28f, block.rectangle)))
                 {
                     block.shouldWreck = true;
                     if (block is AutoBlock autoBlock)
                         varBlocks.Add(autoBlock.blockIndex);
                 }
+
                 blockGroup2.Wreck();
             }
+
             foreach (var block in Level.CheckCircleAll<Block>(position, 28f))
-            {
                 switch (block)
                 {
                     case AutoBlock autoBlock:
@@ -165,7 +174,7 @@ namespace TMGmod.Buddies
                         block.Destroy(new DTRocketExplosion(null));
                         break;
                 }
-            }
+
             if (Network.isActive && isLocal && varBlocks.Count > 0)
                 Send.Message(new NMDestroyBlocks(varBlocks));
             Level.Remove(this);
@@ -193,6 +202,7 @@ namespace TMGmod.Buddies
                 UpdateAv();
                 return;
             }
+
             Ta = _target.velocity - Tlv;
             Tlv = _target.velocity;
             var p = _target.position - position;
@@ -219,6 +229,7 @@ namespace TMGmod.Buddies
                 Graphics.DrawLine(p0, pi, Color.Crimson);
                 p0 = pi;
             }
+
             _pList.Reverse();
             if (_target is null) return;
             var p = _target.position - position;
@@ -236,6 +247,7 @@ namespace TMGmod.Buddies
                 v0 += pa + g;
                 p0 = pi;
             }
+
             p0 = _target.position;
             v0 = _target.velocity;
             for (var i = 0; i < 60; i++)

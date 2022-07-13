@@ -1,57 +1,30 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [BaggedProperty("isInDemo", true), EditorGroup("TMG|Handgun|Fully-Automatic")]
+    [BaggedProperty("isInDemo", true)]
+    [EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class HazeS : BaseGun, IAmHg, IHaveSkin
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+
         private float _heatval;
-        [UsedImplicitly]
-        public float Heatval
-        {
-            get => _heatval;
-            set
-            {
-                _heatval = value;
-                _ammoType.accuracy = _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
-                _ammoType.bulletSpeed = 60f + 10f * _heatval;
-                _ammoType.range = 180f;
-                Sighted = _sighted;
-            }
-        }
-        [UsedImplicitly]
-        public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
 
         private bool _sighted;
 
-        [UsedImplicitly]
-        public bool Sighted
-        {
-            get => _sighted;
-            set
-            {
-                _sighted = value;
-                if (!value) return;
-                //else
-                _ammoType.accuracy = 1f;
-                _ammoType.range = 450f;
-            }
-        }
+        [UsedImplicitly] public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
 
         public HazeS(float xval, float yval) :
             base(xval, yval)
@@ -81,17 +54,55 @@ namespace TMGmod
             _flare = new SpriteMap(GetPath("FlareHazeS"), 13, 10) { center = new Vec2(0.0f, 5f) };
         }
 
+        [UsedImplicitly]
+        public float Heatval
+        {
+            get => _heatval;
+            set
+            {
+                _heatval = value;
+                _ammoType.accuracy = _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
+                _ammoType.bulletSpeed = 60f + 10f * _heatval;
+                _ammoType.range = 180f;
+                Sighted = _sighted;
+            }
+        }
+
+        [UsedImplicitly]
+        public bool Sighted
+        {
+            get => _sighted;
+            set
+            {
+                _sighted = value;
+                if (!value) return;
+                //else
+                _ammoType.accuracy = 1f;
+                _ammoType.range = 450f;
+            }
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void Update()
         {
             base.Update();
             if (_heatval > 8f)
             {
                 _heatval = 8f;
-                for (var i = 0; i < 4; i++)
-                {
-                    Level.Add(SmallSmoke.New(x, y));
-                }
+                for (var i = 0; i < 4; i++) Level.Add(SmallSmoke.New(x, y));
             }
+
             _heatval -= 0.1f;
             if (_heatval < 0f) _heatval = 0f;
             Heatval = _heatval;
@@ -125,31 +136,20 @@ namespace TMGmod
                 Heatval = Heatval;
                 if (_wait <= 0f)
                 {
-                    if (Sighted && _heatval < 1f)
-                    {
-                        _heatval += 4f;
-                    }
+                    if (Sighted && _heatval < 1f) _heatval += 4f;
 
                     _heatval += 1f;
                 }
             }
+
             base.Fire();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
-        }
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void EditorPropertyChanged(object property)

@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -10,27 +10,26 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Other")]
     public class DragoShot : BaseBurst, IAmSr, IHaveSkin
     {
-        [UsedImplicitly]
-        public float Counter;
-        [UsedImplicitly]
-        public StateBinding CounterBinding = new StateBinding(nameof(Counter));
         private const float Step = 0.02f;
         private const float TimeToHappend = 1f;
-        [UsedImplicitly]
-        public bool LoockerOfSound;
-        [UsedImplicitly]
-        public StateBinding LoockerOfSoundBinding = new StateBinding(nameof(LoockerOfSound));
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+
+        [UsedImplicitly] public float Counter;
+
+        [UsedImplicitly] public StateBinding CounterBinding = new StateBinding(nameof(Counter));
+
+        [UsedImplicitly] public bool LoockerOfSound;
+
+        [UsedImplicitly] public StateBinding LoockerOfSoundBinding = new StateBinding(nameof(LoockerOfSound));
+
         public DragoShot(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(-1, this, -1f, 9f, 0.5f);
             ammo = 16;
@@ -59,15 +58,30 @@ namespace TMGmod
             DeltaWait = 0.15f;
             BurstNum = 1;
         }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void OnPressAction()
         {
             //Nothing Happend
         }
+
         public override void OnHoldAction()
         {
             if (ammo != 0 && Counter <= TimeToHappend) Counter += Step;
             base.OnHoldAction();
         }
+
         public override void OnReleaseAction()
         {
             Counter = 0f;
@@ -75,6 +89,7 @@ namespace TMGmod
             if (duck != null) Fire();
             LoockerOfSound = false;
         }
+
         public override void Update()
         {
             if (Counter >= TimeToHappend)
@@ -95,23 +110,17 @@ namespace TMGmod
                 _kickForce = 5.5f;
                 BurstNum = 1;
             }
+
             base.Update();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

@@ -17,9 +17,11 @@ namespace TMGmod.Core.AmmoTypes
             penetration = 2f;
             bulletThickness = 1.5f;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
-            var difficultToSee = new X3XShell(x, y) {hSpeed = dir * (5f + Rando.Float(1f))}; //должна быть кастомная shell
+            var difficultToSee = new X3XShell(x, y)
+                { hSpeed = dir * (5f + Rando.Float(1f)) }; //должна быть кастомная shell
             Level.Add(difficultToSee);
         }
     }

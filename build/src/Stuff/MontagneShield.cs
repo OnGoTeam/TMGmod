@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using JetBrains.Annotations;
-using System;
 using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Stuff
@@ -82,8 +82,8 @@ namespace TMGmod.Stuff
         public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
         {
             var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
-            if (collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) &&
-                from == ImpactedFrom.Left || from == ImpactedFrom.Right)
+            if ((collisionSize.x < 5f && (doblock || with is IAmADuck) && !(with is IDontMove || with is Block) &&
+                 from == ImpactedFrom.Left) || from == ImpactedFrom.Right)
             {
                 if (duck == null && Math.Abs(with.hSpeed) * with.weight > 40f)
                 {
@@ -110,7 +110,8 @@ namespace TMGmod.Stuff
             if (collisionSize.x < 5f)
                 foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
                 {
-                    if (thing == duck || thing == this || thing is IDontMove || thing is Block || thing is Teleporter) continue;
+                    if (thing == duck || thing == this || thing is IDontMove || thing is Block ||
+                        thing is Teleporter) continue;
                     if (!(thing is IAmADuck || doblock)) continue;
                     //else
                     thing.hSpeed = hspd;
@@ -126,10 +127,7 @@ namespace TMGmod.Stuff
                     else hSpeed *= hvk;
                 }
 
-            if (duck != null)
-            {
-                Reset();
-            }
+            if (duck != null) Reset();
 
             base.Update();
         }

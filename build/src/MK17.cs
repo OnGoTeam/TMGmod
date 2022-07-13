@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -12,18 +12,17 @@ namespace TMGmod
     public class MK17 : BaseAr, IHaveSkin
     {
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
+
         private float _calculateSide;
-        private readonly SpriteMap _sprite;
 
         public MK17(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _hitPoints = 49f;
@@ -61,12 +60,26 @@ namespace TMGmod
             _editorName = "Mk17 with Shield";
             _weight = 4.5f;
         }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             _calculateSide = Damage.Calculate(bullet);
             MakeDamage();
             return Hit(bullet, hitPos);
         }
+
         private void MakeDamage()
         {
             _hitPoints -= _calculateSide;
@@ -75,26 +88,18 @@ namespace TMGmod
             _sprite.frame += 10;
             thickness = 0f;
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-
     }
 }

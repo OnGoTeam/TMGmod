@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -12,15 +12,14 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SV99 : Sniper, IAmSr, IHaveSkin, I5
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 5, 8 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 5, 8 });
+
         public SV99(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
@@ -48,6 +47,18 @@ namespace TMGmod
             _weight = 2f;
         }
 
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void Update()
         {
             base.Update();
@@ -55,10 +66,7 @@ namespace TMGmod
             {
                 if (owner == null)
                 {
-                    if (_loadState == 2)
-                    {
-                        loaded = true;
-                    }
+                    if (_loadState == 2) loaded = true;
                     _loadState = -1;
                     _angleOffset = 0f;
                     handOffset = Vec2.Zero;
@@ -68,18 +76,13 @@ namespace TMGmod
                 switch (_loadState)
                 {
                     case 0:
-                        {
-                            if (!Network.isActive)
-                            {
-                                SFX.Play("loadSniper");
-                            }
-                            else if (isServerForObject)
-                            {
-                                _netLoad.Play();
-                            }
-                            _loadState++;
-                            break;
-                        }
+                    {
+                        if (!Network.isActive)
+                            SFX.Play("loadSniper");
+                        else if (isServerForObject) _netLoad.Play();
+                        _loadState++;
+                        break;
+                    }
                     case 1 when _angleOffset < 0.16f:
                         _angleOffset = MathHelper.Lerp(_angleOffset, 0.25f, 0.25f);
                         break;
@@ -87,28 +90,28 @@ namespace TMGmod
                         _loadState++;
                         break;
                     case -1:
+                    {
+                        handOffset.x += 0.8f;
+                        if (handOffset.x > 4f)
                         {
-                            handOffset.x += 0.8f;
-                            if (handOffset.x > 4f)
-                            {
-                                _loadState++;
-                                Reload();
-                                loaded = false;
-                            }
-
-                            break;
+                            _loadState++;
+                            Reload();
+                            loaded = false;
                         }
+
+                        break;
+                    }
                     case 3:
+                    {
+                        handOffset.x -= 0.8f;
+                        if (handOffset.x <= 0f)
                         {
-                            handOffset.x -= 0.8f;
-                            if (handOffset.x <= 0f)
-                            {
-                                _loadState++;
-                                handOffset.x = 0f;
-                            }
-
-                            break;
+                            _loadState++;
+                            handOffset.x = 0f;
                         }
+
+                        break;
+                    }
                     case 4 when _angleOffset > 0.04f:
                         _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.25f);
                         break;
@@ -119,11 +122,13 @@ namespace TMGmod
                         break;
                 }
             }
+
             if (loaded && duck != null && _loadState == -1)
             {
                 laserSight = false;
                 return;
             }
+
             laserSight = false;
         }
 
@@ -146,30 +151,18 @@ namespace TMGmod
         {
             var ang = angle;
             if (offDir > 0)
-            {
                 angle -= _angleOffset;
-            }
             else
-            {
                 angle += _angleOffset;
-            }
             base.Draw();
             angle = ang;
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
-        }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void EditorPropertyChanged(object property)

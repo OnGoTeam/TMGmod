@@ -7,10 +7,10 @@ namespace TMGmod.NY
     [UsedImplicitly]
     public class CandyCane : Gun
     {
-        [UsedImplicitly]
-        public bool Dropped;
-        [UsedImplicitly]
-        public StateBinding DroppedBinding = new StateBinding(nameof(Dropped));
+        [UsedImplicitly] public bool Dropped;
+
+        [UsedImplicitly] public StateBinding DroppedBinding = new StateBinding(nameof(Dropped));
+
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
             ammo = 1;
@@ -39,10 +39,7 @@ namespace TMGmod.NY
 
         public override void Reload(bool shell = true)
         {
-            if (ammo > 0)
-            {
-                --ammo;
-            }
+            if (ammo > 0) --ammo;
             loaded = true;
         }
 

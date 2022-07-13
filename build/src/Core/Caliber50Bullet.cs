@@ -5,7 +5,10 @@ namespace TMGmod.Core
 {
     public class AntiProp : Bullet
     {
-        public AntiProp(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = true)
+        public AntiProp(
+            float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false,
+            float distance = -1f, bool tracer = false, bool network = true
+        )
             : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
         {
         }
@@ -27,6 +30,7 @@ namespace TMGmod.Core
             }
         }
     }
+
     // ReSharper disable once InconsistentNaming
     public class AT50C : BaseAmmoType
     {

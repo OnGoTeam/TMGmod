@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,35 +11,27 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class VSK94 : BaseAr, IHaveSkin, IHaveBipods
     {
-        [UsedImplicitly]
-        public float HandAngleOff
-        {
-            get => handAngle * offDir;
-            set => handAngle = value * offDir;
-        }
-        [UsedImplicitly]
-        public float HandAngleOffState;
-        [UsedImplicitly]
-        public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
-        [UsedImplicitly]
-        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        private const int NonSkinFrames = 1;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7, 8 });
 
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        [UsedImplicitly]
-        public float Psevdotimer;
 
-        private float _floatingKickforce;
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7, 8 });
+
+        private float _floatingKickforce;
+
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+
+        [UsedImplicitly] public float HandAngleOffState;
+
+        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
+
+        [UsedImplicitly] public float Psevdotimer;
 
         public VSK94(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
@@ -71,13 +63,14 @@ namespace TMGmod
             _editorName = "Anyx SR2 Compact";
             _weight = 5.5f;
         }
-        public override void Update()
+
+        [UsedImplicitly]
+        public float HandAngleOff
         {
-            HandAngleOff = HandAngleOffState;
-            base.Update();
-            Bipods = Bipods;
-            _floatingKickforce = Psevdotimer < 16f ? 0.5f : 3f;
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
         }
+
         public bool Bipods
         {
             get => HandleQ();
@@ -90,6 +83,7 @@ namespace TMGmod
                 maxAccuracyLost = value ? 0f : 0.6f;
             }
         }
+
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
@@ -104,6 +98,25 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public override void Update()
+        {
+            HandAngleOff = HandAngleOffState;
+            base.Update();
+            Bipods = Bipods;
+            _floatingKickforce = Psevdotimer < 16f ? 0.5f : 3f;
+        }
 
         public override void OnHoldAction()
         {
@@ -113,6 +126,7 @@ namespace TMGmod
             Psevdotimer += 1f;
             base.OnHoldAction();
         }
+
         public override void OnReleaseAction()
         {
             Psevdotimer = 0f;
@@ -120,20 +134,12 @@ namespace TMGmod
             HandAngleOffState = HandAngleOff;
             base.OnReleaseAction();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
-        }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void EditorPropertyChanged(object property)

@@ -36,6 +36,7 @@ namespace TMGmod
             _editorName = "M72";
             _weight = 4.5f;
         }
+
         public override void Update()
         {
             // ReSharper disable once SwitchStatementMissingSomeCases

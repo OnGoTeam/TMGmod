@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
+using TMGmod.NY;
 
 namespace TMGmod.Cases
 {
@@ -29,17 +30,14 @@ namespace TMGmod.Cases
             var physicsObjects = ItemBox.GetPhysicsObjects(Editor.Placeables);
             physicsObjects.RemoveAll(t => !(t.IsSubclassOf(typeof(Gun)) &&
                                             t.Assembly == typeof(Core.TMGmod).Assembly &&
-                                            t.Namespace != typeof(NY.CandyCane).Namespace));
+                                            t.Namespace != typeof(CandyCane).Namespace));
             Things = physicsObjects;
             base.Initialize();
         }
 
         protected override void Spawned(Holdable thing)
         {
-            if (thing is I5 && thing is IHaveSkin skinThing)
-            {
-                skinThing.FrameId = 5;
-            }
+            if (thing is I5 && thing is IHaveSkin skinThing) skinThing.FrameId = 5;
         }
     }
 }

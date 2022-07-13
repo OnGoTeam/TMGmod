@@ -13,6 +13,12 @@ namespace TMGmod.NY
             _ammoType = new ATCaneLime();
             _editorName = "Peppermint Lime";
         }
+
+        public override void Drop(Vec2 pos, bool force = false, float p = 0.75f)
+        {
+            base.Drop(pos, false, 2f);
+        }
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private class ATCaneLime : ATCane
@@ -23,10 +29,6 @@ namespace TMGmod.NY
                 bulletSpeed = 19f;
                 sprite = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Peppermint Lime"));
             }
-        }
-        public override void Drop(Vec2 pos, bool force = false, float p = 0.75f)
-        {
-            base.Drop(pos, false, 2f);
         }
     }
 }

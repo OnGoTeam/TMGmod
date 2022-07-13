@@ -49,20 +49,37 @@ namespace TMGmod.Buddies
             Level.Add(bullet);
         }
 
-        private float MissileRange() => _totalLength - (_actualStart - start).length;
+        private float MissileRange()
+        {
+            return _totalLength - (_actualStart - start).length;
+        }
 
-        private float MissileAngle() => -Maths.PointDirection(Vec2.Zero, travelDirNormalized);
+        private float MissileAngle()
+        {
+            return -Maths.PointDirection(Vec2.Zero, travelDirNormalized);
+        }
 
-        private Vec2 MissilePosition() => start + travelDirNormalized * 32;
+        private Vec2 MissilePosition()
+        {
+            return start + travelDirNormalized * 32;
+        }
 
-        private Bullet MakeMissileAt(Vec2 pos) =>
-            new ATMissile().GetBullet(
+        private Bullet MakeMissileAt(Vec2 pos)
+        {
+            return new ATMissile().GetBullet(
                 pos.x, pos.y, angle: MissileAngle(), firedFrom: firedFrom, distance: MissileRange(), tracer: _tracer
             );
+        }
 
-        private Bullet MakeMissile() => MakeMissileAt(MissilePosition());
+        private Bullet MakeMissile()
+        {
+            return MakeMissileAt(MissilePosition());
+        }
 
-        private void AddMissile() => AddBullet(MakeMissile());
+        private void AddMissile()
+        {
+            AddBullet(MakeMissile());
+        }
 
         protected override void OnHit(bool destroyed)
         {
@@ -79,9 +96,15 @@ namespace TMGmod.Buddies
             velocity = _bulletSpeed * (deltaNormalized + vec * coeff);
         }
 
-        private void UpdateTimer() => _frameTimer += 1f / 60f;
+        private void UpdateTimer()
+        {
+            _frameTimer += 1f / 60f;
+        }
 
-        private Vec2 Delta() => _realEnd - start;
+        private Vec2 Delta()
+        {
+            return _realEnd - start;
+        }
 
         private void UpdateVelocityPerDelta(Vec2 delta)
         {
@@ -90,7 +113,10 @@ namespace TMGmod.Buddies
             UpdateVelocityPerDeltaNormalized(delta.normalized);
         }
 
-        private void UpdateVelocity() => UpdateVelocityPerDelta(Delta());
+        private void UpdateVelocity()
+        {
+            UpdateVelocityPerDelta(Delta());
+        }
 
         private void UpdateTimerAndVelocity()
         {

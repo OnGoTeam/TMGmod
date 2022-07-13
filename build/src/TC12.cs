@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,8 +11,52 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class TC12 : BaseDmr, IHaveSkin
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3 });
+        private readonly SpriteMap _sprite;
+
+        [UsedImplicitly]
+        // ReSharper disable once InconsistentNaming
+        private readonly EditorProperty<int> skin;
+
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+
+        public TC12(float xval, float yval)
+            : base(xval, yval)
+        {
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            ammo = 11;
+            _ammoType = new ATTC12();
+            //BaseAccuracy = 0.91f;
+            MinAccuracy = 0.45f;
+            RegenAccuracyDmr = 0.007f;
+            DrainAccuracyDmr = 0.15f;
+            _type = "gun";
+            _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
+            _graphic = _sprite;
+            _sprite.frame = 0;
+            _center = new Vec2(20f, 5f);
+            _collisionOffset = new Vec2(-20f, -5f);
+            _collisionSize = new Vec2(39f, 12f);
+            _barrelOffsetTL = new Vec2(28f, 3f);
+            _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
+            {
+                center = new Vec2(0.0f, 5f)
+            };
+            _holdOffset = new Vec2(5f, 0f);
+            ShellOffset = new Vec2(-14f, -1f);
+            _fireSound = "deepMachineGun2";
+            _fullAuto = false;
+            _fireWait = 1.03f;
+            _kickForce = 5.3f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.3f;
+            laserSight = true;
+            _laserOffsetTL = new Vec2(26f, 5.5f);
+            _editorName = "TC-12";
+            _weight = 4.5f;
+        }
+
         [UsedImplicitly]
         public bool Silencer
         {
@@ -50,51 +94,18 @@ namespace TMGmod
                 }
             }
         }
-        [UsedImplicitly]
-        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
+
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3 });
 
-        public TC12(float xval, float yval)
-          : base(xval, yval)
+        public int FrameId
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            ammo = 11;
-            _ammoType = new ATTC12();
-            //BaseAccuracy = 0.91f;
-            MinAccuracy = 0.45f;
-            RegenAccuracyDmr = 0.007f;
-            DrainAccuracyDmr = 0.15f;
-            _type = "gun";
-            _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
-            _center = new Vec2(20f, 5f);
-            _collisionOffset = new Vec2(-20f, -5f);
-            _collisionSize = new Vec2(39f, 12f);
-            _barrelOffsetTL = new Vec2(28f, 3f);
-            _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f)
-            };
-            _holdOffset = new Vec2(5f, 0f);
-            ShellOffset = new Vec2(-14f, -1f);
-            _fireSound = "deepMachineGun2";
-            _fullAuto = false;
-            _fireWait = 1.03f;
-            _kickForce = 5.3f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.3f;
-            laserSight = true;
-            _laserOffsetTL = new Vec2(26f, 5.5f);
-            _editorName = "TC-12";
-            _weight = 4.5f;
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -103,22 +114,17 @@ namespace TMGmod
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);
             }
+
             base.Update();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

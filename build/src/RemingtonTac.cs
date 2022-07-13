@@ -1,7 +1,7 @@
-using DuckGame;
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -12,66 +12,19 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class RemingtonTac : BasePumpAction, IHaveSkin, IHaveStock
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
         private const float Rmax = 3.506401f;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
+
         private bool _stock;
-        [UsedImplicitly]
-        public bool Stock
-        {
-            get => _stock;
-            set
-            {
-                _stock = value;
-                var stockstate = StockState;
-                if (isServerForObject)
-                    StockState += 1f / 10 * (value ? 1 : -1);
-                var nostock = StockState < 0.01f;
-                var stock = StockState > 0.99f;
-                _fireWait = stock ? 0f : 2.75f;
-                _kickForce = stock ? 1.1f : 2.8f;
-                LoadSpeed = (sbyte)(stock ? 20 : 10);
-                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
-                if (isServerForObject && stock && stockstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
-                if (isServerForObject && nostock && stockstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
-            }
-        }
 
         private float _stockstate;
-        public float StockState
-        {
-            get => _stockstate;
-            set
-            {
-                value = Math.Max(value, 0f);
-                value = Math.Min(value, 1f);
-                _stockstate = value;
-            }
-        }
-        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
 
-        [UsedImplicitly]
-        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
-
-        public BitBuffer StockBuffer
-        {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Stock);
-                return b;
-            }
-            set => Stock = value.ReadBool();
-        }
         public RemingtonTac(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -108,6 +61,71 @@ namespace TMGmod
             Stock = false;
         }
 
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set
+            {
+                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
+                SetSpriteMapFrameId(LoaderSprite, value, 10);
+            }
+        }
+
+        [UsedImplicitly]
+        public bool Stock
+        {
+            get => _stock;
+            set
+            {
+                _stock = value;
+                var stockstate = StockState;
+                if (isServerForObject)
+                    StockState += 1f / 10 * (value ? 1 : -1);
+                var nostock = StockState < 0.01f;
+                var stock = StockState > 0.99f;
+                _fireWait = stock ? 0f : 2.75f;
+                _kickForce = stock ? 1.1f : 2.8f;
+                LoadSpeed = (sbyte)(stock ? 20 : 10);
+                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
+                if (isServerForObject && stock && stockstate <= 0.99f)
+                    SFX.Play(GetPath("sounds/beepods1"));
+                if (isServerForObject && nostock && stockstate >= 0.01f)
+                    SFX.Play(GetPath("sounds/beepods2"));
+            }
+        }
+
+        public float StockState
+        {
+            get => _stockstate;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _stockstate = value;
+            }
+        }
+
+        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+
+        [UsedImplicitly] public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
+
+        public BitBuffer StockBuffer
+        {
+            get
+            {
+                var b = new BitBuffer();
+                b.Write(Stock);
+                return b;
+            }
+            set => Stock = value.ReadBool();
+        }
+
         public override void Initialize()
         {
             Stock = false;
@@ -134,21 +152,8 @@ namespace TMGmod
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             FrameId = bublic;
-        }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set
-            {
-                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
-                SetSpriteMapFrameId(LoaderSprite, value, 10);
-            }
         }
 
         public override void EditorPropertyChanged(object property)
@@ -156,6 +161,7 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+
         public override void Fire()
         {
             if (FrameId / 10 == 1) return;

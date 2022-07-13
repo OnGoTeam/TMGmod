@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -12,17 +12,16 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AR9SX : BaseGun, IAmSmg, IHaveSkin, IFirstPrecise
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
         public AR9SX(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 17;
@@ -52,32 +51,37 @@ namespace TMGmod
             ShellOffset = new Vec2(-4f, -2f);
             _editorName = "AR9XS";
             laserSight = true;
-            _laserOffsetTL =new Vec2(23f, 5f);
+            _laserOffsetTL = new Vec2(23f, 5f);
             _weight = 3f;
         }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+
+        public int CurrentDelayFp { get; set; }
+        public int MaxDelayFp { get; }
+        public float MaxAccuracyFp { get; }
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
+        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
     }
 }
 #endif

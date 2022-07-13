@@ -9,18 +9,10 @@ namespace TMGmod
     [BaggedProperty("isSuperWeapon", true)]
     public sealed class X3X : BaseGun
     {
-        [UsedImplicitly]
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % 3;
-        }
-
         private readonly SpriteMap _sprite;
+
         public X3X(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             ammo = 6;
             _ammoType = new ATx3x();
@@ -45,6 +37,15 @@ namespace TMGmod
             _weight = 5.5f;
         }
 
+        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % 3;
+        }
+
         public override void OnPressAction()
         {
             if ((ammo > 0) & (_sprite.frame == 0))
@@ -57,6 +58,7 @@ namespace TMGmod
                 _sprite.frame = 0;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
+
             if (!((ammo < 1) & (_sprite.frame == 0))) return;
             SFX.Play(GetPath("sounds/tuduc.wav"));
         }

@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,19 +11,18 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SIX12S : BaseGun, IHaveSkin, IAmSg, I5
     {
-        private readonly SpriteMap _sprite;
-        [UsedImplicitly]
-        public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
         private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
+
+        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
+
         public SIX12S(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
@@ -51,6 +50,18 @@ namespace TMGmod
             _editorName = "SIX12 Silenced";
             _weight = 4f;
         }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -69,24 +80,18 @@ namespace TMGmod
                     maxAccuracyLost = 0.5f;
                     laserSight = true;
                 }
+
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
+
             base.Update();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
-        }
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void EditorPropertyChanged(object property)
@@ -94,12 +99,10 @@ namespace TMGmod
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
+
         public override void Reload(bool shell = true)
         {
-            if (ammo != 0)
-            {
-                --ammo;
-            }
+            if (ammo != 0) --ammo;
             loaded = true;
         }
     }

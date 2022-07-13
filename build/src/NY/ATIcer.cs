@@ -24,7 +24,10 @@ namespace TMGmod.NY
 
         private class IcerBullet : Bullet
         {
-            public IcerBullet(float xval, float yval, AmmoType type, float ang = -1, Thing owner = null, bool rbound = false, float distance = -1, bool tracer = false, bool network = true) : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
+            public IcerBullet(
+                float xval, float yval, AmmoType type, float ang = -1, Thing owner = null, bool rbound = false,
+                float distance = -1, bool tracer = false, bool network = true
+            ) : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
             {
             }
 
@@ -40,19 +43,20 @@ namespace TMGmod.NY
 
         private class Icicle : PhysicsObject, IPlatform
         {
-            [UsedImplicitly]
-            public float StickAngleOffset;
-            [UsedImplicitly]
-            public StateBinding SaoBinding = new StateBinding(nameof(StickAngleOffset));
-            [UsedImplicitly]
-            public Vec2 StickOffset;
-            [UsedImplicitly]
-            public StateBinding SoBinding = new StateBinding(nameof(StickOffset));
-            [UsedImplicitly]
-            public sbyte OffDirOffset = 1;
-            [UsedImplicitly]
-            public StateBinding OdoBinding = new StateBinding(nameof(OffDirOffset));
             private MaterialThing _stick;
+
+            [UsedImplicitly] public StateBinding OdoBinding = new StateBinding(nameof(OffDirOffset));
+
+            [UsedImplicitly] public sbyte OffDirOffset = 1;
+
+            [UsedImplicitly] public StateBinding SaoBinding = new StateBinding(nameof(StickAngleOffset));
+
+            [UsedImplicitly] public StateBinding SoBinding = new StateBinding(nameof(StickOffset));
+
+            [UsedImplicitly] public float StickAngleOffset;
+
+            [UsedImplicitly] public Vec2 StickOffset;
+
             public Icicle(float xval, float yval) : base(xval, yval)
             {
                 _graphic = new Sprite(Mod.GetPath<Core.TMGmod>("Holiday/Icer Bullet"));
@@ -79,6 +83,7 @@ namespace TMGmod.NY
                     d.Kill(new DTImpact(this));
                     return;
                 }
+
                 _stick = with;
                 InitiateStick();
             }
@@ -92,10 +97,7 @@ namespace TMGmod.NY
                     return;
                 }
 
-                if (_stick is FeatherVolume || _stick is Duck)
-                {
-                    _stick = null;
-                }
+                if (_stick is FeatherVolume || _stick is Duck) _stick = null;
             }
 
             public override void Update()

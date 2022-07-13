@@ -7,12 +7,11 @@ namespace TMGmod.NY
     [UsedImplicitly]
     public class GarlandGun : Gun
     {
-
         private float _sprwait;
-        [UsedImplicitly]
-        public int FrameId;
-        [UsedImplicitly]
-        public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
+
+        [UsedImplicitly] public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
+
+        [UsedImplicitly] public int FrameId;
 
         public GarlandGun(float xval, float yval) : base(xval, yval)
         {
@@ -42,10 +41,7 @@ namespace TMGmod.NY
             if (_sprwait <= 0f)
             {
                 var randres = Rando.Int(0, 29);
-                while (randres == ((AT9mmParasha)ammoType).SpriteY.frame)
-                {
-                    randres = Rando.Int(0, 29);
-                }
+                while (randres == ((AT9mmParasha)ammoType).SpriteY.frame) randres = Rando.Int(0, 29);
                 FrameId = randres;
                 _sprwait += 1.0f;
             }

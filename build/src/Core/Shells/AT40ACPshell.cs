@@ -6,7 +6,7 @@ namespace TMGmod.Core.Shells
     public class AT40ACPShell : EjectedShell
     {
         public AT40ACPShell(float xpos, float ypos)
-          : base(xpos, ypos, Mod.GetPath<TMGmod>("AT40ACPShell"))
+            : base(xpos, ypos, Mod.GetPath<TMGmod>("AT40ACPShell"))
         {
             scale *= 0.9f;
         }

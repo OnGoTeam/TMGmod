@@ -7,6 +7,7 @@
             KickForceSlowAr = 0.07f;
             KickForceFastAr = 0.8f;
         }
+
         public float KickForceSlowAr { get; protected set; }
         public float KickForceFastAr { get; protected set; }
     }

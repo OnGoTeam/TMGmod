@@ -1,7 +1,7 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Linq;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.Particles;
 
 namespace TMGmod.Stuff
@@ -12,12 +12,12 @@ namespace TMGmod.Stuff
     {
         public bool Anchored;
         public StateBinding AnchoredBinding = new StateBinding(nameof(Anchored));
+        public StateBinding DcdBinding = new StateBinding(nameof(Duckcooldown));
+        public float Duckcooldown;
         public float Hp;
         public StateBinding HpBinding = new StateBinding(nameof(Hp));
         public float ImpactSpeed;
         public StateBinding ImpactSpeedBinding = new StateBinding(nameof(ImpactSpeed));
-        public float Duckcooldown;
-        public StateBinding DcdBinding = new StateBinding(nameof(Duckcooldown));
 
         public Barricade(float x, float y) : base(x, y)
         {
@@ -42,8 +42,8 @@ namespace TMGmod.Stuff
                 if (block is Barricade barricade && !barricade.Anchored) continue;
                 //else
                 Anchored = true;
-
             }
+
             blocks = Level.CheckLineAll<Block>(new Vec2(x, y), new Vec2(x, y - 4));
             return Anchored || blocks.Any(block => block != this);
         }
@@ -72,7 +72,8 @@ namespace TMGmod.Stuff
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
             ImpactSpeed = with.hSpeed;
-            if (with is Duck duck && (duck.inputProfile.Down("SHOOT") || duck.sliding || duck.crouch) && Duckcooldown < 0)
+            if (with is Duck duck && (duck.inputProfile.Down("SHOOT") || duck.sliding || duck.crouch) &&
+                Duckcooldown < 0)
             {
                 SFX.Play("woodHit");
                 Duckcooldown = 2.0f;
@@ -93,10 +94,7 @@ namespace TMGmod.Stuff
         public override void Update()
         {
             Duckcooldown -= 0.1f;
-            if (Hp < 0f || !CheckBlocks())
-            {
-                Destroy();
-            }
+            if (Hp < 0f || !CheckBlocks()) Destroy();
             if (_destroyed) return;
             base.Update();
             thickness = 0.2f * Hp;

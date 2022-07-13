@@ -5,7 +5,12 @@ namespace TMGmod.Buddies
 {
     public abstract class LockedContainer<T> : Holdable where T : Thing
     {
+        protected LockedContainer(float xval, float yval) : base(xval, yval)
+        {
+        }
+
         protected abstract Vec2 SpawnPos { get; }
+
         public override void Touch(MaterialThing with)
         {
             base.Touch(with);
@@ -30,10 +35,6 @@ namespace TMGmod.Buddies
             Level.Remove(this);
         }
 
-        protected LockedContainer(float xval, float yval):base(xval, yval)
-        {
-        }
-
         public override ContextMenu GetContextMenu()
         {
             var editorGroupMenu1 = new EditorGroupMenu(null, true);
@@ -49,9 +50,14 @@ namespace TMGmod.Buddies
                     tooltip = "Likelyhood for this object to exist in the level."
                 };
                 editorGroupMenu1.AddItem(editorGroupMenu2);
-                editorGroupMenu2.AddItem(new ContextSlider("Chance", null, new FieldBinding(this, "likelyhoodToExist"), 0.05f, null, false, null, "Chance for object to exist. 1.0 = 100% chance."));
-                editorGroupMenu2.AddItem(new ContextSlider("Chance Group", null, new FieldBinding(this, "chanceGroup", -1f, 10f), 1f, null, false, null, "All objects in a chance group will exist, if their group's chance roll is met. -1 means no grouping."));
-                editorGroupMenu2.AddItem(new ContextCheckBox("Accessible", null, new FieldBinding(this, "isAccessible"), null, "Flag for level generation, set this to false if the object is behind a locked door and not neccesarily accessible."));
+                editorGroupMenu2.AddItem(new ContextSlider("Chance", null, new FieldBinding(this, "likelyhoodToExist"),
+                    0.05f, null, false, null, "Chance for object to exist. 1.0 = 100% chance."));
+                editorGroupMenu2.AddItem(new ContextSlider("Chance Group", null,
+                    new FieldBinding(this, "chanceGroup", -1f, 10f), 1f, null, false, null,
+                    "All objects in a chance group will exist, if their group's chance roll is met. -1 means no grouping."));
+                editorGroupMenu2.AddItem(new ContextCheckBox("Accessible", null, new FieldBinding(this, "isAccessible"),
+                    null,
+                    "Flag for level generation, set this to false if the object is behind a locked door and not neccesarily accessible."));
             }
 
             if (sequence == null) return editorGroupMenu1;
@@ -63,8 +69,10 @@ namespace TMGmod.Buddies
                 };
                 editorGroupMenu1.AddItem(editorGroupMenu2);
                 editorGroupMenu2.AddItem(new ContextCheckBox("Loop", null, new FieldBinding(sequence, "loop")));
-                editorGroupMenu2.AddItem(new ContextSlider("Order", null, new FieldBinding(sequence, "order", 0.0f, 100f), 1f, "RAND"));
-                editorGroupMenu2.AddItem(new ContextCheckBox("Wait", null, new FieldBinding(sequence, "waitTillOrder")));
+                editorGroupMenu2.AddItem(new ContextSlider("Order", null,
+                    new FieldBinding(sequence, "order", 0.0f, 100f), 1f, "RAND"));
+                editorGroupMenu2.AddItem(new ContextCheckBox("Wait", null,
+                    new FieldBinding(sequence, "waitTillOrder")));
             }
             return editorGroupMenu1;
         }

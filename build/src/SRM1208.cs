@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,34 +11,32 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SRM1208 : BaseBurst, IAmSg, IHaveSkin
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        [UsedImplicitly]
-        public bool Loaded = true;
-        [UsedImplicitly]
-        public StateBinding LddBinding = new StateBinding(nameof(Loaded));
-        [UsedImplicitly]
-        public int Yee = 20;
-        [UsedImplicitly]
-        public StateBinding YeeBinding = new StateBinding(nameof(Yee));
-        [UsedImplicitly]
-        public bool Yeeenabled;
-        [UsedImplicitly]
-        public StateBinding YeeeBinding = new StateBinding(nameof(Yeeenabled));
-        [UsedImplicitly]
-        public bool Shootwasyes;
-        [UsedImplicitly]
-        public StateBinding SwyBinding = new StateBinding(nameof(Shootwasyes));
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 5, 8 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 5, 8 });
+
+        [UsedImplicitly] public StateBinding LddBinding = new StateBinding(nameof(Loaded));
+
+        [UsedImplicitly] public bool Loaded = true;
+
+        [UsedImplicitly] public bool Shootwasyes;
+
+        [UsedImplicitly] public StateBinding SwyBinding = new StateBinding(nameof(Shootwasyes));
+
+        [UsedImplicitly] public int Yee = 20;
+
+        [UsedImplicitly] public StateBinding YeeBinding = new StateBinding(nameof(Yee));
+
+        [UsedImplicitly] public StateBinding YeeeBinding = new StateBinding(nameof(Yeeenabled));
+
+        [UsedImplicitly] public bool Yeeenabled;
 
         public SRM1208(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 8;
@@ -69,14 +67,29 @@ namespace TMGmod
             DeltaWait = 1f;
             BurstNum = 2;
         }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void Update()
         {
-            if (ammo % 2 == 0) _ammoType = new ATSRM1(); else _ammoType = new ATSRM2();
+            if (ammo % 2 == 0) _ammoType = new ATSRM1();
+            else _ammoType = new ATSRM2();
             if (ammo <= 0)
             {
                 Loaded = false;
                 _sprite.frame %= 10;
             }
+
             switch (Yeeenabled)
             {
                 case true:
@@ -94,8 +107,10 @@ namespace TMGmod
                 Yeeenabled = false;
                 Loaded = true;
             }
+
             base.Update();
         }
+
         public override void OnPressAction()
         {
             if (!Loaded && ammo > 0 && !Yeeenabled)
@@ -104,8 +119,12 @@ namespace TMGmod
                 Yeeenabled = true;
                 _sprite.frame = _sprite.frame % 10 + 10;
             }
-            else if (Loaded) Fire();
+            else if (Loaded)
+            {
+                Fire();
+            }
         }
+
         public override void OnReleaseAction()
         {
             if (Shootwasyes)
@@ -113,28 +132,23 @@ namespace TMGmod
                 Shootwasyes = false;
                 Loaded = false;
             }
+
             base.OnReleaseAction();
         }
+
         public override void Fire()
         {
             Shootwasyes = true;
             base.Fire();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

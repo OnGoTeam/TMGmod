@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using JetBrains.Annotations;
-using System;
 
 namespace TMGmod.Core
 {
@@ -9,12 +9,14 @@ namespace TMGmod.Core
         private readonly Gun _gun;
         private readonly Type _magType;
         private bool _loaded;
+
         public MagBuddy(Gun gun, Type magType = null, bool loaded = true)
         {
             _gun = gun;
             _magType = magType;
             _loaded = loaded;
         }
+
         [UsedImplicitly]
         public bool Disload()
         {
@@ -33,10 +35,12 @@ namespace TMGmod.Core
                 _loaded = false;
                 return true;
             }
+
             //else
             Level.Remove(mag0);
             return false;
         }
+
         [UsedImplicitly]
         public bool Doload()
         {
@@ -46,11 +50,11 @@ namespace TMGmod.Core
         [UsedImplicitly]
         public interface ISupportReload
         {
+            Vec2 SpawnPos { get; }
             bool SetMag();
+
             [UsedImplicitly]
             bool DropMag(Thing mag);
-
-            Vec2 SpawnPos { get; }
         }
     }
 }

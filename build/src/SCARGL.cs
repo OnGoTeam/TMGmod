@@ -10,28 +10,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ScarGL : BaseGun, IAmAr
     {
-        [UsedImplicitly]
-        public int Mode;
-        [UsedImplicitly]
-        public StateBinding ModeBinding = new StateBinding(nameof(Mode));
-        [UsedImplicitly]
-        public int Ammom0 = 20;
-        [UsedImplicitly]
-        public int Ammom1 = 1;
-        [UsedImplicitly]
-        public int[] Ammom
-        {
-            get => new[] { Ammom0, Ammom1 };
-            set
-            {
-                Ammom0 = value[0];
-                Ammom1 = value[1];
-            }
-        }
-        [UsedImplicitly]
-        public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
-        [UsedImplicitly]
-        public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
             new AT556NATO
@@ -44,29 +22,36 @@ namespace TMGmod
             },
             new ATGrenade
             {
-            range = 2500f,
-            accuracy = 1f,
-            bulletSpeed = 18f,
-            barrelAngleDegrees = -7.5f
+                range = 2500f,
+                accuracy = 1f,
+                bulletSpeed = 18f,
+                barrelAngleDegrees = -7.5f
             }
         };
 
-        private readonly Sprite[] _graphicm = { new Sprite(), new Sprite(), new Sprite() };
         private readonly Vec2[] _barrelOffsetTLm = { new Vec2(33f, 3f), new Vec2(30f, 6.5f) };
         private readonly string[] _fireSoundm = { "sounds/1.wav", "deepMachineGun" };
+        private readonly SpriteMap[] _flarem;
+
+        private readonly Sprite[] _graphicm = { new Sprite(), new Sprite(), new Sprite() };
         private readonly float[] _loseAccuracym = { .1f, 0f };
         private readonly float[] _maxAccuracyLostm = { .45f, 0f };
-        private readonly SpriteMap[] _flarem;
         private bool _switched;
-        [UsedImplicitly]
-        public SpriteMap Flare
-        {
-            get => _flare;
-            set => _flare = value;
-        }
+
+        [UsedImplicitly] public int Ammom0 = 20;
+
+        [UsedImplicitly] public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
+
+        [UsedImplicitly] public int Ammom1 = 1;
+
+        [UsedImplicitly] public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
+
+        [UsedImplicitly] public int Mode;
+
+        [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
 
         public ScarGL(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             ammo = 20;
             _ammoType = new AT556NATO
@@ -110,6 +95,24 @@ namespace TMGmod
             _graphic = _graphicm[_switched ? Mode : 2];
         }
 
+        [UsedImplicitly]
+        public int[] Ammom
+        {
+            get => new[] { Ammom0, Ammom1 };
+            set
+            {
+                Ammom0 = value[0];
+                Ammom1 = value[1];
+            }
+        }
+
+        [UsedImplicitly]
+        public SpriteMap Flare
+        {
+            get => _flare;
+            set => _flare = value;
+        }
+
         private void UpdateMode()
         {
             graphic = _graphicm[_switched ? Mode : 2];
@@ -125,29 +128,25 @@ namespace TMGmod
         {
             if (infiniteAmmoVal) Ammom[0] = 99;
             if (duck != null)
-            {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
                     Mode = 1 - Mode;
                     _switched = true;
                     SFX.Play(GetPath("sounds/tuduc.wav"));
                 }
-            }
+
             UpdateMode();
             base.Update();
         }
+
         public override void Fire()
         {
             ammo = Ammom[Mode];
             base.Fire();
             if (Mode == 0)
-            {
                 Ammom0 = ammo;
-            }
             else
-            {
                 Ammom1 = ammo;
-            }
 
             ammo = Ammom[0] + Ammom[1];
         }

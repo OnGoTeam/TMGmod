@@ -9,22 +9,6 @@ namespace TMGmod.Custom_Guns
     // ReSharper disable once InconsistentNaming
     public class PMR : BaseGun, IAmHg
     {
-        [UsedImplicitly] public int Mode;
-        [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
-        [UsedImplicitly] public int Ammom0 = 30;
-        [UsedImplicitly] public int Ammom1 = 1;
-        [UsedImplicitly]
-        public int[] Ammom
-        {
-            get => new[] { Ammom0, Ammom1 };
-            set
-            {
-                Ammom0 = value[0];
-                Ammom1 = value[1];
-            }
-        }
-        [UsedImplicitly] public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
-        [UsedImplicitly] public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
         private readonly AmmoType[] _ammoTypem =
         {
             new ATPMR30(),
@@ -38,16 +22,23 @@ namespace TMGmod.Custom_Guns
             }
         };
 
-        private readonly Sprite[] _graphicm = { new Sprite(), new Sprite(), new Sprite() };
         private readonly Vec2[] _barrelOffsetTLm = { new Vec2(16f, 2f), new Vec2(14f, 6f) };
         private readonly string[] _fireSoundm = { "sounds/1.wav", "littleGun" };
+
+        private readonly Sprite[] _graphicm = { new Sprite(), new Sprite(), new Sprite() };
         private readonly float[] _loseAccuracym = { .1f, 0f };
         private readonly float[] _maxAccuracyLostm = { .55f, 0f };
         private readonly int[] _numBulletsPerFirem = { 1, 16 };
         private bool _switched;
+        [UsedImplicitly] public int Ammom0 = 30;
+        [UsedImplicitly] public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
+        [UsedImplicitly] public int Ammom1 = 1;
+        [UsedImplicitly] public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
+        [UsedImplicitly] public int Mode;
+        [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
 
         public PMR(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             ammo = 30;
             _ammoType = new ATPMR30();
@@ -74,6 +65,17 @@ namespace TMGmod.Custom_Guns
             _graphic = _graphicm[_switched ? Mode : 2];
         }
 
+        [UsedImplicitly]
+        public int[] Ammom
+        {
+            get => new[] { Ammom0, Ammom1 };
+            set
+            {
+                Ammom0 = value[0];
+                Ammom1 = value[1];
+            }
+        }
+
         private void UpdateMode()
         {
             graphic = _graphicm[_switched ? Mode : 2];
@@ -93,6 +95,7 @@ namespace TMGmod.Custom_Guns
                 _switched = true;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
+
             UpdateMode();
             base.Update();
         }
@@ -102,13 +105,9 @@ namespace TMGmod.Custom_Guns
             ammo = Ammom[Mode];
             base.Fire();
             if (Mode == 0)
-            {
                 Ammom0 = ammo;
-            }
             else
-            {
                 Ammom1 = ammo;
-            }
             ammo = Ammom[0] + Ammom[1];
         }
     }

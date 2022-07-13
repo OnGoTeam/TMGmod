@@ -3,18 +3,16 @@ using System;
 using DuckGame;
 using TMGmod.Useless_or_deleted_Guns;
 
-
 namespace TMGmod.Core
 {
     [Obsolete]
     // ReSharper disable once InconsistentNaming
     public class MF : PhysicsObject, IPlatform
     {
-        private readonly SpriteMap _sprite;
+        private readonly int _numFlames;
 
         private new readonly MAPF _owner;
-
-        private readonly int _numFlames;
+        private readonly SpriteMap _sprite;
 
         public MF(float xpos, float ypos, MAPF owner, int numFlames = 8)
             : base(xpos, ypos)
@@ -40,12 +38,9 @@ namespace TMGmod.Core
         protected override bool OnDestroy(DestroyType dtype = null)
         {
             if (isServerForObject)
-            {
                 for (var i = 0; i < _numFlames; i++)
-                {
-                    Level.Add(SmallFire.New(x - hSpeed, y - vSpeed, -3f + Rando.Float(6f), -3f + Rando.Float(6f), false, null, true, this));
-                }
-            }
+                    Level.Add(SmallFire.New(x - hSpeed, y - vSpeed, -3f + Rando.Float(6f), -3f + Rando.Float(6f), false,
+                        null, true, this));
             SFX.Play("flameExplode", 0.9f, -0.1f + Rando.Float(0.2f));
             Level.Remove(this);
             return true;
@@ -74,6 +69,7 @@ namespace TMGmod.Core
                 with.hSpeed = hSpeed / 4f;
                 with.vSpeed -= 1f;
             }
+
             Destroy(new DTImpact(null));
             with.Burn(position, this);
         }

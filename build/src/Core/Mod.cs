@@ -1,13 +1,12 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Properties;
-
 
 namespace TMGmod.Core
 {
@@ -15,10 +14,10 @@ namespace TMGmod.Core
     // ReSharper disable once InconsistentNaming
     public class TMGmod : Mod
     {
-        [UsedImplicitly]
-        internal string Bdate = Resources.BuildDate;
-        [UsedImplicitly]
-        internal static TMGmod LastInstance;
+        [UsedImplicitly] internal static TMGmod LastInstance;
+
+        [UsedImplicitly] internal string Bdate = Resources.BuildDate;
+
         public TMGmod()
         {
             Debug.Log("TMGmod loading");
@@ -36,7 +35,8 @@ namespace TMGmod.Core
         protected override void OnPostInitialize()
         {
             //Директория
-            var tmgModDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TMGmod");
+            var tmgModDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "TMGmod");
             if (!Directory.Exists(tmgModDirectory))
                 Directory.CreateDirectory(tmgModDirectory);
 
@@ -52,7 +52,8 @@ namespace TMGmod.Core
 
         private static IEnumerable<string> SetupLevels()
         {
-            var levelsTarget = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG\\");
+            var levelsTarget = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                "DuckGame\\Levels\\TMG\\");
             if (!Directory.Exists(levelsTarget))
                 Directory.CreateDirectory(levelsTarget);
             IList<string> levels = new List<string>();
@@ -60,9 +61,11 @@ namespace TMGmod.Core
             foreach (var s in Directory.GetFiles(GetPath<TMGmod>("maps")))
             {
                 var fileSource = s.Replace('/', '\\');
-                var fileName = fileSource.Substring(fileSource.IndexOf(levelsSource, StringComparison.Ordinal) + levelsSource.Length);
+                var fileName = fileSource.Substring(fileSource.IndexOf(levelsSource, StringComparison.Ordinal) +
+                                                    levelsSource.Length);
                 var fileTarget = Path.Combine(levelsTarget, fileName);
-                if (!File.Exists(fileTarget) || !GetMD5Hash(File.ReadAllBytes(fileSource)).SequenceEqual(GetMD5Hash(File.ReadAllBytes(fileTarget))))
+                if (!File.Exists(fileTarget) || !GetMD5Hash(File.ReadAllBytes(fileSource))
+                    .SequenceEqual(GetMD5Hash(File.ReadAllBytes(fileTarget))))
                     File.Copy(fileSource, fileTarget, true);
                 levels.Add(fileTarget);
             }
@@ -78,6 +81,7 @@ namespace TMGmod.Core
                 var levelElement = new XElement("element", s.Replace('\\', '/'));
                 playlistElement.Add(levelElement);
             }
+
             return new XDocument(playlistElement);
         }
 
@@ -98,7 +102,8 @@ namespace TMGmod.Core
         {
             SavePlaylistToFile(
                 Playlist(levels),
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DuckGame\\Levels\\TMG.play")
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                    "DuckGame\\Levels\\TMG.play")
             );
         }
 

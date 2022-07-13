@@ -1,6 +1,6 @@
-﻿using DuckGame;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DuckGame;
 
 namespace TMGmod.Core
 {
@@ -8,14 +8,14 @@ namespace TMGmod.Core
     {
         private Type _contains;
 
-        protected List<Type> Things { private get; set; }
-
-        protected int CaseId { private get; set; }
-
         protected BaseCase(float xval, float yval) : base(xval, yval)
         {
             physicsMaterial = PhysicsMaterial.Metal;
         }
+
+        protected List<Type> Things { private get; set; }
+
+        protected int CaseId { private get; set; }
 
         public override void Initialize()
         {
@@ -33,6 +33,7 @@ namespace TMGmod.Core
                 d.profile.stats.presentsOpened++;
                 duck.ThrowItem();
             }
+
             Level.Remove(this);
             {
                 Initialize();
@@ -43,6 +44,7 @@ namespace TMGmod.Core
                 gun1.infiniteAmmoVal = true;
                 gun1.infinite.value = true;
             }
+
             newThing.x = o.x;
             newThing.y = o.y;
             Spawned(newThing);
@@ -56,10 +58,7 @@ namespace TMGmod.Core
 
         protected virtual void Spawned(Holdable thing)
         {
-            if (thing is IHaveSkin skinThing)
-            {
-                skinThing.FrameId = CaseId;
-            }
+            if (thing is IHaveSkin skinThing) skinThing.FrameId = CaseId;
         }
     }
 }

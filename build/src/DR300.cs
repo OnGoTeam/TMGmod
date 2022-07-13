@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,27 +11,18 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DR300 : BaseDmr, IAmAr, IHaveSkin
     {
-        [UsedImplicitly]
-        public int PostRounds { get; private set; }
-        [UsedImplicitly]
-        public StateBinding PostRoundsBinding { get; } = new StateBinding(nameof(PostRounds));
         private const int Postframe = 8;
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 8 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        // ReSharper disable once InconsistentNaming
-        // ReSharper disable once ConvertToAutoProperty
-        [UsedImplicitly]
-        public EditorProperty<int> Rounds { get; }
 
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 3, 8 });
         public DR300(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             Rounds = new EditorProperty<int>(0, this, 0, 2, 1);
             skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
@@ -66,27 +57,42 @@ namespace TMGmod
             laserSight = false;
             _weight = 3.5f;
         }
-        public override void Update()
-        {
-            if ((PostRounds == 20) & !((_sprite.frame > 9) & (_sprite.frame < 20))) _sprite.frame = 10 + _sprite.frame % 10;
-            if ((PostRounds == 30) & (_sprite.frame < 19)) _sprite.frame = 20 + _sprite.frame % 10;
-            base.Update();
-        }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+
+        [UsedImplicitly] public int PostRounds { get; private set; }
+
+        [UsedImplicitly] public StateBinding PostRoundsBinding { get; } = new StateBinding(nameof(PostRounds));
+
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once ConvertToAutoProperty
+        [UsedImplicitly] public EditorProperty<int> Rounds { get; }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        public override void Update()
+        {
+            if ((PostRounds == 20) & !((_sprite.frame > 9) & (_sprite.frame < 20)))
+                _sprite.frame = 10 + _sprite.frame % 10;
+            if ((PostRounds == 30) & (_sprite.frame < 19)) _sprite.frame = 20 + _sprite.frame % 10;
+            base.Update();
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
+        }
+
         public override void EditorPropertyChanged(object property)
         {
             // ReSharper disable once SwitchStatementMissingSomeCases
@@ -102,6 +108,7 @@ namespace TMGmod
                     PostRounds = 30;
                     break;
             }
+
             ammo = PostRounds;
             UpdateSkin();
             _sprite.frame = Rounds.value * 10 + _sprite.frame % 10;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.WClasses;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
@@ -12,19 +12,17 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DTSRM44 : Sniper, IAmSr, IHaveSkin
     {
+        private const int NonSkinFrames = 1;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         private readonly Vec2 _fakeshelloffset = new Vec2(-12f, -2f);
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 1;
-        [UsedImplicitly]
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
         public DTSRM44(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("DT SRM-44"), 37, 12);
@@ -49,34 +47,40 @@ namespace TMGmod
             _kickForce = 4.6f;
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "DT SRM-44";
-			_weight = 4.5f;
+            _weight = 4.5f;
             laserSight = true;
             _laserOffsetTL = new Vec2(30f, 7.5f);
-
         }
+
+        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void Reload(bool shell = true)
         {
             if (ammo != 0)
             {
-                if (shell)
-                {
-                    _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
-                }
+                if (shell) _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
                 --ammo;
             }
+
             loaded = true;
         }
+
         public override void Draw()
         {
             var ang = angle;
             if (offDir <= 0)
-            {
                 angle += _angleOffset;
-            }
             else
-            {
                 angle -= _angleOffset;
-            }
             base.Draw();
             angle = ang;
             laserSight = true;
@@ -103,10 +107,7 @@ namespace TMGmod
             {
                 if (owner == null)
                 {
-                    if (_loadState == 3)
-                    {
-                        loaded = true;
-                    }
+                    if (_loadState == 3) loaded = true;
                     _loadState = -1;
                     _angleOffset = 0f;
                     handOffset = Vec2.Zero;
@@ -118,13 +119,8 @@ namespace TMGmod
                     case 0:
                     {
                         if (!Network.isActive)
-                        {
                             SFX.Play("loadSniper");
-                        }
-                        else if (isServerForObject)
-                        {
-                            _netLoad.Play();
-                        }
+                        else if (isServerForObject) _netLoad.Play();
                         _loadState++;
                         break;
                     }
@@ -171,23 +167,16 @@ namespace TMGmod
                         break;
                 }
             }
+
             laserSight = true;
             OnHoldAction();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
-        }
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void EditorPropertyChanged(object property)

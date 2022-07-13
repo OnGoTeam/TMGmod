@@ -1,15 +1,15 @@
-﻿using DuckGame;
-using System;
+﻿using System;
+using DuckGame;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
 {
-
     [EditorGroup("TMG|Misc|Holiday")]
     // ReSharper disable once InconsistentNaming
     public class Popcal : BaseAr
     {
         private readonly SpriteMap _sprite;
+
         public Popcal(float xval, float yval)
             : base(xval, yval)
         {
@@ -47,10 +47,7 @@ namespace TMGmod.NY
             var dp = bullet.end - hitpos;
             var v = bullet.bulletSpeed * bullet.travelDirNormalized;
             var u = new Vec2(v.y, -v.x).normalized;
-            if (Math.Abs(Vec2.Dot(dp, u)) < 3f)
-            {
-                Destroy(new DTShot(bullet));
-            }
+            if (Math.Abs(Vec2.Dot(dp, u)) < 3f) Destroy(new DTShot(bullet));
             return hit;
         }
 
@@ -63,10 +60,11 @@ namespace TMGmod.NY
                 var atPopcorn = new ATPopcorn { bulletSpeed = 2f };
                 var bullet = new Bullet(hitpos.x + (float)(Math.Cos(Maths.DegToRad(num2)) * 6.0),
                         hitpos.y - (float)(Math.Sin(Maths.DegToRad(num2)) * 6.0), atPopcorn, num2)
-                { firedFrom = this };
+                    { firedFrom = this };
                 firedBullets.Add(bullet);
                 Level.Add(bullet);
             }
+
             bulletFireIndex += (byte)ammo;
             ammo = 0;
             if (!Network.isActive) return true;

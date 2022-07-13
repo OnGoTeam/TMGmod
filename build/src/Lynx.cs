@@ -1,7 +1,7 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -12,25 +12,26 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Lynx : BaseDmr, ISpeedAccuracy, IHaveSkin, I5, IHaveBipods
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 4;
-        [UsedImplicitly]
-        public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-        [UsedImplicitly]
-        public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
-        [UsedImplicitly]
-        public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
-        [UsedImplicitly]
-        public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 5 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 5 });
+
+        private float _bipodsstate;
+
+        [UsedImplicitly] public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
+
+        [UsedImplicitly] public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
+
+        [UsedImplicitly] public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
+
+        [UsedImplicitly] public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
+
         public Lynx(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
@@ -64,6 +65,21 @@ namespace TMGmod
             _editorName = "Gepard Lynx";
             _weight = 6f;
         }
+
+        [UsedImplicitly]
+        public float BipodsState
+        {
+            get => duck != null ? _bipodsstate : 0;
+            set
+            {
+                value = Math.Max(value, 0f);
+                value = Math.Min(value, 1f);
+                _bipodsstate = value;
+            }
+        }
+
+        [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+
         public bool Bipods
         {
             get => BipodsQ();
@@ -87,43 +103,7 @@ namespace TMGmod
                     BipOff.Play();
             }
         }
-        public override void Update()
-        {
-            Bipods = Bipods;
-            if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(this, true)) BipodsDisabled = false;
-            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-            base.Update();
-        }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
 
-        public override void Fire()
-        {
-            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
-            base.Fire();
-        }
-
-        [UsedImplicitly]
-        public float BipodsState
-        {
-            get => duck != null ? _bipodsstate : 0;
-            set
-            {
-                value = Math.Max(value, 0f);
-                value = Math.Min(value, 1f);
-                _bipodsstate = value;
-            }
-        }
-
-        private float _bipodsstate;
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
@@ -138,9 +118,10 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled { get; private set; }
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        [UsedImplicitly]
-        public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {
@@ -148,13 +129,35 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
+        public float MuAccuracySr => 0;
+        public float LambdaAccuracySr => 0;
+
+        public override void Update()
+        {
+            Bipods = Bipods;
+            if (duck == null) BipodsDisabled = false;
+            else if (!BipodsQ(this, true)) BipodsDisabled = false;
+            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
+            base.Update();
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
+        }
+
+        public override void Fire()
+        {
+            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
+            base.Fire();
+        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-
-        public float MuAccuracySr => 0;
-        public float LambdaAccuracySr => 0;
     }
 }

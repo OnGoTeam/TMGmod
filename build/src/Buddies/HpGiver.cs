@@ -1,7 +1,7 @@
 ﻿#if FEATURES_1_2
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 
 namespace TMGmod.Buddies
 {

@@ -26,6 +26,7 @@ namespace TMGmod.Core.Particles
                 sleeping = false;
                 _tick = 0;
             }
+
             base.Update();
         }
     }

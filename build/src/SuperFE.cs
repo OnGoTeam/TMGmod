@@ -17,10 +17,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            if (_firing && ammo > 0)
-            {
-                ApplyKick();
-            }
+            if (_firing && ammo > 0) ApplyKick();
         }
     }
 }

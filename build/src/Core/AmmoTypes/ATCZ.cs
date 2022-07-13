@@ -21,6 +21,7 @@ namespace TMGmod.Core.AmmoTypes
             AlphaDamage = 0.4f;
             DistanceConvexity = 2f;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new AT556NATOShell(x, y)
@@ -31,6 +32,7 @@ namespace TMGmod.Core.AmmoTypes
             Level.Add(shell);
         }
     }
+
     // ReSharper disable once InconsistentNaming
     public class ATCZ2 : BaseAmmoType
     {
@@ -49,6 +51,7 @@ namespace TMGmod.Core.AmmoTypes
             AlphaDamage = 0.4f;
             DistanceConvexity = 2f;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new AT556NATOShell(x, y)

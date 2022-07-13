@@ -6,7 +6,10 @@ namespace TMGmod.Core
     public class ExplosiveBullet : Bullet
     {
         [UsedImplicitly]
-        public ExplosiveBullet(float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false, float distance = -1f, bool tracer = false, bool network = false)
+        public ExplosiveBullet(
+            float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false,
+            float distance = -1f, bool tracer = false, bool network = false
+        )
             : base(xval, yval, type, ang, owner, rbound, distance, tracer, network)
         {
             _tracer = false;
@@ -22,10 +25,7 @@ namespace TMGmod.Core
             SFX.Play("magPop", 0.7f, Rando.Float(-0.5f, -0.3f));
             //Thing bulletOwner = this.owner;
             var things = Level.CheckCircleAll<MaterialThing>(position, 30f);
-            foreach (var t in things)
-            {
-                t.Destroy(new DTShot(this));
-            }
+            foreach (var t in things) t.Destroy(new DTShot(this));
         }
 
         protected override void Rebound(Vec2 pos, float dir, float rng)

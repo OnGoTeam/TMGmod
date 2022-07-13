@@ -1,7 +1,7 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Stuff
 {
@@ -10,31 +10,31 @@ namespace TMGmod.Stuff
     [UsedImplicitly]
     public class Cfour : Holdable
     {
-        [UsedImplicitly]
-        public float ToExplode = -1f;
-        [UsedImplicitly]
-        public StateBinding ToExplodeBinding = new StateBinding(nameof(ToExplode));
-        [UsedImplicitly]
-        public bool Activated;
-        [UsedImplicitly]
-        public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
-        [UsedImplicitly]
-        public MaterialThing Activator;
-        [UsedImplicitly]
-        public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
-        [UsedImplicitly]
-        public MaterialThing StickThing;
         private Vec2 _stickyVec2;
-        [UsedImplicitly]
-        public bool WasThrown;
-        [UsedImplicitly]
-        public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
-        [UsedImplicitly]
-        public bool Weak;
-        [UsedImplicitly]
-        public bool Didboom;
-        [UsedImplicitly]
-        public StateBinding DidboomBinding = new StateBinding(nameof(Didboom));
+
+        [UsedImplicitly] public bool Activated;
+
+        [UsedImplicitly] public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
+
+        [UsedImplicitly] public MaterialThing Activator;
+
+        [UsedImplicitly] public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
+
+        [UsedImplicitly] public bool Didboom;
+
+        [UsedImplicitly] public StateBinding DidboomBinding = new StateBinding(nameof(Didboom));
+
+        [UsedImplicitly] public MaterialThing StickThing;
+
+        [UsedImplicitly] public float ToExplode = -1f;
+
+        [UsedImplicitly] public StateBinding ToExplodeBinding = new StateBinding(nameof(ToExplode));
+
+        [UsedImplicitly] public bool WasThrown;
+
+        [UsedImplicitly] public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
+
+        [UsedImplicitly] public bool Weak;
 
         public Cfour(float xpos, float ypos) : base(xpos, ypos)
         {
@@ -61,6 +61,7 @@ namespace TMGmod.Stuff
                 explosionPart.scale *= 0.7f;
                 Level.Add(explosionPart);
             }
+
             SFX.Play("explode");
             if (!isServerForObject || Weak) return;
 
@@ -72,7 +73,7 @@ namespace TMGmod.Stuff
                 var atShrapnel = new ATShrapnel { range = 30f + Rando.Float(0f, Rando.Float(70f)) };
                 var bullet = new Bullet(x + (float)(Math.Cos(Maths.DegToRad(num)) * 8.0),
                         y - (float)(Math.Sin(Maths.DegToRad(num)) * 8.0), atShrapnel, num)
-                { firedFrom = this };
+                    { firedFrom = this };
                 varBullets.Add(bullet);
                 Level.Add(bullet);
             }
@@ -82,6 +83,7 @@ namespace TMGmod.Stuff
                 Send.Message(new NMExplodingProp(varBullets), NetMessagePriority.ReliableOrdered);
                 varBullets.Clear();
             }
+
             foreach (var window in Level.CheckCircleAll<Window>(position, 40f))
                 if (Level.CheckLine<Block>(position, window.position, window) == null)
                     window.Destroy(new DTImpact(this));
@@ -96,6 +98,7 @@ namespace TMGmod.Stuff
                 //force.x *= 1.1f;
                 thing.ApplyForce(force);
             }
+
             AddFire();
             Level.Remove(this);
         }
@@ -149,19 +152,13 @@ namespace TMGmod.Stuff
         public override void Update()
         {
             if (_destroyed) return;
-            if (StickThing != null && StickThing._destroyed)
-            {
-                StickThing = null;
-            }
+            if (StickThing != null && StickThing._destroyed) StickThing = null;
 
             ToExplode -= 0.1f;
             if (duck != null && duck.holdObject == this)
             {
                 StickThing = null;
-                if (duck != Activator)
-                {
-                    Activated = false;
-                }
+                if (duck != Activator) Activated = false;
             }
 
             if (StickThing != null)
@@ -180,9 +177,7 @@ namespace TMGmod.Stuff
 
             if (grounded) angle = 0f;
             else if ((duck == null || duck.holdObject != this) && WasThrown && StickThing == null)
-            {
                 angle += 0.3f * offDir;
-            }
 
             if (-0.5 < ToExplode && ToExplode < 0f && !_destroyed) Destroy();
 

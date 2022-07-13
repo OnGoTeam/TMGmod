@@ -10,16 +10,16 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ARwA : BaseGun, IAmAr, MagBuddy.ISupportReload
     {
-        private readonly SpriteMap _sprite;
         private readonly MagBuddy _magBuddy;
+        private readonly SpriteMap _sprite;
         private bool _onemoreclick = true;
-        [UsedImplicitly]
-        public byte Mags = 1;
-        [UsedImplicitly]
-        public StateBinding MagsBinding = new StateBinding(nameof(Mags));
+
+        [UsedImplicitly] public byte Mags = 1;
+
+        [UsedImplicitly] public StateBinding MagsBinding = new StateBinding(nameof(Mags));
 
         public ARwA(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             ammo = 30;
             _ammoType = new AT556NATO
@@ -52,19 +52,6 @@ namespace TMGmod
             _magBuddy = new MagBuddy(this, typeof(ArwaMag));
         }
 
-        public override void OnPressAction()
-        {
-            if (ammo <= 0) _magBuddy.Doload();
-            base.OnPressAction();
-        }
-
-        public override void Update()
-        {
-            if (ammo <= 0) _magBuddy.Disload();
-            if (ammo <= 0 && Mags <= 0) _sprite.frame = 2;
-            base.Update();
-        }
-
         public bool SetMag()
         {
             if (Mags <= 0) return false;
@@ -76,6 +63,7 @@ namespace TMGmod
                 _wait += 5f;
                 return _onemoreclick = false;
             }
+
             _onemoreclick = true;
             ammo = 30;
             Mags -= 1;
@@ -97,10 +85,24 @@ namespace TMGmod
                     _sprite.frame = 1;
                     break;
             }
+
             _wait += 7f;
             return true;
         }
 
         public Vec2 SpawnPos => new Vec2(0, -1);
+
+        public override void OnPressAction()
+        {
+            if (ammo <= 0) _magBuddy.Doload();
+            base.OnPressAction();
+        }
+
+        public override void Update()
+        {
+            if (ammo <= 0) _magBuddy.Disload();
+            if (ammo <= 0 && Mags <= 0) _sprite.frame = 2;
+            base.Update();
+        }
     }
 }

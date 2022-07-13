@@ -11,8 +11,9 @@ namespace TMGmod
     public class ANP73 : BaseGun, IAmHg
     {
         private readonly SpriteMap _sprite;
+
         public ANP73(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             ammo = 33;
             _ammoType = new ATANP73();
@@ -36,6 +37,7 @@ namespace TMGmod
             _editorName = "Experimental ANP-73";
             _weight = 2f;
         }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -68,8 +70,10 @@ namespace TMGmod
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.3f;
                 }
+
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
+
             base.Update();
         }
     }

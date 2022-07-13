@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,18 +11,16 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class M16LMG : BaseLmg, IHaveSkin, IHaveBipods
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
 
         public M16LMG(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 50;
@@ -59,6 +57,7 @@ namespace TMGmod
             KickForce1Lmg = 0.23f;
             KickForce2Lmg = 0.43f;
         }
+
         public bool Bipods
         {
             get => BipodsQ();
@@ -70,20 +69,7 @@ namespace TMGmod
                 loseAccuracy = value ? 0 : 0.15f;
             }
         }
-        public override void Update()
-        {
-            Bipods = Bipods;
-            base.Update();
-        }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
@@ -98,12 +84,31 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        public override void Update()
+        {
+            Bipods = Bipods;
+            base.Update();
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
+        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

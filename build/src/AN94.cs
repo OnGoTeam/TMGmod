@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,43 +11,18 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
     {
-        [UsedImplicitly]
-        public bool Laserrod
-        {
-            get => _sprite.frame < 10;
-            set
-            {
-                if (value)
-                {
-                    loseAccuracy = 0.15f;
-                    _fireWait = 1.5f;
-                    maxAccuracyLost = 0.45f;
-                    _sprite.frame %= 10;
-                    laserSight = false;
-                }
-                else
-                {
-                    loseAccuracy = 0.1f;
-                    _fireWait = 2.5f;
-                    maxAccuracyLost = 0.1f;
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    laserSight = true;
-                }
-            }
-        }
-        [UsedImplicitly]
-        public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
+        private const int NonSkinFrames = 2;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
+
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
+
+        [UsedImplicitly] public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
+
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
@@ -83,6 +58,47 @@ namespace TMGmod
             BurstNum = 2;
         }
 
+        [UsedImplicitly]
+        public bool Laserrod
+        {
+            get => _sprite.frame < 10;
+            set
+            {
+                if (value)
+                {
+                    loseAccuracy = 0.15f;
+                    _fireWait = 1.5f;
+                    maxAccuracyLost = 0.45f;
+                    _sprite.frame %= 10;
+                    laserSight = false;
+                }
+                else
+                {
+                    loseAccuracy = 0.1f;
+                    _fireWait = 2.5f;
+                    maxAccuracyLost = 0.1f;
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    laserSight = true;
+                }
+            }
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public float KickForceSlowAr { get; }
+        public float KickForceFastAr { get; }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -90,29 +106,21 @@ namespace TMGmod
                 Laserrod = !Laserrod;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
+
             base.Update();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-        public float KickForceSlowAr { get; }
-        public float KickForceFastAr { get; }
     }
 }

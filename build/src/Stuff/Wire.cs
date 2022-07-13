@@ -1,6 +1,6 @@
+using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
-using System.Linq;
 
 namespace TMGmod.Stuff
 {
@@ -9,16 +9,15 @@ namespace TMGmod.Stuff
     [UsedImplicitly]
     public class Wire : PhysicsObject
     {
-
         private readonly SpriteMap _sprite;
-        [UsedImplicitly]
-        public int Teksturka;
-        [UsedImplicitly]
-        public StateBinding TexBinding = new StateBinding(nameof(Teksturka));
-        [UsedImplicitly]
-        public float Hp;
-        [UsedImplicitly]
-        public StateBinding HpBinding = new StateBinding(nameof(Hp));
+
+        [UsedImplicitly] public float Hp;
+
+        [UsedImplicitly] public StateBinding HpBinding = new StateBinding(nameof(Hp));
+
+        [UsedImplicitly] public int Teksturka;
+
+        [UsedImplicitly] public StateBinding TexBinding = new StateBinding(nameof(Teksturka));
 
         public Wire(float xpos, float ypos) : base(xpos, ypos)
         {
@@ -36,7 +35,10 @@ namespace TMGmod.Stuff
 
         public override void Update()
         {
-            if (Hp <= 0f) Hp = 0f;
+            if (Hp <= 0f)
+            {
+                Hp = 0f;
+            }
             else
             {
                 var probablyduck =
@@ -50,7 +52,8 @@ namespace TMGmod.Stuff
                 }
 
                 var wirelist = Level.CheckRectAll<Wire>(position + new Vec2(-16f, -3f), position + new Vec2(16f, 3f));
-                if (wirelist.Any(wire => wire != this && wire.sleeping && wire.Hp >= 1f && wire.position.y > position.y))
+                if (wirelist.Any(wire =>
+                    wire != this && wire.sleeping && wire.Hp >= 1f && wire.position.y > position.y))
                 {
                     sleeping = true;
                     vSpeed = 0f;
@@ -61,6 +64,7 @@ namespace TMGmod.Stuff
                     sleeping = false;
                 }
             }
+
             base.Update();
         }
 
@@ -69,6 +73,7 @@ namespace TMGmod.Stuff
             if (bullet.ammo.penetration < 10f) Damage(bullet.ammo);
             return Hit(bullet, hitPos);
         }
+
         private void Damage(AmmoType at)
         {
             if (at.penetration < 1.1f) return;

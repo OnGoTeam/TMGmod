@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,30 +11,24 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class KS23 : BasePumpAction, IHaveSkin
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
         private bool _shootwasyes;
-        [UsedImplicitly]
-        public float HandAngleOff
-        {
-            get => handAngle * offDir;
-            set => handAngle = value * offDir;
-        }
-        [UsedImplicitly]
-        public float HandAngleOffState;
-        [UsedImplicitly]
-        public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
-        [UsedImplicitly]
-        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
-        [UsedImplicitly]
-        public StateBinding ShootwasyesBinding = new StateBinding(nameof(_shootwasyes));
+
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+
+        [UsedImplicitly] public float HandAngleOffState;
+
+        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
+
+        [UsedImplicitly] public StateBinding ShootwasyesBinding = new StateBinding(nameof(_shootwasyes));
+
         [UsedImplicitly]
         public KS23(float xval, float yval) : base(xval, yval)
         {
@@ -72,34 +66,19 @@ namespace TMGmod
             LoadSpeed = 4;
             _weight = 4.2f;
         }
-        public override void Fire()
+
+        [UsedImplicitly]
+        public float HandAngleOff
         {
-            _shootwasyes = true;
-            if (ammo < 1) _shootwasyes = false;
-            base.Fire();
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
         }
-        public override void Update()
-        {
-            HandAngleOff = HandAngleOffState;
-            base.Update();
-            if (_shootwasyes) HandAngleOff -= 0.075f;
-            if (((HandAngleOff > -1f) & (HandAngleOff < -0.8f)) || ((!_shootwasyes) & (HandAngleOff < 0f)))
-            {
-                HandAngleOff += Rando.Float(0.02f, 0.0367f);
-                _shootwasyes = false;
-            }
-            if (HandAngleOff > 0f) HandAngleOff = 0f;
-            HandAngleOffState = HandAngleOff;
-        }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            FrameId = bublic;
-        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
@@ -109,6 +88,35 @@ namespace TMGmod
                 SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
                 SetSpriteMapFrameId(LoaderSprite, value, 10);
             }
+        }
+
+        public override void Fire()
+        {
+            _shootwasyes = true;
+            if (ammo < 1) _shootwasyes = false;
+            base.Fire();
+        }
+
+        public override void Update()
+        {
+            HandAngleOff = HandAngleOffState;
+            base.Update();
+            if (_shootwasyes) HandAngleOff -= 0.075f;
+            if ((HandAngleOff > -1f) & (HandAngleOff < -0.8f) || !_shootwasyes & (HandAngleOff < 0f))
+            {
+                HandAngleOff += Rando.Float(0.02f, 0.0367f);
+                _shootwasyes = false;
+            }
+
+            if (HandAngleOff > 0f) HandAngleOff = 0f;
+            HandAngleOffState = HandAngleOff;
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            FrameId = bublic;
         }
 
         public override void EditorPropertyChanged(object property)

@@ -20,6 +20,7 @@ namespace TMGmod.Core.AmmoTypes
             DeltaDamage = 0.15f;
             AlphaDamage = 0.4f;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new AT556NATOShell(x, y)

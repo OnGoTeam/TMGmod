@@ -6,7 +6,7 @@ namespace TMGmod.Core.Shells
     public class ATSP6Shell : EjectedShell
     {
         public ATSP6Shell(float xpos, float ypos)
-          : base(xpos, ypos, Mod.GetPath<TMGmod>("ATSP6Shell"))
+            : base(xpos, ypos, Mod.GetPath<TMGmod>("ATSP6Shell"))
         {
             scale *= 0.9f;
         }

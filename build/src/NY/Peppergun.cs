@@ -10,7 +10,7 @@ namespace TMGmod.NY
     public class PPLMG : BaseLmg
     {
         public PPLMG(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             ammo = 7;
             _numBulletsPerFire = 12;

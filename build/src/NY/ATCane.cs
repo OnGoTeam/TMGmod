@@ -19,9 +19,7 @@ namespace TMGmod.NY
         {
             base.OnHit(destroyed, b);
             if (b is CandyCaneBullet cb && destroyed && b.firedFrom is CandyCane c)
-            {
                 c.Drop(cb.end - cb.travelDirNormalized * cb.bulletSpeed);
-            }
         }
     }
 }

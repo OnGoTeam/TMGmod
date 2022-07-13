@@ -5,12 +5,12 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BaseBurst : BaseGun
     {
-        [UsedImplicitly]
-        public int ShotsLeft;
-        [UsedImplicitly]
-        public StateBinding ShotsBinding = new StateBinding(nameof(ShotsLeft));
-        protected float DeltaWait;
         protected int BurstNum;
+        protected float DeltaWait;
+
+        [UsedImplicitly] public StateBinding ShotsBinding = new StateBinding(nameof(ShotsLeft));
+
+        [UsedImplicitly] public int ShotsLeft;
 
         protected BaseBurst(float xval, float yval) : base(xval, yval)
         {

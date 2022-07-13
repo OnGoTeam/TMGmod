@@ -6,7 +6,7 @@ namespace TMGmod.Core.Shells
     public class ATMP7Shell : EjectedShell
     {
         public ATMP7Shell(float xpos, float ypos)
-          : base(xpos, ypos, Mod.GetPath<TMGmod>("ATMP7Shell"))
+            : base(xpos, ypos, Mod.GetPath<TMGmod>("ATMP7Shell"))
         {
             scale *= 0.625f;
         }

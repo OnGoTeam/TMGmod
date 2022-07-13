@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.WClasses;
 
@@ -9,18 +9,16 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     public class M50 : BaseGun, ISpeedAccuracy, IAmSr, IHaveSkin, IHaveBipods
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
 
         public M50(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 7;
@@ -58,11 +56,7 @@ namespace TMGmod
             MuAccuracySr = 1f;
             LambdaAccuracySr = 0.67f;
         }
-        public override void Update()
-        {
-            base.Update();
-            Bipods = Bipods;
-        }
+
         public bool Bipods
         {
             get => HandleQ();
@@ -74,6 +68,7 @@ namespace TMGmod
                 LambdaAccuracySr = value ? 0f : 0.5f;
             }
         }
+
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
@@ -88,24 +83,34 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; private set; }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        public float MuAccuracySr { get; }
+        public float LambdaAccuracySr { get; private set; }
+
+        public override void Update()
+        {
+            base.Update();
+            Bipods = Bipods;
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
+        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

@@ -19,6 +19,7 @@ namespace TMGmod.Core.AmmoTypes
             DeltaDamage = 0f;
             AlphaDamage = 1f;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var flyingtoilet = new X3XShell(x, y) { hSpeed = dir * (7f + Rando.Float(1f)) };

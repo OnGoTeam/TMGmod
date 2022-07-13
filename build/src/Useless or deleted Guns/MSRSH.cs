@@ -10,7 +10,8 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.Useless_or_deleted_Guns
 {
     [EditorGroup("TMG|DEBUG")]
-    [BaggedProperty("isInDemo", true), BaggedProperty("canSpawn", false)]
+    [BaggedProperty("isInDemo", true)]
+    [BaggedProperty("canSpawn", false)]
     [PublicAPI]
     [Obsolete]
     // ReSharper disable once InconsistentNaming
@@ -18,16 +19,18 @@ namespace TMGmod.Useless_or_deleted_Guns
     {
         private int _ammo2;
         private AmmoType _ammoType2;
-        private Sprite _graphic2;
         private Vec2 _barrelOffsetTl2;
+        private bool _drobovik;
         private string _fireSound2;
+        private bool _fullAuto2;
+        private Sprite _graphic2;
         private float _loseAccuracy2;
         private float _maxAccuracyLost2;
         private int _numBulletsPerFire2;
-        private bool _switched;
-        private bool _fullAuto2;
-        private bool _drobovik;
         private bool _snuper = true;
+
+        private bool _switched;
+
         //Are you see that? This is a sniper rifle with underbarrel shotgun. But it does not work. R.I.P.
         //Wait.. what are you doing here?!
         public MSRC(float xval, float yval) : base(xval, yval)
@@ -69,21 +72,15 @@ namespace TMGmod.Useless_or_deleted_Guns
             _holdOffset = new Vec2(14f, -1f);
             _editorName = "MSR With SH";
             weight = 5.45f;
-			
-
         }
 
         public override void Draw()
         {
             var ang = angle;
             if (offDir <= 0)
-            {
                 angle += _angleOffset;
-            }
             else
-            {
                 angle -= _angleOffset;
-            }
             base.Draw();
             angle = ang;
             laserSight = false;
@@ -109,10 +106,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             {
                 if (owner == null)
                 {
-                    if (_loadState == 3)
-                    {
-                        loaded = true;
-                    }
+                    if (_loadState == 3) loaded = true;
                     _loadState = -1;
                     _angleOffset = 0f;
                     handOffset = Vec2.Zero;
@@ -123,13 +117,8 @@ namespace TMGmod.Useless_or_deleted_Guns
                     case 0:
                     {
                         if (!Network.isActive)
-                        {
                             SFX.Play("loadSniper");
-                        }
-                        else if (isServerForObject)
-                        {
-                            _netLoad.Play();
-                        }
+                        else if (isServerForObject) _netLoad.Play();
                         Sniper sniper = this;
                         sniper._loadState += 1;
                         break;
@@ -178,9 +167,9 @@ namespace TMGmod.Useless_or_deleted_Guns
                         break;
                 }
             }
+
             laserSight = false;
             if (duck != null)
-            {
                 if (duck.inputProfile.Pressed("QUACK"))
                 {
                     if (!_switched)
@@ -188,6 +177,7 @@ namespace TMGmod.Useless_or_deleted_Guns
                         _switched = true;
                         graphic = new Sprite(GetPath("MSRSH1"));
                     }
+
                     var g2 = _graphic2;
                     _graphic2 = graphic;
                     graphic = g2;
@@ -219,9 +209,10 @@ namespace TMGmod.Useless_or_deleted_Guns
                     _snuper = _drobovik;
                     _drobovik = stupidshit;
                 }
-            }
+
             base.Update();
         }
+
         public override void Thrown()
         {
             if (ammo == 0)
@@ -257,8 +248,9 @@ namespace TMGmod.Useless_or_deleted_Guns
                 _snuper = _drobovik;
                 _drobovik = stupidshit;
             }
+
             base.Thrown();
-        }		
+        }
     }
 }
 #endif

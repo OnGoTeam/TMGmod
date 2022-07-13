@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -10,35 +10,16 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Combined")]
     public class ValmetM76 : BaseBurst, ILoseAccuracy, IHaveSkin
     {
+        private const int NonSkinFrames = 2;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
-        public bool NonAuto
-        {
-            get => BurstNum == 1;
-            set
-            {
-                BurstNum = value ? 1 : 2;
-                _fireWait = value ? 0.7f : 1.4f;
-                FrameId = FrameId % 10 + (value ? 0 : 10);
-                loseAccuracy = value ? 0.2f : 0f;
-                _kickForce = value ? 3f : 6.5f;
-                _ammoType.accuracy = value ? 0.89f : 1f;
-                RegenAccuracyDmr = value ? 0.025f : 0f;
-                DrainAccuracyDmr = value ? 0.15f : 0f;
-                BaseAccuracy = value ? 0.89f : 1f;
-            }
-        }
-        private const int NonSkinFrames = 2;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+
         public ValmetM76(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
@@ -72,6 +53,40 @@ namespace TMGmod
             DeltaWait = 0.15f;
             BurstNum = 1;
         }
+
+        [UsedImplicitly]
+        public bool NonAuto
+        {
+            get => BurstNum == 1;
+            set
+            {
+                BurstNum = value ? 1 : 2;
+                _fireWait = value ? 0.7f : 1.4f;
+                FrameId = FrameId % 10 + (value ? 0 : 10);
+                loseAccuracy = value ? 0.2f : 0f;
+                _kickForce = value ? 3f : 6.5f;
+                _ammoType.accuracy = value ? 0.89f : 1f;
+                RegenAccuracyDmr = value ? 0.025f : 0f;
+                DrainAccuracyDmr = value ? 0.15f : 0f;
+                BaseAccuracy = value ? 0.89f : 1f;
+            }
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        public float RegenAccuracyDmr { get; private set; }
+        public float DrainAccuracyDmr { get; private set; }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -79,30 +94,21 @@ namespace TMGmod
                 NonAuto = !NonAuto;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
+
             base.Update();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();
             base.EditorPropertyChanged(property);
         }
-
-        public float RegenAccuracyDmr { get; private set; }
-        public float DrainAccuracyDmr { get; private set; }
     }
 }

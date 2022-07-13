@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -11,47 +11,18 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class UziPro : BaseSmg, IHaveSkin
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 2;
-        [UsedImplicitly]
-        public bool Silencer
-        {
-            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
-            set
-            {
-                if (value)
-                {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    _ammoType = new ATUziS();
-                    _barrelOffsetTL = new Vec2(16f, 2f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
-                }
-                else
-                {
-                    _sprite.frame %= 10;
-                    _ammoType = new ATUzi();
-                    _barrelOffsetTL = new Vec2(10f, 2f);
-                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f)
-                    };
-                    _fireSound = GetPath("sounds/smg.wav");
-                }
-            }
-        }
-        [UsedImplicitly]
-        public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 6, 8 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4, 6, 8 });
+
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+
         public UziPro(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
@@ -83,6 +54,48 @@ namespace TMGmod
             _editorName = "Uzi Pro";
             _weight = 2.5f;
         }
+
+        [UsedImplicitly]
+        public bool Silencer
+        {
+            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
+            set
+            {
+                if (value)
+                {
+                    _sprite.frame %= 10;
+                    _sprite.frame += 10;
+                    _ammoType = new ATUziS();
+                    _barrelOffsetTL = new Vec2(16f, 2f);
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                }
+                else
+                {
+                    _sprite.frame %= 10;
+                    _ammoType = new ATUzi();
+                    _barrelOffsetTL = new Vec2(10f, 2f);
+                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f)
+                    };
+                    _fireSound = GetPath("sounds/smg.wav");
+                }
+            }
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -91,22 +104,15 @@ namespace TMGmod
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);
             }
+
             base.Update();
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
-        }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void EditorPropertyChanged(object property)

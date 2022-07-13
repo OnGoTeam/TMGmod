@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -10,23 +10,18 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     public class Vintorez : BaseAr, ISpeedAccuracy, IHaveSkin, IHaveBipods
     {
+        private const int NonSkinFrames = 1;
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7 });
 
         private readonly SpriteMap _sprite;
-        private const int NonSkinFrames = 1;
-        [UsedImplicitly]
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        [UsedImplicitly]
-        public float RandomaticKickforce;
-        [UsedImplicitly]
-        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
+
         // ReSharper disable once InconsistentNaming
-        [UsedImplicitly]
-        private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 7 });
+        [UsedImplicitly] private readonly EditorProperty<int> skin;
+
+        [UsedImplicitly] public float RandomaticKickforce;
+
         public Vintorez(float xval, float yval)
-          : base(xval, yval)
+            : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 16;
@@ -57,12 +52,10 @@ namespace TMGmod
             _editorName = "Vintorez";
             _weight = 4.7f;
         }
-        public override void Update()
-        {
-            base.Update();
-            Bipods = Bipods;
-            RandomaticKickforce = Rando.Float(1.1f, 1.7f);
-        }
+
+        [UsedImplicitly]
+        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
+
         [UsedImplicitly]
         public bool Bipods
         {
@@ -75,6 +68,7 @@ namespace TMGmod
                 LambdaAccuracySr = value ? 0f : 0.5f;
             }
         }
+
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
@@ -86,26 +80,38 @@ namespace TMGmod
             }
             set => Bipods = value.ReadBool();
         }
+
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
 
-        [UsedImplicitly]
-        public float MuAccuracySr { get; }
-        public float LambdaAccuracySr { get; private set; }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        [UsedImplicitly] public float MuAccuracySr { get; }
+
+        public float LambdaAccuracySr { get; private set; }
+
+        public override void Update()
+        {
+            base.Update();
+            Bipods = Bipods;
+            RandomaticKickforce = Rando.Float(1.1f, 1.7f);
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
         }
 
         public override void EditorPropertyChanged(object property)

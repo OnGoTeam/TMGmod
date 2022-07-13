@@ -1,6 +1,6 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
@@ -13,25 +13,17 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP7 : BaseGun, IAmSmg, IHaveSkin
     {
-        [UsedImplicitly]
-        public float HandAngleOff
-        {
-            get => handAngle * offDir;
-            set => handAngle = value * offDir;
-        }
-
-        private float _handleAngleOff;
-        [UsedImplicitly]
-        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 3;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+
+        private float _handleAngleOff;
+
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
         public MP7(float xval, float yval)
             : base(xval, yval)
@@ -59,6 +51,25 @@ namespace TMGmod
             maxAccuracyLost = 0.5f;
             _editorName = "HK MP7";
             _weight = 3f;
+        }
+
+        [UsedImplicitly]
+        public float HandAngleOff
+        {
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void Update()
@@ -89,21 +100,14 @@ namespace TMGmod
             else if (_handleAngleOff < 0f) _handleAngleOff += 0.1f;
             if ((_handleAngleOff > -0.1f) & (_handleAngleOff < 0.1f)) _handleAngleOff = 0f;
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
         }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+
         public override void EditorPropertyChanged(object property)
         {
             UpdateSkin();

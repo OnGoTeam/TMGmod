@@ -1,29 +1,27 @@
 ﻿using System.Collections.Generic;
-#if DEBUG
-using System.Linq;    
-#endif
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.WClasses;
+#if DEBUG
+using System.Linq;
+#endif
 
 namespace TMGmod
 {
-
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class PPSh41 : BaseSmg, IHaveSkin, I5
     {
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+
         public PPSh41(float xval, float yval)
             : base(xval, yval)
         {
@@ -56,20 +54,24 @@ namespace TMGmod
             _editorName = "PPSh 41";
             _weight = 3.5f;
         }
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
-            _sprite.frame = bublic;
-        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        private void UpdateSkin()
+        {
+            var bublic = Skin.value;
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
+            _sprite.frame = bublic;
         }
 
         public override void EditorPropertyChanged(object property)
@@ -82,10 +84,8 @@ namespace TMGmod
         {
             var contextMenu = base.GetContextMenu();
 #if DEBUG
-            foreach (var sprite in Allowedlst.Select(allowed => new SpriteMap(GetPath("PPSH41"), 30, 8) {_frame = allowed}))
-            {
-                contextMenu.AddItem(new ContextSkinRender(null, sprite));
-            }
+            foreach (var sprite in Allowedlst.Select(allowed => new SpriteMap(GetPath("PPSH41"), 30, 8)
+                { _frame = allowed })) contextMenu.AddItem(new ContextSkinRender(null, sprite));
 #endif
             return contextMenu;
         }

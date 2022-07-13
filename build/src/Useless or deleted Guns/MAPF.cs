@@ -62,10 +62,9 @@ namespace TMGmod.Useless_or_deleted_Guns
                     Level.Add(d);
                 }
             }
+
             base.Fire();
         }
-
-
     }
 }
 #endif

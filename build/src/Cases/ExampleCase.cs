@@ -1,15 +1,15 @@
 ﻿#if DEBUG
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 
 namespace TMGmod.Cases
 {
     [UsedImplicitly]
     [BaggedProperty("canSpawn", false)]
-    public class ExampleCase:BaseCase
+    public class ExampleCase : BaseCase
     {
         public ExampleCase(float xval, float yval) : base(xval, yval)
         {

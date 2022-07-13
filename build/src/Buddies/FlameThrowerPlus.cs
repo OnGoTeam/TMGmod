@@ -6,7 +6,7 @@ namespace TMGmod.Buddies
 {
     [PublicAPI]
     [EditorGroup("TMG|DEBUG")]
-    public class FlameThrowerPlus: PPSh41
+    public class FlameThrowerPlus : PPSh41
     {
         public FlameThrowerPlus(float xval, float yval) : base(xval, yval)
         {

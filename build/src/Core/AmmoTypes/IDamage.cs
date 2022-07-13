@@ -1,5 +1,5 @@
-using DuckGame;
 using System;
+using DuckGame;
 
 namespace TMGmod.Core.AmmoTypes
 {
@@ -11,6 +11,7 @@ namespace TMGmod.Core.AmmoTypes
         float DistanceConvexity { get; }
         float AlphaDamage { get; }
     }
+
     public static class Damage
     {
         private static float GetDamage(AmmoType ammo)
@@ -47,8 +48,9 @@ namespace TMGmod.Core.AmmoTypes
             if (Math.Abs((a - 1) * a) > 0)
             {
                 var k = (Math.Sqrt(a) + a) / (1 - a);
-                r = (k * k) / (q + k) / (q + k);
+                r = k * k / (q + k) / (q + k);
             }
+
             var s = 1 - (1 - a) * q * q;
             var rc = Math.Exp(+z);
             var sc = Math.Exp(-z);
@@ -67,6 +69,7 @@ namespace TMGmod.Core.AmmoTypes
         {
             return CalculateCoeff(bullet.ammo, bullet.bulletDistance / Math.Max(1, bullet.ammo.range));
         }
+
         public static float Calculate(Bullet bullet)
         {
 #if DEBUG
@@ -81,7 +84,7 @@ namespace TMGmod.Core.AmmoTypes
         private readonly object _d;
         private float _alive = 1f;
 
-        private StringMarker(Vec2 position, object d): base(position.x, position.y)
+        private StringMarker(Vec2 position, object d) : base(position.x, position.y)
         {
             _d = d;
             _hSpeed = Rando.Float(-1f, 1f);
@@ -111,7 +114,6 @@ namespace TMGmod.Core.AmmoTypes
     {
         private DotMarker(Vec2 position) : base(position.x, position.y)
         {
-
         }
 
         public override void Draw()

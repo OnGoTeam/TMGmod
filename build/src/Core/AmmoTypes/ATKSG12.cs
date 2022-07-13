@@ -20,6 +20,7 @@ namespace TMGmod.Core.AmmoTypes
             DeltaDamage = 0.75f;
             AlphaDamage = 0.4f;
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var shell = new Gauge12Shell(x, y)

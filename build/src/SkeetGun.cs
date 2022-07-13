@@ -1,10 +1,9 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
-using System.Collections.Generic;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
-
 
 namespace TMGmod
 {
@@ -12,25 +11,18 @@ namespace TMGmod
     [BaggedProperty("canSpawn", false)]
     public class SkeetGun : BaseGun, IHaveSkin, IAmSg
     {
-        [UsedImplicitly]
-        public float HandAngleOff
-        {
-            get => handAngle * offDir;
-            set => handAngle = value * offDir;
-        }
-
-        private float _handleAngleOff;
-        [UsedImplicitly]
-        public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
-        private readonly SpriteMap _sprite;
         private const int NonSkinFrames = 1;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
+        private readonly SpriteMap _sprite;
+
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
+
+        private float _handleAngleOff;
+
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -56,6 +48,25 @@ namespace TMGmod
             _holdOffset = new Vec2(9f, 2f);
         }
 
+        [UsedImplicitly]
+        public float HandAngleOff
+        {
+            get => handAngle * offDir;
+            set => handAngle = value * offDir;
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        // ReSharper disable once ConvertToAutoProperty
+        public EditorProperty<int> Skin => skin;
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public override void Update()
         {
             HandAngleOff = _handleAngleOff;
@@ -66,29 +77,23 @@ namespace TMGmod
                 _handleAngleOff = 0f;
                 return;
             }
+
             if (duck.inputProfile.Down("UP") && !_raised)
             {
                 if (_handleAngleOff > -0.5f) _handleAngleOff -= 0.05f;
                 return;
             }
+
             if (_handleAngleOff > 0f) _handleAngleOff -= 0.025f;
             else if (_handleAngleOff < 0f) _handleAngleOff += 0.025f;
             if ((_handleAngleOff > -0.025f) & (_handleAngleOff < 0.025f)) _handleAngleOff = 0f;
         }
+
         private void UpdateSkin()
         {
             var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic))
-            {
-                bublic = Rando.Int(0, 9);
-            }
+            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
             _sprite.frame = bublic;
-        }
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void EditorPropertyChanged(object property)

@@ -15,6 +15,7 @@ namespace TMGmod.Core
             bulletSpeed = 55f;
             bulletType = typeof(ExplosiveBullet);
         }
+
         public override void PopShell(float x, float y, int dir)
         {
             var redpill = new M50Shell(x, y) { hSpeed = dir * (6f + Rando.Float(1f)) };
