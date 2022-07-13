@@ -173,6 +173,7 @@ namespace TMGmod.Core.WClasses
             base.Draw();
 #if DEBUG
             if (Level.activeLevel is Editor) return;
+            if (duck is null) return;
             {
                 if (ammoType is null) return;
                 var a = (1 - ammoType.accuracy) / 2;
