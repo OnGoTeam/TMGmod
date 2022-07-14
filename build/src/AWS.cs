@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : BaseBolt, IHaveAllowedSkins, I5, IHaveBipodState, ICanDisableBipods, ISwitchBipods
+    public class AWS : BaseBolt, IHaveAllowedSkins, I5, ICanDisableBipods, ISwitchBipods, IDeployBipods
     {
         // Amazon Web Services
 
@@ -17,19 +17,20 @@ namespace TMGmod
         public ICollection<int> AllowedSkins => new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
+        [UsedImplicitly] private readonly EditorProperty<int> skin;
 
         private float _bipodsstate;
 
-        [UsedImplicitly] public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
+        [UsedImplicitly]
+        public NetSoundEffect BipOff { get; } = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
 
-        [UsedImplicitly] public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
+        [UsedImplicitly] public StateBinding BipOffBinding { get; } = new NetSoundBinding(nameof(BipOff));
 
-        [UsedImplicitly] public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
+        [UsedImplicitly]
+        public NetSoundEffect BipOn { get; } = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
 
-        [UsedImplicitly] public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
+        [UsedImplicitly] public StateBinding BipOnBinding { get; } = new NetSoundBinding(nameof(BipOn));
 
         public AWS(float xval, float yval)
             : base(xval, yval)
@@ -50,7 +51,7 @@ namespace TMGmod
             };
             _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
@@ -71,34 +72,24 @@ namespace TMGmod
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
-        protected override float GetBaseKforce() => BipodsDeployed() ? 0 : 4.75f;
-        protected override float GetBaseAccuracy() => BipodsDeployed() ? 1f : 0.97f;
+        protected override float GetBaseKforce() => this.BipodsDeployed() ? 0 : 4.75f;
+        protected override float GetBaseAccuracy() => this.BipodsDeployed() ? 1f : 0.97f;
 
         private void UpdateStats()
         {
-            _ammoType.range = BipodsDeployed() ? 1100f : 550f;
-            _ammoType.bulletSpeed = BipodsDeployed() ? 150f : 37f;
+            _ammoType.range = this.BipodsDeployed() ? 1100f : 550f;
+            _ammoType.bulletSpeed = this.BipodsDeployed() ? 150f : 37f;
         }
 
-        private void UpdateFrames() => FrameId = FrameId % 10 + 10 * (BipodsDeployed() ? 2 : BipodsFolded() ? 0 : 1);
-
-        private void UpdateSound(float old)
-        {
-            if (isServerForObject && BipodsDeployed() && old <= 0.99f)
-                BipOn.Play();
-            if (isServerForObject && BipodsFolded() && old >= 0.01f)
-                BipOff.Play();
-        }
+        private void UpdateFrames() =>
+            FrameId = FrameId % 10 + 10 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
 
         public void UpdateStats(float old)
         {
             UpdateStats();
             UpdateFrames();
-            UpdateSound(old);
+            this.UpdateBipodsSounds(old);
         }
-
-        private bool BipodsFolded() => BipodsState < .01f;
-        private bool BipodsDeployed() => BipodsState > .99f;
 
         public float BipodSpeed => 1f / 7;
 

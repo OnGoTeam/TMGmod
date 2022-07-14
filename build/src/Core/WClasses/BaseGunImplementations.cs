@@ -44,5 +44,16 @@ namespace TMGmod.Core.WClasses
             else if (gun.duck.inputProfile.Pressed("QUACK")) target.SetBipodsDisabled(!target.BipodsDisabled);
             target.UpdateBipods();
         }
+
+        public static bool BipodsDeployed(this IHaveBipodState target) => target.BipodsState > .99f;
+        public static bool BipodsFolded(this IHaveBipodState target) => target.BipodsState < .01f;
+        public static void UpdateBipodsSounds(this IDeployBipods target, float old)
+        {
+            var gun = target.AsAGun();
+            if (gun.isServerForObject && target.BipodsDeployed() && old <= 0.99f)
+                target.BipOn.Play();
+            if (gun.isServerForObject && target.BipodsFolded() && old >= 0.01f)
+                target.BipOff.Play();
+        }
     }
 }

@@ -13,14 +13,4 @@ namespace TMGmod.Core
 
         bool BipodsDisabled { get; }
     }
-
-    public interface ICanDisableBipods: IHaveBipods, IAmAGun
-    {
-        void SetBipodsDisabled(bool disabled);
-    }
-
-    public interface ISwitchBipods : IHaveBipods
-    {
-        bool SwitchingBipods();
-    }
 }
