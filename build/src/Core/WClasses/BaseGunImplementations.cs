@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System.Linq;
+using DuckGame;
 
 namespace TMGmod.Core.WClasses
 {
@@ -29,12 +30,13 @@ namespace TMGmod.Core.WClasses
             target.UpdateStats(old);
         }
 
-        public static void UpdateSkin(this IHaveAllowedSkins target)
-        {
-            var bublic = target.Skin.value;
-            while (!target.AllowedSkins.Contains(bublic)) bublic = Rando.Int(0, 9);
-            target.FrameId = bublic;
-        }
+        private static int FilterSkin(this IHaveAllowedSkins target, int skin) =>
+            target.AllowedSkins.Contains(skin)
+                ? skin
+                : Rando.ChooseInt(target.AllowedSkins.ToArray());
+
+        public static void UpdateSkin(this IHaveAllowedSkins target) =>
+            target.FrameId = target.FilterSkin(target.Skin.value);
 
         public static void UpdateSwitchableBipods(this ICanDisableBipods target)
         {
@@ -47,6 +49,7 @@ namespace TMGmod.Core.WClasses
 
         public static bool BipodsDeployed(this IHaveBipodState target) => target.BipodsState > .99f;
         public static bool BipodsFolded(this IHaveBipodState target) => target.BipodsState < .01f;
+
         public static void UpdateBipodsSounds(this IDeployBipods target, float old)
         {
             var gun = target.AsAGun();
