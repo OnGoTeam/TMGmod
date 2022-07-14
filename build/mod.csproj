@@ -142,6 +142,7 @@
     <Compile Include="src\Core\AmmoTypes\ATVista.cs" />
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\AmmoTypes\IDamage.cs" />
+    <Compile Include="src\Core\BipodStateContainer.cs" />
     <Compile Include="src\Core\ICanDisableBipods.cs" />
     <Compile Include="src\Core\IDeployBipods.cs" />
     <Compile Include="src\Core\ISwitchBipods.cs" />

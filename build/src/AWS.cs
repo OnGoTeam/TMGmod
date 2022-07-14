@@ -20,8 +20,6 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         [UsedImplicitly] private readonly EditorProperty<int> skin;
 
-        private float _bipodsstate;
-
         [UsedImplicitly]
         public NetSoundEffect BipOff { get; } = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
 
@@ -63,12 +61,12 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -2f);
         }
 
-
+        private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
         [UsedImplicitly]
         public float BipodsState
         {
-            get => duck != null ? _bipodsstate : 0;
-            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
+            get => _bipodsState.Get(this);
+            set => _bipodsState.Set(value);
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
