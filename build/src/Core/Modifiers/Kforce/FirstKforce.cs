@@ -4,9 +4,9 @@ namespace TMGmod.Core.Modifiers.Kforce
 {
     public sealed class FirstKforce : Modifier
     {
-        private uint _currentDelay;
-        private readonly uint _maxDelay;
         private readonly Func<float, float> _additionalKforce;
+        private readonly uint _maxDelay;
+        private uint _currentDelay;
 
         public FirstKforce(uint maxDelay, Func<float, float> additionalKforce)
         {
@@ -14,7 +14,11 @@ namespace TMGmod.Core.Modifiers.Kforce
             _additionalKforce = additionalKforce;
         }
 
-        public override float ModifyKforce(float kforce) => _currentDelay <= 0 ? _additionalKforce(kforce) : kforce;
+        public override float ModifyKforce(float kforce)
+        {
+            return _currentDelay <= 0 ? _additionalKforce(kforce) : kforce;
+        }
+
         public override void ModifyUpdate(Action update)
         {
             if (_currentDelay > 0)

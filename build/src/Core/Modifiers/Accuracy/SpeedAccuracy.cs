@@ -3,11 +3,11 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Accuracy
 {
-    public class SpeedAccuracy: Modifier
+    public class SpeedAccuracy : Modifier
     {
+        private readonly float _horizontal;
         private readonly BaseGun _target;
         private readonly float _threshold;
-        private readonly float _horizontal;
         private readonly float _vertical;
 
         public SpeedAccuracy(

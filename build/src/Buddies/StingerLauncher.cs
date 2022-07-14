@@ -33,7 +33,7 @@ namespace TMGmod.Buddies
                 velocity = OffsetLocal(new Vec2(10, 0)) + velocity - 2 * new Vec2(0f, gravity),
                 owner = this,
                 offDir = offDir,
-                angle = angle
+                angle = angle,
             };
             Level.Add(stg);
             ApplyKick();

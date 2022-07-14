@@ -28,7 +28,7 @@ namespace TMGmod.Core.AmmoTypes
             {
                 hSpeed = (2.5f + Rando.Float(-0.2f, 0.2f)) * dir,
                 vSpeed = -2f + Rando.Float(-0.3f, 0.3f),
-                depth = 1f
+                depth = 1f,
             };
             Level.Add(shell);
         }

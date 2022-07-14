@@ -11,6 +11,7 @@ namespace TMGmod.Buddies
     [UsedImplicitly]
     public class HpArmor : Equipment
     {
+        private const bool Invincibility = false;
         private readonly float _hpMax;
 
         [UsedImplicitly] public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
@@ -123,10 +124,9 @@ namespace TMGmod.Buddies
                 Level.Remove(this);
                 return;
             }
+
             _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
         }
-
-        private const bool Invincibility = false;
 
         public override void Equip(Duck d)
         {
@@ -141,6 +141,7 @@ namespace TMGmod.Buddies
                 _equippedDuck.invincible = false;
                 _equippedDuck.Destroy(new DTCrush(this));
             }
+
             base.UnEquip();
         }
     }

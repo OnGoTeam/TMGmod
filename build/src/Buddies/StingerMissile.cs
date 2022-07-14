@@ -318,7 +318,7 @@ namespace TMGmod.Buddies
                 -8 * pv,
                 4 * (vv - pg) + gg - aa,
                 4 * vg + 2 * gg - 2 * aa,
-                gg - aa
+                gg - aa,
             });
             var t = (from r in rar where r >= 0 select r).Concat(new[] { 1e+10 }).Min();
             return t;

@@ -5,20 +5,14 @@ namespace TMGmod.Core.WClasses
 {
     public abstract class BaseBolt : BaseGun, ISpeedAccuracy, IAmSr
     {
-        [UsedImplicitly] public StateBinding LoadStateBinding = new StateBinding(nameof(LoadState));
-        [UsedImplicitly] public StateBinding AngleOffsetBinding = new StateBinding(nameof(AngleOffset));
-        [UsedImplicitly] public StateBinding NetLoadBinding = new NetSoundBinding(nameof(NetLoad));
-        [UsedImplicitly] public NetSoundEffect NetLoad;
-        [UsedImplicitly] public int LoadState = -1;
         [UsedImplicitly] public float AngleOffset;
-        protected virtual bool HasLaser() => false;
-        protected virtual float MaxAngle() => 0.16f;
-        protected virtual float MaxOffset() => 4f;
-        protected virtual float ReloadSpeed() => 1f;
-        private float AngleSpeed() => .15f * ReloadSpeed();
-        private float OffsetSpeed() => .1f * MaxOffset() * ReloadSpeed();
+        [UsedImplicitly] public StateBinding AngleOffsetBinding = new StateBinding(nameof(AngleOffset));
+        [UsedImplicitly] public int LoadState = -1;
+        [UsedImplicitly] public StateBinding LoadStateBinding = new StateBinding(nameof(LoadState));
+        [UsedImplicitly] public NetSoundEffect NetLoad;
+        [UsedImplicitly] public StateBinding NetLoadBinding = new NetSoundBinding(nameof(NetLoad));
 
-        protected BaseBolt(float xval, float yval, string netLoad="loadSniper") : base(xval, yval)
+        protected BaseBolt(float xval, float yval, string netLoad = "loadSniper") : base(xval, yval)
         {
             NetLoad = new NetSoundEffect(netLoad);
             BaseAccuracy = 1f;
@@ -32,6 +26,36 @@ namespace TMGmod.Core.WClasses
         public float SpeedAccuracyThreshold { get; }
         public float SpeedAccuracyHorizontal { get; }
         public float SpeedAccuracyVertical { get; }
+
+        protected virtual bool HasLaser()
+        {
+            return false;
+        }
+
+        protected virtual float MaxAngle()
+        {
+            return 0.16f;
+        }
+
+        protected virtual float MaxOffset()
+        {
+            return 4f;
+        }
+
+        protected virtual float ReloadSpeed()
+        {
+            return 1f;
+        }
+
+        private float AngleSpeed()
+        {
+            return .15f * ReloadSpeed();
+        }
+
+        private float OffsetSpeed()
+        {
+            return .1f * MaxOffset() * ReloadSpeed();
+        }
 
         public override void Update()
         {
@@ -57,7 +81,9 @@ namespace TMGmod.Core.WClasses
                                 NetLoad.Play();
                         }
                         else
+                        {
                             SFX.Play("loadSniper");
+                        }
 
                         ++LoadState;
                         break;
@@ -111,7 +137,9 @@ namespace TMGmod.Core.WClasses
         public override void OnPressAction()
         {
             if (loaded)
+            {
                 base.OnPressAction();
+            }
             else
             {
                 if (ammo <= 0 || LoadState != -1)

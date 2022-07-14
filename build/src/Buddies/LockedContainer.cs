@@ -47,7 +47,7 @@ namespace TMGmod.Buddies
                 var editorGroupMenu2 = new EditorGroupMenu(editorGroupMenu1)
                 {
                     text = "Chance",
-                    tooltip = "Likelyhood for this object to exist in the level."
+                    tooltip = "Likelyhood for this object to exist in the level.",
                 };
                 editorGroupMenu1.AddItem(editorGroupMenu2);
                 editorGroupMenu2.AddItem(new ContextSlider("Chance", null, new FieldBinding(this, "likelyhoodToExist"),
@@ -65,7 +65,7 @@ namespace TMGmod.Buddies
             {
                 var editorGroupMenu2 = new EditorGroupMenu(editorGroupMenu1)
                 {
-                    text = "Sequence"
+                    text = "Sequence",
                 };
                 editorGroupMenu1.AddItem(editorGroupMenu2);
                 editorGroupMenu2.AddItem(new ContextCheckBox("Loop", null, new FieldBinding(sequence, "loop")));
