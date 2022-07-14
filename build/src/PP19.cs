@@ -30,9 +30,9 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 64;
             _ammoType = new ATBizon();
-            BaseAccuracy = 0.6f;
+            BaseAccuracy = 0.8f;
+            LowerAccuracyFp = 0.6f;
             MinAccuracy = 0.2f;
-            MaxAccuracyFp = 0.8f;
             MaxDelayFp = 25;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PP19Bizon"), 28, 9);
@@ -61,7 +61,7 @@ namespace TMGmod
 
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
+        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

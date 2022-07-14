@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace TMGmod.Core.Modifiers
@@ -23,7 +22,7 @@ namespace TMGmod.Core.Modifiers
 
         public float ModifyKforce(float kforce) => _left.ModifyKforce(_right.ModifyKforce(kforce));
 
-        public static IModifyEverything Compose(IEnumerable<IModifyEverything> modifiers) =>
+        public static IModifyEverything Compose(params IModifyEverything[] modifiers) =>
             modifiers.Reverse().Aggregate(
                 Modifier.Identity(),
                 (left, right) => new ComposedModifier(left, right)

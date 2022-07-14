@@ -32,11 +32,11 @@ namespace TMGmod
             _ammoType = new ATM14
             {
                 range = 333f,
-                accuracy = 0.8f
+                accuracy = 0.8f,
             };
-            BaseAccuracy = 0.8f;
+            BaseAccuracy = 1f;
+            LowerAccuracyFp = 0.8f;
             MinAccuracy = 0.3f;
-            MaxAccuracyFp = 1f;
             MaxDelayFp = 40;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Sawed-Off M14"), 31, 11);
@@ -64,7 +64,7 @@ namespace TMGmod
 
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
+        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

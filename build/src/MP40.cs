@@ -26,10 +26,10 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 32;
             _ammoType = new ATMP40();
-            BaseAccuracy = 0.7f;
+            BaseAccuracy = 1f;
+            LowerAccuracyFp = 0.7f;
             KickForceDeltaSmg = 2f;
             MaxDelaySmg = 20;
-            MaxAccuracyFp = 1f;
             MaxDelayFp = 20;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP40"), 23, 14);
@@ -57,7 +57,7 @@ namespace TMGmod
 
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
+        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

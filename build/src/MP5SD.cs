@@ -28,7 +28,8 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATMP5SD();
-            BaseAccuracy = 0.77f;
+            BaseAccuracy = 0.9f;
+            LowerAccuracyFp = 0.77f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _graphic = _sprite;
@@ -47,7 +48,6 @@ namespace TMGmod
             _editorName = "MP5SD";
             _weight = 3f;
             KickForceDeltaSmg = 2f;
-            MaxAccuracyFp = 0.9f;
             MaxDelayFp = 10;
             MaxDelaySmg = 50;
             DeltaWait = 0.45f;
@@ -72,7 +72,7 @@ namespace TMGmod
         public int MaxDelaySmg { get; }
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
+        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

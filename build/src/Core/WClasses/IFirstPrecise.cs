@@ -4,6 +4,6 @@
     {
         int CurrentDelayFp { get; set; }
         int MaxDelayFp { get; }
-        float MaxAccuracyFp { get; }
+        float LowerAccuracyFp { get; }
     }
 }

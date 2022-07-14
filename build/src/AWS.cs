@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers;
-using TMGmod.Core.Modifiers.Kforce;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -48,7 +48,7 @@ namespace TMGmod
             _ammoType = new AT50SniperS
             {
                 range = 550f,
-                accuracy = 0.97f
+                accuracy = 0.97f,
             };
             _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
             {
@@ -64,25 +64,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -2f);
         }
 
-#if DEBUG
-        public override void Initialize()
-        {
-            if (FrameId == 8)
-            {
-                _weight = 0f;
-                BaseActiveModifier = ComposedModifier.Compose(
-                    new[]
-                    {
-                        DefaultModifier,
-                        new HSpeedKforce(this, speed => speed > .1f, f => f + 5f),
-                        new HSpeedKforce(this, speed => speed > 2f, f => f * 0),
-                    }
-                );
-            }
-            base.Initialize();
-        }
-#endif
-
 
         [UsedImplicitly]
         public float BipodsState
@@ -92,21 +73,34 @@ namespace TMGmod
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+        protected override float GetBaseKforce() => BipodsDeployed() ? 0 : 4.75f;
+        protected override float GetBaseAccuracy() => BipodsDeployed() ? 1f : 0.97f;
+
+        private void UpdateStats()
+        {
+            _ammoType.range = BipodsDeployed() ? 1100f : 550f;
+            _ammoType.bulletSpeed = BipodsDeployed() ? 150f : 37f;
+        }
+
+        private void UpdateFrames() => FrameId = FrameId % 10 + 10 * (BipodsDeployed() ? 2 : BipodsFolded() ? 0 : 1);
+
+        private void UpdateSound(float old)
+        {
+            if (isServerForObject && BipodsDeployed() && old <= 0.99f)
+                BipOn.Play();
+            if (isServerForObject && BipodsFolded() && old >= 0.01f)
+                BipOff.Play();
+        }
 
         public void UpdateStats(float old)
         {
-            var nobipods = BipodsState < 0.01f;
-            var bipods = BipodsState > 0.99f;
-            _kickForce = bipods ? 0 : 4.75f;
-            _ammoType.range = bipods ? 1100f : 550f;
-            _ammoType.bulletSpeed = bipods ? 150f : 37f;
-            BaseAccuracy = bipods ? 1f : 0.97f;
-            FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
-            if (isServerForObject && bipods && old <= 0.99f)
-                BipOn.Play();
-            if (isServerForObject && nobipods && old >= 0.01f)
-                BipOff.Play();
+            UpdateStats();
+            UpdateFrames();
+            UpdateSound(old);
         }
+
+        private bool BipodsFolded() => BipodsState < .01f;
+        private bool BipodsDeployed() => BipodsState > .99f;
 
         public float BipodSpeed => 1f / 7;
 

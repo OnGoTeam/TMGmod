@@ -143,6 +143,7 @@
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\AmmoTypes\IDamage.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\IModifyAccuracy.cs" />
+    <Compile Include="src\Core\Modifiers\Accuracy\SpeedAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\ComposedModifier.cs" />
     <Compile Include="src\Core\Modifiers\IModifyEverything.cs" />
     <Compile Include="src\Core\Modifiers\Updating\IModifyUpdate.cs" />

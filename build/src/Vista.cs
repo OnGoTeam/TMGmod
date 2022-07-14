@@ -27,10 +27,11 @@ namespace TMGmod
             _ammoType = new ATVista
             {
                 range = 105f,
-                accuracy = 0.75f
+                accuracy = 0.75f,
             };
             MaxDelayFp = 30;
-            MaxAccuracyFp = 1f;
+            BaseAccuracy = 1f;
+            LowerAccuracyFp = 0.75f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
             _graphic = _sprite;
@@ -55,7 +56,7 @@ namespace TMGmod
 
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
+        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

@@ -25,7 +25,8 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
             _ammoType = new ATIB8();
-            BaseAccuracy = 0.82f;
+            BaseAccuracy = 1f;
+            LowerAccuracyFp = 0.82f;
             MinAccuracy = 0.24f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
@@ -42,7 +43,6 @@ namespace TMGmod
             _kickForce = 1.5f;
             KickForceDeltaSmg = 2.1f;
             MaxDelaySmg = 11;
-            MaxAccuracyFp = 1f;
             MaxDelayFp = 20;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
@@ -57,7 +57,7 @@ namespace TMGmod
         public int MaxDelaySmg { get; }
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
+        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

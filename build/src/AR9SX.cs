@@ -26,8 +26,8 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 17;
             _ammoType = new ATAR9SX();
-            BaseAccuracy = 0.88f;
-            MaxAccuracyFp = 1f;
+            BaseAccuracy = 1f;
+            LowerAccuracyFp = 0.88f;
             MaxDelayFp = 18;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AR9SX"), 36, 10);
@@ -57,7 +57,7 @@ namespace TMGmod
 
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float MaxAccuracyFp { get; }
+        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
