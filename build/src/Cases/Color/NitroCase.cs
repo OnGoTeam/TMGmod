@@ -59,7 +59,7 @@ namespace TMGmod.Cases.Color
                 typeof(MP7),
                 typeof(CZ805),
                 typeof(HK417),
-                typeof(Foucus)
+                typeof(Foucus),
             };
             CaseId = 7;
         }

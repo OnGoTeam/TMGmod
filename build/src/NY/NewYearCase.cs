@@ -67,7 +67,7 @@ namespace TMGmod.NY
                 //x1
                 typeof(SpruceGun),
                 typeof(CandyCaneOrange),
-                typeof(PPLMG)
+                typeof(PPLMG),
             };
             CaseId = 6;
         }

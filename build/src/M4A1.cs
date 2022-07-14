@@ -27,7 +27,7 @@ namespace TMGmod
             _ammoType = new AT545NATO
             {
                 range = 330f,
-                accuracy = 0.86f
+                accuracy = 0.86f,
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M4A1"), 30, 11);
@@ -39,7 +39,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(30f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;

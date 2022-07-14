@@ -39,7 +39,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(26f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(0f, 1f);
             _fireSound = "shotgunFire2";
@@ -51,7 +51,7 @@ namespace TMGmod
             _editorName = "Remington 870 Raid";
             LoaderSprite = new SpriteMap(GetPath("Remington 870 RaidPump"), 5, 2)
             {
-                center = new Vec2(3f, 1f)
+                center = new Vec2(3f, 1f),
             };
             FrameId = 20;
             ShellOffset = new Vec2(2f, -2f);

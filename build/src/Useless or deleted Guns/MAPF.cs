@@ -25,7 +25,7 @@ namespace TMGmod.Useless_or_deleted_Guns
                 combustable = true,
                 range = 0f,
                 accuracy = 1f,
-                penetration = 2f
+                penetration = 2f,
             };
             _numBulletsPerFire = 2;
             _type = "gun";

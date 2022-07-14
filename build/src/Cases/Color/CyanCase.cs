@@ -40,7 +40,7 @@ namespace TMGmod.Cases.Color
                 typeof(PPK42),
                 typeof(SKS),
                 typeof(Glock18),
-                typeof(RemingtonTac)
+                typeof(RemingtonTac),
             };
             CaseId = 3;
         }

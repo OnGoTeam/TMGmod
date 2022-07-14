@@ -27,7 +27,7 @@ namespace TMGmod.Core.AmmoTypes
             var shell = new ATSP6Shell(x, y)
             {
                 hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
-                vSpeed = -2.25f + Rando.Float(-0.4f, 0.4f)
+                vSpeed = -2.25f + Rando.Float(-0.4f, 0.4f),
             };
             Level.Add(shell);
         }

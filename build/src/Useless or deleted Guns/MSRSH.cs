@@ -46,14 +46,14 @@ namespace TMGmod.Useless_or_deleted_Guns
             _ammo2 = 4;
             _ammoType = new ATBoltAction
             {
-                bulletSpeed = 85f
+                bulletSpeed = 85f,
             };
             _ammoType2 = new AT9mm
             {
                 range = 130f,
                 accuracy = 1f,
                 penetration = 1f,
-                bulletSpeed = 40f
+                bulletSpeed = 40f,
             };
             _numBulletsPerFire = 1;
             _numBulletsPerFire2 = 7;

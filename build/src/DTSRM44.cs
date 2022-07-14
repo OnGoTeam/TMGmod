@@ -36,11 +36,11 @@ namespace TMGmod
             _ammoType = new AT762NATO
             {
                 range = 889f,
-                accuracy = 0.97f
+                accuracy = 0.97f,
             };
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;

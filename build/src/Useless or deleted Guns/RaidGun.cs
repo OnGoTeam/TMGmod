@@ -25,7 +25,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             {
                 accuracy = 0.9f,
                 range = 250f,
-                penetration = 5f
+                penetration = 5f,
             };
             _type = "gun";
             graphic = new Sprite(GetPath("RaidGun"));

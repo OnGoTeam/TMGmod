@@ -17,7 +17,7 @@ namespace TMGmod.NY
             _ammoType = new ATCane
             {
                 range = 100f,
-                accuracy = 0.11f
+                accuracy = 0.11f,
             };
             _type = "gun";
             _graphic = new SpriteMap(GetPath("Holiday/Peppergun"), 18, 7);
@@ -27,7 +27,7 @@ namespace TMGmod.NY
             _barrelOffsetTL = new Vec2(18f, 0f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4)
             {
-                center = new Vec2(0f, 0f)
+                center = new Vec2(0f, 0f),
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;

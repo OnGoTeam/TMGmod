@@ -25,7 +25,7 @@ namespace TMGmod
             _ammoType = new AT556NATO
             {
                 range = 500f,
-                accuracy = 0.85f
+                accuracy = 0.85f,
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARW-A"), 27, 9);
@@ -39,7 +39,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, -2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = "deepMachineGun2";
             _fullAuto = true;

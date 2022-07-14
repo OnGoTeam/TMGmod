@@ -110,7 +110,7 @@ namespace TMGmod.Stuff
                     var bbp = new BarrBetaPar(x, y)
                     {
                         hSpeed = ImpactSpeed * 0.9f + Rando.Float(-1f, 1f),
-                        vSpeed = Rando.Float(-1.5f, 1.5f)
+                        vSpeed = Rando.Float(-1.5f, 1.5f),
                     };
                     Level.Add(bbp);
                 }

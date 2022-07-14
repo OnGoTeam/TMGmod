@@ -27,7 +27,7 @@ namespace TMGmod.Core.AmmoTypes
             var shell = new AT40ACPShell(x, y)
             {
                 hSpeed = (3f + Rando.Float(-0.1f, 0.1f)) * dir,
-                vSpeed = -1.5f + Rando.Float(-0.5f, 0.5f)
+                vSpeed = -1.5f + Rando.Float(-0.5f, 0.5f),
             };
             Level.Add(shell);
         }

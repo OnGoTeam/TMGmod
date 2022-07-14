@@ -33,7 +33,7 @@ namespace TMGmod.Core
             var bullet = new ExplosiveBullet(pos.x, pos.y, ammo, dir, null, rebound, rng)
             {
                 _teleporter = _teleporter,
-                firedFrom = firedFrom
+                firedFrom = firedFrom,
             };
             Level.current.AddThing(bullet);
             Level.current.AddThing(new LaserRebound(pos.x, pos.y));

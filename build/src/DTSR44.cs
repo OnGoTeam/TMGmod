@@ -35,11 +35,11 @@ namespace TMGmod
             _ammoType = new AT50SniperS
             {
                 range = 713f,
-                accuracy = 0.92f
+                accuracy = 0.92f,
             };
             _flare = new SpriteMap(GetPath("FlareBase2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;

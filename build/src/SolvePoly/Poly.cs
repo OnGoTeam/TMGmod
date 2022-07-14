@@ -11,7 +11,7 @@ namespace TMGmod.SolvePoly
     public enum SolutionCount
     {
         Finite,
-        Infinite
+        Infinite,
     }
 
     internal struct Solution

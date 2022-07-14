@@ -34,7 +34,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(31f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(3f, 2f);
             _fireSound = "shotgunFire2";

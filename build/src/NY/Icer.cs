@@ -16,7 +16,7 @@ namespace TMGmod.NY
             _barrelOffsetTL = new Vec2(53f, 5f);
             _flare = new SpriteMap(GetPath("Holiday/IcerFlare"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             ammo = 4;
             _ammoType = new ATIcer();

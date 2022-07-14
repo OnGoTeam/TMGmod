@@ -32,7 +32,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(27f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             ammo = 6;
             _ammoType = new ATSV99();

@@ -40,7 +40,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(41f, 0f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireWait = 0.5f;
             _kickForce = 6.55f;

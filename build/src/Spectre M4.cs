@@ -37,7 +37,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/smg.wav");
             _flare = new SpriteMap("smallFlare", 11, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fullAuto = true;
             _fireWait = 0.31f;
@@ -75,7 +75,7 @@ namespace TMGmod
                     _sprite.frame %= 10;
                     _flare = new SpriteMap("smallFlare", 11, 10)
                     {
-                        center = new Vec2(0.0f, 5f)
+                        center = new Vec2(0.0f, 5f),
                     };
                     _fireSound = GetPath("sounds/smg.wav");
                     _ammoType = new ATSpectreM4();

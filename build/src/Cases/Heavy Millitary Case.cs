@@ -51,7 +51,7 @@ namespace TMGmod.Cases
                 typeof(SRM1208),
                 typeof(Vintorez),
                 typeof(VSK94),
-                typeof(X3X)
+                typeof(X3X),
             };
             _contains = things[Rando.Int(things.Count - 1)];
         }

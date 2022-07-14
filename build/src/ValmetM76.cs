@@ -38,7 +38,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(33f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(4f, 1f);
             ShellOffset = new Vec2(-2f, -2f);

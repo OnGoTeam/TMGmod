@@ -39,7 +39,7 @@ namespace TMGmod.Cases
                 typeof(USP),
                 typeof(UziPro),
                 typeof(CZC2),
-                typeof(DaewooK1)
+                typeof(DaewooK1),
             };
             CaseId = 1;
         }

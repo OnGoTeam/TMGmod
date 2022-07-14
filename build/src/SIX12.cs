@@ -31,7 +31,7 @@ namespace TMGmod
                 range = 165f,
                 accuracy = 0.87f,
                 penetration = 1f,
-                bulletThickness = 0.5f
+                bulletThickness = 0.5f,
             };
             BaseAccuracy = 0.87f;
             _numBulletsPerFire = 14;

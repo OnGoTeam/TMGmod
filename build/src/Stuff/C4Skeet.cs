@@ -26,7 +26,7 @@ namespace TMGmod.Stuff
             {
                 hSpeed = Rando.Float(-7f, 7f),
                 vSpeed = Rando.Float(-5f, 5f) - 15f,
-                Weak = true
+                Weak = true,
             };
             Level.Add(sCfour);
         }

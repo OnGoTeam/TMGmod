@@ -18,7 +18,7 @@ namespace TMGmod.NY
             _ammoType = new ATCane
             {
                 range = 500f,
-                accuracy = 0.95f
+                accuracy = 0.95f,
             };
             _type = "gun";
             _center = new Vec2(9f, 3.5f);

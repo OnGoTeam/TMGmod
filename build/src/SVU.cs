@@ -35,7 +35,7 @@ namespace TMGmod
             _sprite.frame = 0;
             _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);

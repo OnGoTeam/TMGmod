@@ -42,12 +42,12 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(33f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             ammo = 5;
             _ammoType = new ATBoltAction
             {
-                range = 1250f
+                range = 1250f,
             };
             _fireSound = "sniper";
             _fullAuto = false;

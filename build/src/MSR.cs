@@ -32,14 +32,14 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(47f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             ammo = 5;
             _ammoType = new ATBoltAction
             {
                 bulletSpeed = 85f,
                 range = 1200f,
-                penetration = 2f
+                penetration = 2f,
             };
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;

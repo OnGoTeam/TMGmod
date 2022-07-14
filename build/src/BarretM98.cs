@@ -31,7 +31,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(50f, 5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             ammo = 8;
             _ammoType = new ATBoltAction { penetration = 4f, range = 850f };

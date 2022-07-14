@@ -33,7 +33,7 @@ namespace TMGmod
                 range = 360f,
                 accuracy = 1f,
                 bulletSpeed = 60f,
-                bulletThickness = 0.87f
+                bulletThickness = 0.87f,
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ALFA"), 38, 9);
@@ -48,7 +48,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = "deepMachineGun2";
             _fullAuto = true;

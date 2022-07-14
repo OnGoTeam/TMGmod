@@ -66,7 +66,7 @@ namespace TMGmod
                     _sprite.frame %= 10;
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
                     {
-                        center = new Vec2(0.0f, 5f)
+                        center = new Vec2(0.0f, 5f),
                     };
                     _fireSound = GetPath("sounds/1.wav");
                     _ammoType = new ATUSP();

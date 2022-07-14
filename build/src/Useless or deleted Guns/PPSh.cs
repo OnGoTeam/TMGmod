@@ -30,7 +30,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             {
                 range = 300f,
                 accuracy = 0.9f,
-                penetration = 0.4f
+                penetration = 0.4f,
             };
             BaseAccuracy = 0.9f;
             _type = "gun";

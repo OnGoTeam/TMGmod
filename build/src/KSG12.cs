@@ -40,7 +40,7 @@ namespace TMGmod
             _fireWait = 2.5f;
             LoaderSprite = new SpriteMap(GetPath("KSG12Pimp"), 14, 6)
             {
-                center = new Vec2(7f, 3f)
+                center = new Vec2(7f, 3f),
             };
             FrameId = 0;
             ShellOffset = new Vec2(-8f, 0f);

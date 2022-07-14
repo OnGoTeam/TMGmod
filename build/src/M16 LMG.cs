@@ -28,7 +28,7 @@ namespace TMGmod
             {
                 range = 400f,
                 accuracy = 0.8f,
-                penetration = 1.5f
+                penetration = 1.5f,
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M16LMG"), 38, 11);
@@ -40,7 +40,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(38f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;

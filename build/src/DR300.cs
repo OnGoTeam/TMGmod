@@ -44,7 +44,7 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fullAuto = false;
             _fireWait = 0.3f;

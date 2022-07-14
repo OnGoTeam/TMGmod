@@ -18,8 +18,8 @@ namespace TMGmod.Custom_Guns
                 accuracy = 0.35f,
                 penetration = 2f,
                 bulletSpeed = 50f,
-                BulletDamage = 15f
-            }
+                BulletDamage = 15f,
+            },
         };
 
         private readonly Vec2[] _barrelOffsetTLm = { new Vec2(16f, 2f), new Vec2(14f, 6f) };

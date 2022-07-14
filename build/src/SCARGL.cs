@@ -18,15 +18,15 @@ namespace TMGmod
                 accuracy = 0.9f,
                 penetration = 1f,
                 bulletSpeed = 35f,
-                barrelAngleDegrees = 0f
+                barrelAngleDegrees = 0f,
             },
             new ATGrenade
             {
                 range = 2500f,
                 accuracy = 1f,
                 bulletSpeed = 18f,
-                barrelAngleDegrees = -7.5f
-            }
+                barrelAngleDegrees = -7.5f,
+            },
         };
 
         private readonly Vec2[] _barrelOffsetTLm = { new Vec2(33f, 3f), new Vec2(30f, 6.5f) };
@@ -59,7 +59,7 @@ namespace TMGmod
                 range = 400f,
                 accuracy = 0.9f,
                 bulletSpeed = 35f,
-                barrelAngleDegrees = 0f
+                barrelAngleDegrees = 0f,
             };
             BaseAccuracy = 0.9f;
             _type = "gun";
@@ -74,12 +74,12 @@ namespace TMGmod
             {
                 new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
                 {
-                    center = new Vec2(0.0f, 5f)
+                    center = new Vec2(0.0f, 5f),
                 },
                 new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
                 {
-                    center = new Vec2(0.0f, 5f)
-                }
+                    center = new Vec2(0.0f, 5f),
+                },
             };
             _flare = _flarem[Mode];
             _holdOffset = new Vec2(2f, 0f);

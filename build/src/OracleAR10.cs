@@ -39,7 +39,7 @@ namespace TMGmod
             _ammoType = new AT556NATO
             {
                 range = 333f,
-                accuracy = 0.91f
+                accuracy = 0.91f,
             };
             BaseAccuracy = 0.91f;
             MinAccuracy = 0.35f;
@@ -55,7 +55,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(27f, 4f);
             _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(-1f, 0f);
             ShellOffset = new Vec2(0f, 0f);

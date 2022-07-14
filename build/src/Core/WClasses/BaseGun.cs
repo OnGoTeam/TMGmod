@@ -15,7 +15,7 @@ namespace TMGmod.Core.WClasses
             PresentChancePercentage =
                 0.5f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
 
-        protected readonly IModifyEverything DefaultModifier;
+        protected IModifyEverything DefaultModifier() => new BaseModifier(this);
 
         private bool _currHoneInit;
         protected float BaseAccuracy = 1f;
@@ -32,7 +32,7 @@ namespace TMGmod.Core.WClasses
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
             ToPrevKforce = true;
-            BaseActiveModifier = DefaultModifier = new BaseModifier(this);
+            BaseActiveModifier = DefaultModifier();
         }
 
         [UsedImplicitly]

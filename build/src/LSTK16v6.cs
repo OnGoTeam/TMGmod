@@ -46,7 +46,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(34f, 5f);
             _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
             {
-                center = new Vec2(1.0f, 6f)
+                center = new Vec2(1.0f, 6f),
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;

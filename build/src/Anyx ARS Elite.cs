@@ -50,7 +50,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _flare = new SpriteMap(GetPath("FlareAnyxARS"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fullAuto = true;
             _fireWait = 0.75f;

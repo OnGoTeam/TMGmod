@@ -37,7 +37,7 @@ namespace TMGmod
             _ammoType = new AT556NATO
             {
                 range = 480f,
-                accuracy = 0.8f
+                accuracy = 0.8f,
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg3"), 39, 11);

@@ -27,7 +27,7 @@ namespace TMGmod
                 range = 1100f,
                 accuracy = 1f,
                 penetration = 1f,
-                bulletThickness = 2.5f
+                bulletThickness = 2.5f,
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M50"), 40, 13);
@@ -39,7 +39,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(40f, 5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;

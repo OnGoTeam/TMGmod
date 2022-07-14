@@ -49,7 +49,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(31f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _fullAuto = false;

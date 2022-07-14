@@ -38,7 +38,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATLowQammos
             {
-                range = 330f
+                range = 330f,
             };
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);
@@ -50,7 +50,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(27f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = "deepMachineGun";
             _fullAuto = true;

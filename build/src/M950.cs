@@ -27,7 +27,7 @@ namespace TMGmod
             ammo = 50;
             _ammoType = new ATCalico
             {
-                range = Rando.Float(10f, 70f)
+                range = Rando.Float(10f, 70f),
             };
             BaseAccuracy = 0.4f;
             _type = "gun";
@@ -40,7 +40,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(23f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fireSound = "smg";
             _fullAuto = true;

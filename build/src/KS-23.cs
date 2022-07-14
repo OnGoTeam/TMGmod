@@ -45,7 +45,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(35f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(8f, 1f);
             _fireSound = GetPath("sounds/shotgun.wav");
@@ -57,7 +57,7 @@ namespace TMGmod
             _editorName = "KS-23";
             LoaderSprite = new SpriteMap(GetPath("KS-23Pump"), 7, 4)
             {
-                center = new Vec2(4f, 2f)
+                center = new Vec2(4f, 2f),
             };
             FrameId = 0;
             ShellOffset = new Vec2(-7f, -2f);

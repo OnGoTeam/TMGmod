@@ -36,7 +36,7 @@ namespace TMGmod.Custom_Guns
             _barrelOffsetTL = new Vec2(33f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(3f, 2f);
             ShellOffset = new Vec2(0f, -3f);

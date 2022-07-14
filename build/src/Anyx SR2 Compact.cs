@@ -53,7 +53,7 @@ namespace TMGmod
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _fullAuto = true;
             _fireWait = 0.85f;

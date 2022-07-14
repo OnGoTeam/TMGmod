@@ -36,7 +36,7 @@ namespace TMGmod
                 range = 800f,
                 accuracy = 0.97f,
                 bulletSpeed = 95f,
-                bulletThickness = 1.5f
+                bulletThickness = 1.5f,
             };
             BaseAccuracy = 0.97f;
             MinAccuracy = 0.6f;
@@ -50,7 +50,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(42f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(8f, 0f);
             ShellOffset = new Vec2(-9f, -2f);
@@ -99,7 +99,7 @@ namespace TMGmod
                 _fireSound = "";
                 _flare = new SpriteMap(GetPath("takezis"), 4, 4)
                 {
-                    center = new Vec2(0f, 0f)
+                    center = new Vec2(0f, 0f),
                 };
                 _ammoType = new ATNB();
                 _fireWait = 10f;
@@ -125,7 +125,7 @@ namespace TMGmod
                 range = 800f,
                 accuracy = 0.97f,
                 bulletSpeed = 95f,
-                bulletThickness = 1.5f
+                bulletThickness = 1.5f,
             };
             _fireWait = 1.3f;
             _barrelOffsetTL = new Vec2(42f, 4f);
@@ -136,7 +136,7 @@ namespace TMGmod
             _kickForce = 4.8f;
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f)
+                center = new Vec2(0.0f, 5f),
             };
             Stick = false;
         }
@@ -151,7 +151,7 @@ namespace TMGmod
                     range = 800f,
                     accuracy = 0.97f,
                     bulletSpeed = 95f,
-                    bulletThickness = 1.5f
+                    bulletThickness = 1.5f,
                 };
                 _fireWait = 1.55f;
                 _barrelOffsetTL = new Vec2(42f, 4f);
@@ -162,7 +162,7 @@ namespace TMGmod
                 maxAccuracyLost = 0.4f;
                 _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
                 {
-                    center = new Vec2(0.0f, 5f)
+                    center = new Vec2(0.0f, 5f),
                 };
             }
 
