@@ -16,7 +16,7 @@ namespace TMGmod.Core.WClasses
             target.Bipods = buffer.ReadBool();
         }
 
-        public static void UpdateBipods(this IHaveBipods target)
+        private static void UpdateBipods(this IHaveBipods target)
         {
             target.Bipods = target.Bipods;
         }

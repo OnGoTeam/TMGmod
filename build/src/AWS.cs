@@ -3,6 +3,8 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers;
+using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
@@ -62,6 +64,26 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -2f);
         }
 
+#if DEBUG
+        public override void Initialize()
+        {
+            if (FrameId == 8)
+            {
+                _weight = 0f;
+                BaseActiveModifier = ComposedModifier.Compose(
+                    new[]
+                    {
+                        DefaultModifier,
+                        new HSpeedKforce(this, speed => speed > .1f, f => f + 5f),
+                        new HSpeedKforce(this, speed => speed > 2f, f => f * 0),
+                    }
+                );
+            }
+            base.Initialize();
+        }
+#endif
+
+
         [UsedImplicitly]
         public float BipodsState
         {
@@ -78,7 +100,7 @@ namespace TMGmod
             _kickForce = bipods ? 0 : 4.75f;
             _ammoType.range = bipods ? 1100f : 550f;
             _ammoType.bulletSpeed = bipods ? 150f : 37f;
-            _ammoType.accuracy = bipods ? 1f : 0.97f;
+            BaseAccuracy = bipods ? 1f : 0.97f;
             FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
             if (isServerForObject && bipods && old <= 0.99f)
                 BipOn.Play();

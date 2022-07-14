@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.Modifiers;
 using TMGmod.NY;
 #if DEBUG
 using TMGmod.Core.AmmoTypes;
@@ -8,10 +9,10 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseGun : Gun, IAmAGun
+    public abstract class BaseGun : Gun
     {
         private const float
-            PresentChancePercent =
+            PresentChancePercentage =
                 0.5f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
 
         private bool _currHoneInit;
@@ -28,6 +29,7 @@ namespace TMGmod.Core.WClasses
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
             ToPrevKforce = true;
+            BaseActiveModifier = DefaultModifier = new BaseModifier(this);
         }
 
         [UsedImplicitly]
@@ -41,42 +43,39 @@ namespace TMGmod.Core.WClasses
             set => _holdOffset = value + ExtraHoldOffset;
         }
 
-        private float FireHSpeedKforce(IHspeedKforce target, float kickForce)
+        private float CalculateHSpeedKforce(IHspeedKforce target, float kickForce)
         {
             return duck != null
                 ? Math.Abs(duck.hSpeed) < 0.1f ? target.KickForceSlowAr : target.KickForceFastAr
                 : kickForce;
         }
 
-        private static float FireRandKforce(IRandKforce target)
+        private static float CalculateRandKforce(IRandKforce target)
         {
             return Rando.Float(target.KickForce1Lmg, target.KickForce2Lmg);
         }
 
-        private static float FireFirstKforce(IFirstKforce target, float kickForce)
+        private static float CalculateFirstKforce(IFirstKforce target, float kickForce)
         {
-            target.CurrentDelaySmg = target.MaxDelaySmg;
             return target.CurrentDelaySmg <= 0 ? kickForce + target.KickForceDeltaSmg : kickForce;
         }
 
-        protected virtual float CalculateKForce(float kickForce)
+        protected virtual float CalculateKforce(float kickForce)
         {
             switch (this)
             {
                 case IHspeedKforce ihskf:
-                    return FireHSpeedKforce(ihskf, kickForce);
+                    return CalculateHSpeedKforce(ihskf, kickForce);
                 case IRandKforce irkf:
-                    return FireRandKforce(irkf);
+                    return CalculateRandKforce(irkf);
                 case IFirstKforce ifkf:
-                    return FireFirstKforce(ifkf, kickForce);
+                    return CalculateFirstKforce(ifkf, kickForce);
                 default:
                     return kickForce;
             }
         }
-        private void FireSetKforce()
-        {
-            _kickForce = CalculateKForce(_kickForce);
-        }
+
+        private void SetKforce() => _kickForce = Kforce();
 
         private void AddNyCase() => Level.Add(new NewYearCase(x, y));
 
@@ -103,14 +102,29 @@ namespace TMGmod.Core.WClasses
             }
         }
 
+        private static void FireFirstKforce(IFirstKforce target)
+        {
+            target.CurrentDelaySmg = target.MaxDelaySmg;
+        }
+
+        private void FireKforce()
+        {
+            switch (this)
+            {
+                case IFirstKforce ifk:
+                    FireFirstKforce(ifk);
+                    break;
+            }
+        }
+
         private void MaybeAddNyCase()
         {
-            if (Rando.Float(0f, 1f) < PresentChancePercent / 100f) AddNyCase();
+            if (Rando.Float(0f, 1f) < PresentChancePercentage / 100f) AddNyCase();
         }
 
         private void OnAmmoSpent()
         {
-            FireAccuracy();
+            OnFire();
             MaybeAddNyCase();
         }
 
@@ -137,7 +151,7 @@ namespace TMGmod.Core.WClasses
 
         private void SetKforceAndFire()
         {
-            FireSetKforce();
+            SetKforce();
             FireWithKforce();
         }
 
@@ -176,9 +190,9 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-        private void UpdateSpeedAccuracy(ISpeedAccuracy target)
+        private float CalculateSpeedAccuracy(ISpeedAccuracy target)
         {
-            ammoType.accuracy = duck != null
+            return duck != null
                 ? ClipAccuracy(
                     BaseAccuracy
                     +
@@ -193,29 +207,47 @@ namespace TMGmod.Core.WClasses
                 : BaseAccuracy;
         }
 
-        private void UpdateLoseAccuracy(ILoseAccuracy target)
+        private float CalculateLoseAccuracy(ILoseAccuracy target)
         {
-            ammoType.accuracy = ClipAccuracy(ammoType.accuracy + target.RegenAccuracyDmr);
+            return ClipAccuracy(ammoType.accuracy + target.RegenAccuracyDmr);
         }
 
-        private void UpdateFirstPrecise(IFirstPrecise target)
+        private float CalculateFirstPrecise(IFirstPrecise target)
         {
-            target.CurrentDelayFp = Math.Max(target.CurrentDelayFp - 1, 0);
-            ammoType.accuracy = target.CurrentDelayFp <= 0f
+            return target.CurrentDelayFp <= 0f
                 ? target.MaxAccuracyFp
                 : BaseAccuracy;
+        }
+
+        private float CalculateAccuracy(float accuracy)
+        {
+            switch (this)
+            {
+                case ISpeedAccuracy isa:
+                    return CalculateSpeedAccuracy(isa);
+                case ILoseAccuracy ila:
+                    return CalculateLoseAccuracy(ila);
+                case IFirstPrecise ifp:
+                    return CalculateFirstPrecise(ifp);
+                default:
+                    return accuracy;
+            }
+        }
+
+        private void SetAccuracy()
+        {
+            if (_ammoType != null) _ammoType.accuracy = Accuracy();
+        }
+
+        private static void UpdateFirstPrecise(IFirstPrecise target)
+        {
+            target.CurrentDelayFp = Math.Max(target.CurrentDelayFp - 1, 0);
         }
 
         private void UpdateAccuracy()
         {
             switch (this)
             {
-                case ISpeedAccuracy isa:
-                    UpdateSpeedAccuracy(isa);
-                    break;
-                case ILoseAccuracy ila:
-                    UpdateLoseAccuracy(ila);
-                    break;
                 case IFirstPrecise ifp:
                     UpdateFirstPrecise(ifp);
                     break;
@@ -234,11 +266,10 @@ namespace TMGmod.Core.WClasses
             CurrHone = HoldOffsetNoExtra;
         }
 
-        private void UpdateCanonicalParametres()
+        private void UpdateInternals()
         {
+            SetAccuracy();
             UpdateHone();
-            UpdateKforce();
-            UpdateAccuracy();
         }
 
         private void UpdateFeatures()
@@ -246,10 +277,11 @@ namespace TMGmod.Core.WClasses
             if (this is ICanDisableBipods icdb)
                 icdb.UpdateSwitchableBipods();
         }
+
         public override void Update()
         {
-            UpdateCanonicalParametres();
-            UpdateFeatures();
+            UpdateInternals();
+            OnUpdate();
             base.Update();
         }
 
@@ -285,20 +317,11 @@ namespace TMGmod.Core.WClasses
             return !(duck is null) && !duck.sliding;
         }
 
-        protected bool BipodsQ(bool bypassihb = false)
-        {
-            return BipodsQ(this, bypassihb);
-        }
+        protected bool BipodsQ(bool bypassihb = false) => BipodsQ(this, bypassihb);
 
-        protected bool HandleQ()
-        {
-            return HandleQ(this);
-        }
+        protected bool HandleQ() => HandleQ(this);
 
-        protected bool SwitchStockQ()
-        {
-            return SwitchStockQ(this);
-        }
+        protected bool SwitchStockQ() => SwitchStockQ(this);
 
         [PublicAPI]
         public static void SetSpriteMapFrameId(SpriteMap sm, int value, int m)
@@ -358,9 +381,47 @@ namespace TMGmod.Core.WClasses
             {
                 iha.UpdateSkin();
             }
+
             base.EditorPropertyChanged(property);
         }
 
         public Gun AsAGun() => this;
+        protected virtual float GetBaseAccuracy() => BaseAccuracy;
+        protected virtual float Accuracy() => ActiveModifier.ModifyAccuracy(GetBaseAccuracy());
+        protected virtual float GetBaseKforce() => _kickForce;
+
+        protected virtual float Kforce() => ActiveModifier.ModifyKforce(GetBaseKforce());
+
+        protected virtual void BaseOnFire()
+        {
+            FireAccuracy();
+            FireKforce();
+        }
+
+        protected virtual void OnFire() => ActiveModifier.ModifyFire(BaseOnFire);
+
+        protected virtual void BaseOnUpdate()
+        {
+            UpdateAccuracy();
+            UpdateKforce();
+            UpdateFeatures();
+        }
+
+        protected virtual void OnUpdate() => ActiveModifier.ModifyUpdate(BaseOnUpdate);
+        protected IModifyEverything BaseActiveModifier;
+        protected virtual IModifyEverything ActiveModifier => BaseActiveModifier;
+        protected readonly IModifyEverything DefaultModifier;
+
+        private class BaseModifier : Modifier
+        {
+            private readonly BaseGun _target;
+            public BaseModifier(BaseGun target)
+            {
+                _target = target;
+            }
+
+            public override float ModifyAccuracy(float accuracy) => _target.CalculateAccuracy(accuracy);
+            public override float ModifyKforce(float kforce) => _target.CalculateKforce(kforce);
+        }
     }
 }

@@ -142,6 +142,15 @@
     <Compile Include="src\Core\AmmoTypes\ATVista.cs" />
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\AmmoTypes\IDamage.cs" />
+    <Compile Include="src\Core\Modifiers\Accuracy\IModifyAccuracy.cs" />
+    <Compile Include="src\Core\Modifiers\ComposedModifier.cs" />
+    <Compile Include="src\Core\Modifiers\IModifyEverything.cs" />
+    <Compile Include="src\Core\Modifiers\Updating\IModifyUpdate.cs" />
+    <Compile Include="src\Core\Modifiers\Kforce\FirstKforce.cs" />
+    <Compile Include="src\Core\Modifiers\Kforce\IModifyKforce.cs" />
+    <Compile Include="src\Core\Modifiers\Kforce\HSpeedKforce.cs" />
+    <Compile Include="src\Core\Modifiers\Firing\IModifyFire.cs" />
+    <Compile Include="src\Core\Modifiers\Modifier.cs" />
     <Compile Include="src\Core\IAmAGun.cs" />
     <Compile Include="src\Core\IHaveBipodState.cs" />
     <Compile Include="src\Core\Shells\AT40ACPshell.cs" />

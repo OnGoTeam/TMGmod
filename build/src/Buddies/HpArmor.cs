@@ -126,10 +126,12 @@ namespace TMGmod.Buddies
             _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
         }
 
+        private const bool Invincibility = false;
+
         public override void Equip(Duck d)
         {
             base.Equip(d);
-            _equippedDuck.invincible = true;
+            _equippedDuck.invincible = Invincibility;
         }
 
         public override void UnEquip()
