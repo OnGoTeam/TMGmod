@@ -33,7 +33,7 @@ namespace TMGmod
                 penetration = 1f,
                 bulletThickness = 0.5f,
             };
-            BaseAccuracy = 0.87f;
+            MaxAccuracy = 0.87f;
             _numBulletsPerFire = 14;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SIX12"), 29, 10);

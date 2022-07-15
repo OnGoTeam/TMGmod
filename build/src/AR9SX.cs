@@ -26,7 +26,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 17;
             _ammoType = new ATAR9SX();
-            BaseAccuracy = 1f;
+            MaxAccuracy = 1f;
             LowerAccuracyFp = 0.88f;
             MaxDelayFp = 18;
             _type = "gun";

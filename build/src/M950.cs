@@ -29,7 +29,7 @@ namespace TMGmod
             {
                 range = Rando.Float(10f, 70f),
             };
-            BaseAccuracy = 0.4f;
+            MaxAccuracy = 0.4f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M950A"), 23, 7);
             _graphic = _sprite;

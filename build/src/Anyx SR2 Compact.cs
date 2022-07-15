@@ -36,7 +36,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
             _ammoType = new ATSR2C();
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             MinAccuracy = 0.5f;
             KickForceSlowAr = 5.4f;
             KickForceFastAr = 6.85f;

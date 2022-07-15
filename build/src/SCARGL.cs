@@ -61,7 +61,7 @@ namespace TMGmod
                 bulletSpeed = 35f,
                 barrelAngleDegrees = 0f,
             };
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             _type = "gun";
             _graphicm[0] = new Sprite(GetPath("scargl1"));
             _graphicm[1] = new Sprite(GetPath("scargl2"));

@@ -32,7 +32,7 @@ namespace TMGmod.Useless_or_deleted_Guns
                 accuracy = 0.9f,
                 penetration = 0.4f,
             };
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PPSh"), 48, 16);
             _graphic = _sprite;

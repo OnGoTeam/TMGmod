@@ -24,7 +24,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
             _ammoType = new AT44DB();
-            BaseAccuracy = 0.1f;
+            MaxAccuracy = 0.1f;
             _numBulletsPerFire = 44;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("44dbTWICE"), 33, 10);

@@ -1,10 +1,11 @@
+using System;
 using DuckGame;
 using TMGmod.Core.Shells;
 
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATM72 : AmmoType, IHeavyAmmoType
+    public class ATM72 : BaseAmmoType, IHeavyAmmoType
     {
         public ATM72()
         {
@@ -24,10 +25,10 @@ namespace TMGmod.Core.AmmoTypes
             sprite.CenterOrigin();
         }
 
-        public override void PopShell(float x, float y, int dir)
+        public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
             var shalker = new M72Shell(x, y) { hSpeed = dir * (3.5f + Rando.Float(1f)) };
-            Level.Add(shalker);
+            add(shalker);
         }
     }
 }

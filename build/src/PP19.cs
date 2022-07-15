@@ -30,7 +30,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 64;
             _ammoType = new ATBizon();
-            BaseAccuracy = 0.8f;
+            MaxAccuracy = 0.8f;
             LowerAccuracyFp = 0.6f;
             MinAccuracy = 0.2f;
             MaxDelayFp = 25;

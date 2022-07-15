@@ -38,7 +38,7 @@ namespace TMGmod
                 bulletSpeed = 95f,
                 bulletThickness = 1.5f,
             };
-            BaseAccuracy = 0.97f;
+            MaxAccuracy = 0.97f;
             MinAccuracy = 0.6f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SKS"), 46, 11);

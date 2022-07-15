@@ -35,7 +35,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
             _ammoType = new ATLynx();
-            BaseAccuracy = 1f;
+            MaxAccuracy = 1f;
             MinAccuracy = 0.3f;
             RegenAccuracyDmr = 0.01f;
             DrainAccuracyDmr = 0.6f;

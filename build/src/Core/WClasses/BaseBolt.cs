@@ -16,7 +16,7 @@ namespace TMGmod.Core.WClasses
         protected BaseBolt(float xval, float yval, string netLoad = "loadSniper") : base(xval, yval)
         {
             NetLoad = new NetSoundEffect(netLoad);
-            BaseAccuracy = 1f;
+            MaxAccuracy = 1f;
             MinAccuracy = 0f;
             SpeedAccuracyThreshold = 0f;
             SpeedAccuracyHorizontal = 1f;

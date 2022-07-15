@@ -24,7 +24,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new ATM76();
-            BaseAccuracy = 0.89f;
+            MaxAccuracy = 0.89f;
             MinAccuracy = 0.5f;
             RegenAccuracyDmr = 0.025f;
             DrainAccuracyDmr = 0.15f;
@@ -68,7 +68,7 @@ namespace TMGmod
                 _ammoType.accuracy = value ? 0.89f : 1f;
                 RegenAccuracyDmr = value ? 0.025f : 0f;
                 DrainAccuracyDmr = value ? 0.15f : 0f;
-                BaseAccuracy = value ? 0.89f : 1f;
+                MaxAccuracy = value ? 0.89f : 1f;
             }
         }
 

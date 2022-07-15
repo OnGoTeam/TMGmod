@@ -4,7 +4,7 @@
     {
         protected BaseLmg(float xval, float yval) : base(xval, yval)
         {
-            BaseAccuracy = 0.8f;
+            MaxAccuracy = 0.8f;
             MinAccuracy = 0.7f;
             KickForce1Lmg = 0.4f;
             KickForce2Lmg = 0.7f;

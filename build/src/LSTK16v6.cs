@@ -35,7 +35,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 25;
             _ammoType = new ATM16();
-            BaseAccuracy = 0.91f;
+            MaxAccuracy = 0.91f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("LSTK16v6"), 33, 14);
             _graphic = _sprite;

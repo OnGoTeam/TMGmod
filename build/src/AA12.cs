@@ -31,7 +31,7 @@ namespace TMGmod
                 accuracy = 0.6f,
                 bulletThickness = 1.5f,
             };
-            BaseAccuracy = 0.6f;
+            MaxAccuracy = 0.6f;
             _numBulletsPerFire = 12;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AA12"), 34, 13);

@@ -28,7 +28,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
             _ammoType = new ATSkeetGun();
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             _numBulletsPerFire = 10;
             _sprite = new SpriteMap(GetPath("SkeetDouble"), 41, 7);
             _graphic = _sprite;

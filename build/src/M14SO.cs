@@ -34,7 +34,7 @@ namespace TMGmod
                 range = 333f,
                 accuracy = 0.8f,
             };
-            BaseAccuracy = 1f;
+            MaxAccuracy = 1f;
             LowerAccuracyFp = 0.8f;
             MinAccuracy = 0.3f;
             MaxDelayFp = 40;

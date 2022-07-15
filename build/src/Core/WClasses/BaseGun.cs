@@ -18,7 +18,7 @@ namespace TMGmod.Core.WClasses
         protected IModifyEverything DefaultModifier() => new BaseModifier(this);
 
         private bool _currHoneInit;
-        protected float BaseAccuracy = 1f;
+        protected float MaxAccuracy = 1f;
         protected IModifyEverything BaseActiveModifier;
         protected Vec2 CurrHone;
         protected float MinAccuracy;
@@ -214,8 +214,9 @@ namespace TMGmod.Core.WClasses
 
         private float CalculateSpeedAccuracy(ISpeedAccuracy target)
         {
-            return duck != null
+            return duck == null
                 ? GetBaseAccuracy()
+                : GetBaseAccuracy()
                   +
                   target.SpeedAccuracyThreshold
                   -
@@ -223,8 +224,7 @@ namespace TMGmod.Core.WClasses
                       Math.Abs(duck.hSpeed) * target.SpeedAccuracyHorizontal
                       +
                       Math.Abs(duck.vSpeed) * target.SpeedAccuracyVertical
-                  )
-                : GetBaseAccuracy();
+                  );
         }
 
         private float CalculateLoseAccuracy(ILoseAccuracy target)
@@ -322,6 +322,7 @@ namespace TMGmod.Core.WClasses
         {
             Level.Add(shell);
         }
+
         public override void Reload(bool shell = true)
         {
             if (ammo != 0)
@@ -398,7 +399,7 @@ namespace TMGmod.Core.WClasses
 
         protected virtual float GetBaseAccuracy()
         {
-            return BaseAccuracy;
+            return MaxAccuracy;
         }
 
         protected virtual float Accuracy()
@@ -418,6 +419,10 @@ namespace TMGmod.Core.WClasses
 
         protected virtual void BaseOnFire()
         {
+        }
+
+        private void DynamicOnFire()
+        {
             if (DynamicAccuracy())
                 FireAccuracy();
             if (DynamicKforce())
@@ -430,6 +435,10 @@ namespace TMGmod.Core.WClasses
         }
 
         protected virtual void BaseOnUpdate()
+        {
+        }
+
+        private void DynamicOnUpdate()
         {
             if (DynamicAccuracy())
                 UpdateAccuracy();
@@ -462,6 +471,18 @@ namespace TMGmod.Core.WClasses
             public BaseModifier(BaseGun target)
             {
                 _target = target;
+            }
+
+            public override void ModifyFire(Action fire)
+            {
+                _target.DynamicOnFire();
+                fire();
+            }
+
+            public override void ModifyUpdate(Action update)
+            {
+                _target.DynamicOnUpdate();
+                update();
             }
 
             public override float ModifyAccuracy(float accuracy)

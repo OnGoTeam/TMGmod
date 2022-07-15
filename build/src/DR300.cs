@@ -29,7 +29,7 @@ namespace TMGmod
             PostRounds = Rando.ChooseInt(20, 30);
             ammo = PostRounds;
             _ammoType = new ATDR300();
-            BaseAccuracy = 0.98f;
+            MaxAccuracy = 0.98f;
             MinAccuracy = 0.65f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.2f;

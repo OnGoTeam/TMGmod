@@ -52,7 +52,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "M16 LMG";
             _weight = 6f;
-            BaseAccuracy = 0.8f;
+            MaxAccuracy = 0.8f;
             MinAccuracy = 0.7f;
             KickForce1Lmg = 0.23f;
             KickForce2Lmg = 0.43f;

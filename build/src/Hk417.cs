@@ -25,7 +25,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
             ammo = 11;
             _ammoType = new ATHk417();
-            BaseAccuracy = 0.93f;
+            MaxAccuracy = 0.93f;
             MinAccuracy = 0.75f;
             RegenAccuracyDmr = 0.004f;
             DrainAccuracyDmr = 0.1f;

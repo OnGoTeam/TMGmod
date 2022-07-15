@@ -27,7 +27,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 60;
             _ammoType = new ATMG44();
-            BaseAccuracy = 0.75f;
+            MaxAccuracy = 0.75f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MG44 Mark2H"), 39, 11);
             _graphic = _sprite;

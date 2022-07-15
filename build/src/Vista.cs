@@ -30,7 +30,7 @@ namespace TMGmod
                 accuracy = 0.75f,
             };
             MaxDelayFp = 30;
-            BaseAccuracy = 1f;
+            MaxAccuracy = 1f;
             LowerAccuracyFp = 0.75f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vista"), 16, 14);

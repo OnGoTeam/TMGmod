@@ -41,7 +41,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 8;
             _ammoType = new ATSRM1();
-            BaseAccuracy = 0.6f;
+            MaxAccuracy = 0.6f;
             _numBulletsPerFire = 8;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SRM1208"), 29, 10);

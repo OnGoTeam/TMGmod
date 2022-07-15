@@ -27,7 +27,7 @@ namespace TMGmod
             ammo = 16;
             _ammoType = new ATVintorez();
             MinAccuracy = 0f;
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             KickForceSlowAr = 0.4f;
             KickForceFastAr = 0.85f;
             SpeedAccuracyThreshold = 1f;

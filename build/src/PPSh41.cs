@@ -28,7 +28,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 71;
             _ammoType = new ATPPSH41();
-            BaseAccuracy = 0.73f;
+            MaxAccuracy = 0.73f;
             KickForceDeltaSmg = 3f;
             MaxDelaySmg = 50;
             _type = "gun";

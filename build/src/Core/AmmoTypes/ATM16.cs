@@ -1,11 +1,12 @@
 #if DEBUG
+using System;
 using DuckGame;
 using TMGmod.Core.Shells;
 
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATM16 : AmmoType
+    public class ATM16 : BaseAmmoType
     {
         public ATM16()
         {
@@ -18,11 +19,11 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 1.5f;
         }
 
-        public override void PopShell(float x, float y, int dir)
+        public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
             var difficultToSee = new X3XShell(x, y)
                 { hSpeed = dir * (5f + Rando.Float(1f)) }; //должна быть кастомная shell
-            Level.Add(difficultToSee);
+            add(difficultToSee);
         }
     }
 }

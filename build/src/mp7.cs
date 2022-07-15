@@ -31,7 +31,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 35;
             _ammoType = new ATMP7();
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP7"), 20, 10);
             _graphic = _sprite;

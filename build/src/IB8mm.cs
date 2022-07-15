@@ -25,7 +25,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
             _ammoType = new ATIB8();
-            BaseAccuracy = 1f;
+            MaxAccuracy = 1f;
             LowerAccuracyFp = 0.82f;
             MinAccuracy = 0.24f;
             _type = "gun";

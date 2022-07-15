@@ -27,7 +27,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
             _ammoType = new ATSIX12S();
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _type = "gun";

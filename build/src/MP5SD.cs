@@ -28,7 +28,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATMP5SD();
-            BaseAccuracy = 0.9f;
+            MaxAccuracy = 0.9f;
             LowerAccuracyFp = 0.77f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5SD"), 31, 12);

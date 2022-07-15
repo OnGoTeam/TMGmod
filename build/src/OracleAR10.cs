@@ -41,7 +41,7 @@ namespace TMGmod
                 range = 333f,
                 accuracy = 0.91f,
             };
-            BaseAccuracy = 0.91f;
+            MaxAccuracy = 0.91f;
             MinAccuracy = 0.35f;
             RegenAccuracyDmr = 0.015f;
             DrainAccuracyDmr = 0.3f;
@@ -97,7 +97,7 @@ namespace TMGmod
                     BipodsState += 1f / 8 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
-                BaseAccuracy = bipods ? 1f : 0.91f;
+                MaxAccuracy = bipods ? 1f : 0.91f;
                 MinAccuracy = bipods ? 1f : 0.35f;
                 _ammoType.range = bipods ? 666f : 333f;
                 _ammoType.bulletSpeed = bipods ? 69f : 37f;

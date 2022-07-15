@@ -15,7 +15,7 @@ namespace TMGmod.NY
         {
             ammo = 16;
             _ammoType = new ATPopcorn();
-            BaseAccuracy = 0.5f;
+            MaxAccuracy = 0.5f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Holiday/Popcal 9mm"), 27, 10);
             _graphic = _sprite;

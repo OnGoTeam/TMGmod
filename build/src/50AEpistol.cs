@@ -23,7 +23,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(1, this, -1f, 9f, 0.5f);
             ammo = 7;
             _ammoType = new AT50C();
-            BaseAccuracy = 1f;
+            MaxAccuracy = 1f;
             MinAccuracy = 0.6f;
             RegenAccuracyDmr = 0.05f;
             DrainAccuracyDmr = 0.1f;
