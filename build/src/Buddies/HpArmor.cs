@@ -46,49 +46,137 @@ namespace TMGmod.Buddies
             set => _collisionOffset = value;
         }
 
-        private bool QHit(Bullet bullet)
+        private static Vec2 Orthonormal(Vec2 vec)
         {
-            var hit = bullet.end;
-            var v = bullet.bulletSpeed * bullet.travelDirNormalized;
-            var u = new Vec2(v.y, -v.x).normalized;
-
-            return Vec2.Dot(u, (_equippedDuck.topLeft - hit).normalized) *
-                   Vec2.Dot(u, (_equippedDuck.bottomRight - hit).normalized) < 0.001f &&
-                   Vec2.Dot(u, (_equippedDuck.topRight - hit).normalized) *
-                   Vec2.Dot(u, (_equippedDuck.bottomLeft - hit).normalized) < 0.001f;
+            return new Vec2(vec.y, -vec.x).normalized;
         }
 
-        public override bool Hit(Bullet bullet, Vec2 hitPos)
+        private static bool LineIntersectsSegment(
+            Vec2 origin,
+            Vec2 direction,
+            Vec2 pos0,
+            Vec2 pos1
+        )
         {
-            DotMarker.Show(bullet.end);
-            StrokeMarker.Show(hitPos, bullet.end);
-            if (_equippedDuck == null || bullet.owner == _equippedDuck || !bullet.isLocal || duck != _equippedDuck)
-                return false;
-            if (!QHit(bullet))
-                return false;
-            _equippedDuck.hSpeed *= 0.25f;
-            var damage = Damage.Calculate(bullet);
-            _hitPoints -= damage;
-#if DEBUG
-            StringMarker.Show(position, damage.ToString(CultureInfo.InvariantCulture));
-#endif
-            if (_hitPoints < 0)
-            {
-                Mod.Debug.Log("destroyed");
-                var equippedDuck1 = _equippedDuck;
-                equippedDuck1.invincible = false;
-                equippedDuck1.KnockOffEquipment(this, true, bullet);
-                Fondle(this, DuckNetwork.localConnection);
-                equippedDuck1.Destroy(new DTShot(bullet));
-                Level.Remove(this);
-            }
+            return Math.Sign(Vec2.Dot(Orthonormal(direction), (pos0 - origin).normalized))
+                   *
+                   Math.Sign(Vec2.Dot(Orthonormal(direction), (pos1 - origin).normalized))
+                   <
+                   0;
+        }
 
+        private static bool PlaneIntersectsSegment(
+            Vec2 origin,
+            Vec2 direction,
+            Vec2 pos0,
+            Vec2 pos1
+        )
+        {
+            return Math.Sign(Vec2.Dot(direction, (pos0 - origin).normalized)) > 0
+                   ||
+                   Math.Sign(Vec2.Dot(direction, (pos1 - origin).normalized)) > 0;
+        }
+
+        private static bool RayIntersectsSegment(
+            Vec2 origin,
+            Vec2 direction,
+            Vec2 pos0,
+            Vec2 pos1
+        )
+        {
+            return LineIntersectsSegment(origin, direction, pos0, pos1)
+                   &&
+                   PlaneIntersectsSegment(origin, direction, pos0, pos1);
+        }
+
+        private static bool RayIntersectsThing(
+            Vec2 origin,
+            Vec2 direction,
+            Thing thing
+        )
+        {
+            return RayIntersectsSegment(origin, direction, thing.topLeft, thing.topRight)
+                   ||
+                   RayIntersectsSegment(origin, direction, thing.topRight, thing.bottomRight)
+                   ||
+                   RayIntersectsSegment(origin, direction, thing.bottomRight, thing.bottomLeft)
+                   ||
+                   RayIntersectsSegment(origin, direction, thing.bottomLeft, thing.topLeft);
+        }
+
+        private bool QHit(Vec2 hitPos, Vec2 travelDirNormalized)
+        {
+            return RayIntersectsThing(hitPos, travelDirNormalized, _equippedDuck);
+        }
+
+        private bool QLocalHit(Thing bullet)
+        {
+            return _equippedDuck != null && bullet.owner != _equippedDuck && bullet.isLocal && duck == _equippedDuck;
+        }
+
+        private bool QHit(Bullet bullet, Vec2 hitPos)
+        {
+            return QLocalHit(bullet) && QHit(hitPos, bullet.travelDirNormalized);
+        }
+
+        private void DecorativeHit(Bullet bullet, Vec2 hitPos)
+        {
             if (bullet.isLocal && Network.isActive)
                 NetSoundEffect.Play("equipmentTing");
             Level.Add(MetalRebound.New(hitPos.x, hitPos.y, bullet.travelDirNormalized.x > 0 ? 1 : -1));
             for (var index = 0; index < 6; ++index)
                 Level.Add(Spark.New(x, y, bullet.travelDirNormalized));
-            return true;
+        }
+
+        private void Kill(Bullet bullet)
+        {
+            var equippedDuck1 = _equippedDuck;
+            equippedDuck1.invincible = false;
+            equippedDuck1.KnockOffEquipment(this, true, bullet);
+            Fondle(this, DuckNetwork.localConnection);
+            equippedDuck1.Destroy(new DTShot(bullet));
+            Level.Remove(this);
+        }
+
+        private void Damage(float damage)
+        {
+            _hitPoints -= damage;
+#if DEBUG
+            StringMarker.Show(position, damage.ToString(CultureInfo.InvariantCulture));
+#endif
+        }
+
+        private void Slowdown()
+        {
+            _equippedDuck.hSpeed *= 0.25f;
+        }
+
+        private void Damage(Bullet bullet)
+        {
+            Slowdown();
+            Damage(Core.AmmoTypes.Damage.Calculate(bullet));
+        }
+
+        private static void ShowMarkers(Bullet bullet, Vec2 hitPos)
+        {
+            DotMarker.Show(bullet.end);
+            StrokeMarker.Show(hitPos, bullet.end);
+        }
+
+        private bool RealHit(Bullet bullet, Vec2 hitPos)
+        {
+            Damage(bullet);
+            DecorativeHit(bullet, hitPos);
+            if (!(_hitPoints < 0)) return true;
+            Kill(bullet);
+            return false;
+
+        }
+
+        public override bool Hit(Bullet bullet, Vec2 hitPos)
+        {
+            ShowMarkers(bullet, hitPos);
+            return QHit(bullet, hitPos) && RealHit(bullet, hitPos);
         }
 
         public override void Draw()

@@ -52,7 +52,7 @@ namespace TMGmod.Core.AmmoTypes
 
         private static double PositiveCoefficient(double alpha, double distanceProportion)
         {
-            if (!(Math.Abs((alpha - 1) * alpha) > 0)) return 0;
+            if (!(Math.Abs((alpha - 1) * alpha) > 0)) return alpha;
             // else
             var k = (Math.Sqrt(alpha) + alpha) / (1 - alpha);
             return Square(k / (distanceProportion + k));
@@ -60,7 +60,7 @@ namespace TMGmod.Core.AmmoTypes
 
         private static double NegativeCoefficient(double alpha, double distanceProportion)
         {
-            return 1 - (1 - alpha) * distanceProportion * distanceProportion;
+            return 1 - (1 - alpha) * Square(distanceProportion);
         }
 
         private static double WeightedMean(
