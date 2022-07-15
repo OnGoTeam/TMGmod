@@ -14,7 +14,7 @@ namespace TMGmod
         // Amazon Web Services
 
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins => new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
         private readonly SpriteMap _sprite;
 
         // ReSharper disable once InconsistentNaming
@@ -52,7 +52,6 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
-            _fullAuto = false;
             _kickForce = 3.8f;
             _holdOffset = new Vec2(2f, 1f);
             _editorName = "AWS";

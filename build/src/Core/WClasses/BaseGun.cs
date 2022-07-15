@@ -169,12 +169,20 @@ namespace TMGmod.Core.WClasses
             FireWithKforce();
         }
 
-        private void DoFire()
+        private void FireWithDynamicKforce()
         {
             PrevKforce = _kickForce;
             SetKforceAndFire();
             if (ToPrevKforce)
                 _kickForce = PrevKforce;
+        }
+
+        private void DoFire()
+        {
+            if (DynamicKforce())
+                FireWithDynamicKforce();
+            else
+                FireWithKforce();
         }
 
         public override void Fire()
@@ -278,9 +286,14 @@ namespace TMGmod.Core.WClasses
             CurrHone = HoldOffsetNoExtra;
         }
 
+        protected virtual bool DynamicAccuracy() => true;
+        protected virtual bool DynamicKforce() => true;
+        protected virtual bool DynamicFeatures() => true;
+
         private void UpdateInternals()
         {
-            SetAccuracy();
+            if (DynamicAccuracy())
+                SetAccuracy();
             UpdateHone();
         }
 
@@ -297,11 +310,23 @@ namespace TMGmod.Core.WClasses
             base.Update();
         }
 
+        private void PopShell()
+        {
+            if (_ammoType is BaseAmmoType baseAmmo)
+                baseAmmo.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir, AddShell);
+            else
+                _ammoType.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir);
+        }
+
+        protected virtual void AddShell(EjectedShell shell)
+        {
+            Level.Add(shell);
+        }
         public override void Reload(bool shell = true)
         {
             if (ammo != 0)
             {
-                if (shell) _ammoType.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir);
+                if (shell) PopShell();
                 --ammo;
             }
 
@@ -393,8 +418,10 @@ namespace TMGmod.Core.WClasses
 
         protected virtual void BaseOnFire()
         {
-            FireAccuracy();
-            FireKforce();
+            if (DynamicAccuracy())
+                FireAccuracy();
+            if (DynamicKforce())
+                FireKforce();
         }
 
         protected virtual void OnFire()
@@ -404,14 +431,28 @@ namespace TMGmod.Core.WClasses
 
         protected virtual void BaseOnUpdate()
         {
-            UpdateAccuracy();
-            UpdateKforce();
-            UpdateFeatures();
+            if (DynamicAccuracy())
+                UpdateAccuracy();
+            if (DynamicKforce())
+                UpdateKforce();
+            if (DynamicFeatures())
+                UpdateFeatures();
         }
 
         protected virtual void OnUpdate()
         {
             ActiveModifier.ModifyUpdate(BaseOnUpdate);
+        }
+
+        protected virtual void OnInitialize()
+        {
+        }
+
+
+        public override void Initialize()
+        {
+            OnInitialize();
+            base.Initialize();
         }
 
         private class BaseModifier : Modifier

@@ -1,3 +1,4 @@
+using System;
 using DuckGame;
 using TMGmod.Core.Bullets;
 using TMGmod.Core.Shells;
@@ -24,14 +25,14 @@ namespace TMGmod.Core.AmmoTypes
             DistanceConvexity = 0f;
         }
 
-        public override void PopShell(float x, float y, int dir)
+        public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
             var shell = new AT762NATOShell(x, y)
             {
                 hSpeed = (4f + Rando.Float(-0.2f, 0.2f)) * dir,
                 vSpeed = 3f + Rando.Float(-0.3f, 0.3f),
             };
-            Level.Add(shell);
+            add(shell);
         }
 
         public override void WriteAdditionalData(BitBuffer b)

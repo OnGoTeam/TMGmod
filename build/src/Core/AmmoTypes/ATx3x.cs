@@ -1,3 +1,4 @@
+using System;
 using DuckGame;
 using TMGmod.Core.Shells;
 
@@ -20,10 +21,10 @@ namespace TMGmod.Core.AmmoTypes
             AlphaDamage = 1f;
         }
 
-        public override void PopShell(float x, float y, int dir)
+        public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
             var flyingtoilet = new X3XShell(x, y) { hSpeed = dir * (7f + Rando.Float(1f)) };
-            Level.Add(flyingtoilet);
+            add(flyingtoilet);
         }
     }
 }

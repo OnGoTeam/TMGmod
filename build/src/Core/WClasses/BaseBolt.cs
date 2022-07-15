@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
@@ -21,6 +22,8 @@ namespace TMGmod.Core.WClasses
             SpeedAccuracyHorizontal = 1f;
             SpeedAccuracyVertical = 0f;
             _manualLoad = true;
+            _fullAuto = false;
+            laserSight = false;
         }
 
         public float SpeedAccuracyThreshold { get; }
@@ -57,6 +60,17 @@ namespace TMGmod.Core.WClasses
             return .1f * MaxOffset() * ReloadSpeed();
         }
 
+        private void PlayLoad()
+        {
+            if (Network.isActive)
+            {
+                if (isServerForObject)
+                    NetLoad.Play();
+            }
+            else
+                SFX.Play("loadSniper");
+        }
+
         public override void Update()
         {
             base.Update();
@@ -75,15 +89,7 @@ namespace TMGmod.Core.WClasses
                 {
                     case 0:
                     {
-                        if (Network.isActive)
-                        {
-                            if (isServerForObject)
-                                NetLoad.Play();
-                        }
-                        else
-                        {
-                            SFX.Play("loadSniper");
-                        }
+                        PlayLoad();
 
                         ++LoadState;
                         break;
@@ -97,7 +103,7 @@ namespace TMGmod.Core.WClasses
                     case 2:
                     {
                         handOffset.x += OffsetSpeed();
-                        if (handOffset.x > MaxOffset())
+                        if (handOffset.x * Math.Sign(MaxOffset()) > MaxOffset() * Math.Sign(MaxOffset()))
                         {
                             ++LoadState;
                             Reload();
@@ -109,7 +115,7 @@ namespace TMGmod.Core.WClasses
                     case 3:
                     {
                         handOffset.x -= OffsetSpeed();
-                        if (handOffset.x <= 0.0f)
+                        if (handOffset.x * Math.Sign(MaxOffset()) <= 0.0f)
                         {
                             ++LoadState;
                             handOffset.x = 0.0f;
@@ -137,9 +143,7 @@ namespace TMGmod.Core.WClasses
         public override void OnPressAction()
         {
             if (loaded)
-            {
                 base.OnPressAction();
-            }
             else
             {
                 if (ammo <= 0 || LoadState != -1)

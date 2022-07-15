@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System;
+using DuckGame;
 using JetBrains.Annotations;
 
 namespace TMGmod.Core.AmmoTypes
@@ -20,5 +21,10 @@ namespace TMGmod.Core.AmmoTypes
         [UsedImplicitly] public float DistanceConvexity { get; set; }
 
         [UsedImplicitly] public float AlphaDamage { get; set; }
+
+        public virtual void PopShell(float x, float y, int dir, Action<EjectedShell> add)
+        {
+        }
+        public sealed override void PopShell(float x, float y, int dir) => PopShell(x, y, dir, Level.Add);
     }
 }

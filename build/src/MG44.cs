@@ -127,7 +127,7 @@ namespace TMGmod
         {
             if (ammo != 0)
             {
-                if (shell) ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId);
+                if (shell) ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId, AddShell);
                 --ammo;
             }
 

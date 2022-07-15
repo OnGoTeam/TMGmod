@@ -1,3 +1,4 @@
+using System;
 using DuckGame;
 using TMGmod.Core.Shells;
 
@@ -22,14 +23,14 @@ namespace TMGmod.Core.AmmoTypes
             DistanceConvexity = -0.8f;
         }
 
-        public override void PopShell(float x, float y, int dir)
+        public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
             var shell = new AT9mmShell(x, y)
             {
                 hSpeed = (1.5f + Rando.Float(-0.2f, 0.2f)) * dir,
                 vSpeed = -1.5f + Rando.Float(-0.2f, 0.2f),
             };
-            Level.Add(shell);
+            add(shell);
         }
     }
 }
