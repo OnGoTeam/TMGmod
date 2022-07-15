@@ -35,10 +35,7 @@ namespace TMGmod
             };
             ammo = 5;
             _fireSound = GetPath("sounds/RifleOrMG.wav");
-            _fullAuto = false;
             _kickForce = 5.5f;
-            laserSight = false;
-            _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(10f, 0f);
             _editorName = "MSR";
             _weight = 4.65f;
@@ -80,5 +77,10 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        protected override bool HasLaser() => false;
+        protected override float MaxAngle() => 0.1f;
+        protected override float MaxOffset() => 4.0f;
+        protected override float ReloadSpeed() => .5f;
     }
 }

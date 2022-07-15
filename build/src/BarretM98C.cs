@@ -34,10 +34,7 @@ namespace TMGmod
             };
             ammo = 8;
             _fireSound = GetPath("sounds/HeavySniper.wav");
-            _fullAuto = false;
             _kickForce = 4.5f;
-            laserSight = false;
-            //_laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(-2f, 0f);
             _editorName = "Barrett M98 Shorty";
             _weight = 4.5f;

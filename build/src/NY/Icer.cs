@@ -21,9 +21,7 @@ namespace TMGmod.NY
             ammo = 4;
             _ammoType = new ATIcer();
             _fireSound = GetPath("sounds/RifleOrMG.wav");
-            _fullAuto = false;
             _kickForce = 5f;
-            _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(9f, 1f);
             _editorName = "Icer Urbana";
             _weight = 5.6f;

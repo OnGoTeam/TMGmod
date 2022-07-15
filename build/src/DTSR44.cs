@@ -36,12 +36,10 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
-            _fullAuto = false;
             _kickForce = 3.1f;
             _holdOffset = new Vec2(-2f, 0f);
             _editorName = "DT SR-44";
             _weight = 3.5f;
-            laserSight = false;
             ShellOffset = new Vec2(-8f, -2f);
             MaxAccuracy = .92f;
             _ammoType = new AT50SniperS();

@@ -1,6 +1,6 @@
 ﻿namespace TMGmod.Core
 {
-    public interface ISwitchBipods : IHaveBipods
+    public interface ISwitchBipods : ICanDisableBipods
     {
         bool SwitchingBipods();
     }

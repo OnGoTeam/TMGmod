@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : BaseBolt, IHaveAllowedSkins, I5, ICanDisableBipods, ISwitchBipods, IDeployBipods
+    public class AWS : BaseBolt, IHaveAllowedSkins, I5, ISwitchBipods, IDeployBipods
     {
         // Amazon Web Services
 
@@ -51,7 +51,6 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 1f);
             _editorName = "AWS";
             _weight = 5f;
-            _laserOffsetTL = new Vec2(18f, 3f);
             ShellOffset = new Vec2(-3f, -2f);
             _ammoType = new AT50SniperS();
         }
@@ -63,6 +62,7 @@ namespace TMGmod
         }
 
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
+
         [UsedImplicitly]
         public float BipodsState
         {
@@ -90,7 +90,7 @@ namespace TMGmod
             this.UpdateBipodsSounds(old);
         }
 
-        public float BipodSpeed => 1f / 7;
+        public float BipodSpeed => 1f / 7f;
 
         public bool Bipods
         {
@@ -107,7 +107,6 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled { get; private set; }
-
         public void SetBipodsDisabled(bool disabled) => BipodsDisabled = disabled;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 

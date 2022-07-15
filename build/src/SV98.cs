@@ -9,26 +9,25 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class SV98 : Sniper, IAmSr, IHaveSkin, I5, IHaveBipods
+    public class SV98 : BaseBolt, IHaveAllowedSkins, I5, ISwitchBipods, IDeployBipods
     {
         private const int NonSkinFrames = 3;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5, 8 });
-        private readonly Vec2 _fakeshelloffset = new Vec2(-1f, -2f);
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 8 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        private float _bipodsstate;
+        [UsedImplicitly]
+        public NetSoundEffect BipOff { get; } = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
 
-        [UsedImplicitly] public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
+        [UsedImplicitly] public StateBinding BipOffBinding { get; } = new NetSoundBinding(nameof(BipOff));
 
-        [UsedImplicitly] public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
+        [UsedImplicitly]
+        public NetSoundEffect BipOn { get; } = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
 
-        [UsedImplicitly] public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-
-        [UsedImplicitly] public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
+        [UsedImplicitly] public StateBinding BipOnBinding { get; } = new NetSoundBinding(nameof(BipOn));
 
         public SV98(float xval, float yval) : base(xval, yval)
         {
@@ -45,64 +44,66 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             ammo = 5;
-            _ammoType = new ATBoltAction
-            {
-                range = 1250f,
-            };
             _fireSound = "sniper";
-            _fullAuto = false;
             _kickForce = 4.25f;
             _holdOffset = new Vec2(3f, 1f);
             _editorName = "SV-98";
             _weight = 4.5f;
-            laserSight = true;
             _laserOffsetTL = new Vec2(22f, 4f);
+            ShellOffset = new Vec2(-1f, -2f);
+            _ammoType = new ATBoltAction();
         }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 1250f;
+            base.OnInitialize();
+        }
+
+        private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
 
         [UsedImplicitly]
         public float BipodsState
         {
-            get => duck != null ? _bipodsstate : 0;
-            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
+            get => _bipodsState.Get(this);
+            set => _bipodsState.Set(value);
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+        protected override float GetBaseKforce() => this.BipodsDeployed() ? 0 : 4.67f;
+        private void UpdateStats()
+        {
+            _ammoType.range = this.BipodsDeployed() ? 2500f : 1250f;
+            _ammoType.bulletSpeed = this.BipodsDeployed() ? 150f : 48f;
+        }
+
+        private void UpdateFrames() =>
+            FrameId = FrameId % 10 + 10 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
+
+        public void UpdateStats(float old)
+        {
+            UpdateStats();
+            UpdateFrames();
+            this.UpdateBipodsSounds(old);
+        }
+        public float BipodSpeed => 1f / 10f;
 
         public bool Bipods
         {
-            get => this.BipodsQ();
-            set
-            {
-                var bipodsstate = BipodsState;
-                if (isServerForObject)
-                    BipodsState += 1f / 10 * (value ? 1 : -1);
-                var nobipods = BipodsState < 0.01f;
-                var bipods = BipodsState > 0.99f;
-                _kickForce = bipods ? 0 : 4.67f;
-                _ammoType.range = bipods ? 2500f : 1250f;
-                _ammoType.bulletSpeed = bipods ? 150f : 48f;
-                FrameId = FrameId % 10 + 10 * (bipods ? 2 : nobipods ? 0 : 1);
-                if (isServerForObject && bipods && bipodsstate <= 0.99f)
-                    BipOn.Play();
-                if (isServerForObject && nobipods && bipodsstate >= 0.01f)
-                    BipOff.Play();
-            }
+            get => BipodsQ();
+            set => this.SetBipods(value);
         }
 
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled { get; private set; }
+        public void SetBipodsDisabled(bool disabled) => BipodsDisabled = disabled;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
@@ -114,136 +115,11 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        public override void Reload(bool shell = true)
-        {
-            if (ammo != 0)
-            {
-                if (shell) _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
-                --ammo;
-            }
+        public bool SwitchingBipods() => (FrameId + 10) % (10 * NonSkinFrames) >= 20;
 
-            loaded = true;
-        }
-
-        public override void Draw()
-        {
-            var ang = angle;
-            if (offDir <= 0)
-                angle += _angleOffset;
-            else
-                angle -= _angleOffset;
-            base.Draw();
-            angle = ang;
-            laserSight = true;
-        }
-
-        public override void OnPressAction()
-        {
-            if (loaded)
-            {
-                base.OnPressAction();
-                return;
-            }
-
-            if (ammo <= 0 || _loadState != -1) return;
-            //else
-            _loadState = 0;
-            _loadAnimation = 0;
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            Bipods = Bipods;
-            if (duck == null) BipodsDisabled = false;
-            else if (!this.BipodsQ(true)) BipodsDisabled = false;
-            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-            if (_loadState > -1)
-            {
-                if (owner == null)
-                {
-                    if (_loadState == 3) loaded = true;
-                    _loadState = -1;
-                    _angleOffset = 0f;
-                    handOffset = Vec2.Zero;
-                }
-
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (_loadState)
-                {
-                    case 0:
-                    {
-                        if (!Network.isActive)
-                            SFX.Play("loadSniper");
-                        else if (isServerForObject) _netLoad.Play();
-                        _loadState++;
-                        break;
-                    }
-                    case 1 when _angleOffset >= 0.1f:
-                    {
-                        Sniper sniper1 = this;
-                        sniper1._loadState += 1;
-                        break;
-                    }
-                    case 1:
-                        _angleOffset += 0.003f;
-                        break;
-                    case 2:
-                    {
-                        handOffset.x -= 0.2f;
-                        if (handOffset.x > 4f)
-                        {
-                            _loadState++;
-                            Reload();
-                            loaded = false;
-                        }
-
-                        break;
-                    }
-                    case 3:
-                    {
-                        handOffset.x += 0.2f;
-                        if (handOffset.x <= 0f)
-                        {
-                            Sniper sniper3 = this;
-                            sniper3._loadState += 1;
-                            handOffset.x = 0f;
-                        }
-
-                        break;
-                    }
-                    case 4 when _angleOffset <= 0.03f:
-                        _loadState = -1;
-                        loaded = true;
-                        _angleOffset = 0f;
-                        break;
-                    case 4:
-                        _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.15f);
-                        break;
-                }
-            }
-
-            laserSight = true;
-            OnHoldAction();
-        }
-
-        public override void Fire()
-        {
-            if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
-            base.Fire();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
+        protected override bool HasLaser() => true;
+        protected override float MaxAngle() => 0.1f;
+        protected override float MaxOffset() => 4.0f;
+        protected override float ReloadSpeed() => .5f;
     }
 }

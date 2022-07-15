@@ -37,12 +37,10 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
-            _fullAuto = false;
             _kickForce = 4.6f;
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "DT SRM-44";
             _weight = 4.5f;
-            laserSight = true;
             _laserOffsetTL = new Vec2(30f, 7.5f);
             ShellOffset = new Vec2(-12f, -2f);
             MaxAccuracy = .97f;
@@ -65,6 +63,11 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
+        protected override bool HasLaser() => true;
+        protected override float MaxAngle() => 0.1f;
+        protected override float MaxOffset() => 4.0f;
+        protected override float ReloadSpeed() => .5f;
     }
 }
 #endif
