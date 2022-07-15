@@ -128,7 +128,7 @@ namespace TMGmod.Buddies
                 Level.Add(Spark.New(x, y, bullet.travelDirNormalized));
         }
 
-        private void Kill(Bullet bullet)
+        private bool Kill(Bullet bullet)
         {
             var equippedDuck1 = _equippedDuck;
             equippedDuck1.invincible = false;
@@ -136,6 +136,7 @@ namespace TMGmod.Buddies
             Fondle(this, DuckNetwork.localConnection);
             equippedDuck1.Destroy(new DTShot(bullet));
             Level.Remove(this);
+            return equippedDuck1.thickness > bullet.ammo.penetration;
         }
 
         private void Damage(float damage)
@@ -163,14 +164,16 @@ namespace TMGmod.Buddies
             StrokeMarker.Show(hitPos, bullet.end);
         }
 
+        private bool Broken()
+        {
+            return _hitPoints < 0;
+        }
+
         private bool RealHit(Bullet bullet, Vec2 hitPos)
         {
             Damage(bullet);
             DecorativeHit(bullet, hitPos);
-            if (!(_hitPoints < 0)) return true;
-            Kill(bullet);
-            return false;
-
+            return !Broken() || Kill(bullet);
         }
 
         public override bool Hit(Bullet bullet, Vec2 hitPos)
