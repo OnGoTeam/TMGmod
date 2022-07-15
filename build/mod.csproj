@@ -367,7 +367,6 @@
     <Compile Include="src\SVU.cs" />
     <Compile Include="src\SRM1208.cs" />
     <Compile Include="src\Useless or deleted Guns\MAPF.cs" />
-    <Compile Include="src\Useless or deleted Guns\MSRSH.cs" />
     <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />
     <Compile Include="src\USP.cs" />
     <Compile Include="src\ANP-73.cs" />
