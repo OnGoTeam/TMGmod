@@ -455,6 +455,7 @@ namespace TMGmod.Core.WClasses
 
         protected virtual void OnInitialize()
         {
+            _ammoType.accuracy = Accuracy();
         }
 
 

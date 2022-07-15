@@ -43,13 +43,14 @@ namespace TMGmod
             _weight = 3.5f;
             laserSight = false;
             ShellOffset = new Vec2(-8f, -2f);
+            MaxAccuracy = .92f;
             _ammoType = new AT50SniperS();
         }
 
         protected override void OnInitialize()
         {
             _ammoType.range = 713f;
-            _ammoType.accuracy = .92f;
+            base.OnInitialize();
         }
 
         [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));

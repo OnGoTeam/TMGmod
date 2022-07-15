@@ -46,6 +46,7 @@ namespace TMGmod
         {
             _ammoType.penetration = 4f;
             _ammoType.range = 850f;
+            base.OnInitialize();
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -59,7 +60,6 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
 
         protected override bool HasLaser() => false;
         protected override float MaxAngle() => 0.1f;

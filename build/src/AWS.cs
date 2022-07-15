@@ -42,11 +42,6 @@ namespace TMGmod
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             ammo = 6;
-            _ammoType = new AT50SniperS
-            {
-                range = 550f,
-                accuracy = 0.97f,
-            };
             _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
@@ -58,6 +53,13 @@ namespace TMGmod
             _weight = 5f;
             _laserOffsetTL = new Vec2(18f, 3f);
             ShellOffset = new Vec2(-3f, -2f);
+            _ammoType = new AT50SniperS();
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 550f;
+            base.OnInitialize();
         }
 
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
