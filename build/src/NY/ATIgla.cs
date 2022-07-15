@@ -4,9 +4,9 @@ using TMGmod.Core.AmmoTypes;
 namespace TMGmod.NY
 {
     // ReSharper disable once InconsistentNaming
-    public class ATIglu : BaseAmmoType
+    public class ATIgla : BaseAmmoType
     {
-        public ATIglu()
+        public ATIgla()
         {
             var spriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/Igolka"), 4, 1);
             spriteY.CenterOrigin();
@@ -14,6 +14,8 @@ namespace TMGmod.NY
             penetration = 1f;
             bulletLength = 0f;
             bulletThickness = 0.25f;
+            range = 285f;
+            rangeVariation = 100f;
         }
     }
 }

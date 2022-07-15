@@ -28,9 +28,13 @@ namespace TMGmod.Cases
         public override void Initialize()
         {
             var physicsObjects = ItemBox.GetPhysicsObjects(Editor.Placeables);
-            physicsObjects.RemoveAll(t => !(t.IsSubclassOf(typeof(Gun)) &&
-                                            t.Assembly == typeof(Core.TMGmod).Assembly &&
-                                            t.Namespace != typeof(CandyCane).Namespace));
+            physicsObjects.RemoveAll(
+                t => !(
+                    t.IsSubclassOf(typeof(Gun)) &&
+                    t.Assembly == typeof(Core.TMGmod).Assembly &&
+                    t.Namespace != typeof(CandyCane).Namespace
+                )
+            );
             Things = physicsObjects;
             base.Initialize();
         }

@@ -1,20 +1,15 @@
 ﻿using DuckGame;
+using TMGmod.Core.Modifiers;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
 {
     [EditorGroup("TMG|Misc|Holiday")]
-    public class SpruceGun : Gun
+    public class SpruceGun : BaseGun
     {
         public SpruceGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 12;
-            _ammoType = new ATIglu
-            {
-                range = 385f,
-                accuracy = Rando.Float(0f, 0.9f),
-                bulletSpeed = Rando.Float(0.1f, 7f),
-            };
-            _numBulletsPerFire = Rando.Int(25, 100);
             _type = "gun";
             _graphic = new Sprite(GetPath("Holiday/ShorTree"));
             _center = new Vec2(26f, 8f);
@@ -28,19 +23,23 @@ namespace TMGmod.NY
             _fireWait = 2f;
             _editorName = "Tree-12";
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            BaseActiveModifier = new Modifier();
+            _numBulletsPerFire = Rando.Int(5, 50);
+            _ammoType = new ATIgla
+            {
+                bulletSpeed = Rando.Float(0.1f, 7f),
+            };
         }
 
-        public override void Update()
+        protected override bool DynamicAccuracy() => false;
+        protected override float Accuracy() => Rando.Float(0f, 0.9f);
+
+        protected override void OnFire()
         {
             _ammoType.bulletSpeed = Rando.Float(0.1f, 7f);
-            base.Update();
-        }
-
-        public override void OnReleaseAction()
-        {
             _ammoType.accuracy = Rando.Float(0f, 0.9f);
             _numBulletsPerFire = Rando.Int(5, 50);
-            base.OnReleaseAction();
+            base.OnFire();
         }
     }
 }
