@@ -13,11 +13,34 @@ namespace TMGmod.Buddies
             _editorName = "FTP";
         }
 
+        private Thing MakeFire(Vec2 fireVelocity)
+        {
+            return SmallFire.New(barrelPosition.x, barrelPosition.y, fireVelocity.x, fireVelocity.y);
+        }
+
+        private Vec2 FireVelocity(Vec2 fireDirection)
+        {
+            return new Vec2(fireDirection.x * Rando.Float(6f, 8f), fireDirection.y * Rando.Float(6f, 8f) - 1);
+        }
+
+        private Vec2 FireDirection()
+        {
+            return Maths.AngleToVec(barrelAngle + Rando.Float(-0.2f, 0.2f));
+        }
+
+        private Vec2 FireVelocity()
+        {
+            return FireVelocity(FireDirection());
+        }
+
+        private Thing MakeFire()
+        {
+            return MakeFire(FireVelocity());
+        }
+
         public override void Fire()
         {
-            var vec = Maths.AngleToVec(barrelAngle + Rando.Float(-0.2f, 0.2f));
-            vec = new Vec2(vec.x * Rando.Float(6f, 8f), vec.y * Rando.Float(6f, 8f) - 1);
-            Level.Add(SmallFire.New(barrelPosition.x, barrelPosition.y, vec.x, vec.y));
+            Level.Add(MakeFire());
         }
     }
 }
