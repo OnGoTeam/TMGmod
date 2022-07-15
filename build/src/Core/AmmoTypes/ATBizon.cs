@@ -17,8 +17,8 @@ namespace TMGmod.Core.AmmoTypes
             bulletThickness = 0.8f;
             bulletLength = 10f;
             immediatelyDeadly = true;
-            BulletDamage = 30f;
-            DeltaDamage = 0.20f;
+            DamageMean = 30f;
+            DamageVariation = 0.20f;
             AlphaDamage = 0.25f;
             DistanceConvexity = -1.5f;
         }

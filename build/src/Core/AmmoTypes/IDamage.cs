@@ -6,22 +6,22 @@ namespace TMGmod.Core.AmmoTypes
     // ReSharper disable once InconsistentNaming
     public interface IDamage
     {
-        float BulletDamage { get; }
-        float DeltaDamage { get; }
+        float DamageMean { get; }
+        float DamageVariation { get; }
         float DistanceConvexity { get; }
         float AlphaDamage { get; }
     }
 
     public static class Damage
     {
-        private static float GetDamage(AmmoType ammo)
+        private static float GetMean(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.BulletDamage : ammo is ATShrapnel ? 30f : 50f;
+            return ammo is IDamage damage ? damage.DamageMean : ammo is ATShrapnel ? 30f : 50f;
         }
 
-        private static float GetDelta(AmmoType ammo)
+        private static float GetVariation(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.DeltaDamage : ammo is ATShrapnel ? 1f : 0.5f;
+            return ammo is IDamage damage ? damage.DamageVariation : ammo is ATShrapnel ? 1f : 0.5f;
         }
 
         private static float GetConvexity(AmmoType ammo)
@@ -36,33 +36,56 @@ namespace TMGmod.Core.AmmoTypes
 
         private static float CalculateBase(AmmoType ammo)
         {
-            var delta = GetDelta(ammo);
-            return Rando.Float(1 - delta, 1 + delta) * GetDamage(ammo);
+            var variation = GetVariation(ammo);
+            return Rando.Float(1 - variation, 1 + variation) * GetMean(ammo);
         }
 
-        private static double CalculateCoeff(double a, double z, double q)
+        private static double Clamp(double value)
         {
-            q = Math.Min(1f, q);
-            q = Math.Max(0f, q);
-            var r = a;
-            if (Math.Abs((a - 1) * a) > 0)
-            {
-                var k = (Math.Sqrt(a) + a) / (1 - a);
-                r = k * k / (q + k) / (q + k);
-            }
-
-            var s = 1 - (1 - a) * q * q;
-            var rc = Math.Exp(+z);
-            var sc = Math.Exp(-z);
-            var c = (rc * r + sc * s) / (rc + sc);
-            c = Math.Min(1f, c);
-            c = Math.Max(0f, c);
-            return c;
+            return Math.Max(0.0, Math.Min(1.0, value));
         }
 
-        public static float CalculateCoeff(AmmoType ammo, float q)
+        private static double Square(double value)
         {
-            return (float)CalculateCoeff(GetAlpha(ammo), GetConvexity(ammo), q);
+            return value * value;
+        }
+
+        private static double PositiveCoefficient(double alpha, double distanceProportion)
+        {
+            if (!(Math.Abs((alpha - 1) * alpha) > 0)) return 0;
+            // else
+            var k = (Math.Sqrt(alpha) + alpha) / (1 - alpha);
+            return Square(k / (distanceProportion + k));
+        }
+
+        private static double NegativeCoefficient(double alpha, double distanceProportion)
+        {
+            return 1 - (1 - alpha) * distanceProportion * distanceProportion;
+        }
+
+        private static double WeightedMean(
+            double left, double right,
+            double leftc, double rightc
+        )
+        {
+            return (leftc * left + rightc * right) / (leftc + rightc);
+        }
+
+        private static double CalculateCoeff(double alpha, double convexity, double distanceProportion)
+        {
+            return Clamp(
+                WeightedMean(
+                    PositiveCoefficient(alpha, distanceProportion),
+                    NegativeCoefficient(alpha, distanceProportion),
+                    Math.Exp(+convexity),
+                    Math.Exp(-convexity)
+                )
+            );
+        }
+
+        public static float CalculateCoeff(AmmoType ammo, float distanceProportion)
+        {
+            return (float)CalculateCoeff(GetAlpha(ammo), GetConvexity(ammo), Clamp(distanceProportion));
         }
 
         private static float CalculateCoeff(Bullet bullet)

@@ -8,15 +8,15 @@ namespace TMGmod.Core.AmmoTypes
     {
         protected BaseAmmoType()
         {
-            BulletDamage = 50f;
-            DeltaDamage = 1f;
+            DamageMean = 50f;
+            DamageVariation = 1f;
             DistanceConvexity = 0f;
             AlphaDamage = 0.01f;
         }
 
-        [UsedImplicitly] public float BulletDamage { get; set; }
+        [UsedImplicitly] public float DamageMean { get; set; }
 
-        [UsedImplicitly] public float DeltaDamage { get; set; }
+        [UsedImplicitly] public float DamageVariation { get; set; }
 
         [UsedImplicitly] public float DistanceConvexity { get; set; }
 

@@ -18,7 +18,7 @@ namespace TMGmod.Custom_Guns
                 accuracy = 0.35f,
                 penetration = 2f,
                 bulletSpeed = 50f,
-                BulletDamage = 15f,
+                DamageMean = 15f,
             },
         };
 

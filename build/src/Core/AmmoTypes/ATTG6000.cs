@@ -17,8 +17,8 @@ namespace TMGmod.Core.AmmoTypes
             deadly = true;
             weight = 5f;
             immediatelyDeadly = true;
-            BulletDamage = 16f;
-            DeltaDamage = 0.2f;
+            DamageMean = 16f;
+            DamageVariation = 0.2f;
             AlphaDamage = 0.5f;
         }
 

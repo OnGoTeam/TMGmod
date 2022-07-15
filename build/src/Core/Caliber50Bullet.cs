@@ -43,8 +43,8 @@ namespace TMGmod.Core
             bulletSpeed = 45f;
             bulletType = typeof(AntiProp);
             bulletThickness = 3.5f;
-            BulletDamage = 64f;
-            DeltaDamage = 0.2f;
+            DamageMean = 64f;
+            DamageVariation = 0.2f;
             AlphaDamage = 0.5f;
             DistanceConvexity = -1f;
         }
