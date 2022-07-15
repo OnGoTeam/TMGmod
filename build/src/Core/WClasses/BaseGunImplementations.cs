@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Core.WClasses
 {
@@ -17,7 +19,7 @@ namespace TMGmod.Core.WClasses
             target.Bipods = buffer.ReadBool();
         }
 
-        private static void UpdateBipods(this IHaveBipods target)
+        public static void UpdateBipods(this IHaveBipods target)
         {
             target.Bipods = target.Bipods;
         }
@@ -42,7 +44,7 @@ namespace TMGmod.Core.WClasses
         {
             var gun = target.AsAGun();
             if (gun.duck == null) target.SetBipodsDisabled(false);
-            else if (!BaseGun.BipodsQ(gun, true)) target.SetBipodsDisabled(false);
+            else if (!gun.BipodsQ(true)) target.SetBipodsDisabled(false);
             else if (gun.duck.inputProfile.Pressed("QUACK")) target.SetBipodsDisabled(!target.BipodsDisabled);
             target.UpdateBipods();
         }
@@ -57,6 +59,27 @@ namespace TMGmod.Core.WClasses
                 target.BipOn.Play();
             if (gun.isServerForObject && target.BipodsFolded() && old >= 0.01f)
                 target.BipOff.Play();
+        }
+
+        public static bool BipodsQ(this Gun gun, bool bypassihb = false)
+        {
+            var duck = gun.duck;
+            if (!bypassihb && gun is IHaveBipods ihb && ihb.BipodsDisabled) return false;
+            return !(duck is null) && !gun.raised && (duck.crouch || duck.sliding) && duck.grounded &&
+                   Math.Abs(duck.hSpeed) < 0.05f;
+        }
+
+        public static bool HandleQ(this Gun gun)
+        {
+            var duck = gun.duck;
+            return !(duck is null) && !gun.raised && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 1f;
+        }
+
+        [UsedImplicitly]
+        public static bool SwitchStockQ(this Gun gun)
+        {
+            var duck = gun.duck;
+            return !(duck is null) && !duck.sliding;
         }
     }
 }

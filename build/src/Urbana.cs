@@ -72,7 +72,7 @@ namespace TMGmod
 
         public bool Bipods
         {
-            get => BaseGun.BipodsQ(this);
+            get => this.BipodsQ();
             set
             {
                 var bipodsstate = BipodsState;
@@ -158,7 +158,7 @@ namespace TMGmod
             base.Update();
             Bipods = Bipods;
             if (duck == null) BipodsDisabled = false;
-            else if (!BaseGun.BipodsQ(this, true)) BipodsDisabled = false;
+            else if (!this.BipodsQ(true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
             if (_loadState > -1)
             {

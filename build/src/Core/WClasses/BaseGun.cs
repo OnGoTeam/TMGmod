@@ -299,8 +299,15 @@ namespace TMGmod.Core.WClasses
 
         private void UpdateFeatures()
         {
-            if (this is ICanDisableBipods icdb)
-                icdb.UpdateSwitchableBipods();
+            switch (this)
+            {
+                case ICanDisableBipods icdb:
+                    icdb.UpdateSwitchableBipods();
+                    break;
+                case IHaveBipods ihb:
+                    ihb.UpdateBipods();
+                    break;
+            }
         }
 
         public override void Update()
@@ -334,40 +341,19 @@ namespace TMGmod.Core.WClasses
             loaded = true;
         }
 
-        public static bool BipodsQ(Gun gun, bool bypassihb = false)
-        {
-            var duck = gun.duck;
-            if (!bypassihb && gun is IHaveBipods ihb && ihb.BipodsDisabled) return false;
-            return !(duck is null) && !gun.raised && (duck.crouch || duck.sliding) && duck.grounded &&
-                   Math.Abs(duck.hSpeed) < 0.05f;
-        }
-
-        public static bool HandleQ(Gun gun)
-        {
-            var duck = gun.duck;
-            return !(duck is null) && !gun.raised && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 1f;
-        }
-
-        [UsedImplicitly]
-        public static bool SwitchStockQ(Gun gun)
-        {
-            var duck = gun.duck;
-            return !(duck is null) && !duck.sliding;
-        }
-
         protected bool BipodsQ(bool bypassihb = false)
         {
-            return BipodsQ(this, bypassihb);
+            return BaseGunImplementations.BipodsQ(this, bypassihb);
         }
 
         protected bool HandleQ()
         {
-            return HandleQ(this);
+            return BaseGunImplementations.HandleQ(this);
         }
 
         protected bool SwitchStockQ()
         {
-            return SwitchStockQ(this);
+            return BaseGunImplementations.SwitchStockQ(this);
         }
 
         [PublicAPI]

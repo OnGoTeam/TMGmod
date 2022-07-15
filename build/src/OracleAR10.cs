@@ -142,7 +142,7 @@ namespace TMGmod
         {
             Bipods = Bipods;
             if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(this, true)) BipodsDisabled = false;
+            else if (!BipodsQ(true)) BipodsDisabled = false;
             base.Update();
         }
 

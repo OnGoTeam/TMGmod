@@ -75,7 +75,7 @@ namespace TMGmod
         [UsedImplicitly]
         public bool Bipods
         {
-            get => BipodsQ(this);
+            get => BipodsQ();
             set
             {
                 if (isServerForObject)
@@ -109,7 +109,7 @@ namespace TMGmod
             base.Update();
             Bipods = Bipods;
             if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(this, true)) BipodsDisabled = false;
+            else if (!BipodsQ(true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
         }
 

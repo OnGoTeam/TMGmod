@@ -9,11 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class MSR : Sniper, IAmSr, IHaveSkin, IHaveBipods
+    public class MSR : BaseBolt, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 9 });
-        private readonly Vec2 _fakeshelloffset = new Vec2(-9f, -1.5f);
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 9 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -35,12 +34,6 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             ammo = 5;
-            _ammoType = new ATBoltAction
-            {
-                bulletSpeed = 85f,
-                range = 1200f,
-                penetration = 2f,
-            };
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _fullAuto = false;
             _kickForce = 5.5f;
@@ -49,24 +42,29 @@ namespace TMGmod
             _holdOffset = new Vec2(10f, 0f);
             _editorName = "MSR";
             _weight = 4.65f;
+            ShellOffset = new Vec2(-9f, -1.5f);
+            _ammoType = new ATBoltAction();
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.bulletSpeed = 85f;
+            _ammoType.range = 1200;
+            _ammoType.penetration = 2f;
+            base.OnInitialize();
         }
 
         public bool Bipods
         {
-            get => BaseGun.HandleQ(this);
+            get => HandleQ();
             set => _kickForce = value ? 1f : 5.5f;
         }
 
         [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
@@ -81,130 +79,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        public override void Reload(bool shell = true)
-        {
-            if (ammo != 0)
-            {
-                if (shell) _ammoType.PopShell(Offset(_fakeshelloffset).x, Offset(_fakeshelloffset).y, -offDir);
-                --ammo;
-            }
-
-            loaded = true;
-        }
-
-        [UsedImplicitly]
-        public override void Draw()
-        {
-            var ang = angle;
-            if (offDir <= 0)
-                angle += _angleOffset;
-            else
-                angle -= _angleOffset;
-            base.Draw();
-            angle = ang;
-            laserSight = false;
-        }
-
-        public override void OnPressAction()
-        {
-            if (loaded)
-            {
-                base.OnPressAction();
-                return;
-            }
-
-            if (ammo <= 0 || _loadState != -1) return;
-            _loadState = 0;
-            _loadAnimation = 0;
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            Bipods = Bipods;
-            if (_loadState > -1)
-            {
-                if (owner == null)
-                {
-                    if (_loadState == 3) loaded = true;
-                    _loadState = -1;
-                    _angleOffset = 0f;
-                    handOffset = Vec2.Zero;
-                }
-
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (_loadState)
-                {
-                    case 0:
-                    {
-                        if (!Network.isActive)
-                            SFX.Play("loadSniper");
-                        else if (isServerForObject) _netLoad.Play();
-                        Sniper sniper = this;
-                        sniper._loadState += 1;
-                        break;
-                    }
-                    case 1 when _angleOffset >= 0.1f:
-                    {
-                        Sniper sniper1 = this;
-                        sniper1._loadState += 1;
-                        break;
-                    }
-                    case 1:
-                        _angleOffset += 0.003f;
-                        break;
-                    case 2:
-                    {
-                        handOffset.x -= 0.2f;
-                        if (handOffset.x > 4f)
-                        {
-                            Sniper sniper2 = this;
-                            sniper2._loadState += 1;
-                            Reload();
-                            loaded = false;
-                        }
-
-                        break;
-                    }
-                    case 3:
-                    {
-                        handOffset.x += 0.2f;
-                        if (handOffset.x <= 0f)
-                        {
-                            Sniper sniper3 = this;
-                            sniper3._loadState += 1;
-                            handOffset.x = 0f;
-                        }
-
-                        break;
-                    }
-                    case 4 when _angleOffset <= 0.03f:
-                        _loadState = -1;
-                        loaded = true;
-                        _angleOffset = 0f;
-                        break;
-                    case 4:
-                        _angleOffset = MathHelper.Lerp(_angleOffset, 0f, 0.15f);
-                        break;
-                }
-            }
-
-            laserSight = false;
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

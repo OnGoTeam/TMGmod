@@ -122,7 +122,7 @@ namespace TMGmod
             Bipods = Bipods;
             if (ammo == 0 && FrameId % 20 >= 0 && FrameId % 20 < 10) FrameId += 10;
             if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(this, true)) BipodsDisabled = false;
+            else if (!BipodsQ(true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
         }
 
