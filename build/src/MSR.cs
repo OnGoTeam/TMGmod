@@ -45,7 +45,7 @@ namespace TMGmod
 
         protected override void OnInitialize()
         {
-            _ammoType.bulletSpeed = 85f;
+            _ammoType.bulletSpeed = 100f;
             _ammoType.range = 1200;
             _ammoType.penetration = 2f;
             base.OnInitialize();
@@ -79,8 +79,8 @@ namespace TMGmod
         }
 
         protected override bool HasLaser() => false;
-        protected override float MaxAngle() => 0.1f;
+        protected override float MaxAngle() => Bipods ? .067f : .1f;
         protected override float MaxOffset() => 4.0f;
-        protected override float ReloadSpeed() => .5f;
+        protected override float ReloadSpeed() => Bipods ? .5f : .67f;
     }
 }

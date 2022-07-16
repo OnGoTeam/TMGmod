@@ -32,9 +32,9 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            ammo = 8;
+            ammo = 7;
             _fireSound = GetPath("sounds/HeavySniper.wav");
-            _kickForce = 6f;
+            _kickForce = 12f;
             _holdOffset = new Vec2(7f, 0f);
             _editorName = "Barrett M98";
             _weight = 7f;
@@ -45,7 +45,7 @@ namespace TMGmod
         protected override void OnInitialize()
         {
             _ammoType.penetration = 4f;
-            _ammoType.range = 850f;
+            _ammoType.range = 1000f;
             base.OnInitialize();
         }
 
@@ -64,6 +64,6 @@ namespace TMGmod
         protected override bool HasLaser() => false;
         protected override float MaxAngle() => 0.1f;
         protected override float MaxOffset() => 4.0f;
-        protected override float ReloadSpeed() => .5f;
+        protected override float ReloadSpeed() => .4f;
     }
 }

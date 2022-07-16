@@ -65,6 +65,6 @@ namespace TMGmod
         protected override bool HasLaser() => false;
         protected override float MaxAngle() => 0.1f;
         protected override float MaxOffset() => -4.0f;
-        protected override float ReloadSpeed() => .5f;
+        protected override float ReloadSpeed() => 1f;
     }
 }

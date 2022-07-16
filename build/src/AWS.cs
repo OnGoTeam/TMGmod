@@ -125,6 +125,6 @@ namespace TMGmod
         protected override float MaxAngle() => Bipods ? .05f : .25f;
 
         protected override float MaxOffset() => 3.0f;
-        protected override float ReloadSpeed() => Bipods ? 2.0f : 1.5f;
+        protected override float ReloadSpeed() => Bipods ? 1.5f : 1f;
     }
 }

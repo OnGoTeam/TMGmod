@@ -125,8 +125,8 @@ namespace TMGmod
         public bool SwitchingBipods() => (FrameId + 10) % (10 * NonSkinFrames) >= 20;
 
         protected override bool HasLaser() => false;
-        protected override float MaxAngle() => 0.1f;
+        protected override float MaxAngle() => Bipods ? .05f : .15f;
         protected override float MaxOffset() => 4.0f;
-        protected override float ReloadSpeed() => .5f;
+        protected override float ReloadSpeed() => Bipods? 1f : .75f;
     }
 }
