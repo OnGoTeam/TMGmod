@@ -121,8 +121,6 @@ namespace TMGmod.Buddies
 
         private void DecorativeHit(Bullet bullet, Vec2 hitPos)
         {
-            if (bullet.isLocal && Network.isActive)
-                NetSoundEffect.Play("equipmentTing");
             Level.Add(MetalRebound.New(hitPos.x, hitPos.y, bullet.travelDirNormalized.x > 0 ? 1 : -1));
             for (var index = 0; index < 6; ++index)
                 Level.Add(Spark.New(x, y, bullet.travelDirNormalized));
