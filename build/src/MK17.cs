@@ -75,7 +75,7 @@ namespace TMGmod
 
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
-            _calculateSide = Damage.Calculate(bullet);
+            _calculateSide = DamageImplementation.Calculate(bullet);
             MakeDamage();
             return Hit(bullet, hitPos);
         }

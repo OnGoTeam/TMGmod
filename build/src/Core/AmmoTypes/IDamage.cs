@@ -12,7 +12,7 @@ namespace TMGmod.Core.AmmoTypes
         float AlphaDamage { get; }
     }
 
-    public static class Damage
+    public static class DamageImplementation
     {
         private static float GetMean(AmmoType ammo)
         {

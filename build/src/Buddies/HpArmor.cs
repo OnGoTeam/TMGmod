@@ -153,7 +153,7 @@ namespace TMGmod.Buddies
         private void Damage(Bullet bullet)
         {
             Slowdown();
-            Damage(Core.AmmoTypes.Damage.Calculate(bullet));
+            Damage(DamageImplementation.Calculate(bullet));
         }
 
         private static void ShowMarkers(Bullet bullet, Vec2 hitPos)

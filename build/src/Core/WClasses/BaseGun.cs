@@ -503,7 +503,7 @@ namespace TMGmod.Core.WClasses
             for (var i = 0; i < 100; ++i)
             {
                 var q = (i + 1) / 100f;
-                var next = start + q * x1 + Damage.CalculateCoeff(ammoType, q) * y1;
+                var next = start + q * x1 + DamageImplementation.CalculateCoeff(ammoType, q) * y1;
                 Graphics.DrawLine(last, next, Color.Lime);
                 last = next;
             }
