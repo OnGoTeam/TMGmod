@@ -61,10 +61,7 @@ namespace TMGmod
             _editorName = "M14 Sawed-Off";
             _weight = 2.5f;
         }
-
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
+        
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

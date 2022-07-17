@@ -56,10 +56,6 @@ namespace TMGmod
             _editorName = "M14";
             _weight = 4.5f;
         }
-
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
