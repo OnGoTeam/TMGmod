@@ -9,10 +9,10 @@ namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Rifle|Burst|Custom")]
     // ReSharper disable once InconsistentNaming
-    public class AN94C : BaseBurst, IHspeedKforce, IAmAr, IHaveSkin
+    public class AN94C : BaseBurst, IHspeedKforce, IAmAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });
 
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
@@ -109,19 +109,6 @@ namespace TMGmod.Custom_Guns
             }
 
             base.Update();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : BaseGun, IHaveSkin, IAmLmg, IHaveBipods
+    public class MG44 : BaseGun, IHaveAllowedSkins, IAmLmg, IHaveBipods
     {
         private const int NonSkinFrames = 3;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 6, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 6, 7 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -108,19 +108,6 @@ namespace TMGmod
 
             Bipods = Bipods;
             RandomaticKickforce = Rando.Float(0.9f, 1.5f);
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
 
         public override void Reload(bool shell = true)

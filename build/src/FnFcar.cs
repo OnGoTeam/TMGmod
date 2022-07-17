@@ -8,10 +8,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
-    public class FnFcar : BaseDmr, IHaveSkin, IHaveBipods
+    public class FnFcar : BaseDmr, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 5;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -141,19 +141,6 @@ namespace TMGmod
         {
             if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
             base.Fire();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

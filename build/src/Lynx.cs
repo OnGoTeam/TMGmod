@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class Lynx : BaseDmr, ISpeedAccuracy, IHaveSkin, I5, IHaveBipods
+    public class Lynx : BaseDmr, ISpeedAccuracy, IHaveAllowedSkins, I5, IHaveBipods
     {
         private const int NonSkinFrames = 4;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 5 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 5 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -136,23 +136,10 @@ namespace TMGmod
             base.Update();
         }
 
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
         public override void Fire()
         {
             if ((FrameId + 10) % (10 * NonSkinFrames) >= 20) return;
             base.Fire();
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

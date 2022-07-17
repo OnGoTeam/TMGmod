@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|MP")]
     // ReSharper disable once InconsistentNaming
-    public class SMG9 : BaseSmg, IHaveSkin
+    public class SMG9 : BaseSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 4 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -62,19 +62,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

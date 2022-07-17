@@ -12,10 +12,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh41 : BaseSmg, IHaveSkin, I5
+    public class PPSh41 : BaseSmg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -67,24 +67,11 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
-
         public override ContextMenu GetContextMenu()
         {
             var contextMenu = base.GetContextMenu();
 #if DEBUG
-            foreach (var sprite in Allowedlst.Select(allowed => new SpriteMap(GetPath("PPSH41"), 30, 8)
+            foreach (var sprite in AllowedSkins.Select(allowed => new SpriteMap(GetPath("PPSH41"), 30, 8)
                 { _frame = allowed })) contextMenu.AddItem(new ContextSkinRender(null, sprite));
 #endif
             return contextMenu;

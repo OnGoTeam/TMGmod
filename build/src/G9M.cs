@@ -10,11 +10,11 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class G9M : BaseLmg, IHaveSkin, IHaveBipods
+    public class G9M : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
         private const double Explodechance = 0.005;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 8 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -169,19 +169,6 @@ namespace TMGmod
 
             SFX.Play("explode");
             Level.Remove(this);
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

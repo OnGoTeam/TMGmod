@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12S : BaseGun, IHaveSkin, IAmSg, I5
+    public class SIX12S : BaseGun, IHaveAllowedSkins, IAmSg, I5
     {
         private const int NonSkinFrames = 2;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -85,19 +85,6 @@ namespace TMGmod
             }
 
             base.Update();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
 
         public override void Reload(bool shell = true)

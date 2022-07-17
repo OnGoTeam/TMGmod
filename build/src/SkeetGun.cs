@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Break-Action")]
     [BaggedProperty("canSpawn", false)]
-    public class SkeetGun : BaseGun, IHaveSkin, IAmSg
+    public class SkeetGun : BaseGun, IHaveAllowedSkins, IAmSg
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -87,19 +87,6 @@ namespace TMGmod
             if (_handleAngleOff > 0f) _handleAngleOff -= 0.025f;
             else if (_handleAngleOff < 0f) _handleAngleOff += 0.025f;
             if ((_handleAngleOff > -0.025f) & (_handleAngleOff < 0.025f)) _handleAngleOff = 0f;
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

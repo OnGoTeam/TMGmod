@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : BaseGun, IAmLmg, IHaveSkin, I5, IHaveBipods
+    public class MG3 : BaseGun, IAmLmg, IHaveAllowedSkins, I5, IHaveBipods
     {
         private const int NonSkinFrames = 6;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -124,19 +124,6 @@ namespace TMGmod
             if (duck == null) BipodsDisabled = false;
             else if (!BipodsQ(true)) BipodsDisabled = false;
             else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
 
         public override void Fire()

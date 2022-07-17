@@ -8,10 +8,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Combined")]
-    public class Rfb : BaseAr, IHaveSkin
+    public class Rfb : BaseAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -90,19 +90,6 @@ namespace TMGmod
             }
 
             base.Update();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

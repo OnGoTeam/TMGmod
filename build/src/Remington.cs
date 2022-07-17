@@ -8,10 +8,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Pump-Action")]
-    public class Remington : BasePumpAction, IHaveSkin
+    public class Remington : BasePumpAction, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 4 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -69,19 +69,6 @@ namespace TMGmod
                 SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
                 SetSpriteMapFrameId(LoaderSprite, value, 10);
             }
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            FrameId = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

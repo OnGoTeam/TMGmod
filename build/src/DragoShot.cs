@@ -8,12 +8,12 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Other")]
-    public class DragoShot : BaseBurst, IAmSr, IHaveSkin
+    public class DragoShot : BaseBurst, IAmSr, IHaveAllowedSkins
     {
         private const float Step = 0.02f;
         private const float TimeToHappend = 1f;
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -112,19 +112,6 @@ namespace TMGmod
             }
 
             base.Update();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

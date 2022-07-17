@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class OracleAR10 : BaseDmr, IHaveSkin, IHaveBipods
+    public class OracleAR10 : BaseDmr, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -144,19 +144,6 @@ namespace TMGmod
             if (duck == null) BipodsDisabled = false;
             else if (!BipodsQ(true)) BipodsDisabled = false;
             base.Update();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

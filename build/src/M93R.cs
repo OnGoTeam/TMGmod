@@ -8,10 +8,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Burst")]
-    public class M93R : BaseBurst, IAmHg, IHaveSkin, I5
+    public class M93R : BaseBurst, IAmHg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 5 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -59,19 +59,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

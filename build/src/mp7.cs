@@ -11,10 +11,10 @@ namespace TMGmod
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
-    public class MP7 : BaseGun, IAmSmg, IHaveSkin
+    public class MP7 : BaseGun, IAmSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 3;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -99,19 +99,6 @@ namespace TMGmod
             if (_handleAngleOff > 0f) _handleAngleOff -= 0.1f;
             else if (_handleAngleOff < 0f) _handleAngleOff += 0.1f;
             if ((_handleAngleOff > -0.1f) & (_handleAngleOff < 0.1f)) _handleAngleOff = 0f;
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }

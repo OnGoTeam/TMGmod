@@ -377,7 +377,7 @@ namespace TMGmod.Core.WClasses
 
         public override void EditorPropertyChanged(object property)
         {
-            if (this is IHaveAllowedSkins iha) iha.UpdateSkin();
+            if (this is IHaveAllowedSkins target) target.UpdateSkin();
 
             base.EditorPropertyChanged(property);
         }

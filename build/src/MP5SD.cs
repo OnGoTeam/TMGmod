@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
-    public class MP5SD : BaseBurst, IFirstKforce, IFirstPrecise, IHaveSkin, IAmSmg
+    public class MP5SD : BaseBurst, IFirstKforce, IFirstPrecise, IHaveAllowedSkins, IAmSmg
     {
         private const int NonSkinFrames = 2;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
 
         private readonly SpriteMap _sprite;
 
@@ -85,13 +85,6 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -101,12 +94,6 @@ namespace TMGmod
             }
 
             base.Update();
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }
