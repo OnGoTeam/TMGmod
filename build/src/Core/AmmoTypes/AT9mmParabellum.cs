@@ -11,10 +11,8 @@ namespace TMGmod.Core.AmmoTypes
         {
             penetration = 1f;
             bulletSpeed = 46f;
-            deadly = true;
             bulletThickness = 0.8f;
             bulletLength = 15f;
-            immediatelyDeadly = true;
             DamageMean = 31f;
             DamageVariation = 0.3f;
             AlphaDamage = 0.64f;
