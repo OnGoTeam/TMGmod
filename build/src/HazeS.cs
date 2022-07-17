@@ -10,10 +10,10 @@ namespace TMGmod
 {
     [BaggedProperty("isInDemo", true)]
     [EditorGroup("TMG|Handgun|Fully-Automatic")]
-    public class HazeS : BaseGun, IAmHg, IHaveSkin
+    public class HazeS : BaseGun, IAmHg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -45,8 +45,6 @@ namespace TMGmod
             _fireWait = 0.9f;
             _kickForce = 0.5f;
             _holdOffset = new Vec2(1f, 0f);
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0f;
             _editorName = "AF Haze";
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
@@ -61,11 +59,15 @@ namespace TMGmod
             set
             {
                 _heatval = value;
-                _ammoType.accuracy = _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
                 _ammoType.bulletSpeed = 60f + 10f * _heatval;
                 _ammoType.range = 180f;
                 Sighted = _sighted;
             }
+        }
+
+        protected override float Accuracy()
+        {
+            return Sighted ? 1f : _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
         }
 
         [UsedImplicitly]
@@ -75,10 +77,7 @@ namespace TMGmod
             set
             {
                 _sighted = value;
-                if (!value) return;
-                //else
-                _ammoType.accuracy = 1f;
-                _ammoType.range = 450f;
+                if (value) _ammoType.range = 450f;
             }
         }
 
@@ -128,34 +127,16 @@ namespace TMGmod
             CurrHone = HoldOffsetNoExtra;
         }
 
-        public override void Fire()
+        protected override bool CanFire()
         {
-            if (duck?.inputProfile.Down("QUACK") == true && !Sighted) return;
-            if (ammo > 0)
-            {
-                Heatval = Heatval;
-                if (_wait <= 0f)
-                {
-                    if (Sighted && _heatval < 1f) _heatval += 4f;
-
-                    _heatval += 1f;
-                }
-            }
-
-            base.Fire();
+            return Sighted || duck?.inputProfile.Down("QUACK") != true;
         }
 
-        private void UpdateSkin()
+        protected override void OnFire()
         {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
+            Heatval = Heatval;
+            if (Sighted && _heatval < 1f) _heatval += 4f;
+            _heatval += 1f;
         }
     }
 }

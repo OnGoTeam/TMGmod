@@ -179,6 +179,8 @@ namespace TMGmod.Core.WClasses
 
         private void DoFire()
         {
+            if (DynamicAccuracy())
+                SetAccuracy();
             if (DynamicKforce())
                 FireWithDynamicKforce();
             else
@@ -254,9 +256,10 @@ namespace TMGmod.Core.WClasses
             }
         }
 
+        protected bool IntrinsicAccuracy { get; set; } = false;
         private void SetAccuracy()
         {
-            if (_ammoType != null) _ammoType.accuracy = Accuracy();
+            if (_ammoType != null && !IntrinsicAccuracy) _ammoType.accuracy = Accuracy();
         }
 
         private static void UpdateFirstPrecise(IFirstPrecise target)
@@ -286,7 +289,7 @@ namespace TMGmod.Core.WClasses
             CurrHone = HoldOffsetNoExtra;
         }
 
-        protected virtual bool DynamicAccuracy() => true;
+        protected virtual bool DynamicAccuracy() => !IntrinsicAccuracy;
         protected virtual bool DynamicKforce() => true;
         protected virtual bool DynamicFeatures() => true;
 

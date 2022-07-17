@@ -11,10 +11,8 @@ namespace TMGmod.Core.AmmoTypes
         {
             accuracy = 0.9f;
             range = 150f;
-            combustable = true;
             bulletSpeed = 60f;
             penetration = 1f;
-            deadly = true;
             bulletThickness = 0.8f;
             bulletLength = 15f;
             immediatelyDeadly = true;

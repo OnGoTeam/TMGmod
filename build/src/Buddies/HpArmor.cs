@@ -31,6 +31,7 @@ namespace TMGmod.Buddies
             _isArmor = true;
             _equippedThickness = 666f;
             canPickUp = false;
+            _translucent = true;
         }
 
         public override Vec2 collisionSize
