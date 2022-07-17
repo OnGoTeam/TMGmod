@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class M14 : BaseGun, IHaveSkin, IFirstPrecise
+    public class M14 : BaseDmr, IHaveSkin
     {
         private const int NonSkinFrames = 1;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2 });
@@ -27,12 +27,12 @@ namespace TMGmod
             _ammoType = new ATM14
             {
                 range = 666f,
-                accuracy = 0.9f,
+                accuracy = 0.95f,
             };
-            MaxAccuracy = 1f;
-            LowerAccuracyFp = 0.9f;
+            MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.5f;
-            MaxDelayFp = 30;
+            RegenAccuracyDmr = 0.01f;
+            DrainAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("M14"), 46, 11);
             _graphic = _sprite;

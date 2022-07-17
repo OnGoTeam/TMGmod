@@ -30,6 +30,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 32;
             _ammoType = new ATDaewooK1();
+            MaxAccuracy = _ammoType.accuracy;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("DaewooK1"), 28, 11);
             _graphic = _sprite;
@@ -80,7 +81,7 @@ namespace TMGmod
                     StockState += 1f / 10 * (value ? 1 : -1);
                 var nostock = StockState < 0.01f;
                 var stock = StockState > 0.99f;
-                _fireWait = stock ? 0.86f : 0.5f;
+                _fireWait = stock ? 0.86f : 0.75f;
                 loseAccuracy = stock ? 0.1f : 0.2f;
                 maxAccuracyLost = stock ? 0.24f : 0.4f;
                 weight = stock ? 4.5f : 3f;

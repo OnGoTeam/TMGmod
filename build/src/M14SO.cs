@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class M14SO : BaseGun, IHaveSkin, IFirstPrecise, IHaveStock
+    public class M14SO : BaseDmr, IHaveSkin, IHaveStock
     {
         private const int NonSkinFrames = 3;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
@@ -32,12 +32,12 @@ namespace TMGmod
             _ammoType = new ATM14
             {
                 range = 333f,
-                accuracy = 0.8f,
+                accuracy = 0.9f,
             };
-            MaxAccuracy = 1f;
-            LowerAccuracyFp = 0.8f;
+            MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.3f;
-            MaxDelayFp = 40;
+            RegenAccuracyDmr = 0.01f;
+            DrainAccuracyDmr = 0.12f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Sawed-Off M14"), 31, 11);
             _graphic = _sprite;
@@ -54,8 +54,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 1.25f;
             _kickForce = 2.5f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.5f;
+            loseAccuracy = 0f;
+            maxAccuracyLost = 0f;
             _holdOffset = new Vec2(0f, 1f);
             ShellOffset = new Vec2(-9f, -4f);
             _editorName = "M14 Sawed-Off";
@@ -90,8 +90,8 @@ namespace TMGmod
                 var nostock = StockState < 0.01f;
                 var stock = StockState > 0.99f;
                 _fireWait = stock ? 1.25f : 1f;
-                loseAccuracy = stock ? 0.15f : 0.2f;
-                maxAccuracyLost = stock ? 0.5f : 0.7f;
+                loseAccuracy = stock ? 0f : 0.2f;
+                maxAccuracyLost = stock ? 0f : 0.25f;
                 weight = stock ? 2.5f : 2f;
                 FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
                 if (isServerForObject && stock && stockstate <= 0.99f)

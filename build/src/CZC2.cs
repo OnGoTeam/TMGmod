@@ -28,6 +28,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 23;
             _ammoType = new ATCZ2();
+            MaxAccuracy = _ammoType.accuracy;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("CZC2"), 41, 11);
             _graphic = _sprite;
@@ -45,8 +46,8 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 0.9f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.3f;
+            loseAccuracy = 0.12f;
+            maxAccuracyLost = 0.25f;
             _editorName = "CZ-C2 SAR";
             _weight = 4.4f;
             KickForceSlowAr = 1.5f;

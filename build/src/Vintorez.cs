@@ -47,8 +47,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.7f;
             _kickForce = 2.85f;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.2f;
+            loseAccuracy = 0f;
+            maxAccuracyLost = 0f;
             _editorName = "Vintorez";
             _weight = 4.7f;
         }
@@ -63,8 +63,8 @@ namespace TMGmod
             set
             {
                 _kickForce = value ? RandomaticKickforce : 2.85f;
-                loseAccuracy = value ? 0f : 0.1f;
-                maxAccuracyLost = value ? 0f : 0.2f;
+                //loseAccuracy = value ? 0f : 0.1f;
+                //maxAccuracyLost = value ? 0f : 0.2f;
                 SpeedAccuracyVertical = value ? 0f : 0.5f;
             }
         }
@@ -104,7 +104,7 @@ namespace TMGmod
         {
             base.Update();
             Bipods = Bipods;
-            RandomaticKickforce = Rando.Float(1.1f, 1.7f);
+            RandomaticKickforce = Rando.Float(0.5f, 1f);
         }
 
         private void UpdateSkin()

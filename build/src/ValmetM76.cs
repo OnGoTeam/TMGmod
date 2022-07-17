@@ -26,7 +26,7 @@ namespace TMGmod
             _ammoType = new ATM76();
             MaxAccuracy = 0.89f;
             MinAccuracy = 0.5f;
-            RegenAccuracyDmr = 0.025f;
+            RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.15f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Valmet M76"), 33, 10);
@@ -46,8 +46,8 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.7f;
             _kickForce = 3f;
-            loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.4f;
+            loseAccuracy = 0.15f;
+            maxAccuracyLost = 0.25f; //0.4f
             _editorName = "Valmet M76";
             _weight = 4f;
             DeltaWait = 0.15f;
@@ -63,10 +63,10 @@ namespace TMGmod
                 BurstNum = value ? 1 : 2;
                 _fireWait = value ? 0.7f : 1.4f;
                 FrameId = FrameId % 10 + (value ? 0 : 10);
-                loseAccuracy = value ? 0.2f : 0f;
+                loseAccuracy = value ? 0.15f : 0f;
                 _kickForce = value ? 3f : 6.5f;
                 _ammoType.accuracy = value ? 0.89f : 1f;
-                RegenAccuracyDmr = value ? 0.025f : 0f;
+                RegenAccuracyDmr = value ? 0.02f : 0f;
                 DrainAccuracyDmr = value ? 0.15f : 0f;
                 MaxAccuracy = value ? 0.89f : 1f;
             }

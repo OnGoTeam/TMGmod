@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|DMR")]
+    [EditorGroup("TMG|Sniper|Semi-Automatic")]
     public class Arx200 : BaseDmr, IHaveSkin
     {
         private const int NonSkinFrames = 1;
@@ -46,8 +46,8 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.65f;
             _kickForce = 3.1f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.15f;
+            loseAccuracy = 0f; //0.15f
+            maxAccuracyLost = 0f; //0.15f
             _editorName = "Beretta ARX-200";
             _weight = 6f;
         }

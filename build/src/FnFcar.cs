@@ -8,7 +8,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
-    public class FnFcar : BaseAr, IHaveSkin, IHaveBipods
+    public class FnFcar : BaseDmr, IHaveSkin, IHaveBipods
     {
         private const int NonSkinFrames = 5;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 7 });
@@ -34,6 +34,10 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 14;
             _ammoType = new ATFCAR();
+            MaxAccuracy = _ammoType.accuracy;
+            MinAccuracy = 0.67f;
+            RegenAccuracyDmr = 0.01f;
+            DrainAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("FCAR"), 36, 15);
             _graphic = _sprite;
@@ -52,10 +56,8 @@ namespace TMGmod
             _fullAuto = false;
             _fireWait = 0.75f;
             _kickForce = 2.4f;
-            KickForceSlowAr = 2.4f;
-            KickForceFastAr = 0.9f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.2f;
+            loseAccuracy = 0f;
+            maxAccuracyLost = 0f;
             _editorName = "Belguria Fcar";
             laserSight = false;
             _laserOffsetTL = new Vec2(19f, 4f);
@@ -81,14 +83,12 @@ namespace TMGmod
                     BipodsState += 1f / 22 * (value ? 1 : -1);
                 var nobipods = BipodsState < 0.01f;
                 var bipods = BipodsState > 0.99f;
-                _ammoType.accuracy = bipods ? 1f : 0.94f;
+                //_ammoType.accuracy = bipods ? 1f : 0.94f;
                 _ammoType.bulletSpeed = bipods ? 72f : 36f;
                 _fireWait = bipods ? 0.25f : 0.75f;
                 _kickForce = bipods ? 0f : 2.4f;
-                KickForceFastAr = bipods ? 0f : 0.9f;
-                KickForceSlowAr = bipods ? 0f : 0.07f;
-                loseAccuracy = bipods ? 0f : 0.15f;
-                maxAccuracyLost = bipods ? 0f : 0.2f;
+                MaxAccuracy = bipods ? 1f : 0.94f;
+                MinAccuracy = bipods ? 0.95f : 0.67f;
                 FrameId = FrameId % 10 +
                           10 * (bipods ? 4 : nobipods ? 0 : bipodsstate < 0.33f ? 1 : bipodsstate < 0.67f ? 2 : 3);
                 if (isServerForObject && bipods && bipodsstate <= 0.99f)

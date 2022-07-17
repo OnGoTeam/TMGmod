@@ -24,6 +24,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
             _ammoType = new ATType89();
+            IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Type 89"), 30, 12);
             _graphic = _sprite;

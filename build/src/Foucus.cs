@@ -27,6 +27,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new ATFOUCUS();
+            IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Foucus"), 37, 13);
             _graphic = _sprite;
@@ -43,7 +44,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -2f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = true;
-            _fireWait = 0.7f;
+            _fireWait = 0.65f;
             KickForceSlowAr = 2f;
             KickForceFastAr = 5f;
             loseAccuracy = 0.275f;

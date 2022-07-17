@@ -57,7 +57,7 @@ namespace TMGmod
             KickForceSlowAr = 0.05f;
             KickForceFastAr = 0.75f;
             loseAccuracy = 0f;
-            maxAccuracyLost = 0.3f;
+            maxAccuracyLost = 0.25f;
             _editorName = "Alfa";
             _weight = 5.5f;
         }
@@ -86,7 +86,7 @@ namespace TMGmod
                     StockState += 1f / 10 * (value ? 1 : -1);
                 var nostock = StockState < 0.01f;
                 var stock = StockState > 0.99f;
-                _ammoType.accuracy = stock ? 1f : 0.92f;
+                //_ammoType.accuracy = stock ? 1f : 0.92f;
                 loseAccuracy = stock ? 0f : 0.1f;
                 weight = stock ? 5.5f : 3.5f;
                 _kickForce = stock ? 0.65f : 1.2f;

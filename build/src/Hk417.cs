@@ -27,7 +27,7 @@ namespace TMGmod
             _ammoType = new ATHk417();
             MaxAccuracy = 0.93f;
             MinAccuracy = 0.75f;
-            RegenAccuracyDmr = 0.004f;
+            RegenAccuracyDmr = 0.006f;
             DrainAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417"), 30, 10);

@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class IB8mm : BaseGun, IFirstPrecise, IFirstKforce, IHaveSkin
+    public class IB8mm : BaseGun, IFirstKforce, IHaveSkin
     {
         private const int NonSkinFrames = 1;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
@@ -25,9 +25,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
             _ammoType = new ATIB8();
-            MaxAccuracy = 1f;
-            LowerAccuracyFp = 0.82f;
-            MinAccuracy = 0.24f;
+            MaxAccuracy = _ammoType.accuracy;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _graphic = _sprite;
@@ -41,10 +39,9 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.45f;
             _kickForce = 1.5f;
-            KickForceDeltaSmg = 2.1f;
+            KickForceDeltaSmg = 2f;
             MaxDelaySmg = 11;
-            MaxDelayFp = 20;
-            loseAccuracy = 0.15f;
+            loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
             _holdOffset = new Vec2(-2f, 0f);
             ShellOffset = new Vec2(-3f, 0f);
@@ -55,9 +52,6 @@ namespace TMGmod
         public float KickForceDeltaSmg { get; }
         public int CurrentDelaySmg { get; set; }
         public int MaxDelaySmg { get; }
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

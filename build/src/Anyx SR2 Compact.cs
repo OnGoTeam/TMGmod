@@ -56,10 +56,10 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _fullAuto = true;
-            _fireWait = 0.85f;
-            _kickForce = 4.2f;
-            loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.6f;
+            _fireWait = 1f;
+            _kickForce = 3.5f;
+            loseAccuracy = 0.25f;
+            maxAccuracyLost = 0.7f;
             _editorName = "Anyx SR2 Compact";
             _weight = 5.5f;
         }

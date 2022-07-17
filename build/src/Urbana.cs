@@ -79,7 +79,7 @@ namespace TMGmod
         private void UpdateStats()
         {
             _ammoType.range = this.BipodsDeployed() ? 1800f : 1200f;
-            _ammoType.bulletSpeed = this.BipodsDeployed() ? 200f : 75f;
+            _ammoType.bulletSpeed = this.BipodsDeployed() ? 150f : 75f;
         }
 
         private void UpdateFrames() =>
@@ -92,7 +92,7 @@ namespace TMGmod
             this.UpdateBipodsSounds(old);
         }
 
-        public float BipodSpeed => 1f / 14f;
+        public float BipodSpeed => 1f / 20f;
 
         public bool Bipods
         {

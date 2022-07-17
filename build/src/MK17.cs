@@ -35,6 +35,7 @@ namespace TMGmod
                 bulletSpeed = 35f,
                 bulletThickness = 0.6f,
             };
+            IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Mk17Shield"), 26, 12);
             _graphic = _sprite;
@@ -55,7 +56,7 @@ namespace TMGmod
             _kickForce = 2.35f;
             KickForceSlowAr = 1.6f;
             KickForceFastAr = 1.9f;
-            loseAccuracy = 0.2f;
+            loseAccuracy = 0.15f;
             maxAccuracyLost = 0.6f;
             _editorName = "Mk17 with Shield";
             _weight = 4.5f;

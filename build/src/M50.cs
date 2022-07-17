@@ -54,7 +54,7 @@ namespace TMGmod
             _editorName = "M50";
             _weight = 6.75f;
             SpeedAccuracyThreshold = 1f;
-            SpeedAccuracyVertical = 0.67f;
+            SpeedAccuracyVertical = 1f;
         }
 
         public bool Bipods

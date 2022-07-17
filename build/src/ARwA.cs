@@ -8,7 +8,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class ARwA : BaseGun, IAmAr, MagBuddy.ISupportReload
+    public class ARwA : BaseAr, MagBuddy.ISupportReload
     {
         private readonly MagBuddy _magBuddy;
         private readonly SpriteMap _sprite;
@@ -27,6 +27,7 @@ namespace TMGmod
                 range = 500f,
                 accuracy = 0.85f,
             };
+            IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("ARW-A"), 27, 9);
             _graphic = _sprite;
@@ -45,7 +46,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.85f;
             _kickForce = 1f;
-            loseAccuracy = 0.05f;
+            loseAccuracy = 0.11f;
             maxAccuracyLost = 0.2f;
             _editorName = "ARwA";
             _weight = 5f;

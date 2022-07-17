@@ -25,10 +25,10 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 12;
             _ammoType = new ATSVU();
-            MaxAccuracy = 0.95f;
+            MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.2f;
             RegenAccuracyDmr = 0.017f;
-            DrainAccuracyDmr = 0.3f;
+            DrainAccuracyDmr = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;
