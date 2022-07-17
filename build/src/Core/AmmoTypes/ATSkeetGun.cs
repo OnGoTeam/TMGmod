@@ -12,8 +12,6 @@ namespace TMGmod.Core.AmmoTypes
             penetration = 1.5f;
             bulletColor = new Color(255, 0, 0);
             bulletSpeed = 50f;
-            deadly = true;
-            immediatelyDeadly = true;
             DamageMean = 18f;
             DamageVariation = 0.3f;
             AlphaDamage = 0.55f;

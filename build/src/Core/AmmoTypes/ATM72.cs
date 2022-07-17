@@ -13,7 +13,6 @@ namespace TMGmod.Core.AmmoTypes
             penetration = 0.35f;
             bulletSpeed = 15f;
             range = 2000f;
-            deadly = true;
             weight = 5f;
             barrelAngleDegrees = -2.5f;
             bulletThickness = 2f;
