@@ -14,7 +14,7 @@ namespace TMGmod
     {
         private const int NonSkinFrames = 1;
         private const double Explodechance = 0.006;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 8 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
