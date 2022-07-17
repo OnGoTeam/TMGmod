@@ -84,6 +84,8 @@
     <Compile Include="src\Bersa Magnum.cs" />
     <Compile Include="src\Buddies\HpGiver.cs" />
     <Compile Include="src\Buddies\PiercingBazooka.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATYava6.cs" />
+    <Compile Include="src\Yava6.cs" />
     <Compile Include="src\Core\AmmoTypes\ATDaewooK1.cs" />
     <Compile Include="src\Core\AmmoTypes\ATType89.cs" />
     <Compile Include="src\Core\AmmoTypes\ATMK17.cs" />
