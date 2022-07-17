@@ -8,6 +8,6 @@ namespace TMGmod.Core
         float BipodsState { get; set; }
         [UsedImplicitly] StateBinding BsBinding { get; }
         float BipodSpeed { get; }
-        void UpdateStats(float old);
+        void UpdateBipodsStats(float old);
     }
 }

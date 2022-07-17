@@ -85,7 +85,7 @@ namespace TMGmod
         private void UpdateFrames() =>
             FrameId = FrameId % 10 + 10 * (this.BipodsDeployed() ? 3 : this.BipodsFolded() ? 0 : BipodsState < .5f ? 1 : 2);
 
-        public void UpdateStats(float old)
+        public void UpdateBipodsStats(float old)
         {
             UpdateStats();
             UpdateFrames();

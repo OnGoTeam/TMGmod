@@ -29,7 +29,7 @@ namespace TMGmod.Core.WClasses
             var old = target.BipodsState;
             if (target.isServerForObject)
                 target.BipodsState += target.BipodSpeed * (bipods ? 1 : -1);
-            target.UpdateStats(old);
+            target.UpdateBipodsStats(old);
         }
 
         private static int FilterSkin(this IHaveAllowedSkins target, int skin) =>
