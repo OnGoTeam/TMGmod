@@ -13,7 +13,7 @@ namespace TMGmod
     public class Lstk16V6 : BaseGun, IHaveSkin, IHaveBipods
     {
         private const int NonSkinFrames = 9;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 3, 6, 7 });
+        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
