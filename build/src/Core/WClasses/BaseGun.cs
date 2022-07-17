@@ -156,7 +156,7 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case ISwitchBipods switching when switching.SwitchingBipods():
+                case IHaveBipodState target when !target.BipodsDeployed() && !target.BipodsFolded():
                     return false;
                 default:
                     return true;

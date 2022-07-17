@@ -148,7 +148,6 @@
     <Compile Include="src\Core\Bullets\BulletStoppedByProps.cs" />
     <Compile Include="src\Core\ICanDisableBipods.cs" />
     <Compile Include="src\Core\IDeployBipods.cs" />
-    <Compile Include="src\Core\ISwitchBipods.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\IModifyAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\SpeedAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\ComposedModifier.cs" />

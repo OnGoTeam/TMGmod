@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class SV98 : BaseBolt, IHaveAllowedSkins, I5, ISwitchBipods, IDeployBipods
+    public class SV98 : BaseBolt, IHaveAllowedSkins, I5, ICanDisableBipods, IDeployBipods
     {
         private const int NonSkinFrames = 3;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 8 });
@@ -114,8 +114,7 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public bool SwitchingBipods() => (FrameId + 10) % (10 * NonSkinFrames) >= 20;
+        
 
         protected override bool HasLaser() => true;
         protected override float MaxAngle() => Bipods ? .05f : .15f;
