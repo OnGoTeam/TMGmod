@@ -31,7 +31,7 @@ namespace TMGmod
             _ammoType = new ATYava6();
             _numBulletsPerFire = 3;
             MaxAccuracy = _ammoType.accuracy;
-            MinAccuracy = 0.2f;
+            MinAccuracy = 0.5f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Yava 6"), 37, 13);
             _graphic = _sprite;
@@ -75,7 +75,7 @@ namespace TMGmod
 
         protected override void OnUpdate()
         {
-            _tripleTakeParody = duck is null ? MaxCringe : Maths.Clamp(_tripleTakeParody - _chill, 0f, MaxCringe);
+            _tripleTakeParody = ((duck is null) || (duck.velocity.length != 0)) ? MaxCringe : Maths.Clamp(_tripleTakeParody - _chill, 0f, MaxCringe);
             base.OnUpdate();
         }
     }

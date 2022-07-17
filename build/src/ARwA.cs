@@ -51,6 +51,8 @@ namespace TMGmod
             _editorName = "ARwA";
             _weight = 5f;
             _magBuddy = new MagBuddy(this, typeof(ArwaMag));
+            KickForceFastAr = 1.2f;
+            KickForceSlowAr = 1f;
         }
 
         public bool SetMag()

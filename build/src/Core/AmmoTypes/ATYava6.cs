@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATYava6()
         {
-            accuracy = 0.77f;
+            accuracy = 0.9f;
             penetration = 3f;
             bulletSpeed = 42f;
             range = 500f;

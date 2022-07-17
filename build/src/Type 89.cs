@@ -40,13 +40,15 @@ namespace TMGmod
             _fireSound = "deepMachineGun";
             _fullAuto = true;
             _fireWait = 0.71f;
-            _kickForce = 2.1f;
+            _kickForce = 1.1f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(1f, 0f);
             ShellOffset = new Vec2(-1f, -1f);
             _editorName = "Type 89";
             _weight = 4.6f;
+            KickForceFastAr = 1.5f;
+            KickForceSlowAr = 1.1f;
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
