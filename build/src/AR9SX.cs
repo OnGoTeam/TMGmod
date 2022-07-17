@@ -52,10 +52,6 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(23f, 5f);
             _weight = 3f;
         }
-
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
