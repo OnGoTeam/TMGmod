@@ -241,7 +241,6 @@ namespace TMGmod.Core.WClasses
                 : GetBaseAccuracy();
         }
 
-        private float CalculateAccuracy(float accuracy)
         protected virtual float CalculateAccuracy(float accuracy)
         {
             switch (this)
@@ -257,7 +256,6 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-        protected bool IntrinsicAccuracy { get; set; } = false;
         protected bool IntrinsicAccuracy { get; set; }
         private void SetAccuracy()
         {
