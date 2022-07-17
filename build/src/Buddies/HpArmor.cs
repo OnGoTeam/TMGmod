@@ -11,7 +11,6 @@ namespace TMGmod.Buddies
     [UsedImplicitly]
     public class HpArmor : Equipment
     {
-        private const bool Invincibility = false;
         private readonly float _hpMax;
 
         [UsedImplicitly] public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
@@ -36,13 +35,13 @@ namespace TMGmod.Buddies
 
         public override Vec2 collisionSize
         {
-            get => _equippedDuck?.collisionSize ?? _collisionSize;
+            get => EquippedDuck()?.collisionSize ?? _collisionSize;
             set => _collisionSize = value;
         }
 
         public override Vec2 collisionOffset
         {
-            get => _equippedDuck?.collisionOffset ?? _collisionOffset;
+            get => EquippedDuck()?.collisionOffset ?? _collisionOffset;
             set => _collisionOffset = value;
         }
 
@@ -95,6 +94,14 @@ namespace TMGmod.Buddies
             Thing thing
         )
         {
+            if (thing is Ragdoll ragdoll)
+            {
+                return RayIntersectsThing(origin, direction, ragdoll.part1)
+                       ||
+                       RayIntersectsThing(origin, direction, ragdoll.part2)
+                       ||
+                       RayIntersectsThing(origin, direction, ragdoll.part3);
+            }
             return RayIntersectsSegment(origin, direction, thing.topLeft, thing.topRight)
                    ||
                    RayIntersectsSegment(origin, direction, thing.topRight, thing.bottomRight)
@@ -106,12 +113,12 @@ namespace TMGmod.Buddies
 
         private bool QHit(Vec2 hitPos, Vec2 travelDirNormalized)
         {
-            return RayIntersectsThing(hitPos, travelDirNormalized, _equippedDuck);
+            return RayIntersectsThing(hitPos, travelDirNormalized, EquippedDuck());
         }
 
         private bool QLocalHit(Thing bullet)
         {
-            return _equippedDuck != null && bullet.owner != _equippedDuck && bullet.isLocal && duck == _equippedDuck;
+            return _equippedDuck != null && bullet.owner != _equippedDuck && bullet.isLocal;
         }
 
         private bool QHit(Bullet bullet, Vec2 hitPos)
@@ -139,7 +146,7 @@ namespace TMGmod.Buddies
 
         private void Damage(float damage)
         {
-            _hitPoints -= damage;
+            if (isServerForObject) _hitPoints -= damage;
 #if DEBUG
             StringMarker.Show(position, damage.ToString(CultureInfo.InvariantCulture));
 #endif
@@ -147,7 +154,7 @@ namespace TMGmod.Buddies
 
         private void Slowdown()
         {
-            _equippedDuck.hSpeed *= 0.25f;
+            EquippedDuck().hSpeed *= 0.25f;
         }
 
         private void Damage(Bullet bullet)
@@ -180,13 +187,22 @@ namespace TMGmod.Buddies
             return QHit(bullet, hitPos) && RealHit(bullet, hitPos);
         }
 
+        private Thing EquippedDuck()
+        {
+            return _equippedDuck is null
+                ? null
+                : _equippedDuck.ragdoll != null
+                    ? (Thing)_equippedDuck.ragdoll
+                    : _equippedDuck;
+        }
+
         public override void Draw()
         {
 #if DEBUG
-            Graphics.DrawRect(rectangle, new Color(255, 0, 0, 128));
+            Graphics.DrawRect(rectangle, new Color(255, 0, 0, 128), filled: false);
 #endif
-            if (_equippedDuck == null) return;
-            var start = (_equippedDuck.topLeft + _equippedDuck.topRight) / 2 + new Vec2(-32, 0);
+            if (EquippedDuck() == null) return;
+            var start = (EquippedDuck().topLeft + EquippedDuck().topRight) / 2 + new Vec2(-32, 0);
             Graphics.DrawRect(start, start + new Vec2(64, -8), Color.Red, 0.0f);
             Graphics.DrawRect(start, start + new Vec2(0, -8) + new Vec2(64, 0) * Math.Max(_hitPoints / _hpMax, 0),
                 Color.Green, 0.1f);
@@ -196,7 +212,7 @@ namespace TMGmod.Buddies
                 start + new Vec2(64, -8),
                 Color.GreenYellow
             );
-            Graphics.DrawRect(_equippedDuck.rectangle, new Color(0, 0, 255, 128));
+            Graphics.DrawRect(EquippedDuck().rectangle, new Color(0, 0, 255, 128));
 #endif
         }
 
@@ -215,12 +231,6 @@ namespace TMGmod.Buddies
             }
 
             _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
-        }
-
-        public override void Equip(Duck d)
-        {
-            base.Equip(d);
-            _equippedDuck.invincible = Invincibility;
         }
 
         public override void UnEquip()

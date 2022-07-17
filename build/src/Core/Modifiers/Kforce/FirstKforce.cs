@@ -21,8 +21,7 @@ namespace TMGmod.Core.Modifiers.Kforce
 
         public override void ModifyUpdate(Action update)
         {
-            if (_currentDelay > 0)
-                _currentDelay -= 1;
+            if (_currentDelay > 0) _currentDelay -= 1;
             update();
         }
 
