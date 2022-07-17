@@ -1,6 +1,5 @@
 using System;
 using DuckGame;
-using TMGmod.Core.Bullets;
 using TMGmod.Core.Shells;
 
 namespace TMGmod.Core.AmmoTypes
@@ -16,7 +15,6 @@ namespace TMGmod.Core.AmmoTypes
             bulletSpeed = 34f;
             bulletThickness = 1f;
             bulletLength = 50f;
-            bulletType = typeof(Bullet556);
             DamageMean = 52f;
             DamageVariation = 0.1f;
             AlphaDamage = 0.46f;

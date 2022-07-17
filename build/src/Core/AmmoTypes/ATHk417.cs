@@ -1,6 +1,5 @@
 using System;
 using DuckGame;
-using TMGmod.Core.Bullets;
 using TMGmod.Core.Shells;
 
 namespace TMGmod.Core.AmmoTypes
@@ -14,11 +13,8 @@ namespace TMGmod.Core.AmmoTypes
             accuracy = 0.93f;
             penetration = 2.1f;
             bulletSpeed = 34f;
-            deadly = true;
             bulletThickness = 1f;
             bulletLength = 77f;
-            immediatelyDeadly = true;
-            bulletType = typeof(Bullet556);
             DamageMean = 64f;
             DamageVariation = 0.2f;
             AlphaDamage = 0.67f;
