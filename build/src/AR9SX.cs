@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AR9SX : BaseGun, IAmSmg, IHaveSkin, IFirstPrecise
+    public class AR9SX : BaseGun, IAmSmg, IHaveSkin
     {
         private const int NonSkinFrames = 1;
         private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
@@ -26,9 +26,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 17;
             _ammoType = new ATAR9SX();
-            MaxAccuracy = 1f;
-            LowerAccuracyFp = 0.88f;
-            MaxDelayFp = 18;
+            MaxAccuracy = 0.78f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AR9SX"), 36, 10);
             _graphic = _sprite;

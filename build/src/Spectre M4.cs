@@ -26,6 +26,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATSpectreM4();
+            IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SpectreM4"), 19, 10);
             _graphic = _sprite;

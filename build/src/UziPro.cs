@@ -27,6 +27,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
             _ammoType = new ATUzi();
+            IntrinsicAccuracy = true;
             MaxDelaySmg = 25;
             KickForceDeltaSmg = 4f;
             _type = "gun";

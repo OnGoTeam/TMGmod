@@ -49,9 +49,9 @@ namespace TMGmod
             ShellOffset = new Vec2(2f, -4f);
             _editorName = "MP5A3";
             _weight = 3f;
-            KickForceDeltaSmg = 2f;
+            KickForceDeltaSmg = 1.2f;
             MaxDelayFp = 10;
-            MaxDelaySmg = 50;
+            MaxDelaySmg = 20;
             DeltaWait = 0.45f;
             BurstNum = 1;
         }
