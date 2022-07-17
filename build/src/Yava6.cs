@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using System;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
@@ -17,7 +16,7 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
         private const float MaxCringe = 1f;
         private float _tripleTakeParody = MaxCringe;
-        private float _chill = .1f;
+        private const float Chill = .1f;
 
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -75,7 +74,7 @@ namespace TMGmod
 
         protected override void OnUpdate()
         {
-            _tripleTakeParody = ((duck is null) || (duck.velocity.length != 0)) ? MaxCringe : Maths.Clamp(_tripleTakeParody - _chill, 0f, MaxCringe);
+            _tripleTakeParody = duck is null || duck.velocity.length > 0.1f ? MaxCringe : Maths.Clamp(_tripleTakeParody - Chill, 0f, MaxCringe);
             base.OnUpdate();
         }
     }

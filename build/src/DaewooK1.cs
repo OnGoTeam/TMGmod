@@ -8,11 +8,11 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|PDW")]
-    public class DaewooK1 : BaseSmg, IHaveSkin, IHaveStock
+    public class DaewooK1 : BaseSmg, IHaveAllowedSkins, IHaveStock
     {
         [UsedImplicitly] private const int NonSkinFrames = 3;
 
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 4, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 7 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -69,6 +69,8 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
+        public float StockSpeed => 1f / 10f;
+
         [UsedImplicitly]
         public bool Stock
         {
@@ -76,20 +78,7 @@ namespace TMGmod
             set
             {
                 _stock = value;
-                var stockstate = StockState;
-                if (isServerForObject)
-                    StockState += 1f / 10 * (value ? 1 : -1);
-                var nostock = StockState < 0.01f;
-                var stock = StockState > 0.99f;
-                _fireWait = stock ? 0.86f : 0.75f;
-                loseAccuracy = stock ? 0.1f : 0.2f;
-                maxAccuracyLost = stock ? 0.24f : 0.4f;
-                weight = stock ? 4.5f : 3f;
-                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
-                if (isServerForObject && stock && stockstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
-                if (isServerForObject && nostock && stockstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
+                this.SetStock(value);
             }
         }
 
@@ -99,52 +88,35 @@ namespace TMGmod
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
 
+        private void UpdateStats()
+        {
+            _fireWait = this.StockDeployed() ? 0.86f : 0.75f;
+            loseAccuracy = this.StockDeployed() ? 0.1f : 0.2f;
+            maxAccuracyLost = this.StockDeployed() ? 0.24f : 0.4f;
+            _weight = this.StockDeployed() ? 4.5f : 3f;
+        }
+
+        private void UpdateFrames() =>
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+
+        public void UpdateStockStats(float old)
+        {
+            UpdateStats();
+            UpdateFrames();
+            this.UpdateStockSounds(old);
+        }
+
         public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
 
-        [UsedImplicitly] public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
 
         public BitBuffer StockBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Stock);
-                return b;
-            }
-            set => Stock = value.ReadBool();
+            get => this.GetStockBuffer();
+            set => this.SetStockBuffer(value);
         }
 
-        public override void Update()
-        {
-            base.Update();
-            if (SwitchStockQ() && (Stock || duck.grounded) && duck.inputProfile.Pressed("QUACK"))
-            {
-                Stock = !Stock;
-                SFX.Play("quack", -1);
-            }
-            else if (duck != null)
-            {
-                Stock = Stock;
-            }
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
-
-        public override void Fire()
-        {
-            if (FrameId / 10 == 1) return;
-            base.Fire();
-        }
+        public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/beepods1");
+        public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/beepods2");
     }
 }

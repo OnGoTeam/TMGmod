@@ -3,16 +3,21 @@ using JetBrains.Annotations;
 
 namespace TMGmod.Core
 {
-    public interface IHaveStock
+    public interface IHaveStock : IAmAGun
     {
-        [UsedImplicitly] bool Stock { get; set; }
+        bool Stock { get; set; }
 
         [UsedImplicitly] StateBinding StockBinding { get; }
 
         [UsedImplicitly] BitBuffer StockBuffer { get; set; }
 
-        [UsedImplicitly] float StockState { get; set; }
+        float StockState { get; set; }
 
         [UsedImplicitly] StateBinding StockStateBinding { get; }
+        float StockSpeed { get; }
+        void UpdateStockStats(float old);
+
+        string StockOn { get; }
+        string StockOff { get; }
     }
 }

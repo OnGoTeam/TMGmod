@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [UsedImplicitly]
-    public class Vixr : BaseGun, IAmAr, IHaveSkin, IHaveStock
+    public class Vixr : BaseGun, IAmAr, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 6, 8 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 8 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -80,7 +80,7 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
+        public float StockSpeed => 1f / 10f;
         [UsedImplicitly]
         public bool Stock
         {
@@ -88,21 +88,7 @@ namespace TMGmod
             set
             {
                 _stock = value;
-                var stockstate = StockState;
-                if (isServerForObject)
-                    StockState += 1f / 10 * (value ? 1 : -1);
-                var nostock = StockState < 0.01f;
-                var stock = StockState > 0.99f;
-                _fireWait = stock ? 0.75f : 0.6f;
-                loseAccuracy = stock ? 0.15f : 0.2f;
-                maxAccuracyLost = stock ? 0.3f : 0.6f;
-                weight = stock ? 6f : 3.5f;
-                _kickForce = stock ? 3f : 4.6f;
-                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
-                if (isServerForObject && stock && stockstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
-                if (isServerForObject && nostock && stockstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
+                this.SetStock(value);
             }
         }
 
@@ -112,34 +98,43 @@ namespace TMGmod
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
 
+        private void UpdateStats()
+        {
+            _fireWait = this.StockDeployed() ? 0.75f : 0.6f;
+            loseAccuracy = this.StockDeployed() ? 0.15f : 0.2f;
+            maxAccuracyLost = this.StockDeployed() ? 0.3f : 0.6f;
+            _weight = this.StockDeployed() ? 6f : 3.5f;
+        }
+
+        protected override float GetBaseKforce() => this.StockDeployed() ? 3f : 4.6f;
+
+        private void UpdateFrames() =>
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+
+        public void UpdateStockStats(float old)
+        {
+            UpdateStats();
+            UpdateFrames();
+            this.UpdateStockSounds(old);
+        }
+
         public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
 
-        [UsedImplicitly] public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
 
         public BitBuffer StockBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Stock);
-                return b;
-            }
-            set => Stock = value.ReadBool();
+            get => this.GetStockBuffer();
+            set => this.SetStockBuffer(value);
         }
+
+        public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/beepods1");
+        public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
         public override void Update()
         {
             HandAngleOff = HandAngleOffState;
             base.Update();
-            if (SwitchStockQ() && (Stock || duck.grounded) && duck.inputProfile.Pressed("QUACK"))
-            {
-                Stock = !Stock;
-                SFX.Play("quack", -1);
-            }
-            else if (duck != null)
-            {
-                Stock = Stock;
-            }
         }
 
         public override void OnHoldAction()
@@ -155,25 +150,6 @@ namespace TMGmod
             HandAngleOff = 0f;
             HandAngleOffState = HandAngleOff;
             base.OnReleaseAction();
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
-
-        public override void Fire()
-        {
-            if (FrameId / 10 == 1) return;
-            base.Fire();
         }
     }
 }

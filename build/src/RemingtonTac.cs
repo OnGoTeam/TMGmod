@@ -9,11 +9,11 @@ namespace TMGmod
 {
     [UsedImplicitly]
     [EditorGroup("TMG|Shotgun|Pump-Action")]
-    public class RemingtonTac : BasePumpAction, IHaveSkin, IHaveStock
+    public class RemingtonTac : BasePumpAction, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
-        private const float Rmax = 3.506401f;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
+        private static float Rmax => 3.506401f;
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -29,6 +29,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 4;
             _ammoType = new ATFABARM();
+            IntrinsicAccuracy = true;
             _numBulletsPerFire = 6;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);
@@ -76,26 +77,15 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly]
+        public float StockSpeed => 1f / 10f;
+
         public bool Stock
         {
             get => _stock;
             set
             {
                 _stock = value;
-                var stockstate = StockState;
-                if (isServerForObject)
-                    StockState += 1f / 10 * (value ? 1 : -1);
-                var nostock = StockState < 0.01f;
-                var stock = StockState > 0.99f;
-                _fireWait = stock ? 0f : 2.75f;
-                _kickForce = stock ? 1.1f : 2.8f;
-                LoadSpeed = (sbyte)(stock ? 20 : 10);
-                FrameId = FrameId % 10 + 10 * (stock ? 0 : nostock ? 2 : 1);
-                if (isServerForObject && stock && stockstate <= 0.99f)
-                    SFX.Play(GetPath("sounds/beepods1"));
-                if (isServerForObject && nostock && stockstate >= 0.01f)
-                    SFX.Play(GetPath("sounds/beepods2"));
+                this.SetStock(value);
             }
         }
 
@@ -106,61 +96,54 @@ namespace TMGmod
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
 
-        [UsedImplicitly] public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+        private void UpdateStats()
+        {
+            _fireWait = this.StockDeployed() ? 0f : 2.75f;
+            LoadSpeed = (sbyte)(this.StockDeployed() ? 20 : 10);
+        }
 
-        [UsedImplicitly] public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
+        protected override float GetBaseKforce() => this.StockDeployed() ? 1.1f : 2.8f;
+
+        private void UpdateFrames() =>
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+
+        public void UpdateStockStats(float old)
+        {
+            UpdateStats();
+            UpdateFrames();
+            this.UpdateStockSounds(old);
+        }
+
+        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
+
+        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
 
         public BitBuffer StockBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Stock);
-                return b;
-            }
-            set => Stock = value.ReadBool();
+            get => this.GetStockBuffer();
+            set => this.SetStockBuffer(value);
         }
 
-        public override void Initialize()
+        public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/beepods1");
+        public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/beepods2");
+
+        protected override void OnInitialize()
         {
             Stock = false;
-            base.Initialize();
+            base.OnInitialize();
         }
 
+        private void GottaGoFast()
+        {
+            var runMax = duck.runMax;
+            duck.runMax = Rmax;
+            duck.UpdateMove();
+            duck.runMax = runMax;
+        }
         public override void Update()
         {
             base.Update();
-            if (SwitchStockQ() && (Stock || duck?.grounded == true) && duck?.inputProfile.Pressed("QUACK") == true)
-            {
-                Stock = !Stock;
-                SFX.Play("quack", -1);
-            }
-            else if (duck != null)
-            {
-                Stock = Stock;
-                duck.runMax = Rmax;
-                duck.UpdateMove();
-                duck.runMax = 3.1f;
-            }
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            FrameId = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
-
-        public override void Fire()
-        {
-            if (FrameId / 10 == 1) return;
-            base.Fire();
+            if (!Stock && duck != null) GottaGoFast();
         }
     }
 }

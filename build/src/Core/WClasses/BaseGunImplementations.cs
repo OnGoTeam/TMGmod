@@ -32,6 +32,14 @@ namespace TMGmod.Core.WClasses
             target.UpdateBipodsStats(old);
         }
 
+        public static void SetStock<T>(this T target, bool stock) where T : Thing, IHaveStock
+        {
+            var old = target.StockState;
+            if (target.isServerForObject)
+                target.StockState += target.StockSpeed * (stock ? 1 : -1);
+            target.UpdateStockStats(old);
+        }
+
         private static int FilterSkin(this IHaveAllowedSkins target, int skin) =>
             target.AllowedSkins.Contains(skin)
                 ? skin
@@ -48,6 +56,32 @@ namespace TMGmod.Core.WClasses
             else if (gun.duck.inputProfile.Pressed("QUACK")) target.SetBipodsDisabled(!target.BipodsDisabled);
             target.UpdateBipods();
         }
+        public static BitBuffer GetStockBuffer(this IHaveStock target)
+        {
+            var buffer = new BitBuffer();
+            buffer.Write(target.Stock);
+            return buffer;
+        }
+
+        public static void SetStockBuffer(this IHaveStock target, BitBuffer buffer)
+        {
+            target.Stock = buffer.ReadBool();
+        }
+
+        public static void UpdateStock(this IHaveStock target)
+        {
+            var gun = target.AsAGun();
+            if (gun.SwitchStockQ() && (target.Stock || gun.duck.grounded) && gun.duck.inputProfile.Pressed("QUACK"))
+            {
+                target.Stock = !target.Stock;
+
+                SFX.Play("quack", -1, gun.duck.quackPitch);
+            }
+            else if (gun.duck != null)
+            {
+                target.Stock = target.Stock;
+            }
+        }
 
         public static bool BipodsDeployed(this IHaveBipodState target) => target.BipodsState > .99f;
         public static bool BipodsFolded(this IHaveBipodState target) => target.BipodsState < .01f;
@@ -59,6 +93,18 @@ namespace TMGmod.Core.WClasses
                 target.BipOn.Play();
             if (gun.isServerForObject && target.BipodsFolded() && old >= 0.01f)
                 target.BipOff.Play();
+        }
+
+        public static bool StockDeployed(this IHaveStock target) => target.StockState > .99f;
+        public static bool StockFolded(this IHaveStock target) => target.StockState < .01f;
+
+        public static void UpdateStockSounds(this IHaveStock target, float old)
+        {
+            var gun = target.AsAGun();
+            if (gun.isServerForObject && target.StockDeployed() && old <= 0.99f)
+                SFX.Play(target.StockOn);
+            if (gun.isServerForObject && target.StockFolded() && old >= 0.01f)
+                SFX.Play(target.StockOff);
         }
 
         public static bool BipodsQ(this Gun gun, bool bypassihb = false)

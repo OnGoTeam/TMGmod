@@ -69,12 +69,12 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case IHspeedKforce ihskf:
-                    return CalculateHSpeedKforce(ihskf, kickForce);
-                case IRandKforce irkf:
-                    return CalculateRandKforce(irkf);
-                case IFirstKforce ifkf:
-                    return CalculateFirstKforce(ifkf, kickForce);
+                case IHspeedKforce target:
+                    return CalculateHSpeedKforce(target, kickForce);
+                case IRandKforce target:
+                    return CalculateRandKforce(target);
+                case IFirstKforce target:
+                    return CalculateFirstKforce(target, kickForce);
                 default:
                     return kickForce;
             }
@@ -104,11 +104,11 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case ILoseAccuracy ila:
-                    FireLoseAccuracy(ila);
+                case ILoseAccuracy target:
+                    FireLoseAccuracy(target);
                     break;
-                case IFirstPrecise ifp:
-                    FireFirstPrecise(ifp);
+                case IFirstPrecise target:
+                    FireFirstPrecise(target);
                     break;
             }
         }
@@ -122,8 +122,8 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case IFirstKforce ifk:
-                    FireFirstKforce(ifk);
+                case IFirstKforce target:
+                    FireFirstKforce(target);
                     break;
             }
         }
@@ -157,6 +157,8 @@ namespace TMGmod.Core.WClasses
             switch (this)
             {
                 case IHaveBipodState target when !target.BipodsDeployed() && !target.BipodsFolded():
+                    return false;
+                case IHaveStock target when !target.StockDeployed() && !target.StockFolded():
                     return false;
                 default:
                     return true;
@@ -208,8 +210,8 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case IFirstKforce ifkf:
-                    UpdateFirstKforce(ifkf);
+                case IFirstKforce target:
+                    UpdateFirstKforce(target);
                     break;
             }
         }
@@ -245,18 +247,19 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case ISpeedAccuracy isa:
-                    return CalculateSpeedAccuracy(isa);
-                case ILoseAccuracy ila:
-                    return CalculateLoseAccuracy(ila);
-                case IFirstPrecise ifp:
-                    return CalculateFirstPrecise(ifp);
+                case ISpeedAccuracy target:
+                    return CalculateSpeedAccuracy(target);
+                case ILoseAccuracy target:
+                    return CalculateLoseAccuracy(target);
+                case IFirstPrecise target:
+                    return CalculateFirstPrecise(target);
                 default:
                     return accuracy;
             }
         }
 
         protected bool IntrinsicAccuracy { get; set; }
+
         private void SetAccuracy()
         {
             if (_ammoType != null && !IntrinsicAccuracy) _ammoType.accuracy = Accuracy();
@@ -271,8 +274,8 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case IFirstPrecise ifp:
-                    UpdateFirstPrecise(ifp);
+                case IFirstPrecise target:
+                    UpdateFirstPrecise(target);
                     break;
             }
         }
@@ -304,11 +307,14 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case ICanDisableBipods icdb:
-                    icdb.UpdateSwitchableBipods();
+                case ICanDisableBipods target:
+                    target.UpdateSwitchableBipods();
                     break;
-                case IHaveBipods ihb:
-                    ihb.UpdateBipods();
+                case IHaveBipods target:
+                    target.UpdateBipods();
+                    break;
+                case IHaveStock target:
+                    target.UpdateStock();
                     break;
             }
         }
@@ -352,11 +358,6 @@ namespace TMGmod.Core.WClasses
         protected bool HandleQ()
         {
             return BaseGunImplementations.HandleQ(this);
-        }
-
-        protected bool SwitchStockQ()
-        {
-            return BaseGunImplementations.SwitchStockQ(this);
         }
 
         [PublicAPI]
