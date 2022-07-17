@@ -7,10 +7,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
-    public class BigShot : BaseGun, IAmHg, IHaveSkin, ILoseAccuracy
+    public class BigShot : BaseGun, IAmHg, IHaveAllowedSkins, ILoseAccuracy
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 1, 2, 5, 7 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2, 5, 7 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -60,18 +60,5 @@ namespace TMGmod
 
         public float RegenAccuracyDmr { get; }
         public float DrainAccuracyDmr { get; }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
     }
 }

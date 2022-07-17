@@ -1,5 +1,6 @@
 using System;
 using DuckGame;
+using TMGmod.Core.Bullets;
 using TMGmod.Core.Shells;
 
 namespace TMGmod.Core.AmmoTypes
@@ -17,6 +18,7 @@ namespace TMGmod.Core.AmmoTypes
             DamageVariation = 0.18f;
             AlphaDamage = 0.75f;
             DistanceConvexity = 0f;
+            bulletType = typeof(BulletStoppedByProps);
         }
 
         public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)

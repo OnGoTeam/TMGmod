@@ -143,6 +143,7 @@
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\AmmoTypes\IDamage.cs" />
     <Compile Include="src\Core\BipodStateContainer.cs" />
+    <Compile Include="src\Core\Bullets\BulletStoppedByProps.cs" />
     <Compile Include="src\Core\ICanDisableBipods.cs" />
     <Compile Include="src\Core\IDeployBipods.cs" />
     <Compile Include="src\Core\ISwitchBipods.cs" />
@@ -379,9 +380,7 @@
     <None Include="Resources\BuildDate.txt" />
     <Content Include="src\Useless or deleted Guns\Deleted Guns.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\Core\Bullets\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>

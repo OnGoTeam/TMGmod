@@ -9,10 +9,10 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AF2011 : BaseGun, IAmHg, IHaveSkin, I5
+    public class AF2011 : BaseGun, IAmHg, IHaveAllowedSkins, I5, ILoseAccuracy
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0, 2, 3, 5 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 5 });
 
         private readonly SpriteMap _sprite;
 
@@ -36,7 +36,6 @@ namespace TMGmod
             _collisionSize = new Vec2(16f, 9f);
             _barrelOffsetTL = new Vec2(16f, 1f);
             _fireSound = "pistolFire";
-            _fullAuto = false;
             _fireWait = 0.6f;
             _kickForce = 1.7f;
             loseAccuracy = 0.15f;
@@ -45,6 +44,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "AF-2011";
             _weight = 2.5f;
+            MaxAccuracy = .95f;
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -59,48 +59,13 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        public override void Fire()
+        protected override void PopBaseShell()
         {
-            if (ammo > 0) _ammoType.accuracy -= 0.05f;
-            base.Fire();
+            base.PopBaseShell();
+            base.PopBaseShell();
         }
 
-        public override void Update()
-        {
-            if (_ammoType.accuracy + 0.01f < 0.95f)
-                _ammoType.accuracy += 0.003f;
-            else
-                _ammoType.accuracy = 0.95f;
-            base.Update();
-        }
-
-        public override void Reload(bool shell = true)
-        {
-            if (ammo != 0)
-            {
-                if (shell)
-                {
-                    _ammoType.PopShell(x, y, -offDir);
-                    _ammoType.PopShell(x, y, -offDir);
-                }
-
-                --ammo;
-            }
-
-            loaded = true;
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
-        }
+        public float RegenAccuracyDmr => 0.003f;
+        public float DrainAccuracyDmr => 0.05f;
     }
 }

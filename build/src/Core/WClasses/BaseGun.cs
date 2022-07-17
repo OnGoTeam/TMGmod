@@ -320,7 +320,7 @@ namespace TMGmod.Core.WClasses
             base.Update();
         }
 
-        private void PopShell()
+        protected virtual void PopBaseShell()
         {
             if (_ammoType is BaseAmmoType baseAmmo)
                 baseAmmo.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir, AddShell);
@@ -337,7 +337,7 @@ namespace TMGmod.Core.WClasses
         {
             if (ammo != 0)
             {
-                if (shell) PopShell();
+                if (shell) PopBaseShell();
                 --ammo;
             }
 

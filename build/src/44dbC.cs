@@ -8,10 +8,10 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Break-Action")]
-    public class Deadly44C : BaseGun, IAmSg, IHaveSkin
+    public class Deadly44C : BaseGun, IAmSg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
 
         [UsedImplicitly]
@@ -60,32 +60,25 @@ namespace TMGmod
 
         public override void OnPressAction()
         {
-            if (!loaded && ammo > 1) SFX.Play(GetPath("sounds/tuduc.wav"));
-            // ReSharper disable once ConvertIfStatementToSwitchStatement
-            if (!loaded && ammo > 0)
+            switch (loaded)
             {
-                _sprite.frame = _sprite.frame % 10 + 10;
-                Reload();
+                case false when ammo > 0:
+                    Reload();
+                    break;
+                case true:
+                    Fire();
+                    break;
             }
-            else if (loaded) Fire();
         }
 
         public override void Reload(bool shell = true)
         {
+            if (ammo > 1)
+            {
+                SFX.Play(GetPath("sounds/tuduc.wav"));
+                _sprite.frame = _sprite.frame % 10 + 10;
+            }
             base.Reload(ammo > 1);
-        }
-
-        private void UpdateSkin()
-        {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
         }
     }
 }
