@@ -10,12 +10,14 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class Yava6 : BaseDmr, IHaveSkin
+    public class Yava6 : BaseGun, IAmDmr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        private static readonly List<int> Allowedlst = new List<int>(new[] { 0 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-        public float DeltaMaxAccuracy;
+        private const float MaxCringe = 1f;
+        private float _tripleTakeParody = MaxCringe;
+        private float _chill = .1f;
 
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -30,8 +32,6 @@ namespace TMGmod
             _numBulletsPerFire = 3;
             MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.2f;
-            RegenAccuracyDmr = 0.005f;
-            DrainAccuracyDmr = 0.25f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Yava 6"), 37, 13);
             _graphic = _sprite;
@@ -55,6 +55,7 @@ namespace TMGmod
             _editorName = "Yava 6";
             _weight = 5f;
         }
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
@@ -67,24 +68,15 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        private void UpdateSkin()
+        protected override float CalculateAccuracy(float accuracy)
         {
-            var bublic = Skin.value;
-            while (!Allowedlst.Contains(bublic)) bublic = Rando.Int(0, 9);
-            _sprite.frame = bublic;
+            return accuracy - _tripleTakeParody;
         }
 
-        public override void CalculateAccuracy
+        protected override void OnUpdate()
         {
-            DeltaMaxAccuracy += 0.01f;
-            if (Math.Abs(duck.velocity.length) == 0) MaxAccuracy -= DeltaMaxAccuracy;
-            else DeltaMaxAccuracy = 0f;
-        }
-
-        public override void EditorPropertyChanged(object property)
-        {
-            UpdateSkin();
-            base.EditorPropertyChanged(property);
+            _tripleTakeParody = duck is null ? MaxCringe : Maths.Clamp(_tripleTakeParody - _chill, 0f, MaxCringe);
+            base.OnUpdate();
         }
     }
 }
