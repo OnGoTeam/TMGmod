@@ -1,7 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 
-namespace TMGmod.Core
+namespace TMGmod.Core.BipodsLogic
 {
     public interface IHaveBipodState : IHaveBipods
     {

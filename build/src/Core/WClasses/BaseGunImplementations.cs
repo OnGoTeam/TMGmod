@@ -2,6 +2,7 @@
 using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.BipodsLogic;
 
 namespace TMGmod.Core.WClasses
 {

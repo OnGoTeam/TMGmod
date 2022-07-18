@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers;
 using TMGmod.NY;
 #if DEBUG

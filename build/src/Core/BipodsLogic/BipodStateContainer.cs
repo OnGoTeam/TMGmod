@@ -1,7 +1,7 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses;
 
-namespace TMGmod.Core
+namespace TMGmod.Core.BipodsLogic
 {
     public class BipodStateContainer
     {
