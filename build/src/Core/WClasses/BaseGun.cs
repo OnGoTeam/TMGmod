@@ -95,7 +95,7 @@ namespace TMGmod.Core.WClasses
 
         private void FireLoseAccuracy(ILoseAccuracy target)
         {
-            ammoType.accuracy = ClipAccuracy(ammoType.accuracy - target.DrainAccuracyDmr);
+            ammoType.accuracy = ClipAccuracy(ammoType.accuracy - target.RegenAccuracyDmr - target.DrainAccuracyDmr);
         }
 
         private static void FireFirstPrecise(IFirstPrecise target)
