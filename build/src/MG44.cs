@@ -20,8 +20,6 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        [UsedImplicitly] public float RandomaticKickforce;
-
         public MG44(float xval, float yval)
             : base(xval, yval)
         {
@@ -53,30 +51,22 @@ namespace TMGmod
             _weight = 7.5f;
         }
 
-        [UsedImplicitly]
-        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
-
         public bool Bipods
         {
             get => HandleQ();
             set
             {
-                _kickForce = value ? RandomaticKickforce : 1.8f;
+                KickForce1Lmg = value ? .9f : 1.8f;
+                KickForce2Lmg = value ? 1.5f : 1.8f;
                 loseAccuracy = value ? 0f : 0.1f;
                 maxAccuracyLost = value ? 0f : 0.3f;
             }
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
@@ -86,7 +76,6 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
 
-        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
@@ -106,9 +95,6 @@ namespace TMGmod
                     if (_sprite.frame < 20) _sprite.frame += 10;
                     break;
             }
-
-            Bipods = Bipods;
-            RandomaticKickforce = Rando.Float(0.9f, 1.5f);
         }
 
         public override void Reload(bool shell = true)
