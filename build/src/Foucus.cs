@@ -46,7 +46,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.65f;
             KickForceSlowAr = 2f;
-            KickForceFastAr = 5f;
+            KickForceFastAr = 3.5f;
             loseAccuracy = 0.275f;
             maxAccuracyLost = 0.275f;
             _editorName = "Foucus";

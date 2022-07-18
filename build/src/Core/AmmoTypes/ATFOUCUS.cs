@@ -10,7 +10,7 @@ namespace TMGmod.Core.AmmoTypes
         public ATFOUCUS()
         {
             range = 405f;
-            accuracy = 0.85f;
+            accuracy = 0.92f;
             penetration = 2.1f;
             bulletSpeed = 38f;
             bulletThickness = 1f;

@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : BaseGun, IAmLmg, IHaveAllowedSkins, I5, IHaveBipods
+    public class MG3 : BaseLmg, IHaveAllowedSkins, I5, IHaveBipods
     {
         private const int NonSkinFrames = 6;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
@@ -39,6 +39,7 @@ namespace TMGmod
                 range = 480f,
                 accuracy = 0.8f,
             };
+            IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg3"), 39, 11);
             _graphic = _sprite;

@@ -9,7 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44 : BaseGun, IHaveAllowedSkins, IAmLmg, IHaveBipods
+    public class MG44 : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 3;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 6, 7 });
