@@ -1,5 +1,7 @@
 ﻿#if DEBUG
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
 
@@ -16,6 +18,7 @@ namespace TMGmod.Useless_or_deleted_Guns
     public class RaidGun : Gun
     {
         private float _dwait;
+        private List<string> _log = new List<string>();
 
         public RaidGun(float xval, float yval)
             : base(xval, yval)
@@ -44,8 +47,38 @@ namespace TMGmod.Useless_or_deleted_Guns
             _numBulletsPerFire = 5;
         }
 
+        private const int MaxLen = 10;
+
         public override void Update()
         {
+            if (duck != null)
+            {
+                foreach (var key in new[] { "UP", "DOWN", "LEFT", "RIGHT", "QUACK", "RAGDOLL" })
+                {
+                    if (duck.inputProfile.Pressed(key)) _log.Add(key);
+                    if (_log.Count > MaxLen)
+                        _log.RemoveRange(0, _log.Count - MaxLen);
+                }
+
+                if (
+                    _log.SequenceEqual(
+                        new[]
+                        {
+                            "UP",
+                            "UP",
+                            "DOWN",
+                            "DOWN",
+                            "LEFT",
+                            "RIGHT",
+                            "LEFT",
+                            "RIGHT",
+                            "QUACK",
+                            "RAGDOLL",
+                        }
+                    )
+                ) duck.Kill(new DTFall());
+            }
+
             base.Update();
             _dwait -= 1f / 60f;
             if (_dwait < 0) _dwait = 0;
