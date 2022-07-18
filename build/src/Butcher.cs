@@ -14,7 +14,7 @@ namespace TMGmod
         private const int NonSkinFrames = 12;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-        public float debris = 1f;
+        private float _debris = 1f;
 
         private readonly MagBuddy _magBuddy;
         [UsedImplicitly] public byte Mags = 2;
@@ -101,8 +101,8 @@ namespace TMGmod
         public Vec2 SpawnPos => new Vec2(0, -1);
         public override void Update()
         {
-            if (ammoType.barrelAngleDegrees > 5f) debris = -1f;
-            if (ammoType.barrelAngleDegrees < -5f) debris = 1f;
+            if (ammoType.barrelAngleDegrees > 5f) _debris = -1f;
+            if (ammoType.barrelAngleDegrees < -5f) _debris = 1f;
             if (ammo <= 0) _magBuddy.Disload();
             //if (ammo <= 0 && Mags <= 0) _sprite.frame = 2;
             base.Update();
@@ -111,7 +111,7 @@ namespace TMGmod
         public override void Fire()
         {
             base.Fire();
-            ammoType.barrelAngleDegrees += debris;
+            ammoType.barrelAngleDegrees += _debris;
         }
 
         public override void OnReleaseAction()
