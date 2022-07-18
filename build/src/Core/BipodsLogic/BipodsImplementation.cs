@@ -46,9 +46,9 @@ namespace TMGmod.Core.BipodsLogic
         {
             var gun = target.AsAGun();
             if (gun.isServerForObject && target.BipodsDeployed() && old <= 0.99f)
-                NetSoundEffect.Play(target.BipOn);
+                SFX.Play(target.BipOn);
             if (gun.isServerForObject && target.BipodsFolded() && old >= 0.01f)
-                NetSoundEffect.Play(target.BipOff);
+                SFX.Play(target.BipOff);
         }
 
         public static bool BipodsQ(this Gun gun, bool bypassihb = false)
