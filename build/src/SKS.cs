@@ -23,7 +23,7 @@ namespace TMGmod
         private int _bullets;
         private int _patrons = 12;
 
-        [UsedImplicitly] public bool Stick;
+        public bool Stick;
 
         [UsedImplicitly] public StateBinding StickBinding = new StateBinding(nameof(Stick));
 

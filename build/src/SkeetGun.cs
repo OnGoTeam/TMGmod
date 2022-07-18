@@ -21,8 +21,6 @@ namespace TMGmod
 
         private float _handleAngleOff;
 
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
-
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
@@ -48,12 +46,13 @@ namespace TMGmod
             _holdOffset = new Vec2(9f, 2f);
         }
 
-        [UsedImplicitly]
         public float HandAngleOff
         {
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
+
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 

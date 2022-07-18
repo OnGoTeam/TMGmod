@@ -19,8 +19,6 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-
         public USP(float xval, float yval)
             : base(xval, yval)
         {
@@ -46,7 +44,6 @@ namespace TMGmod
             _weight = 1f;
         }
 
-        [UsedImplicitly]
         public bool Silencer
         {
             get => _fireSound == GetPath("sounds/SilencedPistol.wav");
@@ -74,6 +71,8 @@ namespace TMGmod
                 }
             }
         }
+
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 

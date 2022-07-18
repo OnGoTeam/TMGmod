@@ -38,15 +38,15 @@ namespace TMGmod
         private readonly float[] _maxAccuracyLostm = { .45f, 0f };
         private bool _switched;
 
-        [UsedImplicitly] public int Ammom0 = 20;
+        public int Ammom0 = 20;
 
         [UsedImplicitly] public StateBinding Ammom0Binding = new StateBinding(nameof(Ammom0));
 
-        [UsedImplicitly] public int Ammom1 = 1;
+        public int Ammom1 = 1;
 
         [UsedImplicitly] public StateBinding Ammom1Binding = new StateBinding(nameof(Ammom1));
 
-        [UsedImplicitly] public int Mode;
+        public int Mode;
 
         [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
 
@@ -95,23 +95,7 @@ namespace TMGmod
             _graphic = _graphicm[_switched ? Mode : 2];
         }
 
-        [UsedImplicitly]
-        public int[] Ammom
-        {
-            get => new[] { Ammom0, Ammom1 };
-            set
-            {
-                Ammom0 = value[0];
-                Ammom1 = value[1];
-            }
-        }
-
-        [UsedImplicitly]
-        public SpriteMap Flare
-        {
-            get => _flare;
-            set => _flare = value;
-        }
+        private int[] Ammom => new[] { Ammom0, Ammom1 };
 
         private void UpdateMode()
         {
@@ -126,7 +110,7 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (infiniteAmmoVal) Ammom[0] = 99;
+            if (infiniteAmmoVal) Ammom0 = 99;
             if (duck != null)
                 if (duck.inputProfile.Pressed("QUACK"))
                 {

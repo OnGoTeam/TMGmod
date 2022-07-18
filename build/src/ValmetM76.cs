@@ -14,7 +14,6 @@ namespace TMGmod
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
@@ -54,7 +53,6 @@ namespace TMGmod
             BurstNum = 1;
         }
 
-        [UsedImplicitly]
         public bool NonAuto
         {
             get => BurstNum == 1;
@@ -71,6 +69,8 @@ namespace TMGmod
                 MaxAccuracy = value ? 0.89f : 1f;
             }
         }
+
+        [UsedImplicitly] public StateBinding NonAutoBinding { get; } = new StateBinding(nameof(NonAuto));
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
