@@ -97,15 +97,9 @@ namespace TMGmod
             }
         }
 
-        public override void Reload(bool shell = true)
+        protected override void PopBaseShell()
         {
-            if (ammo != 0)
-            {
-                if (shell) ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId, AddShell);
-                --ammo;
-            }
-
-            loaded = true;
+            ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId, AddShell);
         }
     }
 }
