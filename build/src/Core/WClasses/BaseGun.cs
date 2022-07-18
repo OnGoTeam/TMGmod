@@ -472,16 +472,14 @@ namespace TMGmod.Core.WClasses
                 _target = target;
             }
 
-            public override void ModifyFire(Action fire)
+            protected override void ModifyFire()
             {
                 _target.DynamicOnFire();
-                fire();
             }
 
-            public override void ModifyUpdate(Action update)
+            protected override void ModifyUpdate()
             {
                 _target.DynamicOnUpdate();
-                update();
             }
 
             public override float ModifyAccuracy(float accuracy)

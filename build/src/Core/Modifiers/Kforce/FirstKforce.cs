@@ -20,27 +20,23 @@ namespace TMGmod.Core.Modifiers.Kforce
             return _currentDelay <= 0 ? _additionalKforce(kforce) : kforce;
         }
 
-        public override void ModifyUpdate(Action update)
+        protected override void ModifyUpdate()
         {
             if (_currentDelay > 0) _currentDelay -= 1;
-            update();
         }
 
-        public override void ModifyFire(Action fire)
+        protected override void ModifyFire()
         {
             _currentDelay = _maxDelay;
-            fire();
         }
 
-        public override void Read(BitBuffer buffer, Action read)
+        protected override void Read(BitBuffer buffer)
         {
             _currentDelay = buffer.ReadUInt();
-            read();
         }
 
-        public override void Write(BitBuffer buffer, Action write)
+        protected override void Write(BitBuffer buffer)
         {
-            write();
             buffer.Write(_currentDelay);
         }
     }

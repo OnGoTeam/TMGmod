@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -14,9 +16,6 @@ namespace TMGmod
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-        private const float MaxCringe = 1f;
-        private float _tripleTakeParody = MaxCringe;
-        private const float Chill = .1f;
 
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -53,6 +52,10 @@ namespace TMGmod
             ShellOffset = new Vec2(-13f, -4f);
             _editorName = "Yava 6";
             _weight = 5f;
+            BaseActiveModifier = ComposedModifier.Compose(
+                DefaultModifier(),
+                new FocusingAccuracy(this, 1f, .1f)
+            );
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -65,17 +68,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        protected override float CalculateAccuracy(float accuracy)
-        {
-            return accuracy - _tripleTakeParody;
-        }
-
-        protected override void OnUpdate()
-        {
-            _tripleTakeParody = duck is null || duck.velocity.length > 0.1f ? MaxCringe : Maths.Clamp(_tripleTakeParody - Chill, 0f, MaxCringe);
-            base.OnUpdate();
         }
     }
 }

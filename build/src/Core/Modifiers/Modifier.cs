@@ -5,13 +5,23 @@ namespace TMGmod.Core.Modifiers
 {
     public class Modifier : IModifyEverything
     {
-        public virtual void ModifyFire(Action fire)
+        protected virtual void ModifyFire()
         {
+        }
+
+        public void ModifyFire(Action fire)
+        {
+            ModifyFire();
             fire();
         }
 
-        public virtual void ModifyUpdate(Action update)
+        protected virtual void ModifyUpdate()
         {
+        }
+
+        public void ModifyUpdate(Action update)
+        {
+            ModifyUpdate();
             update();
         }
 
@@ -30,14 +40,24 @@ namespace TMGmod.Core.Modifiers
             return new Modifier();
         }
 
-        public virtual void Read(BitBuffer buffer, Action read)
+        protected virtual void Read(BitBuffer buffer)
         {
+        }
+
+        public void Read(BitBuffer buffer, Action read)
+        {
+            Read(buffer);
             read();
         }
 
-        public virtual void Write(BitBuffer buffer, Action write)
+        protected virtual void Write(BitBuffer buffer)
+        {
+        }
+
+        public void Write(BitBuffer buffer, Action write)
         {
             write();
+            Write(buffer);
         }
     }
 }

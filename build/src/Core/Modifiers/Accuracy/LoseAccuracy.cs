@@ -24,27 +24,23 @@ namespace TMGmod.Core.Modifiers.Accuracy
             return accuracy - Maths.Clamp(_drained, 0f, Max);
         }
 
-        public override void ModifyFire(Action fire)
+        protected override void ModifyFire()
         {
             _drained = Math.Max(Max, _drained + Drain);
-            fire();
         }
 
-        public override void ModifyUpdate(Action update)
+        protected override void ModifyUpdate()
         {
             _drained = Math.Max(0f, _drained - Regen);
-            update();
         }
 
-        public override void Read(BitBuffer buffer, Action read)
+        protected override void Read(BitBuffer buffer)
         {
             _drained = buffer.ReadFloat();
-            read();
         }
 
-        public override void Write(BitBuffer buffer, Action write)
+        protected override void Write(BitBuffer buffer)
         {
-            write();
             buffer.Write(_drained);
         }
     }
