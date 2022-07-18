@@ -7,6 +7,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
     public class BigShot : BaseGun, IAmHg, IHaveAllowedSkins, ILoseAccuracy
     {
@@ -14,7 +15,6 @@ namespace TMGmod
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2, 5, 7 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
@@ -52,7 +52,6 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
 
-        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;

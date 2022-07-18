@@ -7,6 +7,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|Shotgun|Break-Action|")]
     public class Deadly44 : BaseGun, IAmSg, IHaveAllowedSkins
     {
@@ -14,7 +15,6 @@ namespace TMGmod
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
@@ -50,7 +50,6 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
 
-        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
