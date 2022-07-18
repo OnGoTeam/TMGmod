@@ -22,14 +22,11 @@ namespace TMGmod
         private readonly EditorProperty<int> skin;
 
         private float _floatingKickforce;
-
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
-
         [UsedImplicitly] public float HandAngleOffState;
-
         [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
-
         [UsedImplicitly] public float Psevdotimer;
+        [UsedImplicitly] public StateBinding PsevdotimerBinding = new StateBinding(nameof(Psevdotimer));
 
         public VSK94(float xval, float yval)
             : base(xval, yval)
@@ -85,16 +82,10 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
@@ -115,7 +106,6 @@ namespace TMGmod
         {
             HandAngleOff = HandAngleOffState;
             base.Update();
-            Bipods = Bipods;
             _floatingKickforce = Psevdotimer < 16f ? 0.5f : 3f;
         }
 
