@@ -58,7 +58,6 @@ namespace TMGmod
 
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
 
-        [UsedImplicitly]
         public float BipodsState
         {
             get => _bipodsState.Get(this);
