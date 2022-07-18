@@ -87,6 +87,7 @@
     <Compile Include="src\Butcher.cs" />
     <Compile Include="src\Core\AmmoTypes\ATButcher.cs" />
     <Compile Include="src\Core\AmmoTypes\ATYava6.cs" />
+    <Compile Include="src\Core\BipodsLogic\BipodsImplementation.cs" />
     <Compile Include="src\Nellegalja Mk2.cs" />
     <Compile Include="src\Yava6.cs" />
     <Compile Include="src\Core\AmmoTypes\ATDaewooK1.cs" />

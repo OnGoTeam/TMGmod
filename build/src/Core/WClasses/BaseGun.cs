@@ -353,7 +353,7 @@ namespace TMGmod.Core.WClasses
 
         protected bool BipodsQ(bool bypassihb = false)
         {
-            return BaseGunImplementations.BipodsQ(this, bypassihb);
+            return BipodsImplementation.BipodsQ(this, bypassihb);
         }
 
         protected bool HandleQ()
