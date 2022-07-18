@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
@@ -457,6 +458,21 @@ namespace TMGmod.Core.WClasses
             OnInitialize();
             base.Initialize();
         }
+
+        private static BitBuffer GetBuffer(ISync modifier, Action write)
+        {
+            var buffer = new BitBuffer();
+            modifier.Write(buffer, write);
+            return buffer;
+        }
+
+        [UsedImplicitly]
+        public BitBuffer ModifierBuffer
+        {
+            get => GetBuffer(ActiveModifier, () => { });
+            set => ActiveModifier.Read(value, () => { });
+        }
+        [UsedImplicitly] public StateBinding MbBinding { get; } = new StateBinding(nameof(ModifierBuffer));
 
         private class BaseModifier : Modifier
         {

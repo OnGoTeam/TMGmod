@@ -1,4 +1,5 @@
 ﻿using System;
+using DuckGame;
 
 namespace TMGmod.Core.Modifiers.Kforce
 {
@@ -29,6 +30,18 @@ namespace TMGmod.Core.Modifiers.Kforce
         {
             _currentDelay = _maxDelay;
             fire();
+        }
+
+        public override void Read(BitBuffer buffer, Action read)
+        {
+            _currentDelay = buffer.ReadUInt();
+            read();
+        }
+
+        public override void Write(BitBuffer buffer, Action write)
+        {
+            write();
+            buffer.Write(_currentDelay);
         }
     }
 }

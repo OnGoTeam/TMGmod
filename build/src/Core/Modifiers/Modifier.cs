@@ -1,4 +1,5 @@
 ﻿using System;
+using DuckGame;
 
 namespace TMGmod.Core.Modifiers
 {
@@ -27,6 +28,16 @@ namespace TMGmod.Core.Modifiers
         public static IModifyEverything Identity()
         {
             return new Modifier();
+        }
+
+        public virtual void Read(BitBuffer buffer, Action read)
+        {
+            read();
+        }
+
+        public virtual void Write(BitBuffer buffer, Action write)
+        {
+            write();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DuckGame;
 
 namespace TMGmod.Core.Modifiers
 {
@@ -40,6 +41,16 @@ namespace TMGmod.Core.Modifiers
                 Modifier.Identity(),
                 (left, right) => new ComposedModifier(left, right)
             );
+        }
+
+        public void Read(BitBuffer buffer, Action read)
+        {
+            _left.Read(buffer, () => _right.Read(buffer, read));
+        }
+
+        public void Write(BitBuffer buffer, Action write)
+        {
+            _left.Write(buffer, () => _right.Write(buffer, write));
         }
     }
 }
