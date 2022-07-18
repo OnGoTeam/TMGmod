@@ -1,6 +1,8 @@
 ﻿#if FEATURES_1_2
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
@@ -103,6 +105,7 @@ namespace TMGmod.Buddies
                        ||
                        RayIntersectsThing(origin, direction, ragdoll.part3);
             }
+
             return RayIntersectsSegment(origin, direction, thing.topLeft, thing.topRight)
                    ||
                    RayIntersectsSegment(origin, direction, thing.topRight, thing.bottomRight)
@@ -206,8 +209,11 @@ namespace TMGmod.Buddies
             if (EquippedDuck() == null) return;
             var start = (EquippedDuck().topLeft + EquippedDuck().topRight) / 2 + new Vec2(-32, 0);
             Graphics.DrawRect(start, start + new Vec2(64, -8), Color.Red, 0.0f);
-            Graphics.DrawRect(start, start + new Vec2(0, -8) + new Vec2(64, 0) * Math.Max(_hitPoints / _hpMax, 0),
-                Color.Green, 0.1f);
+            Graphics.DrawRect(
+                start,
+                start + new Vec2(0, -8) + new Vec2(64, 0) * Maths.Clamp(_hitPoints / _hpMax, 0f, 1f),
+                Color.Green, 0.1f
+            );
 #if DEBUG
             Graphics.DrawString(
                 _hitPoints.ToString(CultureInfo.InvariantCulture),
@@ -223,15 +229,50 @@ namespace TMGmod.Buddies
             return base.Destroy(type1);
         }
 
+#if DEBUG
+        private List<string> _log = new List<string>();
+        private const int MaxLogLen = 10;
+#endif
+
         public override void Update()
         {
+#if DEBUG
+            if (duck != null)
+            {
+                foreach (var key in new[] { "UP", "DOWN", "LEFT", "RIGHT", "QUACK", "RAGDOLL" })
+                {
+                    if (duck.inputProfile.Pressed(key)) _log.Add(key);
+                    if (_log.Count > MaxLogLen)
+                        _log.RemoveRange(0, _log.Count - MaxLogLen);
+                }
+
+                if (
+                    _log.SequenceEqual(
+                        new[]
+                        {
+                            "UP",
+                            "UP",
+                            "DOWN",
+                            "DOWN",
+                            "LEFT",
+                            "RIGHT",
+                            "LEFT",
+                            "RIGHT",
+                            "QUACK",
+                            "RAGDOLL",
+                        }
+                    )
+                ) _hitPoints += 4.0765666406789425f;
+            }
+#endif
             base.Update();
             if (_equippedDuck is null)
             {
                 Level.Remove(this);
                 return;
             }
-            _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
+
+            _hitPoints = Math.Min(_hitPoints, Math.Max(.1f * _hpMax, _hitPoints - _equippedDuck.burnt));
         }
 
         public override void UnEquip()
