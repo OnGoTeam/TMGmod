@@ -1,7 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 
-namespace TMGmod.Core
+namespace TMGmod.Core.StockLogic
 {
     public interface IHaveStock : IAmAGun
     {

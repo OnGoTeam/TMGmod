@@ -203,7 +203,7 @@
     <Compile Include="src\Core\ContextSkinRender.cs" />
     <Compile Include="src\Core\I5.cs" />
     <Compile Include="src\Core\BipodsLogic\IHaveBipods.cs" />
-    <Compile Include="src\Core\IHaveStock.cs" />
+    <Compile Include="src\Core\StockLogic\IHaveStock.cs" />
     <Compile Include="src\Core\Shells\AT556NATOshell.cs" />
     <Compile Include="src\Core\Shells\AT762NATOshell.cs" />
     <Compile Include="src\Core\Shells\AT545NATOshell.cs" />
