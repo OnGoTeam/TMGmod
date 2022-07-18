@@ -65,10 +65,7 @@ namespace TMGmod
             }
         }
 
-        protected override float Accuracy()
-        {
-            return Sighted ? 1f : _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
-        }
+        protected override float Accuracy => Sighted ? 1f : _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
 
         [UsedImplicitly]
         public bool Sighted

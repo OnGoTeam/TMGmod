@@ -97,7 +97,7 @@ namespace TMGmod
             _weight = this.StockDeployed() ? 5.5f : 3.5f;
         }
 
-        protected override float GetBaseKforce() => this.StockDeployed() ? 0.65f : 1.2f;
+        protected override float BaseKforce => this.StockDeployed() ? 0.65f : 1.2f;
 
         private void UpdateFrames() =>
             FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);

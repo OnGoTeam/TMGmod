@@ -19,8 +19,6 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         [UsedImplicitly] private readonly EditorProperty<int> skin;
 
-        [UsedImplicitly] public float RandomaticKickforce;
-
         public Vintorez(float xval, float yval)
             : base(xval, yval)
         {
@@ -31,7 +29,6 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             KickForceSlowAr = 0.4f;
             KickForceFastAr = 0.85f;
-            SpeedAccuracyThreshold = 1f;
             SpeedAccuracyVertical = 0.5f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);
@@ -54,58 +51,40 @@ namespace TMGmod
             _weight = 4.7f;
         }
 
-        [UsedImplicitly]
-        public StateBinding RandomaticKickforceBinding { get; } = new StateBinding(nameof(RandomaticKickforce));
+        protected override bool DynamicKforce() => false;
 
-        [UsedImplicitly]
         public bool Bipods
         {
             get => HandleQ();
             set
             {
-                _kickForce = value ? RandomaticKickforce : 2.85f;
-                //loseAccuracy = value ? 0f : 0.1f;
-                //maxAccuracyLost = value ? 0f : 0.2f;
+                _kickForce = value ? Rando.Float(0.5f, 1f) : 2.85f;
                 SpeedAccuracyVertical = value ? 0f : 0.5f;
             }
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
 
-        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
 
-        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        [UsedImplicitly] public float SpeedAccuracyThreshold { get; }
-        public float SpeedAccuracyHorizontal => 1;
+        public float SpeedAccuracyThreshold => 1f;
+        public float SpeedAccuracyHorizontal => 1f;
         public float SpeedAccuracyVertical { get; private set; }
-
-        public override void Update()
-        {
-            base.Update();
-            Bipods = Bipods;
-            RandomaticKickforce = Rando.Float(0.5f, 1f);
-        }
     }
 }

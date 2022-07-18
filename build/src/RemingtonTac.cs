@@ -103,7 +103,7 @@ namespace TMGmod
             LoadSpeed = (sbyte)(this.StockDeployed() ? 20 : 10);
         }
 
-        protected override float GetBaseKforce() => this.StockDeployed() ? 1.1f : 2.8f;
+        protected override float BaseKforce => this.StockDeployed() ? 1.1f : 2.8f;
 
         private void UpdateFrames() =>
             FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);

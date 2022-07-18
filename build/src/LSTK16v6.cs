@@ -63,7 +63,7 @@ namespace TMGmod
         }
 
         public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
-        protected override float GetBaseKforce() => this.BipodsDeployed() ? 0 : 5.5f;
+        protected override float BaseKforce => this.BipodsDeployed() ? 0 : 5.5f;
 
         private void UpdateFrames() =>
             FrameId = FrameId % 30 + 30 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);

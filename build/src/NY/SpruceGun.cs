@@ -32,7 +32,7 @@ namespace TMGmod.NY
         }
 
         protected override bool DynamicAccuracy() => false;
-        protected override float Accuracy() => Rando.Float(0f, 0.9f);
+        protected override float Accuracy => Rando.Float(0f, 0.9f);
 
         protected override void OnFire()
         {

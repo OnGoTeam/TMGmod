@@ -86,7 +86,7 @@ namespace TMGmod.Core.WClasses
 
         private void SetKforce()
         {
-            _kickForce = Kforce();
+            _kickForce = Kforce;
         }
 
         private void AddNyCase()
@@ -200,7 +200,7 @@ namespace TMGmod.Core.WClasses
 
         private float ClipAccuracy(float accuracy)
         {
-            return Maths.Clamp(accuracy, MinAccuracy, GetBaseAccuracy());
+            return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
         }
 
         private static void UpdateFirstKforce(IFirstKforce target)
@@ -223,8 +223,8 @@ namespace TMGmod.Core.WClasses
         private float CalculateSpeedAccuracy(ISpeedAccuracy target)
         {
             return duck == null
-                ? GetBaseAccuracy()
-                : GetBaseAccuracy()
+                ? BaseAccuracy
+                : BaseAccuracy
                   +
                   target.SpeedAccuracyThreshold
                   -
@@ -244,7 +244,7 @@ namespace TMGmod.Core.WClasses
         {
             return target.CurrentDelayFp > 0f
                 ? target.LowerAccuracyFp
-                : GetBaseAccuracy();
+                : BaseAccuracy;
         }
 
         protected virtual float CalculateAccuracy(float accuracy)
@@ -266,7 +266,7 @@ namespace TMGmod.Core.WClasses
 
         private void SetAccuracy()
         {
-            if (_ammoType != null && !IntrinsicAccuracy) _ammoType.accuracy = Accuracy();
+            if (_ammoType != null && !IntrinsicAccuracy) _ammoType.accuracy = Accuracy;
         }
 
         private static void UpdateFirstPrecise(IFirstPrecise target)
@@ -392,25 +392,13 @@ namespace TMGmod.Core.WClasses
             return this;
         }
 
-        protected virtual float GetBaseAccuracy()
-        {
-            return MaxAccuracy;
-        }
+        protected virtual float BaseAccuracy => MaxAccuracy;
 
-        protected virtual float Accuracy()
-        {
-            return ClipAccuracy(ActiveModifier.ModifyAccuracy(GetBaseAccuracy()));
-        }
+        protected virtual float Accuracy => ClipAccuracy(ActiveModifier.ModifyAccuracy(BaseAccuracy));
 
-        protected virtual float GetBaseKforce()
-        {
-            return _kickForce;
-        }
+        protected virtual float BaseKforce => _kickForce;
 
-        protected virtual float Kforce()
-        {
-            return Math.Max(0f, ActiveModifier.ModifyKforce(GetBaseKforce()));
-        }
+        protected virtual float Kforce => Math.Max(0f, ActiveModifier.ModifyKforce(BaseKforce));
 
         protected virtual void BaseOnFire()
         {
