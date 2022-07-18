@@ -144,7 +144,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            if (!Stock && duck != null) GottaGoFast();
+            if (!Stock && duck != null && ammo > 1) GottaGoFast();
         }
     }
 }
