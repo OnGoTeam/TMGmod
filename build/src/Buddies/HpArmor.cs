@@ -179,6 +179,7 @@ namespace TMGmod.Buddies
         {
             Damage(bullet);
             DecorativeHit(bullet, hitPos);
+            bullet.hitArmor = true;
             return !Broken() || Kill(bullet);
         }
 
@@ -230,7 +231,6 @@ namespace TMGmod.Buddies
                 Level.Remove(this);
                 return;
             }
-
             _hitPoints = Math.Min(_hitPoints, _hpMax * Math.Max(0.1f, 2 * (1 - _equippedDuck.burnt)));
         }
 
