@@ -81,7 +81,8 @@ namespace TMGmod
                 var bipods = BipodsState > 0.99f;
                 _ammoType.range = bipods ? 550f : 480f;
                 _ammoType.bulletSpeed = bipods ? 40f : 28f;
-                _kickForce = bipods ? 0 : 2.5f;
+                KickForce1Lmg = bipods ? 0 : 2.0f;
+                KickForce2Lmg = bipods ? 0 : 3.0f;
                 loseAccuracy = bipods ? 0 : 0.1f;
                 maxAccuracyLost = bipods ? 0 : 0.25f;
                 FrameId = FrameId % 20 + 20 * (bipods ? 2 : nobipods ? 0 : 1);
