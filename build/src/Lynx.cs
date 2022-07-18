@@ -86,7 +86,7 @@ namespace TMGmod
             maxAccuracyLost = this.BipodsDeployed() ? 0 : 0.3f;
             _loseAccuracy.Drain = this.BipodsDeployed() ? .2f : .6f;
             _loseAccuracy.Regen = this.BipodsDeployed() ? .015f : .01f;
-            _loseAccuracy.Max = this.BipodsDeployed() ? .2f : 1f;
+            _loseAccuracy.Max = this.BipodsDeployed() ? .2f : 1.0f;
         }
 
         private void UpdateFrames() =>
