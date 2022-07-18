@@ -90,9 +90,9 @@ namespace TMGmod.Core.WClasses
         {
             var gun = target.AsAGun();
             if (gun.isServerForObject && target.BipodsDeployed() && old <= 0.99f)
-                target.BipOn.Play();
+                NetSoundEffect.Play(target.BipOn);
             if (gun.isServerForObject && target.BipodsFolded() && old >= 0.01f)
-                target.BipOff.Play();
+                NetSoundEffect.Play(target.BipOff);
         }
 
         public static bool StockDeployed(this IHaveStock target) => target.StockState > .99f;

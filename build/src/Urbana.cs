@@ -19,15 +19,8 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        [UsedImplicitly]
-        public NetSoundEffect BipOff { get; } = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
-
-        [UsedImplicitly] public StateBinding BipOffBinding { get; } = new NetSoundBinding(nameof(BipOff));
-
-        [UsedImplicitly]
-        public NetSoundEffect BipOn { get; } = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-
-        [UsedImplicitly] public StateBinding BipOnBinding { get; } = new NetSoundBinding(nameof(BipOn));
+        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
+        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
         public Urbana(float xval, float yval) : base(xval, yval)
         {
