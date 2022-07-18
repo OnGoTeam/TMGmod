@@ -11,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|NOTRELEASEDYET")]
     [UsedImplicitly]
-    public class Lstk16V6 : BaseGun, IHaveAllowedSkins, IHaveBipods
+    public class Lstk16V6 : BaseGun, IHaveAllowedSkins, ICanDisableBipods, IDeployBipods
     {
         private const int NonSkinFrames = 9;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
@@ -21,15 +21,8 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        private float _bipodsstate;
-
-        [UsedImplicitly] public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
-
-        [UsedImplicitly] public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
-
-        [UsedImplicitly] public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-
-        [UsedImplicitly] public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
+        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
+        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
         public Lstk16V6(float xval, float yval) : base(xval, yval)
         {
@@ -61,38 +54,44 @@ namespace TMGmod
             _weight = 6.7f;
         }
 
+        private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
 
-        [UsedImplicitly]
         public float BipodsState
         {
-            get => duck != null ? _bipodsstate : 0;
-            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
+            get => _bipodsState.Get(this);
+            set => _bipodsState.Set(value);
         }
 
-        [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+        public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+        protected override float GetBaseKforce() => this.BipodsDeployed() ? 0 : 5.5f;
 
-        //[UsedImplicitly]
-        //private uint _cdstate;
-        [UsedImplicitly]
+        private void UpdateFrames() =>
+            FrameId = FrameId % 30 + 30 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
+
+        public float BipodSpeed => 1f / 10f;
+
+        public void UpdateBipodsStats(float old)
+        {
+            UpdateFrames();
+            this.UpdateBipodsSounds(old);
+        }
+
         public bool Bipods
         {
             get => BipodsQ();
-            set
-            {
-                if (isServerForObject)
-                    BipodsState += 1f / 10 * (value ? 1 : -1);
-                var nobipods = BipodsState < 0.01f;
-                var bipods = BipodsState > 0.99f;
-                _kickForce = value ? 0 : 5.5f;
-                FrameId = FrameId % 10 + 30 * (bipods ? 2 : nobipods ? 0 : 1);
-            }
+            set => this.SetBipods(value);
         }
 
-        public BitBuffer BipodsBuffer { get; set; }
+        public BitBuffer BipodsBuffer
+        {
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
+        }
 
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(Bipods));
+        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
 
         public bool BipodsDisabled { get; private set; }
+        public void SetBipodsDisabled(bool disabled) => BipodsDisabled = disabled;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
@@ -103,21 +102,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            Bipods = Bipods;
-            if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(true)) BipodsDisabled = false;
-            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-        }
-
-        public override void Fire()
-        {
-            if (29 < FrameId && FrameId < 60) return;
-            base.Fire();
         }
     }
 }
