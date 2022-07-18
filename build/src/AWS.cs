@@ -64,7 +64,7 @@ namespace TMGmod
             set => _bipodsState.Set(value);
         }
 
-        [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
+        public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
         protected override float GetBaseKforce() => this.BipodsDeployed() ? 0 : 4.75f;
         protected override float GetBaseAccuracy() => this.BipodsDeployed() ? 1f : 0.97f;
 
