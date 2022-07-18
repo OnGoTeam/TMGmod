@@ -18,19 +18,15 @@ namespace TMGmod
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
+        [UsedImplicitly] private readonly EditorProperty<int> skin;
 
-        [UsedImplicitly] public int Ammobefore = 71;
-
+        public int Ammobefore = 71;
         [UsedImplicitly] public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
-
-        [UsedImplicitly] public float Explode;
-
+        public float Explode;
+        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
+        public int Uselessinteger = 3;
         [UsedImplicitly] public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
-
-        [UsedImplicitly] public int Uselessinteger = 3;
 
         public G9M(float xval, float yval)
             : base(xval, yval)
@@ -65,8 +61,6 @@ namespace TMGmod
             KickForce1Lmg = 0.23f;
             KickForce2Lmg = 0.43f;
         }
-
-        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
 
         public bool Bipods
         {
