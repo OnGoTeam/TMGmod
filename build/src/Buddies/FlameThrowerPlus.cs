@@ -11,6 +11,8 @@ namespace TMGmod.Buddies
         public FlameThrowerPlus(float xval, float yval) : base(xval, yval)
         {
             _editorName = "FTP";
+            _ammoType = null;
+            _kickForce = .44f;
         }
 
         private Thing MakeFire(Vec2 fireVelocity)
@@ -38,9 +40,16 @@ namespace TMGmod.Buddies
             return MakeFire(FireVelocity());
         }
 
-        public override void Fire()
+        protected override void RealFire()
         {
-            Level.Add(MakeFire());
+            if (ammo > 0)
+            {
+                ApplyKick();
+                Level.Add(MakeFire());
+                --ammo;
+            }
+            else
+                DoAmmoClick();
         }
     }
 }
