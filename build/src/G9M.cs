@@ -22,8 +22,6 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        private float _bipodsstate;
-
         [UsedImplicitly] public int Ammobefore = 71;
 
         [UsedImplicitly] public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
@@ -70,15 +68,6 @@ namespace TMGmod
 
         [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
 
-        [UsedImplicitly]
-        public float BipodsState
-        {
-            get => duck != null ? _bipodsstate : 0;
-            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
-        }
-
-        [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
-
         public bool Bipods
         {
             get => BipodsQ();
@@ -91,16 +80,10 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
@@ -115,12 +98,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        public override void Update()
-        {
-            Bipods = Bipods;
-            base.Update();
         }
 
         public override void OnPressAction()
