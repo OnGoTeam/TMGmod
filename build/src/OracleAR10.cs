@@ -16,19 +16,8 @@ namespace TMGmod
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-
-        private float _bipodsstate;
-
-        [UsedImplicitly] public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
-
-        [UsedImplicitly] public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
-
-        [UsedImplicitly] public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-
-        [UsedImplicitly] public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
 
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
@@ -37,11 +26,6 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
-            _ammoType = new AT556NATO
-            {
-                range = 333f,
-                accuracy = 0.91f,
-            };
             MaxAccuracy = 0.91f;
             MinAccuracy = 0.35f;
             RegenAccuracyDmr = 0.015f;
@@ -70,81 +54,53 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(17f, 1.5f);
             _editorName = "Oracle AR-10";
             _weight = 5f;
+            _ammoType = new AT556NATO();
         }
 
-        [UsedImplicitly]
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 333f;
+            base.OnInitialize();
+        }
+
         public float HandAngleOff
         {
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
-
-        [UsedImplicitly]
-        public float BipodsState
-        {
-            get => duck != null ? _bipodsstate : 0;
-            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
-        }
-
-        [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
-
         public bool Bipods
         {
             get => BipodsQ();
             set
             {
-                var bipodsstate = BipodsState;
-                if (isServerForObject)
-                    BipodsState += 1f / 8 * (value ? 1 : -1);
-                var nobipods = BipodsState < 0.01f;
-                var bipods = BipodsState > 0.99f;
-                MaxAccuracy = bipods ? 1f : 0.91f;
-                MinAccuracy = bipods ? 1f : 0.35f;
-                _ammoType.range = bipods ? 666f : 333f;
-                _ammoType.bulletSpeed = bipods ? 69f : 37f;
-                loseAccuracy = bipods ? 0 : 0.15f;
-                maxAccuracyLost = bipods ? 0 : 0.15f;
-                _kickForce = bipods ? 0f : 2f;
-                laserSight = bipods;
-                if (isServerForObject && bipods && bipodsstate <= 0.99f)
-                    BipOn.Play();
-                if (isServerForObject && nobipods && bipodsstate >= 0.01f)
-                    BipOff.Play();
+                _kickForce = value ? 0f : 2f;
+                MaxAccuracy = value ? 1f : 0.91f;
+                MinAccuracy = value ? 1f : 0.35f;
+                _ammoType.range = value ? 666f : 333f;
+                _ammoType.bulletSpeed = value ? 69f : 37f;
+                loseAccuracy = value ? 0 : 0.15f;
+                maxAccuracyLost = value ? 0 : 0.15f;
+                laserSight = value;
             }
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled { get; private set; }
+        public bool BipodsDisabled => false;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
 
-        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        public override void Update()
-        {
-            Bipods = Bipods;
-            if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(true)) BipodsDisabled = false;
-            base.Update();
         }
     }
 }
