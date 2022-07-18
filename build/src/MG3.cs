@@ -11,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : BaseLmg, IHaveAllowedSkins, I5, IHaveBipods
+    public class MG3 : BaseLmg, IHaveAllowedSkins, I5, ICanDisableBipods, IDeployBipods
     {
         private const int NonSkinFrames = 6;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
@@ -21,27 +21,14 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        private float _bipodsstate;
-
-        [UsedImplicitly] public NetSoundEffect BipOff = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods2"));
-
-        [UsedImplicitly] public StateBinding BipOffBinding = new NetSoundBinding(nameof(BipOff));
-
-        [UsedImplicitly] public NetSoundEffect BipOn = new NetSoundEffect(Mod.GetPath<Core.TMGmod>("sounds/beepods1"));
-
-        [UsedImplicitly] public StateBinding BipOnBinding = new NetSoundBinding(nameof(BipOn));
+        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
+        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
         public MG3(float xval, float yval)
             : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 80;
-            _ammoType = new AT556NATO
-            {
-                range = 480f,
-                accuracy = 0.8f,
-            };
-            IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("mg3"), 39, 11);
             _graphic = _sprite;
@@ -60,55 +47,63 @@ namespace TMGmod
             ShellOffset = new Vec2(-2f, -3f);
             _editorName = "MG3";
             _weight = 7f;
+            _ammoType = new AT556NATO();
+            MaxAccuracy = .8f;
         }
 
-        [UsedImplicitly]
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 480f;
+            base.OnInitialize();
+        }
+
+        private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
+
         public float BipodsState
         {
-            get => duck != null ? _bipodsstate : 0;
-            set => _bipodsstate = Maths.Clamp(value, 0f, 1f);
+            get => _bipodsState.Get(this);
+            set => _bipodsState.Set(value);
         }
 
         [UsedImplicitly] public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
 
+        private void UpdateStats()
+        {
+            _ammoType.range = this.BipodsDeployed() ? 550f : 480f;
+            _ammoType.bulletSpeed = this.BipodsDeployed() ? 40f : 28f;
+            KickForce1Lmg = this.BipodsDeployed() ? 0 : 2.0f;
+            KickForce2Lmg = this.BipodsDeployed() ? 0 : 3.0f;
+            loseAccuracy = this.BipodsDeployed() ? 0 : 0.1f;
+            maxAccuracyLost = this.BipodsDeployed() ? 0 : 0.25f;
+        }
+
+        private void UpdateFrames() =>
+            FrameId = FrameId % 20 + 20 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
+
+        public void UpdateBipodsStats(float old)
+        {
+            UpdateStats();
+            UpdateFrames();
+            this.UpdateBipodsSounds(old);
+        }
+
+        public float BipodSpeed => 1f / 15f;
+
         public bool Bipods
         {
             get => BipodsQ();
-            set
-            {
-                var bipodsstate = BipodsState;
-                if (isServerForObject)
-                    BipodsState += 1f / 15 * (value ? 1 : -1);
-                var nobipods = BipodsState < 0.01f;
-                var bipods = BipodsState > 0.99f;
-                _ammoType.range = bipods ? 550f : 480f;
-                _ammoType.bulletSpeed = bipods ? 40f : 28f;
-                KickForce1Lmg = bipods ? 0 : 2.0f;
-                KickForce2Lmg = bipods ? 0 : 3.0f;
-                loseAccuracy = bipods ? 0 : 0.1f;
-                maxAccuracyLost = bipods ? 0 : 0.25f;
-                FrameId = FrameId % 20 + 20 * (bipods ? 2 : nobipods ? 0 : 1);
-                if (isServerForObject && bipods && bipodsstate <= 0.99f)
-                    BipOn.Play();
-                if (isServerForObject && nobipods && bipodsstate >= 0.01f)
-                    BipOff.Play();
-            }
+            set => this.SetBipods(value);
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled { get; private set; }
+        public void SetBipodsDisabled(bool disabled) => BipodsDisabled = disabled;
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
@@ -122,18 +117,8 @@ namespace TMGmod
 
         public override void Update()
         {
-            base.Update();
-            Bipods = Bipods;
             if (ammo == 0 && FrameId % 20 >= 0 && FrameId % 20 < 10) FrameId += 10;
-            if (duck == null) BipodsDisabled = false;
-            else if (!BipodsQ(true)) BipodsDisabled = false;
-            else if (duck.inputProfile.Pressed("QUACK")) BipodsDisabled = !BipodsDisabled;
-        }
-
-        public override void Fire()
-        {
-            if ((FrameId + 20) % (10 * NonSkinFrames) >= 40) return;
-            base.Fire();
+            base.Update();
         }
     }
 }
