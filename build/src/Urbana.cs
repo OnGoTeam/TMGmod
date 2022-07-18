@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class Urbana : BaseBolt, IHaveAllowedSkins, ICanDisableBipods, IDeployBipods
+    public class Urbana : BaseBolt, IShowSkins, ICanDisableBipods, IDeployBipods
     {
         private const int NonSkinFrames = 4;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
@@ -20,15 +20,16 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
+        public SpriteMap ShowedSkin(int allowed) => new SpriteMap(GetPath("Urbana"), 53, 15) { _frame = allowed };
+
         public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
         public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
         public Urbana(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
-            _sprite = new SpriteMap(GetPath("Urbana"), 53, 15);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f, "random");
+            _sprite = ShowedSkin(0);
             _graphic = _sprite;
-            _sprite.frame = 0;
             _center = new Vec2(27f, 8f);
             _collisionOffset = new Vec2(-27f, -8f);
             _collisionSize = new Vec2(53f, 15f);

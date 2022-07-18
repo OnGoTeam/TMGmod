@@ -93,6 +93,7 @@
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveAllowedSkins.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveFrameId.cs" />
+    <Compile Include="src\Core\SkinLogic\IShowSkins.cs" />
     <Compile Include="src\Core\SkinLogic\SkinImplementation.cs" />
     <Compile Include="src\Core\StockLogic\StockImplementation.cs" />
     <Compile Include="src\Nellegalja Mk2.cs" />
@@ -207,7 +208,7 @@
     <Compile Include="src\Core\AmmoTypes\ATM72.cs" />
     <Compile Include="src\Core\AmmoTypes\ATM16.cs" />
     <Compile Include="src\Core\AmmoTypes\IHeavyAmmoType.cs" />
-    <Compile Include="src\Core\ContextSkinRender.cs" />
+    <Compile Include="src\Core\SkinLogic\ContextSkinRender.cs" />
     <Compile Include="src\Core\I5.cs" />
     <Compile Include="src\Core\BipodsLogic\IHaveBipods.cs" />
     <Compile Include="src\Core\StockLogic\IHaveStock.cs" />

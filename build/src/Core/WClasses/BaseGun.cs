@@ -448,6 +448,23 @@ namespace TMGmod.Core.WClasses
             base.Initialize();
         }
 
+        public override ContextMenu GetContextMenu()
+        {
+            var contextMenu = base.GetContextMenu();
+#if DEBUG
+            switch (this)
+            {
+                case IShowSkins target:
+                {
+                    foreach (var skin in target.AllowedSkins)
+                        contextMenu.AddItem(new ContextSkinRender(target.Skin, skin, target.ShowedSkin));
+                    break;
+                }
+            }
+#endif
+            return contextMenu;
+        }
+
         private static BitBuffer GetBuffer(ISync modifier, Action write)
         {
             var buffer = new BitBuffer();

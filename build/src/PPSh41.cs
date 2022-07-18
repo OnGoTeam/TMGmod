@@ -5,15 +5,12 @@ using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
-#if DEBUG
-using System.Linq;
-#endif
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh41 : BaseSmg, IHaveAllowedSkins, I5
+    public class PPSh41 : BaseSmg, I5, IShowSkins
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
@@ -23,19 +20,20 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
+        public SpriteMap ShowedSkin(int allowed) => new SpriteMap(GetPath("PPSH41"), 30, 8) { _frame = allowed };
+
         public PPSh41(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f, "random");
             ammo = 71;
             _ammoType = new ATPPSH41();
             MaxAccuracy = 0.73f;
             KickForceDeltaSmg = 3f;
             MaxDelaySmg = 50;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
+            _sprite = ShowedSkin(0);
             _graphic = _sprite;
-            _sprite.frame = 0;
             _center = new Vec2(15f, 4f);
             _collisionOffset = new Vec2(-15f, -4f);
             _collisionSize = new Vec2(30f, 8f);
@@ -61,21 +59,10 @@ namespace TMGmod
         // ReSharper disable once ConvertToAutoProperty
         public EditorProperty<int> Skin => skin;
 
-        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        public override ContextMenu GetContextMenu()
-        {
-            var contextMenu = base.GetContextMenu();
-#if DEBUG
-            foreach (var sprite in AllowedSkins.Select(allowed => new SpriteMap(GetPath("PPSH41"), 30, 8)
-                { _frame = allowed })) contextMenu.AddItem(new ContextSkinRender(null, sprite));
-#endif
-            return contextMenu;
         }
     }
 }
