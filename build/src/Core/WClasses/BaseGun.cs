@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers;
+using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
 #if DEBUG

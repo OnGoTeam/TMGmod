@@ -2,7 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 
-namespace TMGmod.Core
+namespace TMGmod.Core.SkinLogic
 {
     public interface IHaveSkin : IHaveFrameId
     {

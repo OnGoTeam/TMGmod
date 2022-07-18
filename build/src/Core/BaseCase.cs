@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Core.SkinLogic;
 
 namespace TMGmod.Core
 {

@@ -271,7 +271,7 @@
     <Compile Include="src\Cases\Color\YellowCase.cs" />
     <Compile Include="src\Cases\Heavy Millitary Case.cs" />
     <Compile Include="src\Core\BaseCase.cs" />
-    <Compile Include="src\Core\IHaveSkin.cs" />
+    <Compile Include="src\Core\SkinLogic\IHaveSkin.cs" />
     <Compile Include="src\Core\WClasses\BaseBurst.cs" />
     <Compile Include="src\Core\WClasses\BaseGun.cs" />
     <Compile Include="src\Core\WClasses\BaseBolt.cs" />

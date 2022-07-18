@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DuckGame;
+using TMGmod.Core.SkinLogic;
 
 namespace TMGmod.Core.WClasses
 {

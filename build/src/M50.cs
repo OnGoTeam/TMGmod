@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
+using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod

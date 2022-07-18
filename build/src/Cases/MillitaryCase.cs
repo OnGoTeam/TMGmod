@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
+using TMGmod.Core.SkinLogic;
 using TMGmod.NY;
 
 namespace TMGmod.Cases

@@ -1,5 +1,6 @@
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.SkinLogic;
 
 namespace TMGmod.Core.Shells
 {
