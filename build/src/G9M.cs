@@ -116,11 +116,11 @@ namespace TMGmod
             base.OnReleaseAction();
         }
 
-        public override void Fire()
+        protected override void RealFire()
         {
             Explode = Rando.Float(0, 1);
             if (Explode < Explodechance) CreateExplosion(position);
-            base.Fire();
+            base.RealFire();
         }
 
         public override void Thrown()
