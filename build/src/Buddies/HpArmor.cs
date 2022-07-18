@@ -230,7 +230,7 @@ namespace TMGmod.Buddies
         }
 
 #if DEBUG
-        private List<string> _log = new List<string>();
+        private readonly List<string> _log = new List<string>();
         private const int MaxLogLen = 10;
 #endif
 
