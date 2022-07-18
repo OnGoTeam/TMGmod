@@ -93,7 +93,6 @@ namespace TMGmod
             set => this.SetBipods(value);
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
             get => this.GetBipodBuffer();
