@@ -7,7 +7,7 @@ namespace TMGmod.Core.BipodsLogic
     {
         bool Bipods { get; set; }
 
-        [UsedImplicitly] BitBuffer BipodsBuffer { get; set; }
+        BitBuffer BipodsBuffer { get; set; }
 
         [UsedImplicitly] StateBinding BipodsBinding { get; }
 
