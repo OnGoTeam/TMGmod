@@ -11,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SVU : BaseDmr, IHaveAllowedSkins
+    public class SVU : BaseGun, IAmDmr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
@@ -29,8 +29,6 @@ namespace TMGmod
             _ammoType = new ATSVU();
             MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.2f;
-            RegenAccuracyDmr = 0.017f;
-            DrainAccuracyDmr = 0.2f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;
@@ -55,6 +53,7 @@ namespace TMGmod
             _weight = 5.7f;
             BaseActiveModifier = ComposedModifier.Compose(
                 DefaultModifier(),
+                new LoseAccuracy(.02f, .017f, 1f),
                 new SpeedAccuracy(this, 0f, 1f, 0f)
             );
         }
