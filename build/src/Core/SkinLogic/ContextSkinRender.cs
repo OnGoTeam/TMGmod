@@ -10,11 +10,13 @@ namespace TMGmod.Core.SkinLogic
     {
         private readonly IShowSkins _target;
         private readonly int _skin;
+
         private readonly SpriteMap _imag;
-        private static readonly Dictionary<Tuple<int, int>, Tex2D> Tex = new Dictionary<Tuple<int, int>, Tex2D>();
-        private static readonly Dictionary<int, Color[]> TexData = new Dictionary<int, Color[]>();
+
         private static readonly Dictionary<Tex2D, Color[]> Data = new Dictionary<Tex2D, Color[]>();
-        private static readonly Dictionary<Tex2D, Tuple<Tex2D, int>> Rendered = new Dictionary<Tex2D, Tuple<Tex2D, int>>();
+
+        private static readonly Dictionary<Tex2D, Tuple<Tex2D, Color[], int>> Rendered =
+            new Dictionary<Tex2D, Tuple<Tex2D, Color[], int>>();
 
         public ContextSkinRender(
             IShowSkins target, int skin
@@ -36,23 +38,18 @@ namespace TMGmod.Core.SkinLogic
 
         private static Tex2D GetTex(int width, int height)
         {
-            var tuple = new Tuple<int, int>(width, height);
-            if (!Tex.ContainsKey(tuple))
-                Tex[tuple] = new Tex2D(width, height);
-            return Tex[tuple];
+            return new Tex2D(width, height);
         }
 
         private static Color[] GetData(int size)
         {
-            if (!TexData.ContainsKey(size))
-                TexData[size] = new Color[size];
-            return TexData[size];
+            return new Color[size];
         }
 
         private static int SkinNo(IReadOnlyList<int> skins, float x, int time)
         {
             var total = skins.Count;
-            return skins[(int) Math.Floor((x + time * .0051379f) * total) % total];
+            return skins[(int)Math.Floor((x + time * .0151379f) * total) % total];
         }
 
         private static void PutData(IReadOnlyList<int> skins, IList<Color> data, Sprite sprite, int time)
@@ -62,7 +59,7 @@ namespace TMGmod.Core.SkinLogic
             {
                 for (var x = 0; x < sprite.width; x++)
                 {
-                    var frame = SkinNo(skins, (float) x / sprite.width, time);
+                    var frame = SkinNo(skins, (x + y / 3f) / sprite.width, time);
                     var columns = sprite.texture.width / sprite.width;
                     var rowNo = frame / columns;
                     var colNo = frame % columns;
@@ -82,15 +79,38 @@ namespace TMGmod.Core.SkinLogic
 
         private static Tex2D GetTex(IReadOnlyList<int> skins, Sprite sprite, int time)
         {
-            var tex = GetTex(sprite.width, sprite.height);
-            tex.SetData(GetData(skins, sprite, time));
-            return tex;
+            if (Rendered.ContainsKey(sprite.texture))
+            {
+                var tuple = Rendered[sprite.texture];
+                if (tuple.Item3 != time)
+                {
+                    PutData(skins, tuple.Item2, sprite, time);
+                    tuple.Item1.SetData(GetData(skins, sprite, time));
+                    Rendered[sprite.texture] = new Tuple<Tex2D, Color[], int>(tuple.Item1, tuple.Item2, time);
+                }
+            }
+            else
+            {
+                var tex = GetTex(sprite.width, sprite.height);
+                var data = GetData(sprite.width * sprite.height);
+                PutData(skins, data, sprite, time);
+                tex.SetData(GetData(skins, sprite, time));
+                Rendered[sprite.texture] = new Tuple<Tex2D, Color[], int>(tex, data, time);
+            }
+
+            return Rendered[sprite.texture].Item1;
+        }
+
+        private static int Time()
+        {
+            return MonoMain.timeInEditor;
         }
 
         private static Sprite GetSprite(IShowSkins target)
         {
-            return new Sprite(GetTex(target.AllowedSkins.ToArray(), target.SpriteBase, MonoMain.timeInEditor));
+            return new Sprite(GetTex(target.AllowedSkins.ToArray(), target.SpriteBase, Time()));
         }
+
         public static void WithRandomized(
             IShowSkins target, Action<Sprite> action
         )
