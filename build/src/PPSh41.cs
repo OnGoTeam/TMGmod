@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class PPSh41 : BaseSmg, I5, IShowSkins
+    public class PPSh41 : BaseSmg, I5, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
@@ -19,8 +19,6 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-
-        public SpriteMap SpriteBase => new SpriteMap(GetPath("PPSH41"), 30, 8);
 
         public PPSh41(float xval, float yval)
             : base(xval, yval)
@@ -32,7 +30,7 @@ namespace TMGmod
             KickForceDeltaSmg = 3f;
             MaxDelaySmg = 50;
             _type = "gun";
-            _sprite = SpriteBase;
+            _sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
             _graphic = _sprite;
             _center = new Vec2(15f, 4f);
             _collisionOffset = new Vec2(-15f, -4f);

@@ -1,9 +1,7 @@
-﻿using DuckGame;
-
-namespace TMGmod.Core.SkinLogic
+﻿namespace TMGmod.Core.SkinLogic
 {
-    public interface IShowSkins: IHaveAllowedSkins
+    public interface IShowSkins: IHaveAllowedSkins, IHaveSpriteBase
     {
-        SpriteMap SpriteBase { get; }
+        
     }
 }

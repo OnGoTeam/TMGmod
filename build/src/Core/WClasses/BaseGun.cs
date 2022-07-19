@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMGmod.Core.AmmoTypes;
 using DuckGame;
 using JetBrains.Annotations;
@@ -457,15 +458,36 @@ namespace TMGmod.Core.WClasses
 #if DEBUG
             switch (this)
             {
-                case IShowSkins target:
+                case IHaveAllowedSkins target when _graphic is SpriteMap sprite:
                 {
                     foreach (var skin in target.AllowedSkins.Concat(new[] { -1 }))
-                        contextMenu.AddItem(new ContextSkinRender(target, skin));
+                        contextMenu.AddItem(new ContextSkinRender(new SkinMix(target, sprite), skin));
                     break;
                 }
             }
 #endif
             return contextMenu;
+        }
+
+        private class SkinMix : IShowSkins
+        {
+            private readonly IHaveAllowedSkins _target;
+
+            public SkinMix(IHaveAllowedSkins target, SpriteMap sprite)
+            {
+                _target = target;
+                SpriteBase = sprite;
+            }
+
+            public int FrameId
+            {
+                set => _target.FrameId = value;
+            }
+
+            public StateBinding FrameIdBinding => _target.FrameIdBinding;
+            public EditorProperty<int> Skin => _target.Skin;
+            public ICollection<int> AllowedSkins => _target.AllowedSkins;
+            public SpriteMap SpriteBase { get; }
         }
 
         private static BitBuffer GetBuffer(ISync modifier, Action write)
@@ -552,15 +574,20 @@ namespace TMGmod.Core.WClasses
 
         private void DrawRandom()
         {
-            if (Level.activeLevel is Editor && this is IShowSkins target && target.Skin.value == -1)
+            if (
+                Level.activeLevel is Editor
+                && this is IHaveAllowedSkins target
+                && _graphic is SpriteMap sprite
+                && target.Skin.value == -1
+            )
             {
                 _flipHorizontal = offDir <= 0;
                 ContextSkinRender.WithRandomized(
-                    target,
-                    sprite =>
+                    new SkinMix(target, sprite),
+                    s =>
                     {
                         var old = _graphic;
-                        _graphic = sprite;
+                        _graphic = s;
                         base.Draw();
                         _graphic = old;
                     }

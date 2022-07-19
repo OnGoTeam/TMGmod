@@ -9,7 +9,7 @@ using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.Buddies
 {
-    [EditorGroup("TMG|Misc")]
+    [BaggedProperty("canSpawn", false)]
     [UsedImplicitly]
     public class HpArmor : Equipment
     {

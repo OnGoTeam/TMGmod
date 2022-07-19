@@ -146,10 +146,12 @@ namespace TMGmod.Core.SkinLogic
                 WithRandomized(_target, DrawStatic);
             else
             {
-                var old = _imag._frame;
-                _imag._frame = _skin;
+                var oldIndex = _imag._imageIndex;
+                var oldFrame = _imag._frame;
+                _imag._imageIndex = _imag._frame = _skin;
                 DrawStatic(_imag);
-                _imag._frame = old;
+                _imag._frame = oldFrame;
+                _imag._imageIndex = oldIndex;
             }
         }
 
