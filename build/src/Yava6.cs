@@ -54,7 +54,7 @@ namespace TMGmod
             _weight = 5f;
             BaseActiveModifier = ComposedModifier.Compose(
                 DefaultModifier(),
-                new FocusingAccuracy(this, 1f, .1f)
+                new FocusingAccuracy(this, 1f, .05f)
             );
         }
 
