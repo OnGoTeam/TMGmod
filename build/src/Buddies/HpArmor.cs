@@ -13,14 +13,15 @@ namespace TMGmod.Buddies
     [UsedImplicitly]
     public class HpArmor : Equipment
     {
-        private readonly float _hpMax;
+        public readonly float HpMax;
 
         [UsedImplicitly] public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
+        [UsedImplicitly] public StateBinding HpMaxBinding = new StateBinding(nameof(HpMax));
 
         public HpArmor(float xpos, float ypos, float hpMax = 99f) : base(xpos, ypos)
         {
-            _hpMax = hpMax;
-            _hitPoints = _hpMax;
+            HpMax = hpMax;
+            _hitPoints = HpMax;
             _collisionOffset = new Vec2(-4f, -4f);
             _collisionSize = new Vec2(8f, 8f);
             _equippedCollisionOffset = new Vec2(-12f, -12f);
@@ -211,7 +212,7 @@ namespace TMGmod.Buddies
             Graphics.DrawRect(start, start + new Vec2(64, -8), Color.Red, 0.0f);
             Graphics.DrawRect(
                 start,
-                start + new Vec2(0, -8) + new Vec2(64, 0) * Maths.Clamp(_hitPoints / _hpMax, 0f, 1f),
+                start + new Vec2(0, -8) + new Vec2(64, 0) * Maths.Clamp(_hitPoints / HpMax, 0f, 1f),
                 Color.Green, 0.1f
             );
 #if DEBUG
@@ -263,6 +264,24 @@ namespace TMGmod.Buddies
                         }
                     )
                 ) _hitPoints *= 1.0040765666406789425f;
+
+                if (
+                    _log.SequenceEqual(
+                        new[]
+                        {
+                            "UP",
+                            "LEFT",
+                            "DOWN",
+                            "RIGHT",
+                            "UP",
+                            "RIGHT",
+                            "DOWN",
+                            "LEFT",
+                            "UP",
+                            "QUACK",
+                        }
+                    )
+                ) _hitPoints = HpMax;
             }
 #endif
             base.Update();
@@ -272,7 +291,7 @@ namespace TMGmod.Buddies
                 return;
             }
 
-            _hitPoints = Math.Min(_hitPoints, Math.Max(.1f * _hpMax, _hitPoints - _equippedDuck.burnt));
+            _hitPoints = Math.Min(_hitPoints, Math.Max(.1f * HpMax, _hitPoints - _equippedDuck.burnt));
         }
 
         public override void UnEquip()
