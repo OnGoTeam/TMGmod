@@ -29,8 +29,8 @@ namespace TMGmod
             _ammoType = new ATMP40();
             MaxAccuracy = 1f;
             LowerAccuracyFp = 0.7f;
-            KickForceDeltaSmg = 2f;
-            MaxDelaySmg = 20;
+            KforceDelta = 2f;
+            KforceDelay = 20;
             MaxDelayFp = 20;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP40"), 23, 14);

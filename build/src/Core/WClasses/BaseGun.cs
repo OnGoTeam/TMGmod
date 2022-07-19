@@ -200,9 +200,8 @@ namespace TMGmod.Core.WClasses
 
         private static void UpdateFirstKforce(IFirstKforce target)
         {
-            target.CurrentDelaySmg -= 1;
-            if (target.CurrentDelaySmg < 0)
-                target.CurrentDelaySmg = 0;
+            if (target.CurrentDelaySmg > 0)
+                --target.CurrentDelaySmg;
         }
 
         private void UpdateKforce()

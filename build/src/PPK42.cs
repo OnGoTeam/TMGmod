@@ -27,8 +27,8 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATPPK42();
             MaxAccuracy = 0.8f;
-            KickForceDeltaSmg = 2.5f;
-            MaxDelaySmg = 20;
+            KforceDelta = 2.5f;
+            KforceDelay = 20;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PPK42"), 25, 11);
             _graphic = _sprite;

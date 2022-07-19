@@ -68,8 +68,8 @@ namespace TMGmod
         }
 
         public float KickForceDeltaSmg { get; }
-        public int CurrentDelaySmg { get; set; }
-        public int MaxDelaySmg { get; }
+        public uint CurrentDelaySmg { get; set; }
+        public uint MaxDelaySmg { get; }
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
         public float LowerAccuracyFp { get; }

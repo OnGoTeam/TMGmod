@@ -41,8 +41,8 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.31f;
             _kickForce = 0.8f;
-            KickForceDeltaSmg = 2.7f;
-            MaxDelaySmg = 50;
+            KforceDelta = 2.7f;
+            KforceDelay = 50;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.34f;
             _holdOffset = new Vec2(3f, 3f);

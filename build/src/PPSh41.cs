@@ -27,8 +27,8 @@ namespace TMGmod
             ammo = 71;
             _ammoType = new ATPPSH41();
             MaxAccuracy = 0.73f;
-            KickForceDeltaSmg = 3f;
-            MaxDelaySmg = 50;
+            KforceDelta = 3f;
+            KforceDelay = 50;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
             _graphic = _sprite;

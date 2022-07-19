@@ -3,7 +3,7 @@
     public interface IFirstKforce
     {
         float KickForceDeltaSmg { get; }
-        int CurrentDelaySmg { get; set; }
-        int MaxDelaySmg { get; }
+        uint CurrentDelaySmg { get; set; }
+        uint MaxDelaySmg { get; }
     }
 }

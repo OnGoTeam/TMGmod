@@ -26,8 +26,8 @@ namespace TMGmod
             ammo = 24;
             _ammoType = new ATSMG9();
             IntrinsicAccuracy = true;
-            KickForceDeltaSmg = 3.5f;
-            MaxDelaySmg = 15;
+            KforceDelta = 3.5f;
+            KforceDelay = 15;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("SMG9"), 16, 15);
             _graphic = _sprite;

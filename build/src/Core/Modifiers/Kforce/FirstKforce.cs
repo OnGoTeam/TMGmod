@@ -6,12 +6,12 @@ namespace TMGmod.Core.Modifiers.Kforce
     public sealed class FirstKforce : Modifier
     {
         private readonly Func<float, float> _additionalKforce;
-        private readonly uint _maxDelay;
+        public uint MaxDelay;
         private uint _currentDelay;
 
         public FirstKforce(uint maxDelay, Func<float, float> additionalKforce)
         {
-            _maxDelay = maxDelay;
+            MaxDelay = maxDelay;
             _additionalKforce = additionalKforce;
         }
 
@@ -27,7 +27,7 @@ namespace TMGmod.Core.Modifiers.Kforce
 
         protected override void ModifyFire()
         {
-            _currentDelay = _maxDelay;
+            _currentDelay = MaxDelay;
         }
 
         protected override void Read(BitBuffer buffer)

@@ -50,8 +50,8 @@ namespace TMGmod
         }
 
         public float KickForceDeltaSmg { get; }
-        public int CurrentDelaySmg { get; set; }
-        public int MaxDelaySmg { get; }
+        public uint CurrentDelaySmg { get; set; }
+        public uint MaxDelaySmg { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

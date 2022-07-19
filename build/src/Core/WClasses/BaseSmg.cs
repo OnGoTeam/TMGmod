@@ -1,22 +1,27 @@
-﻿using DuckGame;
-using JetBrains.Annotations;
+﻿using TMGmod.Core.Modifiers;
+using TMGmod.Core.Modifiers.Kforce;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseSmg : BaseGun, IFirstKforce, IAmSmg
+    public abstract class BaseSmg : BaseGun, IAmSmg
     {
-        [UsedImplicitly] public StateBinding DelaySmgBinding = new StateBinding(nameof(CurrentDelaySmg));
+        private readonly FirstKforce _firstKforce;
 
         protected BaseSmg(float xval, float yval) : base(xval, yval)
         {
-            KickForceDeltaSmg = 0.2f;
-            MaxDelaySmg = 50;
+            KforceDelta = 0.2f;
+            _firstKforce = new FirstKforce(50, kforce => kforce + KforceDelta);
+            BaseActiveModifier = ComposedModifier.Compose(
+                DefaultModifier(),
+                _firstKforce
+            );
         }
 
-        public float KickForceDeltaSmg { get; protected set; }
+        protected float KforceDelta { get; set; }
 
-        public int CurrentDelaySmg { get; set; }
-
-        public int MaxDelaySmg { get; protected set; }
+        protected uint KforceDelay
+        {
+            set => _firstKforce.MaxDelay = value;
+        }
     }
 }
