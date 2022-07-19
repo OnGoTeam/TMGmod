@@ -1,7 +1,7 @@
 using System;
 using DuckGame;
 
-namespace TMGmod.Core.AmmoTypes
+namespace TMGmod.Core
 {
     // ReSharper disable once InconsistentNaming
     public interface IDamage
