@@ -132,6 +132,8 @@ namespace TMGmod.Core
 
     public class DotMarker : Thing
     {
+        private int _ticks;
+
         private DotMarker(Vec2 position) : base(position.x, position.y)
         {
         }
@@ -145,10 +147,18 @@ namespace TMGmod.Core
         {
             Level.Add(new DotMarker(position));
         }
+
+        public override void Update()
+        {
+            base.Update();
+            ++_ticks;
+            if (_ticks > 60) Level.Remove(this);
+        }
     }
 
     public class StrokeMarker : Thing
     {
+        private int _ticks;
         private readonly Vec2 _pos2;
 
         private StrokeMarker(Vec2 position, Vec2 pos2) : base(position.x, position.y)
@@ -164,6 +174,13 @@ namespace TMGmod.Core
         public static void Show(Vec2 position, Vec2 pos2)
         {
             Level.Add(new StrokeMarker(position, pos2));
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            ++_ticks;
+            if (_ticks > 60) Level.Remove(this);
         }
     }
 #endif
