@@ -262,7 +262,7 @@ namespace TMGmod.Buddies
                             "RAGDOLL",
                         }
                     )
-                ) _hitPoints += 4.0765666406789425f;
+                ) _hitPoints *= 1.0040765666406789425f;
             }
 #endif
             base.Update();
