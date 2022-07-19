@@ -70,7 +70,7 @@ namespace TMGmod.Stuff
 
         private bool OldHit(AdsHit adsHit)
         {
-            return _ticks - adsHit.Tick > 5;
+            return _ticks - adsHit.Tick > 30;
         }
 
         private bool InvalidTracked(Tracked tracked)
@@ -88,6 +88,7 @@ namespace TMGmod.Stuff
         public override void Draw()
         {
             _hitPosList.RemoveAll(OldHit);
+
             foreach (var tracked in _trackeds.Where(tracked => tracked.TrLev <= _trackTicks))
                 Graphics.DrawLine(position, tracked.Inst.position, new Color(255, 0, 0));
             foreach (var hitPos in _hitPosList)
