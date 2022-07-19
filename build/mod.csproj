@@ -313,7 +313,7 @@
     <Compile Include="src\Core\AmmoTypes\AT9mmSilenced.cs" />
     <Compile Include="src\Core\AmmoTypes\ATNotBullet.cs" />
     <Compile Include="src\Core\Cal50Explode.cs" />
-    <Compile Include="src\Core\Caliber50Bullet.cs" />
+    <Compile Include="src\Core\Bullets\Caliber50Bullet.cs" />
     <Compile Include="src\Core\Czmag.cs" />
     <Compile Include="src\Core\ExplosiveBullet.cs" />
     <Compile Include="src\Core\ExploCreator.cs" />

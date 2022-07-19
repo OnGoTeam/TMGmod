@@ -1,7 +1,7 @@
 using DuckGame;
 using TMGmod.Core.AmmoTypes;
 
-namespace TMGmod.Core
+namespace TMGmod.Core.Bullets
 {
     public class AntiProp : Bullet
     {
