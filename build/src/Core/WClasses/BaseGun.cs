@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using TMGmod.Core.AmmoTypes;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.BipodsLogic;
@@ -9,7 +9,7 @@ using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
 #if DEBUG
-using TMGmod.Core.AmmoTypes;
+using System.Linq;
 #endif
 
 namespace TMGmod.Core.WClasses
