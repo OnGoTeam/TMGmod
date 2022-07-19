@@ -46,12 +46,16 @@ namespace TMGmod.Core.SkinLogic
             return new Color[size];
         }
 
-        private static int SkinNo(IReadOnlyList<int> skins, float x, int time)
+        private static int SkinNo(IReadOnlyList<int> skins, float off, int time)
         {
             var total = skins.Count;
-            return skins[(int)Math.Floor((x + time * .0151379f) * total) % total];
+            return skins[(int)Math.Floor((off + time * .0151379f) * total) % total];
         }
 
+        private static float Off(float x, float y, Sprite sprite)
+        {
+            return (x + y / 3f) / sprite.width;
+        }
         private static void PutData(IReadOnlyList<int> skins, IList<Color> data, Sprite sprite, int time)
         {
             var spriteData = GetData(sprite.texture);
@@ -59,7 +63,7 @@ namespace TMGmod.Core.SkinLogic
             {
                 for (var x = 0; x < sprite.width; x++)
                 {
-                    var frame = SkinNo(skins, (x + y / 3f) / sprite.width, time);
+                    var frame = SkinNo(skins, Off(x, y, sprite), time);
                     var columns = sprite.texture.width / sprite.width;
                     var rowNo = frame / columns;
                     var colNo = frame % columns;
