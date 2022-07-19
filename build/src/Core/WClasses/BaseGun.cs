@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.BipodsLogic;
@@ -456,8 +457,8 @@ namespace TMGmod.Core.WClasses
             {
                 case IShowSkins target:
                 {
-                    foreach (var skin in target.AllowedSkins)
-                        contextMenu.AddItem(new ContextSkinRender(target.Skin, skin, target.ShowedSkin));
+                    foreach (var skin in target.AllowedSkins.Concat(new []{-1}))
+                        contextMenu.AddItem(new ContextSkinRender(target, skin));
                     break;
                 }
             }
