@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SIX12S : BaseGun, IHaveAllowedSkins, IAmSg, I5
+    public class SIX12S : BaseGun, IShowSkins, IAmSg, I5
     {
         private const int NonSkinFrames = 2;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
@@ -19,20 +19,21 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
+        public SpriteMap ShowedSkin(int allowed) => new SpriteMap(GetPath("SIX12S"), 29, 10) { _frame = allowed };
 
         [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
 
         public SIX12S(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
+            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f, "random");
             ammo = 6;
             _ammoType = new ATSIX12S();
             MaxAccuracy = 0.9f;
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("SIX12S"), 29, 10);
+            _sprite = ShowedSkin(0);
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(19f, 5f);
