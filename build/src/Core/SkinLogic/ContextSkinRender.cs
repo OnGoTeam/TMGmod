@@ -11,6 +11,7 @@ namespace TMGmod.Core.SkinLogic
         private readonly int _skin;
         private readonly SpriteMap _imag;
         private readonly IEnumerable<SpriteMap> _imags;
+        private float _drift;
 
         public ContextSkinRender(
             IShowSkins target, int skin
@@ -52,14 +53,32 @@ namespace TMGmod.Core.SkinLogic
                     sprite._imageIndex = sprite._frame;
                     sprite.CenterOrigin();
                     sprite.depth = depth + 3;
-                    var step = sprite.width / (float)total;
-                    var xoffset = current * step;
-                    sprite.x = x + itemSize.x / 2f + xoffset;
                     sprite.y = y + itemSize.y / 2f;
                     sprite.color = Color.White;
-                    sprite.Draw(new Rectangle(xoffset, 0f, step, sprite.height));
+                    var step = sprite.width / (float)total;
+                    var xoffset = current * step - _drift * sprite.width;
+                    if (xoffset >= 0)
+                    {
+                        sprite.x = x + itemSize.x / 2f + xoffset;
+                        sprite.Draw(new Rectangle(xoffset, 0f, step, sprite.height));
+                    }
+                    else if (xoffset <= -step)
+                    {
+                        sprite.x = x + itemSize.x / 2f + xoffset + sprite.width;
+                        sprite.Draw(new Rectangle(xoffset + sprite.width, 0f, step, sprite.height));
+                    }
+                    else
+                    {
+                        sprite.x = x + itemSize.x / 2f + xoffset + sprite.width;
+                        sprite.Draw(new Rectangle(xoffset + sprite.width, 0f, -xoffset, sprite.height));
+                        sprite.x = x + itemSize.x / 2f;
+                        sprite.Draw(new Rectangle(0f, 0f, step+xoffset, sprite.height));
+                    }
                     current += 1;
                 }
+
+                _drift += .01f;
+                _drift %= 1f;
             }
 
             base.Draw();
