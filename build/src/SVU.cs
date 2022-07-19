@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -40,7 +42,7 @@ namespace TMGmod
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
-            _barrelOffsetTL = new Vec2(37f, 5f);
+            _barrelOffsetTL = new Vec2(37f, 5.5f);
             _fireSound = GetPath("sounds/Rifle.wav");
             _fullAuto = true;
             _fireWait = 1.2f;
@@ -51,6 +53,10 @@ namespace TMGmod
             ShellOffset = new Vec2(-10f, 0f);
             _editorName = "SVU";
             _weight = 5.7f;
+            BaseActiveModifier = ComposedModifier.Compose(
+                DefaultModifier(),
+                new SpeedAccuracy(this, 0f, 1f, 0f)
+            );
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
