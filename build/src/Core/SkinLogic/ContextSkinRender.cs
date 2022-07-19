@@ -1,4 +1,6 @@
 ﻿#if DEBUG
+using System.Collections.Generic;
+using System.Linq;
 using DuckGame;
 
 namespace TMGmod.Core.SkinLogic
@@ -8,6 +10,7 @@ namespace TMGmod.Core.SkinLogic
         private readonly IShowSkins _target;
         private readonly int _skin;
         private readonly SpriteMap _imag;
+        private readonly IEnumerable<SpriteMap> _imags;
 
         public ContextSkinRender(
             IShowSkins target, int skin
@@ -15,10 +18,15 @@ namespace TMGmod.Core.SkinLogic
         {
             _target = target;
             _skin = skin;
-            if (!target.AllowedSkins.Contains(skin)) return;
-            // else
-            _imag = _target.ShowedSkin(skin);
-            _imag.CenterOrigin();
+            if (target.AllowedSkins.Contains(skin))
+            {
+                _imag = _target.ShowedSkin(skin);
+                _imag.CenterOrigin();
+            }
+            else
+            {
+                _imags = _target.AllowedSkins.Select(allowed => _target.ShowedSkin(allowed));
+            }
         }
 
         public override void Draw()
@@ -35,19 +43,25 @@ namespace TMGmod.Core.SkinLogic
                 _imag.color = Color.White;
                 _imag.Draw();
             }
-            else
+            else if (_imags != null)
             {
-                foreach (var skin in _target.AllowedSkins)
+                var total = _target.AllowedSkins.Count;
+                var current = 0;
+                foreach (var sprite in _imags)
                 {
-                    var sprite = _target.ShowedSkin(skin);
+                    sprite._imageIndex = sprite._frame;
                     sprite.CenterOrigin();
                     sprite.depth = depth + 3;
-                    sprite.x = x + itemSize.x / 2f;
+                    var step = sprite.width / (float)total;
+                    var xoffset = current * step;
+                    sprite.x = x + itemSize.x / 2f + xoffset;
                     sprite.y = y + itemSize.y / 2f;
                     sprite.color = Color.White;
-                    sprite.Draw(new Rectangle(0f, 0f, sprite.width, sprite.height));
+                    sprite.Draw(new Rectangle(xoffset, 0f, step, sprite.height));
+                    current += 1;
                 }
             }
+
             base.Draw();
         }
 
