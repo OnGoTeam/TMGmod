@@ -31,7 +31,7 @@ namespace TMGmod.Buddies
             _equippedDepth = 2;
             _wearOffset = new Vec2(0, 0);
             _isArmor = true;
-            _equippedThickness = 666f;
+            _equippedThickness = 0f;
             canPickUp = false;
             _translucent = true;
         }
