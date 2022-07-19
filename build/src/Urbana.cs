@@ -20,7 +20,7 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        public SpriteMap ShowedSkin(int allowed) => new SpriteMap(GetPath("Urbana"), 53, 15) { _frame = allowed };
+        public SpriteMap SpriteBase => new SpriteMap(GetPath("Urbana"), 53, 15);
 
         public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
         public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
@@ -28,7 +28,7 @@ namespace TMGmod
         public Urbana(float xval, float yval) : base(xval, yval)
         {
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f, "random");
-            _sprite = ShowedSkin(0);
+            _sprite = SpriteBase;
             _graphic = _sprite;
             _center = new Vec2(27f, 8f);
             _collisionOffset = new Vec2(-27f, -8f);

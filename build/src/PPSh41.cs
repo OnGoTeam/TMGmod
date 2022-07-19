@@ -20,7 +20,7 @@ namespace TMGmod
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
 
-        public SpriteMap ShowedSkin(int allowed) => new SpriteMap(GetPath("PPSH41"), 30, 8) { _frame = allowed };
+        public SpriteMap SpriteBase => new SpriteMap(GetPath("PPSH41"), 30, 8);
 
         public PPSh41(float xval, float yval)
             : base(xval, yval)
@@ -32,7 +32,7 @@ namespace TMGmod
             KickForceDeltaSmg = 3f;
             MaxDelaySmg = 50;
             _type = "gun";
-            _sprite = ShowedSkin(0);
+            _sprite = SpriteBase;
             _graphic = _sprite;
             _center = new Vec2(15f, 4f);
             _collisionOffset = new Vec2(-15f, -4f);

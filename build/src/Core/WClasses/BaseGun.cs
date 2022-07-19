@@ -375,9 +375,11 @@ namespace TMGmod.Core.WClasses
 
         public override void Draw()
         {
-            base.Draw();
 #if DEBUG
+            DrawRandom();
             DrawDebug();
+#else
+            base.Draw();
 #endif
         }
 
@@ -457,7 +459,7 @@ namespace TMGmod.Core.WClasses
             {
                 case IShowSkins target:
                 {
-                    foreach (var skin in target.AllowedSkins.Concat(new []{-1}))
+                    foreach (var skin in target.AllowedSkins.Concat(new[] { -1 }))
                         contextMenu.AddItem(new ContextSkinRender(target, skin));
                     break;
                 }
@@ -479,6 +481,7 @@ namespace TMGmod.Core.WClasses
             get => GetBuffer(ActiveModifier, () => { });
             set => ActiveModifier.Read(value, () => { });
         }
+
         [UsedImplicitly] public StateBinding MbBinding { get; } = new StateBinding(nameof(ModifierBuffer));
 
         private class BaseModifier : Modifier
@@ -545,6 +548,28 @@ namespace TMGmod.Core.WClasses
             if (duck is null) return;
             DrawAccuracy();
             DrawDamage();
+        }
+
+        private void DrawRandom()
+        {
+            if (Level.activeLevel is Editor && this is IShowSkins target && target.Skin.value == -1)
+            {
+                _flipHorizontal = offDir <= 0;
+                ContextSkinRender.WithRandomized(
+                    target,
+                    sprite =>
+                    {
+                        var old = _graphic;
+                        _graphic = sprite;
+                        base.Draw();
+                        _graphic = old;
+                    }
+                );
+            }
+            else
+            {
+                base.Draw();
+            }
         }
 #endif
     }

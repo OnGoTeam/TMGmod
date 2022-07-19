@@ -19,7 +19,7 @@ namespace TMGmod
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
         private readonly EditorProperty<int> skin;
-        public SpriteMap ShowedSkin(int allowed) => new SpriteMap(GetPath("SIX12S"), 29, 10) { _frame = allowed };
+        public SpriteMap SpriteBase => new SpriteMap(GetPath("SIX12S"), 29, 10);
 
         [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
 
@@ -33,7 +33,7 @@ namespace TMGmod
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _type = "gun";
-            _sprite = ShowedSkin(0);
+            _sprite = SpriteBase;
             _graphic = _sprite;
             _sprite.frame = 0;
             _center = new Vec2(19f, 5f);
