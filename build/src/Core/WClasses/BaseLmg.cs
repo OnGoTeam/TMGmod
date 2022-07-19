@@ -1,6 +1,8 @@
-﻿namespace TMGmod.Core.WClasses
+﻿using DuckGame;
+
+namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseLmg : BaseGun, IRandKforce, IAmLmg
+    public abstract class BaseLmg : BaseGun, IAmLmg
     {
         protected BaseLmg(float xval, float yval) : base(xval, yval)
         {
@@ -10,8 +12,10 @@
             KickForce2Lmg = 0.7f;
         }
 
-        public float KickForce1Lmg { get; protected set; }
+        protected override float BaseKforce => Rando.Float(KickForce1Lmg, KickForce2Lmg);
 
-        public float KickForce2Lmg { get; protected set; }
+        protected float KickForce1Lmg { get; set; }
+
+        protected float KickForce2Lmg { get; set; }
     }
 }

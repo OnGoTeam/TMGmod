@@ -61,11 +61,6 @@ namespace TMGmod.Core.WClasses
                 : kickForce;
         }
 
-        private static float CalculateRandKforce(IRandKforce target)
-        {
-            return Rando.Float(target.KickForce1Lmg, target.KickForce2Lmg);
-        }
-
         private static float CalculateFirstKforce(IFirstKforce target, float kickForce)
         {
             return target.CurrentDelaySmg <= 0 ? kickForce + target.KickForceDeltaSmg : kickForce;
@@ -77,8 +72,6 @@ namespace TMGmod.Core.WClasses
             {
                 case IHspeedKforce target:
                     return CalculateHSpeedKforce(target, kickForce);
-                case IRandKforce target:
-                    return CalculateRandKforce(target);
                 case IFirstKforce target:
                     return CalculateFirstKforce(target, kickForce);
                 default:

@@ -290,7 +290,6 @@
     <Compile Include="src\Core\WClasses\IHspeedKforce.cs" />
     <Compile Include="src\Core\WClasses\IAmDmr.cs" />
     <Compile Include="src\Core\WClasses\IAmHg.cs" />
-    <Compile Include="src\Core\WClasses\IRandKforce.cs" />
     <Compile Include="src\Core\WClasses\IAmSg.cs" />
     <Compile Include="src\Core\WClasses\IFirstKforce.cs" />
     <Compile Include="src\Core\WClasses\ISpeedAccuracy.cs" />
