@@ -13,7 +13,7 @@ namespace TMGmod.Core.Bullets
 
         public override void OnCollide(Vec2 pos, Thing t, bool willBeStopped)
         {
-            if (!(t is IPlatform) || !((t as Holdable)?.thickness > 1.1f)) return;
+            if (!(t is IPlatform) || !((t as PhysicsObject)?.thickness > 1.1f)) return;
             doneTravelling = true;
             alpha = -1f;
             Level.Remove(this);
