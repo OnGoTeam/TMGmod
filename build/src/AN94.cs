@@ -2,8 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassImplementations;
 using TMGmod.Core.WClasses.ClassMarkers;
 
@@ -11,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class AN94 : BaseBurst, IHspeedKforce, IAmAr, IHaveAllowedSkins
+    public class AN94 : BaseBurst, IAmAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });
@@ -44,12 +44,11 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
             _ammoType = new AT545NATO { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
+            IntrinsicAccuracy = true;
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 1.5f;
-            KickForceSlowAr = 0.5f;
-            _kickForce = 1.6f;
-            KickForceFastAr = 2f;
+            _kickForce = 0.5f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.45f;
             _editorName = "AN94";
@@ -58,6 +57,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(30f, 2.5f);
             DeltaWait = 0.07f;
             BurstNum = 2;
+            Compose(new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f));
         }
 
         [UsedImplicitly]
@@ -97,9 +97,6 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float KickForceSlowAr { get; }
-        public float KickForceFastAr { get; }
 
         public override void Update()
         {
