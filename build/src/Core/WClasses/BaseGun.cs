@@ -529,6 +529,11 @@ namespace TMGmod.Core.WClasses
             Level.Add(new HintThing(this, offset, hint, image()));
         }
 
+        public void Hint(string hint, Func<Vec2> offset, string trigger)
+        {
+            Hint("disable bipods", offset, () => gun.duck.inputProfile.GetTriggerImage(trigger));
+        }
+
         private class HintThing : Thing
         {
             private readonly Thing _target;
