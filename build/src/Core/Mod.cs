@@ -101,8 +101,10 @@ namespace TMGmod.Core
         {
             SavePlaylistToFile(
                 Playlist(levels),
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                    "DuckGame\\Levels\\TMG.play")
+                Path.Combine(
+                    DuckFile.saveRoot,
+                    "DuckGame\\Levels\\TMG.play"
+                )
             );
         }
 
