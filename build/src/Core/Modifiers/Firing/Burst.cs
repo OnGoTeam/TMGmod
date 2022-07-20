@@ -6,9 +6,9 @@ namespace TMGmod.Core.Modifiers.Firing
 {
     public class Burst : Modifier
     {
-        public int Num = 2;
-        public float Wait = .1f;
-        public bool Enabled;
+        public int Num { private get; set; } = 2;
+        public float Wait { private get; set; } = .1f;
+        public bool Enabled { private get; set; }
         private int _shotsLeft;
         private readonly BaseGun _target;
         private bool _withinContext;
