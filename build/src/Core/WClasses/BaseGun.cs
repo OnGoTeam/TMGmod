@@ -97,20 +97,12 @@ namespace TMGmod.Core.WClasses
             ammoType.accuracy = ClipAccuracy(ammoType.accuracy - target.RegenAccuracyDmr - target.DrainAccuracyDmr);
         }
 
-        private static void FireFirstPrecise(IFirstPrecise target)
-        {
-            target.CurrentDelayFp = target.MaxDelayFp;
-        }
-
         private void FireAccuracy()
         {
             switch (this)
             {
                 case ILoseAccuracy target:
                     FireLoseAccuracy(target);
-                    break;
-                case IFirstPrecise target:
-                    FireFirstPrecise(target);
                     break;
             }
         }
@@ -206,13 +198,6 @@ namespace TMGmod.Core.WClasses
             return ammoType.accuracy + target.RegenAccuracyDmr;
         }
 
-        private float CalculateFirstPrecise(IFirstPrecise target)
-        {
-            return target.CurrentDelayFp > 0f
-                ? target.LowerAccuracyFp
-                : BaseAccuracy;
-        }
-
         protected virtual float CalculateAccuracy(float accuracy)
         {
             switch (this)
@@ -221,8 +206,6 @@ namespace TMGmod.Core.WClasses
                     return CalculateSpeedAccuracy(target);
                 case ILoseAccuracy target:
                     return CalculateLoseAccuracy(target);
-                case IFirstPrecise target:
-                    return CalculateFirstPrecise(target);
                 default:
                     return accuracy;
             }
@@ -233,21 +216,6 @@ namespace TMGmod.Core.WClasses
         private void SetAccuracy()
         {
             if (_ammoType != null && !IntrinsicAccuracy) _ammoType.accuracy = Accuracy;
-        }
-
-        private static void UpdateFirstPrecise(IFirstPrecise target)
-        {
-            target.CurrentDelayFp = Math.Max(target.CurrentDelayFp - 1, 0);
-        }
-
-        private void UpdateAccuracy()
-        {
-            switch (this)
-            {
-                case IFirstPrecise target:
-                    UpdateFirstPrecise(target);
-                    break;
-            }
         }
 
         private void UpdateHone()
@@ -389,8 +357,6 @@ namespace TMGmod.Core.WClasses
 
         private void DynamicOnUpdate()
         {
-            if (DynamicAccuracy())
-                UpdateAccuracy();
             if (DynamicFeatures())
                 UpdateFeatures();
         }

@@ -2,15 +2,15 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class Vista : BaseBurst, IFirstPrecise, IHaveAllowedSkins, I5
+    public class Vista : BaseBurst, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 5 });
@@ -24,14 +24,8 @@ namespace TMGmod
         {
             skin = new EditorProperty<int>(5, this, -1f, 9f, 0.5f);
             ammo = 30;
-            _ammoType = new ATVista
-            {
-                range = 105f,
-                accuracy = 0.75f,
-            };
-            MaxDelayFp = 30;
+            _ammoType = new ATVista();
             MaxAccuracy = 1f;
-            LowerAccuracyFp = 0.75f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
             _graphic = _sprite;
@@ -52,11 +46,9 @@ namespace TMGmod
             _weight = 2f;
             DeltaWait = 0.1f;
             BurstNum = 3;
+            Compose(new FirstAccuracy(30, accuracy => accuracy - .25f));
         }
 
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

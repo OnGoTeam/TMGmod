@@ -9,6 +9,8 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATVista()
         {
+            accuracy = .75f;
+            range = 105f;
             penetration = 0.4f;
             bulletSpeed = 37f;
             bulletThickness = 0.8f;

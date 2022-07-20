@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.Core.WClasses;
@@ -11,7 +12,7 @@ namespace TMGmod
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
-    public class PP19 : BaseGun, IFirstPrecise, IHaveAllowedSkins, IHaveStock
+    public class PP19 : BaseGun, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 8 });
@@ -32,9 +33,7 @@ namespace TMGmod
             ammo = 64;
             _ammoType = new ATBizon();
             MaxAccuracy = 0.8f;
-            LowerAccuracyFp = 0.6f;
             MinAccuracy = 0.2f;
-            MaxDelayFp = 25;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PP19Bizon"), 28, 9);
             _graphic = _sprite;
@@ -58,11 +57,8 @@ namespace TMGmod
             ShellOffset = new Vec2(-1f, -2f);
             _editorName = "PP-19 Bizon";
             _weight = 1.5f;
+            Compose(new FirstAccuracy(25, accuracy => accuracy - .2f));
         }
-
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
