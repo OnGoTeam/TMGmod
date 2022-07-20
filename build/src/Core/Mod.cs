@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Properties;
 
 namespace TMGmod.Core
 {
@@ -15,8 +14,6 @@ namespace TMGmod.Core
     public class TMGmod : Mod
     {
         [UsedImplicitly] internal static TMGmod LastInstance;
-
-        [UsedImplicitly] internal string Bdate = Resources.BuildDate;
 
         public TMGmod()
         {

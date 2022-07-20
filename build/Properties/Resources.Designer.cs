@@ -59,15 +59,5 @@ namespace TMGmod.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 21.10.2020 13:05:21,77 
-        ///.
-        /// </summary>
-        internal static string BuildDate {
-            get {
-                return ResourceManager.GetString("BuildDate", resourceCulture);
-            }
-        }
     }
 }
