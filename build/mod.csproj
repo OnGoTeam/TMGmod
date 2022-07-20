@@ -88,6 +88,7 @@
     <Compile Include="src\Core\AmmoTypes\ATButcher.cs" />
     <Compile Include="src\Core\AmmoTypes\ATYava6.cs" />
     <Compile Include="src\Core\BipodsLogic\BipodsImplementation.cs" />
+    <Compile Include="src\Core\Modifiers\Accuracy\FirstAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\FocusingAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\LoseAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />

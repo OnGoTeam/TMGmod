@@ -24,8 +24,8 @@ namespace TMGmod.Buddies
             _hitPoints = HpMax;
             _collisionOffset = new Vec2(-4f, -4f);
             _collisionSize = new Vec2(8f, 8f);
-            _equippedCollisionOffset = new Vec2(-12f, -12f);
-            _equippedCollisionSize = new Vec2(24f, 24f);
+            _equippedCollisionOffset = new Vec2(-12f, -16f);
+            _equippedCollisionSize = new Vec2(24f, 32f);
             _hasEquippedCollision = true;
             _center = new Vec2(8f, 8f);
             physicsMaterial = PhysicsMaterial.Duck;

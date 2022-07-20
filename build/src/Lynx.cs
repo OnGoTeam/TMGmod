@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
-using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -58,10 +57,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
             _weight = 6f;
-            BaseActiveModifier = ComposedModifier.Compose(
-                DefaultModifier(),
-                _loseAccuracy
-            );
+            Compose(_loseAccuracy);
         }
 
         private readonly LoseAccuracy _loseAccuracy = new LoseAccuracy(0.6f, 0.01f, 1f);

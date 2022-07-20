@@ -2,7 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -56,10 +55,7 @@ namespace TMGmod
             MaxDelayFp = 10;
             DeltaWait = 0.45f;
             BurstNum = 1;
-            BaseActiveModifier = ComposedModifier.Compose(
-                DefaultModifier(),
-                new FirstKforce(20, kforce => kforce + 1.2f)
-            );
+            Compose(new FirstKforce(20, kforce => kforce + 1.2f));
         }
 
         [UsedImplicitly]

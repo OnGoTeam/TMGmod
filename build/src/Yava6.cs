@@ -2,7 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -52,10 +51,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-13f, -4f);
             _editorName = "Yava 6";
             _weight = 5f;
-            BaseActiveModifier = ComposedModifier.Compose(
-                DefaultModifier(),
-                new FocusingAccuracy(this, 1f, .05f)
-            );
+            Compose(new FocusingAccuracy(this, 1f, .05f));
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));

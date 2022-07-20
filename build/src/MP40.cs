@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -11,7 +12,7 @@ namespace TMGmod
     [BaggedProperty("isInDemo", true)]
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class MP40 : BaseSmg, IFirstPrecise, IHaveAllowedSkins, I5
+    public class MP40 : BaseSmg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 7, 8 });
@@ -27,11 +28,8 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 32;
             _ammoType = new ATMP40();
-            MaxAccuracy = 1f;
-            LowerAccuracyFp = 0.7f;
             KforceDelta = 2f;
             KforceDelay = 20;
-            MaxDelayFp = 20;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP40"), 23, 14);
             _graphic = _sprite;
@@ -54,11 +52,9 @@ namespace TMGmod
             _weight = 3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
+            Compose(new FirstAccuracy(20, accuracy => accuracy - .3f));
         }
 
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

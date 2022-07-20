@@ -2,7 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -47,11 +46,9 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, 0f);
             _editorName = "IB-8mm Sniper";
             _weight = 3f;
-            BaseActiveModifier = ComposedModifier.Compose(
-                DefaultModifier(),
-                new FirstKforce(11, kforce => kforce + 2f)
-            );
+            Compose(new FirstKforce(11, kforce => kforce + 2f));
         }
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

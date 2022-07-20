@@ -1,5 +1,4 @@
 ﻿using DuckGame;
-using TMGmod.Core.Modifiers;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.NY
@@ -23,7 +22,7 @@ namespace TMGmod.NY
             _fireWait = 2f;
             _editorName = "Tree-12";
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            BaseActiveModifier = new Modifier();
+            ResetModifier();
             _numBulletsPerFire = Rando.Int(5, 50);
             _ammoType = new ATIgla
             {

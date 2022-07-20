@@ -1,5 +1,4 @@
-﻿using TMGmod.Core.Modifiers;
-using TMGmod.Core.Modifiers.Kforce;
+﻿using TMGmod.Core.Modifiers.Kforce;
 
 namespace TMGmod.Core.WClasses
 {
@@ -11,10 +10,7 @@ namespace TMGmod.Core.WClasses
         {
             KforceDelta = 0.2f;
             _firstKforce = new FirstKforce(50, kforce => kforce + KforceDelta);
-            BaseActiveModifier = ComposedModifier.Compose(
-                DefaultModifier(),
-                _firstKforce
-            );
+            Compose(_firstKforce);
         }
 
         protected float KforceDelta { get; set; }

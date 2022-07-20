@@ -2,7 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -51,8 +50,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-10f, 0f);
             _editorName = "SVU";
             _weight = 5.7f;
-            BaseActiveModifier = ComposedModifier.Compose(
-                DefaultModifier(),
+            Compose(
                 new LoseAccuracy(.02f, .017f, 1f),
                 new SpeedAccuracy(this, 0f, 1f, 0f)
             );

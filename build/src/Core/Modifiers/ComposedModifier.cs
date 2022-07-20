@@ -53,4 +53,12 @@ namespace TMGmod.Core.Modifiers
             _left.Write(buffer, () => _right.Write(buffer, write));
         }
     }
+
+    public static class ModifierComposition
+    {
+        public static IModifyEverything Compose(this IModifyEverything modifier, params IModifyEverything[] modifiers)
+        {
+            return ComposedModifier.Compose(new[] { modifier }.Concat(modifiers).ToArray());
+        }
+    }
 }
