@@ -3,14 +3,15 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Burst")]
-    public class M93R : BaseBurst, IAmHg, IHaveAllowedSkins, I5
+    public class M93R : BaseGun, IAmHg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
         private readonly SpriteMap _sprite;
@@ -41,8 +42,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "M93R";
             _weight = 2f;
-            DeltaWait = 0.3f;
-            BurstNum = 3;
+            Compose(new Burst(this, true) { Num = 3, Wait = .3f });
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
