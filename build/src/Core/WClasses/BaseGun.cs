@@ -306,6 +306,36 @@ namespace TMGmod.Core.WClasses
 #endif
         }
 
+
+#if FEATURE_EDITOR_SKINS
+        private void DrawRandom()
+        {
+            if (
+                Level.activeLevel is Editor
+                && this is IHaveAllowedSkins target
+                && _graphic is SpriteMap sprite
+                && target.SkinValue == -1
+            )
+            {
+                _flipHorizontal = offDir <= 0;
+                ContextSkinRender.WithRandomized(
+                    new SkinMix(target, sprite),
+                    s =>
+                    {
+                        var old = _graphic;
+                        _graphic = s;
+                        base.Draw();
+                        _graphic = old;
+                    }
+                );
+            }
+            else
+            {
+                base.Draw();
+            }
+        }
+#endif
+
         public override void EditorPropertyChanged(object property)
         {
             if (this is IHaveAllowedSkins target) target.UpdateSkin();
@@ -484,33 +514,6 @@ namespace TMGmod.Core.WClasses
             if (duck is null) return;
             DrawAccuracy();
             DrawDamage();
-        }
-
-        private void DrawRandom()
-        {
-            if (
-                Level.activeLevel is Editor
-                && this is IHaveAllowedSkins target
-                && _graphic is SpriteMap sprite
-                && target.SkinValue == -1
-            )
-            {
-                _flipHorizontal = offDir <= 0;
-                ContextSkinRender.WithRandomized(
-                    new SkinMix(target, sprite),
-                    s =>
-                    {
-                        var old = _graphic;
-                        _graphic = s;
-                        base.Draw();
-                        _graphic = old;
-                    }
-                );
-            }
-            else
-            {
-                base.Draw();
-            }
         }
 #endif
 
