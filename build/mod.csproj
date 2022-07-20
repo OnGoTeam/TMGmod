@@ -397,7 +397,7 @@
   <PropertyGroup>
     <PostBuildEvent>SET outdir=%25userprofile%25\Documents\DuckGame\Mods\$(TargetName)
 SET altdir=%25appdata%25\DuckGame\Mods\$(TargetName)
-IF EXIST %25appdata%25\DuckGame\Mods\mods.conf (
+IF EXIST %25appdata%25\DuckGame\Mods (
     SET outdir=%25altdir%25
 )
 IF NOT EXIST %25outdir%25 (
