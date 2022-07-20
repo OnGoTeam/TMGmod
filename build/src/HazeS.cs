@@ -124,7 +124,7 @@ namespace TMGmod
             return Sighted || duck?.inputProfile.Down("QUACK") != true;
         }
 
-        protected override void OnFire()
+        protected override void OnSpent()
         {
             Heatval = Heatval;
             if (Sighted && _heatval < 1f) _heatval += 4f;

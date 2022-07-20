@@ -15,9 +15,9 @@ namespace TMGmod.Core.Modifiers
             _right = right;
         }
 
-        public void ModifyFire(Action fire)
+        public void ModifySpent(Action spent)
         {
-            _left.ModifyFire(() => _right.ModifyFire(fire));
+            _left.ModifySpent(() => _right.ModifySpent(spent));
         }
 
         public void ModifyUpdate(Action update)

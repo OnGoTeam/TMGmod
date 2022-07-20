@@ -25,7 +25,7 @@ namespace TMGmod.Core.Modifiers.Kforce
             if (_currentDelay > 0) _currentDelay -= 1;
         }
 
-        protected override void ModifyFire()
+        protected override void ModifySpent()
         {
             _currentDelay = MaxDelay;
         }

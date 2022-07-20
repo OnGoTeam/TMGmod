@@ -120,7 +120,7 @@ namespace TMGmod.Core.WClasses
 
         private void OnAmmoSpent()
         {
-            OnFire();
+            OnSpent();
             MaybeAddNyCase();
         }
 
@@ -348,13 +348,13 @@ namespace TMGmod.Core.WClasses
             return this;
         }
 
-        protected virtual void BaseOnFire()
+        protected virtual void BaseOnSpent()
         {
         }
 
-        protected virtual void OnFire()
+        protected virtual void OnSpent()
         {
-            ActiveModifier.ModifyFire(BaseOnFire);
+            ActiveModifier.ModifySpent(BaseOnSpent);
         }
 
         protected virtual void BaseOnUpdate()
@@ -400,7 +400,7 @@ namespace TMGmod.Core.WClasses
                 _target = target;
             }
 
-            protected override void ModifyFire()
+            protected override void ModifySpent()
             {
             }
 

@@ -33,12 +33,12 @@ namespace TMGmod.NY
         protected override bool DynamicAccuracy() => false;
         protected override float Accuracy => Rando.Float(0f, 0.9f);
 
-        protected override void OnFire()
+        protected override void OnSpent()
         {
             _ammoType.bulletSpeed = Rando.Float(0.1f, 7f);
             _ammoType.accuracy = Rando.Float(0f, 0.9f);
             _numBulletsPerFire = Rando.Int(5, 50);
-            base.OnFire();
+            base.OnSpent();
         }
     }
 }

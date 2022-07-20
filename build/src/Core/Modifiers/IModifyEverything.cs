@@ -6,7 +6,7 @@ using TMGmod.Core.Modifiers.Updating;
 
 namespace TMGmod.Core.Modifiers
 {
-    public interface IModifyEverything : IModifyFire, IModifyUpdate, IModifyAccuracy, IModifyKforce, ISync
+    public interface IModifyEverything : IModifySpent, IModifyUpdate, IModifyAccuracy, IModifyKforce, ISync
     {
     }
 }

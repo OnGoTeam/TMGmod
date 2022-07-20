@@ -17,7 +17,7 @@ namespace TMGmod.Core.Modifiers.Accuracy
             _rate = rate;
         }
 
-        protected override void ModifyFire() => _loss = _max;
+        protected override void ModifySpent() => _loss = _max;
 
         private bool LossShouldBeMax => _target.duck is null || _target.duck.velocity.length > .1f;
 

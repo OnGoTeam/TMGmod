@@ -172,7 +172,7 @@
     <Compile Include="src\Core\Modifiers\Kforce\FirstKforce.cs" />
     <Compile Include="src\Core\Modifiers\Kforce\IModifyKforce.cs" />
     <Compile Include="src\Core\Modifiers\Kforce\HSpeedKforce.cs" />
-    <Compile Include="src\Core\Modifiers\Firing\IModifyFire.cs" />
+    <Compile Include="src\Core\Modifiers\Firing\IModifySpent.cs" />
     <Compile Include="src\Core\Modifiers\Modifier.cs" />
     <Compile Include="src\Core\IAmAGun.cs" />
     <Compile Include="src\Core\BipodsLogic\IHaveBipodState.cs" />

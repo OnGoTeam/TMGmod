@@ -5,14 +5,14 @@ namespace TMGmod.Core.Modifiers
 {
     public class Modifier : IModifyEverything
     {
-        protected virtual void ModifyFire()
+        protected virtual void ModifySpent()
         {
         }
 
-        public void ModifyFire(Action fire)
+        public void ModifySpent(Action spent)
         {
-            ModifyFire();
-            fire();
+            ModifySpent();
+            spent();
         }
 
         protected virtual void ModifyUpdate()

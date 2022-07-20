@@ -24,7 +24,7 @@ namespace TMGmod.Core.Modifiers.Accuracy
             return accuracy - Maths.Clamp(_drained, 0f, Max);
         }
 
-        protected override void ModifyFire()
+        protected override void ModifySpent()
         {
             _drained = Math.Min(Max, _drained + Drain);
         }
