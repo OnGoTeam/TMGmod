@@ -3,21 +3,21 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Accuracy;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
-    public class MP5 : BaseBurst, IHaveAllowedSkins, IAmSmg
+    public class MP5 : BaseGun, IHaveAllowedSkins, IAmSmg
     {
         private const int NonSkinFrames = 2;
         protected float IncreasedAccuracy;
-
-        [UsedImplicitly] public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
+        
         protected SpriteMap Texture;
 
         public MP5(float xval, float yval)
@@ -48,25 +48,22 @@ namespace TMGmod
             ShellOffset = new Vec2(2f, -4f);
             _editorName = "MP5A3";
             _weight = 3f;
-            DeltaWait = 0.45f;
-            BurstNum = 1;
             Compose(
                 new FirstKforce(20, kforce => kforce + 1.2f),
-                new FirstAccuracy(10, accuracy => DecreasedAccuracy)
+                new FirstAccuracy(10, accuracy => DecreasedAccuracy),
+                new Burst(this, false)
+                {
+                    Num = 3,
+                    Wait = .45f,
+                    SwitchOnQuack = true,
+                    OnSwitch = burst =>
+                    {
+                        _fireWait = burst ? 1.8f : 0.5f;
+                        FrameId = FrameId % 10 + (burst ? 10 : 0);
+                        MaxAccuracy = burst ? IncreasedAccuracy : DecreasedAccuracy;
+                    }
+                }
             );
-        }
-
-        [UsedImplicitly]
-        public bool NonAuto
-        {
-            get => BurstNum == 1;
-            set
-            {
-                BurstNum = value ? 1 : 3;
-                _fireWait = value ? 0.5f : 1.8f;
-                FrameId = FrameId % 10 + (value ? 0 : 10);
-                MaxAccuracy = value ? DecreasedAccuracy : IncreasedAccuracy;
-            }
         }
 
         protected float DecreasedAccuracy { get; set; }
@@ -79,17 +76,6 @@ namespace TMGmod
         {
             get => Texture.frame;
             set => Texture.frame = value % (10 * NonSkinFrames);
-        }
-
-        public override void Update()
-        {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
-            {
-                NonAuto = !NonAuto;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
-
-            base.Update();
         }
     }
 }

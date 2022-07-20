@@ -8,14 +8,23 @@ namespace TMGmod.Core.Modifiers.Firing
     {
         public int Num { private get; set; } = 2;
         public float Wait { private get; set; } = .1f;
-        public bool Enabled { private get; set; }
+        private bool _enabled;
         private int _shotsLeft;
         private readonly BaseGun _target;
         private bool _withinContext;
+        public bool SwitchOnQuack { private get; set; }
+        public Action<bool> OnSwitch { private get; set; }
 
-        public Burst(BaseGun target)
+        public Burst(BaseGun target, bool enabled)
         {
             _target = target;
+            _enabled = enabled;
+        }
+
+        private void Switch(Func<bool, bool> map)
+        {
+            _enabled = map(_enabled);
+            OnSwitch?.Invoke(_enabled);
         }
 
         public override void ModifyFire(Action fire)
@@ -23,7 +32,7 @@ namespace TMGmod.Core.Modifiers.Firing
             if (_shotsLeft <= 0)
             {
                 fire();
-                if (Enabled)
+                if (_enabled)
                 {
                     _shotsLeft = Num - 1;
                     if (_shotsLeft > 0)
@@ -39,23 +48,46 @@ namespace TMGmod.Core.Modifiers.Firing
             }
         }
 
-        protected override void ModifyUpdate()
+        private void ShootLeft()
         {
-            if (_shotsLeft <= 0) return;
             _withinContext = true;
             _target.Fire();
             _withinContext = false;
         }
 
+        private void UpdateShotsLeft()
+        {
+            if (_shotsLeft > 0) ShootLeft();
+        }
+
+        private bool NeedSwitch() => SwitchOnQuack && _target.duck?.inputProfile.Pressed("QUACK") == true;
+
+        private void DoSwitch()
+        {
+            Switch(burst => !burst);
+            SFX.Play(Mod.GetPath<TMGmod>("sounds/tuduc.wav"));
+        }
+
+        private void UpdateSwitch()
+        {
+            if (NeedSwitch()) DoSwitch();
+        }
+
+        protected override void ModifyUpdate()
+        {
+            UpdateSwitch();
+            UpdateShotsLeft();
+        }
+
         protected override void Read(BitBuffer buffer)
         {
-            Enabled = buffer.ReadBool();
+            _enabled = buffer.ReadBool();
             _shotsLeft = buffer.ReadInt();
         }
 
         protected override void Write(BitBuffer buffer)
         {
-            buffer.Write(Enabled);
+            buffer.Write(_enabled);
             buffer.Write(_shotsLeft);
         }
     }
