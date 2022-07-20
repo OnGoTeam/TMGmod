@@ -232,7 +232,7 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case ICanDisableBipods target:
+                case ISwitchBipods target:
                     target.UpdateSwitchableBipods();
                     break;
                 case IHaveBipods target:
@@ -312,7 +312,7 @@ namespace TMGmod.Core.WClasses
             base.EditorPropertyChanged(property);
         }
 
-        public Gun AsAGun()
+        public BaseGun AsAGun()
         {
             return this;
         }
@@ -512,5 +512,72 @@ namespace TMGmod.Core.WClasses
             }
         }
 #endif
+
+        private static readonly Dictionary<Tuple<Type, string>, bool> Hints =
+            new Dictionary<Tuple<Type, string>, bool>();
+
+        public void Hint(string hint, Func<Vec2> offset, Func<Sprite> image)
+        {
+            if (!isServerForObject) return;
+            var tuple = new Tuple<Type, string>(GetType(), hint);
+#if DEBUG
+            if (Hints.ContainsKey(tuple) && !duck.inputProfile.Pressed("STRAFE")) return;
+#else
+            if (Hints.ContainsKey(tuple)) return;
+#endif
+            Hints[tuple] = true;
+            Level.Add(new HintThing(this, offset, hint, image()));
+        }
+
+        private class HintThing : Thing
+        {
+            private readonly Thing _target;
+            private readonly Func<Vec2> _offset;
+            private readonly string _hint;
+            private readonly Sprite _image;
+            private int _ticks;
+
+            public HintThing(Thing target, Func<Vec2> offset, string hint, Sprite image)
+            {
+                _target = target;
+                _offset = offset;
+                _hint = hint;
+                _image = image;
+            }
+
+            public override void Update()
+            {
+                ++_ticks;
+                if (_ticks > 180)
+                    Level.Remove(this);
+            }
+
+            public override void Draw()
+            {
+                var pos = _target.Offset(_offset());
+                position = pos;
+                var newDepth = _target.depth.Add(1);
+                angle = _ticks * .07f;
+                Graphics.DrawCircle(pos, 4f + (float)Math.Sin(_ticks * .1f), Color.Coral, depth: newDepth);
+                const int n = 3;
+                for (var i = 0; i < n; ++i)
+                {
+                    angle += (float)(2 * Math.PI / n);
+                    Graphics.DrawLine(
+                        Offset(new Vec2(2.5f, 0f)),
+                        Offset(new Vec2(5.5f, 0f)),
+                        Color.Coral,
+                        depth: newDepth
+                    );
+                }
+
+                pos.x += 16f;
+                pos.y -= 8f;
+                _image.depth = newDepth;
+                Graphics.Draw(_image, pos.x, pos.y - _image.height / 2f);
+                pos.y += _image.height / 2f;
+                Graphics.DrawStringOutline(_hint, pos, Color.White, depth: newDepth, outline: Color.Black);
+            }
+        }
     }
 }

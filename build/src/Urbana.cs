@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class Urbana : BaseBolt, IHaveAllowedSkins, ICanDisableBipods, IDeployBipods
+    public class Urbana : BaseBolt, IHaveAllowedSkins, ISwitchBipods
     {
         private const int NonSkinFrames = 4;
 

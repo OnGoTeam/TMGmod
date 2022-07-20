@@ -10,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : BaseBolt, IHaveAllowedSkins, I5, ICanDisableBipods, IDeployBipods
+    public class AWS : BaseBolt, IHaveAllowedSkins, I5, ISwitchBipods
     {
         // Amazon Web Services
 

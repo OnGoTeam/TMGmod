@@ -1,9 +1,9 @@
-﻿using DuckGame;
+﻿using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core
 {
     public interface IAmAGun
     {
-        Gun AsAGun();
+        BaseGun AsAGun();
     }
 }

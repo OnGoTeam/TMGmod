@@ -8,7 +8,7 @@ using TMGmod.Core.WClasses.ClassImplementations;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
-    public class FnFcar : BaseDmr, IHaveAllowedSkins, ICanDisableBipods, IDeployBipods
+    public class FnFcar : BaseDmr, IHaveAllowedSkins, ISwitchBipods
     {
         private const int NonSkinFrames = 5;
 

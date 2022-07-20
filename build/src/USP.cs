@@ -83,6 +83,8 @@ namespace TMGmod
 
         public override void Update()
         {
+            if (duck != null) Hint("silencer", () => barrelOffset, () => duck.inputProfile.GetTriggerImage("QUACK"));
+
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));

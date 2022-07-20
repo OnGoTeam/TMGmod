@@ -11,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG3 : BaseLmg, IHaveAllowedSkins, I5, ICanDisableBipods, IDeployBipods
+    public class MG3 : BaseLmg, IHaveAllowedSkins, I5, ISwitchBipods
     {
         private const int NonSkinFrames = 6;
 

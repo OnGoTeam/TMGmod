@@ -11,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|NOTRELEASEDYET")]
     [UsedImplicitly]
-    public class Lstk16V6 : BaseGun, IHaveAllowedSkins, ICanDisableBipods, IDeployBipods
+    public class Lstk16V6 : BaseGun, IHaveAllowedSkins, ISwitchBipods
     {
         private const int NonSkinFrames = 9;
 
