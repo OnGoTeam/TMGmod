@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TMGmod.Core.AmmoTypes;
 using DuckGame;
 using JetBrains.Annotations;
@@ -10,6 +9,7 @@ using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
 #if DEBUG
+using System.Collections.Generic;
 using System.Linq;
 #endif
 
@@ -303,6 +303,7 @@ namespace TMGmod.Core.WClasses
             return contextMenu;
         }
 
+#if DEBUG
         private class SkinMix : IShowSkins
         {
             private readonly IHaveAllowedSkins _target;
@@ -323,6 +324,7 @@ namespace TMGmod.Core.WClasses
             public ICollection<int> AllowedSkins => _target.AllowedSkins;
             public SpriteMap SpriteBase { get; }
         }
+#endif
 
         private static BitBuffer GetBuffer(ISync modifier, Action write)
         {
