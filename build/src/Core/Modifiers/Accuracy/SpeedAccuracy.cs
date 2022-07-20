@@ -24,13 +24,14 @@ namespace TMGmod.Core.Modifiers.Accuracy
         {
             return _target.duck != null
                 ? accuracy
-                  +
-                  _threshold
                   -
-                  (
+                  Math.Max(
+                      0f,
                       Math.Abs(_target.duck.hSpeed) * _horizontal
                       +
                       Math.Abs(_target.duck.vSpeed) * _vertical
+                      -
+                      _threshold
                   )
                 : accuracy;
         }

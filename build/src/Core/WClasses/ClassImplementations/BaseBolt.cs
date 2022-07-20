@@ -1,11 +1,12 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod.Core.WClasses.ClassImplementations
 {
-    public abstract class BaseBolt : BaseGun, ISpeedAccuracy, IAmSr
+    public abstract class BaseBolt : BaseGun, IAmSr
     {
         [UsedImplicitly] public float AngleOffset;
         [UsedImplicitly] public StateBinding AngleOffsetBinding = new StateBinding(nameof(AngleOffset));
@@ -19,17 +20,11 @@ namespace TMGmod.Core.WClasses.ClassImplementations
             NetLoad = new NetSoundEffect(netLoad);
             MaxAccuracy = 1f;
             MinAccuracy = 0f;
-            SpeedAccuracyThreshold = 0f;
-            SpeedAccuracyHorizontal = 1f;
-            SpeedAccuracyVertical = 0f;
             _manualLoad = true;
             _fullAuto = false;
             laserSight = false;
+            Compose(new SpeedAccuracy(this, 0f, 1f, 0f));
         }
-
-        public float SpeedAccuracyThreshold { get; }
-        public float SpeedAccuracyHorizontal { get; }
-        public float SpeedAccuracyVertical { get; }
 
         protected virtual bool HasLaser()
         {
