@@ -31,7 +31,6 @@ namespace TMGmod.Custom_Guns
         private readonly Vec2[] _barrelOffsetTLm = { new Vec2(16f, 2f), new Vec2(14f, 6f) };
         private readonly string[] _fireSoundm = { "sounds/1.wav", "littleGun" };
 
-        private readonly Sprite[] _graphicm = { new Sprite(), new Sprite(), new Sprite() };
         private readonly float[] _loseAccuracym = { .1f, 0f };
         private readonly float[] _maxAccuracyLostm = { .55f, 0f };
         private readonly int[] _numBulletsPerFirem = { 1, 16 };
@@ -47,13 +46,11 @@ namespace TMGmod.Custom_Guns
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATPMR30();
+            _ammoType = _ammoTypem[0];
             _numBulletsPerFire = 1;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("PMR300"), 16, 10);
-            _graphicm[0] = new Sprite(GetPath("PMR301"));
-            _graphicm[1] = new Sprite(GetPath("PMR302"));
-            _graphicm[2] = new Sprite(GetPath("PMR300"));
+            _sprite = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
+            graphic = _sprite;
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
@@ -69,7 +66,7 @@ namespace TMGmod.Custom_Guns
             maxAccuracyLost = 0.5f;
             _editorName = "PMR30 Shotgunned";
             _weight = 1f;
-            _graphic = _graphicm[_switched ? Mode : 2];
+            FrameId = FrameId % 10 + 10 * (_switched ? 1 + Mode : 0);
         }
 
         [UsedImplicitly]
@@ -85,7 +82,7 @@ namespace TMGmod.Custom_Guns
 
         private void UpdateMode()
         {
-            graphic = _graphicm[_switched ? Mode : 2];
+            FrameId = FrameId % 10 + 10 * (_switched ? 1 + Mode : 0);
             _ammoType = _ammoTypem[Mode];
             _barrelOffsetTL = _barrelOffsetTLm[Mode];
             _fireSound = _fireSoundm[Mode];
