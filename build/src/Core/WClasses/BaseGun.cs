@@ -230,9 +230,10 @@ namespace TMGmod.Core.WClasses
 
         private void UpdateFeatures()
         {
+            Hint();
             switch (this)
             {
-                case ISwitchBipods target:
+                case ICanDisableBipods target:
                     target.UpdateSwitchableBipods();
                     break;
                 case IHaveBipods target:
@@ -516,9 +517,10 @@ namespace TMGmod.Core.WClasses
         private static readonly Dictionary<Tuple<Type, string>, bool> Hints =
             new Dictionary<Tuple<Type, string>, bool>();
 
-        public void Hint(string hint, Func<Vec2> offset, Func<Sprite> image)
+        private void Hint(string hint, Func<Vec2> offset, Func<Sprite> image)
         {
             if (!isServerForObject) return;
+            if (hint is null) return;
             var tuple = new Tuple<Type, string>(GetType(), hint);
 #if DEBUG
             if (Hints.ContainsKey(tuple) && !duck.inputProfile.Pressed("STRAFE")) return;
@@ -531,7 +533,53 @@ namespace TMGmod.Core.WClasses
 
         public void Hint(string hint, Func<Vec2> offset, string trigger)
         {
-            Hint("disable bipods", offset, () => gun.duck.inputProfile.GetTriggerImage(trigger));
+            if (duck != null)
+                Hint(hint, offset, () => duck.inputProfile.GetTriggerImage(trigger));
+        }
+
+        private void Hint()
+        {
+            if (NeedHint()) Hint(HintMessage, HintOffset, HintTrigger);
+        }
+
+        protected virtual string HintMessage
+        {
+            get
+            {
+                switch (this)
+                {
+                    case IDeployBipods target when target.BipodsDeployed():
+                        return "disable bipods";
+                    case IHaveStock _:
+                        return "switch stock";
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        protected virtual Vec2 HintOffset()
+        {
+            switch (this)
+            {
+                case IHaveStock _:
+                    return new Vec2(-8f, 0f) - _holdOffset;
+                default:
+                    return barrelOffset;
+            }
+        }
+
+        protected string HintTrigger = "QUACK";
+
+        protected virtual bool NeedHint()
+        {
+            switch (this)
+            {
+                case IDeployBipods target when !target.BipodsDeployed():
+                    return false;
+                default:
+                    return true;
+            }
         }
 
         private class HintThing : Thing

@@ -41,6 +41,8 @@ namespace TMGmod
             _weight = 1f;
         }
 
+        protected override string HintMessage => "silencer";
+
         public bool Silencer
         {
             get => _fireSound == GetPath("sounds/SilencedPistol.wav");
@@ -80,11 +82,8 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
         public override void Update()
         {
-            if (duck != null) Hint("silencer", () => barrelOffset, "QUACK");
-
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
