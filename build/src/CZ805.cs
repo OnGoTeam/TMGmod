@@ -50,8 +50,8 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _editorName = "CZ-805 BREN";
             _weight = 5f;
-            KickForceSlowAr = 1.5f;
-            KickForceFastAr = 2.76f;
+            _kickForce = 1.5f;
+            KforceDelta = 1.26f;
         }
 
         [UsedImplicitly]

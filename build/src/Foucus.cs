@@ -45,8 +45,8 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = true;
             _fireWait = 0.65f;
-            KickForceSlowAr = 2f;
-            KickForceFastAr = 3.5f;
+            _kickForce = 2f;
+            KforceDelta = 1.5f;
             loseAccuracy = 0.275f;
             maxAccuracyLost = 0.275f;
             _editorName = "Foucus";

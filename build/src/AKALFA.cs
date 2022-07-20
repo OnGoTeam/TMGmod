@@ -54,9 +54,8 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.75f;
-            _kickForce = 0.65f;
-            KickForceSlowAr = 0.05f;
-            KickForceFastAr = 0.75f;
+            _kickForce = 0.05f;
+            KforceDelta = 0.70f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.25f;
             _editorName = "Alfa";

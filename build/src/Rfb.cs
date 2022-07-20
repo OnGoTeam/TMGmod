@@ -45,12 +45,12 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
             _fireWait = 0.46f;
-            _kickForce = 1.7f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             _editorName = "RFB";
             _weight = 5.5f;
-            KickForceFastAr = 0.7f;
+            _kickForce = 0.07f;
+            KforceDelta = 0.63f;
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));

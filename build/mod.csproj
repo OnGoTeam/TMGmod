@@ -287,7 +287,6 @@
     <Compile Include="src\Core\WClasses\ClassImplementations\BaseAr.cs" />
     <Compile Include="src\Core\WClasses\ClassImplementations\BaseLmg.cs" />
     <Compile Include="src\Core\WClasses\ClassImplementations\BaseSmg.cs" />
-    <Compile Include="src\Core\WClasses\IHspeedKforce.cs" />
     <Compile Include="src\Core\WClasses\ClassMarkers\IAmDmr.cs" />
     <Compile Include="src\Core\WClasses\ClassMarkers\IAmHg.cs" />
     <Compile Include="src\Core\WClasses\ClassMarkers\IAmSg.cs" />

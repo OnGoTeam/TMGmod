@@ -2,8 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassImplementations;
 using TMGmod.Core.WClasses.ClassMarkers;
 
@@ -11,7 +11,7 @@ namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Rifle|Burst|Custom")]
     // ReSharper disable once InconsistentNaming
-    public class AN94C : BaseBurst, IHspeedKforce, IAmAr, IHaveAllowedSkins
+    public class AN94C : BaseBurst, IAmAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });
@@ -47,9 +47,7 @@ namespace TMGmod.Custom_Guns
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2f;
-            KickForceSlowAr = 0.07f;
-            _kickForce = 0.9f;
-            KickForceFastAr = 0.9f;
+            _kickForce = 0.07f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.1f;
             _editorName = "AN94 with Wooden Stock";
@@ -58,6 +56,7 @@ namespace TMGmod.Custom_Guns
             _laserOffsetTL = new Vec2(30f, 2.5f);
             DeltaWait = 0.07f;
             BurstNum = 2;
+            Compose(new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f));
         }
 
         [UsedImplicitly]
@@ -97,10 +96,6 @@ namespace TMGmod.Custom_Guns
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float KickForceSlowAr { get; }
-
-        public float KickForceFastAr { get; }
 
         public override void Update()
         {

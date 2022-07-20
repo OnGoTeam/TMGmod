@@ -45,14 +45,13 @@ namespace TMGmod
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.85f;
-            _kickForce = 1f;
             loseAccuracy = 0.11f;
             maxAccuracyLost = 0.2f;
             _editorName = "ARwA";
             _weight = 5f;
             _magBuddy = new MagBuddy(this, typeof(ArwaMag));
-            KickForceFastAr = 1.2f;
-            KickForceSlowAr = 1f;
+            _kickForce = 1f;
+            KforceDelta = .2f;
         }
 
         public bool SetMag()

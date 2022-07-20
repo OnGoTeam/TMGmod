@@ -50,8 +50,8 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _editorName = "CZ-C2 SAR";
             _weight = 4.4f;
-            KickForceSlowAr = 1.5f;
-            KickForceFastAr = 3.1f;
+            _kickForce = 1.5f;
+            KforceDelta = 1.6f;
         }
 
         [UsedImplicitly]

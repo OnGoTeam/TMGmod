@@ -28,8 +28,8 @@ namespace TMGmod
             _ammoType = new ATVintorez();
             MinAccuracy = 0f;
             MaxAccuracy = 0.9f;
-            KickForceSlowAr = 0.4f;
-            KickForceFastAr = 0.85f;
+            _kickForce = 0.4f;
+            KforceDelta = 0.45f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);
             _graphic = _sprite;
@@ -44,7 +44,6 @@ namespace TMGmod
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _fullAuto = true;
             _fireWait = 0.7f;
-            _kickForce = 2.85f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
             _editorName = "Vintorez";

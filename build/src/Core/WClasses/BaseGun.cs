@@ -64,33 +64,11 @@ namespace TMGmod.Core.WClasses
 
         protected virtual IModifyEverything ActiveModifier => _baseActiveModifier;
 
-        private float CalculateHSpeedKforce(IHspeedKforce target, float kickForce)
-        {
-            return duck != null
-                ? Math.Abs(duck.hSpeed) < 0.1f ? target.KickForceSlowAr : target.KickForceFastAr
-                : kickForce;
-        }
+        protected virtual float CalculateKforce(float kickForce) => kickForce;
 
-        protected virtual float CalculateKforce(float kickForce)
-        {
-            switch (this)
-            {
-                case IHspeedKforce target:
-                    return CalculateHSpeedKforce(target, kickForce);
-                default:
-                    return kickForce;
-            }
-        }
+        private void SetKforce() => _kickForce = Kforce;
 
-        private void SetKforce()
-        {
-            _kickForce = Kforce;
-        }
-
-        private void AddNyCase()
-        {
-            Level.Add(new NewYearCase(x, y));
-        }
+        private void AddNyCase() => Level.Add(new NewYearCase(x, y));
 
         private void MaybeAddNyCase()
         {
@@ -103,10 +81,7 @@ namespace TMGmod.Core.WClasses
             MaybeAddNyCase();
         }
 
-        protected virtual void RealFire()
-        {
-            base.Fire();
-        }
+        protected virtual void RealFire() => base.Fire();
 
         private void FireWithKforce()
         {
@@ -158,15 +133,9 @@ namespace TMGmod.Core.WClasses
             if (CanFire()) DoFire();
         }
 
-        private float ClipAccuracy(float accuracy)
-        {
-            return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
-        }
+        private float ClipAccuracy(float accuracy) => Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
 
-        protected virtual float CalculateAccuracy(float accuracy)
-        {
-            return accuracy;
-        }
+        protected virtual float CalculateAccuracy(float accuracy) => accuracy;
 
         protected bool IntrinsicAccuracy { get; set; }
 
@@ -280,10 +249,7 @@ namespace TMGmod.Core.WClasses
             base.EditorPropertyChanged(property);
         }
 
-        public Gun AsAGun()
-        {
-            return this;
-        }
+        public Gun AsAGun() => this;
 
         protected virtual float BaseAccuracy => MaxAccuracy;
 
@@ -297,10 +263,7 @@ namespace TMGmod.Core.WClasses
         {
         }
 
-        protected virtual void OnFire()
-        {
-            ActiveModifier.ModifyFire(BaseOnFire);
-        }
+        protected virtual void OnFire() => ActiveModifier.ModifyFire(BaseOnFire);
 
         protected virtual void BaseOnUpdate()
         {
@@ -312,15 +275,9 @@ namespace TMGmod.Core.WClasses
                 UpdateFeatures();
         }
 
-        protected virtual void OnUpdate()
-        {
-            ActiveModifier.ModifyUpdate(BaseOnUpdate);
-        }
+        protected virtual void OnUpdate() => ActiveModifier.ModifyUpdate(BaseOnUpdate);
 
-        protected virtual void OnInitialize()
-        {
-            SetAccuracy();
-        }
+        protected virtual void OnInitialize() => SetAccuracy();
 
 
         public override void Initialize()

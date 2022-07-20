@@ -54,9 +54,8 @@ namespace TMGmod
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;
             _fireWait = 0.81f;
-            _kickForce = 2.35f;
-            KickForceSlowAr = 1.6f;
-            KickForceFastAr = 1.9f;
+            _kickForce = 1.6f;
+            KforceDelta = .3f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.6f;
             _editorName = "Mk17 with Shield";
