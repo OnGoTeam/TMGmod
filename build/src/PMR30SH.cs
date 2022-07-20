@@ -6,7 +6,7 @@ using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Custom")]
     // ReSharper disable once InconsistentNaming
@@ -50,7 +50,7 @@ namespace TMGmod.Custom_Guns
             _numBulletsPerFire = 1;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
-            graphic = _sprite;
+            _graphic = _sprite;
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);

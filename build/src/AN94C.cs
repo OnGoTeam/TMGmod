@@ -7,7 +7,7 @@ using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 using TMGmod.Core.WClasses.ClassMarkers;
 
-namespace TMGmod.Custom_Guns
+namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Burst")]
     // ReSharper disable once InconsistentNaming

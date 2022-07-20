@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
