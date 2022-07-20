@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers.Accuracy;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -11,6 +12,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
+    [UsedImplicitly]
     public class M50 : BaseGun, IAmSr, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
@@ -64,7 +66,6 @@ namespace TMGmod
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
 
-        [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
@@ -84,5 +85,17 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
+    }
+
+    [EditorGroup("TMG|DEBUG")]
+    [UsedImplicitly]
+    public class Super50: M50
+    {
+        public Super50(float xval, float yval) : base(xval, yval)
+        {
+            ammo = 35;
+            material = new MaterialGlitch(this);
+            Compose(new Burst(this) { Num = 5, Wait = 1f, Enabled = true });
+        }
     }
 }

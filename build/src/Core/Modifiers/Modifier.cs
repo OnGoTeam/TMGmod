@@ -59,5 +59,10 @@ namespace TMGmod.Core.Modifiers
             Write(buffer);
             write();
         }
+
+        public virtual void ModifyFire(Action fire)
+        {
+            fire();
+        }
     }
 }

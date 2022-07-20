@@ -98,11 +98,6 @@ namespace TMGmod.Core.WClasses
             _baseActiveModifier = _baseActiveModifier.Compose(modifiers);
         }
 
-        protected virtual float CalculateKforce(float kickForce)
-        {
-            return kickForce;
-        }
-
         private void SetKforce()
         {
             _kickForce = Kforce;
@@ -129,10 +124,15 @@ namespace TMGmod.Core.WClasses
             base.Fire();
         }
 
+        protected virtual void ModifiedFire()
+        {
+            ActiveModifier.ModifyFire(RealFire);
+        }
+
         private void FireWithKforce()
         {
             var previousAmmo = ammo;
-            RealFire();
+            ModifiedFire();
             if (ammo < previousAmmo)
                 OnAmmoSpent();
         }
@@ -182,11 +182,6 @@ namespace TMGmod.Core.WClasses
         private float ClipAccuracy(float accuracy)
         {
             return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
-        }
-
-        protected virtual float CalculateAccuracy(float accuracy)
-        {
-            return accuracy;
         }
 
         private void SetAccuracy()
@@ -400,23 +395,9 @@ namespace TMGmod.Core.WClasses
                 _target = target;
             }
 
-            protected override void ModifySpent()
-            {
-            }
-
             protected override void ModifyUpdate()
             {
                 _target.DynamicOnUpdate();
-            }
-
-            public override float ModifyAccuracy(float accuracy)
-            {
-                return _target.CalculateAccuracy(accuracy);
-            }
-
-            public override float ModifyKforce(float kforce)
-            {
-                return _target.CalculateKforce(kforce);
             }
         }
 

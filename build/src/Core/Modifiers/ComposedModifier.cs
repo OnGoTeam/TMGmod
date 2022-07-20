@@ -52,6 +52,11 @@ namespace TMGmod.Core.Modifiers
         {
             _left.Write(buffer, () => _right.Write(buffer, write));
         }
+
+        public void ModifyFire(Action fire)
+        {
+            _left.ModifyFire(() => _right.ModifyFire(fire));
+        }
     }
 
     public static class ModifierComposition
