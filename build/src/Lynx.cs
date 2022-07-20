@@ -13,7 +13,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class Lynx : BaseGun, IAmDmr, ISpeedAccuracy, IHaveAllowedSkins, I5, ICanDisableBipods, IDeployBipods
+    public class Lynx : BaseGun, IAmDmr, IHaveAllowedSkins, I5, ICanDisableBipods, IDeployBipods
     {
         private const int NonSkinFrames = 4;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 5 });
@@ -58,7 +58,10 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _editorName = "Gepard Lynx";
             _weight = 6f;
-            Compose(_loseAccuracy);
+            Compose(
+                _loseAccuracy,
+                new SpeedAccuracy(this, 0f, 1f, 0f)
+            );
         }
 
         private readonly LoseAccuracy _loseAccuracy = new LoseAccuracy(0.6f, 0.01f, 1f);
@@ -124,9 +127,5 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float SpeedAccuracyThreshold => 0f;
-        public float SpeedAccuracyHorizontal => 1f;
-        public float SpeedAccuracyVertical => 0f;
     }
 }
