@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod.Core.WClasses
 {

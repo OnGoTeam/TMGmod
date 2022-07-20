@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod.Core.WClasses
 {

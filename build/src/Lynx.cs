@@ -7,6 +7,7 @@ using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {

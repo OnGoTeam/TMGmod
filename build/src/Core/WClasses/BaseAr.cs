@@ -1,4 +1,6 @@
-﻿namespace TMGmod.Core.WClasses
+﻿using TMGmod.Core.WClasses.ClassMarkers;
+
+namespace TMGmod.Core.WClasses
 {
     public abstract class BaseAr : BaseGun, IHspeedKforce, IAmAr
     {

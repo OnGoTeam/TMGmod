@@ -5,6 +5,7 @@ using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {

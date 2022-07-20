@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.Core.Bullets;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
