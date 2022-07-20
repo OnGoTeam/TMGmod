@@ -13,7 +13,7 @@ namespace TMGmod.Buddies
     [UsedImplicitly]
     public class HpArmor : Equipment
     {
-        public readonly float HpMax;
+        public float HpMax;
 
         [UsedImplicitly] public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
         [UsedImplicitly] public StateBinding HpMaxBinding = new StateBinding(nameof(HpMax));
@@ -149,9 +149,19 @@ namespace TMGmod.Buddies
             return equippedDuck1.thickness > bullet.ammo.penetration;
         }
 
+        private void NetworkKill(DestroyType dtype)
+        {
+            var equippedDuck1 = _equippedDuck;
+            equippedDuck1.invincible = false;
+            equippedDuck1.KnockOffEquipment(this);
+            Fondle(this, DuckNetwork.localConnection);
+            equippedDuck1.Destroy(dtype);
+            Level.Remove(this);
+        }
+
         private void Damage(float damage)
         {
-            if (isServerForObject) _hitPoints -= damage;
+            _hitPoints -= damage;
 #if DEBUG
             StringMarker.Show(position, damage.ToString(CultureInfo.InvariantCulture));
 #endif
@@ -159,13 +169,14 @@ namespace TMGmod.Buddies
 
         private void Slowdown()
         {
-            EquippedDuck().hSpeed *= 0.25f;
+            if (EquippedDuck() != null)
+                EquippedDuck().hSpeed *= 0.25f;
         }
 
-        private void Damage(Bullet bullet)
+        private void DoDamage(float damage)
         {
             Slowdown();
-            Damage(DamageImplementation.Calculate(bullet));
+            Damage(damage);
         }
 
         private static void ShowMarkers(Bullet bullet, Vec2 hitPos)
@@ -179,11 +190,22 @@ namespace TMGmod.Buddies
             return _hitPoints < 0;
         }
 
+        public void NetworkHit(float damage)
+        {
+            DoDamage(damage);
+            if (Broken())
+                NetworkKill(new DTCrush(this));
+        }
+
         private bool RealHit(Bullet bullet, Vec2 hitPos)
         {
-            Damage(bullet);
             DecorativeHit(bullet, hitPos);
             bullet.hitArmor = true;
+            var damage = DamageImplementation.Calculate(bullet);
+            if (isServerForObject)
+                DoDamage(damage);
+            else if (Network.isActive)
+                Send.Message(new NmHpDamage(this, damage));
             return !Broken() || Kill(bullet);
         }
 
@@ -303,6 +325,28 @@ namespace TMGmod.Buddies
             }
 
             base.UnEquip();
+        }
+    }
+
+    public class NmHpDamage : NMEvent
+    {
+        [UsedImplicitly] public Thing Hp;
+        [UsedImplicitly] public float Amount;
+
+        public NmHpDamage(HpArmor hp, float amount)
+        {
+            Hp = hp;
+            Amount = amount;
+        }
+
+        public NmHpDamage()
+        {
+        }
+
+        public override void Activate()
+        {
+            if (Hp.isServerForObject && Hp is HpArmor hp)
+                hp.NetworkHit(Amount);
         }
     }
 }

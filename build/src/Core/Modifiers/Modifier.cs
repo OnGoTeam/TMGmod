@@ -56,8 +56,8 @@ namespace TMGmod.Core.Modifiers
 
         public void Write(BitBuffer buffer, Action write)
         {
-            write();
             Write(buffer);
+            write();
         }
     }
 }

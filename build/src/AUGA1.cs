@@ -51,7 +51,7 @@ namespace TMGmod
         [UsedImplicitly]
         public bool Grip
         {
-            get => _sprite.frame > 10;
+            get => maxAccuracyLost > 0.1f;
             set
             {
                 if (!value)
