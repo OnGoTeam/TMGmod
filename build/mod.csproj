@@ -291,7 +291,6 @@
     <Compile Include="src\Core\WClasses\ClassMarkers\IAmDmr.cs" />
     <Compile Include="src\Core\WClasses\ClassMarkers\IAmHg.cs" />
     <Compile Include="src\Core\WClasses\ClassMarkers\IAmSg.cs" />
-    <Compile Include="src\Core\WClasses\ISpeedAccuracy.cs" />
     <Compile Include="src\KSG12.cs" />
     <Compile Include="src\MP5.cs" />
     <Compile Include="src\MP5SD.cs" />

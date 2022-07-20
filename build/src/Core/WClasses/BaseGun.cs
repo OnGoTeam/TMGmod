@@ -163,30 +163,9 @@ namespace TMGmod.Core.WClasses
             return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
         }
 
-        private float CalculateSpeedAccuracy(ISpeedAccuracy target)
-        {
-            return duck == null
-                ? BaseAccuracy
-                : BaseAccuracy
-                  +
-                  target.SpeedAccuracyThreshold
-                  -
-                  (
-                      Math.Abs(duck.hSpeed) * target.SpeedAccuracyHorizontal
-                      +
-                      Math.Abs(duck.vSpeed) * target.SpeedAccuracyVertical
-                  );
-        }
-
         protected virtual float CalculateAccuracy(float accuracy)
         {
-            switch (this)
-            {
-                case ISpeedAccuracy target:
-                    return CalculateSpeedAccuracy(target);
-                default:
-                    return accuracy;
-            }
+            return accuracy;
         }
 
         protected bool IntrinsicAccuracy { get; set; }
