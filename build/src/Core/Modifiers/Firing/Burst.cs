@@ -32,12 +32,10 @@ namespace TMGmod.Core.Modifiers.Firing
             if (_shotsLeft <= 0)
             {
                 fire();
-                if (_enabled)
-                {
-                    _shotsLeft = Num - 1;
-                    if (_shotsLeft > 0)
-                        _target._wait = Wait;
-                }
+                if (!_enabled) return;
+                _shotsLeft = Num - 1;
+                if (_shotsLeft > 0)
+                    _target._wait = Wait;
             }
             else if (_withinContext && _target._wait <= 0f)
             {
