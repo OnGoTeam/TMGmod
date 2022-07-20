@@ -2,15 +2,16 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
     [UsedImplicitly]
     [EditorGroup("TMG|Handgun|Burst")]
-    public class Glock18 : BaseBurst, IAmHg, IHaveAllowedSkins
+    public class Glock18 : BaseGun, IAmHg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
         private readonly SpriteMap _sprite;
@@ -42,8 +43,7 @@ namespace TMGmod
             _holdOffset = new Vec2(-1f, 2f);
             _editorName = "Anyx PR5";
             _weight = 1.7f;
-            DeltaWait = 0.6f;
-            BurstNum = 3;
+            Compose(new Burst(this, true) { Num = 3, Wait = .6f });
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 4 });
