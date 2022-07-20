@@ -22,8 +22,8 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMP5SD();
             IncreasedAccuracy = 0.92f;
-            LowerAccuracyFp = 0.77f;
-            MaxAccuracy = LowerAccuracyFp;
+            DecreasedAccuracy = 0.77f;
+            MaxAccuracy = DecreasedAccuracy;
             _type = "gun";
             Texture = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _graphic = Texture;

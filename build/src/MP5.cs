@@ -2,9 +2,9 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassImplementations;
 using TMGmod.Core.WClasses.ClassMarkers;
 
@@ -12,7 +12,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
-    public class MP5 : BaseBurst, IFirstPrecise, IHaveAllowedSkins, IAmSmg
+    public class MP5 : BaseBurst, IHaveAllowedSkins, IAmSmg
     {
         private const int NonSkinFrames = 2;
         public virtual ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
@@ -32,8 +32,8 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMP5();
             IncreasedAccuracy = .9f;
-            LowerAccuracyFp = 0.7f;
-            MaxAccuracy = LowerAccuracyFp;
+            DecreasedAccuracy = 0.7f;
+            MaxAccuracy = DecreasedAccuracy;
             _type = "gun";
             Texture = new SpriteMap(GetPath("MP5"), 27, 12);
             _graphic = Texture;
@@ -54,10 +54,12 @@ namespace TMGmod
             ShellOffset = new Vec2(2f, -4f);
             _editorName = "MP5A3";
             _weight = 3f;
-            MaxDelayFp = 10;
             DeltaWait = 0.45f;
             BurstNum = 1;
-            Compose(new FirstKforce(20, kforce => kforce + 1.2f));
+            Compose(
+                new FirstKforce(20, kforce => kforce + 1.2f),
+                new FirstAccuracy(10, accuracy => DecreasedAccuracy)
+            );
         }
 
         [UsedImplicitly]
@@ -69,13 +71,10 @@ namespace TMGmod
                 BurstNum = value ? 1 : 3;
                 _fireWait = value ? 0.5f : 1.8f;
                 FrameId = FrameId % 10 + (value ? 0 : 10);
-                MaxAccuracy = value ? LowerAccuracyFp : IncreasedAccuracy;
+                MaxAccuracy = value ? DecreasedAccuracy : IncreasedAccuracy;
             }
         }
-
-        public int CurrentDelayFp { get; set; }
-        public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; protected set; }
+        public float DecreasedAccuracy { get; protected set; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
