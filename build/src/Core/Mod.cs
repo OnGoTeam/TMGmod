@@ -49,8 +49,10 @@ namespace TMGmod.Core
 
         private static IEnumerable<string> SetupLevels()
         {
-            var levelsTarget = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                "DuckGame\\Levels\\TMG\\");
+            var levelsTarget = Path.Combine(
+                DuckFile.saveRoot,
+                "DuckGame\\Levels\\TMG\\"
+            );
             if (!Directory.Exists(levelsTarget))
                 Directory.CreateDirectory(levelsTarget);
             IList<string> levels = new List<string>();
