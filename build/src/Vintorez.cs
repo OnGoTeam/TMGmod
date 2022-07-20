@@ -3,14 +3,14 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
-    public class Vintorez : BaseAr, ISpeedAccuracy, IHaveAllowedSkins, IHaveBipods
+    public class Vintorez : BaseAr, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 7 });
@@ -30,7 +30,6 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             KickForceSlowAr = 0.4f;
             KickForceFastAr = 0.85f;
-            SpeedAccuracyVertical = 0.5f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);
             _graphic = _sprite;
@@ -50,6 +49,7 @@ namespace TMGmod
             maxAccuracyLost = 0f;
             _editorName = "Vintorez";
             _weight = 4.7f;
+            Compose(new SpeedAccuracy(this, 1f, 1f, 0.5f));
         }
 
         protected override bool DynamicKforce() => false;
@@ -60,7 +60,6 @@ namespace TMGmod
             set
             {
                 _kickForce = value ? Rando.Float(0.5f, 1f) : 2.85f;
-                SpeedAccuracyVertical = value ? 0f : 0.5f;
             }
         }
 
@@ -83,9 +82,5 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float SpeedAccuracyThreshold => 1f;
-        public float SpeedAccuracyHorizontal => 1f;
-        public float SpeedAccuracyVertical { get; private set; }
     }
 }
