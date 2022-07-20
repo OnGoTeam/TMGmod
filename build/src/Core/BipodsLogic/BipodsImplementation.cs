@@ -38,7 +38,7 @@ namespace TMGmod.Core.BipodsLogic
             else if (gun.duck.inputProfile.Pressed("QUACK")) target.SetBipodsDisabled(!target.BipodsDisabled);
             target.UpdateBipods();
             if (gun.duck != null && target.BipodsDeployed())
-                gun.Hint("silencer", () => gun.barrelOffset, () => gun.duck.inputProfile.GetTriggerImage("QUACK"));
+                gun.Hint("disable bipods", () => gun.barrelOffset, () => gun.duck.inputProfile.GetTriggerImage("QUACK"));
         }
 
         public static bool BipodsDeployed(this IHaveBipodState target) => target.BipodsState > .99f;
