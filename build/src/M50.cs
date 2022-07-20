@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -10,7 +11,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
-    public class M50 : BaseGun, ISpeedAccuracy, IAmSr, IHaveAllowedSkins, IHaveBipods
+    public class M50 : BaseGun, IAmSr, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
@@ -56,8 +57,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(31f, 9f);
             _editorName = "M50";
             _weight = 6.75f;
-            SpeedAccuracyThreshold = 1f;
-            SpeedAccuracyVertical = 1f;
+            Compose(new SpeedAccuracy(this, 1f, 1f, 1f));
         }
 
         public bool Bipods
@@ -68,20 +68,13 @@ namespace TMGmod
                 _kickForce = value ? 1f : 8f;
                 loseAccuracy = value ? 0f : 0.1f;
                 maxAccuracyLost = value ? 0f : 0.3f;
-                SpeedAccuracyVertical = value ? 0f : 0.5f;
             }
         }
 
-        [UsedImplicitly]
         public BitBuffer BipodsBuffer
         {
-            get
-            {
-                var b = new BitBuffer();
-                b.Write(Bipods);
-                return b;
-            }
-            set => Bipods = value.ReadBool();
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
         }
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
@@ -96,16 +89,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        public float SpeedAccuracyThreshold { get; }
-        public float SpeedAccuracyHorizontal => 1f;
-        public float SpeedAccuracyVertical { get; private set; }
-
-        public override void Update()
-        {
-            base.Update();
-            Bipods = Bipods;
         }
     }
 }
