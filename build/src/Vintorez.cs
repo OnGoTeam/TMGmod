@@ -56,10 +56,7 @@ namespace TMGmod
         public bool Bipods
         {
             get => HandleQ();
-            set
-            {
-                _kickForce = value ? Rando.Float(0.5f, 1f) : 2.85f;
-            }
+            set => _kickForce = value ? Rando.Float(0.5f, 1f) : 2.85f;
         }
 
         public BitBuffer BipodsBuffer
