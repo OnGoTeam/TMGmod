@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
@@ -9,8 +10,9 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
-    public class ScarGL : BaseGun, IAmAr
+    public class ScarGL : BaseGun, IAmAr, IHaveFrameId
     {
+        private const int NonSkinFrames = 3;
         private readonly AmmoType[] _ammoTypem =
         {
             new AT556NATO
@@ -34,7 +36,7 @@ namespace TMGmod
         private readonly string[] _fireSoundm = { "sounds/1.wav", "deepMachineGun" };
         private readonly SpriteMap[] _flarem;
 
-        private readonly Sprite[] _graphicm = { new Sprite(), new Sprite(), new Sprite() };
+        private readonly SpriteMap _sprite;
         private readonly float[] _loseAccuracym = { .1f, 0f };
         private readonly float[] _maxAccuracyLostm = { .45f, 0f };
         private bool _switched;
@@ -55,18 +57,11 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new AT556NATO
-            {
-                range = 400f,
-                accuracy = 0.9f,
-                bulletSpeed = 35f,
-                barrelAngleDegrees = 0f,
-            };
+            _ammoType = _ammoTypem[0];
             MaxAccuracy = 0.9f;
             _type = "gun";
-            _graphicm[0] = new Sprite(GetPath("scargl1"));
-            _graphicm[1] = new Sprite(GetPath("scargl2"));
-            _graphicm[2] = new Sprite(GetPath("scargl"));
+            _sprite = new SpriteMap(GetPath("scargl"), 33, 10);
+            _graphic = _sprite;
             _center = new Vec2(16.5f, 5f);
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 11f);
@@ -93,14 +88,14 @@ namespace TMGmod
             maxAccuracyLost = 0.45f;
             _editorName = "SCAR-H With GL";
             _weight = 6f;
-            _graphic = _graphicm[_switched ? Mode : 2];
+            FrameId = FrameId % 10 + 10 * (_switched ? 1 + Mode : 0);
         }
 
         private int[] Ammom => new[] { Ammom0, Ammom1 };
 
         private void UpdateMode()
         {
-            graphic = _graphicm[_switched ? Mode : 2];
+            FrameId = FrameId % 10 + 10 * (_switched ? 1 + Mode : 0);
             _ammoType = _ammoTypem[Mode];
             _barrelOffsetTL = _barrelOffsetTLm[Mode];
             _fireSound = _fireSoundm[Mode];
@@ -134,6 +129,15 @@ namespace TMGmod
                 Ammom1 = ammo;
 
             ammo = Ammom[0] + Ammom[1];
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }
