@@ -10,7 +10,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
             Compose(new HSpeedKforce(this, hspeed => hspeed > KforceSpeedThreshold, kforce => kforce + KforceDelta));
         }
 
-        public float KforceDelta { get; protected set; } = .73f;
-        protected float KforceSpeedThreshold = .1f;
+        protected float KforceDelta { get; set; } = .73f;
+        private const float KforceSpeedThreshold = .1f;
     }
 }

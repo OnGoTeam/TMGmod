@@ -1,4 +1,5 @@
-﻿// MIT License Copyright (c) 2020 timotheyca
+﻿#if DEBUG
+// MIT License Copyright (c) 2020 timotheyca
 // https://gitea.ongoteam.net/timofey/solve_poly/src/branch/master/LICENSE
 
 #define LINE_HOOK
@@ -214,3 +215,4 @@ namespace TMGmod.SolvePoly
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿#if DEBUG
+using DuckGame;
 
 namespace TMGmod.Core.SkinLogic
 {
@@ -7,3 +8,4 @@ namespace TMGmod.Core.SkinLogic
         SpriteMap SpriteBase { get; }
     }
 }
+#endif

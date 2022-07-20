@@ -74,7 +74,8 @@ namespace TMGmod
                 MaxAccuracy = value ? DecreasedAccuracy : IncreasedAccuracy;
             }
         }
-        public float DecreasedAccuracy { get; protected set; }
+
+        protected float DecreasedAccuracy { get; set; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

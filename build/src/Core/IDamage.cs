@@ -82,8 +82,11 @@ namespace TMGmod.Core
                 )
             );
         }
-
+#if DEBUG
         public static float CalculateCoeff(AmmoType ammo, float distanceProportion)
+#else
+        private static float CalculateCoeff(AmmoType ammo, float distanceProportion)
+#endif
         {
             return (float)CalculateCoeff(GetAlpha(ammo), GetConvexity(ammo), Clamp(distanceProportion));
         }

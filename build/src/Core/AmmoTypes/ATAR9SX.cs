@@ -1,3 +1,4 @@
+#if DEBUG
 using System;
 using DuckGame;
 using TMGmod.Core.Shells;
@@ -32,3 +33,4 @@ namespace TMGmod.Core.AmmoTypes
         }
     }
 }
+#endif
