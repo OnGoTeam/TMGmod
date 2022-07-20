@@ -3,16 +3,16 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Accuracy;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Combined")]
-    public class ValmetM76 : BaseBurst, IHaveAllowedSkins
+    public class ValmetM76 : BaseGun, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        private readonly LoseAccuracy _loseAccuracy;
         private readonly SpriteMap _sprite;
 
         public ValmetM76(float xval, float yval)
@@ -44,30 +44,30 @@ namespace TMGmod
             maxAccuracyLost = 0.25f; //0.4f
             _editorName = "Valmet M76";
             _weight = 4f;
-            DeltaWait = 0.15f;
-            BurstNum = 1;
-            _loseAccuracy = new LoseAccuracy(0.15f, 0.02f, 1f);
-            Compose(_loseAccuracy);
+            var lose = new LoseAccuracy(0.15f, 0.02f, 1f);
+            Compose(
+                lose,
+                new Burst(
+                    this,
+                    false,
+                    burst => {
+                        _fireWait = burst ? 1.4f : 0.7f;
+                        FrameId = FrameId % 10 + (burst ? 10 : 0);
+                        loseAccuracy = burst ? 0f : 0.15f;
+                        _kickForce = burst ? 6.5f : 3f;
+                        MaxAccuracy = burst ? 1f : 0.89f;
+                        lose.Regen = burst ? 0f : 0.02f;
+                        lose.Drain = burst ? 0f : 0.15f;
+                        MaxAccuracy = burst ? 1f : 0.89f;
+                    }
+                )
+                {
+                    Num = 2,
+                    Wait = .15f,
+                    SwitchOnQuack = true,
+                }
+            );
         }
-
-        public bool NonAuto
-        {
-            get => BurstNum == 1;
-            set
-            {
-                BurstNum = value ? 1 : 2;
-                _fireWait = value ? 0.7f : 1.4f;
-                FrameId = FrameId % 10 + (value ? 0 : 10);
-                loseAccuracy = value ? 0.15f : 0f;
-                _kickForce = value ? 3f : 6.5f;
-                MaxAccuracy = value ? 0.89f : 1f;
-                _loseAccuracy.Regen = value ? 0.02f : 0f;
-                _loseAccuracy.Drain = value ? 0.15f : 0f;
-                MaxAccuracy = value ? 0.89f : 1f;
-            }
-        }
-
-        [UsedImplicitly] public StateBinding NonAutoBinding { get; } = new StateBinding(nameof(NonAuto));
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -78,17 +78,6 @@ namespace TMGmod
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
-        public override void Update()
-        {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
-            {
-                NonAuto = !NonAuto;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
-
-            base.Update();
         }
     }
 }
