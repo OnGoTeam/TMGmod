@@ -1,14 +1,18 @@
 ﻿using DuckGame;
+using System.Collections.Generic;
 using JetBrains.Annotations;
+using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Bolt-Action")]
     [BaggedProperty("isSuperWeapon", true)]
-    public sealed class X3X : BaseGun
+    public sealed class X3X : BaseGun, IHaveAllowedSkins
     {
+        private const int NonSkinFrames = 3;
         private readonly SpriteMap _sprite;
 
         public X3X(float xval, float yval)
@@ -37,29 +41,28 @@ namespace TMGmod
             _weight = 5.5f;
         }
 
-        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        [UsedImplicitly]
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
         public int FrameId
         {
             get => _sprite.frame;
-            set => _sprite.frame = value % 3;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public override void OnPressAction()
         {
-            if ((ammo > 0) & (_sprite.frame == 0))
+            if ((ammo > 0) & (_sprite.frame / 10 == 0))
             {
                 Fire();
-                _sprite.frame = ammo < 1 ? 2 : 1;
+                _sprite.frame += ammo < 1 ? 20 : 10;
             }
-            else if (_sprite.frame == 1)
+            else if (_sprite.frame / 10 == 1)
             {
-                _sprite.frame = 0;
+                _sprite.frame -= 10;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
 
-            if (!((ammo < 1) & (_sprite.frame == 0))) return;
+            if (!((ammo < 1) & (_sprite.frame / 10 == 0))) return;
             SFX.Play(GetPath("sounds/tuduc.wav"));
         }
     }

@@ -1,6 +1,8 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
@@ -8,7 +10,7 @@ namespace TMGmod.Custom_Guns
 {
     [EditorGroup("TMG|Handgun|Custom")]
     // ReSharper disable once InconsistentNaming
-    public class PMR : BaseGun, IAmHg
+    public class PMR : BaseGun, IAmHg, IHaveAllowedSkins
     {
         private readonly AmmoType[] _ammoTypem =
         {
@@ -22,6 +24,9 @@ namespace TMGmod.Custom_Guns
                 DamageMean = 15f,
             },
         };
+
+        private const int NonSkinFrames = 3;
+        private readonly SpriteMap _sprite;
 
         private readonly Vec2[] _barrelOffsetTLm = { new Vec2(16f, 2f), new Vec2(14f, 6f) };
         private readonly string[] _fireSoundm = { "sounds/1.wav", "littleGun" };
@@ -45,6 +50,7 @@ namespace TMGmod.Custom_Guns
             _ammoType = new ATPMR30();
             _numBulletsPerFire = 1;
             _type = "gun";
+            _sprite = new SpriteMap(GetPath("PMR300"), 16, 10);
             _graphicm[0] = new Sprite(GetPath("PMR301"));
             _graphicm[1] = new Sprite(GetPath("PMR302"));
             _graphicm[2] = new Sprite(GetPath("PMR300"));
@@ -110,6 +116,16 @@ namespace TMGmod.Custom_Guns
             else
                 Ammom1 = ammo;
             ammo = Ammom[0] + Ammom[1];
+        }
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }

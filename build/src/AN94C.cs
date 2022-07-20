@@ -9,7 +9,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod.Custom_Guns
 {
-    [EditorGroup("TMG|Rifle|Burst|Custom")]
+    [EditorGroup("TMG|Rifle|Burst")]
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseBurst, IAmAr, IHaveAllowedSkins
     {

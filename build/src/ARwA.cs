@@ -1,15 +1,18 @@
-﻿using DuckGame;
+﻿using System.Collections.Generic;
+using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class ARwA : BaseAr, MagBuddy.ISupportReload
+    public class ARwA : BaseAr, IHaveAllowedSkins, MagBuddy.ISupportReload
     {
+        private const int NonSkinFrames = 4;
         private readonly MagBuddy _magBuddy;
         private readonly SpriteMap _sprite;
         private bool _onemoreclick = true;
@@ -53,7 +56,15 @@ namespace TMGmod
             _kickForce = 1f;
             KforceDelta = .2f;
         }
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
         public bool SetMag()
         {
             if (Mags <= 0) return false;
