@@ -3,14 +3,15 @@ using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Accuracy;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class Vista : BaseBurst, IHaveAllowedSkins, I5
+    public class Vista : BaseGun, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
         private readonly SpriteMap _sprite;
@@ -39,9 +40,10 @@ namespace TMGmod
             ShellOffset = new Vec2(-4f, -3f);
             _editorName = "Vista";
             _weight = 2f;
-            DeltaWait = 0.1f;
-            BurstNum = 3;
-            Compose(new FirstAccuracy(30, accuracy => accuracy - .25f));
+            Compose(
+                new FirstAccuracy(30, accuracy => accuracy - .25f),
+                new Burst(this, true) { Num = 3, Wait = .1f }
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 5 });
