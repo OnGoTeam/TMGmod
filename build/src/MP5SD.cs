@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -9,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Combined")]
     // ReSharper disable once InconsistentNaming
-    public class MP5SD : BaseBurst, IFirstKforce, IFirstPrecise, IHaveAllowedSkins, IAmSmg
+    public class MP5SD : BaseBurst, IFirstPrecise, IHaveAllowedSkins, IAmSmg
     {
         private const int NonSkinFrames = 2;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
@@ -28,7 +29,7 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATMP5SD();
-            MaxAccuracy = 0.9f;
+            MaxAccuracy = 0.77f;
             LowerAccuracyFp = 0.77f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("MP5SD"), 31, 12);
@@ -47,11 +48,13 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "MP5SD";
             _weight = 3f;
-            KickForceDeltaSmg = 1.2f;
             MaxDelayFp = 10;
-            MaxDelaySmg = 20;
             DeltaWait = 0.45f;
             BurstNum = 1;
+            BaseActiveModifier = ComposedModifier.Compose(
+                DefaultModifier(),
+                MP5.KforceModifier()
+            );
         }
 
         [UsedImplicitly]
@@ -63,13 +66,9 @@ namespace TMGmod
                 BurstNum = value ? 1 : 3;
                 _fireWait = value ? 0.5f : 1.8f;
                 FrameId = FrameId % 10 + (value ? 0 : 10);
-                _ammoType.accuracy = value ? 0.77f : 0.92f;
+                MaxAccuracy = value ? 0.77f : 0.92f;
             }
         }
-
-        public float KickForceDeltaSmg { get; }
-        public uint CurrentDelaySmg { get; set; }
-        public uint MaxDelaySmg { get; }
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
         public float LowerAccuracyFp { get; }
