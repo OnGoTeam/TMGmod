@@ -181,7 +181,6 @@
     <Compile Include="src\Core\WClasses\ClassImplementations\BaseDmr.cs" />
     <Compile Include="src\Core\WClasses\BaseGunImplementations.cs" />
     <Compile Include="src\Core\WClasses\BaseGunNoFeatures.cs" />
-    <Compile Include="src\Core\WClasses\ILoseAccuracy.cs" />
     <Compile Include="src\DTSRM44.cs" />
     <Compile Include="src\DTSR44.cs" />
     <Compile Include="src\SolvePoly\Poly.cs" />
