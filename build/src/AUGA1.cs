@@ -48,27 +48,17 @@ namespace TMGmod
             KforceDelta = .63f;
         }
 
+        protected override string HintMessage => "foregrip";
+
         [UsedImplicitly]
         public bool Grip
         {
             get => maxAccuracyLost < 0.2f;
             set
             {
-                if (!value)
-                {
-                    _sprite.frame %= 10;
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.2f;
-                    _ammoType.accuracy = 0.8f;
-                }
-                else
-                {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.1f;
-                    _ammoType.accuracy = 0.97f;
-                }
+                FrameId = FrameId % 10 + 10 * (value ? 1 : 0);
+                maxAccuracyLost = value ? .1f : .2f;
+                _ammoType.accuracy = value ? .97f : .80f;
             }
         }
 
