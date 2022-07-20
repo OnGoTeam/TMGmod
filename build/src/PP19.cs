@@ -15,12 +15,7 @@ namespace TMGmod
     public class PP19 : BaseGun, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private bool _stock = true;
 
@@ -29,7 +24,6 @@ namespace TMGmod
         public PP19(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 64;
             _ammoType = new ATBizon();
             MaxAccuracy = 0.8f;
@@ -59,10 +53,10 @@ namespace TMGmod
             _weight = 1.5f;
             Compose(new FirstAccuracy(25, accuracy => accuracy - .2f));
         }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 8 });
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
@@ -89,17 +83,6 @@ namespace TMGmod
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
 
-        private void UpdateStats()
-        {
-            _fireWait = this.StockDeployed() ? 0.75f : 0.5f;
-            loseAccuracy = this.StockDeployed() ? 0.15f : 0.25f;
-            maxAccuracyLost = this.StockDeployed() ? 0.35f : 0.7f;
-            _weight = this.StockDeployed() ? 1.5f : 1f;
-        }
-
-        private void UpdateFrames() =>
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
-
         public void UpdateStockStats(float old)
         {
             UpdateStats();
@@ -119,5 +102,18 @@ namespace TMGmod
 
         public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
         public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
+
+        private void UpdateStats()
+        {
+            _fireWait = this.StockDeployed() ? 0.75f : 0.5f;
+            loseAccuracy = this.StockDeployed() ? 0.15f : 0.25f;
+            maxAccuracyLost = this.StockDeployed() ? 0.35f : 0.7f;
+            _weight = this.StockDeployed() ? 1.5f : 1f;
+        }
+
+        private void UpdateFrames()
+        {
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+        }
     }
 }

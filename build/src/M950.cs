@@ -13,18 +13,12 @@ namespace TMGmod
     public class M950 : BaseGun, IAmSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         // ReSharper disable once MemberCanBePrivate.Global		
         public M950(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 50;
             _ammoType = new ATCalico
             {
@@ -56,10 +50,10 @@ namespace TMGmod
             handAngle = 0f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

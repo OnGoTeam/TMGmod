@@ -13,24 +13,18 @@ namespace TMGmod
     public class Butcher : BaseLmg, IHaveAllowedSkins, MagBuddy.ISupportReload
     {
         private const int NonSkinFrames = 12;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        private readonly SpriteMap _sprite;
-        private float _debris = 1f;
 
         private readonly MagBuddy _magBuddy;
-        [UsedImplicitly] public byte Mags = 2;
+        private readonly SpriteMap _sprite;
+        private float _debris = 1f;
         private bool _onemoreclick = true;
+        [UsedImplicitly] public byte Mags = 2;
 
         [UsedImplicitly] public StateBinding MagsBinding = new StateBinding(nameof(Mags));
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public Butcher(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 60;
             _ammoType = new ATButcher();
             IntrinsicAccuracy = true;
@@ -59,6 +53,18 @@ namespace TMGmod
             _magBuddy = new MagBuddy(this, typeof(ArwaMag));
             KickForce1Lmg = 0.33f;
             KickForce2Lmg = 0.67f;
+        }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
+        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
         public bool SetMag()
@@ -100,6 +106,7 @@ namespace TMGmod
         }
 
         public Vec2 SpawnPos => new Vec2(0, -1);
+
         public override void Update()
         {
             if (ammoType.barrelAngleDegrees > 5f) _debris = -1f;
@@ -125,19 +132,6 @@ namespace TMGmod
         {
             if (ammo <= 0) _magBuddy.Doload();
             base.OnPressAction();
-        }
-
-        [UsedImplicitly]
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }

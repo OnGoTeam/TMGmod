@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
@@ -13,17 +12,11 @@ namespace TMGmod
     public class MG44 : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 6, 7 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public MG44(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 60;
             _ammoType = new ATMG44();
             MaxAccuracy = 0.75f;
@@ -51,6 +44,22 @@ namespace TMGmod
             _weight = 7.5f;
         }
 
+        public BitBuffer BipodsBuffer
+        {
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
+        }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 6, 7 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public bool Bipods
         {
             get => HandleQ();
@@ -63,24 +72,8 @@ namespace TMGmod
             }
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

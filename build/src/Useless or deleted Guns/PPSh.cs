@@ -16,17 +16,11 @@ namespace TMGmod.Useless_or_deleted_Guns
     public class PPSh : BaseGun, IHaveAllowedSkins, IAmSmg, I5
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 5, 6, 7 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public PPSh(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 71;
             _ammoType = new AT9mmParabellum
             {
@@ -54,10 +48,10 @@ namespace TMGmod.Useless_or_deleted_Guns
             _weight = 5.5f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 5, 6, 7 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

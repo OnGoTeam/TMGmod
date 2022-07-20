@@ -13,18 +13,14 @@ namespace TMGmod
     public class SkeetGun : BaseGun, IHaveAllowedSkins, IAmSg
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private float _handleAngleOff;
 
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
             _ammoType = new ATSkeetGun();
             MaxAccuracy = 0.9f;
@@ -53,12 +49,10 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

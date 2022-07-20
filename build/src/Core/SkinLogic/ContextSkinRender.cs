@@ -8,15 +8,14 @@ namespace TMGmod.Core.SkinLogic
 {
     public class ContextSkinRender : ContextMenu
     {
-        private readonly IShowSkins _target;
-        private readonly int _skin;
-
-        private readonly SpriteMap _imag;
-
         private static readonly Dictionary<Tex2D, Color[]> Data = new Dictionary<Tex2D, Color[]>();
 
         private static readonly Dictionary<Tex2D, Tuple<Tex2D, Color[], int>> Rendered =
             new Dictionary<Tex2D, Tuple<Tex2D, Color[], int>>();
+
+        private readonly SpriteMap _imag;
+        private readonly int _skin;
+        private readonly IShowSkins _target;
 
         public ContextSkinRender(
             IShowSkins target, int skin
@@ -61,17 +60,15 @@ namespace TMGmod.Core.SkinLogic
         {
             var spriteData = GetData(sprite.texture);
             for (var y = 0; y < sprite.height; y++)
+            for (var x = 0; x < sprite.width; x++)
             {
-                for (var x = 0; x < sprite.width; x++)
-                {
-                    var frame = SkinNo(skins, Off(x, y, sprite), time);
-                    var columns = sprite.texture.width / sprite.width;
-                    var rowNo = frame / columns;
-                    var colNo = frame % columns;
-                    data[y * sprite.width + x] = spriteData[
-                        colNo * sprite.width + (rowNo * sprite.height + y) * sprite.texture.width + x
-                    ];
-                }
+                var frame = SkinNo(skins, Off(x, y, sprite), time);
+                var columns = sprite.texture.width / sprite.width;
+                var rowNo = frame / columns;
+                var colNo = frame % columns;
+                data[y * sprite.width + x] = spriteData[
+                    colNo * sprite.width + (rowNo * sprite.height + y) * sprite.texture.width + x
+                ];
             }
         }
 
@@ -131,7 +128,7 @@ namespace TMGmod.Core.SkinLogic
         {
             if (_hover)
                 Graphics.DrawRect(position, position + itemSize, new Color(70, 70, 70), depth + 1);
-            else if (_target.Skin.value == _skin)
+            else if (_target.SkinValue == _skin)
                 Graphics.DrawRect(position, position + itemSize, new Color(60, 60, 60), depth + 1);
         }
 
@@ -148,7 +145,9 @@ namespace TMGmod.Core.SkinLogic
         private void DrawSkin()
         {
             if (_imag is null)
+            {
                 WithRandomized(_target, DrawStatic);
+            }
             else
             {
                 var oldIndex = _imag._imageIndex;
@@ -167,7 +166,10 @@ namespace TMGmod.Core.SkinLogic
             DrawSkin();
         }
 
-        public override void Selected() => _target.Skin.value = _skin;
+        public override void Selected()
+        {
+            _target.SkinValue = _skin;
+        }
     }
 }
 #endif

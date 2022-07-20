@@ -15,23 +15,17 @@ namespace TMGmod
     {
         private const int NonSkinFrames = 1;
         private const double Explodechance = 0.005;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
         private readonly SpriteMap _sprite;
-
-        // ReSharper disable once InconsistentNaming
-        [UsedImplicitly] private readonly EditorProperty<int> skin;
 
         public int Ammobefore = 71;
         [UsedImplicitly] public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
         public float Explode;
-        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
-        public int Uselessinteger = 3;
         [UsedImplicitly] public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
+        public int Uselessinteger = 3;
 
         public G9M(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 70;
             _ammoType = new ATLowQammos();
             _type = "gun";
@@ -62,6 +56,24 @@ namespace TMGmod
             KickForce2Lmg = 0.43f;
         }
 
+        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
+
+        public BitBuffer BipodsBuffer
+        {
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
+        }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public bool Bipods
         {
             get => BipodsQ();
@@ -74,24 +86,8 @@ namespace TMGmod
             }
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void OnPressAction()
         {

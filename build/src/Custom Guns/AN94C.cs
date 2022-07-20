@@ -14,21 +14,15 @@ namespace TMGmod.Custom_Guns
     public class AN94C : BaseBurst, IAmAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });
 
         // ReSharper disable once MemberCanBePrivate.Global
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         [UsedImplicitly] public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
 
         public AN94C(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("AN94C"), 33, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -85,10 +79,10 @@ namespace TMGmod.Custom_Guns
             }
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

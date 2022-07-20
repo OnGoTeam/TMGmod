@@ -13,16 +13,11 @@ namespace TMGmod
     public class Deadly44 : BaseGun, IAmSg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public Deadly44(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 1;
             _ammoType = new AT12Gauge();
             MaxAccuracy = 0.1f;
@@ -46,10 +41,10 @@ namespace TMGmod
             _weight = 4.25f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {

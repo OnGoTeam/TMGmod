@@ -12,17 +12,11 @@ namespace TMGmod
     public class M4A1 : BaseAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public M4A1(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new AT545NATO
             {
@@ -55,10 +49,10 @@ namespace TMGmod
             KforceDelta = .5f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

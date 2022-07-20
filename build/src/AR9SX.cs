@@ -14,17 +14,11 @@ namespace TMGmod
     public class AR9SX : BaseGun, IAmSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public AR9SX(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 17;
             _ammoType = new ATAR9SX();
             MaxAccuracy = 0.78f;
@@ -53,10 +47,10 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(23f, 5f);
             _weight = 3f;
         }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

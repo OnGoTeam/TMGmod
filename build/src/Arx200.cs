@@ -11,17 +11,11 @@ namespace TMGmod
     public class Arx200 : BaseDmr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 6, 7, 9 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public Arx200(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new ATArx200();
             MaxAccuracy = 0.98f;
@@ -52,10 +46,10 @@ namespace TMGmod
             _weight = 6f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 6, 7, 9 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

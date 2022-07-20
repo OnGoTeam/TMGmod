@@ -12,17 +12,13 @@ namespace TMGmod
     public class UziPro : BaseSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 6, 8 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public UziPro(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
             _ammoType = new ATUzi();
             IntrinsicAccuracy = true;
@@ -82,12 +78,10 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 6, 8 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

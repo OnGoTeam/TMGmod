@@ -5,7 +5,7 @@ namespace TMGmod.Core.SkinLogic
 {
     public interface IHaveFrameId
     {
-        int FrameId { set; }
+        int FrameId { get; set; }
 
         [UsedImplicitly] StateBinding FrameIdBinding { get; }
     }

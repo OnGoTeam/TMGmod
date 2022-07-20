@@ -11,16 +11,10 @@ namespace TMGmod
     public class BarretM98 : BaseBolt, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("BarretM98"), 50, 13);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -42,17 +36,10 @@ namespace TMGmod
             _ammoType = new ATBoltAction();
         }
 
-        protected override void OnInitialize()
-        {
-            _ammoType.penetration = 4f;
-            _ammoType.range = 1000f;
-            base.OnInitialize();
-        }
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
@@ -61,9 +48,31 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        protected override bool HasLaser() => false;
-        protected override float MaxAngle() => 0.1f;
-        protected override float MaxOffset() => 4.0f;
-        protected override float ReloadSpeed() => .4f;
+        protected override void OnInitialize()
+        {
+            _ammoType.penetration = 4f;
+            _ammoType.range = 1000f;
+            base.OnInitialize();
+        }
+
+        protected override bool HasLaser()
+        {
+            return false;
+        }
+
+        protected override float MaxAngle()
+        {
+            return 0.1f;
+        }
+
+        protected override float MaxOffset()
+        {
+            return 4.0f;
+        }
+
+        protected override float ReloadSpeed()
+        {
+            return .4f;
+        }
     }
 }

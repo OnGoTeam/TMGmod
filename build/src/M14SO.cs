@@ -14,12 +14,7 @@ namespace TMGmod
     public class M14SO : BaseDmr, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private bool _stock = true;
 
@@ -28,7 +23,6 @@ namespace TMGmod
         public M14SO(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 18;
             _ammoType = new ATM14
             {
@@ -63,10 +57,10 @@ namespace TMGmod
             _weight = 2.5f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
@@ -94,17 +88,6 @@ namespace TMGmod
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
 
-        private void UpdateStats()
-        {
-            _fireWait = this.StockDeployed() ? 1.25f : 1f;
-            loseAccuracy = this.StockDeployed() ? 0f : 0.2f;
-            maxAccuracyLost = this.StockDeployed() ? 0f : 0.25f;
-            _weight = this.StockDeployed() ? 2.5f : 2f;
-        }
-
-        private void UpdateFrames() =>
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
-
         public void UpdateStockStats(float old)
         {
             UpdateStats();
@@ -124,6 +107,19 @@ namespace TMGmod
 
         public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
         public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
+
+        private void UpdateStats()
+        {
+            _fireWait = this.StockDeployed() ? 1.25f : 1f;
+            loseAccuracy = this.StockDeployed() ? 0f : 0.2f;
+            maxAccuracyLost = this.StockDeployed() ? 0f : 0.25f;
+            _weight = this.StockDeployed() ? 2.5f : 2f;
+        }
+
+        private void UpdateFrames()
+        {
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+        }
     }
 }
 #endif

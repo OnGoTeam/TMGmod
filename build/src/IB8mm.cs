@@ -13,17 +13,11 @@ namespace TMGmod
     public class IB8mm : BaseGun, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public IB8mm(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 26;
             _ammoType = new ATIB8();
             MaxAccuracy = _ammoType.accuracy;
@@ -49,10 +43,10 @@ namespace TMGmod
             Compose(new FirstKforce(11, kforce => kforce + 2f));
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

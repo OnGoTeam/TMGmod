@@ -13,17 +13,11 @@ namespace TMGmod
     public class DTSRM44 : BaseBolt, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public DTSRM44(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("DT SRM-44"), 37, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -47,16 +41,10 @@ namespace TMGmod
             _ammoType = new AT762NATO();
         }
 
-        protected override void OnInitialize()
-        {
-            _ammoType.range = 889f;
-            base.OnInitialize();
-        }
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
         [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {
@@ -64,10 +52,31 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        protected override bool HasLaser() => true;
-        protected override float MaxAngle() => 0.1f;
-        protected override float MaxOffset() => 4.0f;
-        protected override float ReloadSpeed() => .5f;
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 889f;
+            base.OnInitialize();
+        }
+
+        protected override bool HasLaser()
+        {
+            return true;
+        }
+
+        protected override float MaxAngle()
+        {
+            return 0.1f;
+        }
+
+        protected override float MaxOffset()
+        {
+            return 4.0f;
+        }
+
+        protected override float ReloadSpeed()
+        {
+            return .5f;
+        }
     }
 }
 #endif

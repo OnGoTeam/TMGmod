@@ -14,19 +14,13 @@ namespace TMGmod
     public class SIX12S : BaseGun, IHaveAllowedSkins, IAmSg, I5
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
 
         public SIX12S(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f, "random");
             ammo = 6;
             _ammoType = new ATSIX12S();
             MaxAccuracy = 0.9f;
@@ -53,10 +47,10 @@ namespace TMGmod
             _weight = 4f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {

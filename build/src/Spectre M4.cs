@@ -11,17 +11,13 @@ namespace TMGmod
     public class SpectreM4 : BaseSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public SpectreM4(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATSpectreM4();
             IntrinsicAccuracy = true;
@@ -85,12 +81,10 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {

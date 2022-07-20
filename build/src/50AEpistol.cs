@@ -14,16 +14,11 @@ namespace TMGmod
     public class BigShot : BaseGun, IAmHg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2, 5, 7 });
         private readonly SpriteMap _sprite;
-
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public BigShot(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(1, this, -1f, 9f, 0.5f);
             ammo = 7;
             _ammoType = new AT50C();
             MaxAccuracy = 1f;
@@ -31,7 +26,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             _graphic = _sprite;
-            _sprite.frame = 1;
+            _sprite.frame = SkinValue = 1;
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(26f, 10f);
@@ -48,10 +43,10 @@ namespace TMGmod
             Compose(new LoseAccuracy(0.1f, 0.02f, 1f));
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2, 5, 7 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {

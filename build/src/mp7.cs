@@ -15,12 +15,7 @@ namespace TMGmod
     public class MP7 : BaseGun, IAmSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private float _handleAngleOff;
 
@@ -29,7 +24,6 @@ namespace TMGmod
         public MP7(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 35;
             _ammoType = new ATMP7();
             MaxAccuracy = 0.9f;
@@ -61,10 +55,10 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

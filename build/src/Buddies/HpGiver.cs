@@ -11,8 +11,7 @@ namespace TMGmod.Buddies
     {
         private readonly HashSet<Duck> _given = new HashSet<Duck>();
 
-        [UsedImplicitly]
-        public EditorProperty<float> Hp;
+        [UsedImplicitly] public EditorProperty<float> Hp;
 
         public HpGiver()
         {

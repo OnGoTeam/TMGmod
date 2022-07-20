@@ -15,18 +15,12 @@ namespace TMGmod
     public class AF2011 : BaseGun, IAmHg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 5 });
 
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public AF2011(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
             _ammoType = new ATAF2011();
             _numBulletsPerFire = 2;
@@ -51,10 +45,10 @@ namespace TMGmod
             Compose(new LoseAccuracy(0.05f, 0.003f, 1f));
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 5 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

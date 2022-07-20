@@ -12,12 +12,7 @@ namespace TMGmod
     public class KS23 : BasePumpAction, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private bool _shootwasyes;
 
@@ -32,7 +27,6 @@ namespace TMGmod
         [UsedImplicitly]
         public KS23(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
             _ammoType = new AT12GaugeS();
             _numBulletsPerFire = 16;
@@ -74,10 +68,10 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

@@ -13,17 +13,11 @@ namespace TMGmod
     public class PMRC : BaseGun, IAmHg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 5, 9 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public PMRC(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATPMR30();
             _type = "gun";
@@ -46,10 +40,10 @@ namespace TMGmod
             _weight = 2.5f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 5, 9 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

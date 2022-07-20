@@ -13,17 +13,11 @@ namespace TMGmod
     public class M93R : BaseBurst, IAmHg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public M93R(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("M93R"), 12, 9);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -51,10 +45,10 @@ namespace TMGmod
             BurstNum = 3;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

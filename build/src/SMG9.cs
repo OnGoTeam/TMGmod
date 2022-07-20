@@ -12,17 +12,11 @@ namespace TMGmod
     public class SMG9 : BaseSmg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public SMG9(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 24;
             _ammoType = new ATSMG9();
             IntrinsicAccuracy = true;
@@ -52,10 +46,10 @@ namespace TMGmod
             _weight = 2.5f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

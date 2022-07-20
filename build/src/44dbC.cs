@@ -13,16 +13,11 @@ namespace TMGmod
     public class Deadly44C : BaseGun, IAmSg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public Deadly44C(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 2;
             _ammoType = new AT44DB();
             MaxAccuracy = 0.1f;
@@ -47,10 +42,10 @@ namespace TMGmod
             _weight = 4.25f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {
@@ -78,6 +73,7 @@ namespace TMGmod
                 SFX.Play(GetPath("sounds/tuduc.wav"));
                 _sprite.frame = _sprite.frame % 10 + 10;
             }
+
             base.Reload(ammo > 1);
         }
     }

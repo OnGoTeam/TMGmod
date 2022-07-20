@@ -1,7 +1,7 @@
 ﻿using System;
-using TMGmod.Core.AmmoTypes;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Syncing;
@@ -15,18 +15,18 @@ using System.Linq;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseGun : Gun
+    public abstract class BaseGun : Gun, ISupportEnablingSkins
     {
         private const float
             PresentChancePercentage =
                 0.5f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
 
-        private IModifyEverything DefaultModifier() => new BaseModifier(this);
+        private IModifyEverything _baseActiveModifier;
 
         private bool _currHoneInit;
-        protected float MaxAccuracy = 1f;
-        private IModifyEverything _baseActiveModifier;
+        private int _skinValue;
         protected Vec2 CurrHone;
+        protected float MaxAccuracy = 1f;
         protected float MinAccuracy;
 
         [UsedImplicitly] protected float PrevKforce;
@@ -39,16 +39,6 @@ namespace TMGmod.Core.WClasses
         {
             ToPrevKforce = true;
             _baseActiveModifier = DefaultModifier();
-        }
-
-        protected void ResetModifier()
-        {
-            _baseActiveModifier = Modifier.Identity();
-        }
-
-        protected void Compose(params IModifyEverything[] modifiers)
-        {
-            _baseActiveModifier = _baseActiveModifier.Compose(modifiers);
         }
 
         [UsedImplicitly]
@@ -64,11 +54,64 @@ namespace TMGmod.Core.WClasses
 
         protected virtual IModifyEverything ActiveModifier => _baseActiveModifier;
 
-        protected virtual float CalculateKforce(float kickForce) => kickForce;
+        protected bool IntrinsicAccuracy { get; set; }
 
-        private void SetKforce() => _kickForce = Kforce;
+        protected virtual float BaseAccuracy => MaxAccuracy;
 
-        private void AddNyCase() => Level.Add(new NewYearCase(x, y));
+        protected virtual float Accuracy => ClipAccuracy(ActiveModifier.ModifyAccuracy(BaseAccuracy));
+
+        protected virtual float BaseKforce => _kickForce;
+
+        protected virtual float Kforce => Math.Max(0f, ActiveModifier.ModifyKforce(BaseKforce));
+
+        [UsedImplicitly]
+        public BitBuffer ModifierBuffer
+        {
+            get => GetBuffer(ActiveModifier, () => { });
+            set => ActiveModifier.Read(value, () => { });
+        }
+
+        [UsedImplicitly] public StateBinding MbBinding { get; } = new StateBinding(nameof(ModifierBuffer));
+
+        public int SkinValue
+        {
+            get => _skinValue;
+            set
+            {
+                _skinValue = value;
+                if (this is IHaveAllowedSkins target) target.UpdateSkin();
+            }
+        }
+
+        private IModifyEverything DefaultModifier()
+        {
+            return new BaseModifier(this);
+        }
+
+        protected void ResetModifier()
+        {
+            _baseActiveModifier = Modifier.Identity();
+        }
+
+        protected void Compose(params IModifyEverything[] modifiers)
+        {
+            _baseActiveModifier = _baseActiveModifier.Compose(modifiers);
+        }
+
+        protected virtual float CalculateKforce(float kickForce)
+        {
+            return kickForce;
+        }
+
+        private void SetKforce()
+        {
+            _kickForce = Kforce;
+        }
+
+        private void AddNyCase()
+        {
+            Level.Add(new NewYearCase(x, y));
+        }
 
         private void MaybeAddNyCase()
         {
@@ -81,7 +124,10 @@ namespace TMGmod.Core.WClasses
             MaybeAddNyCase();
         }
 
-        protected virtual void RealFire() => base.Fire();
+        protected virtual void RealFire()
+        {
+            base.Fire();
+        }
 
         private void FireWithKforce()
         {
@@ -133,11 +179,15 @@ namespace TMGmod.Core.WClasses
             if (CanFire()) DoFire();
         }
 
-        private float ClipAccuracy(float accuracy) => Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
+        private float ClipAccuracy(float accuracy)
+        {
+            return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
+        }
 
-        protected virtual float CalculateAccuracy(float accuracy) => accuracy;
-
-        protected bool IntrinsicAccuracy { get; set; }
+        protected virtual float CalculateAccuracy(float accuracy)
+        {
+            return accuracy;
+        }
 
         private void SetAccuracy()
         {
@@ -156,9 +206,20 @@ namespace TMGmod.Core.WClasses
             CurrHone = HoldOffsetNoExtra;
         }
 
-        protected virtual bool DynamicAccuracy() => !IntrinsicAccuracy;
-        protected virtual bool DynamicKforce() => true;
-        protected virtual bool DynamicFeatures() => true;
+        protected virtual bool DynamicAccuracy()
+        {
+            return !IntrinsicAccuracy;
+        }
+
+        protected virtual bool DynamicKforce()
+        {
+            return true;
+        }
+
+        protected virtual bool DynamicFeatures()
+        {
+            return true;
+        }
 
         private void UpdateInternals()
         {
@@ -251,21 +312,19 @@ namespace TMGmod.Core.WClasses
             base.EditorPropertyChanged(property);
         }
 
-        public Gun AsAGun() => this;
-
-        protected virtual float BaseAccuracy => MaxAccuracy;
-
-        protected virtual float Accuracy => ClipAccuracy(ActiveModifier.ModifyAccuracy(BaseAccuracy));
-
-        protected virtual float BaseKforce => _kickForce;
-
-        protected virtual float Kforce => Math.Max(0f, ActiveModifier.ModifyKforce(BaseKforce));
+        public Gun AsAGun()
+        {
+            return this;
+        }
 
         protected virtual void BaseOnFire()
         {
         }
 
-        protected virtual void OnFire() => ActiveModifier.ModifyFire(BaseOnFire);
+        protected virtual void OnFire()
+        {
+            ActiveModifier.ModifyFire(BaseOnFire);
+        }
 
         protected virtual void BaseOnUpdate()
         {
@@ -277,9 +336,15 @@ namespace TMGmod.Core.WClasses
                 UpdateFeatures();
         }
 
-        protected virtual void OnUpdate() => ActiveModifier.ModifyUpdate(BaseOnUpdate);
+        protected virtual void OnUpdate()
+        {
+            ActiveModifier.ModifyUpdate(BaseOnUpdate);
+        }
 
-        protected virtual void OnInitialize() => SetAccuracy();
+        protected virtual void OnInitialize()
+        {
+            SetAccuracy();
+        }
 
 
         public override void Initialize()
@@ -288,61 +353,12 @@ namespace TMGmod.Core.WClasses
             base.Initialize();
         }
 
-        public override ContextMenu GetContextMenu()
-        {
-            var contextMenu = base.GetContextMenu();
-#if FEATURE_EDITOR_SKINS
-            switch (this)
-            {
-                case IHaveAllowedSkins target when _graphic is SpriteMap sprite:
-                {
-                    foreach (var skin in target.AllowedSkins.Concat(new[] { -1 }))
-                        contextMenu.AddItem(new ContextSkinRender(new SkinMix(target, sprite), skin));
-                    break;
-                }
-            }
-#endif
-            return contextMenu;
-        }
-
-#if FEATURE_EDITOR_SKINS
-        private class SkinMix : IShowSkins
-        {
-            private readonly IHaveAllowedSkins _target;
-
-            public SkinMix(IHaveAllowedSkins target, SpriteMap sprite)
-            {
-                _target = target;
-                SpriteBase = sprite;
-            }
-
-            public int FrameId
-            {
-                set => _target.FrameId = value;
-            }
-
-            public StateBinding FrameIdBinding => _target.FrameIdBinding;
-            public EditorProperty<int> Skin => _target.Skin;
-            public ICollection<int> AllowedSkins => _target.AllowedSkins;
-            public SpriteMap SpriteBase { get; }
-        }
-#endif
-
         private static BitBuffer GetBuffer(ISync modifier, Action write)
         {
             var buffer = new BitBuffer();
             modifier.Write(buffer, write);
             return buffer;
         }
-
-        [UsedImplicitly]
-        public BitBuffer ModifierBuffer
-        {
-            get => GetBuffer(ActiveModifier, () => { });
-            set => ActiveModifier.Read(value, () => { });
-        }
-
-        [UsedImplicitly] public StateBinding MbBinding { get; } = new StateBinding(nameof(ModifierBuffer));
 
         private class BaseModifier : Modifier
         {
@@ -372,6 +388,66 @@ namespace TMGmod.Core.WClasses
                 return _target.CalculateKforce(kforce);
             }
         }
+
+#if FEATURE_EDITOR_SKINS
+        public override ContextMenu GetContextMenu()
+        {
+            var contextMenu = base.GetContextMenu();
+            switch (this)
+            {
+                case IHaveAllowedSkins target when _graphic is SpriteMap sprite:
+                {
+                    foreach (var skin in target.AllowedSkins.Concat(new[] { -1 }))
+                        contextMenu.AddItem(new ContextSkinRender(new SkinMix(target, sprite), skin));
+                    break;
+                }
+            }
+
+            return contextMenu;
+        }
+
+        public override BinaryClassChunk Serialize()
+        {
+            var node = base.Serialize();
+            if (this is IHaveSkin)
+                node.AddProperty("skin", _skinValue);
+            return node;
+        }
+
+        public override bool Deserialize(BinaryClassChunk node)
+        {
+            if (this is IHaveSkin)
+                _skinValue = node.GetProperty<int>("skin");
+            return base.Deserialize(node);
+        }
+
+        private class SkinMix : IShowSkins
+        {
+            private readonly IHaveAllowedSkins _target;
+
+            public SkinMix(IHaveAllowedSkins target, SpriteMap sprite)
+            {
+                _target = target;
+                SpriteBase = sprite;
+            }
+
+            public int FrameId
+            {
+                get => _target.FrameId;
+                set => _target.FrameId = value;
+            }
+
+            public StateBinding FrameIdBinding => _target.FrameIdBinding;
+            public ICollection<int> AllowedSkins => _target.AllowedSkins;
+            public SpriteMap SpriteBase { get; }
+
+            public int SkinValue
+            {
+                get => _target.SkinValue;
+                set => _target.SkinValue = value;
+            }
+        }
+#endif
 #if DEBUG
         private void DrawAccuracy()
         {
@@ -415,7 +491,7 @@ namespace TMGmod.Core.WClasses
                 Level.activeLevel is Editor
                 && this is IHaveAllowedSkins target
                 && _graphic is SpriteMap sprite
-                && target.Skin.value == -1
+                && target.SkinValue == -1
             )
             {
                 _flipHorizontal = offDir <= 0;

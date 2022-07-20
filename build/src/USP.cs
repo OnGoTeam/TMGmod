@@ -13,17 +13,13 @@ namespace TMGmod
     public class USP : BaseGun, IAmHg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 7 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public USP(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 13;
             _ammoType = new ATUSP();
             _type = "gun";
@@ -73,12 +69,10 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 7 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

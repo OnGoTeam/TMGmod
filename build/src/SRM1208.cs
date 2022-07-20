@@ -13,12 +13,7 @@ namespace TMGmod
     public class SRM1208 : BaseBurst, IAmSg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 5, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         [UsedImplicitly] public StateBinding LddBinding = new StateBinding(nameof(Loaded));
 
@@ -39,7 +34,6 @@ namespace TMGmod
         public SRM1208(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 8;
             _ammoType = new ATSRM1();
             MaxAccuracy = 0.6f;
@@ -69,10 +63,10 @@ namespace TMGmod
             BurstNum = 2;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 5, 8 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
@@ -121,7 +115,10 @@ namespace TMGmod
                 Yeeenabled = true;
                 _sprite.frame = _sprite.frame % 10 + 10;
             }
-            else if (Loaded) Fire();
+            else if (Loaded)
+            {
+                Fire();
+            }
         }
 
         public override void OnReleaseAction()

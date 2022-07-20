@@ -14,19 +14,13 @@ namespace TMGmod
     public class SV99 : BaseBolt, I5, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 3, 5, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public SV99(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             _sprite = new SpriteMap(GetPath("SV99"), 27, 9);
             _graphic = _sprite;
-            _sprite.frame = 8;
+            _sprite.frame = SkinValue = 8;
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(27f, 9f);
@@ -46,10 +40,10 @@ namespace TMGmod
             _weight = 2f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 3, 5, 8 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
@@ -58,9 +52,24 @@ namespace TMGmod
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
 
-        protected override bool HasLaser() => false;
-        protected override float MaxAngle() => 0.3f;
-        protected override float MaxOffset() => 2.0f;
-        protected override float ReloadSpeed() => 2f;
+        protected override bool HasLaser()
+        {
+            return false;
+        }
+
+        protected override float MaxAngle()
+        {
+            return 0.3f;
+        }
+
+        protected override float MaxOffset()
+        {
+            return 2.0f;
+        }
+
+        protected override float ReloadSpeed()
+        {
+            return 2f;
+        }
     }
 }

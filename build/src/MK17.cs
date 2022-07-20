@@ -13,19 +13,13 @@ namespace TMGmod
     public class MK17 : BaseAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private float _calculateSide;
 
         public MK17(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             _hitPoints = 49f;
             thickness = 12f;
             ammo = 20;
@@ -62,10 +56,10 @@ namespace TMGmod
             _weight = 4.5f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

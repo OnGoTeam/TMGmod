@@ -13,26 +13,20 @@ namespace TMGmod
     public class AUGA1 : BaseAr, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 4, 5, 6, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         [UsedImplicitly] public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
         public AUGA1(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             ammo = 42;
             _ammoType = new ATAUGA1();
             IntrinsicAccuracy = true;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("AUGA1"), 30, 12);
             _graphic = _sprite;
-            _sprite.frame = 8;
+            _sprite.frame = SkinValue = 8;
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 12f);
@@ -78,10 +72,10 @@ namespace TMGmod
             }
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 4, 5, 6, 8 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

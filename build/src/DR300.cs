@@ -14,19 +14,12 @@ namespace TMGmod
     {
         private const int Postframe = 8;
         private const int NonSkinFrames = 3;
-
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 3, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public DR300(float xval, float yval)
             : base(xval, yval)
         {
             Rounds = new EditorProperty<int>(0, this, 0, 2, 1);
-            skin = new EditorProperty<int>(8, this, -1f, 9f, 0.5f);
             PostRounds = Rando.ChooseInt(20, 30);
             ammo = PostRounds;
             _ammoType = new ATDR300();
@@ -64,13 +57,13 @@ namespace TMGmod
         [UsedImplicitly] public StateBinding PostRoundsBinding { get; } = new StateBinding(nameof(PostRounds));
 
         // ReSharper disable once InconsistentNaming
-        // ReSharper disable once ConvertToAutoProperty
+
         [UsedImplicitly] public EditorProperty<int> Rounds { get; }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 3, 8 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

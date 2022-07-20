@@ -13,13 +13,8 @@ namespace TMGmod
     public class VSK94 : BaseAr, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 7, 8 });
 
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private float _floatingKickforce;
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
@@ -31,7 +26,6 @@ namespace TMGmod
         public VSK94(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
             _ammoType = new ATSR2C();
             MaxAccuracy = 0.9f;
@@ -68,6 +62,23 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
+        public BitBuffer BipodsBuffer
+        {
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
+        }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 7, 8 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        [UsedImplicitly]
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public bool Bipods
         {
             get => HandleQ();
@@ -81,25 +92,8 @@ namespace TMGmod
             }
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

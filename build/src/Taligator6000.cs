@@ -13,16 +13,10 @@ namespace TMGmod
     public class Taligator6000 : BaseGun, IAmSg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public Taligator6000(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
             _ammoType = new ATTG6000();
             _numBulletsPerFire = 13;
@@ -50,10 +44,10 @@ namespace TMGmod
             _weight = 3f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

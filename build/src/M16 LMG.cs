@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
@@ -13,17 +12,11 @@ namespace TMGmod
     public class M16LMG : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public M16LMG(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 50;
             _ammoType = new AT556NATO
             {
@@ -59,6 +52,22 @@ namespace TMGmod
             KickForce2Lmg = 0.43f;
         }
 
+        public BitBuffer BipodsBuffer
+        {
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
+        }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public bool Bipods
         {
             get => BipodsQ();
@@ -71,23 +80,7 @@ namespace TMGmod
             }
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

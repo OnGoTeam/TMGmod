@@ -13,12 +13,7 @@ namespace TMGmod
     public class AKALFA : BaseAr, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 5 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private bool _stock = true;
 
@@ -27,7 +22,6 @@ namespace TMGmod
         public AKALFA(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new AT545NATO
             {
@@ -62,10 +56,11 @@ namespace TMGmod
             _weight = 5.5f;
         }
 
+        protected override float BaseKforce => this.StockDeployed() ? 0.65f : 1.2f;
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 5 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
@@ -73,7 +68,9 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
         public float StockSpeed => 1f / 10f;
+
         public bool Stock
         {
             get => _stock;
@@ -89,17 +86,6 @@ namespace TMGmod
             get => _stockstate;
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
-
-        private void UpdateStats()
-        {
-            loseAccuracy = this.StockDeployed() ? 0f : 0.1f;
-            _weight = this.StockDeployed() ? 5.5f : 3.5f;
-        }
-
-        protected override float BaseKforce => this.StockDeployed() ? 0.65f : 1.2f;
-
-        private void UpdateFrames() =>
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
 
         public void UpdateStockStats(float old)
         {
@@ -120,5 +106,16 @@ namespace TMGmod
 
         public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
         public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
+
+        private void UpdateStats()
+        {
+            loseAccuracy = this.StockDeployed() ? 0f : 0.1f;
+            _weight = this.StockDeployed() ? 5.5f : 3.5f;
+        }
+
+        private void UpdateFrames()
+        {
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+        }
     }
 }

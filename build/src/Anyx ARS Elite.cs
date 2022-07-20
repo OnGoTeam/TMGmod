@@ -14,12 +14,7 @@ namespace TMGmod
     public class Vixr : BaseGun, IAmAr, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private bool _stock = true;
 
@@ -34,7 +29,6 @@ namespace TMGmod
         public Vixr(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 21;
             _ammoType = new ATARS();
             MaxAccuracy = 0.81f;
@@ -71,10 +65,11 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
+        protected override float BaseKforce => this.StockDeployed() ? 3f : 4.6f;
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 8 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
@@ -82,7 +77,9 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
+
         public float StockSpeed => 1f / 10f;
+
         [UsedImplicitly]
         public bool Stock
         {
@@ -99,19 +96,6 @@ namespace TMGmod
             get => _stockstate;
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
-
-        private void UpdateStats()
-        {
-            _fireWait = this.StockDeployed() ? 0.75f : 0.6f;
-            loseAccuracy = this.StockDeployed() ? 0.15f : 0.2f;
-            maxAccuracyLost = this.StockDeployed() ? 0.3f : 0.6f;
-            _weight = this.StockDeployed() ? 6f : 3.5f;
-        }
-
-        protected override float BaseKforce => this.StockDeployed() ? 3f : 4.6f;
-
-        private void UpdateFrames() =>
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
 
         public void UpdateStockStats(float old)
         {
@@ -132,6 +116,19 @@ namespace TMGmod
 
         public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/beepods1");
         public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/beepods2");
+
+        private void UpdateStats()
+        {
+            _fireWait = this.StockDeployed() ? 0.75f : 0.6f;
+            loseAccuracy = this.StockDeployed() ? 0.15f : 0.2f;
+            maxAccuracyLost = this.StockDeployed() ? 0.3f : 0.6f;
+            _weight = this.StockDeployed() ? 6f : 3.5f;
+        }
+
+        private void UpdateFrames()
+        {
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+        }
 
         public override void Update()
         {

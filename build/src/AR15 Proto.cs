@@ -14,12 +14,7 @@ namespace TMGmod
     {
         private const int NonSkinFrames = 1;
         private const double Explodechance = 0.006;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         [UsedImplicitly] public int Ammobefore = 21;
 
@@ -34,7 +29,6 @@ namespace TMGmod
         public AR15Proto(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new ATLowQammos();
             _type = "gun";
@@ -62,24 +56,23 @@ namespace TMGmod
             KforceDelta = 0.43f;
         }
 
-        protected override void OnInitialize()
-        {
-            _ammoType.range = 330f;
-            base.OnInitialize();
-        }
-
         [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
         {
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 330f;
+            base.OnInitialize();
         }
 
         public override void OnPressAction()

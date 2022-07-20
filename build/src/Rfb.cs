@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -11,17 +10,11 @@ namespace TMGmod
     public class Rfb : BaseAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public Rfb(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new AT545NATO
             {
@@ -53,10 +46,10 @@ namespace TMGmod
             KforceDelta = 0.63f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {

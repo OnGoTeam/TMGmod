@@ -15,17 +15,11 @@ namespace TMGmod
     public class MP40 : BaseSmg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 7, 8 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public MP40(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 32;
             _ammoType = new ATMP40();
             KforceDelta = 2f;
@@ -55,10 +49,10 @@ namespace TMGmod
             Compose(new FirstAccuracy(20, accuracy => accuracy - .3f));
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 7, 8 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

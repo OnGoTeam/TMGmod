@@ -12,17 +12,11 @@ namespace TMGmod
     public class M14 : BaseDmr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public M14(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
             _ammoType = new ATM14
             {
@@ -56,10 +50,10 @@ namespace TMGmod
             _editorName = "M14";
             _weight = 4.5f;
         }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2 });
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

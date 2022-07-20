@@ -13,18 +13,13 @@ namespace TMGmod
     public class OracleAR10 : BaseDmr, IHaveAllowedSkins, IHaveBipods
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
-
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
         public OracleAR10(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 10;
             MaxAccuracy = 0.91f;
             MinAccuracy = 0.35f;
@@ -57,17 +52,28 @@ namespace TMGmod
             _ammoType = new AT556NATO();
         }
 
-        protected override void OnInitialize()
-        {
-            _ammoType.range = 333f;
-            base.OnInitialize();
-        }
-
         public float HandAngleOff
         {
             get => handAngle * offDir;
             set => handAngle = value * offDir;
         }
+
+        public BitBuffer BipodsBuffer
+        {
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
+        }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
+
         public bool Bipods
         {
             get => BipodsQ();
@@ -84,23 +90,13 @@ namespace TMGmod
             }
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-
-        public int FrameId
+        protected override void OnInitialize()
         {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
+            _ammoType.range = 333f;
+            base.OnInitialize();
         }
     }
 }

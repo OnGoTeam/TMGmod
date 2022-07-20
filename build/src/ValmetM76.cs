@@ -11,18 +11,13 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Combined")]
     public class ValmetM76 : BaseBurst, IHaveAllowedSkins
     {
-        private readonly LoseAccuracy _loseAccuracy;
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+        private readonly LoseAccuracy _loseAccuracy;
         private readonly SpriteMap _sprite;
-
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public ValmetM76(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 20;
             _ammoType = new ATM76();
             MaxAccuracy = 0.89f;
@@ -73,11 +68,10 @@ namespace TMGmod
         }
 
         [UsedImplicitly] public StateBinding NonAutoBinding { get; } = new StateBinding(nameof(NonAuto));
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

@@ -96,6 +96,7 @@
     <Compile Include="src\Core\SkinLogic\IHaveFrameId.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveSpriteBase.cs" />
     <Compile Include="src\Core\SkinLogic\IShowSkins.cs" />
+    <Compile Include="src\Core\SkinLogic\ISupportEnablingSkins.cs" />
     <Compile Include="src\Core\SkinLogic\SkinImplementation.cs" />
     <Compile Include="src\Core\StockLogic\StockImplementation.cs" />
     <Compile Include="src\Nellegalja Mk2.cs" />

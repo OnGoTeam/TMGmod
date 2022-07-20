@@ -14,17 +14,11 @@ namespace TMGmod
     public class AA12 : BaseGun, IAmSg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7, 8, 9 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public AA12(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 12;
             _ammoType = new AT12Gauge
             {
@@ -54,10 +48,10 @@ namespace TMGmod
             _weight = 7f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7, 8, 9 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

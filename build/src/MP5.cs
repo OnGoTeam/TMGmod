@@ -15,20 +15,14 @@ namespace TMGmod
     public class MP5 : BaseBurst, IHaveAllowedSkins, IAmSmg
     {
         private const int NonSkinFrames = 2;
-        public virtual ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
-        protected SpriteMap Texture;
         protected float IncreasedAccuracy;
 
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
-
         [UsedImplicitly] public StateBinding NonAutoBinding = new StateBinding(nameof(NonAuto));
+        protected SpriteMap Texture;
 
         public MP5(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATMP5();
             IncreasedAccuracy = .9f;
@@ -76,10 +70,9 @@ namespace TMGmod
         }
 
         protected float DecreasedAccuracy { get; set; }
+        public virtual ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

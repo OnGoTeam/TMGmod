@@ -1,9 +1,6 @@
-﻿using DuckGame;
-
-namespace TMGmod.Core.SkinLogic
+﻿namespace TMGmod.Core.SkinLogic
 {
-    public interface IHaveSkin : IHaveFrameId
+    public interface IHaveSkin : IHaveFrameId, ISupportEnablingSkins
     {
-        EditorProperty<int> Skin { get; }
     }
 }

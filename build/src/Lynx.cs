@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
@@ -16,20 +15,15 @@ namespace TMGmod
     public class Lynx : BaseGun, IAmDmr, IHaveAllowedSkins, I5, ICanDisableBipods, IDeployBipods
     {
         private const int NonSkinFrames = 4;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 5 });
+
+        private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
+
+        private readonly LoseAccuracy _loseAccuracy = new LoseAccuracy(0.6f, 0.01f, 1f);
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
-
-        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
-        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
         public Lynx(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 6;
             _ammoType = new ATLynx();
             MaxAccuracy = 1f;
@@ -64,9 +58,30 @@ namespace TMGmod
             );
         }
 
-        private readonly LoseAccuracy _loseAccuracy = new LoseAccuracy(0.6f, 0.01f, 1f);
+        protected override float BaseKforce => this.BipodsDeployed() ? 0 : 5.8f;
 
-        private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
+        public BitBuffer BipodsBuffer
+        {
+            get => this.GetBipodBuffer();
+            set => this.SetBipodBuffer(value);
+        }
+
+        public bool Bipods
+        {
+            get => BipodsQ();
+            set => this.SetBipods(value);
+        }
+
+        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
+        public bool BipodsDisabled { get; private set; }
+
+        public void SetBipodsDisabled(bool disabled)
+        {
+            BipodsDisabled = disabled;
+        }
+
+        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
+        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
         public float BipodsState
         {
@@ -75,7 +90,24 @@ namespace TMGmod
         }
 
         public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
-        protected override float BaseKforce => this.BipodsDeployed() ? 0 : 5.8f;
+
+        public void UpdateBipodsStats(float old)
+        {
+            UpdateStats();
+            UpdateFrames();
+            this.UpdateBipodsSounds(old);
+        }
+
+        public float BipodSpeed => 1f / 8f;
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 5 });
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+
+        public int FrameId
+        {
+            get => _sprite.frame;
+            set => _sprite.frame = value % (10 * NonSkinFrames);
+        }
 
         private void UpdateStats()
         {
@@ -89,43 +121,10 @@ namespace TMGmod
             _loseAccuracy.Max = this.BipodsDeployed() ? .5f : 1.0f;
         }
 
-        private void UpdateFrames() =>
+        private void UpdateFrames()
+        {
             FrameId = FrameId % 10 +
                       10 * (this.BipodsDeployed() ? 3 : this.BipodsFolded() ? 0 : BipodsState < 0.5f ? 1 : 2);
-
-        public void UpdateBipodsStats(float old)
-        {
-            UpdateStats();
-            UpdateFrames();
-            this.UpdateBipodsSounds(old);
-        }
-
-        public float BipodSpeed => 1f / 8f;
-
-        public bool Bipods
-        {
-            get => BipodsQ();
-            set => this.SetBipods(value);
-        }
-
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled { get; private set; }
-        public void SetBipodsDisabled(bool disabled) => BipodsDisabled = disabled;
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }

@@ -12,20 +12,16 @@ namespace TMGmod
     public class TC12 : BaseDmr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3 });
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public TC12(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 11;
             _ammoType = new ATTC12();
-            //MaxAccuracy = 0.91f;
+            MaxAccuracy = 0.91f;
             MinAccuracy = 0.45f;
             RegenAccuracyDmr = 0.007f;
             DrainAccuracyDmr = 0.15f;
@@ -92,12 +88,10 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3 });
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {

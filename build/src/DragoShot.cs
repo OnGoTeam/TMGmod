@@ -14,12 +14,7 @@ namespace TMGmod
         private const float Step = 0.02f;
         private const float TimeToHappend = 1f;
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         [UsedImplicitly] public float Counter;
 
@@ -32,7 +27,6 @@ namespace TMGmod
         public DragoShot(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(-1, this, -1f, 9f, 0.5f);
             ammo = 16;
             _ammoType = new ATDragoshot();
             _numBulletsPerFire = 8;
@@ -60,10 +54,10 @@ namespace TMGmod
             BurstNum = 1;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId

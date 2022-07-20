@@ -13,13 +13,7 @@ namespace TMGmod
     public class RemingtonTac : BasePumpAction, IHaveAllowedSkins, IHaveStock
     {
         private const int NonSkinFrames = 3;
-        private static float Rmax => 3.506401f;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         private bool _stock;
 
@@ -27,7 +21,6 @@ namespace TMGmod
 
         public RemingtonTac(float xval, float yval) : base(xval, yval)
         {
-            skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 4;
             _ammoType = new ATFABARM();
             IntrinsicAccuracy = true;
@@ -62,10 +55,13 @@ namespace TMGmod
             Stock = false;
         }
 
+        private static float Rmax => 3.506401f;
+
+        protected override float BaseKforce => this.StockDeployed() ? 1.1f : 2.8f;
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         public int FrameId
         {
@@ -95,17 +91,6 @@ namespace TMGmod
             set => _stockstate = Maths.Clamp(value, 0f, 1f);
         }
 
-        private void UpdateStats()
-        {
-            _fireWait = this.StockDeployed() ? 0f : 2.75f;
-            LoadSpeed = (sbyte)(this.StockDeployed() ? 20 : 10);
-        }
-
-        protected override float BaseKforce => this.StockDeployed() ? 1.1f : 2.8f;
-
-        private void UpdateFrames() =>
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
-
         public void UpdateStockStats(float old)
         {
             UpdateStats();
@@ -126,6 +111,17 @@ namespace TMGmod
         public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/beepods1");
         public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/beepods2");
 
+        private void UpdateStats()
+        {
+            _fireWait = this.StockDeployed() ? 0f : 2.75f;
+            LoadSpeed = (sbyte)(this.StockDeployed() ? 20 : 10);
+        }
+
+        private void UpdateFrames()
+        {
+            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+        }
+
         protected override void OnInitialize()
         {
             Stock = false;
@@ -139,6 +135,7 @@ namespace TMGmod
             duck.UpdateMove();
             duck.runMax = runMax;
         }
+
         public override void Update()
         {
             base.Update();

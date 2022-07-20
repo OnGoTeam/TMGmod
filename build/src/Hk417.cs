@@ -12,17 +12,11 @@ namespace TMGmod
     public class HK417 : BaseDmr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 1, 7 });
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        private readonly EditorProperty<int> skin;
 
         public HK417(float xval, float yval)
             : base(xval, yval)
         {
-            skin = new EditorProperty<int>(4, this, -1f, 9f, 0.5f);
             ammo = 11;
             _ammoType = new ATHk417();
             MaxAccuracy = 0.93f;
@@ -32,7 +26,7 @@ namespace TMGmod
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Hk417"), 30, 10);
             _graphic = _sprite;
-            _sprite.frame = 4;
+            _sprite.frame = SkinValue = 4;
             _center = new Vec2(15f, 5f);
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(30f, 10f);
@@ -53,10 +47,10 @@ namespace TMGmod
             _weight = 3.5f;
         }
 
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 1, 7 });
+
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-        // ReSharper disable once ConvertToAutoProperty
-        public EditorProperty<int> Skin => skin;
 
         [UsedImplicitly]
         public int FrameId
