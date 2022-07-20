@@ -13,19 +13,22 @@ namespace TMGmod.Core.Modifiers.Firing
         private readonly BaseGun _target;
         private bool _withinContext;
         public bool SwitchOnQuack { private get; set; }
-        public Action<bool> OnSwitch { private get; set; }
+        private readonly Action<bool> _onSwitch;
 
-        public Burst(BaseGun target, bool enabled)
+        public Burst(BaseGun target, bool enabled, Action<bool> onSwitch)
         {
             _target = target;
-            _enabled = enabled;
+            _onSwitch = onSwitch;
+            SetEnabled(enabled);
         }
 
-        private void Switch(Func<bool, bool> map)
+        private void SetEnabled(bool enabled)
         {
-            _enabled = map(_enabled);
-            OnSwitch?.Invoke(_enabled);
+            _enabled = enabled;
+            _onSwitch?.Invoke(enabled);
         }
+
+        private void Switch(Func<bool, bool> map) => SetEnabled(map(_enabled));
 
         public override void ModifyFire(Action fire)
         {
@@ -79,7 +82,7 @@ namespace TMGmod.Core.Modifiers.Firing
 
         protected override void Read(BitBuffer buffer)
         {
-            _enabled = buffer.ReadBool();
+            SetEnabled(buffer.ReadBool());
             _shotsLeft = buffer.ReadInt();
         }
 

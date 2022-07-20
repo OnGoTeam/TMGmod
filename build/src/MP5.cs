@@ -17,7 +17,7 @@ namespace TMGmod
     {
         private const int NonSkinFrames = 2;
         protected float IncreasedAccuracy;
-        
+
         protected SpriteMap Texture;
 
         public MP5(float xval, float yval)
@@ -51,17 +51,20 @@ namespace TMGmod
             Compose(
                 new FirstKforce(20, kforce => kforce + 1.2f),
                 new FirstAccuracy(10, accuracy => DecreasedAccuracy),
-                new Burst(this, false)
-                {
-                    Num = 3,
-                    Wait = .45f,
-                    SwitchOnQuack = true,
-                    OnSwitch = burst =>
+                new Burst(
+                    this,
+                    false,
+                    burst =>
                     {
                         _fireWait = burst ? 1.8f : 0.5f;
                         FrameId = FrameId % 10 + (burst ? 10 : 0);
                         MaxAccuracy = burst ? IncreasedAccuracy : DecreasedAccuracy;
-                    },
+                    }
+                )
+                {
+                    Num = 3,
+                    Wait = .45f,
+                    SwitchOnQuack = true,
                 }
             );
         }

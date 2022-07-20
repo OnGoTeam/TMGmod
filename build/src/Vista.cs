@@ -42,7 +42,7 @@ namespace TMGmod
             _weight = 2f;
             Compose(
                 new FirstAccuracy(30, accuracy => accuracy - .25f),
-                new Burst(this, true) { Num = 3, Wait = .1f }
+                new Burst(this, true, null) { Num = 3, Wait = .1f }
             );
         }
 

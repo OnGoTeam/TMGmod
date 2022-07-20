@@ -43,7 +43,7 @@ namespace TMGmod
             _holdOffset = new Vec2(-1f, 2f);
             _editorName = "Anyx PR5";
             _weight = 1.7f;
-            Compose(new Burst(this, true) { Num = 3, Wait = .6f });
+            Compose(new Burst(this, true, null) { Num = 3, Wait = .6f });
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 4 });
