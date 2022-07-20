@@ -5,6 +5,7 @@ using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {

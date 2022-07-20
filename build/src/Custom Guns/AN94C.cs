@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassImplementations;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod.Custom_Guns

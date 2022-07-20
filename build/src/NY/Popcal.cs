@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod.NY
 {

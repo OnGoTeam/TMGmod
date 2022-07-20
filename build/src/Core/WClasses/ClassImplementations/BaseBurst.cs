@@ -1,7 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 
-namespace TMGmod.Core.WClasses
+namespace TMGmod.Core.WClasses.ClassImplementations
 {
     public abstract class BaseBurst : BaseGun
     {

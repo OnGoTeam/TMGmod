@@ -3,7 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses.ClassMarkers;
 
-namespace TMGmod.Core.WClasses
+namespace TMGmod.Core.WClasses.ClassImplementations
 {
     public abstract class BaseBolt : BaseGun, ISpeedAccuracy, IAmSr
     {

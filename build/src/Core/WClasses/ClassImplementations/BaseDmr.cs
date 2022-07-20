@@ -1,6 +1,6 @@
 ﻿using TMGmod.Core.WClasses.ClassMarkers;
 
-namespace TMGmod.Core.WClasses
+namespace TMGmod.Core.WClasses.ClassImplementations
 {
     public abstract class BaseDmr : BaseGun, ILoseAccuracy, IAmDmr
     {

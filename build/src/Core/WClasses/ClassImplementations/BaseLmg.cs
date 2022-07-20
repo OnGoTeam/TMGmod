@@ -1,7 +1,7 @@
 ﻿using DuckGame;
 using TMGmod.Core.WClasses.ClassMarkers;
 
-namespace TMGmod.Core.WClasses
+namespace TMGmod.Core.WClasses.ClassImplementations
 {
     public abstract class BaseLmg : BaseGun, IAmLmg
     {

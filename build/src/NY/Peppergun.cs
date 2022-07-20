@@ -1,6 +1,7 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod.NY
 {

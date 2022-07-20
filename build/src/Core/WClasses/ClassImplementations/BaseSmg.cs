@@ -1,7 +1,7 @@
 ﻿using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.WClasses.ClassMarkers;
 
-namespace TMGmod.Core.WClasses
+namespace TMGmod.Core.WClasses.ClassImplementations
 {
     public abstract class BaseSmg : BaseGun, IAmSmg
     {

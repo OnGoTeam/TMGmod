@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.WClasses;
+using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
