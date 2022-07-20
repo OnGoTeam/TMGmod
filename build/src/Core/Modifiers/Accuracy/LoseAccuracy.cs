@@ -26,7 +26,7 @@ namespace TMGmod.Core.Modifiers.Accuracy
 
         protected override void ModifyFire()
         {
-            _drained = Math.Max(Max, _drained + Drain);
+            _drained = Math.Min(Max, _drained + Drain);
         }
 
         protected override void ModifyUpdate()
