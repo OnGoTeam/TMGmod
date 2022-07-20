@@ -317,7 +317,7 @@
     <Compile Include="src\Core\Mod.cs" />
     <Compile Include="src\Core\Particles\BarrBetaPar.cs" />
     <Compile Include="src\44dbC.cs" />
-    <Compile Include="src\AN94C.cs" />
+    <Compile Include="src\Anyx AR2 Mustang.cs" />
     <Compile Include="src\AUGA3.cs" />
     <Compile Include="src\BarretM98C.cs" />
     <Compile Include="src\CZC2.cs" />

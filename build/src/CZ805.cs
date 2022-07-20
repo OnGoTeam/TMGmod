@@ -61,7 +61,7 @@ namespace TMGmod
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _ammoType = new ATCZS();
-                    _barrelOffsetTL = new Vec2(42.5f, 3f);
+                    _barrelOffsetTL = new Vec2(41f, 3f);
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.35f;
                 }
