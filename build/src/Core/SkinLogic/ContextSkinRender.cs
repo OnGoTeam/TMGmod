@@ -56,6 +56,7 @@ namespace TMGmod.Core.SkinLogic
         {
             return (x + y / 3f) / sprite.width;
         }
+
         private static void PutData(IReadOnlyList<int> skins, IList<Color> data, Sprite sprite, int time)
         {
             var spriteData = GetData(sprite.texture);
@@ -81,27 +82,31 @@ namespace TMGmod.Core.SkinLogic
             return data;
         }
 
+        private static void UpdateContained(IReadOnlyList<int> skins, Sprite sprite, int time)
+        {
+            var tuple = Rendered[sprite.texture];
+            if (tuple.Item3 == time) return;
+            // else
+            PutData(skins, tuple.Item2, sprite, time);
+            tuple.Item1.SetData(GetData(skins, sprite, time));
+            Rendered[sprite.texture] = new Tuple<Tex2D, Color[], int>(tuple.Item1, tuple.Item2, time);
+        }
+
+        private static void CreateContained(IReadOnlyList<int> skins, Sprite sprite, int time)
+        {
+            var tex = GetTex(sprite.width, sprite.height);
+            var data = GetData(sprite.width * sprite.height);
+            PutData(skins, data, sprite, time);
+            tex.SetData(GetData(skins, sprite, time));
+            Rendered[sprite.texture] = new Tuple<Tex2D, Color[], int>(tex, data, time);
+        }
+
         private static Tex2D GetTex(IReadOnlyList<int> skins, Sprite sprite, int time)
         {
             if (Rendered.ContainsKey(sprite.texture))
-            {
-                var tuple = Rendered[sprite.texture];
-                if (tuple.Item3 != time)
-                {
-                    PutData(skins, tuple.Item2, sprite, time);
-                    tuple.Item1.SetData(GetData(skins, sprite, time));
-                    Rendered[sprite.texture] = new Tuple<Tex2D, Color[], int>(tuple.Item1, tuple.Item2, time);
-                }
-            }
+                UpdateContained(skins, sprite, time);
             else
-            {
-                var tex = GetTex(sprite.width, sprite.height);
-                var data = GetData(sprite.width * sprite.height);
-                PutData(skins, data, sprite, time);
-                tex.SetData(GetData(skins, sprite, time));
-                Rendered[sprite.texture] = new Tuple<Tex2D, Color[], int>(tex, data, time);
-            }
-
+                CreateContained(skins, sprite, time);
             return Rendered[sprite.texture].Item1;
         }
 
