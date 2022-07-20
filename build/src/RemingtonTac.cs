@@ -15,9 +15,9 @@ namespace TMGmod
         private const int NonSkinFrames = 3;
         private readonly SpriteMap _sprite;
 
-        private bool _stock;
+        private bool _stock = true;
 
-        private float _stockstate;
+        private float _stockstate = 1f;
 
         public RemingtonTac(float xval, float yval) : base(xval, yval)
         {
@@ -52,7 +52,6 @@ namespace TMGmod
             ShellOffset = new Vec2(2f, -2f);
             LoaderVec2 = new Vec2(8f, -0.5f);
             Loaddx = 3f;
-            Stock = false;
         }
 
         private static float Rmax => 3.506401f;
@@ -120,12 +119,6 @@ namespace TMGmod
         private void UpdateFrames()
         {
             FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
-        }
-
-        protected override void OnInitialize()
-        {
-            Stock = false;
-            base.OnInitialize();
         }
 
         private void GottaGoFast()
