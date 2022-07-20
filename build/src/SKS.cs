@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -10,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class SKS : BaseGun, IHaveAllowedSkins, ISpeedAccuracy, I5
+    public class SKS : BaseGun, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
@@ -64,6 +65,7 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             _editorName = "SKS";
             _weight = 6f;
+            Compose(new SpeedAccuracy(this, 1f, 1f, .15f));
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -77,10 +79,6 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float SpeedAccuracyThreshold => 1f;
-        public float SpeedAccuracyHorizontal => 1f;
-        public float SpeedAccuracyVertical => 0.15f;
 
         public override void Update()
         {
