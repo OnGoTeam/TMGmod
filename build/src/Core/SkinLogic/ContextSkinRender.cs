@@ -23,6 +23,7 @@ namespace TMGmod.Core.SkinLogic
         {
             _target = target;
             _skin = skin;
+            itemSize.y = 4f + target.SpriteBase.height;
             if (!target.AllowedSkins.Contains(skin)) return;
             // else
             _imag = _target.SpriteBase;
@@ -45,15 +46,50 @@ namespace TMGmod.Core.SkinLogic
             return new Color[size];
         }
 
-        private static int SkinNo(IReadOnlyList<int> skins, float off, int time)
+        private class SkinContext
         {
-            var total = skins.Count;
-            return skins[(int)Math.Floor((off + time * .0151379f) * total) % total];
+            private readonly float _x;
+            private readonly float _y;
+            private readonly Sprite _sprite;
+            private readonly int _time;
+            private readonly int _total;
+            private static readonly float Mode = Rando.Float(0f, 2.1f);
+            public SkinContext(float x, float y, Sprite sprite, int time, int total)
+            {
+                _x = x;
+                _y = y;
+                _sprite = sprite;
+                _time = time;
+                _total = total;
+            }
+
+            private float Off()
+            {
+                return (_x + _y / 3f) / _sprite.width;
+            }
+            private float FloatNo()
+            {
+                switch (Mode)
+                {
+                    case var _ when Mode < 1f:
+                        return _x / _sprite.width / 2 + _time * .0151379f;
+                    case var _ when Mode < 2f:
+                        return (Off() + _time * .00951379f) * _total;
+                    default:
+                        return Rando.Int(0, _total - 1);
+                }
+            }
+
+            public int SkinNo()
+            {
+                return (int)Math.Floor(FloatNo());
+            }
         }
 
-        private static float Off(float x, float y, Sprite sprite)
+        private static int SkinNo(IReadOnlyList<int> skins, int skin)
         {
-            return (x + y / 3f) / sprite.width;
+            var total = skins.Count;
+            return skins[(skin % total + total) % total];
         }
 
         private static void PutData(IReadOnlyList<int> skins, IList<Color> data, Sprite sprite, int time)
@@ -62,7 +98,7 @@ namespace TMGmod.Core.SkinLogic
             for (var y = 0; y < sprite.height; y++)
             for (var x = 0; x < sprite.width; x++)
             {
-                var frame = SkinNo(skins, Off(x, y, sprite), time);
+                var frame = SkinNo(skins, new SkinContext(x, y, sprite, time, skins.Count).SkinNo());
                 var columns = sprite.texture.width / sprite.width;
                 var rowNo = frame / columns;
                 var colNo = frame % columns;
@@ -142,21 +178,22 @@ namespace TMGmod.Core.SkinLogic
             sprite.Draw();
         }
 
+        private void DrawImag()
+        {
+            var oldIndex = _imag._imageIndex;
+            var oldFrame = _imag._frame;
+            _imag._imageIndex = _imag._frame = _skin;
+            DrawStatic(_imag);
+            _imag._frame = oldFrame;
+            _imag._imageIndex = oldIndex;
+        }
+
         private void DrawSkin()
         {
             if (_imag is null)
-            {
                 WithRandomized(_target, DrawStatic);
-            }
             else
-            {
-                var oldIndex = _imag._imageIndex;
-                var oldFrame = _imag._frame;
-                _imag._imageIndex = _imag._frame = _skin;
-                DrawStatic(_imag);
-                _imag._frame = oldFrame;
-                _imag._imageIndex = oldIndex;
-            }
+                DrawImag();
         }
 
         public override void Draw()
