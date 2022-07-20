@@ -2,16 +2,17 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class AN94 : BaseBurst, IAmAr, IHaveAllowedSkins
+    public class AN94 : BaseGun, IAmAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
 
@@ -49,9 +50,10 @@ namespace TMGmod
             _weight = 4.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(30f, 2.5f);
-            DeltaWait = 0.07f;
-            BurstNum = 2;
-            Compose(new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f));
+            Compose(
+                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f),
+                new Burst(this, true, null) { Num = 2, Wait = .07f }
+            );
         }
 
         [UsedImplicitly]
