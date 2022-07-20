@@ -18,7 +18,7 @@ namespace TMGmod.Stuff
         private readonly int _trackTicks;
         private int _ticks;
 
-        [UsedImplicitly] public int Ammo = 5;
+        public int Ammo = 5;
 
         [UsedImplicitly] public StateBinding AmmoBinding = new StateBinding(nameof(Ammo));
 
@@ -125,20 +125,6 @@ namespace TMGmod.Stuff
             contextMenu.AddItem(new ContextSlider("Charges", null, new FieldBinding(this, "Ammo", -1, 20, 1), 1,
                 "INF"));
             return contextMenu;
-        }
-
-        public override BinaryClassChunk Serialize()
-        {
-            var binaryClassChunk = base.Serialize();
-            binaryClassChunk.AddProperty("Ammo", Ammo);
-            return binaryClassChunk;
-        }
-
-        public override bool Deserialize(BinaryClassChunk node)
-        {
-            base.Deserialize(node);
-            Ammo = node.GetProperty<int>("Ammo");
-            return true;
         }
 
         private struct AdsHit
