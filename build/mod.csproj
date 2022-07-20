@@ -396,6 +396,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET outdir=%25userprofile%25\Documents\DuckGame\Mods\$(TargetName)
+SET altdir=%25appdata%25\DuckGame\Mods\$(TargetName)
+IF EXIST %25appdata%25\DuckGame\Mods\mods.conf (
+    SET outdir=%25altdir%25
+)
 IF NOT EXIST %25outdir%25 (
     MKDIR %25outdir%25
 )
