@@ -491,6 +491,7 @@ namespace TMGmod.Core.WClasses
 
         private void DrawDamage()
         {
+            if (Network.isActive) return;
             if (ammoType is null) return;
             var start = barrelPosition + new Vec2(0, -64);
             var x1 = OffsetLocal(new Vec2(ammoType.range, 0));
@@ -534,7 +535,7 @@ namespace TMGmod.Core.WClasses
             Level.Add(new HintThing(this, offset, hint, image()));
         }
 
-        public void Hint(string hint, Func<Vec2> offset, string trigger)
+        private void Hint(string hint, Func<Vec2> offset, string trigger)
         {
             if (duck != null)
                 Hint(hint, offset, () => duck.inputProfile.GetTriggerImage(trigger));
@@ -561,7 +562,7 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-        protected virtual Vec2 HintOffset()
+        private Vec2 HintOffset()
         {
             switch (this)
             {
@@ -572,9 +573,9 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-        protected string HintTrigger = "QUACK";
+        private const string HintTrigger = "QUACK";
 
-        protected virtual bool NeedHint()
+        private bool NeedHint()
         {
             switch (this)
             {

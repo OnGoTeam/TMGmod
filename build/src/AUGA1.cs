@@ -86,7 +86,7 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
+            if (isServerForObject && duck?.inputProfile.Pressed("QUACK") == true)
             {
                 Grip = !Grip;
                 SFX.Play(GetPath("sounds/tuduc.wav"));

@@ -24,8 +24,8 @@ namespace TMGmod.Buddies
             _hitPoints = HpMax;
             _collisionOffset = new Vec2(-4f, -4f);
             _collisionSize = new Vec2(8f, 8f);
-            _equippedCollisionOffset = new Vec2(-12f, -16f);
-            _equippedCollisionSize = new Vec2(24f, 32f);
+            _equippedCollisionOffset = new Vec2(-16f, -24f);
+            _equippedCollisionSize = new Vec2(32f, 48f);
             _hasEquippedCollision = true;
             _center = new Vec2(8f, 8f);
             physicsMaterial = PhysicsMaterial.Duck;
@@ -193,7 +193,7 @@ namespace TMGmod.Buddies
         public void NetworkHit(float damage)
         {
             DoDamage(damage);
-            if (Broken())
+            if (Broken() && EquippedDuck() != null)
                 NetworkKill(new DTCrush(this));
         }
 
@@ -307,7 +307,7 @@ namespace TMGmod.Buddies
             }
 #endif
             base.Update();
-            if (_equippedDuck is null)
+            if (_equippedDuck is null || _equippedDuck.dead)
             {
                 Level.Remove(this);
                 return;
