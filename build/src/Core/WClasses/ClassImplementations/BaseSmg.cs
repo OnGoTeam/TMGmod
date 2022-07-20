@@ -11,6 +11,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
         {
             KforceDelta = 0.2f;
             _firstKforce = new FirstKforce(50, kforce => kforce + KforceDelta);
+            _fullAuto = true;
             Compose(_firstKforce);
         }
 
