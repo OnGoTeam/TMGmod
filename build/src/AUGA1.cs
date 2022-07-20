@@ -51,7 +51,7 @@ namespace TMGmod
         [UsedImplicitly]
         public bool Grip
         {
-            get => maxAccuracyLost > 0.1f;
+            get => maxAccuracyLost < 0.2f;
             set
             {
                 if (!value)
