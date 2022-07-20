@@ -72,7 +72,7 @@ namespace TMGmod
             if (_onemoreclick)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
-                _sprite.frame = 3;
+                _sprite.frame = _sprite.frame % 10 + 30;
                 _wait += 5f;
                 return _onemoreclick = false;
             }
@@ -86,16 +86,16 @@ namespace TMGmod
         public bool DropMag(Thing mag)
         {
             SFX.Play(GetPath("sounds/tuduc.wav"));
-            switch (_sprite.frame)
+            switch (_sprite.frame / 10)
             {
                 case 0:
-                    _sprite.frame = 1;
+                    _sprite.frame += 10;
                     break;
                 case 3:
-                    _sprite.frame = 2;
+                    _sprite.frame -= 10;
                     break;
                 default:
-                    _sprite.frame = 1;
+                    _sprite.frame = _sprite.frame % 10 + 10;
                     break;
             }
 
@@ -114,7 +114,7 @@ namespace TMGmod
         public override void Update()
         {
             if (ammo <= 0) _magBuddy.Disload();
-            if (ammo <= 0 && Mags <= 0) _sprite.frame = 2;
+            if (ammo <= 0 && Mags <= 0) _sprite.frame = _sprite.frame % 10 + 20;
             base.Update();
         }
     }
