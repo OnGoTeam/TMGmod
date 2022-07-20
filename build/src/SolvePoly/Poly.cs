@@ -1,4 +1,4 @@
-﻿#if DEBUG
+﻿#if FEATURES_1_3
 // MIT License Copyright (c) 2020 timotheyca
 // https://gitea.ongoteam.net/timofey/solve_poly/src/branch/master/LICENSE
 

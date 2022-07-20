@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("[1.1.7] QoL Patches")]
 #elif FEATURES_1_2
 [assembly: AssemblyDescription("[1.2] HP")]
+#elif FEATURES_1_3
+[assembly: AssemblyDescription("[1.3] Explosive Things")]
 #else
 [assembly: AssemblyDescription("[1.107] QoL Patches")]
 #endif

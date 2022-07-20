@@ -1,4 +1,4 @@
-﻿#if DEBUG
+﻿#if FEATURES_1_3
 using DuckGame;
 
 namespace TMGmod.Core.SkinLogic
