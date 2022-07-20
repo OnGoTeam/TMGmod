@@ -14,8 +14,9 @@ namespace TMGmod
     public class MP5 : BaseBurst, IFirstPrecise, IHaveAllowedSkins, IAmSmg
     {
         private const int NonSkinFrames = 2;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
-        private readonly SpriteMap _sprite;
+        public virtual ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
+        protected SpriteMap Texture;
+        protected float IncreasedAccuracy;
 
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
@@ -29,12 +30,13 @@ namespace TMGmod
             skin = new EditorProperty<int>(0, this, -1f, 9f, 0.5f);
             ammo = 30;
             _ammoType = new ATMP5();
-            MaxAccuracy = 0.7f;
+            IncreasedAccuracy = .9f;
             LowerAccuracyFp = 0.7f;
+            MaxAccuracy = LowerAccuracyFp;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("MP5"), 27, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Texture = new SpriteMap(GetPath("MP5"), 27, 12);
+            _graphic = Texture;
+            Texture.frame = 0;
             _center = new Vec2(13f, 6f);
             _collisionOffset = new Vec2(-13f, -6f);
             _collisionSize = new Vec2(27f, 12f);
@@ -56,11 +58,9 @@ namespace TMGmod
             BurstNum = 1;
             BaseActiveModifier = ComposedModifier.Compose(
                 DefaultModifier(),
-                KforceModifier()
+                new FirstKforce(20, kforce => kforce + 1.2f)
             );
         }
-
-        public static IModifyEverything KforceModifier() => new FirstKforce(20, kforce => kforce + 1.2f);
 
         [UsedImplicitly]
         public bool NonAuto
@@ -71,13 +71,13 @@ namespace TMGmod
                 BurstNum = value ? 1 : 3;
                 _fireWait = value ? 0.5f : 1.8f;
                 FrameId = FrameId % 10 + (value ? 0 : 10);
-                MaxAccuracy = value ? 0.7f : 0.9f;
+                MaxAccuracy = value ? LowerAccuracyFp : IncreasedAccuracy;
             }
         }
 
         public int CurrentDelayFp { get; set; }
         public int MaxDelayFp { get; }
-        public float LowerAccuracyFp { get; }
+        public float LowerAccuracyFp { get; protected set; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty
@@ -86,8 +86,8 @@ namespace TMGmod
         [UsedImplicitly]
         public int FrameId
         {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
+            get => Texture.frame;
+            set => Texture.frame = value % (10 * NonSkinFrames);
         }
 
         public override void Update()
