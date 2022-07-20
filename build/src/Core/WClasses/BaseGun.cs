@@ -553,9 +553,9 @@ namespace TMGmod.Core.WClasses
                 switch (this)
                 {
                     case IDeployBipods target when target.BipodsDeployed():
-                        return "disable bipods";
+                        return "bipods";
                     case IHaveStock _:
-                        return "switch stock";
+                        return "stock";
                     default:
                         return null;
                 }
