@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers;
+using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -9,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class IB8mm : BaseGun, IFirstKforce, IHaveAllowedSkins
+    public class IB8mm : BaseGun, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
@@ -39,19 +41,17 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = 0.45f;
             _kickForce = 1.5f;
-            KickForceDeltaSmg = 2f;
-            MaxDelaySmg = 11;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.15f;
             _holdOffset = new Vec2(-2f, 0f);
             ShellOffset = new Vec2(-3f, 0f);
             _editorName = "IB-8mm Sniper";
             _weight = 3f;
+            BaseActiveModifier = ComposedModifier.Compose(
+                DefaultModifier(),
+                new FirstKforce(11, kforce => kforce + 2f)
+            );
         }
-
-        public float KickForceDeltaSmg { get; }
-        public uint CurrentDelaySmg { get; set; }
-        public uint MaxDelaySmg { get; }
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
         // ReSharper disable once ConvertToAutoProperty

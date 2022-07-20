@@ -61,19 +61,12 @@ namespace TMGmod.Core.WClasses
                 : kickForce;
         }
 
-        private static float CalculateFirstKforce(IFirstKforce target, float kickForce)
-        {
-            return target.CurrentDelaySmg <= 0 ? kickForce + target.KickForceDeltaSmg : kickForce;
-        }
-
         protected virtual float CalculateKforce(float kickForce)
         {
             switch (this)
             {
                 case IHspeedKforce target:
                     return CalculateHSpeedKforce(target, kickForce);
-                case IFirstKforce target:
-                    return CalculateFirstKforce(target, kickForce);
                 default:
                     return kickForce;
             }
@@ -108,21 +101,6 @@ namespace TMGmod.Core.WClasses
                     break;
                 case IFirstPrecise target:
                     FireFirstPrecise(target);
-                    break;
-            }
-        }
-
-        private static void FireFirstKforce(IFirstKforce target)
-        {
-            target.CurrentDelaySmg = target.MaxDelaySmg;
-        }
-
-        private void FireKforce()
-        {
-            switch (this)
-            {
-                case IFirstKforce target:
-                    FireFirstKforce(target);
                     break;
             }
         }
@@ -196,22 +174,6 @@ namespace TMGmod.Core.WClasses
         private float ClipAccuracy(float accuracy)
         {
             return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
-        }
-
-        private static void UpdateFirstKforce(IFirstKforce target)
-        {
-            if (target.CurrentDelaySmg > 0)
-                --target.CurrentDelaySmg;
-        }
-
-        private void UpdateKforce()
-        {
-            switch (this)
-            {
-                case IFirstKforce target:
-                    UpdateFirstKforce(target);
-                    break;
-            }
         }
 
         private float CalculateSpeedAccuracy(ISpeedAccuracy target)
@@ -404,8 +366,6 @@ namespace TMGmod.Core.WClasses
         {
             if (DynamicAccuracy())
                 FireAccuracy();
-            if (DynamicKforce())
-                FireKforce();
         }
 
         protected virtual void OnFire()
@@ -421,8 +381,6 @@ namespace TMGmod.Core.WClasses
         {
             if (DynamicAccuracy())
                 UpdateAccuracy();
-            if (DynamicKforce())
-                UpdateKforce();
             if (DynamicFeatures())
                 UpdateFeatures();
         }
