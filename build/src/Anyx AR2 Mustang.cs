@@ -2,16 +2,17 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class AN94C : BaseBurst, IAmAr, IHaveAllowedSkins
+    public class AN94C : BaseGun, IAmAr, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
         private readonly SpriteMap _sprite;
@@ -45,9 +46,10 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _editorName = "Anyx AR2 Mustang";
             _weight = 5.5f;
-            DeltaWait = 0.07f;
-            BurstNum = 2;
-            Compose(new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f));
+            Compose(
+                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f),
+                new Burst(this, true, null) { Num = 2, Wait = .07f }
+            );
         }
 
         [UsedImplicitly]
@@ -95,6 +97,7 @@ namespace TMGmod
                 Silencer = !Silencer;
                 SFX.Play("quack", -1);
             }
+
             base.Update();
         }
     }
