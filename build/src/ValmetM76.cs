@@ -2,15 +2,16 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Combined")]
-    public class ValmetM76 : BaseBurst, ILoseAccuracy, IHaveAllowedSkins
+    public class ValmetM76 : BaseBurst, IHaveAllowedSkins
     {
+        private readonly LoseAccuracy _loseAccuracy;
         private const int NonSkinFrames = 2;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         private readonly SpriteMap _sprite;
@@ -26,8 +27,6 @@ namespace TMGmod
             _ammoType = new ATM76();
             MaxAccuracy = 0.89f;
             MinAccuracy = 0.5f;
-            RegenAccuracyDmr = 0.02f;
-            DrainAccuracyDmr = 0.15f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("Valmet M76"), 33, 10);
             _graphic = _sprite;
@@ -52,6 +51,8 @@ namespace TMGmod
             _weight = 4f;
             DeltaWait = 0.15f;
             BurstNum = 1;
+            _loseAccuracy = new LoseAccuracy(0.15f, 0.02f, 1f);
+            Compose(_loseAccuracy);
         }
 
         public bool NonAuto
@@ -64,9 +65,9 @@ namespace TMGmod
                 FrameId = FrameId % 10 + (value ? 0 : 10);
                 loseAccuracy = value ? 0.15f : 0f;
                 _kickForce = value ? 3f : 6.5f;
-                _ammoType.accuracy = value ? 0.89f : 1f;
-                RegenAccuracyDmr = value ? 0.02f : 0f;
-                DrainAccuracyDmr = value ? 0.15f : 0f;
+                MaxAccuracy = value ? 0.89f : 1f;
+                _loseAccuracy.Regen = value ? 0.02f : 0f;
+                _loseAccuracy.Drain = value ? 0.15f : 0f;
                 MaxAccuracy = value ? 0.89f : 1f;
             }
         }
@@ -84,9 +85,6 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float RegenAccuracyDmr { get; private set; }
-        public float DrainAccuracyDmr { get; private set; }
 
         public override void Update()
         {

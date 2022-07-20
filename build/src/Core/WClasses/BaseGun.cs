@@ -92,21 +92,6 @@ namespace TMGmod.Core.WClasses
             Level.Add(new NewYearCase(x, y));
         }
 
-        private void FireLoseAccuracy(ILoseAccuracy target)
-        {
-            ammoType.accuracy = ClipAccuracy(ammoType.accuracy - target.RegenAccuracyDmr - target.DrainAccuracyDmr);
-        }
-
-        private void FireAccuracy()
-        {
-            switch (this)
-            {
-                case ILoseAccuracy target:
-                    FireLoseAccuracy(target);
-                    break;
-            }
-        }
-
         private void MaybeAddNyCase()
         {
             if (Rando.Float(0f, 1f) < PresentChancePercentage / 100f) AddNyCase();
@@ -193,19 +178,12 @@ namespace TMGmod.Core.WClasses
                   );
         }
 
-        private float CalculateLoseAccuracy(ILoseAccuracy target)
-        {
-            return ammoType.accuracy + target.RegenAccuracyDmr;
-        }
-
         protected virtual float CalculateAccuracy(float accuracy)
         {
             switch (this)
             {
                 case ISpeedAccuracy target:
                     return CalculateSpeedAccuracy(target);
-                case ILoseAccuracy target:
-                    return CalculateLoseAccuracy(target);
                 default:
                     return accuracy;
             }
@@ -340,12 +318,6 @@ namespace TMGmod.Core.WClasses
         {
         }
 
-        private void DynamicOnFire()
-        {
-            if (DynamicAccuracy())
-                FireAccuracy();
-        }
-
         protected virtual void OnFire()
         {
             ActiveModifier.ModifyFire(BaseOnFire);
@@ -443,7 +415,6 @@ namespace TMGmod.Core.WClasses
 
             protected override void ModifyFire()
             {
-                _target.DynamicOnFire();
             }
 
             protected override void ModifyUpdate()

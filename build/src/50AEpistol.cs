@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.Bullets;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -10,7 +11,7 @@ namespace TMGmod
 {
     [UsedImplicitly]
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
-    public class BigShot : BaseGun, IAmHg, IHaveAllowedSkins, ILoseAccuracy
+    public class BigShot : BaseGun, IAmHg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2, 5, 7 });
@@ -27,8 +28,6 @@ namespace TMGmod
             _ammoType = new AT50C();
             MaxAccuracy = 1f;
             MinAccuracy = 0.6f;
-            RegenAccuracyDmr = 0.05f;
-            DrainAccuracyDmr = 0.1f;
             _type = "gun";
             _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             _graphic = _sprite;
@@ -46,6 +45,7 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 2f);
             _editorName = "50AE Pistol";
             _weight = 2.5f;
+            Compose(new LoseAccuracy(0.1f, 0.02f, 1f));
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -58,8 +58,5 @@ namespace TMGmod
             get => _sprite.frame;
             set => _sprite.frame = value % (10 * NonSkinFrames);
         }
-
-        public float RegenAccuracyDmr { get; }
-        public float DrainAccuracyDmr { get; }
     }
 }

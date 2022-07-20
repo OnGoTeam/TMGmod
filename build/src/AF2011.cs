@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -11,7 +12,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AF2011 : BaseGun, IAmHg, IHaveAllowedSkins, I5, ILoseAccuracy
+    public class AF2011 : BaseGun, IAmHg, IHaveAllowedSkins, I5
     {
         private const int NonSkinFrames = 1;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 5 });
@@ -47,6 +48,7 @@ namespace TMGmod
             _editorName = "AF-2011";
             _weight = 2.5f;
             MaxAccuracy = .95f;
+            Compose(new LoseAccuracy(0.05f, 0.003f, 1f));
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -66,8 +68,5 @@ namespace TMGmod
             base.PopBaseShell();
             base.PopBaseShell();
         }
-
-        public float RegenAccuracyDmr => 0.003f;
-        public float DrainAccuracyDmr => 0.05f;
     }
 }
