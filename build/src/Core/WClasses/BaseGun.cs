@@ -8,7 +8,7 @@ using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
-#if FEATURES_1_3
+#if FEATURE_EDITOR_SKINS
 using System.Collections.Generic;
 using System.Linq;
 #endif
@@ -237,7 +237,7 @@ namespace TMGmod.Core.WClasses
 #if DEBUG
             DrawDebug();
 #endif
-#if FEATURES_1_3
+#if FEATURE_EDITOR_SKINS
             DrawRandom();
 #else
             base.Draw();
@@ -291,7 +291,7 @@ namespace TMGmod.Core.WClasses
         public override ContextMenu GetContextMenu()
         {
             var contextMenu = base.GetContextMenu();
-#if FEATURES_1_3
+#if FEATURE_EDITOR_SKINS
             switch (this)
             {
                 case IHaveAllowedSkins target when _graphic is SpriteMap sprite:
@@ -305,7 +305,7 @@ namespace TMGmod.Core.WClasses
             return contextMenu;
         }
 
-#if FEATURES_1_3
+#if FEATURE_EDITOR_SKINS
         private class SkinMix : IShowSkins
         {
             private readonly IHaveAllowedSkins _target;
