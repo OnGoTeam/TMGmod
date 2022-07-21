@@ -39,7 +39,6 @@ namespace TMGmod
             _collisionSize = new Vec2(29f, 11f);
             _barrelOffsetTL = new Vec2(29f, 2f);
             _fireSound = "shotgunFire";
-            _fullAuto = false;
             _fireWait = 1.5f;
             _kickForce = 5.5f;
             loseAccuracy = 0.1f;
@@ -74,13 +73,11 @@ namespace TMGmod
         public override void OnHoldAction()
         {
             if (ammo != 0 && Counter <= TimeToHappend) Counter += Step;
-            base.OnHoldAction();
         }
 
         public override void OnReleaseAction()
         {
             Counter = 0f;
-            base.OnReleaseAction();
             if (duck != null) Fire();
             LoockerOfSound = false;
         }
