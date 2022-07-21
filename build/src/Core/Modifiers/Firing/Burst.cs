@@ -31,7 +31,7 @@ namespace TMGmod.Core.Modifiers.Firing
             _onSwitch?.Invoke(enabled);
         }
 
-        private void Switch(Func<bool, bool> map) => SetEnabled(map(_enabled));
+        public void Switch(Func<bool, bool> map) => SetEnabled(map(_enabled));
 
         public override void ModifyFire(Action fire)
         {
