@@ -22,7 +22,7 @@ namespace TMGmod
             ammo = 33;
             _ammoType = new ATANP73();
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);
             _graphic = _sprite;
             _sprite.frame = 0;

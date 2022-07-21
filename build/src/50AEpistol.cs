@@ -23,7 +23,6 @@ namespace TMGmod
             _ammoType = new AT50C();
             MaxAccuracy = 1f;
             MinAccuracy = 0.6f;
-            _type = "gun";
             _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             _graphic = _sprite;
             _sprite.frame = SkinValue = 1;

@@ -30,7 +30,7 @@ namespace TMGmod
             ammo = 16;
             _ammoType = new ATDragoshot();
             _numBulletsPerFire = 8;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Dragoshot"), 29, 11);
             _graphic = _sprite;
             _sprite.frame = Rando.Int(0, 9);

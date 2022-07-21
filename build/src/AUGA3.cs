@@ -21,7 +21,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATAUGA3();
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("AUGA3"), 30, 12);
             _graphic = _sprite;
             _sprite.frame = 0;

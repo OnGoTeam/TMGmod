@@ -22,7 +22,7 @@ namespace TMGmod
             ammo = 17;
             _ammoType = new ATAR9SX();
             MaxAccuracy = 0.78f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("AR9SX"), 36, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

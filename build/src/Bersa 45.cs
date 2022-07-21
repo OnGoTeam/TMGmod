@@ -19,7 +19,7 @@ namespace TMGmod
         {
             ammo = 11;
             _ammoType = new ATBersa45();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Bersa45"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;

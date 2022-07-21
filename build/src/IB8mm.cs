@@ -21,7 +21,7 @@ namespace TMGmod
             ammo = 26;
             _ammoType = new ATIB8();
             MaxAccuracy = _ammoType.accuracy;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _graphic = _sprite;
             _sprite.frame = 0;

@@ -19,7 +19,6 @@ namespace TMGmod
         {
             ammo = 18;
             _ammoType = new ATAlep30();
-            _type = "gun";
             _sprite = new SpriteMap(GetPath("Alep30"), 16, 9);
             _graphic = _sprite;
             _sprite.frame = 0;

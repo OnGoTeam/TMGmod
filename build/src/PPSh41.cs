@@ -24,7 +24,7 @@ namespace TMGmod
             MaxAccuracy = 0.73f;
             KforceDelta = 3f;
             KforceDelay = 50;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
             _graphic = _sprite;
             _center = new Vec2(15f, 4f);

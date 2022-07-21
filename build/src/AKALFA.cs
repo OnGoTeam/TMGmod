@@ -30,7 +30,6 @@ namespace TMGmod
                 bulletSpeed = 60f,
                 bulletThickness = 0.87f,
             };
-            _type = "gun";
             _sprite = new SpriteMap(GetPath("ALFA"), 38, 9);
             _graphic = _sprite;
             _sprite.frame = 0;

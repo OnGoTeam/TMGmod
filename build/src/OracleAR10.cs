@@ -25,7 +25,7 @@ namespace TMGmod
             MinAccuracy = 0.35f;
             RegenAccuracyDmr = 0.015f;
             DrainAccuracyDmr = 0.3f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
             _graphic = _sprite;
             _sprite.frame = 0;

@@ -22,7 +22,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 80;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("mg3"), 39, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

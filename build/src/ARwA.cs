@@ -31,7 +31,7 @@ namespace TMGmod
                 accuracy = 0.85f,
             };
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("ARW-A"), 27, 9);
             _graphic = _sprite;
             _sprite.frame = 0;

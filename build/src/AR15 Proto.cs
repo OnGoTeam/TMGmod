@@ -31,7 +31,7 @@ namespace TMGmod
         {
             ammo = 20;
             _ammoType = new ATLowQammos();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

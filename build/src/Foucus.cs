@@ -22,7 +22,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = new ATFOUCUS();
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Foucus"), 37, 13);
             _graphic = _sprite;
             _sprite.frame = 0;

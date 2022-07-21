@@ -30,7 +30,7 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new AT12GaugeS();
             _numBulletsPerFire = 16;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("KS-23"), 35, 8);
             _graphic = _sprite;
             _center = new Vec2(18f, 4f);

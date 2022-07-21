@@ -28,7 +28,6 @@ namespace TMGmod
             };
             MaxAccuracy = 0.6f;
             _numBulletsPerFire = 12;
-            _type = "gun";
             _sprite = new SpriteMap(GetPath("AA12"), 34, 13);
             _graphic = _sprite;
             _sprite.frame = 0;

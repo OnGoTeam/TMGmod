@@ -24,7 +24,7 @@ namespace TMGmod
             MinAccuracy = 0.8f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.45f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Nellegalja Mk2"), 33, 13);
             _graphic = _sprite;
             _sprite.frame = 0;

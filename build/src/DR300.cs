@@ -27,7 +27,7 @@ namespace TMGmod
             MinAccuracy = 0.65f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.2f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("DR300"), 37, 11);
             _graphic = _sprite;
             _sprite.frame = Postframe;

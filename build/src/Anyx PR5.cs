@@ -27,7 +27,7 @@ namespace TMGmod
             _collisionSize = new Vec2(12f, 8f);
             ammo = 21;
             _ammoType = new ATPR5();
-            _type = "gun";
+            
             _barrelOffsetTL = new Vec2(12f, 1f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {

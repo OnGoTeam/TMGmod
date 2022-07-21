@@ -20,7 +20,7 @@ namespace TMGmod
             ammo = 5;
             _ammoType = new ATM72();
             MaxAccuracy = 0.95f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("M72"), 32, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

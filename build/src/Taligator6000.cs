@@ -20,7 +20,7 @@ namespace TMGmod
             ammo = 11;
             _ammoType = new ATTG6000();
             _numBulletsPerFire = 13;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Taligator 6000 SX"), 31, 12);
             _graphic = _sprite;
             _center = new Vec2(16f, 6f);

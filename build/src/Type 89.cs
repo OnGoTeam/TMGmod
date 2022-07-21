@@ -19,7 +19,7 @@ namespace TMGmod
             ammo = 26;
             _ammoType = new ATType89();
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Type 89"), 30, 12);
             _graphic = _sprite;
             _sprite.frame = 0;

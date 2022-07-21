@@ -59,7 +59,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = _ammoTypem[0];
             MaxAccuracy = 0.9f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("scargl"), 33, 10);
             _graphic = _sprite;
             _center = new Vec2(16.5f, 5f);

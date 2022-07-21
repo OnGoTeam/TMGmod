@@ -1,5 +1,5 @@
-﻿using DuckGame;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -18,7 +18,7 @@ namespace TMGmod
         {
             ammo = 6;
             _ammoType = new ATx3x();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("X3X"), 27, 14);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -41,6 +41,7 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
         public int FrameId
         {
             get => _sprite.frame;

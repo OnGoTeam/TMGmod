@@ -26,7 +26,7 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _type = "gun";
+
             _sprite = new SpriteMap(GetPath("SIX12S"), 29, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

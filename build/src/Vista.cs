@@ -22,7 +22,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATVista();
             MaxAccuracy = 1f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
             _graphic = _sprite;
             _sprite.frame = 0;

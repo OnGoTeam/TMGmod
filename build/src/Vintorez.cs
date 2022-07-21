@@ -24,7 +24,7 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             _kickForce = 0.4f;
             KforceDelta = 0.45f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

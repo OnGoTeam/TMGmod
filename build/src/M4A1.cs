@@ -24,7 +24,7 @@ namespace TMGmod
                 accuracy = 0.86f,
             };
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("M4A1"), 30, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

@@ -27,7 +27,7 @@ namespace TMGmod
         {
             ammo = 26;
             _ammoType = new ATHazeS();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("HazeS"), 24, 12);
             _graphic = _sprite;
             _sprite.frame = 0;

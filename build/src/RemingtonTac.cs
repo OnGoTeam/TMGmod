@@ -25,7 +25,7 @@ namespace TMGmod
             _ammoType = new ATFABARM();
             IntrinsicAccuracy = true;
             _numBulletsPerFire = 6;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);
             _graphic = _sprite;
             _center = new Vec2(13f, 4f);

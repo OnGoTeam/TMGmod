@@ -24,7 +24,6 @@ namespace TMGmod
             ammo = 10;
             _ammoType = new ATAF2011();
             _numBulletsPerFire = 2;
-            _type = "gun";
             _sprite = new SpriteMap(GetPath("AF2011"), 16, 9);
             _graphic = _sprite;
             _sprite.frame = 0;

@@ -48,7 +48,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = _ammoTypem[0];
             _numBulletsPerFire = 1;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
             _graphic = _sprite;
             _center = new Vec2(8f, 5f);

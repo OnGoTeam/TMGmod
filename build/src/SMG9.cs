@@ -22,7 +22,7 @@ namespace TMGmod
             IntrinsicAccuracy = true;
             KforceDelta = 3.5f;
             KforceDelay = 15;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("SMG9"), 16, 15);
             _graphic = _sprite;
             _sprite.frame = 0;

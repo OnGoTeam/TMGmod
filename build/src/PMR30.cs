@@ -20,7 +20,7 @@ namespace TMGmod
         {
             ammo = 30;
             _ammoType = new ATPMR30();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("PMR30"), 16, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

@@ -23,7 +23,7 @@ namespace TMGmod
             MaxAccuracy = 0.8f;
             KforceDelta = 2.5f;
             KforceDelay = 20;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("PPK42"), 25, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

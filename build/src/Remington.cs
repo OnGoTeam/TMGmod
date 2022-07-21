@@ -17,7 +17,7 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new ATRemington();
             _numBulletsPerFire = 5;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
             _graphic = _sprite;
             LoaderSprite = new SpriteMap(GetPath("Fabarm FP-6Pump"), 9, 4)

@@ -28,7 +28,7 @@ namespace TMGmod
             ammo = 60;
             _ammoType = new ATButcher();
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Solaris Butcher"), 24, 12);
             _graphic = _sprite;
             _sprite.frame = 0;

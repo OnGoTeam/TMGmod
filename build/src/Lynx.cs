@@ -28,7 +28,7 @@ namespace TMGmod
             _ammoType = new ATLynx();
             MaxAccuracy = 1f;
             MinAccuracy = 0.3f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Lynx"), 31, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

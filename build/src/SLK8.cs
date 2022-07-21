@@ -23,7 +23,7 @@ namespace TMGmod
             MinAccuracy = 0.3f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.45f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("SLK8"), 41, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

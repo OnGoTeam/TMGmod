@@ -25,7 +25,7 @@ namespace TMGmod
                 range = Rando.Float(10f, 70f),
             };
             MaxAccuracy = 0.4f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("M900"), 27, 7);
             _graphic = _sprite;
             _sprite.frame = 0;

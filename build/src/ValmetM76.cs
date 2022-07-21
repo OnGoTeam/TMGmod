@@ -22,7 +22,7 @@ namespace TMGmod
             _ammoType = new ATM76();
             MaxAccuracy = 0.89f;
             MinAccuracy = 0.5f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Valmet M76"), 33, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

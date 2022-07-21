@@ -28,7 +28,7 @@ namespace TMGmod
             _ammoType = new ATBizon();
             MaxAccuracy = 0.8f;
             MinAccuracy = 0.2f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("PP19Bizon"), 28, 9);
             _graphic = _sprite;
             _sprite.frame = 0;

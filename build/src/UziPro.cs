@@ -24,7 +24,7 @@ namespace TMGmod
             IntrinsicAccuracy = true;
             KforceDelay = 25;
             KforceDelta = 4f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

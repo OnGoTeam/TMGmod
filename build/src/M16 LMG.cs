@@ -24,7 +24,7 @@ namespace TMGmod
                 accuracy = 0.8f,
                 penetration = 1.5f,
             };
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("M16LMG"), 38, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

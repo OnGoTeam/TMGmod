@@ -23,7 +23,7 @@ namespace TMGmod
         {
             ammo = 24;
             _ammoType = new ATCZ75();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("CZ75"), 12, 8);
             _graphic = _sprite;
             _sprite.frame = 0;

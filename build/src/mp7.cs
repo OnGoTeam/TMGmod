@@ -27,7 +27,7 @@ namespace TMGmod
             ammo = 35;
             _ammoType = new ATMP7();
             MaxAccuracy = 0.9f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("MP7"), 20, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

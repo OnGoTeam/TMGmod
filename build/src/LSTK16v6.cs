@@ -23,7 +23,7 @@ namespace TMGmod
             ammo = 25;
             _ammoType = new ATM16();
             MaxAccuracy = 0.91f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("LSTK16v6"), 33, 14);
             _graphic = _sprite;
             _sprite.frame = 0;

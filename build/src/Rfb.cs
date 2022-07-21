@@ -21,7 +21,7 @@ namespace TMGmod
                 range = 380f,
                 accuracy = 0.9f,
             };
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("RFB"), 33, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

@@ -25,7 +25,7 @@ namespace TMGmod
             ammo = 32;
             _ammoType = new ATDaewooK1();
             MaxAccuracy = _ammoType.accuracy;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("DaewooK1"), 28, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

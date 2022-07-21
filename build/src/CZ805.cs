@@ -23,7 +23,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATCZ();
             MaxAccuracy = _ammoType.accuracy;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("CZ805Bren"), 41, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

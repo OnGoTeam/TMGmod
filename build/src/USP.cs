@@ -22,7 +22,7 @@ namespace TMGmod
         {
             ammo = 13;
             _ammoType = new ATUSP();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("USP"), 23, 9);
             _graphic = _sprite;
             _sprite.frame = 0;

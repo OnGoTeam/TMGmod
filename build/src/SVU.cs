@@ -23,7 +23,7 @@ namespace TMGmod
             _ammoType = new ATSVU();
             MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.2f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

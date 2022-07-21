@@ -16,7 +16,7 @@ namespace TMGmod
             IncreasedAccuracy = 0.92f;
             DecreasedAccuracy = 0.77f;
             MaxAccuracy = DecreasedAccuracy;
-            _type = "gun";
+            
             Texture = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _graphic = Texture;
             Texture.frame = 0;

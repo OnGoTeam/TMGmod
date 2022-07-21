@@ -32,7 +32,7 @@ namespace TMGmod
             MinAccuracy = 0.5f;
             _kickForce = 5.4f;
             KforceDelta = 1.45f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);
             _graphic = _sprite;
             _sprite.frame = 0;

@@ -28,7 +28,7 @@ namespace TMGmod
         {
             ammo = 70;
             _ammoType = new ATLowQammos();
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("G9M"), 38, 11);
             _graphic = _sprite;
             _sprite.frame = 0;

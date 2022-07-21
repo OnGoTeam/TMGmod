@@ -32,7 +32,7 @@ namespace TMGmod
             ammo = 21;
             _ammoType = new ATARS();
             MaxAccuracy = 0.81f;
-            _type = "gun";
+            
             //THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends
             _sprite = new SpriteMap(GetPath("Anyx ARS Elite"), 33, 9);
             _graphic = _sprite;

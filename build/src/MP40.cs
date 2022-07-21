@@ -24,7 +24,7 @@ namespace TMGmod
             _ammoType = new ATMP40();
             KforceDelta = 2f;
             KforceDelay = 20;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("MP40"), 23, 14);
             _graphic = _sprite;
             _sprite.frame = 0;

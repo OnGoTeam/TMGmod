@@ -31,7 +31,7 @@ namespace TMGmod
                 bulletThickness = 0.6f,
             };
             IntrinsicAccuracy = true;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("Mk17Shield"), 26, 12);
             _graphic = _sprite;
             _sprite.frame = 0;

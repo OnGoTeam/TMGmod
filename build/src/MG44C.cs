@@ -20,7 +20,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATMG44();
             MaxAccuracy = 0.75f;
-            _type = "gun";
+            
             _sprite = new SpriteMap(GetPath("MG44 Mark2T"), 39, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
