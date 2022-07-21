@@ -33,7 +33,7 @@ namespace TMGmod
             
             _sprite = new SpriteMap(GetPath("Dragoshot"), 29, 11);
             _graphic = _sprite;
-            _sprite.frame = Rando.Int(0, 9);
+            SkinValue = -1;
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-14f, -7f);
             _collisionSize = new Vec2(29f, 11f);
@@ -78,7 +78,7 @@ namespace TMGmod
         public override void OnReleaseAction()
         {
             Counter = 0f;
-            if (duck != null) Fire();
+            if (owner != null) Fire();
             LoockerOfSound = false;
         }
 
