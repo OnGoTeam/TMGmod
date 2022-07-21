@@ -31,10 +31,10 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
             SetFirstAccuracy<ATVista>(1f, 30);
+            SetSimpleBurst(3, .1f);
+            _fireWait = 0.36f;
             _kickForce = 1.5f;
             _weight = 2f;
-            _fireWait = 0.36f;
-            SetSimpleBurst(3, .1f);
 
             _fireSound = GetPath("sounds/2.wav");
         }
