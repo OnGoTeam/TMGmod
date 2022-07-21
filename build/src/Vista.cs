@@ -30,16 +30,15 @@ namespace TMGmod
 
             _weight = 2f;
             ammo = 30;
+            _kickForce = 1.5f;
             _fullAuto = false;
             _fireWait = 0.36f;
-            _kickForce = 1.5f;
+            SetSimpleBurst(3, .1f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
             SetFirstAccuracy<ATVista>(1f, 30);
 
             _fireSound = GetPath("sounds/2.wav");
-
-            SetSimpleBurst(3, .1f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 5 });
