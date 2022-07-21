@@ -24,7 +24,7 @@ namespace TMGmod
             IntrinsicAccuracy = true;
             KforceDelay = 25;
             KforceDelta = 4f;
-            
+
             _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -49,6 +49,8 @@ namespace TMGmod
             _editorName = "Uzi Pro";
             _weight = 2.5f;
         }
+
+        protected override string HintMessage => "silencer";
 
         public bool Silencer
         {
