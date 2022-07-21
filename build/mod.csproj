@@ -305,7 +305,7 @@
     <Compile Include="src\Spectre M4.cs" />
     <Compile Include="src\Stuff\C4Pack.cs" />
     <Compile Include="src\Stuff\Cfour.cs" />
-    <Compile Include="src\Core\AmmoTypes\AT9mmSilenced.cs" />
+    <Compile Include="src\Core\AmmoTypes\AT9mmS.cs" />
     <Compile Include="src\Core\AmmoTypes\ATNotBullet.cs" />
     <Compile Include="src\Core\Cal50Explode.cs" />
     <Compile Include="src\Core\Bullets\Caliber50Bullet.cs" />
