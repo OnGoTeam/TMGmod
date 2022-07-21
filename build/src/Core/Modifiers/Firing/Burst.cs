@@ -12,15 +12,16 @@ namespace TMGmod.Core.Modifiers.Firing
         private int _shotsLeft;
         private readonly BaseGun _target;
         private bool _withinContext;
-        public bool SwitchOnQuack { private get; set; }
+        private readonly bool _switchOnQuack;
         private readonly Action<bool> _onSwitch;
 
-        public Burst(BaseGun target, bool enabled, int num, float wait, Action<bool> onSwitch)
+        public Burst(BaseGun target, bool enabled, int num, float wait, Action<bool> onSwitch=null, bool switchOnQuack=false)
         {
             _target = target;
             _onSwitch = onSwitch;
             _num = num;
             _wait = wait;
+            _switchOnQuack = switchOnQuack;
             SetEnabled(enabled);
         }
 
@@ -63,7 +64,7 @@ namespace TMGmod.Core.Modifiers.Firing
             if (_target.isLocal && _shotsLeft > 0) ShootLeft();
         }
 
-        private bool NeedSwitch() => SwitchOnQuack && _target.duck?.inputProfile.Pressed("QUACK") == true;
+        private bool NeedSwitch() => _switchOnQuack && _target.duck?.inputProfile.Pressed("QUACK") == true;
 
         private void DoSwitch()
         {

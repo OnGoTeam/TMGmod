@@ -61,11 +61,9 @@ namespace TMGmod
                         _fireWait = burst ? 1.8f : 0.5f;
                         FrameId = FrameId % 10 + (burst ? 10 : 0);
                         MaxAccuracy = burst ? IncreasedAccuracy : DecreasedAccuracy;
-                    }
+                    },
+                    true
                 )
-                {
-                    SwitchOnQuack = true,
-                }
             );
         }
 

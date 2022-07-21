@@ -58,7 +58,7 @@ namespace TMGmod.Core.WClasses
 
         protected void ComposeSimpleBurst(int num, float wait)
         {
-            Compose(new Burst(this, true, num, wait, null));
+            Compose(new Burst(this, true, num, wait));
         }
 
         [UsedImplicitly]

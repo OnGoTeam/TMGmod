@@ -95,7 +95,7 @@ namespace TMGmod
         {
             ammo = 35;
             material = new MaterialGlitch(this);
-            Compose(new Burst(this, true, 5, 1f,  null));
+            Compose(new Burst(this, true, 5, 1f));
         }
     }
 }

@@ -61,11 +61,9 @@ namespace TMGmod
                         lose.Regen = burst ? 0f : 0.02f;
                         lose.Drain = burst ? 0f : 0.15f;
                         MaxAccuracy = burst ? 1f : 0.89f;
-                    }
+                    },
+                    true
                 )
-                {
-                    SwitchOnQuack = true,
-                }
             );
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
