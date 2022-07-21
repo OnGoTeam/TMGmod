@@ -42,6 +42,12 @@ namespace TMGmod.Core.WClasses
             _baseActiveModifier = DefaultModifier();
         }
 
+        protected void SetAsMax<T>() where T: AmmoType, new()
+        {
+            _ammoType = new T();
+            MaxAccuracy = _ammoType.accuracy;
+        }
+
         [UsedImplicitly]
         protected Vec2 ExtraHoldOffset =>
             duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
