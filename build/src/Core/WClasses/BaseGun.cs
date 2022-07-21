@@ -5,6 +5,7 @@ using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
@@ -55,6 +56,11 @@ namespace TMGmod.Core.WClasses
             MaxAccuracy = max;
             var delta = max - _ammoType.accuracy;
             Compose(new FirstAccuracy(delay, accuracy => accuracy - delta));
+        }
+
+        protected void SetSimpleBurst(int num, float wait)
+        {
+            Compose(new Burst(this, true, null) { Num = num, Wait = wait });
         }
 
         [UsedImplicitly]
