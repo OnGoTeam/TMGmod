@@ -56,7 +56,7 @@ namespace TMGmod.Core.WClasses
             Compose(new FirstAccuracy(delay, accuracy => accuracy - delta));
         }
 
-        protected void SetSimpleBurst(int num, float wait)
+        protected void ComposeSimpleBurst(int num, float wait)
         {
             Compose(new Burst(this, true, null) { Num = num, Wait = wait });
         }

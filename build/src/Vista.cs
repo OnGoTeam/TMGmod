@@ -30,7 +30,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATVista();
             ComposeFirstAccuracy(1f, 30);
-            SetSimpleBurst(3, .1f);
+            ComposeSimpleBurst(3, .1f);
             _fireWait = 0.36f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
