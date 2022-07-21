@@ -54,6 +54,8 @@ namespace TMGmod
                 new Burst(
                     this,
                     false,
+                    3,
+                    .45f,
                     burst =>
                     {
                         _fireWait = burst ? 1.8f : 0.5f;
@@ -62,8 +64,6 @@ namespace TMGmod
                     }
                 )
                 {
-                    Num = 3,
-                    Wait = .45f,
                     SwitchOnQuack = true,
                 }
             );

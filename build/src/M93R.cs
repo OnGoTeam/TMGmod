@@ -42,7 +42,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "M93R";
             _weight = 2f;
-            Compose(new Burst(this, true, null) { Num = 3, Wait = .3f });
+            Compose(new Burst(this, true, 3, .3f, null));
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });

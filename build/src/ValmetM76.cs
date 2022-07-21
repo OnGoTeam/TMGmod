@@ -50,6 +50,8 @@ namespace TMGmod
                 new Burst(
                     this,
                     false,
+                    2,
+                    .15f,
                     burst => {
                         _fireWait = burst ? 1.4f : 0.7f;
                         FrameId = FrameId % 10 + (burst ? 10 : 0);
@@ -62,8 +64,6 @@ namespace TMGmod
                     }
                 )
                 {
-                    Num = 2,
-                    Wait = .15f,
                     SwitchOnQuack = true,
                 }
             );

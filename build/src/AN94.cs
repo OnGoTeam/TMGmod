@@ -52,7 +52,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(30f, 2.5f);
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f),
-                new Burst(this, true, null) { Num = 2, Wait = .07f }
+                new Burst(this, true, 2, .07f, null)
             );
         }
 

@@ -48,7 +48,7 @@ namespace TMGmod
             _weight = 5.5f;
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f),
-                new Burst(this, true, null) { Num = 2, Wait = .07f }
+                new Burst(this, true, 2, .07f, null)
             );
         }
 

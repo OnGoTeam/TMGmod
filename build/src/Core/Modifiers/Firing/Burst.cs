@@ -6,8 +6,8 @@ namespace TMGmod.Core.Modifiers.Firing
 {
     public class Burst : Modifier
     {
-        public int Num { private get; set; } = 2;
-        public float Wait { private get; set; } = .1f;
+        private readonly int _num;
+        private readonly float _wait;
         private bool _enabled;
         private int _shotsLeft;
         private readonly BaseGun _target;
@@ -15,10 +15,12 @@ namespace TMGmod.Core.Modifiers.Firing
         public bool SwitchOnQuack { private get; set; }
         private readonly Action<bool> _onSwitch;
 
-        public Burst(BaseGun target, bool enabled, Action<bool> onSwitch)
+        public Burst(BaseGun target, bool enabled, int num, float wait, Action<bool> onSwitch)
         {
             _target = target;
             _onSwitch = onSwitch;
+            _num = num;
+            _wait = wait;
             SetEnabled(enabled);
         }
 
@@ -36,16 +38,16 @@ namespace TMGmod.Core.Modifiers.Firing
             {
                 fire();
                 if (!_enabled) return;
-                _shotsLeft = Num - 1;
+                _shotsLeft = _num - 1;
                 if (_shotsLeft > 0)
-                    _target._wait = Wait;
+                    _target._wait = _wait;
             }
             else if (_withinContext && _target._wait <= 0f)
             {
                 fire();
                 --_shotsLeft;
                 if (_shotsLeft > 0)
-                    _target._wait = Wait;
+                    _target._wait = _wait;
             }
         }
 
