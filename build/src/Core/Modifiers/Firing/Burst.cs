@@ -64,7 +64,7 @@ namespace TMGmod.Core.Modifiers.Firing
             if (_target.isServerForObject && _shotsLeft > 0) ShootLeft();
         }
 
-        private bool NeedSwitch() => _switchOnQuack && _target.duck?.inputProfile.Pressed("QUACK") == true;
+        private bool NeedSwitch() => _target.duck?.inputProfile.Pressed("QUACK") == true;
 
         private void DoSwitch()
         {
@@ -72,9 +72,15 @@ namespace TMGmod.Core.Modifiers.Firing
             SFX.Play(Mod.GetPath<TMGmod>("sounds/tuduc.wav"));
         }
 
+        private void UpdateSwitching()
+        {
+            _target.Hint("burst", () => Vec2.Zero, "QUACK");
+            if (NeedSwitch()) DoSwitch();
+        }
+
         private void UpdateSwitch()
         {
-            if (NeedSwitch()) DoSwitch();
+            if (_switchOnQuack) UpdateSwitching();
         }
 
         protected override void ModifyUpdate()
