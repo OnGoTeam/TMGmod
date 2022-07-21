@@ -44,15 +44,13 @@ namespace TMGmod.Core.WClasses
             _baseActiveModifier = DefaultModifier();
         }
 
-        protected void SetAsMax<T>() where T: AmmoType, new()
+        protected void SetAsMax()
         {
-            _ammoType = new T();
             MaxAccuracy = _ammoType.accuracy;
         }
 
-        protected void ComposeFirstAccuracy<T>(float max, uint delay) where T : AmmoType, new()
+        protected void ComposeFirstAccuracy(float max, uint delay)
         {
-            _ammoType = new T();
             MaxAccuracy = max;
             var delta = max - _ammoType.accuracy;
             Compose(new FirstAccuracy(delay, accuracy => accuracy - delta));

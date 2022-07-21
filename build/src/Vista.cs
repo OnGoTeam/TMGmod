@@ -2,7 +2,6 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -29,7 +28,8 @@ namespace TMGmod
             ShellOffset = new Vec2(-4f, -3f);
 
             ammo = 30;
-            ComposeFirstAccuracy<ATVista>(1f, 30);
+            _ammoType = new ATVista();
+            ComposeFirstAccuracy(1f, 30);
             SetSimpleBurst(3, .1f);
             _fireWait = 0.36f;
             loseAccuracy = 0.1f;
