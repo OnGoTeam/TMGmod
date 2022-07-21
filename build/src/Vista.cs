@@ -2,7 +2,6 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -28,13 +27,12 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(16f, 2f);
             ShellOffset = new Vec2(-4f, -3f);
 
-            _weight = 2f;
+            ammo = 30;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
             SetFirstAccuracy<ATVista>(1f, 30);
             _kickForce = 1.5f;
-            ammo = 30;
-            _fullAuto = false;
+            _weight = 2f;
             _fireWait = 0.36f;
             SetSimpleBurst(3, .1f);
 
