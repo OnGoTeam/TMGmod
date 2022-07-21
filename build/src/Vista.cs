@@ -39,9 +39,7 @@ namespace TMGmod
 
             _fireSound = GetPath("sounds/2.wav");
 
-            Compose(
-                new Burst(this, true, null) { Num = 3, Wait = .1f }
-            );
+            SetSimpleBurst(3, .1f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 5 });
