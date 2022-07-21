@@ -8,6 +8,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         protected BaseAmmoType()
         {
+            accuracy = 1f;
             DamageMean = 50f;
             DamageVariation = 1f;
             DistanceConvexity = 0f;
