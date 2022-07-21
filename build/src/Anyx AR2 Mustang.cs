@@ -52,7 +52,8 @@ namespace TMGmod
             );
         }
 
-        [UsedImplicitly]
+        protected override string HintMessage => "silencer";
+
         public bool Silencer
         {
             get => _fireSound == GetPath("sounds/Silenced2.wav");

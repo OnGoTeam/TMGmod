@@ -23,7 +23,7 @@ namespace TMGmod
             ammo = 23;
             _ammoType = new ATCZ2();
             MaxAccuracy = _ammoType.accuracy;
-            
+
             _sprite = new SpriteMap(GetPath("CZC2"), 41, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -48,7 +48,8 @@ namespace TMGmod
             KforceDelta = 1.6f;
         }
 
-        [UsedImplicitly]
+        protected override string HintMessage => "silencer";
+
         public bool Silencer
         {
             get => _fireSound == GetPath("sounds/Silenced2.wav");

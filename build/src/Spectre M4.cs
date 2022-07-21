@@ -21,7 +21,7 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATSpectreM4();
             IntrinsicAccuracy = true;
-            
+
             _sprite = new SpriteMap(GetPath("SpectreM4"), 19, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -46,6 +46,8 @@ namespace TMGmod
             _editorName = "Spectre M4";
             _weight = 3.3f;
         }
+
+        protected override string HintMessage => "silencer";
 
         public bool Silencer
         {

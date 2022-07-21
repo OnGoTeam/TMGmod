@@ -25,7 +25,7 @@ namespace TMGmod
             MinAccuracy = 0.45f;
             RegenAccuracyDmr = 0.007f;
             DrainAccuracyDmr = 0.15f;
-            
+
             _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -50,6 +50,8 @@ namespace TMGmod
             _editorName = "TC-12";
             _weight = 4.5f;
         }
+
+        protected override string HintMessage => "silencer";
 
         public bool Silencer
         {
