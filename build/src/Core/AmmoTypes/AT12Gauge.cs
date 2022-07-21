@@ -9,10 +9,10 @@ namespace TMGmod.Core.AmmoTypes
     {
         public AT12Gauge()
         {
+            range = 100f;
             accuracy = 0.4f;
             penetration = 1f;
             bulletSpeed = 23f;
-            range = 100f;
             weight = 5f;
             bulletThickness = 2f;
             DamageMean = 11f;
