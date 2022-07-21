@@ -19,27 +19,27 @@ namespace TMGmod
         public Vista(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 30;
-            _ammoType = new ATVista();
-            MaxAccuracy = 1f;
-            
-            _sprite = new SpriteMap(GetPath("Vista"), 16, 14);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            _editorName = "Vista";
+
+            _graphic = _sprite = new SpriteMap(GetPath("Vista"), 16, 14) { frame = 0 };
             _center = new Vec2(6f, 7f);
             _collisionOffset = new Vec2(-8f, -7f);
             _collisionSize = new Vec2(16f, 14f);
+            _holdOffset = new Vec2(-1f, 3f);
             _barrelOffsetTL = new Vec2(16f, 2f);
-            _fireSound = GetPath("sounds/2.wav");
+            ShellOffset = new Vec2(-4f, -3f);
+
+            _weight = 2f;
+            ammo = 30;
             _fullAuto = false;
             _fireWait = 0.36f;
             _kickForce = 1.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
-            _holdOffset = new Vec2(-1f, 3f);
-            ShellOffset = new Vec2(-4f, -3f);
-            _editorName = "Vista";
-            _weight = 2f;
+            _ammoType = new ATVista();
+
+            _fireSound = GetPath("sounds/2.wav");
+
             Compose(
                 new FirstAccuracy(30, accuracy => accuracy - .25f),
                 new Burst(this, true, null) { Num = 3, Wait = .1f }
