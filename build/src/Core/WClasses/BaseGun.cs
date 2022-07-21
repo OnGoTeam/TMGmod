@@ -37,6 +37,7 @@ namespace TMGmod.Core.WClasses
 
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
+            _type = "gun";
             ToPrevKforce = true;
             _baseActiveModifier = DefaultModifier();
         }
