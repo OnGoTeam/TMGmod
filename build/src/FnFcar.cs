@@ -19,6 +19,8 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 14;
+            BipOff = GetPath("sounds/beepods2");
+            BipOn = GetPath("sounds/beepods1");
             _ammoType = new ATFCAR();
             MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.67f;
@@ -72,8 +74,8 @@ namespace TMGmod
             BipodsDisabled = disabled;
         }
 
-        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
-        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
+        public string BipOn { get; }
+        public string BipOff { get; }
 
         public float BipodsState
         {

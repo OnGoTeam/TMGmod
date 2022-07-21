@@ -24,6 +24,8 @@ namespace TMGmod
         {
             _sprite = new SpriteMap(GetPath("AWS"), 33, 11);
             _graphic = _sprite;
+            BipOff = GetPath("sounds/beepods2");
+            BipOn = GetPath("sounds/beepods1");
             _sprite.frame = 0;
             _center = new Vec2(17f, 6f);
             _collisionOffset = new Vec2(-17f, -6f);
@@ -66,8 +68,8 @@ namespace TMGmod
             BipodsDisabled = disabled;
         }
 
-        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
-        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
+        public string BipOn { get; }
+        public string BipOff { get; }
 
         public float BipodsState
         {

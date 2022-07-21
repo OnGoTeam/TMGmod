@@ -21,6 +21,8 @@ namespace TMGmod
         public Lstk16V6(float xval, float yval) : base(xval, yval)
         {
             ammo = 25;
+            BipOff = GetPath("sounds/beepods2");
+            BipOn = GetPath("sounds/beepods1");
             _ammoType = new ATM16();
             MaxAccuracy = 0.91f;
             
@@ -70,8 +72,8 @@ namespace TMGmod
             BipodsDisabled = disabled;
         }
 
-        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
-        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
+        public string BipOn { get; }
+        public string BipOff { get; }
 
         public float BipodsState
         {

@@ -22,7 +22,9 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 80;
-            
+            BipOff = GetPath("sounds/beepods2");
+            BipOn = GetPath("sounds/beepods1");
+
             _sprite = new SpriteMap(GetPath("mg3"), 39, 11);
             _graphic = _sprite;
             _sprite.frame = 0;
@@ -64,8 +66,8 @@ namespace TMGmod
             BipodsDisabled = disabled;
         }
 
-        public string BipOn { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods1");
-        public string BipOff { get; } = Mod.GetPath<Core.TMGmod>("sounds/beepods2");
+        public string BipOn { get; }
+        public string BipOff { get; }
 
         public float BipodsState
         {
