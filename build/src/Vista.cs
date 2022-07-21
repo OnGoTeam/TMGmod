@@ -29,14 +29,14 @@ namespace TMGmod
             ShellOffset = new Vec2(-4f, -3f);
 
             _weight = 2f;
-            ammo = 30;
-            _kickForce = 1.5f;
-            _fullAuto = false;
-            _fireWait = 0.36f;
-            SetSimpleBurst(3, .1f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
             SetFirstAccuracy<ATVista>(1f, 30);
+            _kickForce = 1.5f;
+            ammo = 30;
+            _fullAuto = false;
+            _fireWait = 0.36f;
+            SetSimpleBurst(3, .1f);
 
             _fireSound = GetPath("sounds/2.wav");
         }
