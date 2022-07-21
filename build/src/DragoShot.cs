@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -11,26 +12,18 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Other")]
     public class DragoShot : BaseBurst, IAmSr, IHaveAllowedSkins
     {
-        private const float Step = 0.02f;
-        private const float TimeToHappend = 1f;
+        private const int FramesToCharge = 50;
         private const int NonSkinFrames = 1;
         private readonly SpriteMap _sprite;
-
-        [UsedImplicitly] public float Counter;
-
-        [UsedImplicitly] public StateBinding CounterBinding = new StateBinding(nameof(Counter));
-
-        [UsedImplicitly] public bool LoockerOfSound;
-
-        [UsedImplicitly] public StateBinding LoockerOfSoundBinding = new StateBinding(nameof(LoockerOfSound));
 
         public DragoShot(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 16;
             _ammoType = new ATDragoshot();
+            SetAccuracyAsMax();
             _numBulletsPerFire = 8;
-            
+
             _sprite = new SpriteMap(GetPath("Dragoshot"), 29, 11);
             _graphic = _sprite;
             SkinValue = -1;
@@ -51,6 +44,22 @@ namespace TMGmod
             _weight = 5f;
             DeltaWait = 0.15f;
             BurstNum = 1;
+            Compose(
+                new Charging(
+                    this,
+                    (counter, old) =>
+                    {
+                        var charged = counter >= FramesToCharge;
+                        _ammoType.range = charged ? 170f : 120f;
+                        MaxAccuracy = charged ? .9f : .7f;
+                        maxAccuracyLost = charged ? .1f : .4f;
+                        _kickForce = charged ? 3f : 5.5f;
+                        BurstNum = charged ? 4 : 1;
+                        if (charged && old < FramesToCharge) SFX.Play("woodHit");
+                    },
+                    _ => Fire()
+                )
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
@@ -67,43 +76,6 @@ namespace TMGmod
 
         public override void OnPressAction()
         {
-            //Nothing Happend
-        }
-
-        public override void OnHoldAction()
-        {
-            if (ammo != 0 && Counter <= TimeToHappend) Counter += Step;
-        }
-
-        public override void OnReleaseAction()
-        {
-            Counter = 0f;
-            if (owner != null) Fire();
-            LoockerOfSound = false;
-        }
-
-        public override void Update()
-        {
-            if (Counter >= TimeToHappend)
-            {
-                if (!LoockerOfSound) SFX.Play("woodHit");
-                LoockerOfSound = true;
-                _ammoType.range = 170f;
-                _ammoType.accuracy = 0.9f;
-                maxAccuracyLost = 0.1f;
-                _kickForce = 3f;
-                BurstNum = 4;
-            }
-            else
-            {
-                _ammoType.range = 120f;
-                _ammoType.accuracy = 0.7f;
-                maxAccuracyLost = 0.4f;
-                _kickForce = 5.5f;
-                BurstNum = 1;
-            }
-
-            base.Update();
         }
     }
 }

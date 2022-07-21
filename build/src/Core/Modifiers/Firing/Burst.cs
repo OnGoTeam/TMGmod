@@ -61,7 +61,7 @@ namespace TMGmod.Core.Modifiers.Firing
 
         private void UpdateShotsLeft()
         {
-            if (_target.isLocal && _shotsLeft > 0) ShootLeft();
+            if (_target.isServerForObject && _shotsLeft > 0) ShootLeft();
         }
 
         private bool NeedSwitch() => _switchOnQuack && _target.duck?.inputProfile.Pressed("QUACK") == true;
