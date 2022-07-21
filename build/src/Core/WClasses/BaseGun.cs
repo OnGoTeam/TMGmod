@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers;
+using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
@@ -46,6 +47,14 @@ namespace TMGmod.Core.WClasses
         {
             _ammoType = new T();
             MaxAccuracy = _ammoType.accuracy;
+        }
+
+        protected void SetFirstAccuracy<T>(float max, uint delay) where T : AmmoType, new()
+        {
+            _ammoType = new T();
+            MaxAccuracy = max;
+            var delta = max - _ammoType.accuracy;
+            Compose(new FirstAccuracy(delay, accuracy => accuracy - delta));
         }
 
         [UsedImplicitly]
