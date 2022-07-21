@@ -44,7 +44,7 @@ namespace TMGmod.Core.WClasses
             _baseActiveModifier = DefaultModifier();
         }
 
-        protected void SetAsMax()
+        protected void SetAccuracyAsMax()
         {
             MaxAccuracy = _ammoType.accuracy;
         }

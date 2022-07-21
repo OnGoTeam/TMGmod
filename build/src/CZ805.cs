@@ -22,7 +22,7 @@ namespace TMGmod
         {
             ammo = 30;
             _ammoType = new ATCZ();
-            SetAsMax();
+            SetAccuracyAsMax();
             
             _sprite = new SpriteMap(GetPath("CZ805Bren"), 41, 11);
             _graphic = _sprite;
