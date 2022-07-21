@@ -28,11 +28,11 @@ namespace TMGmod
             ShellOffset = new Vec2(-4f, -3f);
 
             ammo = 30;
-            loseAccuracy = 0.1f;
-            maxAccuracyLost = 0.44f;
             SetFirstAccuracy<ATVista>(1f, 30);
             SetSimpleBurst(3, .1f);
             _fireWait = 0.36f;
+            loseAccuracy = 0.1f;
+            maxAccuracyLost = 0.44f;
             _kickForce = 1.5f;
             _weight = 2f;
 
