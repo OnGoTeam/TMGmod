@@ -50,7 +50,7 @@ namespace TMGmod.Core.WClasses
             MaxAccuracy = _ammoType.accuracy;
         }
 
-        protected void SetStaticAmmotypeAndComposeFirstAccuracy<T>(float max, uint delay) where T : AmmoType, new()
+        protected void ComposeFirstAccuracy<T>(float max, uint delay) where T : AmmoType, new()
         {
             _ammoType = new T();
             MaxAccuracy = max;
