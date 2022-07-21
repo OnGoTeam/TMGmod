@@ -4,17 +4,18 @@ using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Other")]
-    public class DragoShot : BaseBurst, IAmSr, IHaveAllowedSkins
+    public class DragoShot : BaseGun, IAmSr, IHaveAllowedSkins
     {
         private const int FramesToCharge = 50;
         private const int NonSkinFrames = 1;
         private readonly SpriteMap _sprite;
+        private bool _charged;
 
         public DragoShot(float xval, float yval)
             : base(xval, yval)
@@ -42,25 +43,38 @@ namespace TMGmod
             ShellOffset = new Vec2(-6f, -3f);
             _editorName = "DragoShot";
             _weight = 5f;
-            DeltaWait = 0.15f;
-            BurstNum = 1;
+            var burst = new Burst(
+                this,
+                false,
+                4,
+                .15f,
+                enabled =>
+                {
+                    _ammoType.range = enabled ? 170f : 120f;
+                    MaxAccuracy = enabled ? .9f : .7f;
+                    maxAccuracyLost = enabled ? .1f : .4f;
+                    _kickForce = enabled ? 3f : 5.5f;
+                }
+            );
             Compose(
+                burst,
                 new Charging(
                     this,
                     (counter, old) =>
                     {
-                        var charged = counter >= FramesToCharge;
-                        _ammoType.range = charged ? 170f : 120f;
-                        MaxAccuracy = charged ? .9f : .7f;
-                        maxAccuracyLost = charged ? .1f : .4f;
-                        _kickForce = charged ? 3f : 5.5f;
-                        BurstNum = charged ? 4 : 1;
-                        if (charged && old < FramesToCharge) SFX.Play("woodHit");
+                        _charged = counter >= FramesToCharge;
+                        burst.Switch(IsCharged);
+                        if (_charged && old < FramesToCharge) SFX.Play("woodHit");
                     },
-                    _ => Fire()
+                    _ =>
+                    {
+                        if (owner != null) Fire();
+                    }
                 )
             );
         }
+
+        private bool IsCharged(bool _) => _charged;
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
