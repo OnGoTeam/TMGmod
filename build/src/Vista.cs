@@ -2,7 +2,6 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -36,12 +35,11 @@ namespace TMGmod
             _kickForce = 1.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.44f;
-            _ammoType = new ATVista();
+            SetFirstAccuracy<ATVista>(1f, 30);
 
             _fireSound = GetPath("sounds/2.wav");
 
             Compose(
-                new FirstAccuracy(30, accuracy => accuracy - .25f),
                 new Burst(this, true, null) { Num = 3, Wait = .1f }
             );
         }
