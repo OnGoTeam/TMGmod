@@ -536,7 +536,7 @@ namespace TMGmod.Core.WClasses
             Level.Add(new HintThing(this, offset, hint, image()));
         }
 
-        private void Hint(string hint, Func<Vec2> offset, string trigger)
+        public void Hint(string hint, Func<Vec2> offset, string trigger)
         {
             if (duck != null)
                 Hint(hint, offset, () => duck.inputProfile.GetTriggerImage(trigger));
