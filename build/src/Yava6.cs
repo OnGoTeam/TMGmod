@@ -19,18 +19,15 @@ namespace TMGmod
         public Yava6(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 15;
-            _ammoType = new ATYava6();
-            _numBulletsPerFire = 3;
-            MaxAccuracy = _ammoType.accuracy;
-            MinAccuracy = 0.5f;
-            _type = "gun";
-            _sprite = new SpriteMap(GetPath("Yava 6"), 37, 13);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            _editorName = "Yava 6";
+            _graphic = _sprite = new SpriteMap(GetPath("Yava 6"), 37, 13) { frame = 0 };
             _center = new Vec2(19f, 7f);
             _collisionOffset = new Vec2(-19f, -7f);
             _collisionSize = new Vec2(37f, 13f);
+            _weight = 5f;
+            _holdOffset = new Vec2(4f, 1f);
+            ammo = 15;
+            _numBulletsPerFire = 3;
             _barrelOffsetTL = new Vec2(37f, 5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
@@ -42,10 +39,10 @@ namespace TMGmod
             _kickForce = 4f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
-            _holdOffset = new Vec2(4f, 1f);
+            _ammoType = new ATYava6();
+            MaxAccuracy = _ammoType.accuracy;
+            MinAccuracy = 0.5f;
             ShellOffset = new Vec2(-13f, -4f);
-            _editorName = "Yava 6";
-            _weight = 5f;
             Compose(new FocusingAccuracy(this, 1f, .05f));
         }
 
