@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
@@ -12,9 +11,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class PPK42 : BaseSmg, IHaveAllowedSkins, I5
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public PPK42(float xval, float yval)
             : base(xval, yval)
         {
@@ -23,10 +19,7 @@ namespace TMGmod
             MaxAccuracy = 0.8f;
             KforceDelta = 2.5f;
             KforceDelay = 20;
-            
-            _sprite = new SpriteMap(GetPath("PPK42"), 25, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("PPK42"), 25, 11);
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(25f, 11f);
@@ -48,15 +41,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

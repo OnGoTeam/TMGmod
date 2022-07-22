@@ -12,18 +12,13 @@ namespace TMGmod
     [UsedImplicitly]
     public sealed class X3X : BaseGun, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         public X3X(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 6;
             _ammoType = new ATx3x();
-            
-            _sprite = new SpriteMap(GetPath("X3X"), 27, 14);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("X3X"), 27, 14);
             _center = new Vec2(14f, 9f);
             _collisionOffset = new Vec2(-11.5f, -9f);
             _collisionSize = new Vec2(27f, 14f);
@@ -42,28 +37,21 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void OnPressAction()
         {
-            if ((ammo > 0) & (_sprite.frame / 10 == 0))
+            if ((ammo > 0) & (NonSkin == 0))
             {
                 Fire();
-                _sprite.frame += ammo < 1 ? 20 : 10;
+                NonSkin += ammo < 1 ? 2 : 1;
             }
-            else if (_sprite.frame / 10 == 1)
+            else if (NonSkin == 1)
             {
-                _sprite.frame -= 10;
+                NonSkin -= 1;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
 
-            if (!((ammo < 1) & (_sprite.frame / 10 == 0))) return;
+            if (!((ammo < 1) & (NonSkin == 0))) return;
             SFX.Play(GetPath("sounds/tuduc.wav"));
         }
     }

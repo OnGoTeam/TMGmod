@@ -11,9 +11,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class KS23 : BasePumpAction, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         private bool _shootwasyes;
 
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
@@ -30,9 +27,7 @@ namespace TMGmod
             ammo = 6;
             _ammoType = new AT12GaugeS();
             _numBulletsPerFire = 16;
-            
-            _sprite = new SpriteMap(GetPath("KS-23"), 35, 8);
-            _graphic = _sprite;
+            Smap = new SpriteMap(GetPath("KS-23"), 35, 8);
             _center = new Vec2(18f, 4f);
             _collisionOffset = new Vec2(-18f, -4f);
             _collisionSize = new Vec2(35f, 8f);
@@ -69,20 +64,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set
-            {
-                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
-                SetSpriteMapFrameId(LoaderSprite, value, 10);
-            }
-        }
 
         public override void Fire()
         {

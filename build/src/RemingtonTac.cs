@@ -12,9 +12,6 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class RemingtonTac : BasePumpAction, IHaveAllowedSkins, IHaveStock
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         private bool _stock = true;
 
         private float _stockstate = 1f;
@@ -25,9 +22,9 @@ namespace TMGmod
             _ammoType = new ATFABARM();
             IntrinsicAccuracy = true;
             _numBulletsPerFire = 6;
-            
-            _sprite = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);
-            _graphic = _sprite;
+
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);
             _center = new Vec2(13f, 4f);
             _collisionOffset = new Vec2(-13f, -4f);
             _collisionSize = new Vec2(26f, 8f);
@@ -59,17 +56,10 @@ namespace TMGmod
         protected override float BaseKforce => this.StockDeployed() ? 1.1f : 2.8f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-
-        public int FrameId
+        protected override void UpdateFrameId(int frameId)
         {
-            get => _sprite.frame;
-            set
-            {
-                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
-                SetSpriteMapFrameId(LoaderSprite, value, 10);
-            }
+            SetSpriteMapFrameId(LoaderSprite, frameId, SkinFrames);
         }
 
         public float StockSpeed => 1f / 10f;
@@ -118,7 +108,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+            NonSkin = this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1;
         }
 
         private void GottaGoFast()

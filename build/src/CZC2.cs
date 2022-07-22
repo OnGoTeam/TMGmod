@@ -11,10 +11,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class CZC2 : BaseAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public CZC2(float xval, float yval)
@@ -23,10 +19,8 @@ namespace TMGmod
             ammo = 23;
             _ammoType = new ATCZ2();
             MaxAccuracy = _ammoType.accuracy;
-
-            _sprite = new SpriteMap(GetPath("CZC2"), 41, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("CZC2"), 41, 11);
             _center = new Vec2(20.5f, 5.5f);
             _collisionOffset = new Vec2(-20.5f, -5.5f);
             _collisionSize = new Vec2(41f, 11f);
@@ -57,8 +51,7 @@ namespace TMGmod
             {
                 if (value)
                 {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _ammoType = new ATCZS2();
                     loseAccuracy = 0.15f;
@@ -68,7 +61,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.frame %= 10;
+                    NonSkin = 0;
                     _fireSound = "deepMachineGun2";
                     _ammoType = new ATCZ2();
                     loseAccuracy = 0.1f;
@@ -83,15 +76,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

@@ -11,10 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Foucus : BaseAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
-        [UsedImplicitly] public int Legacy;
+        public int Legacy;
 
         public Foucus(float xval, float yval)
             : base(xval, yval)
@@ -23,9 +20,7 @@ namespace TMGmod
             _ammoType = new ATFOUCUS();
             IntrinsicAccuracy = true;
             
-            _sprite = new SpriteMap(GetPath("Foucus"), 37, 13);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("Foucus"), 37, 13);
             _center = new Vec2(19f, 7f);
             _collisionOffset = new Vec2(-19f, -7f);
             _collisionSize = new Vec2(37f, 13f);
@@ -49,16 +44,6 @@ namespace TMGmod
 
         [UsedImplicitly] public StateBinding LegacyBinding { get; } = new StateBinding(nameof(Legacy));
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Fire()
         {

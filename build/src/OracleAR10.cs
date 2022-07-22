@@ -12,9 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class OracleAR10 : BaseDmr, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
         public OracleAR10(float xval, float yval)
@@ -25,10 +22,7 @@ namespace TMGmod
             MinAccuracy = 0.35f;
             RegenAccuracyDmr = 0.015f;
             DrainAccuracyDmr = 0.3f;
-            
-            _sprite = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(29f, 12f);
@@ -65,14 +59,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {

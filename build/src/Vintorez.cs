@@ -11,10 +11,6 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     public class Vintorez : BaseAr, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 1;
-
-        private readonly SpriteMap _sprite;
-
         public Vintorez(float xval, float yval)
             : base(xval, yval)
         {
@@ -24,10 +20,7 @@ namespace TMGmod
             MaxAccuracy = 0.9f;
             _kickForce = 0.4f;
             KforceDelta = 0.45f;
-            
-            _sprite = new SpriteMap(GetPath("Vintorez"), 33, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("Vintorez"), 33, 11);
             _center = new Vec2(16f, 6f);
             _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(33f, 11f);
@@ -52,15 +45,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {

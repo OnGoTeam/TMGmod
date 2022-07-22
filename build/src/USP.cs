@@ -12,9 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class USP : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public USP(float xval, float yval)
@@ -22,10 +19,8 @@ namespace TMGmod
         {
             ammo = 13;
             _ammoType = new ATUSP();
-            
-            _sprite = new SpriteMap(GetPath("USP"), 23, 9);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("USP"), 23, 9);
             _center = new Vec2(8f, 3f);
             _collisionOffset = new Vec2(-7.5f, -3.5f);
             _collisionSize = new Vec2(23f, 9f);
@@ -50,8 +45,7 @@ namespace TMGmod
             {
                 if (value)
                 {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _ammoType = new ATUSPS();
@@ -59,7 +53,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.frame %= 10;
+                    NonSkin = 0;
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f),
@@ -72,16 +66,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)

@@ -9,7 +9,8 @@ namespace TMGmod.NY
     {
         public Icer(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new SpriteMap(GetPath("Holiday/Icer"), 53, 13);
+            SkinFrames = 1;
+            Smap = new SpriteMap(GetPath("Holiday/Icer"), 53, 13);
             _center = new Vec2(27f, 8f);
             _collisionOffset = new Vec2(-27f, -8f);
             _collisionSize = new Vec2(53f, 15f);

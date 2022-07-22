@@ -13,14 +13,9 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SV99 : BaseBolt, I5, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public SV99(float xval, float yval) : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("SV99"), 27, 9);
-            _graphic = _sprite;
-            _sprite.frame = SkinValue = 8;
+            Smap = new SpriteMap(GetPath("SV99"), 27, 9);
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(27f, 9f);
@@ -42,34 +37,12 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 3, 5, 8 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+        protected override bool HasLaser() => false;
 
+        protected override float MaxAngle() => 0.3f;
 
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
+        protected override float MaxOffset() => 2.0f;
 
-        protected override bool HasLaser()
-        {
-            return false;
-        }
-
-        protected override float MaxAngle()
-        {
-            return 0.3f;
-        }
-
-        protected override float MaxOffset()
-        {
-            return 2.0f;
-        }
-
-        protected override float ReloadSpeed()
-        {
-            return 2f;
-        }
+        protected override float ReloadSpeed() => 2f;
     }
 }

@@ -13,9 +13,6 @@ namespace TMGmod
     [UsedImplicitly]
     public class Vixr : BaseGun, IAmAr, IHaveAllowedSkins, IHaveStock
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         private bool _stock = true;
 
         private float _stockstate = 1f;
@@ -34,9 +31,8 @@ namespace TMGmod
             MaxAccuracy = 0.81f;
             
             //THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends
-            _sprite = new SpriteMap(GetPath("Anyx ARS Elite"), 33, 9);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("Anyx ARS Elite"), 33, 9);
             _center = new Vec2(17f, 5f);
             _collisionOffset = -_center;
             _collisionSize = new Vec2(33f, 9f);
@@ -67,16 +63,6 @@ namespace TMGmod
 
         protected override float BaseKforce => this.StockDeployed() ? 3f : 4.6f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 8 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public float StockSpeed => 1f / 10f;
 
@@ -127,7 +113,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+            NonSkin = this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1;
         }
 
         public override void Update()

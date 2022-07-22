@@ -9,12 +9,10 @@ using TMGmod.Core.WClasses.ClassImplementations;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class MK17 : BaseAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         private float _calculateSide;
 
         public MK17(float xval, float yval)
@@ -31,10 +29,8 @@ namespace TMGmod
                 bulletThickness = 0.6f,
             };
             IntrinsicAccuracy = true;
-            
-            _sprite = new SpriteMap(GetPath("Mk17Shield"), 26, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("Mk17Shield"), 26, 12);
             _center = new Vec2(5f, 8f);
             _collisionOffset = -_center;
             _collisionSize = new Vec2(26f, 12f);
@@ -58,16 +54,6 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
             _calculateSide = DamageImplementation.Calculate(bullet);
@@ -79,8 +65,7 @@ namespace TMGmod
         {
             _hitPoints -= _calculateSide;
             if (!(_hitPoints <= 0f)) return;
-            _sprite.frame %= 10;
-            _sprite.frame += 10;
+            NonSkin = 1;
             thickness = 0f;
         }
     }

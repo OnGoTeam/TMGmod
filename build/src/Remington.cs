@@ -9,17 +9,13 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class Remington : BasePumpAction, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Remington(float xval, float yval) : base(xval, yval)
         {
             ammo = 6;
             _ammoType = new ATRemington();
             _numBulletsPerFire = 5;
-            
-            _sprite = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
-            _graphic = _sprite;
+
+            Smap = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
             LoaderSprite = new SpriteMap(GetPath("Fabarm FP-6Pump"), 9, 4)
             {
                 center = new Vec2(5f, 2f),
@@ -50,17 +46,9 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
+        protected override void UpdateFrameId(int frameId)
         {
-            get => _sprite.frame;
-            set
-            {
-                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
-                SetSpriteMapFrameId(LoaderSprite, value, 10);
-            }
+            SetSpriteMapFrameId(LoaderSprite, frameId, SkinFrames);
         }
     }
 }

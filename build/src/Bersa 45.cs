@@ -8,21 +8,17 @@ using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
     public class Bersa45 : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Bersa45(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 11;
             _ammoType = new ATBersa45();
             
-            _sprite = new SpriteMap(GetPath("Bersa45"), 12, 8);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("Bersa45"), 12, 8);
             _center = new Vec2(6f, 4f);
             _collisionOffset = new Vec2(-6f, -4f);
             _collisionSize = new Vec2(12f, 8f);
@@ -43,15 +39,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 3, 4, 6, 8 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

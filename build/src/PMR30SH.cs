@@ -14,15 +14,13 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class PMR : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         public PMR(float xval, float yval)
             : base(xval, yval)
         {
             _editorName = "PMR30 Shotgunned";
 
-            _graphic = _sprite = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
@@ -58,7 +56,7 @@ namespace TMGmod
                     ammom,
                     mode =>
                     {
-                        FrameId = FrameId % 10 + 10 * (1 + mode);
+                        NonSkin = 1 + mode;
                         _ammoType = ammoTypem[mode];
                         _barrelOffsetTL = barrelOffsetTLm[mode];
                         _fireSound = fireSoundm[mode];
@@ -67,19 +65,11 @@ namespace TMGmod
                         _numBulletsPerFire = numBulletsPerFirem[mode];
                         SetAccuracyAsMax();
                     },
-                    () => FrameId %= 10
+                    () => NonSkin = 0
                 )
             );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

@@ -10,7 +10,8 @@ namespace TMGmod.NY
         {
             ammo = 12;
             _type = "gun";
-            _graphic = new Sprite(GetPath("Holiday/ShorTree"));
+            SkinFrames = 1;
+            Smap = new SpriteMap(GetPath("Holiday/ShorTree"), 51, 15);
             _center = new Vec2(26f, 8f);
             _collisionOffset = new Vec2(-26f, -8f);
             _collisionSize = new Vec2(51f, 15f);

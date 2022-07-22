@@ -9,12 +9,10 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|Rifle|Combined")]
     public class ValmetM76 : BaseGun, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         public ValmetM76(float xval, float yval)
             : base(xval, yval)
         {
@@ -22,10 +20,8 @@ namespace TMGmod
             _ammoType = new ATM76();
             MaxAccuracy = 0.89f;
             MinAccuracy = 0.5f;
-            
-            _sprite = new SpriteMap(GetPath("Valmet M76"), 33, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("Valmet M76"), 33, 10);
             _center = new Vec2(17f, 5f);
             _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 10f);
@@ -54,7 +50,7 @@ namespace TMGmod
                     .15f,
                     burst => {
                         _fireWait = burst ? 1.4f : 0.7f;
-                        FrameId = FrameId % 10 + (burst ? 10 : 0);
+                        NonSkin = burst ? 10 : 0;
                         loseAccuracy = burst ? 0f : 0.15f;
                         _kickForce = burst ? 6.5f : 3f;
                         MaxAccuracy = burst ? 1f : 0.89f;
@@ -67,15 +63,5 @@ namespace TMGmod
             );
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

@@ -12,9 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ARwA : BaseAr, IHaveAllowedSkins, MagBuddy.ISupportReload
     {
-        private const int NonSkinFrames = 4;
         private readonly MagBuddy _magBuddy;
-        private readonly SpriteMap _sprite;
         private bool _onemoreclick = true;
 
         [UsedImplicitly] public byte Mags = 1;
@@ -31,10 +29,8 @@ namespace TMGmod
                 accuracy = 0.85f,
             };
             IntrinsicAccuracy = true;
-            
-            _sprite = new SpriteMap(GetPath("ARW-A"), 27, 9);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 4;
+            Smap = new SpriteMap(GetPath("ARW-A"), 27, 9);
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(27f, 9f);
@@ -57,14 +53,6 @@ namespace TMGmod
             KforceDelta = .2f;
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
         public bool SetMag()
         {
             if (Mags <= 0) return false;
@@ -72,7 +60,7 @@ namespace TMGmod
             if (_onemoreclick)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
-                _sprite.frame = _sprite.frame % 10 + 30;
+                NonSkin = 3;
                 _wait += 5f;
                 return _onemoreclick = false;
             }
@@ -86,16 +74,16 @@ namespace TMGmod
         public bool DropMag(Thing mag)
         {
             SFX.Play(GetPath("sounds/tuduc.wav"));
-            switch (_sprite.frame / 10)
+            switch (NonSkin)
             {
                 case 0:
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     break;
                 case 3:
-                    _sprite.frame -= 10;
+                    NonSkin = 2;
                     break;
                 default:
-                    _sprite.frame = _sprite.frame % 10 + 10;
+                    NonSkin = 1;
                     break;
             }
 
@@ -114,7 +102,7 @@ namespace TMGmod
         public override void Update()
         {
             if (ammo <= 0) _magBuddy.Disload();
-            if (ammo <= 0 && Mags <= 0) _sprite.frame = _sprite.frame % 10 + 20;
+            if (ammo <= 0 && Mags <= 0) NonSkin = 2;
             base.Update();
         }
     }

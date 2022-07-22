@@ -11,9 +11,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class TC12 : BaseDmr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public TC12(float xval, float yval)
@@ -25,10 +22,8 @@ namespace TMGmod
             MinAccuracy = 0.45f;
             RegenAccuracyDmr = 0.007f;
             DrainAccuracyDmr = 0.15f;
-
-            _sprite = new SpriteMap(GetPath("TC-12"), 39, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("TC-12"), 39, 12);
             _center = new Vec2(20f, 5f);
             _collisionOffset = new Vec2(-20f, -5f);
             _collisionSize = new Vec2(39f, 12f);
@@ -60,8 +55,7 @@ namespace TMGmod
             {
                 if (value)
                 {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     _fireSound = GetPath("sounds/Silenced3.wav");
                     _ammoType = new ATTC12S();
                     _kickForce = 4.5f;
@@ -75,7 +69,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.frame %= 10;
+                    NonSkin = 0;
                     _fireSound = "deepMachineGun2";
                     _ammoType = new ATTC12();
                     _kickForce = 5.3f;
@@ -91,15 +85,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

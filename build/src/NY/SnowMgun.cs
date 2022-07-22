@@ -6,16 +6,14 @@ namespace TMGmod.NY
     [EditorGroup("TMG|Misc|Holiday")]
     public class SnowMgun : BaseSmg
     {
-        private readonly SpriteMap _sprite;
-
         public SnowMgun(float xval, float yval) : base(xval, yval)
         {
             ammo = 40;
             _ammoType = new ATSneg();
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Holiday/SnowMachineGun"), 17, 9);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 4;
+            SkinFrames = 1;
+            Smap = new SpriteMap(GetPath("Holiday/SnowMachineGun"), 17, 9);
             _center = new Vec2(10f, 5f);
             _collisionOffset = new Vec2(-10f, -5f);
             _collisionSize = new Vec2(19f, 9f);
@@ -33,9 +31,9 @@ namespace TMGmod.NY
 
         public override void Update()
         {
-            if (ammo > 20 && ammo <= 30 && _sprite.frame < 1) _sprite.frame += 1;
-            if (ammo > 10 && ammo <= 20 && _sprite.frame < 2) _sprite.frame += 1;
-            if (ammo > 0 && ammo <= 10 && _sprite.frame < 3) _sprite.frame += 1;
+            if (ammo > 20 && ammo <= 30) NonSkin = 1;
+            if (ammo > 10 && ammo <= 20) NonSkin = 2;
+            if (ammo > 0 && ammo <= 10) NonSkin = 3;
             base.Update();
         }
     }

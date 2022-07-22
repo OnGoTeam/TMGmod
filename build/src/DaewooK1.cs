@@ -11,10 +11,6 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|PDW")]
     public class DaewooK1 : BaseSmg, IHaveAllowedSkins, IHaveStock
     {
-        [UsedImplicitly] private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
-
         private bool _stock = true;
 
         private float _stockstate = 1f;
@@ -25,10 +21,8 @@ namespace TMGmod
             ammo = 32;
             _ammoType = new ATDaewooK1();
             MaxAccuracy = _ammoType.accuracy;
-            
-            _sprite = new SpriteMap(GetPath("DaewooK1"), 28, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("DaewooK1"), 28, 11);
             _center = new Vec2(14f, 5f);
             _collisionOffset = new Vec2(-14f, -5f);
             _collisionSize = new Vec2(28f, 11f);
@@ -52,16 +46,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public float StockSpeed => 1f / 10f;
 
@@ -112,7 +96,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+            NonSkin = this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1;
         }
     }
 }

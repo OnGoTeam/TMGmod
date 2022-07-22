@@ -12,9 +12,6 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Break-Action")]
     public class Deadly44C : BaseGun, IAmSg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         public Deadly44C(float xval, float yval)
             : base(xval, yval)
         {
@@ -22,9 +19,8 @@ namespace TMGmod
             _ammoType = new AT44DB();
             MaxAccuracy = 0.1f;
             _numBulletsPerFire = 44;
-            _sprite = new SpriteMap(GetPath("44dbTWICE"), 33, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("44dbTWICE"), 33, 10);
             _center = new Vec2(16.5f, 5f);
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 10f);
@@ -42,15 +38,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void OnPressAction()
         {
@@ -70,7 +57,7 @@ namespace TMGmod
             if (ammo > 1)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
-                _sprite.frame = _sprite.frame % 10 + 10;
+                FrameId = FrameId % 10 + 10;
             }
 
             base.Reload(ammo > 1);

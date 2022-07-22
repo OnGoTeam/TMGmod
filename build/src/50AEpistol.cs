@@ -13,9 +13,6 @@ namespace TMGmod
     [EditorGroup("TMG|Handgun|Semi-Automatic")]
     public class BigShot : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public BigShot(float xval, float yval)
             : base(xval, yval)
         {
@@ -23,9 +20,8 @@ namespace TMGmod
             _ammoType = new AT50C();
             MaxAccuracy = 1f;
             MinAccuracy = 0.6f;
-            _sprite = new SpriteMap(GetPath("50AEPistol"), 26, 10);
-            _graphic = _sprite;
-            _sprite.frame = SkinValue = 1;
+            Smap = new SpriteMap(GetPath("50AEPistol"), 26, 10);
+            SkinValue = 1;
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(26f, 10f);
@@ -43,14 +39,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2, 5, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

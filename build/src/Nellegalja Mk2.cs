@@ -7,27 +7,21 @@ using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
     public class NellegaljaMk2 : BaseDmr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public NellegaljaMk2(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 20;
             _ammoType = new ATSLK8();
-            _ammoType.range = 800f;
-            MaxAccuracy = 1f;
+            SetAccuracyAsMax();
             MinAccuracy = 0.8f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.45f;
-            
-            _sprite = new SpriteMap(GetPath("Nellegalja Mk2"), 33, 13);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("Nellegalja Mk2"), 33, 13);
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-17f, -7f);
             _collisionSize = new Vec2(33f, 13f);
@@ -47,16 +41,12 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(18f, 2f);
         }
 
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
+        protected override void OnInitialize()
         {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
+            _ammoType.range = 800f;
+            base.OnInitialize();
         }
+
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
     }
 }

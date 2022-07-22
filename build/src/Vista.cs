@@ -11,15 +11,11 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Vista : BaseGun, IHaveAllowedSkins, I5
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Vista(float xval, float yval)
             : base(xval, yval)
         {
             _editorName = "Vista";
-
-            _graphic = _sprite = new SpriteMap(GetPath("Vista"), 16, 14) { frame = 0 };
+            Smap = new SpriteMap(GetPath("Vista"), 16, 14);
             _center = new Vec2(6f, 7f);
             _collisionOffset = new Vec2(-8f, -7f);
             _collisionSize = new Vec2(16f, 14f);
@@ -41,14 +37,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 5 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

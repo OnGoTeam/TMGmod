@@ -10,10 +10,7 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     public class FnFcar : BaseDmr, IHaveAllowedSkins, ISwitchBipods
     {
-        private const int NonSkinFrames = 5;
-
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
-        private readonly SpriteMap _sprite;
 
         public FnFcar(float xval, float yval)
             : base(xval, yval)
@@ -26,10 +23,8 @@ namespace TMGmod
             MinAccuracy = 0.67f;
             RegenAccuracyDmr = 0.01f;
             DrainAccuracyDmr = 0.1f;
-            
-            _sprite = new SpriteMap(GetPath("FCAR"), 36, 15);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 5;
+            Smap = new SpriteMap(GetPath("FCAR"), 36, 15);
             _center = new Vec2(18f, 8f);
             _collisionOffset = new Vec2(-18f, -8f);
             _collisionSize = new Vec2(36f, 15f);
@@ -94,14 +89,6 @@ namespace TMGmod
 
         public float BipodSpeed => 1f / 22f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         private void UpdateStats()
         {
@@ -113,13 +100,10 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId = FrameId % 10 +
-                                10 * (
-                                    this.BipodsDeployed() ? 4 :
-                                    this.BipodsFolded() ? 0 :
-                                    BipodsState < 0.33f ? 1 :
-                                    BipodsState < 0.67f ? 2 : 3
-                                );
+            NonSkin = this.BipodsDeployed() ? 4 :
+                this.BipodsFolded() ? 0 :
+                BipodsState < 0.33f ? 1 :
+                BipodsState < 0.67f ? 2 : 3;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
@@ -13,9 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class CZ75 : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         private int _fdelay;
 
         public CZ75(float xval, float yval)
@@ -23,10 +19,9 @@ namespace TMGmod
         {
             ammo = 24;
             _ammoType = new ATCZ75();
-            
-            _sprite = new SpriteMap(GetPath("CZ75"), 12, 8);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("CZ75"), 12, 8);
             _center = new Vec2(6f, 4f);
             _collisionOffset = new Vec2(-6f, -4f);
             _collisionSize = new Vec2(12f, 8f);
@@ -48,19 +43,9 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public override void OnPressAction()
         {
-            if (((ammo > 0 && _sprite.frame == 10) || (ammo > 12 && _sprite.frame == 0)) && _fdelay == 0)
+            if (((ammo > 0 && NonSkin == 1) || (ammo > 12 && NonSkin == 0)) && _fdelay == 0)
                 Fire();
             else
                 switch (ammo)
@@ -68,7 +53,7 @@ namespace TMGmod
                     case 0:
                         DoAmmoClick();
                         break;
-                    case 12 when _sprite.frame == 0:
+                    case 12 when NonSkin == 0:
                         SFX.Play("click");
                         if (_raised)
                             Level.Add(new Czmag(x, y + 1));
@@ -76,7 +61,7 @@ namespace TMGmod
                             Level.Add(new Czmag(x + 5, y));
                         else
                             Level.Add(new Czmag(x - 5, y));
-                        _sprite.frame = 10;
+                        NonSkin = 1;
                         _fdelay = 40;
                         break;
                     default:

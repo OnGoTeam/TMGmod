@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -10,19 +9,13 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     public class Type89 : BaseAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Type89(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 26;
             _ammoType = new ATType89();
-            IntrinsicAccuracy = true;
-            
-            _sprite = new SpriteMap(GetPath("Type 89"), 30, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            SetAccuracyAsMax();
+            Smap = new SpriteMap(GetPath("Type 89"), 30, 12);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 12f);
@@ -45,15 +38,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

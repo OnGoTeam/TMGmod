@@ -13,19 +13,14 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ANP73 : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 4;
-        private readonly SpriteMap _sprite;
-
         public ANP73(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 33;
             _ammoType = new ATANP73();
             IntrinsicAccuracy = true;
-            
-            _sprite = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 4;
+            Smap = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(10f, 7f);
             _collisionOffset = new Vec2(-10f, -7f);
@@ -43,41 +38,35 @@ namespace TMGmod
             _weight = 2f;
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
-                if (_sprite.frame / 10 < 1) //1
+                if (NonSkin < 1) //1
                 {
-                    _sprite.frame += 10;
+                    NonSkin += 1;
                     _fireWait = 1.2f;
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.5f;
                 }
-                else if (_sprite.frame / 10 < 2) //2
+                else if (NonSkin < 2) //2
                 {
-                    _sprite.frame += 10;
+                    NonSkin += 1;
                     _fireWait = 0.9f;
                     loseAccuracy = 0.2f;
                     maxAccuracyLost = 0.6f;
                 }
-                else if (_sprite.frame / 10 < 3) //3
+                else if (NonSkin < 3) //3
                 {
-                    _sprite.frame += 10;
+                    NonSkin += 1;
                     _fireWait = 0.6f;
                     loseAccuracy = 0.3f;
                     maxAccuracyLost = 0.7f;
                 }
-                else if (_sprite.frame / 10 < 4) //0
+                else if (NonSkin < 4) //0
                 {
-                    _sprite.frame -= 30;
+                    NonSkin -= 3;
                     _fireWait = 1.5f;
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.3f;

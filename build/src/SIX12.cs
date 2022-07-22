@@ -13,9 +13,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SIX12 : BaseGun, IHaveAllowedSkins, IAmSg, I5
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
 
         public SIX12(float xval, float yval)
@@ -31,10 +28,8 @@ namespace TMGmod
             };
             MaxAccuracy = 0.87f;
             _numBulletsPerFire = 14;
-            
-            _sprite = new SpriteMap(GetPath("SIX12"), 29, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("SIX12"), 29, 10);
             _center = new Vec2(19f, 5f);
             _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(29f, 10f);
@@ -54,29 +49,20 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
             {
                 if (laserSight)
                 {
-                    FrameId -= 10;
+                    NonSkin = 0;
                     loseAccuracy = 0.3f;
                     maxAccuracyLost = 0.4f;
                     laserSight = false;
                 }
                 else
                 {
-                    FrameId += 10;
+                    NonSkin = 1;
                     loseAccuracy = 0.5f;
                     maxAccuracyLost = 0.5f;
                     laserSight = true;

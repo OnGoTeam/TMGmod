@@ -8,8 +8,6 @@ namespace TMGmod.NY
     // ReSharper disable once InconsistentNaming
     public class Popcal : BaseAr
     {
-        private readonly SpriteMap _sprite;
-
         public Popcal(float xval, float yval)
             : base(xval, yval)
         {
@@ -17,9 +15,9 @@ namespace TMGmod.NY
             _ammoType = new ATPopcorn();
             MaxAccuracy = 0.5f;
             _type = "gun";
-            _sprite = new SpriteMap(GetPath("Holiday/Popcal 9mm"), 27, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 9;
+            SkinFrames = 1;
+            Smap = new SpriteMap(GetPath("Holiday/Popcal 9mm"), 27, 10);
             _center = new Vec2(14f, 5f);
             _collisionOffset = new Vec2(-14f, -5f);
             _collisionSize = new Vec2(27f, 10f);
@@ -76,14 +74,14 @@ namespace TMGmod.NY
 
         public override void Update()
         {
-            if ((ammo > 13) & (ammo < 15)) _sprite.frame = 1;
-            if ((ammo > 11) & (ammo < 13)) _sprite.frame = 2;
-            if ((ammo > 9) & (ammo < 11)) _sprite.frame = 3;
-            if ((ammo > 7) & (ammo < 9)) _sprite.frame = 4;
-            if ((ammo > 5) & (ammo < 7)) _sprite.frame = 5;
-            if ((ammo > 3) & (ammo < 5)) _sprite.frame = 6;
-            if ((ammo > 1) & (ammo < 3)) _sprite.frame = 7;
-            if (ammo < 1) _sprite.frame = 8;
+            if ((ammo > 13) & (ammo < 15)) NonSkin = 1;
+            if ((ammo > 11) & (ammo < 13)) NonSkin = 2;
+            if ((ammo > 9) & (ammo < 11)) NonSkin = 3;
+            if ((ammo > 7) & (ammo < 9)) NonSkin = 4;
+            if ((ammo > 5) & (ammo < 7)) NonSkin = 5;
+            if ((ammo > 3) & (ammo < 5)) NonSkin = 6;
+            if ((ammo > 1) & (ammo < 3)) NonSkin = 7;
+            if (ammo < 1) NonSkin = 8;
             base.Update();
         }
     }

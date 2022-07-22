@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
@@ -12,19 +11,13 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class IB8mm : BaseGun, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public IB8mm(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 26;
             _ammoType = new ATIB8();
             MaxAccuracy = _ammoType.accuracy;
-            
-            _sprite = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(14f, 6f);
             _collisionOffset = new Vec2(-14f, -6f);
@@ -44,15 +37,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

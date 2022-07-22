@@ -12,9 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AR15Proto : BaseAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
         private const double Explodechance = 0.006;
-        private readonly SpriteMap _sprite;
 
         [UsedImplicitly] public int Ammobefore = 21;
 
@@ -31,10 +29,8 @@ namespace TMGmod
         {
             ammo = 20;
             _ammoType = new ATLowQammos();
-            
-            _sprite = new SpriteMap(GetPath("AR15Proto"), 27, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+
+            Smap = new SpriteMap(GetPath("AR15Proto"), 27, 10);
             _center = new Vec2(19f, 5f);
             _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(27f, 10f);
@@ -58,16 +54,6 @@ namespace TMGmod
 
         [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         protected override void OnInitialize()
         {

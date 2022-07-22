@@ -10,25 +10,17 @@ namespace TMGmod
 {
     [BaggedProperty("isInDemo", true)]
     [EditorGroup("TMG|SMG|Fully-Automatic")]
+    [UsedImplicitly]
     public class M950 : BaseGun, IAmSmg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         // ReSharper disable once MemberCanBePrivate.Global		
         public M950(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 50;
-            _ammoType = new ATCalico
-            {
-                range = Rando.Float(10f, 70f),
-            };
-            MaxAccuracy = 0.4f;
-            
-            _sprite = new SpriteMap(GetPath("M950A"), 23, 7);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            _ammoType = new ATCalico();
+            SetAccuracyAsMax();
+            Smap = new SpriteMap(GetPath("M950A"), 23, 7);
             _center = new Vec2(11f, 4f);
             _collisionOffset = new Vec2(-11f, -4f);
             _collisionSize = new Vec2(23f, 7f);
@@ -52,19 +44,8 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public override void OnHoldAction()
         {
-            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 45f));
             handAngle = Rando.Float(-0.15f, 0.15f);
             base.OnHoldAction();
         }

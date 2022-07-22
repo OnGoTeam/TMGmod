@@ -8,25 +8,20 @@ using TMGmod.Core.WClasses.ClassImplementations;
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class SLK8 : BaseDmr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public SLK8(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 14;
             _ammoType = new ATSLK8();
-            MaxAccuracy = 1f;
+            SetAccuracyAsMax();
             MinAccuracy = 0.3f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.45f;
-            
-            _sprite = new SpriteMap(GetPath("SLK8"), 41, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("SLK8"), 41, 11);
             _center = new Vec2(21f, 6f);
             _collisionOffset = new Vec2(-21f, -6f);
             _collisionSize = new Vec2(41f, 11f);
@@ -45,15 +40,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

@@ -11,10 +11,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class CZ805 : BaseAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 10;
-
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public CZ805(float xval, float yval)
@@ -23,10 +19,8 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATCZ();
             SetAccuracyAsMax();
-
-            _sprite = new SpriteMap(GetPath("CZ805Bren"), 41, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 10;
+            Smap = new SpriteMap(GetPath("CZ805Bren"), 41, 11);
             _center = new Vec2(20.5f, 5.5f);
             _collisionOffset = new Vec2(-20.5f, -5.5f);
             _collisionSize = new Vec2(41f, 11f);
@@ -57,8 +51,8 @@ namespace TMGmod
             {
                 if (value)
                 {
-                    _sprite.frame %= 50;
-                    _sprite.frame += 50;
+                    NonSkin %= 5;
+                    NonSkin += 5;
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _ammoType = new ATCZS();
@@ -68,7 +62,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.frame %= 50;
+                    NonSkin %= 5;
                     _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f),
@@ -84,15 +78,6 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 4, 5, 7 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -102,10 +87,11 @@ namespace TMGmod
                 SFX.Play("quack", -1);
             }
 
-            if (ammo > 20 && ammo <= 26 && FrameId / 10 % 5 != 1) _sprite.frame += 10;
-            if (ammo > 12 && ammo <= 20 && FrameId / 10 % 5 != 2) _sprite.frame += 10;
-            if (ammo > 5 && ammo <= 12 && FrameId / 10 % 5 != 3) _sprite.frame += 10;
-            if (ammo > 0 && ammo <= 5 && FrameId / 10 % 5 != 4) _sprite.frame += 10;
+            if (ammo > 26) NonSkin = 0;
+            else if (ammo > 20) NonSkin = 1;
+            else if (ammo > 12) NonSkin = 2;
+            else if (ammo > 5) NonSkin = 3;
+            else NonSkin = 4;
             base.Update();
         }
     }

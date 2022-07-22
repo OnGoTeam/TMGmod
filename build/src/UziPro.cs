@@ -11,9 +11,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class UziPro : BaseSmg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public UziPro(float xval, float yval)
@@ -24,10 +21,8 @@ namespace TMGmod
             IntrinsicAccuracy = true;
             KforceDelay = 25;
             KforceDelta = 4f;
-
-            _sprite = new SpriteMap(GetPath("UziProS"), 16, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("UziProS"), 16, 10);
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
@@ -59,8 +54,7 @@ namespace TMGmod
             {
                 if (value)
                 {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     _ammoType = new ATUziS();
                     _barrelOffsetTL = new Vec2(16f, 2f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
@@ -68,7 +62,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.frame %= 10;
+                    NonSkin = 0;
                     _ammoType = new ATUzi();
                     _barrelOffsetTL = new Vec2(10f, 2f);
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
@@ -81,16 +75,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 6, 8 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

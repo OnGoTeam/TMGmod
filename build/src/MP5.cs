@@ -12,13 +12,11 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Combined")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class MP5 : BaseGun, IHaveAllowedSkins, IAmSmg
     {
-        private const int NonSkinFrames = 2;
         protected float IncreasedAccuracy;
-
-        protected SpriteMap Texture;
 
         public MP5(float xval, float yval)
             : base(xval, yval)
@@ -28,10 +26,8 @@ namespace TMGmod
             IncreasedAccuracy = .9f;
             DecreasedAccuracy = 0.7f;
             MaxAccuracy = DecreasedAccuracy;
-            
-            Texture = new SpriteMap(GetPath("MP5"), 27, 12);
-            _graphic = Texture;
-            Texture.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("MP5"), 27, 12);
             _center = new Vec2(13f, 6f);
             _collisionOffset = new Vec2(-13f, -6f);
             _collisionSize = new Vec2(27f, 12f);
@@ -59,7 +55,7 @@ namespace TMGmod
                     burst =>
                     {
                         _fireWait = burst ? 1.8f : 0.5f;
-                        FrameId = FrameId % 10 + (burst ? 10 : 0);
+                        NonSkin = burst ? 1 : 0;
                         MaxAccuracy = burst ? IncreasedAccuracy : DecreasedAccuracy;
                     },
                     true
@@ -69,14 +65,5 @@ namespace TMGmod
 
         protected float DecreasedAccuracy { get; set; }
         public virtual ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => Texture.frame;
-            set => Texture.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

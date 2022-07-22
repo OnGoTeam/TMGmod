@@ -2,7 +2,6 @@
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Updating;
-using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
@@ -11,19 +10,14 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
-    public class ScarGL : BaseGun, IAmAr, IHaveFrameId
+    public class ScarGL : BaseGun, IAmAr
     {
-        private const int NonSkinFrames = 3;
-
-        private readonly SpriteMap _sprite;
-
         public ScarGL(float xval, float yval)
             : base(xval, yval)
         {
             _editorName = "SCAR-H With GL";
-
-            _graphic = _sprite = new SpriteMap(GetPath("scargl"), 33, 10);
-            _center = new Vec2(16.5f, 5f);
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("scargl"), 33, 10);
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 11f);
             _holdOffset = new Vec2(2f, 0f);
@@ -74,7 +68,7 @@ namespace TMGmod
                     ammom,
                     mode =>
                     {
-                        FrameId = FrameId % 10 + 10 * (1 + mode);
+                        NonSkinFrames = 1 + mode;
                         _ammoType = ammoTypem[mode];
                         _barrelOffsetTL = barrelOffsetTLm[mode];
                         _fireSound = fireSoundm[mode];
@@ -83,17 +77,9 @@ namespace TMGmod
                         _flare = flarem[mode];
                         SetAccuracyAsMax();
                     },
-                    () => FrameId %= 10
+                    () => NonSkin = 0
                 )
             );
-        }
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
         }
     }
 }

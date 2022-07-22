@@ -9,19 +9,15 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Fully-Automatic")]
+    [UsedImplicitly]
     public class Alep30 : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Alep30(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 18;
             _ammoType = new ATAlep30();
-            _sprite = new SpriteMap(GetPath("Alep30"), 16, 9);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("Alep30"), 16, 9);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
@@ -40,15 +36,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

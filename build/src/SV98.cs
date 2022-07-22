@@ -13,18 +13,14 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SV98 : BaseBolt, IHaveAllowedSkins, I5, ISwitchBipods
     {
-        private const int NonSkinFrames = 3;
-
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
-        private readonly SpriteMap _sprite;
 
         public SV98(float xval, float yval) : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("SV98"), 33, 11);
-            _graphic = _sprite;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("SV98"), 33, 11);
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
-            _sprite.frame = 0;
             _center = new Vec2(17f, 6f);
             _collisionOffset = new Vec2(-17f, -6f);
             _collisionSize = new Vec2(33f, 11f);
@@ -88,14 +84,6 @@ namespace TMGmod
 
         public float BipodSpeed => 1f / 7f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 8 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         protected override void OnInitialize()
         {
@@ -111,7 +99,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 + 10 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
+            NonSkin = this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1;
         }
 
 

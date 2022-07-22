@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
@@ -12,9 +11,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AKALFA : BaseAr, IHaveAllowedSkins, IHaveStock
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         private bool _stock = true;
 
         private float _stockstate = 1f;
@@ -30,10 +26,8 @@ namespace TMGmod
                 bulletSpeed = 60f,
                 bulletThickness = 0.87f,
             };
-            _sprite = new SpriteMap(GetPath("ALFA"), 38, 9);
-            _graphic = _sprite;
-            _sprite.frame = 0;
-            _graphic = _sprite;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("ALFA"), 38, 9);
             _center = new Vec2(19f, 5f);
             _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(38f, 9f);
@@ -57,16 +51,6 @@ namespace TMGmod
 
         protected override float BaseKforce => this.StockDeployed() ? 0.65f : 1.2f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 5 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public float StockSpeed => 1f / 10f;
 
@@ -114,7 +98,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+            NonSkin = this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1;
         }
     }
 }

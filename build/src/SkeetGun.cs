@@ -12,9 +12,6 @@ namespace TMGmod
     [BaggedProperty("canSpawn", false)]
     public class SkeetGun : BaseGun, IHaveAllowedSkins, IAmSg
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         private float _handleAngleOff;
 
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
@@ -25,9 +22,7 @@ namespace TMGmod
             _ammoType = new ATSkeetGun();
             MaxAccuracy = 0.9f;
             _numBulletsPerFire = 10;
-            _sprite = new SpriteMap(GetPath("SkeetDouble"), 41, 7);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("SkeetDouble"), 41, 7);
             _center = new Vec2(21f, 4f);
             _collisionOffset = new Vec2(-21f, -4f);
             _collisionSize = new Vec2(41f, 7f);
@@ -50,16 +45,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

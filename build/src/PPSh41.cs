@@ -12,9 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class PPSh41 : BaseSmg, I5, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly]
         public PPSh41(float xval, float yval)
             : base(xval, yval)
@@ -24,9 +21,7 @@ namespace TMGmod
             MaxAccuracy = 0.73f;
             KforceDelta = 3f;
             KforceDelay = 50;
-            
-            _sprite = new SpriteMap(GetPath("PPSH41"), 30, 8);
-            _graphic = _sprite;
+            Smap = new SpriteMap(GetPath("PPSH41"), 30, 8);
             _center = new Vec2(15f, 4f);
             _collisionOffset = new Vec2(-15f, -4f);
             _collisionSize = new Vec2(30f, 8f);
@@ -47,14 +42,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

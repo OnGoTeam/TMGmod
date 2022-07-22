@@ -13,17 +13,13 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseGun, IAmAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding StockBinding = new StateBinding(nameof(Silencer));
 
         public AN94C(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("Anyx AR2 Mustang"), 33, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("Anyx AR2 Mustang"), 33, 10);
             _center = new Vec2(16f, 5f);
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(33f, 10f);
@@ -64,30 +60,19 @@ namespace TMGmod
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _ammoType = new ATCZS();
                     _barrelOffsetTL = new Vec2(33f, 2f);
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                 }
                 else
                 {
                     _fireSound = "deepMachineGun2";
                     _ammoType = new ATCZ();
                     _barrelOffsetTL = new Vec2(28f, 2f);
-                    _sprite.frame %= 10;
+                    NonSkin = 0;
                 }
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

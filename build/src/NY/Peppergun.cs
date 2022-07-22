@@ -20,7 +20,8 @@ namespace TMGmod.NY
                 accuracy = 0.11f,
             };
             _type = "gun";
-            _graphic = new SpriteMap(GetPath("Holiday/Peppergun"), 18, 7);
+            SkinFrames = 1;
+            Smap = new SpriteMap(GetPath("Holiday/Peppergun"), 18, 7);
             _center = new Vec2(9f, 4f);
             _collisionOffset = new Vec2(-9f, -4f);
             _collisionSize = new Vec2(18f, 7f);
@@ -36,7 +37,7 @@ namespace TMGmod.NY
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(-8f, 3f);
-            _editorName = "Big Sweat Gun";
+            _editorName = "Big Sweet Gun";
             _weight = 2f;
         }
     }

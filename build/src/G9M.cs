@@ -13,9 +13,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class G9M : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 1;
         private const double Explodechance = 0.005;
-        private readonly SpriteMap _sprite;
 
         public int Ammobefore = 71;
         [UsedImplicitly] public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
@@ -29,9 +27,7 @@ namespace TMGmod
             ammo = 70;
             _ammoType = new ATLowQammos();
             
-            _sprite = new SpriteMap(GetPath("G9M"), 38, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("G9M"), 38, 11);
             _center = new Vec2(19f, 6f);
             _collisionOffset = new Vec2(-19f, -6f);
             _collisionSize = new Vec2(38f, 11f);
@@ -65,14 +61,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {

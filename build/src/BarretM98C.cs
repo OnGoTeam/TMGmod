@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -10,14 +9,9 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     public class BarretM98C : BaseBolt, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public BarretM98C(float xval, float yval) : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("BarretM98SHORT"), 32, 13);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("BarretM98SHORT"), 32, 13);
             _center = new Vec2(16f, 7f);
             _collisionOffset = new Vec2(-16f, -7f);
             _collisionSize = new Vec2(32f, 13f);
@@ -38,16 +32,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         protected override void OnInitialize()
         {

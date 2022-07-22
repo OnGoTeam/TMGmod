@@ -14,9 +14,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP7 : BaseGun, IAmSmg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         private float _handleAngleOff;
 
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
@@ -27,10 +24,7 @@ namespace TMGmod
             ammo = 35;
             _ammoType = new ATMP7();
             MaxAccuracy = 0.9f;
-            
-            _sprite = new SpriteMap(GetPath("MP7"), 20, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("MP7"), 20, 10);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(12f, 4f);
             _collisionOffset = new Vec2(-12f, -4f);
@@ -56,16 +50,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

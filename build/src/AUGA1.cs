@@ -12,9 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AUGA1 : BaseAr, IHaveAllowedSkins, I5
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding GripBinding = new StateBinding(nameof(Grip));
 
         public AUGA1(float xval, float yval)
@@ -23,10 +20,8 @@ namespace TMGmod
             ammo = 42;
             _ammoType = new ATAUGA1();
             IntrinsicAccuracy = true;
-            
-            _sprite = new SpriteMap(GetPath("AUGA1"), 30, 12);
-            _graphic = _sprite;
-            _sprite.frame = SkinValue = 8;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("AUGA1"), 30, 12);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 12f);
@@ -56,23 +51,13 @@ namespace TMGmod
             get => maxAccuracyLost < 0.2f;
             set
             {
-                FrameId = FrameId % 10 + 10 * (value ? 1 : 0);
+                NonSkin = value ? 1 : 0;
                 maxAccuracyLost = value ? .1f : .2f;
                 _ammoType.accuracy = value ? .97f : .80f;
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 4, 5, 6, 8 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

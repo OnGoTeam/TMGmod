@@ -13,9 +13,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class M14SO : BaseDmr, IHaveAllowedSkins, IHaveStock
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         private bool _stock = true;
 
         private float _stockstate = 1f;
@@ -33,10 +30,8 @@ namespace TMGmod
             MinAccuracy = 0.3f;
             RegenAccuracyDmr = 0.01f;
             DrainAccuracyDmr = 0.12f;
-            
-            _sprite = new SpriteMap(GetPath("Sawed-Off M14"), 31, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("Sawed-Off M14"), 31, 11);
             _center = new Vec2(16f, 6f);
             _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(31f, 11f);
@@ -58,16 +53,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public float StockSpeed => 1f / 17f;
 
@@ -118,7 +103,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 + 10 * (this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1);
+            NonSkin = this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1;
         }
     }
 }

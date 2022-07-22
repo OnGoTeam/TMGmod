@@ -14,9 +14,6 @@ namespace TMGmod
     [UsedImplicitly]
     public class M50 : BaseGun, IAmSr, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public M50(float xval, float yval)
             : base(xval, yval)
         {
@@ -28,10 +25,7 @@ namespace TMGmod
                 penetration = 1f,
                 bulletThickness = 2.5f,
             };
-            
-            _sprite = new SpriteMap(GetPath("M50"), 40, 13);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("M50"), 40, 13);
             _center = new Vec2(20f, 7f);
             _collisionOffset = new Vec2(-20f, -7f);
             _collisionSize = new Vec2(40f, 13f);
@@ -62,14 +56,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {

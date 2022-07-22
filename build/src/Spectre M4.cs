@@ -10,9 +10,6 @@ namespace TMGmod
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     public class SpectreM4 : BaseSmg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public SpectreM4(float xval, float yval)
@@ -21,10 +18,8 @@ namespace TMGmod
             ammo = 30;
             _ammoType = new ATSpectreM4();
             IntrinsicAccuracy = true;
-
-            _sprite = new SpriteMap(GetPath("SpectreM4"), 19, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("SpectreM4"), 19, 10);
             _center = new Vec2(9.5f, 5f);
             _collisionOffset = new Vec2(-9.5f, -5f);
             _collisionSize = new Vec2(19f, 10f);
@@ -56,8 +51,7 @@ namespace TMGmod
             {
                 if (value)
                 {
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     _ammoType = new ATSpectreM4S();
                     _barrelOffsetTL = new Vec2(16f, 1f);
                     loseAccuracy = 0.07f;
@@ -68,7 +62,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _sprite.frame %= 10;
+                    NonSkin = 0;
                     _flare = new SpriteMap("smallFlare", 11, 10)
                     {
                         center = new Vec2(0.0f, 5f),
@@ -84,15 +78,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

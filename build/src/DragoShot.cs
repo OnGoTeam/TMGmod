@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
@@ -13,8 +12,6 @@ namespace TMGmod
     public class DragoShot : BaseGun, IAmSr, IHaveAllowedSkins
     {
         private const int FramesToCharge = 50;
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
         private bool _charged;
 
         public DragoShot(float xval, float yval)
@@ -25,8 +22,7 @@ namespace TMGmod
             SetAccuracyAsMax();
             _numBulletsPerFire = 8;
 
-            _sprite = new SpriteMap(GetPath("Dragoshot"), 29, 11);
-            _graphic = _sprite;
+            Smap = new SpriteMap(GetPath("Dragoshot"), 29, 11);
             SkinValue = -1;
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-14f, -7f);
@@ -77,16 +73,6 @@ namespace TMGmod
         private bool IsCharged(bool _) => _charged;
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void OnPressAction()
         {

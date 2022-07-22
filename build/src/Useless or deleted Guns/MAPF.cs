@@ -29,7 +29,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             };
             _numBulletsPerFire = 2;
             _type = "gun";
-            graphic = new Sprite(GetPath("Mixaly4sPistol2"));
+            _graphic = new Sprite(GetPath("Mixaly4sPistol2"));
             center = new Vec2(7f, 7f);
             collisionOffset = new Vec2(-6.5f, -7f);
             collisionSize = new Vec2(15f, 12f);

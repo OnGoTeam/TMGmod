@@ -10,12 +10,10 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|SMG|Fully-Automatic")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class AR9SX : BaseGun, IAmSmg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public AR9SX(float xval, float yval)
             : base(xval, yval)
         {
@@ -23,9 +21,7 @@ namespace TMGmod
             _ammoType = new ATAR9SX();
             MaxAccuracy = 0.78f;
             
-            _sprite = new SpriteMap(GetPath("AR9SX"), 36, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("AR9SX"), 36, 10);
             _center = new Vec2(18f, 5f);
             _collisionOffset = new Vec2(-18f, -5f);
             _collisionSize = new Vec2(36f, 10f);
@@ -49,15 +45,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }
 #endif

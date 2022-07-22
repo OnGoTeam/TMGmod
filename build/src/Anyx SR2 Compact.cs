@@ -12,10 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class VSK94 : BaseAr, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 1;
-
-        private readonly SpriteMap _sprite;
-
         private float _floatingKickforce;
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
         [UsedImplicitly] public float HandAngleOffState;
@@ -33,9 +29,7 @@ namespace TMGmod
             _kickForce = 5.4f;
             KforceDelta = 1.45f;
             
-            _sprite = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("Anyx SR2 Compact"), 32, 10);
             _center = new Vec2(11f, 5f);
             _collisionOffset = -_center;
             _collisionSize = new Vec2(32f, 10f);
@@ -69,15 +63,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 7, 8 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {

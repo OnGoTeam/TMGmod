@@ -10,7 +10,9 @@ namespace TMGmod.Core.AmmoTypes
     {
         public AT9mmParabellum() //This is the SMG9 selfAT
         {
-            penetration = 1f;
+            accuracy = .9f;
+            penetration = .4f;
+            range = 300f;
             bulletSpeed = 46f;
             bulletThickness = 0.8f;
             bulletLength = 15f;

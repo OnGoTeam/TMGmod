@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -10,14 +9,9 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     public class BarretM98 : BaseBolt, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("BarretM98"), 50, 13);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("BarretM98"), 50, 13);
             _center = new Vec2(25f, 7f);
             _collisionOffset = new Vec2(-25f, -7f);
             _collisionSize = new Vec2(50f, 13f);
@@ -38,16 +32,6 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         protected override void OnInitialize()
         {
             _ammoType.penetration = 4f;
@@ -55,24 +39,12 @@ namespace TMGmod
             base.OnInitialize();
         }
 
-        protected override bool HasLaser()
-        {
-            return false;
-        }
+        protected override bool HasLaser() => false;
 
-        protected override float MaxAngle()
-        {
-            return 0.1f;
-        }
+        protected override float MaxAngle() => 0.1f;
 
-        protected override float MaxOffset()
-        {
-            return 4.0f;
-        }
+        protected override float MaxOffset() => 4.0f;
 
-        protected override float ReloadSpeed()
-        {
-            return .4f;
-        }
+        protected override float ReloadSpeed() => .4f;
     }
 }

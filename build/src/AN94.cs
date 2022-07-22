@@ -13,19 +13,13 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseGun, IAmAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        private readonly SpriteMap _sprite;
-
         [UsedImplicitly] public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
 
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("AN94"), 33, 9);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("AN94"), 33, 9);
             _center = new Vec2(16f, 5f);
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(33f, 9f);
@@ -58,7 +52,7 @@ namespace TMGmod
         [UsedImplicitly]
         public bool Laserrod
         {
-            get => _sprite.frame < 10;
+            get => NonSkin == 0;
             set
             {
                 if (value)
@@ -66,7 +60,7 @@ namespace TMGmod
                     loseAccuracy = 0.15f;
                     _fireWait = 1.5f;
                     maxAccuracyLost = 0.45f;
-                    _sprite.frame %= 10;
+                    NonSkin = 0;
                     laserSight = false;
                 }
                 else
@@ -74,24 +68,13 @@ namespace TMGmod
                     loseAccuracy = 0.1f;
                     _fireWait = 2.5f;
                     maxAccuracyLost = 0.1f;
-                    _sprite.frame %= 10;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     laserSight = true;
                 }
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

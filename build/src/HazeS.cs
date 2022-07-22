@@ -13,9 +13,6 @@ namespace TMGmod
     [EditorGroup("TMG|Handgun|Fully-Automatic")]
     public class HazeS : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         private float _heatval;
 
         private bool _sighted;
@@ -27,10 +24,7 @@ namespace TMGmod
         {
             ammo = 26;
             _ammoType = new ATHazeS();
-            
-            _sprite = new SpriteMap(GetPath("HazeS"), 24, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("HazeS"), 24, 12);
             _center = new Vec2(12f, 3f);
             _collisionOffset = new Vec2(-12f, -3f);
             _collisionSize = new Vec2(24f, 12f);
@@ -74,16 +68,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

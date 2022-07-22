@@ -12,15 +12,12 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Urbana : BaseBolt, IHaveAllowedSkins, ISwitchBipods
     {
-        private const int NonSkinFrames = 4;
-
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
-        private readonly SpriteMap _sprite;
 
         public Urbana(float xval, float yval) : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("Urbana"), 53, 15);
-            _graphic = _sprite;
+            NonSkinFrames = 4;
+            Smap = new SpriteMap(GetPath("Urbana"), 53, 15);
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
             _center = new Vec2(27f, 8f);
@@ -88,15 +85,6 @@ namespace TMGmod
 
         public float BipodSpeed => 1f / 20f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         protected override void OnInitialize()
         {
@@ -114,8 +102,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 +
-                      10 * (this.BipodsDeployed() ? 3 : this.BipodsFolded() ? 0 : BipodsState < .5f ? 1 : 2);
+            NonSkin = this.BipodsDeployed() ? 3 : this.BipodsFolded() ? 0 : BipodsState < .5f ? 1 : 2;
         }
 
 

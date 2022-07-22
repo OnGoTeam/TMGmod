@@ -31,7 +31,7 @@ namespace TMGmod.Useless_or_deleted_Guns
                 penetration = 5f,
             };
             _type = "gun";
-            graphic = new Sprite(GetPath("RaidGun"));
+            _graphic = new Sprite(GetPath("RaidGun"));
             center = new Vec2(12f, 3f);
             collisionOffset = new Vec2(-12f, -3f);
             collisionSize = new Vec2(24f, 6f);

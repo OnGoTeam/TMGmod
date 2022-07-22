@@ -9,6 +9,8 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATCalico()
         {
+            range = 40f;
+            rangeVariation = 30f;
             accuracy = 0.4f;
             penetration = 0.4f;
             bulletSpeed = 44f;

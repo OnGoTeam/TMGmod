@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
@@ -13,9 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SVU : BaseGun, IAmDmr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public SVU(float xval, float yval)
             : base(xval, yval)
         {
@@ -23,10 +19,7 @@ namespace TMGmod
             _ammoType = new ATSVU();
             MaxAccuracy = _ammoType.accuracy;
             MinAccuracy = 0.2f;
-            
-            _sprite = new SpriteMap(GetPath("SVU"), 37, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("SVU"), 37, 11);
             _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
@@ -52,15 +45,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

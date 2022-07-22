@@ -13,9 +13,6 @@ namespace TMGmod
     [UsedImplicitly]
     public class M900 : BaseGun, IAmSmg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public M900(float xval, float yval)
             : base(xval, yval)
         {
@@ -25,10 +22,7 @@ namespace TMGmod
                 range = Rando.Float(10f, 70f),
             };
             MaxAccuracy = 0.4f;
-            
-            _sprite = new SpriteMap(GetPath("M900"), 27, 7);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("M900"), 27, 7);
             _center = new Vec2(18f, 4f);
             _collisionOffset = new Vec2(-18f, -4f);
             _collisionSize = new Vec2(27f, 7f);
@@ -51,16 +45,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void OnHoldAction()
         {

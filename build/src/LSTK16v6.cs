@@ -13,10 +13,7 @@ namespace TMGmod
     [UsedImplicitly]
     public class Lstk16V6 : BaseGun, IHaveAllowedSkins, ISwitchBipods
     {
-        private const int NonSkinFrames = 9;
-
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
-        private readonly SpriteMap _sprite;
 
         public Lstk16V6(float xval, float yval) : base(xval, yval)
         {
@@ -25,10 +22,8 @@ namespace TMGmod
             BipOn = GetPath("sounds/beepods1");
             _ammoType = new ATM16();
             MaxAccuracy = 0.91f;
-            
-            _sprite = new SpriteMap(GetPath("LSTK16v6"), 33, 14);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 9;
+            Smap = new SpriteMap(GetPath("LSTK16v6"), 33, 14);
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-17f, -7f);
             _collisionSize = new Vec2(33f, 14f);
@@ -92,19 +87,10 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 30 + 30 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
+            NonSkin = NonSkin % 3 + 3 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
         }
     }
 }

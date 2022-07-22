@@ -13,9 +13,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class M16LMG : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public M16LMG(float xval, float yval)
             : base(xval, yval)
         {
@@ -26,10 +23,7 @@ namespace TMGmod
                 accuracy = 0.8f,
                 penetration = 1.5f,
             };
-            
-            _sprite = new SpriteMap(GetPath("M16LMG"), 38, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("M16LMG"), 38, 11);
             _center = new Vec2(19f, 6f);
             _collisionOffset = new Vec2(-19f, -6f);
             _collisionSize = new Vec2(38f, 11f);
@@ -61,14 +55,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {

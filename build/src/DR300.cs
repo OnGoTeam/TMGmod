@@ -12,10 +12,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DR300 : BaseDmr, IAmAr, IHaveAllowedSkins
     {
-        private const int Postframe = 8;
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         public DR300(float xval, float yval)
             : base(xval, yval)
         {
@@ -27,10 +23,9 @@ namespace TMGmod
             MinAccuracy = 0.65f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.2f;
-            
-            _sprite = new SpriteMap(GetPath("DR300"), 37, 11);
-            _graphic = _sprite;
-            _sprite.frame = Postframe;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("DR300"), 37, 11);
+            SkinValue = 8;
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
@@ -62,21 +57,18 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 3, 8 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public override void Update()
         {
-            if ((PostRounds == 20) & !((_sprite.frame > 9) & (_sprite.frame < 20)))
-                _sprite.frame = 10 + _sprite.frame % 10;
-            if ((PostRounds == 30) & (_sprite.frame < 19)) _sprite.frame = 20 + _sprite.frame % 10;
+            switch (PostRounds)
+            {
+                case 20:
+                    NonSkin = 1;
+                    break;
+                case 30:
+                    NonSkin = 2;
+                    break;
+            }
+
             base.Update();
         }
 
@@ -97,7 +89,7 @@ namespace TMGmod
             }
 
             ammo = PostRounds;
-            _sprite.frame = Rounds.value * 10 + _sprite.frame % 10;
+            NonSkin = Rounds.value;
             base.EditorPropertyChanged(property);
         }
     }

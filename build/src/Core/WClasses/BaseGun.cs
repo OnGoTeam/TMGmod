@@ -17,8 +17,45 @@ using System.Linq;
 
 namespace TMGmod.Core.WClasses
 {
-    public abstract class BaseGun : Gun, ISupportEnablingSkins
+    public abstract class BaseGun : Gun, ISupportEnablingSkins, IHaveFrameId
     {
+        protected int NonSkinFrames = 1;
+        protected int SkinFrames = 10;
+        private SpriteMap _smap;
+
+        protected SpriteMap Smap
+        {
+            get => _smap;
+            set => _graphic = _smap = value;
+        }
+
+        private void SetNonSkin(int nonSkin)
+        {
+            FrameId = FrameId % SkinFrames + SkinFrames * nonSkin;
+        }
+
+        protected int NonSkin
+        {
+            get => FrameId / SkinFrames;
+            set => SetNonSkin(value);
+        }
+
+        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
+
+        public int FrameId
+        {
+            get => Smap.frame;
+            set
+            {
+                SetSpriteMapFrameId(Smap, value, SkinFrames * NonSkinFrames);
+                UpdateFrameId(value);
+            }
+        }
+
+        protected virtual void UpdateFrameId(int frameId)
+        {
+        }
+
         private const float
             PresentChancePercentage =
                 0.5f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
@@ -39,6 +76,7 @@ namespace TMGmod.Core.WClasses
 
         protected BaseGun(float xval, float yval) : base(xval, yval)
         {
+            _graphic = Smap;
             _type = "gun";
             ToPrevKforce = true;
             _baseActiveModifier = DefaultModifier();
@@ -305,8 +343,7 @@ namespace TMGmod.Core.WClasses
         [PublicAPI]
         public static void SetSpriteMapFrameId(SpriteMap sm, int value, int m)
         {
-            value = (value % m + m) % m;
-            sm.frame = value;
+            sm.frame = (value % m + m) % m;
         }
 
         public override void Draw()

@@ -13,9 +13,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SKS : BaseGun, IHaveAllowedSkins, I5
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         private int _bullets;
         private int _patrons = 12;
 
@@ -36,10 +33,7 @@ namespace TMGmod
             };
             MaxAccuracy = 0.97f;
             MinAccuracy = 0.6f;
-            
-            _sprite = new SpriteMap(GetPath("SKS"), 46, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("SKS"), 46, 11);
             _center = new Vec2(23f, 6f);
             _collisionOffset = new Vec2(-23f, -6f);
             _collisionSize = new Vec2(46f, 11f);
@@ -63,16 +57,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Update()
         {

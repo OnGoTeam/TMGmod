@@ -14,12 +14,9 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Lynx : BaseGun, IAmDmr, IHaveAllowedSkins, I5, ISwitchBipods
     {
-        private const int NonSkinFrames = 4;
-
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
 
         private readonly LoseAccuracy _loseAccuracy = new LoseAccuracy(0.6f, 0.01f, 1f);
-        private readonly SpriteMap _sprite;
 
         public Lynx(float xval, float yval)
             : base(xval, yval)
@@ -30,10 +27,8 @@ namespace TMGmod
             _ammoType = new ATLynx();
             MaxAccuracy = 1f;
             MinAccuracy = 0.3f;
-            
-            _sprite = new SpriteMap(GetPath("Lynx"), 31, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 4;
+            Smap = new SpriteMap(GetPath("Lynx"), 31, 11);
             _center = new Vec2(14f, 5.5f);
             _collisionOffset = new Vec2(-14.5f, -5.5f);
             _collisionSize = new Vec2(31f, 11f);
@@ -102,14 +97,6 @@ namespace TMGmod
 
         public float BipodSpeed => 1f / 8f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 5 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         private void UpdateStats()
         {
@@ -125,8 +112,7 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 10 +
-                      10 * (this.BipodsDeployed() ? 3 : this.BipodsFolded() ? 0 : BipodsState < 0.5f ? 1 : 2);
+            NonSkin = this.BipodsDeployed() ? 3 : this.BipodsFolded() ? 0 : BipodsState < 0.5f ? 1 : 2;
         }
     }
 }

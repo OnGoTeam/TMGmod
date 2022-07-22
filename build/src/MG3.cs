@@ -13,10 +13,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MG3 : BaseLmg, IHaveAllowedSkins, I5, ISwitchBipods
     {
-        private const int NonSkinFrames = 6;
-
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
-        private readonly SpriteMap _sprite;
 
         public MG3(float xval, float yval)
             : base(xval, yval)
@@ -24,10 +21,8 @@ namespace TMGmod
             ammo = 80;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
-
-            _sprite = new SpriteMap(GetPath("mg3"), 39, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 6;
+            Smap = new SpriteMap(GetPath("mg3"), 39, 11);
             _center = new Vec2(19.5f, 5.5f);
             _collisionOffset = new Vec2(-19.5f, -5.5f);
             _collisionSize = new Vec2(39f, 11f);
@@ -86,14 +81,6 @@ namespace TMGmod
 
         public float BipodSpeed => 1f / 15f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         protected override void OnInitialize()
         {
@@ -113,12 +100,12 @@ namespace TMGmod
 
         private void UpdateFrames()
         {
-            FrameId = FrameId % 20 + 20 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
+            NonSkin = NonSkin % 2 + 2 * (this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1);
         }
 
         public override void Update()
         {
-            if (ammo == 0 && FrameId % 20 >= 0 && FrameId % 20 < 10) FrameId += 10;
+            if (ammo == 0 && NonSkin % 2 == 0) NonSkin += 1;
             base.Update();
         }
     }

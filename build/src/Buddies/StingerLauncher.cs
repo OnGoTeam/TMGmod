@@ -11,7 +11,8 @@ namespace TMGmod.Buddies
     {
         public StingerLauncher(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new SpriteMap(GetPath("deleteco/Future/Stinger.png"), 42, 10) { frame = 0 };
+            SkinFrames = 1;
+            Smap = new SpriteMap(GetPath("deleteco/Future/Stinger.png"), 42, 10) { frame = 0 };
             _center = new Vec2(21f, 5f);
             _collisionOffset = new Vec2(-21f, -5f);
             _collisionSize = new Vec2(42f, 10f);

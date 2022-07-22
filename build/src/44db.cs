@@ -12,9 +12,6 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Break-Action|")]
     public class Deadly44 : BaseGun, IAmSg, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Deadly44(float xval, float yval)
             : base(xval, yval)
         {
@@ -22,9 +19,7 @@ namespace TMGmod
             _ammoType = new AT12Gauge();
             MaxAccuracy = 0.1f;
             _numBulletsPerFire = 44;
-            _sprite = new SpriteMap(GetPath("44db"), 33, 10);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("44db"), 33, 10);
             _center = new Vec2(16.5f, 5f);
             _collisionOffset = new Vec2(-16.5f, -5f);
             _collisionSize = new Vec2(33f, 10f);
@@ -41,15 +36,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public override void Reload(bool shell = true)
         {

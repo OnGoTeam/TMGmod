@@ -12,14 +12,9 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MSR : BaseBolt, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public MSR(float xval, float yval) : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("MSR"), 47, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("MSR"), 47, 12);
             _center = new Vec2(24f, 6f);
             _collisionOffset = new Vec2(-24f, -6f);
             _collisionSize = new Vec2(47f, 12f);
@@ -46,15 +41,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 9 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {

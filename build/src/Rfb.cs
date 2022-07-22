@@ -9,9 +9,6 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Combined")]
     public class Rfb : BaseAr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 2;
-        private readonly SpriteMap _sprite;
-
         public Rfb(float xval, float yval)
             : base(xval, yval)
         {
@@ -21,10 +18,8 @@ namespace TMGmod
                 range = 380f,
                 accuracy = 0.9f,
             };
-            
-            _sprite = new SpriteMap(GetPath("RFB"), 33, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 2;
+            Smap = new SpriteMap(GetPath("RFB"), 33, 11);
             _center = new Vec2(17f, 5f);
             _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 11f);
@@ -48,15 +43,6 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public override void Update()
         {
             if (duck?.inputProfile.Pressed("QUACK") == true)
@@ -64,7 +50,7 @@ namespace TMGmod
                 if (_fullAuto)
                 {
                     _fullAuto = false;
-                    _sprite.frame -= 10;
+                    NonSkin = 0;
                     _fireWait = 0.46f;
                     maxAccuracyLost = 0.3f;
                     _ammoType.accuracy = 0.9f;
@@ -72,7 +58,7 @@ namespace TMGmod
                 else
                 {
                     _fullAuto = true;
-                    _sprite.frame += 10;
+                    NonSkin = 1;
                     _fireWait = 0.79f;
                     maxAccuracyLost = 0.45f;
                     _ammoType.accuracy = 0.6f;

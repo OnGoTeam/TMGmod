@@ -11,19 +11,14 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MG44 : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
-        private const int NonSkinFrames = 3;
-        private readonly SpriteMap _sprite;
-
         public MG44(float xval, float yval)
             : base(xval, yval)
         {
             ammo = 60;
             _ammoType = new ATMG44();
             MaxAccuracy = 0.75f;
-            
-            _sprite = new SpriteMap(GetPath("MG44 Mark2H"), 39, 11);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 3;
+            Smap = new SpriteMap(GetPath("MG44 Mark2H"), 39, 11);
             _center = new Vec2(20f, 6f);
             _collisionOffset = new Vec2(-20f, -6f);
             _collisionSize = new Vec2(39f, 11f);
@@ -51,14 +46,6 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 6, 7 });
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
 
         public bool Bipods
         {
@@ -82,10 +69,10 @@ namespace TMGmod
             switch (ammo)
             {
                 case 1:
-                    if (_sprite.frame < 10) _sprite.frame += 10;
+                    NonSkin = 1;
                     break;
                 case 0:
-                    if (_sprite.frame < 20) _sprite.frame += 10;
+                    NonSkin = 2;
                     break;
             }
         }

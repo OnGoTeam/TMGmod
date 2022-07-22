@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -11,15 +10,10 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DTSR44 : BaseBolt, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public DTSR44(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("DT SR-44"), 29, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("DT SR-44"), 29, 12);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(29f, 12f);
@@ -41,39 +35,18 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
 
-        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         protected override void OnInitialize()
         {
             _ammoType.range = 713f;
             base.OnInitialize();
         }
 
-        protected override bool HasLaser()
-        {
-            return false;
-        }
+        protected override bool HasLaser() => false;
 
-        protected override float MaxAngle()
-        {
-            return 0.1f;
-        }
+        protected override float MaxAngle() => 0.1f;
 
-        protected override float MaxOffset()
-        {
-            return -4.0f;
-        }
+        protected override float MaxOffset() => -4.0f;
 
-        protected override float ReloadSpeed()
-        {
-            return 1f;
-        }
+        protected override float ReloadSpeed() => 1f;
     }
 }

@@ -11,9 +11,6 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class Ksg12 : BasePumpAction, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Ksg12(float xval, float yval)
             : base(xval, yval)
         {
@@ -21,8 +18,7 @@ namespace TMGmod
             _ammoType = new ATKSG12();
             _numBulletsPerFire = 8;
             
-            _sprite = new SpriteMap(GetPath("KSG12"), 36, 11);
-            _graphic = _sprite;
+            Smap = new SpriteMap(GetPath("KSG12"), 36, 11);
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(36f, 11f);
@@ -44,19 +40,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set
-            {
-                SetSpriteMapFrameId(_sprite, value, 10 * NonSkinFrames);
-                SetSpriteMapFrameId(LoaderSprite, value, 10);
-            }
-        }
     }
 }

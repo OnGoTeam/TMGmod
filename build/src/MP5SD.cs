@@ -16,10 +16,7 @@ namespace TMGmod
             IncreasedAccuracy = 0.92f;
             DecreasedAccuracy = 0.77f;
             MaxAccuracy = DecreasedAccuracy;
-            
-            Texture = new SpriteMap(GetPath("MP5SD"), 31, 12);
-            _graphic = Texture;
-            Texture.frame = 0;
+            Smap = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(15.5f, 6f);
             _collisionOffset = new Vec2(-15.5f, -6f);

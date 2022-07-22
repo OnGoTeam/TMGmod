@@ -9,18 +9,16 @@ using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
+    [UsedImplicitly]
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
     public class Yava6 : BaseGun, IAmDmr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Yava6(float xval, float yval)
             : base(xval, yval)
         {
             _editorName = "Yava 6";
-            _graphic = _sprite = new SpriteMap(GetPath("Yava 6"), 37, 13) { frame = 0 };
+            Smap = new SpriteMap(GetPath("Yava 6"), 37, 13);
             _center = new Vec2(19f, 7f);
             _collisionOffset = new Vec2(-19f, -7f);
             _collisionSize = new Vec2(37f, 13f);
@@ -47,15 +45,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

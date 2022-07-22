@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -10,9 +9,6 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     public class Arx200 : BaseDmr, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public Arx200(float xval, float yval)
             : base(xval, yval)
         {
@@ -23,9 +19,7 @@ namespace TMGmod
             RegenAccuracyDmr = 0.009f;
             DrainAccuracyDmr = 0.1f;
             
-            _sprite = new SpriteMap(GetPath("ARX200"), 33, 14);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("ARX200"), 33, 14);
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-17f, -7f);
             _collisionSize = new Vec2(33f, 14f);
@@ -47,15 +41,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 6, 7, 9 });
-
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
     }
 }

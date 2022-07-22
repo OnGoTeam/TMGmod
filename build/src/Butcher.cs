@@ -12,10 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Butcher : BaseLmg, IHaveAllowedSkins, MagBuddy.ISupportReload
     {
-        private const int NonSkinFrames = 12;
-
         private readonly MagBuddy _magBuddy;
-        private readonly SpriteMap _sprite;
         private float _debris = 1f;
         private bool _onemoreclick = true;
         [UsedImplicitly] public byte Mags = 2;
@@ -28,10 +25,8 @@ namespace TMGmod
             ammo = 60;
             _ammoType = new ATButcher();
             IntrinsicAccuracy = true;
-            
-            _sprite = new SpriteMap(GetPath("Solaris Butcher"), 24, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            NonSkinFrames = 12;
+            Smap = new SpriteMap(GetPath("Solaris Butcher"), 24, 12);
             _center = new Vec2(12f, 6f);
             _collisionOffset = new Vec2(-12f, -6f);
             _collisionSize = new Vec2(24f, 12f);
@@ -57,16 +52,6 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
-        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        [UsedImplicitly]
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         public bool SetMag()
         {
             if (Mags <= 0) return false;
@@ -74,7 +59,7 @@ namespace TMGmod
             if (_onemoreclick)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
-                //_sprite.frame = 3;
+                //NonSkin = 3;
                 _wait += 5f;
                 return _onemoreclick = false;
             }
@@ -88,16 +73,16 @@ namespace TMGmod
         public bool DropMag(Thing mag)
         {
             SFX.Play(GetPath("sounds/tuduc.wav"));
-            //switch (_sprite.frame)
+            //switch (NonSkin)
             //{
             //    case 0:
-            //        _sprite.frame += 1;
+            //        NonSkin += 1;
             //        break;
             //    case 3:
-            //        _sprite.frame = 2;
+            //        NonSkin = 2;
             //        break;
             //    default:
-            //        _sprite.frame = 1;
+            //        NonSkin = 1;
             //        break;
             //}
 
@@ -112,7 +97,7 @@ namespace TMGmod
             if (ammoType.barrelAngleDegrees > 5f) _debris = -1f;
             if (ammoType.barrelAngleDegrees < -5f) _debris = 1f;
             if (ammo <= 0) _magBuddy.Disload();
-            //if (ammo <= 0 && Mags <= 0) _sprite.frame = 2;
+            //if (ammo <= 0 && Mags <= 0) NonSkin = 2;
             base.Update();
         }
 

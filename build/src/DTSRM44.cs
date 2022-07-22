@@ -9,18 +9,14 @@ using TMGmod.Core.WClasses.ClassImplementations;
 namespace TMGmod
 {
     [EditorGroup("TMG|NOTRELEASEDYET")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class DTSRM44 : BaseBolt, IHaveAllowedSkins
     {
-        private const int NonSkinFrames = 1;
-        private readonly SpriteMap _sprite;
-
         public DTSRM44(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("DT SRM-44"), 37, 12);
-            _graphic = _sprite;
-            _sprite.frame = 0;
+            Smap = new SpriteMap(GetPath("DT SRM-44"), 37, 12);
             _center = new Vec2(19f, 6f);
             _collisionOffset = new Vec2(-19f, -6f);
             _collisionSize = new Vec2(37f, 12f);
@@ -43,40 +39,19 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
-        [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
-
-        public int FrameId
-        {
-            get => _sprite.frame;
-            set => _sprite.frame = value % (10 * NonSkinFrames);
-        }
-
         protected override void OnInitialize()
         {
             _ammoType.range = 889f;
             base.OnInitialize();
         }
 
-        protected override bool HasLaser()
-        {
-            return true;
-        }
+        protected override bool HasLaser() => true;
 
-        protected override float MaxAngle()
-        {
-            return 0.1f;
-        }
+        protected override float MaxAngle() => 0.1f;
 
-        protected override float MaxOffset()
-        {
-            return 4.0f;
-        }
+        protected override float MaxOffset() => 4.0f;
 
-        protected override float ReloadSpeed()
-        {
-            return .5f;
-        }
+        protected override float ReloadSpeed() => .5f;
     }
 }
 #endif
