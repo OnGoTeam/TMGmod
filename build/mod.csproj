@@ -91,6 +91,7 @@
     <Compile Include="src\Core\Modifiers\Firing\Charging.cs" />
     <Compile Include="src\Core\Modifiers\Firing\IModifyFire.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />
+    <Compile Include="src\Core\Modifiers\Updating\SwitchingModes.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveAllowedSkins.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveFrameId.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveSpriteBase.cs" />
