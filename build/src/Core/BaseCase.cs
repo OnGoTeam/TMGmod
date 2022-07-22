@@ -59,7 +59,7 @@ namespace TMGmod.Core
 
         protected virtual void Spawned(Holdable thing)
         {
-            if (thing is IHaveSkin skinThing) skinThing.FrameId = CaseId;
+            if (thing is IHaveSkin skinThing) skinThing.SkinValue = CaseId;
         }
     }
 }
