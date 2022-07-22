@@ -31,7 +31,7 @@ namespace TMGmod
         private readonly SpriteMap _sprite;
 
         private readonly Vec2[] _barrelOffsetTLm = { new Vec2(16f, 2f), new Vec2(14f, 6f) };
-        private readonly string[] _fireSoundm = { "sounds/1.wav", "littleGun" };
+        private readonly string[] _fireSoundm = { Mod.GetPath<Core.TMGmod>("sounds/1.wav"), "littleGun" };
 
         private readonly float[] _loseAccuracym = { .1f, 0f };
         private readonly float[] _maxAccuracyLostm = { .55f, 0f };
@@ -40,24 +40,16 @@ namespace TMGmod
         public PMR(float xval, float yval)
             : base(xval, yval)
         {
-            _ammoType = _ammoTypem[0];
-            _numBulletsPerFire = 1;
-
             _sprite = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
             _graphic = _sprite;
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
-            _barrelOffsetTL = new Vec2(16f, 2f);
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-2f, -3f);
-            _fireSound = GetPath("sounds/1.wav");
-            _fireSoundm[0] = _fireSound;
             _fullAuto = false;
             _fireWait = 0.5f;
             _kickForce = 1.67f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.5f;
             _editorName = "PMR30 Shotgunned";
             _weight = 1f;
             Compose(
