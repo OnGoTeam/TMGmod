@@ -14,57 +14,57 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class PMR : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private readonly AmmoType[] _ammoTypem =
-        {
-            new ATPMR30(),
-            new AT12Gauge
-            {
-                range = 110f,
-                accuracy = 0.35f,
-                penetration = 2f,
-                bulletSpeed = 50f,
-                DamageMean = 15f,
-            },
-        };
-
         private const int NonSkinFrames = 3;
         private readonly SpriteMap _sprite;
-
-        private readonly Vec2[] _barrelOffsetTLm = { new Vec2(16f, 2f), new Vec2(14f, 6f) };
-        private readonly string[] _fireSoundm = { Mod.GetPath<Core.TMGmod>("sounds/1.wav"), "littleGun" };
-
-        private readonly float[] _loseAccuracym = { .1f, 0f };
-        private readonly float[] _maxAccuracyLostm = { .55f, 0f };
-        private readonly int[] _numBulletsPerFirem = { 1, 16 };
 
         public PMR(float xval, float yval)
             : base(xval, yval)
         {
-            _sprite = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
-            _graphic = _sprite;
+            _editorName = "PMR30 Shotgunned";
+
+            _graphic = _sprite = new SpriteMap(GetPath("PMR30Custom"), 16, 10);
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
             _holdOffset = new Vec2(0f, 2f);
+            var barrelOffsetTLm = new[] { new Vec2(16f, 2f), new Vec2(14f, 6f) };
             ShellOffset = new Vec2(-2f, -3f);
-            _fullAuto = false;
+
+            var ammom = new[] { 30, 1 };
+            var ammoTypem = new AmmoType[]
+            {
+                new ATPMR30(),
+                new AT12Gauge
+                {
+                    range = 110f,
+                    accuracy = 0.35f,
+                    penetration = 2f,
+                    bulletSpeed = 50f,
+                    DamageMean = 15f,
+                },
+            };
+            var numBulletsPerFirem = new[] { 1, 16 };
             _fireWait = 0.5f;
+            var loseAccuracym = new[] { .1f, 0f };
+            var maxAccuracyLostm = new[] { .55f, 0f };
             _kickForce = 1.67f;
-            _editorName = "PMR30 Shotgunned";
             _weight = 1f;
+
+            var fireSoundm = new[] { Mod.GetPath<Core.TMGmod>("sounds/1.wav"), "littleGun" };
+
             Compose(
                 new SwitchingModes(
                     this,
-                    new[] { 30, 1 },
+                    ammom,
                     mode =>
                     {
                         FrameId = FrameId % 10 + 10 * (1 + mode);
-                        _ammoType = _ammoTypem[mode];
-                        _barrelOffsetTL = _barrelOffsetTLm[mode];
-                        _fireSound = _fireSoundm[mode];
-                        loseAccuracy = _loseAccuracym[mode];
-                        maxAccuracyLost = _maxAccuracyLostm[mode];
-                        _numBulletsPerFire = _numBulletsPerFirem[mode];
+                        _ammoType = ammoTypem[mode];
+                        _barrelOffsetTL = barrelOffsetTLm[mode];
+                        _fireSound = fireSoundm[mode];
+                        loseAccuracy = loseAccuracym[mode];
+                        maxAccuracyLost = maxAccuracyLostm[mode];
+                        _numBulletsPerFire = numBulletsPerFirem[mode];
                     },
                     () => FrameId %= 10
                 )
