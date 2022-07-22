@@ -75,7 +75,6 @@ namespace TMGmod
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
 
-
         public int FrameId
         {
             get => _sprite.frame;
