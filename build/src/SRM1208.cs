@@ -3,14 +3,14 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses.ClassImplementations;
+using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Burst")]
     // ReSharper disable once InconsistentNaming
-    public class SRM1208 : BaseBurst, IAmSg, IHaveAllowedSkins
+    public class SRM1208 : BaseGun, IAmSg, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 2;
         private readonly SpriteMap _sprite;
@@ -59,8 +59,7 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 1f);
             _editorName = "SRM 1208";
             _weight = 4.5f;
-            DeltaWait = 1f;
-            BurstNum = 2;
+            ComposeSimpleBurst(2, 1f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 5, 8 });

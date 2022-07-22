@@ -3,7 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -42,7 +41,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "M93R";
             _weight = 2f;
-            Compose(new Burst(this, true, 3, .3f));
+            ComposeSimpleBurst(3, .3f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5 });

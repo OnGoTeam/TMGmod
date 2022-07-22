@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers.Accuracy;
-using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -95,7 +94,7 @@ namespace TMGmod
         {
             ammo = 35;
             material = new MaterialGlitch(this);
-            Compose(new Burst(this, true, 5, 1f));
+            ComposeSimpleBurst(5, 1f);
         }
     }
 }

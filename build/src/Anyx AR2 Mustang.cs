@@ -2,7 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -47,9 +46,9 @@ namespace TMGmod
             _editorName = "Anyx AR2 Mustang";
             _weight = 5.5f;
             Compose(
-                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f),
-                new Burst(this, true, 2, .07f)
+                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f)
             );
+            ComposeSimpleBurst(2, .07f);
         }
 
         protected override string HintMessage => "silencer";

@@ -2,7 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -51,9 +50,9 @@ namespace TMGmod
             laserSight = false;
             _laserOffsetTL = new Vec2(30f, 2.5f);
             Compose(
-                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f),
-                new Burst(this, true, 2, .07f)
+                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f)
             );
+            ComposeSimpleBurst(2, .07f);
         }
 
         [UsedImplicitly]
