@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -8,6 +9,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Bolt-Action")]
     [BaggedProperty("isSuperWeapon", true)]
+    [UsedImplicitly]
     public sealed class X3X : BaseGun, IHaveAllowedSkins
     {
         private const int NonSkinFrames = 3;
