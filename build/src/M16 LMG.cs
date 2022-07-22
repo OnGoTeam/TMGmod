@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
@@ -8,6 +9,7 @@ using TMGmod.Core.WClasses.ClassImplementations;
 namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class M16LMG : BaseLmg, IHaveAllowedSkins, IHaveBipods
     {
