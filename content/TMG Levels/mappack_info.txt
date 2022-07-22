@@ -1,0 +1,4 @@
+TMG Levels
+EXsess
+Edit info.txt to change this information!
+<add a 1280x720 PNG file called 'screenshot.png' to set a custom workshop image!>
