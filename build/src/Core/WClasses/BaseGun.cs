@@ -441,7 +441,7 @@ namespace TMGmod.Core.WClasses
                     new ContextMenu(subMenu)
                     {
                         text = characteristic,
-                        itemSize = new Vec2(Graphics.GetStringWidth(characteristic) + 8f, 16f)
+                        itemSize = new Vec2(Graphics.GetStringWidth(characteristic) + 8f, 16f),
                     }
                 );
             contextMenu.AddItem(subMenu);
