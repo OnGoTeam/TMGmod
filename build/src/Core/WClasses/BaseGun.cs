@@ -435,7 +435,29 @@ namespace TMGmod.Core.WClasses
                 }
             }
 
+            ContextMenu subMenu = new EditorGroupMenu(contextMenu) { text = "Characteristics" };
+            foreach (var characteristic in Characteristics())
+                subMenu.AddItem(
+                    new ContextMenu(subMenu)
+                    {
+                        text = characteristic,
+                        itemSize = new Vec2(Graphics.GetStringWidth(characteristic) + 8f, 16f)
+                    }
+                );
+            contextMenu.AddItem(subMenu);
             return contextMenu;
+        }
+
+        private IEnumerable<string> Characteristics()
+        {
+            var chars = new List<string>();
+            if (_ammoType != null) chars.Add($"Accuracy: {100 * _ammoType.accuracy}");
+            if (_ammoType != null) chars.Add($"Range: {_ammoType.range / 16f}");
+            if (_ammoType != null) chars.Add($"Bullet Speed: {_ammoType.bulletSpeed / 16f * 60f}");
+            if (_ammoType != null) chars.Add($"Penetration: {_ammoType.penetration}");
+            chars.Add($"Kickforce: {_kickForce}");
+            if (_fireWait > 0 && !_manualLoad && _fullAuto) chars.Add($"RPM: {Math.Round(3600 / (_fireWait / .15f))}");
+            return chars;
         }
 
         public override BinaryClassChunk Serialize()
