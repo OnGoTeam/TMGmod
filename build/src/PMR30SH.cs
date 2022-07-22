@@ -93,7 +93,12 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
+            if (duck is null)
+            {
+                Mode = 0;
+                _switched = false;
+            }
+            else if (duck.inputProfile.Pressed("QUACK"))
             {
                 Mode = 1 - Mode;
                 _switched = true;

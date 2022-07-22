@@ -13,6 +13,7 @@ namespace TMGmod
     public class ScarGL : BaseGun, IAmAr, IHaveFrameId
     {
         private const int NonSkinFrames = 3;
+
         private readonly AmmoType[] _ammoTypem =
         {
             new AT556NATO
@@ -59,7 +60,7 @@ namespace TMGmod
             ammo = 20;
             _ammoType = _ammoTypem[0];
             MaxAccuracy = 0.9f;
-            
+
             _sprite = new SpriteMap(GetPath("scargl"), 33, 10);
             _graphic = _sprite;
             _center = new Vec2(16.5f, 5f);
@@ -107,13 +108,18 @@ namespace TMGmod
         public override void Update()
         {
             if (infiniteAmmoVal) Ammom0 = 99;
-            if (duck != null)
-                if (duck.inputProfile.Pressed("QUACK"))
-                {
-                    Mode = 1 - Mode;
-                    _switched = true;
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
-                }
+            if (duck is null)
+            {
+                Mode = 0;
+                _switched = false;
+            }
+            else if (duck.inputProfile.Pressed("QUACK"))
+            {
+                Mode = 1 - Mode;
+                _switched = true;
+                SFX.Play(GetPath("sounds/tuduc.wav"));
+            }
+
 
             UpdateMode();
             base.Update();
