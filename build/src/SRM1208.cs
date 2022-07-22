@@ -15,9 +15,9 @@ namespace TMGmod
         private const int NonSkinFrames = 2;
         private readonly SpriteMap _sprite;
 
-        [UsedImplicitly] public StateBinding LddBinding = new StateBinding(nameof(Loaded));
-
         [UsedImplicitly] public bool Loaded = true;
+
+        [UsedImplicitly] public StateBinding LddBinding = new StateBinding(nameof(Loaded));
 
         [UsedImplicitly] public bool Shootwasyes;
 
@@ -27,9 +27,9 @@ namespace TMGmod
 
         [UsedImplicitly] public StateBinding YeeBinding = new StateBinding(nameof(Yee));
 
-        [UsedImplicitly] public StateBinding YeeeBinding = new StateBinding(nameof(Yeeenabled));
-
         [UsedImplicitly] public bool Yeeenabled;
+
+        [UsedImplicitly] public StateBinding YeeeBinding = new StateBinding(nameof(Yeeenabled));
 
         public SRM1208(float xval, float yval)
             : base(xval, yval)
@@ -38,7 +38,7 @@ namespace TMGmod
             _ammoType = new ATSRM1();
             MaxAccuracy = 0.6f;
             _numBulletsPerFire = 8;
-            
+
             _sprite = new SpriteMap(GetPath("SRM1208"), 29, 10);
             _graphic = _sprite;
             _sprite.frame = 0;
