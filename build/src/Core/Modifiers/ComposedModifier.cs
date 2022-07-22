@@ -38,9 +38,9 @@ namespace TMGmod.Core.Modifiers
         public static IModifyEverything Compose(params IModifyEverything[] modifiers)
         {
             return modifiers.Reverse().Aggregate(
-                Modifier.Identity(),
-                (left, right) => new ComposedModifier(left, right)
-            );
+                (IModifyEverything) null,
+                (left, right) => left is null ? right : new ComposedModifier(left, right)
+            ) ?? Modifier.Identity();
         }
 
         public void Read(BitBuffer buffer, Action read)
