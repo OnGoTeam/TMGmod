@@ -280,7 +280,6 @@
     <Compile Include="src\Cases\Heavy Millitary Case.cs" />
     <Compile Include="src\Core\BaseCase.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveSkin.cs" />
-    <Compile Include="src\Core\WClasses\ClassImplementations\BaseBurst.cs" />
     <Compile Include="src\Core\WClasses\BaseGun.cs" />
     <Compile Include="src\Core\WClasses\ClassImplementations\BaseBolt.cs" />
     <Compile Include="src\Core\WClasses\ClassImplementations\BasePumpAction.cs" />
