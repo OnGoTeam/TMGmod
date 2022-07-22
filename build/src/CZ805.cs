@@ -87,11 +87,11 @@ namespace TMGmod
                 SFX.Play("quack", -1);
             }
 
-            if (ammo > 26) NonSkin = 0;
-            else if (ammo > 20) NonSkin = 1;
-            else if (ammo > 12) NonSkin = 2;
-            else if (ammo > 5) NonSkin = 3;
-            else NonSkin = 4;
+            if (ammo > 26) NonSkin = 5 * (NonSkin / 5) + 0;
+            else if (ammo > 20) NonSkin = 5 * (NonSkin / 5) + 1;
+            else if (ammo > 12) NonSkin = 5 * (NonSkin / 5) + 2;
+            else if (ammo > 5) NonSkin = 5 * (NonSkin / 5) + 3;
+            else NonSkin = 5 * (NonSkin / 5) + 4;
             base.Update();
         }
     }
