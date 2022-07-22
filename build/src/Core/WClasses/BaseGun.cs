@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
@@ -11,7 +12,6 @@ using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
 #if FEATURE_EDITOR_SKINS
-using System.Collections.Generic;
 using System.Linq;
 #endif
 
