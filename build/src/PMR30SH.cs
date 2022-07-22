@@ -50,7 +50,7 @@ namespace TMGmod
             _kickForce = 1.67f;
             _weight = 1f;
 
-            var fireSoundm = new[] { Mod.GetPath<Core.TMGmod>("sounds/1.wav"), "littleGun" };
+            var fireSoundm = new[] { GetPath("sounds/1.wav"), "littleGun" };
 
             Compose(
                 new SwitchingModes(
@@ -65,6 +65,7 @@ namespace TMGmod
                         loseAccuracy = loseAccuracym[mode];
                         maxAccuracyLost = maxAccuracyLostm[mode];
                         _numBulletsPerFire = numBulletsPerFirem[mode];
+                        SetAccuracyAsMax();
                     },
                     () => FrameId %= 10
                 )
