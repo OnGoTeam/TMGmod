@@ -16,7 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 18;
-            _ammoType = new ATAlep30();
+            SetAmmoType<ATAlep30>();
             Smap = new SpriteMap(GetPath("Alep30"), 16, 9);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(8f, 5f);
