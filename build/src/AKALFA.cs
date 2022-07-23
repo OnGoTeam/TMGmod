@@ -19,13 +19,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new AT545NATO
-            {
-                range = 360f,
-                accuracy = 1f,
-                bulletSpeed = 60f,
-                bulletThickness = 0.87f,
-            };
+            SetAmmoType<AT545NATO>();
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("ALFA"), 38, 9);
             _center = new Vec2(19f, 5f);
@@ -47,6 +41,14 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _editorName = "Alfa";
             _weight = 5.5f;
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 360f;
+            _ammoType.bulletSpeed = 60f;
+            _ammoType.bulletThickness = .87f;
+            base.OnInitialize();
         }
 
         protected override float BaseKforce => this.StockDeployed() ? 0.65f : 1.2f;
