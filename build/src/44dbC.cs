@@ -16,8 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 2;
-            _ammoType = new AT44DB();
-            MaxAccuracy = 0.1f;
+            SetAmmoType<AT44DB>(.1f);
             _numBulletsPerFire = 44;
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("44dbTWICE"), 33, 10);

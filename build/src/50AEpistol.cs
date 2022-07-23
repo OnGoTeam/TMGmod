@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.Bullets;
+using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 7;
-            _ammoType = new AT50C();
-            MaxAccuracy = 1f;
+            SetAmmoType<AT50C>();
             MinAccuracy = 0.6f;
             Smap = new SpriteMap(GetPath("50AEPistol"), 26, 10);
             SkinValue = 1;

@@ -37,8 +37,7 @@ namespace TMGmod
             _kickForce = 4f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
-            _ammoType = new ATYava6();
-            MaxAccuracy = _ammoType.accuracy;
+            SetAmmoType<ATYava6>();
             MinAccuracy = 0.5f;
             ShellOffset = new Vec2(-13f, -4f);
             Compose(new FocusingAccuracy(this, 1f, .05f));
