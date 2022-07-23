@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.SkinLogic;
@@ -8,6 +9,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class IB8mm : BaseGun, IHaveAllowedSkins
     {

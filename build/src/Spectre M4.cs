@@ -68,7 +68,7 @@ namespace TMGmod
                     maxAccuracyLost = 0.34f;
                     _weight = 3.3f;
                     _fireSound = GetPath("sounds/smg.wav");
-                    _flare = new SpriteMap("smallFlare", 11, 10) { center = new Vec2(0.0f, 5f), };
+                    _flare = new SpriteMap("smallFlare", 11, 10) { center = new Vec2(0.0f, 5f) };
                 }
             }
         }

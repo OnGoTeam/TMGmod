@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
@@ -9,6 +10,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
+    [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class SVU : BaseGun, IAmDmr, IHaveAllowedSkins
     {

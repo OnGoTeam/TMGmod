@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
@@ -9,6 +10,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|Handgun|Burst")]
+    [UsedImplicitly]
     public class M93R : BaseGun, IAmHg, IHaveAllowedSkins, I5
     {
         public M93R(float xval, float yval)

@@ -4,7 +4,9 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
+#if DEBUG
 using TMGmod.Core.DamageLogic;
+#endif
 using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Firing;
