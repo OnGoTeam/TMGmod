@@ -15,8 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATPPK42();
-            MaxAccuracy = 0.8f;
+            SetAmmoType<ATPPK42>();
             KforceDelta = 2.5f;
             KforceDelay = 20;
             Smap = new SpriteMap(GetPath("PPK42"), 25, 11);

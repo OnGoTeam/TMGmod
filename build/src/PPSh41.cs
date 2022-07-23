@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 71;
-            _ammoType = new ATPPSH41();
-            MaxAccuracy = 0.73f;
+            SetAmmoType<ATPPSH41>();
             KforceDelta = 3f;
             KforceDelay = 50;
             Smap = new SpriteMap(GetPath("PPSH41"), 30, 8);

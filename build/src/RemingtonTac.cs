@@ -19,8 +19,7 @@ namespace TMGmod
         public RemingtonTac(float xval, float yval) : base(xval, yval)
         {
             ammo = 4;
-            _ammoType = new ATFABARM();
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATRemington>();
             _numBulletsPerFire = 6;
 
             NonSkinFrames = 3;

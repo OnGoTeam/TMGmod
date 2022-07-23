@@ -12,7 +12,7 @@ namespace TMGmod
         public Remington(float xval, float yval) : base(xval, yval)
         {
             ammo = 6;
-            _ammoType = new ATRemington();
+            SetAmmoType<ATFABARM>();
             _numBulletsPerFire = 5;
 
             Smap = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
