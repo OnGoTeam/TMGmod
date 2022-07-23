@@ -182,10 +182,13 @@ namespace TMGmod.Core.SkinLogic
         {
             var oldIndex = _imag._imageIndex;
             var oldFrame = _imag._frame;
+            var oldFlip = _imag.flipH;
             _imag._imageIndex = _imag._frame = _skin;
+            _imag.flipH = false;
             DrawStatic(_imag);
             _imag._frame = oldFrame;
             _imag._imageIndex = oldIndex;
+            _imag.flipH = oldFlip;
         }
 
         private void DrawSkin()
