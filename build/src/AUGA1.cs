@@ -18,8 +18,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 42;
-            _ammoType = new ATAUGA1();
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATAUGA1>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("AUGA1"), 30, 12);
             _center = new Vec2(15f, 6f);
@@ -53,7 +52,7 @@ namespace TMGmod
             {
                 NonSkin = value ? 1 : 0;
                 maxAccuracyLost = value ? .1f : .2f;
-                _ammoType.accuracy = value ? .97f : .80f;
+                MaxAccuracy = value ? .97f : .80f;
             }
         }
 
