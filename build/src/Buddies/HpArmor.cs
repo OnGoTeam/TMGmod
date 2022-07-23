@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core;
+using TMGmod.Core.DamageLogic;
 
 namespace TMGmod.Buddies
 {

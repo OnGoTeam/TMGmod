@@ -159,7 +159,7 @@
     <Compile Include="src\Core\AmmoTypes\ATHk417.cs" />
     <Compile Include="src\Core\AmmoTypes\ATVista.cs" />
     <Compile Include="src\Core\AmmoTypes\AT9mmParabellum.cs" />
-    <Compile Include="src\Core\IDamage.cs" />
+    <Compile Include="src\Core\DamageLogic\IDamage.cs" />
     <Compile Include="src\Core\BipodsLogic\BipodStateContainer.cs" />
     <Compile Include="src\Core\Bullets\BulletStoppedByProps.cs" />
     <Compile Include="src\Core\BipodsLogic\ICanDisableBipods.cs" />

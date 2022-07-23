@@ -1,7 +1,7 @@
 using System;
 using DuckGame;
 
-namespace TMGmod.Core
+namespace TMGmod.Core.DamageLogic
 {
     // ReSharper disable once InconsistentNaming
     public interface IDamage

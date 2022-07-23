@@ -2,7 +2,6 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
-using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 

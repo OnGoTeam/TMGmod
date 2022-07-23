@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.DamageLogic;
 
 namespace TMGmod.Core.AmmoTypes
 {
