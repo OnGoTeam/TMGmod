@@ -16,7 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 11;
-            _ammoType = new ATBersa45();
+            SetAmmoType<ATBersa45>();
             
             Smap = new SpriteMap(GetPath("Bersa45"), 12, 8);
             _center = new Vec2(6f, 4f);
