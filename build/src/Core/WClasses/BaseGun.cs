@@ -61,8 +61,6 @@ namespace TMGmod.Core.WClasses
             PresentChancePercentage =
                 0.5f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
 
-        private IModifyEverything _baseActiveModifier;
-
         private bool _currHoneInit;
         private int _skinValue;
         protected Vec2 CurrHone;
@@ -80,7 +78,7 @@ namespace TMGmod.Core.WClasses
             _graphic = Smap;
             _type = "gun";
             ToPrevKforce = true;
-            _baseActiveModifier = DefaultModifier();
+            ActiveModifier = DefaultModifier();
         }
 
         protected void SetAmmoType<T>() where T : AmmoType, new()
@@ -122,7 +120,7 @@ namespace TMGmod.Core.WClasses
             set => _holdOffset = value + ExtraHoldOffset;
         }
 
-        protected virtual IModifyEverything ActiveModifier => _baseActiveModifier;
+        private IModifyEverything ActiveModifier { get; set; }
 
         protected virtual float BaseAccuracy => MaxAccuracy;
 
@@ -158,12 +156,12 @@ namespace TMGmod.Core.WClasses
 
         protected void ResetModifier()
         {
-            _baseActiveModifier = Modifier.Identity();
+            ActiveModifier = Modifier.Identity();
         }
 
         protected void Compose(params IModifyEverything[] modifiers)
         {
-            _baseActiveModifier = _baseActiveModifier.Compose(modifiers);
+            ActiveModifier = ActiveModifier.Compose(modifiers);
         }
 
         private void SetKforce()
@@ -192,7 +190,7 @@ namespace TMGmod.Core.WClasses
             base.Fire();
         }
 
-        protected virtual void ModifiedFire()
+        private void ModifiedFire()
         {
             ActiveModifier.ModifyFire(RealFire);
         }
