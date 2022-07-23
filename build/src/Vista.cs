@@ -15,6 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             _editorName = "Vista";
+
             Smap = new SpriteMap(GetPath("Vista"), 16, 14);
             _center = new Vec2(6f, 7f);
             _collisionOffset = new Vec2(-8f, -7f);
