@@ -314,7 +314,6 @@
     <Compile Include="src\Core\Czmag.cs" />
     <Compile Include="src\Core\ExplosiveBullet.cs" />
     <Compile Include="src\Core\ExploCreator.cs" />
-    <Compile Include="src\Core\MF.cs" />
     <Compile Include="src\Core\Mod.cs" />
     <Compile Include="src\Core\Particles\BarrBetaPar.cs" />
     <Compile Include="src\44dbC.cs" />
@@ -378,7 +377,6 @@
     <Compile Include="src\SV99.cs" />
     <Compile Include="src\SVU.cs" />
     <Compile Include="src\SRM1208.cs" />
-    <Compile Include="src\Useless or deleted Guns\MAPF.cs" />
     <Compile Include="src\Useless or deleted Guns\RaidGun.cs" />
     <Compile Include="src\USP.cs" />
     <Compile Include="src\ANP-73.cs" />
