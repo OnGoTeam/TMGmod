@@ -10,9 +10,9 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class Butcher : BaseLmg, IHaveAllowedSkins, MagBuddy.ISupportReload
+    public class Butcher : BaseLmg, IHaveAllowedSkins, MagBuddy<Butcher>.ISupportReload
     {
-        private readonly MagBuddy _magBuddy;
+        private readonly MagBuddy<Butcher> _magBuddy;
         private float _debris = 1f;
         private bool _onemoreclick = true;
         [UsedImplicitly] public byte Mags = 2;
@@ -22,9 +22,8 @@ namespace TMGmod
         public Butcher(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 60;
-            _ammoType = new ATButcher();
-            IntrinsicAccuracy = true;
+            ammo = (1 + Mags) * 60;
+            SetAmmoType<ATButcher>();
             NonSkinFrames = 12;
             Smap = new SpriteMap(GetPath("Solaris Butcher"), 24, 12);
             _center = new Vec2(12f, 6f);
@@ -45,7 +44,7 @@ namespace TMGmod
             ShellOffset = new Vec2(3f, -1f);
             _editorName = "Solaris Butcher";
             _weight = 4f;
-            _magBuddy = new MagBuddy(this, typeof(ArwaMag));
+            _magBuddy = new MagBuddy<Butcher>(this, typeof(ArwaMag));
             KickForce1Lmg = 0.33f;
             KickForce2Lmg = 0.67f;
         }
@@ -65,7 +64,6 @@ namespace TMGmod
             }
 
             _onemoreclick = true;
-            ammo = 60;
             Mags -= 1;
             return true;
         }
@@ -96,14 +94,16 @@ namespace TMGmod
         {
             if (ammoType.barrelAngleDegrees > 5f) _debris = -1f;
             if (ammoType.barrelAngleDegrees < -5f) _debris = 1f;
-            if (ammo <= 0) _magBuddy.Disload();
-            //if (ammo <= 0 && Mags <= 0) NonSkin = 2;
+            if (RealAmmo <= 0) _magBuddy.Disload();
+            //if (RealAmmo <= 0 && Mags <= 0) NonSkin = 2;
             base.Update();
         }
 
         public override void Fire()
         {
+            ammo -= 60 * Mags;
             base.Fire();
+            ammo += 60 * Mags;
             ammoType.barrelAngleDegrees += _debris;
         }
 
@@ -112,10 +112,10 @@ namespace TMGmod
             base.OnReleaseAction();
             ammoType.barrelAngleDegrees = -5f;
         }
-
+        private int RealAmmo => ammo - 60 * Mags;
         public override void OnPressAction()
         {
-            if (ammo <= 0) _magBuddy.Doload();
+            if (RealAmmo <= 0) _magBuddy.Doload();
             base.OnPressAction();
         }
     }

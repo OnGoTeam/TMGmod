@@ -10,9 +10,9 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class ARwA : BaseAr, IHaveAllowedSkins, MagBuddy.ISupportReload
+    public class ARwA : BaseAr, IHaveAllowedSkins, MagBuddy<ARwA>.ISupportReload
     {
-        private readonly MagBuddy _magBuddy;
+        private readonly MagBuddy<ARwA> _magBuddy;
         private bool _onemoreclick = true;
 
         [UsedImplicitly] public byte Mags = 1;
@@ -22,7 +22,7 @@ namespace TMGmod
         public ARwA(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 60;
+            ammo = (1 + Mags) * 30;
             SetAmmoType<AT556NATO>(.85f);
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("ARW-A"), 27, 9);
@@ -43,7 +43,7 @@ namespace TMGmod
             maxAccuracyLost = 0.2f;
             _editorName = "ARwA";
             _weight = 5f;
-            _magBuddy = new MagBuddy(this, typeof(ArwaMag));
+            _magBuddy = new MagBuddy<ARwA>(this, typeof(ArwaMag));
             _kickForce = 1f;
             KforceDelta = .2f;
         }
