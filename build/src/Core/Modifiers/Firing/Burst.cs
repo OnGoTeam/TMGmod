@@ -40,7 +40,7 @@ namespace TMGmod.Core.Modifiers.Firing
                 fire();
                 return;
             }*/
-            if (_shotsLeft <= 0)
+            if (_shotsLeft <= 0 && _target._wait <= 0)
             {
                 fire();
                 if (!_enabled) return;
