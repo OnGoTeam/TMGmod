@@ -336,7 +336,7 @@ namespace TMGmod.Core.WClasses
 
         protected bool HandleQ()
         {
-            return BaseGunImplementations.HandleQ(this);
+            return HandleImplementation.HandleQ(this);
         }
 
         [PublicAPI]

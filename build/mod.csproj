@@ -185,7 +185,7 @@
     <Compile Include="src\Core\Shells\AT9mmshell.cs" />
     <Compile Include="src\Core\Shells\ATMP7shell.cs" />
     <Compile Include="src\Core\WClasses\ClassImplementations\BaseDmr.cs" />
-    <Compile Include="src\Core\WClasses\BaseGunImplementations.cs" />
+    <Compile Include="src\Core\BipodsLogic\HandleImplementation.cs" />
     <Compile Include="src\DTSRM44.cs" />
     <Compile Include="src\DTSR44.cs" />
     <Compile Include="src\SolvePoly\Poly.cs" />

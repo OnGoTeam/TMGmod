@@ -1,9 +1,9 @@
 ﻿using System;
 using DuckGame;
 
-namespace TMGmod.Core.WClasses
+namespace TMGmod.Core.BipodsLogic
 {
-    public static class BaseGunImplementations
+    public static class HandleImplementation
     {
         public static bool HandleQ(this Gun gun)
         {
