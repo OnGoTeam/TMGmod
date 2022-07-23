@@ -10,7 +10,7 @@ namespace TMGmod.Core.AmmoTypes
         public ATSR2C()
         {
             range = 560f;
-            accuracy = 0.95f;
+            accuracy = 0.9f;
             penetration = 2f;
             bulletSpeed = 55f;
             bulletThickness = 1.5f;
