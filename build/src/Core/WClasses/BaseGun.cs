@@ -129,6 +129,7 @@ namespace TMGmod.Core.WClasses
 
         protected virtual IModifyEverything ActiveModifier => _baseActiveModifier;
 
+        [Obsolete]
         protected bool IntrinsicAccuracy { get; set; }
 
         protected virtual float BaseAccuracy => MaxAccuracy;
