@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATCZ();
-            SetAccuracyAsMax();
+            SetAmmoType<ATCZ>();
             NonSkinFrames = 10;
             Smap = new SpriteMap(GetPath("CZ805Bren"), 41, 11);
             _center = new Vec2(20.5f, 5.5f);

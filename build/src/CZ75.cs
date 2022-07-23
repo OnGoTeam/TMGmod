@@ -18,8 +18,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 24;
-            _ammoType = new ATCZ75();
-
+            SetAmmoType<ATCZ75>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("CZ75"), 12, 8);
             _center = new Vec2(6f, 4f);
