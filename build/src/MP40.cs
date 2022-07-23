@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 32;
-            _ammoType = new ATMP40();
-            SetAccuracyAsMax();
+            SetAmmoType<ATMP40>(.99f);
             KforceDelta = 2f;
             KforceDelay = 20;
             Smap = new SpriteMap(GetPath("MP40"), 23, 14);
@@ -39,7 +38,7 @@ namespace TMGmod
             _weight = 3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
-            Compose(new FirstAccuracy(20, accuracy => accuracy - .3f));
+            ComposeFirstAccuracy(20);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 7, 8 });
