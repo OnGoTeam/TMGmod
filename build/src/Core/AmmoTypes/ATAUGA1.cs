@@ -10,7 +10,7 @@ namespace TMGmod.Core.AmmoTypes
         public ATAUGA1()
         {
             range = 325f;
-            accuracy = 0.85f;
+            accuracy = 0.80f;
             penetration = 1f;
             bulletSpeed = 37f;
             bulletThickness = 1f;
