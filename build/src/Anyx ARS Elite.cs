@@ -27,8 +27,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 21;
-            _ammoType = new ATARS();
-            MaxAccuracy = 0.81f;
+            SetAmmoType<ATARS>();
             
             //THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends
             NonSkinFrames = 3;
