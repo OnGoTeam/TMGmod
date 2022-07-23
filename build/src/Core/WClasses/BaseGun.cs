@@ -501,11 +501,19 @@ namespace TMGmod.Core.WClasses
         public static IEnumerable<string> StatsHeader()
         {
             yield return "editor name";
+            yield return "MaxAccuracy";
+            yield return "Accuracy";
+            yield return "MinAccuracy";
+            yield return "KickForce";
         }
 
         public IEnumerable<string> StatsLine()
         {
             yield return editorName;
+            yield return $"{MaxAccuracy}";
+            yield return $"{Accuracy}";
+            yield return $"{MinAccuracy}";
+            yield return $"{Kforce}";
         }
 
         public override BinaryClassChunk Serialize()
