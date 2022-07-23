@@ -14,8 +14,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATAUGA3();
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATAUGA3>();
             
             Smap = new SpriteMap(GetPath("AUGA3"), 30, 12);
             _center = new Vec2(15f, 6f);
