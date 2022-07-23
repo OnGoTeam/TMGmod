@@ -31,8 +31,7 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
-            _ammoType = new ATCZ { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATCZ>(.87f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2f;
@@ -45,6 +44,13 @@ namespace TMGmod
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f)
             );
             ComposeSimpleBurst(2, .07f);
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 260f;
+            _ammoType.bulletSpeed = 60f;
+            base.OnInitialize();
         }
 
         protected override string HintMessage => "silencer";
