@@ -23,8 +23,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 11;
-            _ammoType = new ATSR2C();
-            MaxAccuracy = 0.9f;
+            SetAmmoType<ATSR2C>();
             MinAccuracy = 0.5f;
             _kickForce = 5.4f;
             KforceDelta = 1.45f;
