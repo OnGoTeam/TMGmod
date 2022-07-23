@@ -306,6 +306,24 @@ namespace TMGmod.Buddies
                 ) _hitPoints = HpMax;
             }
 #endif
+            if (_equippedDuck?.ragdoll != null)
+            {
+                var r = Bounding(
+                    _equippedDuck.ragdoll.part1.rectangle,
+                    Bounding(
+                        _equippedDuck.ragdoll.part2.rectangle,
+                        _equippedDuck.ragdoll.part3.rectangle
+                    )
+                );
+                _equippedCollisionSize = new Vec2(r.width, r.height);
+                _equippedCollisionOffset = r.tl - _equippedDuck.skeleton.upperTorso.position;
+            }
+            else if (_equippedDuck?.skeleton != null)
+            {
+                _equippedCollisionSize = _equippedDuck.collisionSize;
+                _equippedCollisionOffset = _equippedDuck.topLeft - _equippedDuck.skeleton.upperTorso.position;
+            }
+
             base.Update();
             if (_equippedDuck is null || _equippedDuck.dead)
             {
@@ -314,6 +332,14 @@ namespace TMGmod.Buddies
             }
 
             _hitPoints = Math.Min(_hitPoints, Math.Max(.1f * HpMax, _hitPoints - _equippedDuck.burnt));
+        }
+
+        private static Rectangle Bounding(Rectangle r0, Rectangle r1)
+        {
+            return new Rectangle(
+                new Vec2(Math.Min(r0.Left, r1.Left), Math.Min(r0.Top, r1.Top)),
+                new Vec2(Math.Max(r0.Right, r1.Right), Math.Max(r0.Bottom, r1.Bottom))
+            )
         }
 
         public override void UnEquip()
