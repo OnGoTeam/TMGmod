@@ -17,7 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 10;
-            _ammoType = new ATAF2011();
+            SetAmmoType<ATAF2011>();
             _numBulletsPerFire = 2;
             Smap = new SpriteMap(GetPath("AF2011"), 16, 9);
             _center = new Vec2(7f, 4f);
@@ -33,7 +33,6 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _editorName = "AF-2011";
             _weight = 2.5f;
-            MaxAccuracy = .95f;
             Compose(new LoseAccuracy(0.05f, 0.003f, 1f));
         }
 
