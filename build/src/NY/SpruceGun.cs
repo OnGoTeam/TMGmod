@@ -26,17 +26,21 @@ namespace TMGmod.NY
             ResetModifier();
             _numBulletsPerFire = Rando.Int(5, 50);
             SetAmmoType<ATIgla>();
-            _ammoType.bulletSpeed = Rando.Float(0.1f, 7f);
+            Randomize();
         }
 
-        protected override bool DynamicAccuracy() => false;
-        protected override float Accuracy => Rando.Float(0f, 0.9f);
-
-        protected override void OnSpent()
+        private void Randomize()
         {
             _ammoType.bulletSpeed = Rando.Float(0.1f, 7f);
             _ammoType.accuracy = Rando.Float(0f, 0.9f);
             _numBulletsPerFire = Rando.Int(5, 50);
+        }
+
+        protected override float Accuracy => _ammoType.accuracy;
+
+        protected override void OnSpent()
+        {
+            Randomize();
             base.OnSpent();
         }
     }
