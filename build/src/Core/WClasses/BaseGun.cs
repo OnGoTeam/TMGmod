@@ -232,12 +232,8 @@ namespace TMGmod.Core.WClasses
 
         private void DoFire()
         {
-            if (DynamicAccuracy())
-                SetAccuracy();
-            if (DynamicKforce())
-                FireWithDynamicKforce();
-            else
-                FireWithKforce();
+            SetAccuracy();
+            FireWithDynamicKforce();
         }
 
         public override void Fire()
@@ -267,16 +263,9 @@ namespace TMGmod.Core.WClasses
             CurrHone = HoldOffsetNoExtra;
         }
 
-        protected virtual bool DynamicAccuracy() => true;
-
-        protected virtual bool DynamicKforce() => true;
-
-        protected virtual bool DynamicFeatures() => true;
-
         private void UpdateInternals()
         {
-            if (DynamicAccuracy())
-                SetAccuracy();
+            SetAccuracy();
             UpdateHone();
         }
 
@@ -406,12 +395,6 @@ namespace TMGmod.Core.WClasses
         {
         }
 
-        private void DynamicOnUpdate()
-        {
-            if (DynamicFeatures())
-                UpdateFeatures();
-        }
-
         protected virtual void OnUpdate()
         {
             ActiveModifier.ModifyUpdate(BaseOnUpdate);
@@ -447,7 +430,7 @@ namespace TMGmod.Core.WClasses
 
             protected override void ModifyUpdate()
             {
-                _target.DynamicOnUpdate();
+                _target.UpdateFeatures();
             }
         }
 
