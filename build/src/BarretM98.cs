@@ -27,7 +27,7 @@ namespace TMGmod
             _editorName = "Barrett M98";
             _weight = 7f;
             ShellOffset = new Vec2(-6f, -3f);
-            _ammoType = new ATBoltAction();
+            SetAmmoType<ATBoltAction>();
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });

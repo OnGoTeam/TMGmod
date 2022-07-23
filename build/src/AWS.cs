@@ -39,7 +39,7 @@ namespace TMGmod
             _editorName = "AWS";
             _weight = 5f;
             ShellOffset = new Vec2(-3f, -2f);
-            _ammoType = new AT50SniperS();
+            SetAmmoType<AT50SniperS>();
         }
 
         protected override float BaseKforce => this.BipodsDeployed() ? 0 : 4.75f;

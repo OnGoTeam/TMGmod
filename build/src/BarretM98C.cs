@@ -27,8 +27,7 @@ namespace TMGmod
             _editorName = "Barrett M98 Shorty";
             _weight = 4.5f;
             ShellOffset = new Vec2(4f, -2f);
-            MaxAccuracy = .9f;
-            _ammoType = new ATBoltAction();
+            SetAmmoType<ATBoltAction>(.9f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
