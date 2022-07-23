@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 33;
-            _ammoType = new ATANP73();
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATANP73>();
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
