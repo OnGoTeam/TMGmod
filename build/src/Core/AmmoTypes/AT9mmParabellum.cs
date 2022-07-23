@@ -1,4 +1,4 @@
-#if FEATURES_1_2
+#if DEBUG
 using System;
 using DuckGame;
 using TMGmod.Core.Shells;
