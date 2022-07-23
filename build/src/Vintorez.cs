@@ -53,10 +53,5 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
-
-        protected override bool DynamicKforce()
-        {
-            return false;
-        }
     }
 }
