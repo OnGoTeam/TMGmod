@@ -43,7 +43,7 @@ namespace TMGmod.Core.Modifiers.Firing
                 if (_shotsLeft > 0)
                     _target._wait = _wait;
             }
-            else if (_withinContext && _target._wait <= 0f)
+            else if (_withinContext)
             {
                 fire();
                 --_shotsLeft;
@@ -61,7 +61,7 @@ namespace TMGmod.Core.Modifiers.Firing
 
         private void UpdateShotsLeft()
         {
-            if (_target.isServerForObject && _shotsLeft > 0) ShootLeft();
+            if (_shotsLeft > 0 && _target._wait <= 0f) ShootLeft();
         }
 
         private bool NeedSwitch() => _target.duck?.inputProfile.Pressed("QUACK") == true;
