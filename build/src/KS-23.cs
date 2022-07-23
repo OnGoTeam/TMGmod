@@ -25,7 +25,7 @@ namespace TMGmod
         public KS23(float xval, float yval) : base(xval, yval)
         {
             ammo = 6;
-            _ammoType = new AT12GaugeS();
+            SetAmmoType<AT12GaugeS>();
             _numBulletsPerFire = 16;
             Smap = new SpriteMap(GetPath("KS-23"), 35, 8);
             _center = new Vec2(18f, 4f);

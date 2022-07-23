@@ -18,8 +18,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 16;
-            _ammoType = new ATDragoshot();
-            SetAccuracyAsMax();
+            SetAmmoType<ATDragoshot>();
             _numBulletsPerFire = 8;
 
             Smap = new SpriteMap(GetPath("Dragoshot"), 29, 11);

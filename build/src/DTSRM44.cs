@@ -33,8 +33,7 @@ namespace TMGmod
             _weight = 4.5f;
             _laserOffsetTL = new Vec2(30f, 7.5f);
             ShellOffset = new Vec2(-12f, -2f);
-            MaxAccuracy = .97f;
-            _ammoType = new AT762NATO();
+            SetAmmoType<AT762NATO>(.97f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });

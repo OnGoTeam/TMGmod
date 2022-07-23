@@ -29,8 +29,7 @@ namespace TMGmod
             _editorName = "DT SR-44";
             _weight = 3.5f;
             ShellOffset = new Vec2(-8f, -2f);
-            MaxAccuracy = .92f;
-            _ammoType = new AT50SniperS();
+            SetAmmoType<AT50SniperS>(.92f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });

@@ -18,8 +18,7 @@ namespace TMGmod
             ammo = 14;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
-            _ammoType = new ATFCAR();
-            MaxAccuracy = _ammoType.accuracy;
+            SetAmmoType<ATFCAR>();
             MinAccuracy = 0.67f;
             RegenAccuracyDmr = 0.01f;
             DrainAccuracyDmr = 0.1f;

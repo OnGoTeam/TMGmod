@@ -25,7 +25,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 70;
-            _ammoType = new ATLowQammos();
+            SetAmmoType<ATLowQammos>();
             
             Smap = new SpriteMap(GetPath("G9M"), 38, 11);
             _center = new Vec2(19f, 6f);
@@ -46,7 +46,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "G9M";
             _weight = 6f;
-            MaxAccuracy = 0.8f;
             MinAccuracy = 0.7f;
             KickForce1Lmg = 0.23f;
             KickForce2Lmg = 0.43f;

@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new ATFOUCUS();
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATFOUCUS>();
             
             Smap = new SpriteMap(GetPath("Foucus"), 37, 13);
             _center = new Vec2(19f, 7f);

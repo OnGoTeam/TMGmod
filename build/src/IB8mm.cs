@@ -15,8 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 26;
-            _ammoType = new ATIB8();
-            MaxAccuracy = _ammoType.accuracy;
+            SetAmmoType<ATIB8>();
             Smap = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(14f, 6f);

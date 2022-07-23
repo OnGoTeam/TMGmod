@@ -20,8 +20,7 @@ namespace TMGmod
             ammo = 25;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
-            _ammoType = new ATM16();
-            MaxAccuracy = 0.91f;
+            SetAmmoType<ATM16>();
             NonSkinFrames = 9;
             Smap = new SpriteMap(GetPath("LSTK16v6"), 33, 14);
             _center = new Vec2(17f, 7f);

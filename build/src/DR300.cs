@@ -18,8 +18,7 @@ namespace TMGmod
             Rounds = new EditorProperty<int>(0, this, 0, 2, 1);
             PostRounds = Rando.ChooseInt(20, 30);
             ammo = PostRounds;
-            _ammoType = new ATDR300();
-            MaxAccuracy = 0.98f;
+            SetAmmoType<ATDR300>();
             MinAccuracy = 0.65f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.2f;

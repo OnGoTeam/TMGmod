@@ -15,7 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 15;
-            _ammoType = new ATKSG12();
+            SetAmmoType<ATKSG12>();
             _numBulletsPerFire = 8;
             
             Smap = new SpriteMap(GetPath("KSG12"), 36, 11);

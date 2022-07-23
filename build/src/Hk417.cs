@@ -14,8 +14,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 11;
-            _ammoType = new ATHk417();
-            MaxAccuracy = 0.93f;
+            SetAmmoType<ATHk417>();
             MinAccuracy = 0.75f;
             RegenAccuracyDmr = 0.006f;
             DrainAccuracyDmr = 0.1f;

@@ -23,7 +23,7 @@ namespace TMGmod
             base(xval, yval)
         {
             ammo = 26;
-            _ammoType = new ATHazeS();
+            SetAmmoType<ATHazeS>();
             Smap = new SpriteMap(GetPath("HazeS"), 24, 12);
             _center = new Vec2(12f, 3f);
             _collisionOffset = new Vec2(-12f, -3f);

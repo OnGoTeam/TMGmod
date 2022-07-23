@@ -19,8 +19,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 32;
-            _ammoType = new ATDaewooK1();
-            MaxAccuracy = _ammoType.accuracy;
+            SetAmmoType<ATDaewooK1>();
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("DaewooK1"), 28, 11);
             _center = new Vec2(14f, 5f);

@@ -24,8 +24,7 @@ namespace TMGmod
             ammo = 6;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
-            _ammoType = new ATLynx();
-            MaxAccuracy = 1f;
+            SetAmmoType<ATLynx>();
             MinAccuracy = 0.3f;
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("Lynx"), 31, 11);
