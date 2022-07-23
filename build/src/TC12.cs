@@ -21,6 +21,7 @@ namespace TMGmod
             MinAccuracy = 0.45f;
             RegenAccuracyDmr = 0.007f;
             DrainAccuracyDmr = 0.15f;
+            MaxDrain = .55f;
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("TC-12"), 39, 12);
             _center = new Vec2(20f, 5f);
