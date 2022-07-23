@@ -37,18 +37,6 @@ namespace TMGmod.Buddies
             _translucent = true;
         }
 
-        public override Vec2 collisionSize
-        {
-            get => EquippedDuck()?.collisionSize ?? _collisionSize;
-            set => _collisionSize = value;
-        }
-
-        public override Vec2 collisionOffset
-        {
-            get => EquippedDuck()?.collisionOffset ?? _collisionOffset;
-            set => _collisionOffset = value;
-        }
-
         private static Vec2 Orthonormal(Vec2 vec)
         {
             return new Vec2(vec.y, -vec.x).normalized;
@@ -315,6 +303,9 @@ namespace TMGmod.Buddies
                         _equippedDuck.ragdoll.part3.rectangle
                     )
                 );
+                var v = _equippedDuck.ragdoll.velocity * 2;
+                var r2 = new Rectangle(r.tl + v, r.br + v);
+                r = Bounding(r, r2);
                 _equippedCollisionSize = new Vec2(r.width, r.height);
                 _equippedCollisionOffset = r.tl - _equippedDuck.skeleton.upperTorso.position;
             }
@@ -339,7 +330,7 @@ namespace TMGmod.Buddies
             return new Rectangle(
                 new Vec2(Math.Min(r0.Left, r1.Left), Math.Min(r0.Top, r1.Top)),
                 new Vec2(Math.Max(r0.Right, r1.Right), Math.Max(r0.Bottom, r1.Bottom))
-            )
+            );
         }
 
         public override void UnEquip()
