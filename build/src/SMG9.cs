@@ -14,8 +14,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 24;
-            _ammoType = new ATSMG9();
-            SetAccuracyAsMax();
+            SetAmmoType<ATSMG9>();
             KforceDelta = 3.5f;
             KforceDelay = 15;
             Smap = new SpriteMap(GetPath("SMG9"), 16, 15);

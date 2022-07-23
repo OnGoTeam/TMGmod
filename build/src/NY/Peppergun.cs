@@ -14,11 +14,7 @@ namespace TMGmod.NY
         {
             ammo = 7;
             _numBulletsPerFire = 12;
-            _ammoType = new ATCane
-            {
-                range = 100f,
-                accuracy = 0.11f,
-            };
+            SetAmmoType<ATCane>(.11f);
             _type = "gun";
             SkinFrames = 1;
             Smap = new SpriteMap(GetPath("Holiday/Peppergun"), 18, 7);
@@ -39,6 +35,12 @@ namespace TMGmod.NY
             _holdOffset = new Vec2(-8f, 3f);
             _editorName = "Big Sweet Gun";
             _weight = 2f;
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 100f;
+            base.OnInitialize();
         }
     }
 }

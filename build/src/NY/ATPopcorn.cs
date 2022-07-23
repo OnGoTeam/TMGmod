@@ -16,7 +16,7 @@ namespace TMGmod.NY
             sprite = _sprite;
             bulletSpeed = 6f;
             range = 400f;
-            accuracy = 0.85f;
+            accuracy = .5f;
             bulletLength = 3f;
             penetration = 0.7f;
             affectedByGravity = true;

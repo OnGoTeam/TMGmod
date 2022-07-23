@@ -25,8 +25,8 @@ namespace TMGmod
             ShellOffset = new Vec2(-4f, -3f);
 
             ammo = 30;
-            _ammoType = new ATVista();
-            ComposeFirstAccuracy(1f, 30);
+            SetAmmoType<ATVista>(1f);
+            ComposeFirstAccuracy(30);
             ComposeSimpleBurst(3, .1f);
             _fireWait = 0.36f;
             loseAccuracy = 0.1f;

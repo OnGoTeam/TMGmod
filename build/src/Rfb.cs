@@ -13,11 +13,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new AT545NATO
-            {
-                range = 380f,
-                accuracy = 0.9f,
-            };
+            SetAmmoType<AT545NATO>(.9f);
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("RFB"), 33, 11);
             _center = new Vec2(17f, 5f);
@@ -39,6 +35,12 @@ namespace TMGmod
             _weight = 5.5f;
             _kickForce = 0.07f;
             KforceDelta = 0.63f;
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 380f;
+            base.OnInitialize();
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });

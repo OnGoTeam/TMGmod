@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 11;
-            _ammoType = new ATTC12();
-            MaxAccuracy = 0.91f;
+            SetAmmoType<ATTC12>();
             MinAccuracy = 0.45f;
             RegenAccuracyDmr = 0.007f;
             DrainAccuracyDmr = 0.15f;
@@ -57,7 +56,7 @@ namespace TMGmod
                 {
                     NonSkin = 1;
                     _fireSound = GetPath("sounds/Silenced3.wav");
-                    _ammoType = new ATTC12S();
+                    SetAmmoType<ATTC12S>();
                     _kickForce = 4.5f;
                     loseAccuracy = 0f;
                     _weight = 6.3f;
@@ -71,7 +70,7 @@ namespace TMGmod
                 {
                     NonSkin = 0;
                     _fireSound = "deepMachineGun2";
-                    _ammoType = new ATTC12();
+                    SetAmmoType<ATTC12>();
                     _kickForce = 5.3f;
                     loseAccuracy = 0.1f;
                     _weight = 4.5f;

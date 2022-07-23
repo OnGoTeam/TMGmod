@@ -82,11 +82,6 @@ namespace TMGmod.Core.WClasses
             ToPrevKforce = true;
             _baseActiveModifier = DefaultModifier();
         }
-        [Obsolete]
-        protected void SetAccuracyAsMax()
-        {
-            MaxAccuracy = _ammoType.accuracy;
-        }
 
         protected void SetAmmoType<T>() where T : AmmoType, new()
         {
@@ -96,19 +91,13 @@ namespace TMGmod.Core.WClasses
         protected void SetAmmoType(AmmoType at)
         {
             _ammoType = at;
-            SetAccuracyAsMax();
+            MaxAccuracy = _ammoType.accuracy;
         }
 
         protected void SetAmmoType<T>(float maxAccuracy) where T : AmmoType, new()
         {
             _ammoType = new T();
             MaxAccuracy = maxAccuracy;
-        }
-
-        protected void ComposeFirstAccuracy(float max, uint delay)
-        {
-            MaxAccuracy = max;
-            ComposeFirstAccuracy(delay);
         }
 
         protected void ComposeFirstAccuracy(uint delay)
@@ -134,9 +123,6 @@ namespace TMGmod.Core.WClasses
         }
 
         protected virtual IModifyEverything ActiveModifier => _baseActiveModifier;
-
-        [Obsolete]
-        protected bool IntrinsicAccuracy { get; set; }
 
         protected virtual float BaseAccuracy => MaxAccuracy;
 
@@ -268,7 +254,7 @@ namespace TMGmod.Core.WClasses
 
         private void SetAccuracy()
         {
-            if (_ammoType != null && !IntrinsicAccuracy) _ammoType.accuracy = Accuracy;
+            if (_ammoType != null) _ammoType.accuracy = Accuracy;
         }
 
         private void UpdateHone()
@@ -283,20 +269,11 @@ namespace TMGmod.Core.WClasses
             CurrHone = HoldOffsetNoExtra;
         }
 
-        protected virtual bool DynamicAccuracy()
-        {
-            return !IntrinsicAccuracy;
-        }
+        protected virtual bool DynamicAccuracy() => true;
 
-        protected virtual bool DynamicKforce()
-        {
-            return true;
-        }
+        protected virtual bool DynamicKforce() => true;
 
-        protected virtual bool DynamicFeatures()
-        {
-            return true;
-        }
+        protected virtual bool DynamicFeatures() => true;
 
         private void UpdateInternals()
         {
@@ -568,7 +545,8 @@ namespace TMGmod.Core.WClasses
         {
             if (ammoType is null) return;
             var a = (1 - ammoType.accuracy) / 2;
-            var v = OffsetLocal(new Vec2(64, 0));
+            var v = barrelVector * 64;
+            v = v.Rotate(offDir * Maths.DegToRad(ammoType.barrelAngleDegrees), Vec2.Zero);
             Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(a, Vec2.Zero), Color.Red);
             Graphics.DrawLine(barrelPosition, barrelPosition + v.Rotate(-a, Vec2.Zero), Color.Red);
         }

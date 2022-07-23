@@ -16,7 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 6;
-            _ammoType = new ATx3x();
+            SetAmmoType<ATx3x>();
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("X3X"), 27, 14);
             _center = new Vec2(14f, 9f);

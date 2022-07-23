@@ -37,7 +37,7 @@ namespace TMGmod
             _weight = 4.5f;
             _laserOffsetTL = new Vec2(22f, 4f);
             ShellOffset = new Vec2(-1f, -2f);
-            _ammoType = new ATBoltAction();
+            SetAmmoType<ATBoltAction>();
         }
 
         protected override float BaseKforce => this.BipodsDeployed() ? 0 : 4.67f;

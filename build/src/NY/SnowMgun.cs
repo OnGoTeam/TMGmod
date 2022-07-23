@@ -9,7 +9,7 @@ namespace TMGmod.NY
         public SnowMgun(float xval, float yval) : base(xval, yval)
         {
             ammo = 40;
-            _ammoType = new ATSneg();
+            SetAmmoType<ATSneg>();
             _type = "gun";
             NonSkinFrames = 4;
             SkinFrames = 1;

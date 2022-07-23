@@ -1,9 +1,9 @@
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATSRM2 : BaseAmmoType
+    public class ATSRM : BaseAmmoType
     {
-        public ATSRM2()
+        public ATSRM()
         {
             range = 120f;
             accuracy = 0.6f;
@@ -11,7 +11,7 @@ namespace TMGmod.Core.AmmoTypes
             combustable = true;
             bulletSpeed = 71f;
             penetration = 1f;
-            barrelAngleDegrees = 6.5f;
+            barrelAngleDegrees = -6.5f;
             DamageMean = 15f;
             DamageVariation = 0.3f;
             AlphaDamage = 0.5f;

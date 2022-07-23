@@ -16,8 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATSpectreM4();
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATSpectreM4>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("SpectreM4"), 19, 10);
             _center = new Vec2(9.5f, 5f);
@@ -52,7 +51,7 @@ namespace TMGmod
                 if (value)
                 {
                     NonSkin = 1;
-                    _ammoType = new ATSpectreM4S();
+                    SetAmmoType<ATSpectreM4S>();
                     _barrelOffsetTL = new Vec2(16f, 1f);
                     loseAccuracy = 0.07f;
                     maxAccuracyLost = 0.3f;
@@ -63,16 +62,13 @@ namespace TMGmod
                 else
                 {
                     NonSkin = 0;
-                    _flare = new SpriteMap("smallFlare", 11, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
-                    _fireSound = GetPath("sounds/smg.wav");
-                    _ammoType = new ATSpectreM4();
+                    SetAmmoType<ATSpectreM4>();
                     _barrelOffsetTL = new Vec2(13f, 1f);
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.34f;
                     _weight = 3.3f;
+                    _fireSound = GetPath("sounds/smg.wav");
+                    _flare = new SpriteMap("smallFlare", 11, 10) { center = new Vec2(0.0f, 5f), };
                 }
             }
         }

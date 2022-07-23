@@ -25,10 +25,8 @@ namespace TMGmod.NY
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             ResetModifier();
             _numBulletsPerFire = Rando.Int(5, 50);
-            _ammoType = new ATIgla
-            {
-                bulletSpeed = Rando.Float(0.1f, 7f),
-            };
+            SetAmmoType<ATIgla>();
+            _ammoType.bulletSpeed = Rando.Float(0.1f, 7f);
         }
 
         protected override bool DynamicAccuracy() => false;

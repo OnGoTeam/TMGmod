@@ -19,8 +19,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 6;
-            _ammoType = new ATSIX12S();
-            MaxAccuracy = 0.9f;
+            SetAmmoType<ATSIX12S>();
             _numBulletsPerFire = 14;
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             NonSkinFrames = 2;

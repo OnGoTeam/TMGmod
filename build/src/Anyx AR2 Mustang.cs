@@ -31,7 +31,7 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
-            SetAmmoType<ATCZ>(.87f);
+            SetAmmoType<ATCZ>();
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 2f;
@@ -64,14 +64,14 @@ namespace TMGmod
                 {
                     _fireSound = GetPath("sounds/Silenced2.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _ammoType = new ATCZS();
+                    SetAmmoType<ATCZS>();
                     _barrelOffsetTL = new Vec2(33f, 2f);
                     NonSkin = 1;
                 }
                 else
                 {
                     _fireSound = "deepMachineGun2";
-                    _ammoType = new ATCZ();
+                    SetAmmoType<ATCZ>();
                     _barrelOffsetTL = new Vec2(28f, 2f);
                     NonSkin = 0;
                 }

@@ -38,7 +38,7 @@ namespace TMGmod
             _editorName = "Urbana";
             _weight = 5.6f;
             ShellOffset = new Vec2(-9f, -2f);
-            _ammoType = new ATBoltAction();
+            SetAmmoType<ATBoltAction>();
         }
 
         protected override float BaseKforce => this.BipodsDeployed() ? 0 : 5f;

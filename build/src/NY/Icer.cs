@@ -20,7 +20,7 @@ namespace TMGmod.NY
                 center = new Vec2(0.0f, 5f),
             };
             ammo = 4;
-            _ammoType = new ATIcer();
+            SetAmmoType<ATIcer>();
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _kickForce = 5f;
             _holdOffset = new Vec2(9f, 1f);

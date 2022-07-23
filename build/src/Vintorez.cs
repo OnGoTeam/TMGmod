@@ -15,9 +15,8 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 16;
-            _ammoType = new ATVintorez();
+            SetAmmoType<ATVintorez>();
             MinAccuracy = 0f;
-            MaxAccuracy = 0.9f;
             _kickForce = 0.4f;
             KforceDelta = 0.45f;
             Smap = new SpriteMap(GetPath("Vintorez"), 33, 11);

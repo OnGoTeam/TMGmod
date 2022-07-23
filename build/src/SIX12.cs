@@ -19,14 +19,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 6;
-            _ammoType = new AT12Gauge
-            {
-                range = 165f,
-                accuracy = 0.87f,
-                penetration = 1f,
-                bulletThickness = 0.5f,
-            };
-            MaxAccuracy = 0.87f;
+            SetAmmoType<AT12Gauge>(.87f);
             _numBulletsPerFire = 14;
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("SIX12"), 29, 10);
@@ -45,6 +38,14 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 0f);
             _editorName = "SIX12";
             _weight = 4f;
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 165f;
+            _ammoType.penetration = 1f;
+            _ammoType.bulletThickness = .5f;
+            base.OnInitialize();
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7 });

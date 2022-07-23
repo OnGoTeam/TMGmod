@@ -16,8 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 14;
-            _ammoType = new ATSLK8();
-            SetAccuracyAsMax();
+            SetAmmoType<ATSLK8>();
             MinAccuracy = 0.3f;
             RegenAccuracyDmr = 0.02f;
             DrainAccuracyDmr = 0.45f;

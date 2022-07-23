@@ -32,8 +32,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 8;
-            _ammoType = new ATSRM1();
-            MaxAccuracy = 0.6f;
+            SetAmmoType<ATSRM>(.6f);
             _numBulletsPerFire = 8;
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("SRM1208"), 29, 10);
@@ -61,8 +60,7 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (ammo % 2 == 0) _ammoType = new ATSRM1();
-            else _ammoType = new ATSRM2();
+            _ammoType.barrelAngleDegrees = ammo % 2 == 0 ? -6.5f : +6.5f;
             if (ammo <= 0)
             {
                 Loaded = false;
@@ -102,6 +100,9 @@ namespace TMGmod
             else if (Loaded)
             {
                 Fire();
+            } else if (ammo == 0)
+            {
+                DoAmmoClick();
             }
         }
 

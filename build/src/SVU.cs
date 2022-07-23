@@ -16,8 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 12;
-            _ammoType = new ATSVU();
-            MaxAccuracy = _ammoType.accuracy;
+            SetAmmoType<ATSVU>();
             MinAccuracy = 0.2f;
             Smap = new SpriteMap(GetPath("SVU"), 37, 11);
             _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)

@@ -52,7 +52,7 @@ namespace TMGmod
                 {
                     NonSkin = 1;
                     _fireSound = GetPath("sounds/Silenced2.wav");
-                    _ammoType = new ATCZS2();
+                    SetAmmoType<ATCZS2>();
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.28f;
                     _barrelOffsetTL = new Vec2(41f, 3f);
@@ -62,7 +62,7 @@ namespace TMGmod
                 {
                     NonSkin = 0;
                     _fireSound = "deepMachineGun2";
-                    _ammoType = new ATCZ2();
+                    SetAmmoType<ATCZ2>();
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.3f;
                     _barrelOffsetTL = new Vec2(37f, 3f);

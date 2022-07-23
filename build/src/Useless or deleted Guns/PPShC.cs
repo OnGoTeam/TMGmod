@@ -19,8 +19,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             : base(xval, yval)
         {
             ammo = 35;
-            _ammoType = new AT9mmParabellum();
-            SetAccuracyAsMax();
+            SetAmmoType<AT9mmParabellum>();
             _type = "gun";
             Smap = new SpriteMap(GetPath("PPShC"), 48, 16);
             _center = new Vec2(23f, 5.5f);

@@ -18,7 +18,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 13;
-            _ammoType = new ATUSP();
+            SetAmmoType<ATUSP>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("USP"), 23, 9);
             _center = new Vec2(8f, 3f);
@@ -48,7 +48,7 @@ namespace TMGmod
                     NonSkin = 1;
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _ammoType = new ATUSPS();
+                    SetAmmoType<ATUSPS>();
                     _barrelOffsetTL = new Vec2(23f, 2f);
                 }
                 else
@@ -59,7 +59,7 @@ namespace TMGmod
                         center = new Vec2(0.0f, 5f),
                     };
                     _fireSound = GetPath("sounds/1.wav");
-                    _ammoType = new ATUSP();
+                    SetAmmoType<ATUSP>();
                     _barrelOffsetTL = new Vec2(14f, 2f);
                 }
             }

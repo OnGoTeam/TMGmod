@@ -13,8 +13,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 26;
-            _ammoType = new ATType89();
-            SetAccuracyAsMax();
+            SetAmmoType<ATType89>();
             Smap = new SpriteMap(GetPath("Type 89"), 30, 12);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);

@@ -10,7 +10,7 @@ namespace TMGmod.Core.AmmoTypes
         public ATVintorez()
         {
             range = 550f;
-            accuracy = 0.95f;
+            accuracy = 0.9f;
             bulletSpeed = 17f;
             penetration = 0.4f;
             bulletThickness = 0.8f;

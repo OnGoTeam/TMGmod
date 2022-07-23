@@ -19,8 +19,7 @@ namespace TMGmod
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
             ammo = 2;
-            _ammoType = new ATSkeetGun();
-            MaxAccuracy = 0.9f;
+            SetAmmoType<ATSkeetGun>();
             _numBulletsPerFire = 10;
             Smap = new SpriteMap(GetPath("SkeetDouble"), 41, 7);
             _center = new Vec2(21f, 4f);

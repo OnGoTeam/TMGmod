@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 24;
-            _ammoType = new ATUzi();
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATUzi>();
             KforceDelay = 25;
             KforceDelta = 4f;
             NonSkinFrames = 2;
@@ -55,7 +54,7 @@ namespace TMGmod
                 if (value)
                 {
                     NonSkin = 1;
-                    _ammoType = new ATUziS();
+                    SetAmmoType<ATUziS>();
                     _barrelOffsetTL = new Vec2(16f, 2f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     _fireSound = GetPath("sounds/SilencedPistol.wav");
@@ -63,7 +62,7 @@ namespace TMGmod
                 else
                 {
                     NonSkin = 0;
-                    _ammoType = new ATUzi();
+                    SetAmmoType<ATUzi>();
                     _barrelOffsetTL = new Vec2(10f, 2f);
                     _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
                     {

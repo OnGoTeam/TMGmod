@@ -17,8 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new ATM76();
-            MaxAccuracy = 0.89f;
+            SetAmmoType<ATM76>();
             MinAccuracy = 0.5f;
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("Valmet M76"), 33, 10);
@@ -56,7 +55,6 @@ namespace TMGmod
                         MaxAccuracy = burst ? 1f : 0.89f;
                         lose.Regen = burst ? 0f : 0.02f;
                         lose.Drain = burst ? 0f : 0.15f;
-                        MaxAccuracy = burst ? 1f : 0.89f;
                     },
                     true
                 )

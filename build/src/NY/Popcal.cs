@@ -12,8 +12,7 @@ namespace TMGmod.NY
             : base(xval, yval)
         {
             ammo = 16;
-            _ammoType = new ATPopcorn();
-            MaxAccuracy = 0.5f;
+            SetAmmoType<ATPopcorn>();
             _type = "gun";
             NonSkinFrames = 9;
             SkinFrames = 1;
