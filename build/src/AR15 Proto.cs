@@ -28,7 +28,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new ATLowQammos();
+            SetAmmoType<ATLowQammos>();
 
             Smap = new SpriteMap(GetPath("AR15Proto"), 27, 10);
             _center = new Vec2(19f, 5f);
