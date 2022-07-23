@@ -490,14 +490,22 @@ namespace TMGmod.Core.WClasses
 
         private IEnumerable<string> Characteristics()
         {
-            var chars = new List<string>();
-            if (_ammoType != null) chars.Add($"Accuracy: {100 * _ammoType.accuracy}");
-            if (_ammoType != null) chars.Add($"Range: {_ammoType.range / 16f}");
-            if (_ammoType != null) chars.Add($"Bullet Speed: {_ammoType.bulletSpeed / 16f * 60f}");
-            if (_ammoType != null) chars.Add($"Penetration: {_ammoType.penetration}");
-            chars.Add($"Kickforce: {_kickForce}");
-            if (_fireWait > 0 && !_manualLoad && _fullAuto) chars.Add($"RPM: {Math.Round(3600 / (_fireWait / .15f))}");
-            return chars;
+            if (_ammoType != null) yield return $"Accuracy: {100 * _ammoType.accuracy}";
+            if (_ammoType != null) yield return $"Range: {_ammoType.range / 16f}";
+            if (_ammoType != null) yield return $"Bullet Speed: {_ammoType.bulletSpeed / 16f * 60f}";
+            if (_ammoType != null) yield return $"Penetration: {_ammoType.penetration}";
+            yield return $"Kickforce: {_kickForce}";
+            if (_fireWait > 0 && !_manualLoad && _fullAuto) yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
+        }
+
+        public static IEnumerable<string> StatsHeader()
+        {
+            yield return "editor name";
+        }
+
+        public IEnumerable<string> StatsLine()
+        {
+            yield return editorName;
         }
 
         public override BinaryClassChunk Serialize()
