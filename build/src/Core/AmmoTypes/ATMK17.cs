@@ -9,9 +9,11 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATMK17()
         {
+            accuracy = .84f;
+            range = 345f;
             penetration = 2.1f;
-            bulletSpeed = 34f;
-            bulletThickness = 1f;
+            bulletSpeed = 35f;
+            bulletThickness = .6f;
             bulletLength = 50f;
             DamageMean = 38f;
             DamageVariation = 0.18f;

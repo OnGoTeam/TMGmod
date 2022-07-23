@@ -18,10 +18,10 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 10;
-            MaxAccuracy = 0.91f;
-            MinAccuracy = 0.35f;
-            RegenAccuracyDmr = 0.015f;
-            DrainAccuracyDmr = 0.3f;
+            SetAmmoType<AT556NATO>(.91f);
+            MinAccuracy = .35f;
+            RegenAccuracyDmr = .015f;
+            DrainAccuracyDmr = .3f;
             Smap = new SpriteMap(GetPath("Oracle AR-10"), 29, 12);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
@@ -35,15 +35,14 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = false;
-            _fireWait = 0.5f;
+            _fireWait = .5f;
             _kickForce = 2f;
-            loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.15f;
+            loseAccuracy = .15f;
+            maxAccuracyLost = .15f;
             laserSight = false;
             _laserOffsetTL = new Vec2(17f, 1.5f);
             _editorName = "Oracle AR-10";
             _weight = 5f;
-            _ammoType = new AT556NATO();
         }
 
         public float HandAngleOff

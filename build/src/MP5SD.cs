@@ -12,10 +12,9 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATMP5SD();
-            IncreasedAccuracy = 0.92f;
-            DecreasedAccuracy = 0.77f;
-            MaxAccuracy = DecreasedAccuracy;
+            IncreasedAccuracy = .92f;
+            DecreasedAccuracy = .77f;
+            SetAmmoType<ATMP5SD>(DecreasedAccuracy);
             Smap = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(15.5f, 6f);

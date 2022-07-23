@@ -9,10 +9,11 @@ namespace TMGmod.Core
     {
         public Cal50Explode()
         {
-            accuracy = 0.9f;
-            range = 700f;
-            penetration = 0f;
+            accuracy = 1f;
+            range = 1100f;
+            penetration = 1f;
             combustable = true;
+            bulletThickness = 2.5f;
             bulletSpeed = 55f;
             bulletType = typeof(ExplosiveBullet);
         }

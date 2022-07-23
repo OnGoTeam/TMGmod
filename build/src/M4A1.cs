@@ -16,8 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new AT545NATO();
-            MaxAccuracy = .86f;
+            SetAmmoType<AT545NATO>(.86f);
             Smap = new SpriteMap(GetPath("M4A1"), 30, 11);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);

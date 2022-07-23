@@ -30,7 +30,15 @@ namespace TMGmod
             _editorName = "MSR";
             _weight = 4.65f;
             ShellOffset = new Vec2(-9f, -1.5f);
-            _ammoType = new ATBoltAction();
+            SetAmmoType<ATBoltAction>();
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.bulletSpeed = 100f;
+            _ammoType.range = 1200;
+            _ammoType.penetration = 2f;
+            base.OnInitialize();
         }
 
         [UsedImplicitly]
@@ -50,14 +58,6 @@ namespace TMGmod
 
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;
-
-        protected override void OnInitialize()
-        {
-            _ammoType.bulletSpeed = 100f;
-            _ammoType.range = 1200;
-            _ammoType.penetration = 2f;
-            base.OnInitialize();
-        }
 
         protected override bool HasLaser()
         {

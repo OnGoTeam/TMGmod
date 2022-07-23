@@ -15,7 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATPMR30();
+            SetAmmoType<ATPMR30>();
             Smap = new SpriteMap(GetPath("PMR30"), 16, 10);
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);

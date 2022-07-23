@@ -15,8 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 5;
-            _ammoType = new ATM72();
-            MaxAccuracy = 0.95f;
+            SetAmmoType<ATM72>();
             NonSkinFrames = 6;
             Smap = new SpriteMap(GetPath("M72"), 32, 11);
             _center = new Vec2(16f, 6f);

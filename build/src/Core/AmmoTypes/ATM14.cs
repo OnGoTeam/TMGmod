@@ -9,6 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATM14()
         {
+            range = 666f;
             accuracy = .95f;
             penetration = 2f;
             bulletSpeed = 29f;

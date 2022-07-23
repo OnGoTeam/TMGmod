@@ -22,10 +22,9 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATMP5();
             IncreasedAccuracy = .9f;
-            DecreasedAccuracy = 0.7f;
-            MaxAccuracy = DecreasedAccuracy;
+            DecreasedAccuracy = .7f;
+            SetAmmoType<ATMP5>(DecreasedAccuracy);
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("MP5"), 27, 12);
             _center = new Vec2(13f, 6f);

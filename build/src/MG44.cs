@@ -15,8 +15,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 60;
-            _ammoType = new ATMG44();
-            MaxAccuracy = 0.75f;
+            SetAmmoType<ATMG44>();
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("MG44 Mark2H"), 39, 11);
             _center = new Vec2(20f, 6f);

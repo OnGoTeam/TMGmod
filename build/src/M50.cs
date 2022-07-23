@@ -18,13 +18,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 7;
-            _ammoType = new Cal50Explode
-            {
-                range = 1100f,
-                accuracy = 1f,
-                penetration = 1f,
-                bulletThickness = 2.5f,
-            };
+            SetAmmoType<Cal50Explode>();
             Smap = new SpriteMap(GetPath("M50"), 40, 13);
             _center = new Vec2(20f, 7f);
             _collisionOffset = new Vec2(-20f, -7f);

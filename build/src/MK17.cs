@@ -21,14 +21,7 @@ namespace TMGmod
             _hitPoints = 49f;
             thickness = 12f;
             ammo = 20;
-            _ammoType = new ATMK17
-            {
-                range = 345f,
-                accuracy = 0.84f,
-                bulletSpeed = 35f,
-                bulletThickness = 0.6f,
-            };
-            IntrinsicAccuracy = true;
+            SetAmmoType<ATMK17>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("Mk17Shield"), 26, 12);
             _center = new Vec2(5f, 8f);

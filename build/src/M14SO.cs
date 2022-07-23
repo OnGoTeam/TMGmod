@@ -21,12 +21,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 18;
-            _ammoType = new ATM14
-            {
-                range = 333f,
-                accuracy = 0.9f,
-            };
-            MaxAccuracy = _ammoType.accuracy;
+            SetAmmoType<ATM14>(.9f);
             MinAccuracy = 0.3f;
             RegenAccuracyDmr = 0.01f;
             DrainAccuracyDmr = 0.12f;
@@ -50,6 +45,12 @@ namespace TMGmod
             ShellOffset = new Vec2(-9f, -4f);
             _editorName = "M14 Sawed-Off";
             _weight = 2.5f;
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 333f;
+            base.OnInitialize();
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });

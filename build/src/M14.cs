@@ -39,12 +39,6 @@ namespace TMGmod
             _weight = 4.5f;
         }
 
-        protected override void OnInitialize()
-        {
-            _ammoType.range = 666f;
-            base.OnInitialize();
-        }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2 });
     }
 }

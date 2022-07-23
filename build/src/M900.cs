@@ -17,11 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 30;
-            _ammoType = new ATCalico
-            {
-                range = Rando.Float(10f, 70f),
-            };
-            MaxAccuracy = 0.4f;
+            SetAmmoType<ATCalico>();
             Smap = new SpriteMap(GetPath("M900"), 27, 7);
             _center = new Vec2(18f, 4f);
             _collisionOffset = new Vec2(-18f, -4f);
@@ -48,7 +44,6 @@ namespace TMGmod
 
         public override void OnHoldAction()
         {
-            _ammoType.range = Rando.Float(0f, Rando.Float(0f, 67f)) + 5f;
             handAngle = Rando.Float(-0.1f, 0.1f);
             base.OnHoldAction();
         }

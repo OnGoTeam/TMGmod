@@ -57,13 +57,12 @@ namespace TMGmod
                     mode =>
                     {
                         NonSkin = 1 + mode;
-                        _ammoType = ammoTypem[mode];
+                        SetAmmoType(ammoTypem[mode]);
                         _barrelOffsetTL = barrelOffsetTLm[mode];
                         _fireSound = fireSoundm[mode];
                         loseAccuracy = loseAccuracym[mode];
                         maxAccuracyLost = maxAccuracyLostm[mode];
                         _numBulletsPerFire = numBulletsPerFirem[mode];
-                        SetAccuracyAsMax();
                     },
                     () => NonSkin = 0
                 )

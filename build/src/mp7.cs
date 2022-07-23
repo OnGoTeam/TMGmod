@@ -22,8 +22,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 35;
-            _ammoType = new ATMP7();
-            MaxAccuracy = 0.9f;
+            SetAmmoType<ATMP7>();
             Smap = new SpriteMap(GetPath("MP7"), 20, 10);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _center = new Vec2(12f, 4f);

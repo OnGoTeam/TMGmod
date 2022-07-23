@@ -22,8 +22,8 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 64;
-            _ammoType = new ATBizon();
-            MaxAccuracy = 0.8f;
+            SetAmmoType<ATBizon>(.8f);
+            ComposeFirstAccuracy(25);
             MinAccuracy = 0.2f;
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("PP19Bizon"), 28, 9);
@@ -46,7 +46,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-1f, -2f);
             _editorName = "PP-19 Bizon";
             _weight = 1.5f;
-            Compose(new FirstAccuracy(25, accuracy => accuracy - .2f));
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 8 });

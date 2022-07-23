@@ -90,7 +90,12 @@ namespace TMGmod.Core.WClasses
 
         protected void SetAmmoType<T>() where T : AmmoType, new()
         {
-            _ammoType = new T();
+            SetAmmoType(new T());
+        }
+
+        protected void SetAmmoType(AmmoType at)
+        {
+            _ammoType = at;
             SetAccuracyAsMax();
         }
 

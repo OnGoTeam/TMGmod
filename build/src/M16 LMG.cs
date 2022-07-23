@@ -17,12 +17,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 50;
-            _ammoType = new AT556NATO
-            {
-                range = 400f,
-                accuracy = 0.8f,
-                penetration = 1.5f,
-            };
+            SetAmmoType<AT556NATO>(.8f);
             Smap = new SpriteMap(GetPath("M16LMG"), 38, 11);
             _center = new Vec2(19f, 6f);
             _collisionOffset = new Vec2(-19f, -6f);
@@ -42,10 +37,16 @@ namespace TMGmod
             ShellOffset = new Vec2(-7f, -2f);
             _editorName = "M16 LMG";
             _weight = 6f;
-            MaxAccuracy = 0.8f;
             MinAccuracy = 0.7f;
             KickForce1Lmg = 0.23f;
             KickForce2Lmg = 0.43f;
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 400f;
+            _ammoType.penetration = 1.5f;
+            base.OnInitialize();
         }
 
         public BitBuffer BipodsBuffer

@@ -18,8 +18,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 50;
-            _ammoType = new ATCalico();
-            SetAccuracyAsMax();
+            SetAmmoType<ATCalico>();
             Smap = new SpriteMap(GetPath("M950A"), 23, 7);
             _center = new Vec2(11f, 4f);
             _collisionOffset = new Vec2(-11f, -4f);

@@ -37,8 +37,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-2f, -3f);
             _editorName = "MG3";
             _weight = 7f;
-            _ammoType = new AT556NATO();
-            MaxAccuracy = .8f;
+            SetAmmoType<AT556NATO>(.8f);
         }
 
         public BitBuffer BipodsBuffer

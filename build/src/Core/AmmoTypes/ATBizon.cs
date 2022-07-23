@@ -10,7 +10,7 @@ namespace TMGmod.Core.AmmoTypes
         public ATBizon()
         {
             range = 115f;
-            accuracy = 0.4f;
+            accuracy = 0.6f;
             penetration = 1f;
             bulletSpeed = 44f;
             bulletThickness = 0.8f;
