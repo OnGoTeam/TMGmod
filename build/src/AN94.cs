@@ -31,8 +31,7 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
-            _ammoType = new AT545NATO { range = 260f, bulletSpeed = 60f, accuracy = 0.87f };
-            IntrinsicAccuracy = true;
+            SetAmmoType<AT545NATO>(.87f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
             _fireWait = 1.5f;
@@ -47,6 +46,13 @@ namespace TMGmod
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f)
             );
             ComposeSimpleBurst(2, .07f);
+        }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 260f;
+            _ammoType.bulletSpeed = 60f;
+            base.OnInitialize();
         }
 
         [UsedImplicitly]
