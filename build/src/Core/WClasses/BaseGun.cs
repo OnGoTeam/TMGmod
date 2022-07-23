@@ -82,7 +82,7 @@ namespace TMGmod.Core.WClasses
             ToPrevKforce = true;
             _baseActiveModifier = DefaultModifier();
         }
-
+        [Obsolete]
         protected void SetAccuracyAsMax()
         {
             MaxAccuracy = _ammoType.accuracy;
