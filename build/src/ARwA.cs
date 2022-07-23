@@ -22,13 +22,8 @@ namespace TMGmod
         public ARwA(float xval, float yval)
             : base(xval, yval)
         {
-            ammo = 30;
-            _ammoType = new AT556NATO
-            {
-                range = 500f,
-                accuracy = 0.85f,
-            };
-            IntrinsicAccuracy = true;
+            ammo = 60;
+            SetAmmoType<AT556NATO>(.85f);
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("ARW-A"), 27, 9);
             _center = new Vec2(13f, 5f);
@@ -52,7 +47,15 @@ namespace TMGmod
             _kickForce = 1f;
             KforceDelta = .2f;
         }
+
+        protected override void OnInitialize()
+        {
+            _ammoType.range = 500f;
+            base.OnInitialize();
+        }
+
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+
         public bool SetMag()
         {
             if (Mags <= 0) return false;
@@ -66,7 +69,6 @@ namespace TMGmod
             }
 
             _onemoreclick = true;
-            ammo = 30;
             Mags -= 1;
             return true;
         }
@@ -92,17 +94,25 @@ namespace TMGmod
         }
 
         public Vec2 SpawnPos => new Vec2(0, -1);
+        private int RealAmmo => ammo - 30 * Mags;
 
         public override void OnPressAction()
         {
-            if (ammo <= 0) _magBuddy.Doload();
+            if (RealAmmo <= 0) _magBuddy.Doload();
             base.OnPressAction();
+        }
+
+        protected override void RealFire()
+        {
+            ammo -= 30 * Mags; // ammo = RealAmmo
+            base.RealFire();
+            ammo += 30 * Mags;
         }
 
         public override void Update()
         {
-            if (ammo <= 0) _magBuddy.Disload();
-            if (ammo <= 0 && Mags <= 0) NonSkin = 2;
+            if (RealAmmo <= 0) _magBuddy.Disload();
+            if (RealAmmo <= 0 && Mags <= 0) NonSkin = 2;
             base.Update();
         }
     }
