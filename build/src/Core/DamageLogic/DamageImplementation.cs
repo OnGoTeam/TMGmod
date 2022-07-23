@@ -7,22 +7,60 @@ namespace TMGmod.Core.DamageLogic
     {
         private static float GetMean(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.DamageMean : ammo is ATShrapnel ? 30f : 50f;
+            switch (ammo)
+            {
+                case IDamage damage:
+                    return damage.DamageMean;
+                case ATShrapnel _:
+                    return 30f;
+                case ATSniper _:
+                    return 110f;
+                default:
+                    return 50f;
+            }
         }
 
         private static float GetVariation(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.DamageVariation : ammo is ATShrapnel ? 1f : 0.5f;
+            switch (ammo)
+            {
+                case IDamage damage:
+                    return damage.DamageVariation;
+                case ATShrapnel _:
+                    return 1f;
+                case ATSniper _:
+                    return .05f;
+                default:
+                    return 0.5f;
+            }
         }
 
         private static float GetConvexity(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.DistanceConvexity : ammo is ATShrapnel ? 1f : 0f;
+            switch (ammo)
+            {
+                case IDamage damage:
+                    return damage.DistanceConvexity;
+                case ATShrapnel _:
+                    return 1f;
+                default:
+                    return 0f;
+            }
         }
 
         private static float GetAlpha(AmmoType ammo)
         {
-            return ammo is IDamage damage ? damage.AlphaDamage : ammo is ATShrapnel ? 0.8f : 0.01f;
+            switch (ammo)
+            {
+                case IDamage damage:
+                    return damage.AlphaDamage;
+                case ATShrapnel _:
+                    return 0.8f;
+                case ATSniper _:
+                    return 1f;
+                default:
+                    return 0.01f;
+            }
         }
 
         private static float CalculateBase(AmmoType ammo)
