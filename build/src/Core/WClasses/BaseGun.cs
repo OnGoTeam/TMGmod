@@ -14,9 +14,7 @@ using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
-#if FEATURE_EDITOR_SKINS
 using System.Linq;
-#endif
 
 namespace TMGmod.Core.WClasses
 {
@@ -354,15 +352,10 @@ namespace TMGmod.Core.WClasses
 #if DEBUG
             DrawDebug();
 #endif
-#if FEATURE_EDITOR_SKINS
             DrawRandom();
-#else
-            base.Draw();
-#endif
         }
 
 
-#if FEATURE_EDITOR_SKINS
         private void DrawRandom()
         {
             if (
@@ -389,7 +382,6 @@ namespace TMGmod.Core.WClasses
                 base.Draw();
             }
         }
-#endif
 
         public override void EditorPropertyChanged(object property)
         {
@@ -461,7 +453,6 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-#if FEATURE_EDITOR_SKINS
         public override ContextMenu GetContextMenu()
         {
             var contextMenu = base.GetContextMenu();
@@ -495,7 +486,8 @@ namespace TMGmod.Core.WClasses
             if (_ammoType != null) yield return $"Bullet Speed: {_ammoType.bulletSpeed / 16f * 60f}";
             if (_ammoType != null) yield return $"Penetration: {_ammoType.penetration}";
             yield return $"Kickforce: {_kickForce}";
-            if (_fireWait > 0 && !_manualLoad && _fullAuto) yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
+            if (_fireWait > 0 && !_manualLoad && _fullAuto)
+                yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
         }
 
         public static IEnumerable<string> StatsHeader()
@@ -557,7 +549,7 @@ namespace TMGmod.Core.WClasses
                 set => _target.SkinValue = value;
             }
         }
-#endif
+
 #if DEBUG
         private void DrawAccuracy()
         {
