@@ -13,8 +13,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 20;
-            _ammoType = new ATArx200();
-            MaxAccuracy = 0.98f;
+            SetAmmoType<ATArx200>(.98f);
             MinAccuracy = 0.6f;
             RegenAccuracyDmr = 0.009f;
             DrainAccuracyDmr = 0.1f;
