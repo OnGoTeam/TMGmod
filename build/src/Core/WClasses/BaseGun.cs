@@ -102,7 +102,12 @@ namespace TMGmod.Core.WClasses
         protected void ComposeFirstAccuracy(float max, uint delay)
         {
             MaxAccuracy = max;
-            var delta = max - _ammoType.accuracy;
+            ComposeFirstAccuracy(delay);
+        }
+
+        protected void ComposeFirstAccuracy(uint delay)
+        {
+            var delta = MaxAccuracy - _ammoType.accuracy;
             Compose(new FirstAccuracy(delay, accuracy => accuracy - delta));
         }
 
