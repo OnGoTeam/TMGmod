@@ -18,8 +18,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             ammo = 17;
-            _ammoType = new ATAR9SX();
-            MaxAccuracy = 0.78f;
+            SetAmmoType<ATAR9SX>();
             
             Smap = new SpriteMap(GetPath("AR9SX"), 36, 10);
             _center = new Vec2(18f, 5f);
