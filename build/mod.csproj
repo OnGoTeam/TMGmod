@@ -85,6 +85,10 @@
     <Compile Include="src\Core\BipodsLogic\BipodsImplementation.cs" />
     <Compile Include="src\Core\BipodsLogic\ISwitchBipods.cs" />
     <Compile Include="src\Core\Bullets\AntiProp.cs" />
+    <Compile Include="src\Core\DamageLogic\DamageImplementation.cs" />
+    <Compile Include="src\Core\DamageLogic\DotMarker.cs" />
+    <Compile Include="src\Core\DamageLogic\StringMarker.cs" />
+    <Compile Include="src\Core\DamageLogic\StrokeMarker.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\FirstAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\FocusingAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\LoseAccuracy.cs" />
