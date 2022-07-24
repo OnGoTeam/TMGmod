@@ -579,11 +579,9 @@ namespace TMGmod.Core.WClasses
             if (!isServerForObject) return;
             if (hint is null) return;
             var tuple = new Tuple<Type, string>(GetType(), hint);
-#if DEBUG
-            if (Hints.ContainsKey(tuple) && !duck.inputProfile.Pressed("STRAFE")) return;
-#else
+            if (duck.inputProfile.Pressed("STRAFE"))
+                Hints.Clear();
             if (Hints.ContainsKey(tuple)) return;
-#endif
             Hints[tuple] = true;
             Level.Add(new HintThing(this, offset, hint, image()));
         }
