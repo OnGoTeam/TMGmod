@@ -38,10 +38,9 @@ namespace TMGmod.NY
 
         protected override float Accuracy => _ammoType.accuracy;
 
-        protected override void OnSpent()
+        protected override void BaseOnSpent()
         {
             Randomize();
-            base.OnSpent();
         }
     }
 }
