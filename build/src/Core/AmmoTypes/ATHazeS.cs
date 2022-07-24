@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATHazeS()
         {
-            accuracy = 0.9f;
+            accuracy = 1f;
             range = 150f;
             bulletSpeed = 60f;
             penetration = 1f;

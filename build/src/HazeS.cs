@@ -31,8 +31,8 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(24f, 2f);
             _fireSound = GetPath("sounds/SilencedPistol.wav");
             _fullAuto = true;
-            _fireWait = 0.9f;
-            _kickForce = 0.5f;
+            _fireWait = .9f;
+            _kickForce = .5f;
             _holdOffset = new Vec2(1f, 0f);
             _editorName = "AF Haze";
             laserSight = true;
@@ -50,11 +50,12 @@ namespace TMGmod
                 _heatval = value;
                 _ammoType.bulletSpeed = 60f + 10f * _heatval;
                 _ammoType.range = 180f;
+                _fireWait = _heatval > 3f ? .6f : .9f;
                 Sighted = _sighted;
             }
         }
 
-        protected override float Accuracy => Sighted ? 1f : _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
+        protected override float BaseAccuracy => Sighted ? 1f : _heatval > 3f ? 1.28f - _heatval * 0.16f : 0.8f;
 
         [UsedImplicitly]
         public bool Sighted
@@ -69,16 +70,15 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
 
-        public override void Update()
+        protected override void BaseOnUpdate()
         {
-            base.Update();
             if (_heatval > 8f)
             {
                 _heatval = 8f;
                 for (var i = 0; i < 4; i++) Level.Add(SmallSmoke.New(x, y));
             }
 
-            _heatval -= 0.1f;
+            _heatval -= 0.07f;
             if (_heatval < 0f) _heatval = 0f;
             Heatval = _heatval;
             if (duck != null)
@@ -108,11 +108,22 @@ namespace TMGmod
             return Sighted || duck?.inputProfile.Down("QUACK") != true;
         }
 
-        protected override void OnSpent()
+        protected override void BaseOnSpent()
         {
+            switch (Sighted)
+            {
+                case true when _heatval < 1f:
+                    _heatval += 4f;
+                    break;
+                case true:
+                    _heatval += .7f;
+                    break;
+                default:
+                    _heatval += 1.5f;
+                    break;
+            }
+
             Heatval = Heatval;
-            if (Sighted && _heatval < 1f) _heatval += 4f;
-            _heatval += 1f;
         }
     }
 }

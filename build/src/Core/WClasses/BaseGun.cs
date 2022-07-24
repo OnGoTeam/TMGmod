@@ -124,11 +124,11 @@ namespace TMGmod.Core.WClasses
 
         protected virtual float BaseAccuracy => MaxAccuracy;
 
-        protected virtual float Accuracy => ClipAccuracy(ActiveModifier.ModifyAccuracy(BaseAccuracy));
+        private float Accuracy => ClipAccuracy(ActiveModifier.ModifyAccuracy(BaseAccuracy));
 
         protected virtual float BaseKforce => _kickForce;
 
-        protected virtual float Kforce => Math.Max(0f, ActiveModifier.ModifyKforce(BaseKforce));
+        private float Kforce => Math.Max(0f, ActiveModifier.ModifyKforce(BaseKforce));
 
         [UsedImplicitly]
         public BitBuffer ModifierBuffer
@@ -386,7 +386,7 @@ namespace TMGmod.Core.WClasses
         {
         }
 
-        protected virtual void OnSpent()
+        private void OnSpent()
         {
             ActiveModifier.ModifySpent(BaseOnSpent);
         }
@@ -395,7 +395,7 @@ namespace TMGmod.Core.WClasses
         {
         }
 
-        protected virtual void OnUpdate()
+        private void OnUpdate()
         {
             ActiveModifier.ModifyUpdate(BaseOnUpdate);
         }
