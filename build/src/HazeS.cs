@@ -22,6 +22,7 @@ namespace TMGmod
         public HazeS(float xval, float yval) :
             base(xval, yval)
         {
+            _editorName = "AF Haze";
             ammo = 26;
             SetAmmoType<ATHazeS>();
             Smap = new SpriteMap(GetPath("HazeS"), 24, 12);
@@ -34,7 +35,6 @@ namespace TMGmod
             _fireWait = .9f;
             _kickForce = .5f;
             _holdOffset = new Vec2(1f, 0f);
-            _editorName = "AF Haze";
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
             _weight = 2f;

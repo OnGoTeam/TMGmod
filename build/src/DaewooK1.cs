@@ -18,6 +18,7 @@ namespace TMGmod
         public DaewooK1(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Daewoo K1";
             ammo = 32;
             SetAmmoType<ATDaewooK1>();
             NonSkinFrames = 3;
@@ -40,7 +41,6 @@ namespace TMGmod
             KforceDelay = 50;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.24f;
-            _editorName = "Daewoo K1";
             _weight = 4.5f;
         }
 

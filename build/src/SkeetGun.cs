@@ -18,6 +18,7 @@ namespace TMGmod
 
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "Skeet Double";
             ammo = 2;
             SetAmmoType<ATSkeetGun>();
             _numBulletsPerFire = 10;
@@ -33,7 +34,6 @@ namespace TMGmod
             };
             _fireWait = 0.5f;
             _kickForce = 6.55f;
-            _editorName = "Skeet Double";
             _holdOffset = new Vec2(9f, 2f);
         }
 

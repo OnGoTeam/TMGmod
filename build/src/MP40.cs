@@ -15,6 +15,7 @@ namespace TMGmod
         public MP40(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "MP40";
             ammo = 32;
             SetAmmoType<ATMP40>(.99f);
             KforceDelta = 2f;
@@ -33,7 +34,6 @@ namespace TMGmod
             _kickForce = 1.45f;
             _holdOffset = new Vec2(4f, 4f);
             ShellOffset = new Vec2(-1f, -6f);
-            _editorName = "MP40";
             _weight = 3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;

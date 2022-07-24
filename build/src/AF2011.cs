@@ -16,6 +16,7 @@ namespace TMGmod
         public AF2011(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "AF-2011";
             ammo = 10;
             SetAmmoType<ATAF2011>();
             _numBulletsPerFire = 2;
@@ -31,7 +32,6 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             _holdOffset = new Vec2(-1f, 1f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "AF-2011";
             _weight = 2.5f;
             Compose(new LoseAccuracy(0.05f, 0.003f, 1f));
         }

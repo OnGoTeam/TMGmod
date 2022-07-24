@@ -17,6 +17,7 @@ namespace TMGmod
         public M950(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Calico M950A";
             ammo = 50;
             SetAmmoType<ATCalico>();
             Smap = new SpriteMap(GetPath("M950A"), 23, 7);
@@ -36,7 +37,6 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 1f);
             loseAccuracy = 0.01f;
             maxAccuracyLost = 0.05f;
-            _editorName = "Calico M950A";
             _weight = 1f;
             handAngle = 0f;
         }

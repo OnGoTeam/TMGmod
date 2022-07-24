@@ -21,6 +21,7 @@ namespace TMGmod
         public MP7(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "HK MP7";
             ammo = 35;
             SetAmmoType<ATMP7>();
             Smap = new SpriteMap(GetPath("MP7"), 20, 10);
@@ -37,7 +38,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-6f, -2f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
-            _editorName = "HK MP7";
             _weight = 3f;
         }
 

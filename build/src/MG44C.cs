@@ -14,6 +14,7 @@ namespace TMGmod
         public MG44C(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "MG44 Mark2T";
             ammo = 30;
             SetAmmoType<ATMG44>();
             Smap = new SpriteMap(GetPath("MG44 Mark2T"), 39, 11);
@@ -33,7 +34,6 @@ namespace TMGmod
             maxAccuracyLost = 0.6f;
             _holdOffset = new Vec2(5f, 1f);
             ShellOffset = new Vec2(-5f, -3f);
-            _editorName = "MG44 Mark2T";
             laserSight = true;
             _laserOffsetTL = new Vec2(29f, 1f);
             _weight = 6f;

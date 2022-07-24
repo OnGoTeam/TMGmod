@@ -14,6 +14,7 @@ namespace TMGmod
         public M72(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "M72";
             ammo = 5;
             SetAmmoType<ATM72>();
             NonSkinFrames = 6;
@@ -30,7 +31,6 @@ namespace TMGmod
             _kickForce = 4.5f;
             loseAccuracy = 0.65f;
             maxAccuracyLost = 1f;
-            _editorName = "M72";
             _weight = 4.5f;
         }
         public override void Update()

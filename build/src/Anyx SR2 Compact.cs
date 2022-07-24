@@ -22,6 +22,7 @@ namespace TMGmod
         public VSK94(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Anyx SR2 Compact";
             ammo = 11;
             SetAmmoType<ATSR2C>();
             MinAccuracy = 0.5f;
@@ -44,7 +45,6 @@ namespace TMGmod
             _fireWait = 1f;
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.7f;
-            _editorName = "Anyx SR2 Compact";
             _weight = 5.5f;
         }
 

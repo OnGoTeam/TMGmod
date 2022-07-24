@@ -12,6 +12,7 @@ namespace TMGmod
         public Rfb(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "RFB";
             ammo = 20;
             SetAmmoType<AT545NATO>(.9f);
             NonSkinFrames = 2;
@@ -31,7 +32,6 @@ namespace TMGmod
             _fireWait = 0.46f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
-            _editorName = "RFB";
             _weight = 5.5f;
             _kickForce = 0.07f;
             KforceDelta = 0.63f;

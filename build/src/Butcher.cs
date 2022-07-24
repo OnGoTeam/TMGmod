@@ -22,6 +22,7 @@ namespace TMGmod
         public Butcher(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Solaris Butcher";
             ammo = (1 + Mags) * 60;
             SetAmmoType<ATButcher>();
             NonSkinFrames = 12;
@@ -42,7 +43,6 @@ namespace TMGmod
             maxAccuracyLost = 0.1f;
             _holdOffset = new Vec2(0f, 1f);
             ShellOffset = new Vec2(3f, -1f);
-            _editorName = "Solaris Butcher";
             _weight = 4f;
             _magBuddy = new MagBuddy<Butcher>(this, typeof(ArwaMag));
             KickForce1Lmg = 0.33f;

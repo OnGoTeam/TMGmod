@@ -21,6 +21,7 @@ namespace TMGmod
         public Lynx(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Gepard Lynx";
             ammo = 6;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
@@ -46,7 +47,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-18f, -1f);
             laserSight = true;
             _laserOffsetTL = new Vec2(22f, 3.5f);
-            _editorName = "Gepard Lynx";
             _weight = 6f;
             Compose(
                 _loseAccuracy,

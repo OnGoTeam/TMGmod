@@ -14,6 +14,7 @@ namespace TMGmod
         public PMRC(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "PMR-30";
             ammo = 30;
             SetAmmoType<ATPMR30>();
             Smap = new SpriteMap(GetPath("PMR30"), 16, 10);
@@ -29,7 +30,6 @@ namespace TMGmod
             _kickForce = 0.5f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.3f;
-            _editorName = "PMR-30";
             _weight = 2.5f;
         }
 

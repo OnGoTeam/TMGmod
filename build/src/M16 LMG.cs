@@ -16,6 +16,7 @@ namespace TMGmod
         public M16LMG(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "M16 LMG";
             ammo = 50;
             SetAmmoType<AT556NATO>(.8f);
             Smap = new SpriteMap(GetPath("M16LMG"), 38, 11);
@@ -35,7 +36,6 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
-            _editorName = "M16 LMG";
             _weight = 6f;
             MinAccuracy = 0.7f;
             KickForce1Lmg = 0.23f;

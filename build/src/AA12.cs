@@ -14,6 +14,7 @@ namespace TMGmod
         public AA12(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "AA-12";
             ammo = 12;
             SetAmmoType<AT12Gauge>(.6f);
             _numBulletsPerFire = 12;
@@ -30,7 +31,6 @@ namespace TMGmod
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(1f, 1f);
             ShellOffset = new Vec2(-14f, -5f);
-            _editorName = "AA-12";
             _weight = 7f;
         }
 

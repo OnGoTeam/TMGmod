@@ -15,6 +15,7 @@ namespace TMGmod
         public SpectreM4(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Spectre M4";
             ammo = 30;
             SetAmmoType<ATSpectreM4>();
             NonSkinFrames = 2;
@@ -37,7 +38,6 @@ namespace TMGmod
             maxAccuracyLost = 0.34f;
             _holdOffset = new Vec2(3f, 3f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "Spectre M4";
             _weight = 3.3f;
         }
 

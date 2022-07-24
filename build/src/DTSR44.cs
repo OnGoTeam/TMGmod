@@ -13,6 +13,7 @@ namespace TMGmod
         public DTSR44(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "DT SR-44";
             Smap = new SpriteMap(GetPath("DT SR-44"), 29, 12);
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
@@ -26,7 +27,6 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _kickForce = 3.1f;
             _holdOffset = new Vec2(-2f, 0f);
-            _editorName = "DT SR-44";
             _weight = 3.5f;
             ShellOffset = new Vec2(-8f, -2f);
             SetAmmoType<AT50SniperS>(.92f);

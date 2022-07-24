@@ -16,6 +16,7 @@ namespace TMGmod
 
         public Urbana(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "Urbana";
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("Urbana"), 53, 15);
             BipOff = GetPath("sounds/beepods2");
@@ -35,7 +36,6 @@ namespace TMGmod
             laserSight = false;
             _laserOffsetTL = new Vec2(31f, 9f);
             _holdOffset = new Vec2(9f, 1f);
-            _editorName = "Urbana";
             _weight = 5.6f;
             ShellOffset = new Vec2(-9f, -2f);
             SetAmmoType<ATBoltAction>();

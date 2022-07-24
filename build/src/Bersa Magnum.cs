@@ -15,6 +15,7 @@ namespace TMGmod
         public BersaMagnum(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Bersa Magnum";
             ammo = 7;
             SetAmmoType<ATBersaMagnum>();
             
@@ -32,7 +33,6 @@ namespace TMGmod
             maxAccuracyLost = 0.7f;
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "Bersa Magnum";
             _laserOffsetTL = new Vec2(12f, 0f);
             laserSight = true;
             _weight = 2.4f;

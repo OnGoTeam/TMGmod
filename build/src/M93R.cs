@@ -16,6 +16,7 @@ namespace TMGmod
         public M93R(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "M93R";
             Smap = new SpriteMap(GetPath("M93R"), 12, 9);
             _center = new Vec2(6f, 2f);
             _collisionOffset = new Vec2(-6f, -2f);
@@ -35,7 +36,6 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.35f;
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "M93R";
             _weight = 2f;
             ComposeSimpleBurst(3, .3f);
         }

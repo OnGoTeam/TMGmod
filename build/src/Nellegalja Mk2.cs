@@ -15,6 +15,7 @@ namespace TMGmod
         public NellegaljaMk2(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Nellegalja Mk2";
             ammo = 20;
             SetAmmoType<ATSLK8>();
             MinAccuracy = 0.8f;
@@ -34,7 +35,6 @@ namespace TMGmod
             _kickForce = 0.7f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
-            _editorName = "Nellegalja Mk2";
             _weight = 5f;
             laserSight = true;
             _laserOffsetTL = new Vec2(18f, 2f);

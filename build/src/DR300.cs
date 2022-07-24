@@ -15,6 +15,7 @@ namespace TMGmod
         public DR300(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Daewoo DR300";
             Rounds = new EditorProperty<int>(0, this, 0, 2, 1);
             PostRounds = Rando.ChooseInt(20, 30);
             ammo = PostRounds;
@@ -41,7 +42,6 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(2f, 3f);
             ShellOffset = new Vec2(-7f, -2f);
-            _editorName = "Daewoo DR300";
             laserSight = false;
             _weight = 3.5f;
         }

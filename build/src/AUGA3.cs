@@ -13,6 +13,7 @@ namespace TMGmod
         public AUGA3(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "AUG A3";
             ammo = 30;
             SetAmmoType<ATAUGA3>();
             
@@ -32,7 +33,6 @@ namespace TMGmod
             _fireWait = 0.8f;
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.2f;
-            _editorName = "AUG A3";
             _weight = 5f;
             _kickForce = .07f;
             KforceDelta = .63f;

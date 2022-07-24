@@ -15,6 +15,7 @@ namespace TMGmod
         public M4A1(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "M4A1";
             ammo = 30;
             SetAmmoType<AT545NATO>(.86f);
             Smap = new SpriteMap(GetPath("M4A1"), 30, 11);
@@ -33,7 +34,6 @@ namespace TMGmod
             maxAccuracyLost = 0.21f;
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(-2f, -2f);
-            _editorName = "M4A1";
             _weight = 4f;
             _kickForce = .5f;
             KforceDelta = .5f;

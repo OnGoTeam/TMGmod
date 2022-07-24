@@ -15,6 +15,7 @@ namespace TMGmod
         public Alep30(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Alep 30";
             ammo = 18;
             SetAmmoType<ATAlep30>();
             Smap = new SpriteMap(GetPath("Alep30"), 16, 9);
@@ -31,7 +32,6 @@ namespace TMGmod
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(1f, 2f);
             ShellOffset = new Vec2(-3f, -3f);
-            _editorName = "Alep 30";
             _weight = 2.3f;
         }
 

@@ -20,6 +20,7 @@ namespace TMGmod
         public PP19(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "PP-19 Bizon";
             ammo = 64;
             SetAmmoType<ATBizon>(.8f);
             ComposeFirstAccuracy(25);
@@ -43,7 +44,6 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 1f);
             handOffset = new Vec2(2f, 0f);
             ShellOffset = new Vec2(-1f, -2f);
-            _editorName = "PP-19 Bizon";
             _weight = 1.5f;
         }
 

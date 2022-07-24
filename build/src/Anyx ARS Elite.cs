@@ -26,6 +26,7 @@ namespace TMGmod
         public Vixr(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Anyx ARS Elite";
             ammo = 21;
             SetAmmoType<ATARS>();
             
@@ -48,7 +49,6 @@ namespace TMGmod
             _kickForce = 3f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
-            _editorName = "Anyx ARS Elite";
             _weight = 6f;
             handAngle = 0f;
         }

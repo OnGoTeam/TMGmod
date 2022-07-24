@@ -13,6 +13,7 @@ namespace TMGmod
         public M14(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "M14";
             ammo = 10;
             SetAmmoType<ATM14>();
             MinAccuracy = 0.5f;
@@ -35,7 +36,6 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-13f, -4f);
-            _editorName = "M14";
             _weight = 4.5f;
         }
 

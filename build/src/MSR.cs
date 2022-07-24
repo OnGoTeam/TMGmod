@@ -14,6 +14,7 @@ namespace TMGmod
     {
         public MSR(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "MSR";
             Smap = new SpriteMap(GetPath("MSR"), 47, 12);
             _center = new Vec2(24f, 6f);
             _collisionOffset = new Vec2(-24f, -6f);
@@ -27,7 +28,6 @@ namespace TMGmod
             _fireSound = GetPath("sounds/RifleOrMG.wav");
             _kickForce = 5.5f;
             _holdOffset = new Vec2(10f, 0f);
-            _editorName = "MSR";
             _weight = 4.65f;
             ShellOffset = new Vec2(-9f, -1.5f);
             SetAmmoType<ATBoltAction>();

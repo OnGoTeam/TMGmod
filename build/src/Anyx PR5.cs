@@ -13,6 +13,7 @@ namespace TMGmod
         public Glock18(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Anyx PR5";
             Smap = new SpriteMap(GetPath("Anyx PR5"), 12, 8);
             _center = new Vec2(6f, 4f);
             _collisionOffset = new Vec2(-6f, -4f);
@@ -33,7 +34,6 @@ namespace TMGmod
             maxAccuracyLost = 0.6f;
             ShellOffset = new Vec2(-1f, -2f);
             _holdOffset = new Vec2(-1f, 2f);
-            _editorName = "Anyx PR5";
             _weight = 1.7f;
             ComposeSimpleBurst(3, .6f);
         }

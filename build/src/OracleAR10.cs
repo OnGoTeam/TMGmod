@@ -17,6 +17,7 @@ namespace TMGmod
         public OracleAR10(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Oracle AR-10";
             ammo = 10;
             SetAmmoType<AT556NATO>(.91f);
             MinAccuracy = .35f;
@@ -41,7 +42,6 @@ namespace TMGmod
             maxAccuracyLost = .15f;
             laserSight = false;
             _laserOffsetTL = new Vec2(17f, 1.5f);
-            _editorName = "Oracle AR-10";
             _weight = 5f;
         }
 

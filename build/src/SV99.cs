@@ -15,6 +15,7 @@ namespace TMGmod
     {
         public SV99(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "SV-99";
             Smap = new SpriteMap(GetPath("SV99"), 27, 9);
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
@@ -31,7 +32,6 @@ namespace TMGmod
             loseAccuracy = 0.5f;
             maxAccuracyLost = 1.5f;
             _holdOffset = new Vec2(-1f, 0f);
-            _editorName = "SV-99";
             _weight = 2f;
         }
 

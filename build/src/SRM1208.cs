@@ -31,6 +31,7 @@ namespace TMGmod
         public SRM1208(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "SRM 1208";
             ammo = 8;
             SetAmmoType<ATSRM>(.6f);
             _numBulletsPerFire = 8;
@@ -51,7 +52,6 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(0f, 1f);
-            _editorName = "SRM 1208";
             _weight = 4.5f;
             ComposeSimpleBurst(2, 1f);
         }

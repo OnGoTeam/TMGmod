@@ -18,6 +18,7 @@ namespace TMGmod
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "AN94";
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("AN94"), 33, 9);
             _center = new Vec2(16f, 5f);
@@ -38,7 +39,6 @@ namespace TMGmod
             _kickForce = 0.5f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.45f;
-            _editorName = "AN94";
             _weight = 4.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(30f, 2.5f);

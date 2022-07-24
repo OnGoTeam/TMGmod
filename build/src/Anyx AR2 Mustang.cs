@@ -18,6 +18,7 @@ namespace TMGmod
         public AN94C(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Anyx AR2 Mustang";
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("Anyx AR2 Mustang"), 33, 10);
             _center = new Vec2(16f, 5f);
@@ -38,7 +39,6 @@ namespace TMGmod
             _kickForce = 1.2f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.25f;
-            _editorName = "Anyx AR2 Mustang";
             _weight = 5.5f;
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f)

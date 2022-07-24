@@ -16,6 +16,7 @@ namespace TMGmod
         public ANP73(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Experimental ANP-73";
             ammo = 33;
             SetAmmoType<ATANP73>();
             NonSkinFrames = 4;
@@ -33,7 +34,6 @@ namespace TMGmod
             _kickForce = 1.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
-            _editorName = "Experimental ANP-73";
             _weight = 2f;
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });

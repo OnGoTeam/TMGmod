@@ -16,6 +16,7 @@ namespace TMGmod
         public Foucus(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Foucus";
             ammo = 20;
             SetAmmoType<ATFOUCUS>();
             
@@ -37,7 +38,6 @@ namespace TMGmod
             KforceDelta = 1.5f;
             loseAccuracy = 0.275f;
             maxAccuracyLost = 0.275f;
-            _editorName = "Foucus";
             _weight = 8f;
         }
 

@@ -18,6 +18,7 @@ namespace TMGmod
         public MK17(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Mk17 with Shield";
             _hitPoints = 49f;
             thickness = 12f;
             ammo = 20;
@@ -41,7 +42,6 @@ namespace TMGmod
             KforceDelta = .3f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.6f;
-            _editorName = "Mk17 with Shield";
             _weight = 4.5f;
         }
 

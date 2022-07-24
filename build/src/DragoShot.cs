@@ -17,6 +17,7 @@ namespace TMGmod
         public DragoShot(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "DragoShot";
             ammo = 16;
             SetAmmoType<ATDragoshot>();
             _numBulletsPerFire = 8;
@@ -36,7 +37,6 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(23f, 3f);
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-6f, -3f);
-            _editorName = "DragoShot";
             _weight = 5f;
             var burst = new Burst(
                 this,

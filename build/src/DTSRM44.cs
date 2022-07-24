@@ -16,6 +16,7 @@ namespace TMGmod
         public DTSRM44(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "DT SRM-44";
             Smap = new SpriteMap(GetPath("DT SRM-44"), 37, 12);
             _center = new Vec2(19f, 6f);
             _collisionOffset = new Vec2(-19f, -6f);
@@ -29,7 +30,6 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _kickForce = 4.6f;
             _holdOffset = new Vec2(2f, 0f);
-            _editorName = "DT SRM-44";
             _weight = 4.5f;
             _laserOffsetTL = new Vec2(30f, 7.5f);
             ShellOffset = new Vec2(-12f, -2f);

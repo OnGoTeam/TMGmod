@@ -16,6 +16,7 @@ namespace TMGmod
         public TC12(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "TC-12";
             ammo = 11;
             SetAmmoType<ATTC12>();
             MinAccuracy = 0.45f;
@@ -42,7 +43,6 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             laserSight = true;
             _laserOffsetTL = new Vec2(26f, 5.5f);
-            _editorName = "TC-12";
             _weight = 4.5f;
         }
 

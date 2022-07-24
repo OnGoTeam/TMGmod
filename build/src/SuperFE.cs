@@ -9,9 +9,9 @@ namespace TMGmod
     {
         public SuperFe(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "SFE";
             ammo = 666;
             _kickForce = 2f;
-            _editorName = "SFE";
         }
 
         public override void Update()

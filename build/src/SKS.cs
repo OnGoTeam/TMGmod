@@ -23,6 +23,7 @@ namespace TMGmod
         public SKS(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "SKS";
             ammo = 11;
             _ammoType = new AT762NATO
             {
@@ -51,7 +52,6 @@ namespace TMGmod
             _kickForce = 3.8f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.4f;
-            _editorName = "SKS";
             _weight = 6f;
             Compose(new SpeedAccuracy(this, 1f, 1f, .15f));
         }

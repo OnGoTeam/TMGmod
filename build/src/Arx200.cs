@@ -12,6 +12,7 @@ namespace TMGmod
         public Arx200(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Beretta ARX-200";
             ammo = 20;
             SetAmmoType<ATArx200>(.98f);
             MinAccuracy = 0.6f;
@@ -35,7 +36,6 @@ namespace TMGmod
             _kickForce = 3.1f;
             loseAccuracy = 0f; //0.15f
             maxAccuracyLost = 0f; //0.15f
-            _editorName = "Beretta ARX-200";
             _weight = 6f;
         }
 

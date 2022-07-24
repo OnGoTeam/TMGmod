@@ -16,6 +16,7 @@ namespace TMGmod
         public ValmetM76(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Valmet M76";
             ammo = 20;
             SetAmmoType<ATM76>();
             MinAccuracy = 0.5f;
@@ -37,7 +38,6 @@ namespace TMGmod
             _kickForce = 3f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.25f; //0.4f
-            _editorName = "Valmet M76";
             _weight = 4f;
             var lose = new LoseAccuracy(0.15f, 0.02f, 1f);
             Compose(

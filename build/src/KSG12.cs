@@ -14,6 +14,7 @@ namespace TMGmod
         public Ksg12(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "KSG-12";
             ammo = 15;
             SetAmmoType<ATKSG12>();
             _numBulletsPerFire = 8;
@@ -34,7 +35,6 @@ namespace TMGmod
             };
             FrameId = 0;
             ShellOffset = new Vec2(-8f, 0f);
-            _editorName = "KSG-12";
             LoaderVec2 = new Vec2(6f, 0f);
             Loaddx = 2.5f;
         }

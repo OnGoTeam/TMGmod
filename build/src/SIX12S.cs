@@ -18,6 +18,7 @@ namespace TMGmod
         public SIX12S(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "SIX12 Silenced";
             ammo = 6;
             SetAmmoType<ATSIX12S>();
             _numBulletsPerFire = 14;
@@ -37,7 +38,6 @@ namespace TMGmod
             laserSight = false;
             _laserOffsetTL = new Vec2(24f, 7.5f);
             _holdOffset = new Vec2(2f, 0f);
-            _editorName = "SIX12 Silenced";
             _weight = 4f;
         }
 

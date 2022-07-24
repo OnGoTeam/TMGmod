@@ -18,6 +18,7 @@ namespace TMGmod
         public AKALFA(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Alfa";
             ammo = 20;
             SetAmmoType<AT545NATO>();
             NonSkinFrames = 3;
@@ -39,7 +40,6 @@ namespace TMGmod
             KforceDelta = 0.70f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0.25f;
-            _editorName = "Alfa";
             _weight = 5.5f;
         }
 

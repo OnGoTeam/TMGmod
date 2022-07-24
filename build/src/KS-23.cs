@@ -24,6 +24,7 @@ namespace TMGmod
         [UsedImplicitly]
         public KS23(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "KS-23";
             ammo = 6;
             SetAmmoType<AT12GaugeS>();
             _numBulletsPerFire = 16;
@@ -43,7 +44,6 @@ namespace TMGmod
             maxAccuracyLost = 0.9f;
             _manualLoad = true;
             _fireWait = 4f;
-            _editorName = "KS-23";
             LoaderSprite = new SpriteMap(GetPath("KS-23Pump"), 7, 4)
             {
                 center = new Vec2(4f, 2f),

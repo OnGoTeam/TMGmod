@@ -15,6 +15,8 @@ namespace TMGmod
         public X3X(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Experimental X3X";
+            _bio = "ammo = 1337";
             ammo = 6;
             SetAmmoType<ATx3x>();
             NonSkinFrames = 3;
@@ -31,8 +33,6 @@ namespace TMGmod
             maxAccuracyLost = 1.7f;
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-4f, -1f);
-            _editorName = "Experimental X3X";
-            _bio = "ammo = 1337";
             _weight = 5.5f;
         }
 

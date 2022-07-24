@@ -19,6 +19,7 @@ namespace TMGmod
         public CZ75(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "CZ-75";
             ammo = 24;
             SetAmmoType<ATCZ75>();
             NonSkinFrames = 2;
@@ -38,7 +39,6 @@ namespace TMGmod
             _kickForce = 0.9f;
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
-            _editorName = "CZ-75";
             _weight = 1f;
         }
 

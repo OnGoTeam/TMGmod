@@ -14,6 +14,7 @@ namespace TMGmod
         public PPK42(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "PPK 42";
             ammo = 30;
             SetAmmoType<ATPPK42>();
             KforceDelta = 2.5f;
@@ -35,7 +36,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-3f, -4f);
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.5f;
-            _editorName = "PPK 42";
             _weight = 3f;
         }
 

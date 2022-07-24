@@ -16,6 +16,7 @@ namespace TMGmod
         public IB8mm(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "IB-8mm Sniper";
             ammo = 26;
             SetAmmoType<ATIB8>();
             Smap = new SpriteMap(GetPath("IB-8mm Sniper"), 28, 12);
@@ -32,7 +33,6 @@ namespace TMGmod
             maxAccuracyLost = 0.15f;
             _holdOffset = new Vec2(-2f, 0f);
             ShellOffset = new Vec2(-3f, 0f);
-            _editorName = "IB-8mm Sniper";
             _weight = 3f;
             Compose(new FirstKforce(11, kforce => kforce + 2f));
         }

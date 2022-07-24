@@ -14,6 +14,7 @@ namespace TMGmod
         public Vintorez(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Vintorez";
             ammo = 16;
             SetAmmoType<ATVintorez>();
             MinAccuracy = 0f;
@@ -32,7 +33,6 @@ namespace TMGmod
             _fireWait = 0.7f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
-            _editorName = "Vintorez";
             _weight = 4.7f;
             Compose(new SpeedAccuracy(this, 1f, 1f, 0.5f));
         }

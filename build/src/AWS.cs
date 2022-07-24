@@ -20,6 +20,7 @@ namespace TMGmod
             : base(xval, yval)
 
         {
+            _editorName = "AWS";
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("AWS"), 33, 11);
             BipOff = GetPath("sounds/beepods2");
@@ -36,7 +37,6 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced1.wav");
             _kickForce = 3.8f;
             _holdOffset = new Vec2(2f, 1f);
-            _editorName = "AWS";
             _weight = 5f;
             ShellOffset = new Vec2(-3f, -2f);
             SetAmmoType<AT50SniperS>();

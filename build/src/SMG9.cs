@@ -13,6 +13,7 @@ namespace TMGmod
         public SMG9(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "SMG-9";
             ammo = 24;
             SetAmmoType<ATSMG9>();
             KforceDelta = 3.5f;
@@ -34,7 +35,6 @@ namespace TMGmod
             maxAccuracyLost = 0.57f;
             _holdOffset = new Vec2(-1f, 2f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "SMG-9";
             _weight = 2.5f;
         }
 

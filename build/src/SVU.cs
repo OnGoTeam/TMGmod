@@ -17,6 +17,7 @@ namespace TMGmod
         public SVU(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "SVU";
             ammo = 12;
             SetAmmoType<ATSVU>();
             MinAccuracy = 0.2f;
@@ -37,7 +38,6 @@ namespace TMGmod
             maxAccuracyLost = 0.1f;
             _holdOffset = new Vec2(0f, 0f);
             ShellOffset = new Vec2(-10f, 0f);
-            _editorName = "SVU";
             _weight = 5.7f;
             Compose(
                 new LoseAccuracy(.02f, .017f, 1f),

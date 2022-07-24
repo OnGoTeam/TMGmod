@@ -12,6 +12,7 @@ namespace TMGmod
         public Type89(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Type 89";
             ammo = 26;
             SetAmmoType<ATType89>();
             Smap = new SpriteMap(GetPath("Type 89"), 30, 12);
@@ -30,7 +31,6 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(1f, 0f);
             ShellOffset = new Vec2(-1f, -1f);
-            _editorName = "Type 89";
             _weight = 4.6f;
             _kickForce = 1.1f;
             KforceDelta = .4f;

@@ -11,6 +11,7 @@ namespace TMGmod
         public MP5SD(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "MP5SD";
             ammo = 30;
             IncreasedAccuracy = .92f;
             DecreasedAccuracy = .77f;
@@ -24,7 +25,6 @@ namespace TMGmod
             _fireSound = GetPath("sounds/Silenced2.wav");
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(0f, 0f);
-            _editorName = "MP5SD";
         }
 
         public override ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });

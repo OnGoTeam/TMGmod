@@ -27,6 +27,7 @@ namespace TMGmod
         public AR15Proto(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "AR15 Proto";
             ammo = 20;
             SetAmmoType<ATLowQammos>();
 
@@ -46,7 +47,6 @@ namespace TMGmod
             maxAccuracyLost = 0.21f;
             _holdOffset = new Vec2(5f, 0f);
             ShellOffset = new Vec2(-7f, -1f);
-            _editorName = "AR15 Proto";
             _weight = 4.2f;
             _kickForce = 0.07f;
             KforceDelta = 0.43f;

@@ -18,6 +18,7 @@ namespace TMGmod
         public MG3(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "MG3";
             ammo = 80;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
@@ -35,7 +36,6 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(4f, 1.5f);
             ShellOffset = new Vec2(-2f, -3f);
-            _editorName = "MG3";
             _weight = 7f;
             SetAmmoType<AT556NATO>(.8f);
         }

@@ -17,6 +17,7 @@ namespace TMGmod
 
         public Lstk16V6(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "LSTK-16v6";
             ammo = 25;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
@@ -39,7 +40,6 @@ namespace TMGmod
             maxAccuracyLost = 0.45f;
             _holdOffset = new Vec2(3f, 0f);
             ShellOffset = new Vec2(-5f, -2f);
-            _editorName = "LSTK-16v6";
             _weight = 6.7f;
         }
 

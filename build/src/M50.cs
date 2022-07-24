@@ -17,6 +17,7 @@ namespace TMGmod
         public M50(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "M50";
             ammo = 7;
             SetAmmoType<Cal50Explode>();
             Smap = new SpriteMap(GetPath("M50"), 40, 13);
@@ -38,7 +39,6 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, 0f);
             laserSight = true;
             _laserOffsetTL = new Vec2(31f, 9f);
-            _editorName = "M50";
             _weight = 6.75f;
             Compose(new SpeedAccuracy(this, 1f, 1f, 1f));
         }

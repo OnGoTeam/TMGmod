@@ -17,6 +17,7 @@ namespace TMGmod
 
         public SV98(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "SV-98";
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("SV98"), 33, 11);
             BipOff = GetPath("sounds/beepods2");
@@ -33,7 +34,6 @@ namespace TMGmod
             _fireSound = "sniper";
             _kickForce = 4.25f;
             _holdOffset = new Vec2(3f, 1f);
-            _editorName = "SV-98";
             _weight = 4.5f;
             _laserOffsetTL = new Vec2(22f, 4f);
             ShellOffset = new Vec2(-1f, -2f);

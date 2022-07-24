@@ -22,6 +22,7 @@ namespace TMGmod
         public ARwA(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "ARwA";
             ammo = (1 + Mags) * 30;
             SetAmmoType<AT556NATO>(.85f);
             NonSkinFrames = 4;
@@ -41,7 +42,6 @@ namespace TMGmod
             _fireWait = 0.85f;
             loseAccuracy = 0.11f;
             maxAccuracyLost = 0.2f;
-            _editorName = "ARwA";
             _weight = 5f;
             _magBuddy = new MagBuddy<ARwA>(this, typeof(ArwaMag));
             _kickForce = 1f;

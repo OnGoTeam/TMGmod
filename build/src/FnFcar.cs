@@ -15,6 +15,7 @@ namespace TMGmod
         public FnFcar(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Belguria Fcar";
             ammo = 14;
             BipOff = GetPath("sounds/beepods2");
             BipOn = GetPath("sounds/beepods1");
@@ -40,7 +41,6 @@ namespace TMGmod
             _kickForce = 2.4f;
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
-            _editorName = "Belguria Fcar";
             laserSight = false;
             _laserOffsetTL = new Vec2(19f, 4f);
             _weight = 7f;

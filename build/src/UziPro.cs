@@ -16,6 +16,7 @@ namespace TMGmod
         public UziPro(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Uzi Pro";
             ammo = 24;
             SetAmmoType<ATUzi>();
             KforceDelay = 25;
@@ -40,7 +41,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-5f, -3f);
             laserSight = true;
             _laserOffsetTL = new Vec2(9f, 6f);
-            _editorName = "Uzi Pro";
             _weight = 2.5f;
         }
 

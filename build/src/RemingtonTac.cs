@@ -18,10 +18,10 @@ namespace TMGmod
 
         public RemingtonTac(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "Remington 870 Raid";
             ammo = 4;
             SetAmmoType<ATRemington>();
             _numBulletsPerFire = 6;
-
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("Remington 870 Raid"), 26, 8);
             _center = new Vec2(13f, 4f);
@@ -39,7 +39,6 @@ namespace TMGmod
             _fireWait = 1.5f;
             _laserOffsetTL = new Vec2(22f, 1f);
             laserSight = true;
-            _editorName = "Remington 870 Raid";
             LoaderSprite = new SpriteMap(GetPath("Remington 870 RaidPump"), 5, 2)
             {
                 center = new Vec2(3f, 1f),

@@ -24,6 +24,7 @@ namespace TMGmod
         public G9M(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "G9M";
             ammo = 70;
             SetAmmoType<ATLowQammos>();
             
@@ -44,7 +45,6 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(6f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
-            _editorName = "G9M";
             _weight = 6f;
             MinAccuracy = 0.7f;
             KickForce1Lmg = 0.23f;

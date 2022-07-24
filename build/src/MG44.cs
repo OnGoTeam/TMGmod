@@ -14,6 +14,7 @@ namespace TMGmod
         public MG44(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "MG44 Mark2H";
             ammo = 60;
             SetAmmoType<ATMG44>();
             NonSkinFrames = 3;
@@ -34,7 +35,6 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _holdOffset = new Vec2(5f, 1f);
             ShellOffset = new Vec2(-5f, -3f);
-            _editorName = "MG44 Mark2H";
             _weight = 7.5f;
         }
 

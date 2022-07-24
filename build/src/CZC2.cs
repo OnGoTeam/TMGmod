@@ -16,6 +16,7 @@ namespace TMGmod
         public CZC2(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "CZ-C2 SAR";
             ammo = 23;
             SetAmmoType<ATCZ2>();
             NonSkinFrames = 2;
@@ -35,7 +36,6 @@ namespace TMGmod
             _fireWait = 0.9f;
             loseAccuracy = 0.12f;
             maxAccuracyLost = 0.25f;
-            _editorName = "CZ-C2 SAR";
             _weight = 4.4f;
             _kickForce = 1.5f;
             KforceDelta = 1.6f;

@@ -16,6 +16,7 @@ namespace TMGmod
         public CZ805(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "CZ-805 BREN";
             ammo = 30;
             SetAmmoType<ATCZ>();
             NonSkinFrames = 10;
@@ -35,7 +36,6 @@ namespace TMGmod
             _fireWait = 0.9f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.25f;
-            _editorName = "CZ-805 BREN";
             _weight = 5f;
             _kickForce = 1.5f;
             KforceDelta = 1.26f;

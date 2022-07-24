@@ -11,10 +11,10 @@ namespace TMGmod
     {
         public Remington(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "Fabarm FP-6";
             ammo = 6;
             SetAmmoType<ATFABARM>();
             _numBulletsPerFire = 5;
-
             Smap = new SpriteMap(GetPath("Fabarm FP-6"), 33, 9);
             LoaderSprite = new SpriteMap(GetPath("Fabarm FP-6Pump"), 9, 4)
             {
@@ -36,7 +36,6 @@ namespace TMGmod
             maxAccuracyLost = 0.8f;
             _manualLoad = true;
             _fireWait = 3f;
-            _editorName = "Fabarm FP-6";
             ShellOffset = new Vec2(0f, -3f);
             LoaderVec2 = new Vec2(9f, -1f);
             Loaddx = 3f;

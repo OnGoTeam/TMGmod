@@ -13,6 +13,7 @@ namespace TMGmod
         public HK417(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "Hk 417C";
             ammo = 11;
             SetAmmoType<ATHk417>();
             MinAccuracy = 0.75f;
@@ -37,7 +38,6 @@ namespace TMGmod
             _kickForce = 2.1f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.15f;
-            _editorName = "Hk 417C";
             _weight = 3.5f;
         }
 

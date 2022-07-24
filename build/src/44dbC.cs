@@ -15,6 +15,7 @@ namespace TMGmod
         public Deadly44C(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "You Scared Ded Twice";
             ammo = 2;
             SetAmmoType<AT44DB>(.1f);
             _numBulletsPerFire = 44;
@@ -32,7 +33,6 @@ namespace TMGmod
             _kickForce = 9f;
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.5f;
-            _editorName = "You Scared Ded Twice";
             _weight = 4.25f;
         }
 

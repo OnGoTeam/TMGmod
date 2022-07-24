@@ -15,6 +15,7 @@ namespace TMGmod
         public SLK8(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "HK SLK8";
             ammo = 14;
             SetAmmoType<ATSLK8>();
             MinAccuracy = 0.3f;
@@ -34,7 +35,6 @@ namespace TMGmod
             _kickForce = 3.5f;
             loseAccuracy = 0.22f;
             maxAccuracyLost = 0.22f;
-            _editorName = "HK SLK8";
             _weight = 7.5f;
         }
 

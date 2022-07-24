@@ -11,6 +11,7 @@ namespace TMGmod
     {
         public BarretM98(float xval, float yval) : base(xval, yval)
         {
+            _editorName = "Barrett M98";
             Smap = new SpriteMap(GetPath("BarretM98"), 50, 13);
             _center = new Vec2(25f, 7f);
             _collisionOffset = new Vec2(-25f, -7f);
@@ -24,7 +25,6 @@ namespace TMGmod
             _fireSound = GetPath("sounds/HeavySniper.wav");
             _kickForce = 12f;
             _holdOffset = new Vec2(7f, 0f);
-            _editorName = "Barrett M98";
             _weight = 7f;
             ShellOffset = new Vec2(-6f, -3f);
             SetAmmoType<ATBoltAction>();

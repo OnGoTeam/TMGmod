@@ -16,6 +16,7 @@ namespace TMGmod
         public BigShot(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "50AE Pistol";
             ammo = 7;
             SetAmmoType<AT50C>();
             MinAccuracy = 0.6f;
@@ -32,7 +33,6 @@ namespace TMGmod
             loseAccuracy = 0.25f;
             maxAccuracyLost = 0.8f;
             _holdOffset = new Vec2(0f, 2f);
-            _editorName = "50AE Pistol";
             _weight = 2.5f;
             Compose(new LoseAccuracy(0.1f, 0.02f, 1f));
         }

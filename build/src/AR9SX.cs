@@ -17,6 +17,7 @@ namespace TMGmod
         public AR9SX(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "AR9XS";
             ammo = 17;
             SetAmmoType<ATAR9SX>();
             
@@ -37,7 +38,6 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _holdOffset = new Vec2(3f, 0f);
             ShellOffset = new Vec2(-4f, -2f);
-            _editorName = "AR9XS";
             laserSight = true;
             _laserOffsetTL = new Vec2(23f, 5f);
             _weight = 3f;

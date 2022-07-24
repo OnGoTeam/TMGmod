@@ -21,6 +21,7 @@ namespace TMGmod
         public MP5(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "MP5A3";
             ammo = 30;
             IncreasedAccuracy = .9f;
             DecreasedAccuracy = .7f;
@@ -41,7 +42,6 @@ namespace TMGmod
             _kickForce = 0.5f;
             _holdOffset = new Vec2(-1f, 2f);
             ShellOffset = new Vec2(2f, -4f);
-            _editorName = "MP5A3";
             _weight = 3f;
             Compose(
                 new FirstKforce(20, kforce => kforce + 1.2f),

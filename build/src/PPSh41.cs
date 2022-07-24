@@ -16,6 +16,7 @@ namespace TMGmod
         public PPSh41(float xval, float yval)
             : base(xval, yval)
         {
+            _editorName = "PPSh 41";
             ammo = 71;
             SetAmmoType<ATPPSH41>();
             KforceDelta = 3f;
@@ -36,7 +37,6 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, -3f);
             loseAccuracy = 0.05f;
             maxAccuracyLost = 0.4f;
-            _editorName = "PPSh 41";
             _weight = 3.5f;
         }
 
