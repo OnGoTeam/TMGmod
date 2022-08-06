@@ -55,7 +55,7 @@ namespace TMGmod
             set => this.SetBipodBuffer(value);
         }
 
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
 
         public bool Bipods
         {
