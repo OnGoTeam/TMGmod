@@ -10,8 +10,7 @@ namespace TMGmod.Cases.Color
     [UsedImplicitly]
     public class PodarokClassic : BaseCase
     {
-        public int Kostyl1 = 0;
-        public int Kostyl2 = 0;
+        private int _frames;
         public PodarokClassic(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("CaseClassic"), 14, 8);
@@ -31,17 +30,17 @@ namespace TMGmod.Cases.Color
             };
             CaseId = 0;
         }
+
         public override void Update()
         {
+            ++_frames;
             base.Update();
-            Kostyl1 += 1;
-            if (Kostyl1 % 6 == 0)
-            {
-                Kostyl2 += 1;
-                var sprite = new SpriteMap(GetPath("CaseClassic"), 14, 8);
-                _graphic = sprite;
-                sprite.frame = Kostyl2 % 4;
-            }
+        }
+
+        public override void Draw()
+        {
+            ((SpriteMap)_graphic).frame = (Level.activeLevel is Editor ? MonoMain.timeInEditor : _frames) / 6 % 4;
+            base.Draw();
         }
     }
 }
