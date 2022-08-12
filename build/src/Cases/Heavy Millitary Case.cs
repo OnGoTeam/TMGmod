@@ -17,7 +17,7 @@ namespace TMGmod.Cases
         public Hpodarok(float xval, float yval)
             : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("CaseMillitaryHeavy"), 14, 8);
+            _graphic = new SpriteMap(GetPath("CaseMillitaryHeavy"), 14, 8);
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);
