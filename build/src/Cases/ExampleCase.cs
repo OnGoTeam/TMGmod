@@ -13,7 +13,7 @@ namespace TMGmod.Cases
     {
         public ExampleCase(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("CivilianCase"), 14, 8);
+            var sprite = new SpriteMap(GetPath("CaseCivilian"), 14, 8);
             _graphic = sprite;
             sprite.frame = 1;
             _center = new Vec2(7f, 4f);
@@ -23,7 +23,7 @@ namespace TMGmod.Cases
             thickness = 0.0f;
             _weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Example Container";
+            _editorName = "Example Case";
             Things = new List<Type>
             {
                 typeof(CZ75),

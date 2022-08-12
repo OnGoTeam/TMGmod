@@ -17,7 +17,7 @@ namespace TMGmod.Cases
         public Hpodarok(float xval, float yval)
             : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("HeavyMillitaryCase"));
+            var sprite = new SpriteMap(GetPath("CaseMillitaryHeavy"), 14, 8);
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);
@@ -25,7 +25,7 @@ namespace TMGmod.Cases
             thickness = 0.0f;
             _weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Heavy Millitary Container";
+            _editorName = "Heavy Millitary Case";
         }
 
 

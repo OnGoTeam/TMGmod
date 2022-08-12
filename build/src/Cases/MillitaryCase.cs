@@ -12,7 +12,7 @@ namespace TMGmod.Cases
     {
         public PodarokMillitary(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("MillitaryCase"), 14, 8);
+            var sprite = new SpriteMap(GetPath("CaseMillitary"), 14, 8);
             _graphic = sprite;
             sprite.frame = 0;
             _center = new Vec2(7f, 4f);

@@ -13,7 +13,7 @@ namespace TMGmod.Cases.Color
     {
         public PodarokColorR(float xval, float yval) : base(xval, yval)
         {
-            var sprite = new SpriteMap(GetPath("ColoredCases"), 14, 8);
+            var sprite = new SpriteMap(GetPath("CaseColor"), 14, 8);
             _graphic = sprite;
             sprite.frame = 0;
             _center = new Vec2(7f, 4f);
@@ -23,7 +23,7 @@ namespace TMGmod.Cases.Color
             thickness = 0.0f;
             _weight = 3f;
             collideSounds.Add("presentLand");
-            _editorName = "Red Container";
+            _editorName = "Red Case";
             Things = new List<Type>
             {
                 typeof(SIX12S),

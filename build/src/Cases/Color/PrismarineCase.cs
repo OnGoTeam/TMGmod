@@ -15,7 +15,7 @@ namespace TMGmod.Cases.Color
     {
         public PodarokPrismarine(float xval, float yval) : base(xval, yval)
         {
-            _graphic = new Sprite(GetPath("PrismarineCase"));
+            _graphic = new Sprite(GetPath("CasePrismarine"), 14, 8);
             _center = new Vec2(7f, 4f);
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(14f, 8f);
