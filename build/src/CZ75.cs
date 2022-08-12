@@ -42,7 +42,7 @@ namespace TMGmod
             _weight = 1f;
         }
 
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 5 });
 
         public override void OnPressAction()
         {
