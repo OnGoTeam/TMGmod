@@ -18,12 +18,12 @@ namespace TMGmod
             SetAmmoType<ATMP5SD>(DecreasedAccuracy);
             Smap = new SpriteMap(GetPath("MP5SD"), 31, 12);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _center = new Vec2(15.5f, 6f);
-            _collisionOffset = new Vec2(-15.5f, -6f);
+            _center = new Vec2(16f, 6f);
+            _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(31f, 12f);
             _barrelOffsetTL = new Vec2(31f, 2f);
             _fireSound = GetPath("sounds/Silenced2.wav");
-            _holdOffset = new Vec2(0f, 2f);
+            _holdOffset = new Vec2(1f, 2f);
             ShellOffset = new Vec2(0f, 0f);
         }
 

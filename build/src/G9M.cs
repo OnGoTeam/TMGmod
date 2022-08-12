@@ -43,7 +43,7 @@ namespace TMGmod
             _kickForce = 2.33f;
             loseAccuracy = 0.2f;
             maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(6f, 1f);
+            _holdOffset = new Vec2(5f, 1f);
             ShellOffset = new Vec2(-7f, -2f);
             _weight = 6f;
             MinAccuracy = 0.7f;

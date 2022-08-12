@@ -20,14 +20,14 @@ namespace TMGmod
             SetAmmoType<ATSpectreM4>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("SpectreM4"), 19, 10);
-            _center = new Vec2(9.5f, 5f);
-            _collisionOffset = new Vec2(-9.5f, -5f);
+            _center = new Vec2(10f, 5f);
+            _collisionOffset = new Vec2(-10f, -5f);
             _collisionSize = new Vec2(19f, 10f);
             _barrelOffsetTL = new Vec2(13f, 1f);
             _fireSound = GetPath("sounds/smg.wav");
             _flare = new SpriteMap("smallFlare", 11, 10)
             {
-                center = new Vec2(0.0f, 5f),
+                center = new Vec2(0.0f, 4f),
             };
             _fullAuto = true;
             _fireWait = 0.31f;

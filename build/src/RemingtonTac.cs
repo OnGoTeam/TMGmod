@@ -37,7 +37,7 @@ namespace TMGmod
             _kickForce = 2.8f;
             _manualLoad = true;
             _fireWait = 1.5f;
-            _laserOffsetTL = new Vec2(22f, 1f);
+            _laserOffsetTL = new Vec2(22f, 1.33f);
             laserSight = true;
             LoaderSprite = new SpriteMap(GetPath("Remington 870 RaidPump"), 5, 2)
             {

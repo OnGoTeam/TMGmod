@@ -24,8 +24,8 @@ namespace TMGmod
             BipOn = GetPath("sounds/beepods1");
             NonSkinFrames = 6;
             Smap = new SpriteMap(GetPath("mg3"), 39, 11);
-            _center = new Vec2(19.5f, 5.5f);
-            _collisionOffset = new Vec2(-19.5f, -5.5f);
+            _center = new Vec2(20f, 6f);
+            _collisionOffset = new Vec2(-20f, -6f);
             _collisionSize = new Vec2(39f, 11f);
             _barrelOffsetTL = new Vec2(39f, 3f);
             _fireSound = GetPath("sounds/RifleOrMG.wav");
@@ -34,7 +34,7 @@ namespace TMGmod
             _kickForce = 2.5f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.25f;
-            _holdOffset = new Vec2(4f, 1.5f);
+            _holdOffset = new Vec2(4f, 2f);
             ShellOffset = new Vec2(-2f, -3f);
             _weight = 7f;
             SetAmmoType<AT556NATO>(.8f);

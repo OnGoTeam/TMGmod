@@ -34,7 +34,7 @@ namespace TMGmod
             };
             _fireWait = 0.5f;
             _kickForce = 6.55f;
-            _holdOffset = new Vec2(9f, 2f);
+            _holdOffset = new Vec2(8f, 2f);
         }
 
         public float HandAngleOff

@@ -21,15 +21,15 @@ namespace TMGmod
             SetAmmoType<ATCZ2>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("CZC2"), 41, 11);
-            _center = new Vec2(20.5f, 5.5f);
-            _collisionOffset = new Vec2(-20.5f, -5.5f);
+            _center = new Vec2(21f, 6f);
+            _collisionOffset = new Vec2(-21f, -6f);
             _collisionSize = new Vec2(41f, 11f);
             _barrelOffsetTL = new Vec2(37f, 3f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _holdOffset = new Vec2(5f, 1f);
+            _holdOffset = new Vec2(5f, 2f);
             ShellOffset = new Vec2(-5f, -3f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;

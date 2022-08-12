@@ -26,7 +26,15 @@ namespace TMGmod.Cases.Color
             _editorName = "Classic Case";
             Things = new List<Type>
             {
-                typeof(PodarokClassic)
+                typeof(NellegaljaMk2),
+                typeof(Alep30),
+                typeof(BigShot),
+                typeof(AF2011),
+                typeof(AKALFA),
+                typeof(AN94),
+                typeof(BarretM98),
+                typeof(X3X),
+                typeof(SVU)
             };
             CaseId = 0;
         }

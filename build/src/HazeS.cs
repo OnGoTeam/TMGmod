@@ -34,7 +34,7 @@ namespace TMGmod
             _fullAuto = true;
             _fireWait = .9f;
             _kickForce = .5f;
-            _holdOffset = new Vec2(1f, 0f);
+            _holdOffset = new Vec2(2f, 0f);
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
             _weight = 2f;

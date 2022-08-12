@@ -27,7 +27,7 @@ namespace TMGmod
             _collisionSize = new Vec2(33f, 12f);
             _barrelOffsetTL = new Vec2(33f, 4f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _holdOffset = new Vec2(2f, 1f);
+            _holdOffset = new Vec2(1f, 1f);
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
@@ -37,7 +37,7 @@ namespace TMGmod
             maxAccuracyLost = 0.3f;
             _weight = 5f;
             laserSight = true;
-            _laserOffsetTL = new Vec2(18f, 1f);
+            _laserOffsetTL = new Vec2(22f, 1.33f);
         }
 
         protected override void OnInitialize()

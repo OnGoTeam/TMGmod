@@ -20,12 +20,16 @@ namespace TMGmod
             SetAmmoType<AT44DB>(.1f);
             _numBulletsPerFire = 44;
             Smap = new SpriteMap(GetPath("44db"), 33, 10);
-            _center = new Vec2(16.5f, 5f);
-            _collisionOffset = new Vec2(-16.5f, -5f);
+            _center = new Vec2(17f, 5f);
+            _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 10f);
-            _barrelOffsetTL = new Vec2(33f, 2f);
+            _barrelOffsetTL = new Vec2(33f, 1.5f);
             _holdOffset = new Vec2(2f, 1f);
             _fireSound = "shotgun";
+            _flare = new SpriteMap(GetPath("FlareBase3"), 13, 10)
+            {
+                center = new Vec2(0f, 4.5f),
+            };
             _fullAuto = false;
             _fireWait = 4f;
             _kickForce = 9f;

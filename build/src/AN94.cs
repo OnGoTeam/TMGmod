@@ -29,7 +29,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _holdOffset = new Vec2(1f, 2f);
+            _holdOffset = new Vec2(2f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
             SetAmmoType<AT545NATO>(.87f);
@@ -41,7 +41,7 @@ namespace TMGmod
             maxAccuracyLost = 0.45f;
             _weight = 4.5f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(30f, 2.5f);
+            _laserOffsetTL = new Vec2(24f, 1.33f);
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f)
             );

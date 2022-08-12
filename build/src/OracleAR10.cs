@@ -41,7 +41,7 @@ namespace TMGmod
             loseAccuracy = .15f;
             maxAccuracyLost = .15f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(17f, 1.5f);
+            _laserOffsetTL = new Vec2(17f, 1.33f);
             _weight = 5f;
         }
 
@@ -56,8 +56,6 @@ namespace TMGmod
             get => this.GetBipodBuffer();
             set => this.SetBipodBuffer(value);
         }
-
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
         public bool Bipods
         {
@@ -83,5 +81,6 @@ namespace TMGmod
             _ammoType.range = 333f;
             base.OnInitialize();
         }
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
     }
 }

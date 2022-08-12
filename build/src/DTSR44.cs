@@ -18,11 +18,11 @@ namespace TMGmod
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(29f, 12f);
-            _barrelOffsetTL = new Vec2(29f, 5f);
+            _barrelOffsetTL = new Vec2(29f, 4.5f);
             ammo = 6;
             _flare = new SpriteMap(GetPath("FlareBase2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f),
+                center = new Vec2(0.0f, 4.5f),
             };
             _fireSound = GetPath("sounds/Silenced1.wav");
             _kickForce = 3.1f;

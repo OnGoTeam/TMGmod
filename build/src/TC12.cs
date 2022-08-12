@@ -33,7 +33,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _holdOffset = new Vec2(5f, 0f);
+            _holdOffset = new Vec2(6f, 0f);
             ShellOffset = new Vec2(-14f, -1f);
             _fireSound = "deepMachineGun2";
             _fullAuto = false;
@@ -42,7 +42,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
             laserSight = true;
-            _laserOffsetTL = new Vec2(26f, 5.5f);
+            _laserOffsetTL = new Vec2(26f, 5.33f);
             _weight = 4.5f;
         }
 

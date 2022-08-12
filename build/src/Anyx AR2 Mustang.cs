@@ -71,6 +71,10 @@ namespace TMGmod
                 else
                 {
                     _fireSound = "deepMachineGun2";
+                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f),
+                    };
                     SetAmmoType<ATCZ>();
                     _barrelOffsetTL = new Vec2(28f, 2f);
                     NonSkin = 0;

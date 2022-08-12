@@ -18,8 +18,8 @@ namespace TMGmod
             _editorName = "SCAR-H With GL";
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("scargl"), 33, 10);
-            _center = new Vec2(16.5f, 5f);
-            _collisionOffset = new Vec2(-16.5f, -5f);
+            _center = new Vec2(17f, 5f);
+            _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 11f);
             _holdOffset = new Vec2(2f, 0f);
             var barrelOffsetTLm = new[] { new Vec2(33f, 3f), new Vec2(30f, 6.5f) };

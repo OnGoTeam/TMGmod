@@ -23,10 +23,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-19f, -7f);
             _collisionSize = new Vec2(37f, 13f);
             _weight = 5f;
-            _holdOffset = new Vec2(4f, 1f);
+            _holdOffset = new Vec2(3f, 1f);
             ammo = 15;
             _numBulletsPerFire = 3;
-            _barrelOffsetTL = new Vec2(37f, 5f);
+            _barrelOffsetTL = new Vec2(37f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),

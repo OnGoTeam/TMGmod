@@ -22,6 +22,7 @@ namespace TMGmod
             SetAmmoType<ATAUGA1>();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("AUGA1"), 30, 12);
+            FrameId = 8;
             _center = new Vec2(15f, 6f);
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(30f, 12f);

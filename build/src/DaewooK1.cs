@@ -31,7 +31,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _holdOffset = new Vec2(-2f, 1f);
+            _holdOffset = new Vec2(-2f, 2f);
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/scar.wav");
             _fullAuto = true;

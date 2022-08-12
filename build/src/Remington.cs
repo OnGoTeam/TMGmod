@@ -24,10 +24,10 @@ namespace TMGmod
             _center = new Vec2(17f, 5f);
             _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 9f);
-            _barrelOffsetTL = new Vec2(33f, 1f);
+            _barrelOffsetTL = new Vec2(33f, 1.5f);
             _flare = new SpriteMap(GetPath("FlareBase2"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f),
+                center = new Vec2(0f, 4.5f),
             };
             _holdOffset = new Vec2(1f, 2f);
             _fireSound = "shotgunFire";

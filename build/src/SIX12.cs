@@ -27,8 +27,12 @@ namespace TMGmod
             _center = new Vec2(19f, 5f);
             _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(29f, 10f);
-            _barrelOffsetTL = new Vec2(29f, 3f);
+            _barrelOffsetTL = new Vec2(29f, 3.5f);
             _fireSound = "shotgunFire";
+            _flare = new SpriteMap(GetPath("FlareBase2"), 13, 10)
+            {
+                center = new Vec2(0f, 4.5f),
+            };
             _fullAuto = false;
             _fireWait = 2f;
             _kickForce = 5f;
@@ -36,7 +40,7 @@ namespace TMGmod
             maxAccuracyLost = 0.4f;
             laserSight = false;
             _laserOffsetTL = new Vec2(24f, 7.5f);
-            _holdOffset = new Vec2(2f, 0f);
+            _holdOffset = new Vec2(1f, 0f);
             _weight = 4f;
         }
 
