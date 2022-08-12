@@ -21,7 +21,7 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
-            var difficultToSee = new X3XShell(x, y)
+            var difficultToSee = new X3XShell(x, y, 0)
                 { hSpeed = dir * (5f + Rando.Float(1f)) }; //должна быть кастомная shell
             add(difficultToSee);
         }

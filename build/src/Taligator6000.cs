@@ -19,6 +19,7 @@ namespace TMGmod
             SetAmmoType<ATTG6000>();
             _numBulletsPerFire = 13;
             Smap = new SpriteMap(GetPath("Taligator 6000 SX"), 31, 12);
+            FrameId = 2;
             _center = new Vec2(16f, 6f);
             _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(31f, 12f);
@@ -38,6 +39,10 @@ namespace TMGmod
             _weight = 3f;
         }
 
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2 });
+        protected override void PopBaseShell()
+        {
+            ATTG6000.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId, AddShell);
+        }
     }
 }

@@ -54,5 +54,9 @@ namespace TMGmod
             if (!((ammo < 1) & (NonSkin == 0))) return;
             SFX.Play(GetPath("sounds/tuduc.wav"));
         }
+        protected override void PopBaseShell()
+        {
+            ATx3x.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId, AddShell);
+        }
     }
 }

@@ -5,7 +5,7 @@ using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATx3x : BaseAmmoType
+    public sealed class ATx3x : BaseAmmoType
     {
         public ATx3x()
         {
@@ -23,7 +23,15 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
-            var flyingtoilet = new X3XShell(x, y) { hSpeed = dir * (7f + Rando.Float(1f)) };
+            PopShellSkin(x, y, 0, add);
+        }
+
+        public static void PopShellSkin(float x, float y, int frameid, Action<EjectedShell> add)
+        {
+            var flyingtoilet = new X3XShell(x, y, frameid)
+            {
+                hSpeed = 7f + Rando.Float(1f),
+            };
             add(flyingtoilet);
         }
     }
