@@ -28,7 +28,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-14f, -7f);
             _collisionSize = new Vec2(29f, 11f);
             _barrelOffsetTL = new Vec2(29f, 2.5f);
-            _fireSound = "shotgunFire";
+            _fireSound = GetPath("sounds/new/DragoShot.wav");
             _flare = new SpriteMap(GetPath("FlareBase3"), 13, 10)
             {
                 center = new Vec2(0f, 4.5f),
@@ -53,6 +53,7 @@ namespace TMGmod
                     MaxAccuracy = enabled ? .9f : .7f;
                     maxAccuracyLost = enabled ? .1f : .4f;
                     _kickForce = enabled ? 3f : 5.5f;
+                    _fireSound = enabled ? GetPath("sounds/new/DragoShot-Blast.wav") : GetPath("sounds/new/DragoShot.wav");
                 }
             );
             Compose(

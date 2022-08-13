@@ -45,7 +45,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _fireSound = "shotgunFire";
+            _fireSound = "shotgunFire2";
             _fullAuto = false;
             _fireWait = 2f;
             _kickForce = 6f;

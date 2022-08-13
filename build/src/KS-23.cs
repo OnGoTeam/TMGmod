@@ -38,7 +38,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(8f, 1f);
-            _fireSound = GetPath("sounds/shotgun.wav");
+            _fireSound = GetPath("sounds/new/KS-23.wav");
             _kickForce = 9f;
             loseAccuracy = 0.4f;
             maxAccuracyLost = 0.9f;

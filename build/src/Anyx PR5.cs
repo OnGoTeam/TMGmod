@@ -26,7 +26,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _fireSound = GetPath("sounds/2.wav");
+            _fireSound = GetPath("sounds/new/HighCaliber-Pistol.wav");
             _fullAuto = false;
             _fireWait = 0.5f;
             _kickForce = 0.5f;

@@ -33,7 +33,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
             SetAmmoType<ATCZ>();
-            _fireSound = "deepMachineGun2";
+            _fireSound = GetPath("sounds/new/HighCaliber-LessImpact.wav");
             _fullAuto = false;
             _fireWait = 2f;
             _kickForce = 1.2f;
@@ -43,7 +43,7 @@ namespace TMGmod
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f)
             );
-            ComposeSimpleBurst(2, .07f);
+            ComposeSimpleBurst(2, .4f);
         }
 
         protected override void OnInitialize()
@@ -57,12 +57,12 @@ namespace TMGmod
 
         public bool Silencer
         {
-            get => _fireSound == GetPath("sounds/Silenced2.wav");
+            get => _fireSound == GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav");
             set
             {
                 if (value)
                 {
-                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    _fireSound = GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     SetAmmoType<ATCZS>();
                     _barrelOffsetTL = new Vec2(33f, 2f);
@@ -70,7 +70,7 @@ namespace TMGmod
                 }
                 else
                 {
-                    _fireSound = "deepMachineGun2";
+                    _fireSound = GetPath("sounds/new/HighCaliber-LessImpact.wav");
                     _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f),

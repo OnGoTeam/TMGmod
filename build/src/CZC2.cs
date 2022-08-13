@@ -45,13 +45,13 @@ namespace TMGmod
 
         public bool Silencer
         {
-            get => _fireSound == GetPath("sounds/Silenced2.wav");
+            get => _fireSound == GetPath("sounds/new/CZ-Silenced.wav");
             set
             {
                 if (value)
                 {
                     NonSkin = 1;
-                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    _fireSound = GetPath("sounds/new/CZ-Silenced.wav");
                     SetAmmoType<ATCZS2>();
                     loseAccuracy = 0.15f;
                     maxAccuracyLost = 0.28f;

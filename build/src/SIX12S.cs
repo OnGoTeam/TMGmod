@@ -29,7 +29,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-19f, -5f);
             _collisionSize = new Vec2(29f, 10f);
             _barrelOffsetTL = new Vec2(29f, 4f);
-            _fireSound = "shotgunFire";
+            _fireSound = GetPath("sounds/new/SIX12-Sv2.wav");
             _fullAuto = false;
             _fireWait = 2f;
             _kickForce = 5.5f;

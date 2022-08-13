@@ -28,7 +28,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-20f, -6f);
             _collisionSize = new Vec2(39f, 11f);
             _barrelOffsetTL = new Vec2(39f, 3f);
-            _fireSound = GetPath("sounds/RifleOrMG.wav");
+            _fireSound = GetPath("sounds/new/HighCaliber-Impactful.wav");
             _fullAuto = true;
             _fireWait = 0.5f;
             _kickForce = 2.5f;

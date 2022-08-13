@@ -39,7 +39,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(28f, 2f);
             _holdOffset = new Vec2(4f, 2f);
             ShellOffset = new Vec2(-13f, -2f);
-            _fireSound = GetPath("sounds/RifleOrMG.wav");
+            _fireSound = GetPath("sounds/new/HighCaliber-Impactful.wav");
             _flare = new SpriteMap(GetPath("FlareAnyxARS"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),

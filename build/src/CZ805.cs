@@ -45,14 +45,14 @@ namespace TMGmod
 
         public bool Silencer
         {
-            get => _fireSound == GetPath("sounds/Silenced2.wav");
+            get => _fireSound == GetPath("sounds/new/CZ-Silenced.wav");
             set
             {
                 if (value)
                 {
                     NonSkin %= 5;
                     NonSkin += 5;
-                    _fireSound = GetPath("sounds/Silenced2.wav");
+                    _fireSound = GetPath("sounds/new/CZ-Silenced.wav");
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     SetAmmoType<ATCZS>();
                     _barrelOffsetTL = new Vec2(41f, 3f);

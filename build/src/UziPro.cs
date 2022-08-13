@@ -31,7 +31,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _fireSound = GetPath("sounds/smg.wav");
+            _fireSound = GetPath("sounds/new/UziPro.wav");
             _fullAuto = true;
             _fireWait = 0.4f;
             _kickForce = 0.5f;
@@ -48,7 +48,7 @@ namespace TMGmod
 
         public bool Silencer
         {
-            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
+            get => _fireSound == GetPath("sounds/new/SMG-Silenced.wav");
             set
             {
                 if (value)
@@ -57,7 +57,7 @@ namespace TMGmod
                     SetAmmoType<ATUziS>();
                     _barrelOffsetTL = new Vec2(16f, 2f);
                     _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
+                    _fireSound = GetPath("sounds/new/SMG-Silenced.wav");
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace TMGmod
                     {
                         center = new Vec2(0.0f, 5f),
                     };
-                    _fireSound = GetPath("sounds/smg.wav");
+                    _fireSound = GetPath("sounds/new/UziPro.wav");
                 }
             }
         }

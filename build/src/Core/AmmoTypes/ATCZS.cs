@@ -1,4 +1,8 @@
+using System;
+using DuckGame;
+using TMGmod.Core.Shells;
 namespace TMGmod.Core.AmmoTypes
+
 {
     // ReSharper disable once InconsistentNaming
     public class ATCZS : BaseAmmoType
@@ -13,6 +17,15 @@ namespace TMGmod.Core.AmmoTypes
             DamageMean = 26f;
             DamageVariation = 0.1f;
             AlphaDamage = 0.37f;
+        }
+        public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
+        {
+            var shell = new AT556NATOShell(x, y)
+            {
+                hSpeed = (2.5f + Rando.Float(-0.2f, 0.2f)) * dir,
+                vSpeed = 2f + Rando.Float(-0.3f, 0.3f),
+            };
+            add(shell);
         }
     }
 
