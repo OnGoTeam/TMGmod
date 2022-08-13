@@ -32,7 +32,7 @@ namespace TMGmod
             };
             _holdOffset = new Vec2(4f, 1f);
             ShellOffset = new Vec2(-2f, -2f);
-            _fireSound = GetPath("sounds/HeavyRifle.wav");
+            _fireSound = GetPath("sounds/new/DaewooK1.wav");
             _fullAuto = false;
             _fireWait = 0.7f;
             _kickForce = 3f;

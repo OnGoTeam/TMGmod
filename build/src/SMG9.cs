@@ -27,7 +27,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _fireSound = GetPath("sounds/1.wav");
+            _fireSound = GetPath("sounds/new/LightCaliber-SMG.wav");
             _fullAuto = true;
             _fireWait = 0.35f;
             _kickForce = 1.6f;

@@ -36,7 +36,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _fireSound = GetPath("sounds/scar.wav");
+            _fireSound = GetPath("sounds/new/MarksmanRifle-WithBoltNoise.wav");
             _fullAuto = true;
             _fireWait = 1.25f;
             _kickForce = 2.5f;

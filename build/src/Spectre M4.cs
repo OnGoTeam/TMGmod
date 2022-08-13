@@ -24,7 +24,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-10f, -5f);
             _collisionSize = new Vec2(19f, 10f);
             _barrelOffsetTL = new Vec2(13f, 1f);
-            _fireSound = GetPath("sounds/smg.wav");
+            _fireSound = GetPath("sounds/new/LightCaliber-Pistol.wav");
             _flare = new SpriteMap("smallFlare", 11, 10)
             {
                 center = new Vec2(0.0f, 4f),
@@ -67,7 +67,7 @@ namespace TMGmod
                     loseAccuracy = 0.1f;
                     maxAccuracyLost = 0.34f;
                     _weight = 3.3f;
-                    _fireSound = GetPath("sounds/smg.wav");
+                    _fireSound = GetPath("sounds/new/LightCaliber-Pistol.wav");
                     _flare = new SpriteMap("smallFlare", 11, 10) { center = new Vec2(0.0f, 5f) };
                 }
             }

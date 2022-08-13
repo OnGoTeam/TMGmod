@@ -35,7 +35,7 @@ namespace TMGmod
             {
                 center = new Vec2(1.0f, 6f),
             };
-            _fireSound = "deepMachineGun";
+            _fireSound = GetPath("sounds/new/LMG-2.wav");
             _fullAuto = true;
             _fireWait = 0.2f;
             _kickForce = 0f;

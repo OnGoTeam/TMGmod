@@ -33,7 +33,7 @@ namespace TMGmod
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
             SetAmmoType<AT545NATO>(.87f);
-            _fireSound = "deepMachineGun2";
+            _fireSound = GetPath("sounds/new/AutomaticRifle-1.wav");
             _fullAuto = false;
             _fireWait = 1.5f;
             _kickForce = 0.5f;

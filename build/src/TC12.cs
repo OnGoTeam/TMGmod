@@ -35,7 +35,7 @@ namespace TMGmod
             };
             _holdOffset = new Vec2(6f, 0f);
             ShellOffset = new Vec2(-14f, -1f);
-            _fireSound = "deepMachineGun2";
+            _fireSound = GetPath("sounds/new/HighCaliber.wav");
             _fullAuto = false;
             _fireWait = 1.03f;
             _kickForce = 5.3f;
@@ -50,13 +50,13 @@ namespace TMGmod
 
         public bool Silencer
         {
-            get => _fireSound == GetPath("sounds/Silenced3.wav");
+            get => _fireSound == GetPath("sounds/new/TC12-Silenced.wav");
             set
             {
                 if (value)
                 {
                     NonSkin = 1;
-                    _fireSound = GetPath("sounds/Silenced3.wav");
+                    _fireSound = GetPath("sounds/new/TC12-Silenced.wav");
                     SetAmmoType<ATTC12S>();
                     _kickForce = 4.5f;
                     loseAccuracy = 0f;
@@ -70,7 +70,7 @@ namespace TMGmod
                 else
                 {
                     NonSkin = 0;
-                    _fireSound = "deepMachineGun2";
+                    _fireSound = GetPath("sounds/new/HighCaliber.wav");
                     SetAmmoType<ATTC12>();
                     _kickForce = 5.3f;
                     loseAccuracy = 0.1f;

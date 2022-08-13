@@ -34,7 +34,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 4.5f),
             };
-            _fireSound = GetPath("sounds/Silenced1.wav");
+            _fireSound = GetPath("sounds/new/AWS.wav");
             _kickForce = 3.8f;
             _holdOffset = new Vec2(2f, 1f);
             _weight = 5f;

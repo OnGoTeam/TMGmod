@@ -25,7 +25,7 @@ namespace TMGmod
             _collisionSize = new Vec2(13f, 8f);
             _barrelOffsetTL = new Vec2(13f, 1.5f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-            _fireSound = "magnum";
+            _fireSound = GetPath("sounds/new/USP.wav");
             _fullAuto = false;
             _fireWait = 1.2f;
             _kickForce = 2.1f;

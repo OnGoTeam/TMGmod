@@ -26,7 +26,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-7.5f, -3.5f);
             _collisionSize = new Vec2(23f, 9f);
             _barrelOffsetTL = new Vec2(14f, 2f);
-            _fireSound = GetPath("sounds/1.wav");
+            _fireSound = GetPath("sounds/new/USP.wav");
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 12, 10)
             {
                 center = new Vec2(0f, 5f),
@@ -63,7 +63,7 @@ namespace TMGmod
                     {
                         center = new Vec2(0f, 5f),
                     };
-                    _fireSound = GetPath("sounds/1.wav");
+                    _fireSound = GetPath("sounds/new/USP.wav");
                     SetAmmoType<ATUSP>();
                     _barrelOffsetTL = new Vec2(14f, 2f);
                 }
