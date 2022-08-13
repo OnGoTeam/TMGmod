@@ -29,10 +29,10 @@ namespace TMGmod
             MinAccuracy = 0.3f;
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("Lynx"), 31, 11);
-            _center = new Vec2(14f, 5.5f);
-            _collisionOffset = new Vec2(-14.5f, -5.5f);
+            _center = new Vec2(15f, 6f);
+            _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(31f, 11f);
-            _barrelOffsetTL = new Vec2(31f, 4.5f);
+            _barrelOffsetTL = new Vec2(31f, 4f);
             _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
@@ -43,9 +43,9 @@ namespace TMGmod
             _kickForce = 5.8f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.3f;
-            _holdOffset = new Vec2(-1f, 1f);
+            _holdOffset = new Vec2(0f, 1f);
             ShellOffset = new Vec2(-18f, -1f);
-            laserSight = true;
+            laserSight = false;
             _laserOffsetTL = new Vec2(22f, 3.5f);
             _weight = 6f;
             Compose(

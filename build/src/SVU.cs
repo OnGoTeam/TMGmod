@@ -24,12 +24,12 @@ namespace TMGmod
             Smap = new SpriteMap(GetPath("SVU"), 37, 11);
             _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f),
+                center = new Vec2(0.0f, 4f),
             };
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
-            _barrelOffsetTL = new Vec2(37f, 5.5f);
+            _barrelOffsetTL = new Vec2(37f, 5f);
             _fireSound = GetPath("sounds/Rifle.wav");
             _fullAuto = true;
             _fireWait = 1.2f;
