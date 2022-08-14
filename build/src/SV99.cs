@@ -28,7 +28,7 @@ namespace TMGmod
             };
             ammo = 6;
             SetAmmoType<ATSV99>();
-            _fireSound = GetPath("sounds/Silenced3.wav");
+            _fireSound = GetPath("sounds/new/SV99.wav");
             _kickForce = 1.8f;
             loseAccuracy = 0.5f;
             maxAccuracyLost = 1.5f;

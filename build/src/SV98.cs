@@ -31,7 +31,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             ammo = 5;
-            _fireSound = "sniper";
+            _fireSound = GetPath("sounds/new/SV98.wav");
             _kickForce = 4.25f;
             _holdOffset = new Vec2(3f, 1f);
             _weight = 4.5f;

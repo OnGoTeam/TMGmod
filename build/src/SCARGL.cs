@@ -61,7 +61,7 @@ namespace TMGmod
             _kickForce = 2.6f;
             _weight = 6f;
 
-            var fireSoundm = new[] { GetPath("sounds/scar.wav"), "deepMachineGun" };
+            var fireSoundm = new[] { GetPath("sounds/new/scar.wav"), "deepMachineGun" };
 
             Compose(
                 new SwitchingModes(

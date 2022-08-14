@@ -31,7 +31,7 @@ namespace TMGmod
             };
             _holdOffset = new Vec2(3f, 2f);
             ShellOffset = new Vec2(-3f, -2f);
-            _fireSound = GetPath("sounds/Silenced1.wav");
+            _fireSound = GetPath("sounds/new/TC12-Silenced.wav");
             _fullAuto = true;
             _fireWait = 0.65f;
             _kickForce = 2f;

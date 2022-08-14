@@ -37,7 +37,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _fireSound = GetPath("sounds/HeavySniper.wav");
+            _fireSound = GetPath("sounds/new/HeavySniper.wav");
             _fullAuto = false;
             _fireWait = 2f;
             _kickForce = 5.8f;

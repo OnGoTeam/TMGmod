@@ -25,7 +25,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             ammo = 5;
-            _fireSound = GetPath("sounds/RifleOrMG.wav");
+            _fireSound = GetPath("sounds/new/HeavySniper.wav");
             _kickForce = 5.5f;
             _holdOffset = new Vec2(10f, 0f);
             _weight = 4.65f;

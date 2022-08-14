@@ -30,7 +30,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             ammo = 6;
-            _fireSound = GetPath("sounds/RifleOrMG.wav");
+            _fireSound = GetPath("sounds/new/HeavySniper.wav");
             _fullAuto = false;
             _kickForce = 5.25f;
             laserSight = false;
