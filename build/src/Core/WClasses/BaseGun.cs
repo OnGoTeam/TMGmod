@@ -111,7 +111,7 @@ namespace TMGmod.Core.WClasses
 
         [UsedImplicitly]
         protected Vec2 ExtraHoldOffset =>
-            duck == null ? new Vec2(0, 0) : !duck.sliding ? new Vec2(0, 0) : new Vec2(0, 1);
+            duck == null ? new Vec2(0, 0) : !(duck.sliding || duck.crouch) ? new Vec2(0, 0) : new Vec2(0, 1);
 
         [UsedImplicitly]
         protected Vec2 HoldOffsetNoExtra
