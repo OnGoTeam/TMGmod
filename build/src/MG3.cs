@@ -1,12 +1,10 @@
-﻿#if DEBUG
-using System;
-#endif
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -41,6 +39,7 @@ namespace TMGmod
             ShellOffset = new Vec2(-1f, -3f);
             _weight = 7f;
             SetAmmoType<AT556NATO>(.8f);
+            Compose(new BifurcatedFw(this, 1.0f, .001f, .02f));
         }
 
         public BitBuffer BipodsBuffer
@@ -110,36 +109,5 @@ namespace TMGmod
             if (ammo == 0 && NonSkin % 2 == 0) NonSkin += 1;
             base.Update();
         }
-#if DEBUG
-        private float _acc;
-        private const float Fw0 = .5f;
-        private float _fw = Fw0;
-        private const float FwC = 1.0f;
-        private const float FwM = Fw0 - FwC * 2f / 3f;
-
-        protected override void BaseOnUpdate()
-        {
-            _acc -= .001f;
-            _acc = Maths.Clamp(_acc, 0f, 1f);
-            _fireWait = _fw;
-        }
-
-        protected override void BaseOnSpent()
-        {
-            var waitbase = (_fw - FwM) / FwC;
-            waitbase = Maths.Clamp(waitbase, .0001f, .9999f);
-            var accbase = _acc;
-            accbase = Maths.Clamp(accbase, 0f, 1f);
-            accbase = (float) Math.Sqrt(accbase);
-            accbase = Maths.Clamp(accbase, 0f, 1f);
-            var bifurcation = 3 + accbase * .6785728f;
-            bifurcation = Maths.Clamp(bifurcation, 1f, 4f);
-            waitbase = bifurcation * waitbase * (1 - waitbase);
-            waitbase = Maths.Clamp(waitbase, 0f, 1f);
-            _fireWait = _fw = waitbase * FwC + FwM;
-            _acc += .03f;
-            _acc = Maths.Clamp(_acc, 0f, 1f);
-        }
-#endif
     }
 }
