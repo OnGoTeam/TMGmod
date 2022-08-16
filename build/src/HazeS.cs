@@ -85,22 +85,20 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Down("QUACK") && _heatval < 2f && Math.Abs(duck.hSpeed) < 2.845f)
                 {
-                    _holdOffset = new Vec2(3f, -2f) * 0.2f + _holdOffset * 0.8f;
+                    HoldOffsetNoExtra = new Vec2(3f, -2f) * 0.2f + HoldOffsetNoExtra * 0.8f;
                     Sighted = true;
                 }
                 else
                 {
                     _sighted = false;
-                    _holdOffset = new Vec2(1f, 0f) * 0.2f + _holdOffset * 0.8f;
+                    HoldOffsetNoExtra = new Vec2(1f, 0f) * 0.2f + HoldOffsetNoExtra * 0.8f;
                 }
             }
             else
             {
                 _sighted = false;
-                _holdOffset = new Vec2(1f, 0f);
+                HoldOffsetNoExtra = new Vec2(1f, 0f);
             }
-
-            CurrHone = HoldOffsetNoExtra;
         }
 
         protected override bool CanFire()
