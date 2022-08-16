@@ -139,7 +139,6 @@ namespace TMGmod
             _fireWait = _fw = waitbase * FwC + FwM;
             _acc += .03f;
             _acc = Maths.Clamp(_acc, 0f, 1f);
-            Mod.Debug.Log($"{bifurcation} {_fireWait}");
         }
 #endif
     }
