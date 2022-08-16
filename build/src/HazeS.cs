@@ -85,19 +85,19 @@ namespace TMGmod
             {
                 if (duck.inputProfile.Down("QUACK") && _heatval < 2f && Math.Abs(duck.hSpeed) < 2.845f)
                 {
-                    HoldOffsetNoExtra = new Vec2(3f, -2f) * 0.2f + HoldOffsetNoExtra * 0.8f;
+                    CurrHone = new Vec2(3f, -2f) * 0.2f + CurrHone * 0.8f;
                     Sighted = true;
                 }
                 else
                 {
                     _sighted = false;
-                    HoldOffsetNoExtra = new Vec2(1f, 0f) * 0.2f + HoldOffsetNoExtra * 0.8f;
+                    CurrHone = new Vec2(1f, 0f) * 0.2f + CurrHone * 0.8f;
                 }
             }
             else
             {
                 _sighted = false;
-                HoldOffsetNoExtra = new Vec2(1f, 0f);
+                CurrHone = new Vec2(1f, 0f);
             }
         }
 
