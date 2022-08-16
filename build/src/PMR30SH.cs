@@ -32,14 +32,7 @@ namespace TMGmod
             var ammoTypem = new AmmoType[]
             {
                 new ATPMR30(),
-                new AT12Gauge
-                {
-                    range = 110f,
-                    accuracy = 0.35f,
-                    penetration = 2f,
-                    bulletSpeed = 50f,
-                    DamageMean = 15f,
-                },
+                new ATPMR30SH(),
             };
             var numBulletsPerFirem = new[] { 1, 16 };
             _fireWait = 0.5f;
