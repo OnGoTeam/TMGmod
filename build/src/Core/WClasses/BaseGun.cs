@@ -306,6 +306,7 @@ namespace TMGmod.Core.WClasses
             shell.velocity = shell.velocity.Rotate(angle, Vec2.Zero);
             shell.graphic.flipH = offDir < 0;
             shell.spinAngle = Maths.RadToDeg(-angle);
+            shell.depth = depth.Add(1);
             Level.Add(shell);
         }
 
