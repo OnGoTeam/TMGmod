@@ -29,6 +29,10 @@ namespace TMGmod.NY
                 typeof(CandyCane),
                 typeof(CandyCane),
                 typeof(CandyCane),
+                typeof(PodarokClassic),
+                typeof(PodarokClassic),
+                typeof(PodarokClassic),
+                typeof(PodarokClassic),
                 //x3
                 typeof(GarlandGun),
                 typeof(GarlandGun),

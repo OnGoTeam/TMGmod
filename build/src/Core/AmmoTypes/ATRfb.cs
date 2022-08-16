@@ -24,7 +24,7 @@ namespace TMGmod.Core.AmmoTypes
         {
             var shell = new AT545NATOShell(x, y)
             {
-                hSpeed = .5f * -dir,
+                hSpeed = Rando.Float(0.15f, 0.35f) * -dir,
                 vSpeed = 0f,
             };
             add(shell);

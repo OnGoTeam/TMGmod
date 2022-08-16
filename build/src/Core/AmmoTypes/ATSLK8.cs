@@ -25,8 +25,8 @@ namespace TMGmod.Core.AmmoTypes
         {
             var shell = new AT762NATOShell(x, y)
             {
-                hSpeed = (2.5f + Rando.Float(-0.2f, 0.2f)) * dir,
-                vSpeed = -2f + Rando.Float(-0.3f, 0.3f),
+                hSpeed = (3f + Rando.Float(-0.2f, 0.2f)) * dir,
+                vSpeed = -1.5f + Rando.Float(-0.3f, 0.3f),
                 depth = 1f,
             };
             add(shell);
