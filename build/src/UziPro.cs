@@ -38,7 +38,7 @@ namespace TMGmod
             loseAccuracy = 0.08f;
             maxAccuracyLost = 0.5f;
             _holdOffset = new Vec2(1f, 1f);
-            ShellOffset = new Vec2(-5f, -3f);
+            ShellOffset = new Vec2(-4f, -2f);
             laserSight = true;
             _laserOffsetTL = new Vec2(8f, 5.33f);
             _weight = 2.5f;

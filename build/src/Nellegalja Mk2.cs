@@ -28,7 +28,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(33f, 4f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _holdOffset = new Vec2(1f, 1f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-1f, -2f);
             _fireSound = GetPath("sounds/Silenced1.wav");
             _fullAuto = false;
             _fireWait = 0.8f;

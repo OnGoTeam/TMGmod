@@ -30,7 +30,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(3f, 2f);
-            ShellOffset = new Vec2(0f, -3f);
+            ShellOffset = new Vec2(-4f, -2f);
             ammo = 30;
             SetAmmoType<ATCZ>();
             _fireSound = GetPath("sounds/new/HighCaliber-LessImpact.wav");
@@ -39,7 +39,7 @@ namespace TMGmod
             _kickForce = 1.2f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.25f;
-            _weight = 5.5f;
+            _weight = 4f;
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f)
             );

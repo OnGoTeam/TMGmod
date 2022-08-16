@@ -31,7 +31,7 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.4f;
             _holdOffset = new Vec2(-1f, 2f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-4f, -2f);
             _weight = 2.5f;
             Compose(new LoseAccuracy(0.05f, 0.003f, 1f));
         }

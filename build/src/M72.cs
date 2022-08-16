@@ -24,7 +24,7 @@ namespace TMGmod
             _collisionSize = new Vec2(32f, 11f);
             _barrelOffsetTL = new Vec2(32f, 2f);
             _holdOffset = new Vec2(2f, 1f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-1f, -(5f / 3f));
             _fireSound = "deepMachineGun";
             _fullAuto = false;
             _fireWait = 1f;

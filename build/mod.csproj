@@ -83,6 +83,7 @@
     <Compile Include="src\Cases\Color\ClassicCase.cs" />
     <Compile Include="src\Core\AmmoTypes\ATButcher.cs" />
     <Compile Include="src\Core\AmmoTypes\ATPMR30SH.cs" />
+    <Compile Include="src\Core\AmmoTypes\ATRfb.cs" />
     <Compile Include="src\Core\AmmoTypes\ATScarGrenade.cs" />
     <Compile Include="src\Core\AmmoTypes\ATYava6.cs" />
     <Compile Include="src\Core\BipodsLogic\BipodsImplementation.cs" />

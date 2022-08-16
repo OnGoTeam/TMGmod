@@ -30,7 +30,7 @@ namespace TMGmod.Core.AmmoTypes
         {
             var flyingtoilet = new X3XShell(x, y, frameid)
             {
-                hSpeed = (7f + Rando.Float(1f)) * dir,
+                hSpeed = (7f + Rando.Float(1f)) * -dir,
             };
             add(flyingtoilet);
         }

@@ -37,6 +37,7 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 0f);
             laserSight = true;
             _laserOffsetTL = new Vec2(16f, 6f);
+            ShellOffset = new Vec2(-4f, 0f);
             _weight = 2f;
             _flare = new SpriteMap(GetPath("FlareHazeS"), 13, 10) { center = new Vec2(0.0f, 5f) };
         }

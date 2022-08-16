@@ -24,7 +24,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(31f, 2f);
             _fireSound = GetPath("sounds/Silenced2.wav");
             _holdOffset = new Vec2(1f, 2f);
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(0f, -4f);
         }
 
         public override ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 6, 7 });

@@ -37,6 +37,7 @@ namespace TMGmod
             maxAccuracyLost = 0.44f;
             _kickForce = 1.5f;
             _weight = 2f;
+            ShellOffset = new Vec2(2f, -4f);
 
             _fireSound = GetPath("sounds/2.wav");
         }

@@ -26,7 +26,7 @@ namespace TMGmod
             _kickForce = 9f;
             _holdOffset = new Vec2(-2f, 0f);
             _weight = 4.5f;
-            ShellOffset = new Vec2(4f, -2f);
+            ShellOffset = new Vec2(5f, -1f);
             SetAmmoType<ATBoltAction>(.9f);
         }
 

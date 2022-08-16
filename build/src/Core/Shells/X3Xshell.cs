@@ -15,7 +15,7 @@ namespace TMGmod.Core.Shells
             _sprite = new SpriteMap(GetPath("X3XShell"), 16, 16);
             FrameId = frameid;
             _graphic = _sprite;
-            scale *= 0.707f;
+            scale *= 1f;
         }
 
         [UsedImplicitly]

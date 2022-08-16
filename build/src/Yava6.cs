@@ -39,10 +39,9 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             SetAmmoType<ATYava6>();
             MinAccuracy = 0.5f;
-            ShellOffset = new Vec2(-13f, -4f);
+            ShellOffset = new Vec2(-2f, -3f);
             Compose(new FocusingAccuracy(this, 1f, .05f));
         }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
     }
 }

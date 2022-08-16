@@ -26,7 +26,7 @@ namespace TMGmod
             _collisionSize = new Vec2(33f, 10f);
             _barrelOffsetTL = new Vec2(33f, 1.5f);
             _holdOffset = new Vec2(2f, 1f);
-            ShellOffset = new Vec2(-6f, -7f);
+            ShellOffset = new Vec2(-6f, -3f);
             _fireSound = GetPath("sounds/new/HeavyAss-1.wav");
             _flare = new SpriteMap(GetPath("FlareBase3"), 13, 10)
             {

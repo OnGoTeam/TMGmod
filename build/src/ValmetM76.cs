@@ -31,7 +31,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(4f, 1f);
-            ShellOffset = new Vec2(-2f, -2f);
+            ShellOffset = new Vec2(-5f, -1f);
             _fireSound = GetPath("sounds/new/DaewooK1.wav");
             _fullAuto = false;
             _fireWait = 0.7f;

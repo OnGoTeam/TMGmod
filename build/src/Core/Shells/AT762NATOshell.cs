@@ -8,7 +8,7 @@ namespace TMGmod.Core.Shells
         public AT762NATOShell(float xpos, float ypos)
             : base(xpos, ypos, Mod.GetPath<TMGmod>("AT762NATOShell"))
         {
-            scale *= 0.707f;
+            scale *= 1f;
         }
     }
 }

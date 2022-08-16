@@ -28,7 +28,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(41f, 5f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _holdOffset = new Vec2(4f, 0f);
-            ShellOffset = new Vec2(-7f, 0f);
+            ShellOffset = new Vec2(-4f, 0f);
             _fireSound = GetPath("sounds/new/HighCaliber-Impactful.wav");
             _fullAuto = false;
             _fireWait = 2f;

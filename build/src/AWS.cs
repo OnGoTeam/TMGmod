@@ -38,7 +38,7 @@ namespace TMGmod
             _kickForce = 3.8f;
             _holdOffset = new Vec2(2f, 1f);
             _weight = 5f;
-            ShellOffset = new Vec2(-3f, -2f);
+            ShellOffset = new Vec2(-2f, -2f);
             SetAmmoType<AT50SniperS>();
         }
 

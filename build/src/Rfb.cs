@@ -14,7 +14,7 @@ namespace TMGmod
         {
             _editorName = "RFB";
             ammo = 20;
-            SetAmmoType<AT545NATO>(.9f);
+            SetAmmoType<ATRfb>(.9f);
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("RFB"), 33, 11);
             _center = new Vec2(17f, 5f);
@@ -26,7 +26,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(0f, 1f);
-            ShellOffset = new Vec2(9f, -3f);
+            ShellOffset = new Vec2(10f, -2f);
             _fireSound = GetPath("sounds/new/DaewooK1.wav");
             _fullAuto = false;
             _fireWait = 0.46f;

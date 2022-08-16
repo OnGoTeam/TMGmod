@@ -36,7 +36,7 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, 1f);
             _weight = 4.5f;
             _laserOffsetTL = new Vec2(21f, 4.33f);
-            ShellOffset = new Vec2(-1f, -2f);
+            ShellOffset = new Vec2(-5f, -1f);
             SetAmmoType<ATBoltAction>();
         }
 

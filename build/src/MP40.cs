@@ -33,7 +33,7 @@ namespace TMGmod
             _fireWait = 0.5f;
             _kickForce = 1.45f;
             _holdOffset = new Vec2(4f, 4f);
-            ShellOffset = new Vec2(-1f, -6f);
+            ShellOffset = new Vec2(2f, -6f);
             _weight = 3f;
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;

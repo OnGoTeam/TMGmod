@@ -35,7 +35,7 @@ namespace TMGmod
             _kickForce = 0.24f;
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.35f;
-            ShellOffset = new Vec2(0f, 0f);
+            ShellOffset = new Vec2(-3f, 0f);
             _weight = 2f;
             ComposeSimpleBurst(3, .3f);
         }

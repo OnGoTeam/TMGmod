@@ -30,7 +30,7 @@ namespace TMGmod
                 center = new Vec2(3f, 5f),
             };
             _holdOffset = new Vec2(3f, 2f);
-            ShellOffset = new Vec2(-3f, -2f);
+            ShellOffset = new Vec2(-3f, -4f);
             _fireSound = GetPath("sounds/new/TC12-Silenced.wav");
             _fullAuto = true;
             _fireWait = 0.65f;

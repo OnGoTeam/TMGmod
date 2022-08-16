@@ -43,7 +43,7 @@ namespace TMGmod
             loseAccuracy = 0f;
             maxAccuracyLost = 0f;
             _holdOffset = new Vec2(-1f, 1f);
-            ShellOffset = new Vec2(-9f, -4f);
+            ShellOffset = new Vec2(1f, -2f);
             _weight = 2.5f;
         }
 

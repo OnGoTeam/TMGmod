@@ -6,9 +6,9 @@ namespace TMGmod.Core.Shells
     public class AT9mmShell : EjectedShell
     {
         public AT9mmShell(float xpos, float ypos)
-            : base(xpos, ypos, Mod.GetPath<TMGmod>("ATMP7Shell"))
+            : base(xpos, ypos, Mod.GetPath<TMGmod>("AT9mmShell"))
         {
-            scale *= 0.85f;
+            scale *= 1f;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace TMGmod
             _collisionSize = new Vec2(16f, 10f);
             _holdOffset = new Vec2(0f, 2f);
             var barrelOffsetTLm = new[] { new Vec2(16f, 2f), new Vec2(14f, 6f) };
-            ShellOffset = new Vec2(-2f, -3f);
+            ShellOffset = new Vec2(-5f, -2f);
 
             var ammom = new[] { 30, 1 };
             var ammoTypem = new AmmoType[]

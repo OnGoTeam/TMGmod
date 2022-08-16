@@ -34,7 +34,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(6f, 0f);
-            ShellOffset = new Vec2(-14f, -1f);
+            ShellOffset = new Vec2(-7f, -1f);
             _fireSound = GetPath("sounds/new/HighCaliber.wav");
             _fullAuto = false;
             _fireWait = 1.03f;

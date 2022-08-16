@@ -36,7 +36,7 @@ namespace TMGmod
             maxAccuracyLost = 0.8f;
             _manualLoad = true;
             _fireWait = 3f;
-            ShellOffset = new Vec2(0f, -3f);
+            ShellOffset = new Vec2(2f, -3f);
             LoaderVec2 = new Vec2(9f, -1f);
             Loaddx = 3f;
             LoadSpeed = 15;

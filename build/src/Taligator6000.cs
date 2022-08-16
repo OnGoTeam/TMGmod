@@ -35,7 +35,7 @@ namespace TMGmod
             maxAccuracyLost = 0.9f;
             _fullAuto = true;
             _fireWait = 2.75f;
-            ShellOffset = new Vec2(-6f, -1f);
+            ShellOffset = new Vec2(-1f, -3f);
             _weight = 3f;
         }
 
