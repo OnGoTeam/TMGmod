@@ -97,6 +97,7 @@
     <Compile Include="src\Core\Modifiers\Accuracy\FirstAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\FocusingAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\LoseAccuracy.cs" />
+    <Compile Include="src\Core\Modifiers\Firing\BifurcatedFw.cs" />
     <Compile Include="src\Core\Modifiers\Firing\Burst.cs" />
     <Compile Include="src\Core\Modifiers\Firing\Charging.cs" />
     <Compile Include="src\Core\Modifiers\Firing\IModifyFire.cs" />
