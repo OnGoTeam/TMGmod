@@ -78,7 +78,7 @@ namespace TMGmod
 
         protected override void PopBaseShell()
         {
-            ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId, AddShell);
+            ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, offDir, FrameId, AddShell);
         }
     }
 }

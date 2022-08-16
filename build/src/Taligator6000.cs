@@ -42,7 +42,7 @@ namespace TMGmod
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 1, 2 });
         protected override void PopBaseShell()
         {
-            ATTG6000.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, FrameId, AddShell);
+            ATTG6000.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, offDir, FrameId, AddShell);
         }
     }
 }

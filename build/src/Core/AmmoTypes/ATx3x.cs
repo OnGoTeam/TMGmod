@@ -23,14 +23,14 @@ namespace TMGmod.Core.AmmoTypes
 
         public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
-            PopShellSkin(x, y, 0, add);
+            PopShellSkin(x, y, dir, 0, add);
         }
 
-        public static void PopShellSkin(float x, float y, int frameid, Action<EjectedShell> add)
+        public static void PopShellSkin(float x, float y, int dir, int frameid, Action<EjectedShell> add)
         {
             var flyingtoilet = new X3XShell(x, y, frameid)
             {
-                hSpeed = 7f + Rando.Float(1f),
+                hSpeed = (7f + Rando.Float(1f)) * dir,
             };
             add(flyingtoilet);
         }

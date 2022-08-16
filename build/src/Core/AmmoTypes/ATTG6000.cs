@@ -21,14 +21,14 @@ namespace TMGmod.Core.AmmoTypes
         }
         public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
-            PopShellSkin(x, y, 0, add);
+            PopShellSkin(x, y, dir, 0, add);
         }
 
-        public static void PopShellSkin(float x, float y, int frameid, Action<EjectedShell> add)
+        public static void PopShellSkin(float x, float y, int dir, int frameid, Action<EjectedShell> add)
         {
             var shell = new Taligator6000Shell(x, y, frameid)
             {
-                hSpeed = 0.5f + Rando.Float(-0.1f, 0.1f),
+                hSpeed = (0.5f + Rando.Float(-0.1f, 0.1f)) * dir,
                 vSpeed = -4.5f + Rando.Float(-0.8f, 0.8f),
                 depth = 0.2f - Rando.Float(0.0f, 0.1f),
             };
