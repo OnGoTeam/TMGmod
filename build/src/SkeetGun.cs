@@ -27,7 +27,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-21f, -4f);
             _collisionSize = new Vec2(41f, 7f);
             _fireSound = "shotgunFire";
-            _barrelOffsetTL = new Vec2(41f, 0f);
+            _barrelOffsetTL = new Vec2(41f, .5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
@@ -45,11 +45,25 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 4, 6, 7, 9 });
 
+        protected override void RealFire()
+        {
+            switch (ammo)
+            {
+                case 2:
+                    _barrelOffsetTL.y = .5f;
+                    break;
+                case 1:
+                    _barrelOffsetTL.y = 2.5f;
+                    break;
+            }
+
+            base.RealFire();
+        }
+
         public override void Update()
         {
             HandAngleOff = _handleAngleOff;
             base.Update();
-            _barrelOffsetTL = ammo % 2 == 0 ? new Vec2(41f, 0f) : new Vec2(41f, 2f);
             if (duck is null)
             {
                 _handleAngleOff = 0f;
