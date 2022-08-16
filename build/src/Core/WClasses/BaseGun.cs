@@ -304,6 +304,14 @@ namespace TMGmod.Core.WClasses
         protected virtual void AddShell(EjectedShell shell)
         {
             shell.velocity = shell.velocity.Rotate(angle, Vec2.Zero);
+
+            #region Shell Debug
+
+            shell._grounded = true;
+#warning "remove the line above"
+
+            #endregion
+
             Level.Add(shell);
         }
 
