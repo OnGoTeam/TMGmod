@@ -1,6 +1,8 @@
-﻿namespace TMGmod.Core
+﻿using TMGmod.Core.SkinLogic;
+
+namespace TMGmod.Core
 {
-    public interface I5
+    public interface I5: IHaveSkin
     {
     }
 }

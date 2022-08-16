@@ -1,7 +1,6 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
-using TMGmod.Core.SkinLogic;
 using TMGmod.NY;
 
 namespace TMGmod.Cases
@@ -42,7 +41,12 @@ namespace TMGmod.Cases
 
         protected override void Spawned(Holdable thing)
         {
-            if (thing is I5 && thing is IHaveSkin skinThing) skinThing.FrameId = 5;
+            switch (thing)
+            {
+                case I5 i5:
+                    i5.FrameId = 5;
+                    break;
+            }
         }
     }
 }

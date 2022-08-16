@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core;
+#if DEBUG
+using TMGmod.Useless_or_deleted_Guns;
+#endif
 
 namespace TMGmod.Cases.Color
 {
@@ -11,6 +12,7 @@ namespace TMGmod.Cases.Color
     public class PodarokClassic : BaseCase
     {
         private int _frames;
+
         public PodarokClassic(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("CaseClassic"), 14, 8);
@@ -24,17 +26,23 @@ namespace TMGmod.Cases.Color
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Classic Case";
-            Things = new List<Type>
+            ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                typeof(NellegaljaMk2),
-                typeof(Alep30),
-                typeof(BigShot),
-                typeof(AF2011),
-                typeof(AKALFA),
-                typeof(AN94),
-                typeof(BarretM98),
-                typeof(X3X),
-                typeof(SVU)
+                B<NellegaljaMk2>().Skin(CaseColor.Green),
+                B<Alep30>().Skin(CaseColor.Alt),
+                B<BigShot>().Skin(CaseColor.Red),
+                B<AF2011>(),
+                B<AKALFA>().Skin(CaseColor.Fifth),
+                B<AN94>(),
+                B<BarretM98>(),
+                B<X3X>().Skin(CaseColor.Random),
+                B<SVU>(),
+#if DEBUG
+                B<PPSh41>().Chance(.5f),
+                B<PPSh>().Chance(.5f),
+#else
+                B<PPSh41>(),
+#endif
             };
             CaseId = 0;
         }
