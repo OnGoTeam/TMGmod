@@ -13,12 +13,57 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SKS : BaseGun, IHaveAllowedSkins, I5
     {
-        private int _bullets;
         private int _patrons = 12;
+        private Vec2 _honeTarget;
 
-        public bool Stick;
+        public bool Bayonet
+        {
+            get => _ammoType is ATNB;
+            set
+            {
+                if (value)
+                {
+                    if (!Bayonet) _patrons = ammo;
+                    ammo = 20;
+                    _fireSound = "swipe";
+                    _honeTarget = new Vec2(12f, 0f);
+                    _flare = new SpriteMap(GetPath("takezis"), 4, 4)
+                    {
+                        center = new Vec2(0f, 0f),
+                    };
+                    _ammoType = new ATNB();
+                    _fireWait = 10f;
+                    _barrelOffsetTL = new Vec2(0f, 6f);
+                    loseAccuracy = 0f;
+                    maxAccuracyLost = 0f;
+                    _kickForce = 0f;
+                }
+                else
+                {
+                    if (Bayonet) ammo = _patrons;
+                    _ammoType = new AT762NATO
+                    {
+                        range = 800f,
+                        accuracy = 0.97f,
+                        bulletSpeed = 95f,
+                        bulletThickness = 1.5f,
+                    };
+                    _fireWait = 1.55f;
+                    _barrelOffsetTL = new Vec2(42f, 4f);
+                    _fireSound = GetPath("sounds/scar.wav");
+                    _honeTarget = new Vec2(8f, 0f);
+                    loseAccuracy = 0.2f;
+                    maxAccuracyLost = 0.4f;
+                    _kickForce = 4.8f;
+                    _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
+                    {
+                        center = new Vec2(0.0f, 5f),
+                    };
+                }
+            }
+        }
 
-        [UsedImplicitly] public StateBinding StickBinding = new StateBinding(nameof(Stick));
+        [UsedImplicitly] public StateBinding BayonetBinding = new StateBinding(nameof(Bayonet));
 
         public SKS(float xval, float yval)
             : base(xval, yval)
@@ -43,7 +88,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _holdOffset = new Vec2(8f, 0f);
+            _honeTarget = _holdOffset = new Vec2(8f, 0f);
             ShellOffset = new Vec2(-9f, -2f);
             _fireSound = GetPath("sounds/scar.wav");
             _flare.center = new Vec2(0f, 5f);
@@ -60,37 +105,18 @@ namespace TMGmod
 
         private void OnQuackPress()
         {
-            if (ammo < 12)
-            {
-                _patrons = ammo;
-                _bullets = _patrons + 20;
-                ammo += 20;
-            }
-
-            _fireSound = "";
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4)
-            {
-                center = new Vec2(0f, 0f),
-            };
-            _ammoType = new ATNB();
-            _fireWait = 10f;
-            _barrelOffsetTL = new Vec2(0f, 6f);
-            loseAccuracy = 0f;
-            maxAccuracyLost = 0f;
-            _kickForce = 0f;
-            Stick = true;
+            Bayonet = true;
             Fire();
         }
 
         private void OnQuackHold()
         {
-            _holdOffset = new Vec2(12f, 0f);
-            if (ammo < _bullets) ammo += 1;
+            ammo = 20;
         }
 
         private void OnQuackRelease()
         {
-            ResetAmmoType();
+            Bayonet = false;
         }
 
         private void UpdateWithDuck()
@@ -100,10 +126,15 @@ namespace TMGmod
             if (duck.inputProfile.Released("QUACK")) OnQuackRelease();
         }
 
+        private void UpdateHone()
+        {
+            CurrHone = Vec2.Lerp(CurrHone, _honeTarget, .5f);
+        }
+
         private void CustomUpdate()
         {
-            if (ammo < 12) _patrons = ammo;
             if (duck != null) UpdateWithDuck();
+            UpdateHone();
         }
 
         public override void Update()
@@ -112,35 +143,9 @@ namespace TMGmod
             CustomUpdate();
         }
 
-        private void ResetAmmoType()
-        {
-            ammo = _patrons;
-            _ammoType = new AT762NATO
-            {
-                range = 800f,
-                accuracy = 0.97f,
-                bulletSpeed = 95f,
-                bulletThickness = 1.5f,
-            };
-            _fireWait = 1.55f;
-            _barrelOffsetTL = new Vec2(42f, 4f);
-            _fireSound = GetPath("sounds/scar.wav");
-            _holdOffset = new Vec2(8f, 0f);
-            loseAccuracy = 0.2f;
-            maxAccuracyLost = 0.4f;
-            _kickForce = 4.8f;
-            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
-            Stick = false;
-        }
-
         private void CustomThrown()
         {
-            if (ammo != 0) ResetAmmoType();
-
-            if (Stick && _patrons == 0) ammo = 0;
+            if (ammo != 0) Bayonet = false;
         }
 
         public override void Thrown()
