@@ -2,6 +2,7 @@
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -38,6 +39,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             ComposeFirstAccuracy(20);
+            Compose(new BifurcatedFw(this, 1.0f, .001f, .05f));
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 5, 7, 8 });
