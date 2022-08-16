@@ -3,7 +3,7 @@ using DuckGame;
 namespace TMGmod.Core.AmmoTypes
 {
     // ReSharper disable once InconsistentNaming
-    public class ATNB : AmmoType
+    public class ATNB : BaseAmmoType
     {
         public ATNB()
         {
@@ -14,6 +14,9 @@ namespace TMGmod.Core.AmmoTypes
             bulletSpeed = 5f;
             range = 50f;
             penetration = 228f;
+            AlphaDamage = 1f;
+            DamageMean = 89.241f;
+            DamageVariation = .25f;
         }
     }
 }
