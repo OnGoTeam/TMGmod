@@ -1,6 +1,7 @@
 ﻿using System;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core.Bullets;
 using TMGmod.Core.DamageLogic;
 
 namespace TMGmod.Core.AmmoTypes
@@ -14,6 +15,7 @@ namespace TMGmod.Core.AmmoTypes
             DamageVariation = 1f;
             DistanceConvexity = 0f;
             AlphaDamage = 0.01f;
+            bulletType = typeof(BaseBullet);
         }
 
         [UsedImplicitly] public float DamageMean { get; set; }

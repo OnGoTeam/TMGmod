@@ -2,7 +2,7 @@ using DuckGame;
 
 namespace TMGmod.Core.Bullets
 {
-    public class AntiProp : Bullet
+    public class AntiProp : BaseBullet
     {
         public AntiProp(
             float xval, float yval, AmmoType type, float ang = -1f, Thing owner = null, bool rbound = false,

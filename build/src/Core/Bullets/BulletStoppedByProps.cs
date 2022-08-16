@@ -2,7 +2,7 @@
 
 namespace TMGmod.Core.Bullets
 {
-    public class BulletStoppedByProps : Bullet
+    public class BulletStoppedByProps : BaseBullet
     {
         public BulletStoppedByProps(
             float xval, float yval, AmmoType type, float ang = -1, Thing owner = null, bool rbound = false,

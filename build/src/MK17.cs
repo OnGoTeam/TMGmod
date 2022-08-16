@@ -13,8 +13,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MK17 : BaseAr, IHaveAllowedSkins
     {
-        private float _calculateSide;
-
         public MK17(float xval, float yval)
             : base(xval, yval)
         {
@@ -49,14 +47,13 @@ namespace TMGmod
 
         public override bool DoHit(Bullet bullet, Vec2 hitPos)
         {
-            _calculateSide = DamageImplementation.Calculate(bullet);
-            MakeDamage();
+            DoDamage(DamageImplementation.Calculate(bullet));
             return Hit(bullet, hitPos);
         }
 
-        private void MakeDamage()
+        private void DoDamage(float damage)
         {
-            _hitPoints -= _calculateSide;
+            _hitPoints -= damage;
             if (!(_hitPoints <= 0f)) return;
             NonSkin = 1;
             thickness = 0f;

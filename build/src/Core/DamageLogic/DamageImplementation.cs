@@ -1,5 +1,6 @@
 using System;
 using DuckGame;
+using TMGmod.Core.Bullets;
 
 namespace TMGmod.Core.DamageLogic
 {
@@ -125,9 +126,27 @@ namespace TMGmod.Core.DamageLogic
             return CalculateCoeff(bullet.ammo, bullet.bulletDistance / Math.Max(1, bullet.ammo.range));
         }
 
+        private static float CalculatePortion(Bullet bullet)
+        {
+            switch (bullet)
+            {
+                case BaseBullet b:
+                    return b.DamagePortion();
+                default:
+                    return 1f;
+            }
+        }
+
+        public static float CalculateFull(Bullet bullet)
+        {
+            return CalculateBase(bullet.ammo) * CalculateCoeff(bullet) * CalculatePortion(bullet);
+        }
+
         public static float Calculate(Bullet bullet)
         {
-            return CalculateBase(bullet.ammo) * CalculateCoeff(bullet);
+            var damage = CalculateFull(bullet);
+            (bullet as BaseBullet)?.LoseDamage();
+            return damage;
         }
     }
 }
