@@ -44,15 +44,8 @@ namespace TMGmod
                     accuracy = 0.9f,
                     penetration = 1f,
                     bulletSpeed = 35f,
-                    barrelAngleDegrees = 0f,
                 },
-                new ATGrenade
-                {
-                    range = 2500f,
-                    accuracy = 1f,
-                    bulletSpeed = 18f,
-                    barrelAngleDegrees = -7.5f,
-                },
+                new ATScarGrenade(),
             };
             _fullAuto = true;
             _fireWait = 1f;
