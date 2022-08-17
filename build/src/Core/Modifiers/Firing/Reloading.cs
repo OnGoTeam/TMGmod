@@ -9,10 +9,10 @@ namespace TMGmod.Core.Modifiers.Firing
         private readonly BaseGun _target;
         private readonly int _magSize;
         private int _mags;
-        private readonly Action<Action, int> _reload;
+        private readonly Action<Action<Action<int>>, int> _reload;
         private bool _triggerHeld;
 
-        public Reloading(BaseGun target, int magSize, int mags, Action<Action, int> reload)
+        public Reloading(BaseGun target, int magSize, int mags, Action<Action<Action<int>>, int> reload)
         {
             _target = target;
             _magSize = magSize;
@@ -21,9 +21,12 @@ namespace TMGmod.Core.Modifiers.Firing
             _reload = reload;
         }
 
-        private void Load()
+        private void Load(Action<int> success)
         {
-            if (_mags > 0) --_mags;
+            if (_mags <= 0) return;
+            // else
+            --_mags;
+            success(_mags);
         }
 
         private void TryReload()
