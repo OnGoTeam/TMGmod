@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -14,8 +15,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class CZ75 : BaseGun, IAmHg, IHaveAllowedSkins
     {
-        private int _fdelay;
-
         public CZ75(float xval, float yval)
             : base(xval, yval)
         {
@@ -40,50 +39,42 @@ namespace TMGmod
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             _weight = 1f;
+            var ldd = true;
+            Compose(
+                new Reloading(
+                    this,
+                    12,
+                    1,
+                    (
+                        load, _
+                    ) =>
+                    {
+                        if (ldd)
+                        {
+                            DoAmmoClick();
+                            ldd = false;
+                            _wait += 5f;
+                            return;
+                        }
+
+                        load(
+                            mags =>
+                            {
+                                var magpos = Offset(new Vec2(-5f, 0f));
+                                Level.Add(
+                                    new Czmag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
+                                );
+                                DoAmmoClick();
+                                if (mags <= 0)
+                                    NonSkin = 1;
+                            }
+                        );
+                    }
+                )
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 5 });
-
-        public override void OnPressAction()
-        {
-            if (((ammo > 0 && NonSkin == 1) || (ammo > 12 && NonSkin == 0)) && _fdelay == 0)
-                Fire();
-            else
-                switch (ammo)
-                {
-                    case 0:
-                        DoAmmoClick();
-                        break;
-                    case 12 when NonSkin == 0:
-                        SFX.Play("click");
-                        if (_raised)
-                            Level.Add(new Czmag(x, y + 1));
-                        else if (offDir < 0)
-                            Level.Add(new Czmag(x + 5, y));
-                        else
-                            Level.Add(new Czmag(x - 5, y));
-                        NonSkin = 1;
-                        _fdelay = 40;
-                        break;
-                    default:
-                        DoAmmoClick();
-                        break;
-                }
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            if (_fdelay > 1)
-            {
-                _fdelay -= 1;
-            }
-            else if (_fdelay == 1)
-            {
-                SFX.Play("click");
-                _fdelay -= 1;
-            }
-        }
 
 
         protected override float BaseKforce => NonSkin == 0 ? _kickForce : _kickForce * 216f;
