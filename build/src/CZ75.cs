@@ -84,5 +84,8 @@ namespace TMGmod
                 _fdelay -= 1;
             }
         }
+
+
+        protected override float BaseKforce => NonSkin == 0 ? _kickForce : _kickForce * 216f;
     }
 }
