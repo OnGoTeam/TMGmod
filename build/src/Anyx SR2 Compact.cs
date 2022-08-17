@@ -88,7 +88,7 @@ namespace TMGmod
 
         public override void OnHoldAction()
         {
-            if (ammo > 0) HandAngleOff -= 0.01f;
+            if (ammo > 0) HandAngleOff -= 0.0067f;
             else if (ammo < 1) HandAngleOff = 0f;
             HandAngleOffState = HandAngleOff;
             Psevdotimer += 1f;
