@@ -14,6 +14,7 @@ namespace TMGmod.Cases
         private readonly float _detailwidth;
         private readonly float _itemwidth;
         private readonly float _itemheight;
+        private int _timeoffset;
 
         private static Tuple<Holdable, float> SpecTuple(SpawnSpec<Holdable> drop) =>
             new Tuple<Holdable, float>(drop.Thing(), drop.Chance());
@@ -27,7 +28,7 @@ namespace TMGmod.Cases
             var withchance = drops.Select(SpecTuple).Where(ValidGraphic).ToList();
             var totalchance = withchance.Select(tuple => tuple.Item2).Sum();
             totalchance = Math.Max(totalchance, 1f);
-            _drops = withchance.Select(tuple => new Tuple<Holdable, string>(tuple.Item1, $"{tuple.Item2 / totalchance}")).ToList();
+            _drops = withchance.Select(tuple => new Tuple<Holdable, string>(tuple.Item1, $"{tuple.Item2 / totalchance:0.###}")).ToList();
             var details = _drops.Select(drop => drop.Item2).ToList();
             var holdables = _drops.Select(drop => drop.Item1).ToList();
             _dropwidth = holdables.Select(
@@ -48,7 +49,13 @@ namespace TMGmod.Cases
             itemSize.x = _itemwidth + 4f;
         }
 
-        private Tuple<Holdable, string> TupleNo(int ix) => _drops[ix % _drops.Count];
+        private Tuple<Holdable, string> TupleNo(int ix)
+        {
+            ix %= _drops.Count;
+            ix += _drops.Count;
+            ix %= _drops.Count;
+            return _drops[ix];
+        }
 
         private float ExtraWidth() => itemSize.x - _itemwidth - 4f;
 
@@ -101,14 +108,20 @@ namespace TMGmod.Cases
             );
         }
 
+        private int _direction = +1;
+
         public override void Draw()
         {
             base.Draw();
-            var timeoffset = int.MaxValue - MonoMain.timeInEditor;
+            var totalmod = _drops.Count * FramesPerItem;
+            var timeoffset = -MonoMain.timeInEditor * _direction - _timeoffset;
+            timeoffset %= totalmod;
+            timeoffset += totalmod;
+            timeoffset %= totalmod;
             var startix = timeoffset / FramesPerItem;
             var startoffset = timeoffset - startix * FramesPerItem;
             for (var ix = 0; ix < 4; ix++)
-                DrawNo(int.MaxValue - startix + ix, ix, startoffset);
+                DrawNo(-startix + ix, ix, startoffset);
             Graphics.DrawRect(
                 new Rectangle(x + 1f, y + 1f, itemSize.x - 2f, _itemheight + 2f), DuckGame.Color.Gray,
                 depth: depth + 5
@@ -156,6 +169,21 @@ namespace TMGmod.Cases
                 DuckGame.Color.White,
                 depth: depth + 7
             );
+        }
+
+        public override void Update()
+        {
+            if (Editor.inputMode == EditorInput.Mouse && Mouse.x >= x && Mouse.x <= x + itemSize.x && Mouse.y >= y + 1.0 && Mouse.y <= y + itemSize.y - 1.0)
+            {
+                var delta = (int)(.11f * Mouse.scroll);
+                _timeoffset += delta;
+                if (delta * _direction < 0)
+                {
+                    _timeoffset += 2 * MonoMain.timeInEditor * _direction;
+                    _direction *= -1;
+                }
+            }
+            base.Update();
         }
     }
 }
