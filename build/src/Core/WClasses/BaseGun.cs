@@ -345,13 +345,14 @@ namespace TMGmod.Core.WClasses
             DrawRandom();
         }
 
+        protected virtual SpriteMap EditorSpriteMap() => _graphic as SpriteMap;
 
         private void DrawRandom()
         {
             if (
                 Level.activeLevel is Editor
                 && this is IHaveAllowedSkins target
-                && _graphic is SpriteMap sprite
+                && EditorSpriteMap() is SpriteMap sprite
                 && target.SkinValue == -1
             )
             {
@@ -368,9 +369,7 @@ namespace TMGmod.Core.WClasses
                 );
             }
             else
-            {
                 base.Draw();
-            }
         }
 
         public override void EditorPropertyChanged(object property)
@@ -442,7 +441,7 @@ namespace TMGmod.Core.WClasses
             var contextMenu = base.GetContextMenu();
             switch (this)
             {
-                case IHaveAllowedSkins target when _graphic is SpriteMap sprite:
+                case IHaveAllowedSkins target when EditorSpriteMap() is SpriteMap sprite:
                 {
                     foreach (var skin in target.AllowedSkins.Concat(new[] { -1 }))
                         contextMenu.AddItem(new ContextSkinRender(new SkinMix(target, sprite), skin));
