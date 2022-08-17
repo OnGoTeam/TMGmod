@@ -29,7 +29,7 @@ namespace TMGmod
                 center = new Vec2(0.0f, 5f),
             };
             _holdOffset = new Vec2(-1f, 0f);
-            _fireSound = GetPath("sounds/1.wav");
+            _fireSound = GetPath("sounds/new/SMG-1.wav");
             _fullAuto = false;
             _fireWait = 1.5f;
             _kickForce = 0.24f;

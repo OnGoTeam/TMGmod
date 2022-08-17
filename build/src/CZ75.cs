@@ -33,7 +33,7 @@ namespace TMGmod
             };
             _holdOffset = new Vec2(-1f, 2f);
             ShellOffset = new Vec2(-3f, -1f);
-            _fireSound = GetPath("sounds/1.wav");
+            _fireSound = GetPath("sounds/new/SMG-1.wav");
             _fireWait = 0.75f;
             _kickForce = 0.9f;
             loseAccuracy = 0.3f;

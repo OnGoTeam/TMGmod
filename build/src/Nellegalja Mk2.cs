@@ -29,7 +29,7 @@ namespace TMGmod
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _holdOffset = new Vec2(1f, 1f);
             ShellOffset = new Vec2(-1f, -2f);
-            _fireSound = GetPath("sounds/Silenced1.wav");
+            _fireSound = GetPath("sounds/new/Nellegalja.wav");
             _fullAuto = false;
             _fireWait = 0.8f;
             _kickForce = 0.7f;

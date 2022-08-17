@@ -24,12 +24,12 @@ namespace TMGmod
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 9f);
             _barrelOffsetTL = new Vec2(16f, 2f);
-            _fireSound = GetPath("sounds/smg.wav");
+            _fireSound = GetPath("sounds/new/Alep30.wav");
             _fullAuto = true;
-            _fireWait = 0.45f;
+            _fireWait = 0.75f;
             _kickForce = 1f;
             loseAccuracy = 0.15f;
-            maxAccuracyLost = 0.8f;
+            maxAccuracyLost = 0.7f;
             _holdOffset = new Vec2(1f, 2f);
             ShellOffset = new Vec2(-6f, -3f);
             _weight = 2.3f;

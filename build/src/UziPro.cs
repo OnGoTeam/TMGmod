@@ -31,7 +31,7 @@ namespace TMGmod
             {
                 center = new Vec2(0.0f, 5f),
             };
-            _fireSound = GetPath("sounds/new/UziPro.wav");
+            _fireSound = GetPath("sounds/new/SMG-1.wav");
             _fullAuto = true;
             _fireWait = 0.4f;
             _kickForce = 0.5f;

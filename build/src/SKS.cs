@@ -50,7 +50,7 @@ namespace TMGmod
                     };
                     _fireWait = 1.55f;
                     _barrelOffsetTL = new Vec2(42f, 4f);
-                    _fireSound = GetPath("sounds/scar.wav");
+                    _fireSound = GetPath("sounds/new/MarksmanRifle-WithBoltNoise.wav");
                     _honeTarget = new Vec2(8f, 0f);
                     loseAccuracy = 0.2f;
                     maxAccuracyLost = 0.4f;
@@ -90,7 +90,7 @@ namespace TMGmod
             };
             _honeTarget = _holdOffset = new Vec2(8f, 0f);
             ShellOffset = new Vec2(-9f, -2f);
-            _fireSound = GetPath("sounds/scar.wav");
+            _fireSound = GetPath("sounds/new/MarksmanRifle-WithBoltNoise.wav");
             _flare.center = new Vec2(0f, 5f);
             _fullAuto = false;
             _fireWait = 1.55f;

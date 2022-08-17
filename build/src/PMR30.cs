@@ -24,7 +24,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(16f, 2f);
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-5f, -2f);
-            _fireSound = GetPath("sounds/1.wav");
+            _fireSound = GetPath("sounds/new/Alep30.wav");
             _fullAuto = false;
             _fireWait = 0.5f;
             _kickForce = 0.5f;
