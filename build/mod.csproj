@@ -104,7 +104,7 @@
     <Compile Include="src\Core\Modifiers\Firing\Reloading.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />
     <Compile Include="src\Core\Modifiers\Updating\SwitchingModes.cs" />
-    <Compile Include="src\Core\SkinLogic\ContextDetailsRender.cs" />
+    <Compile Include="src\Cases\ContextChanceRender.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveAllowedSkins.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveFrameId.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveSpriteBase.cs" />

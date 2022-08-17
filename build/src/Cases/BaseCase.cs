@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DuckGame;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.WClasses;
 
 namespace TMGmod.Cases
 {
@@ -142,29 +141,10 @@ namespace TMGmod.Cases
             }
         }
 
-        private static ContextMenu SpecContext(SpawnSpec<Holdable> spec)
-        {
-            var details = $"{spec.Chance()}";
-            var thing = spec.Thing();
-            switch (thing)
-            {
-                case IHaveAllowedSkins target when thing.graphic is SpriteMap sprite:
-                    return new ContextDetailsRender(new BaseGun.SkinMix(target, sprite), details);
-                case Holdable target when thing.graphic != null:
-                    return new ContextDetailsRender(target, details);
-                default:
-                    return null;
-            }
-        }
-
         public override ContextMenu GetContextMenu()
         {
             var menu = base.GetContextMenu();
-            var sub = new EditorGroupMenu(menu) { text = "Drops" };
-            foreach (var ctx in ThingsDetailed.Select(SpecContext).Where(ctx => ctx != null))
-                sub.AddItem(ctx);
-            sub.greyOut = false;
-            menu.AddItem(sub);
+            menu.AddItem(new ContextChanceRender(ThingsDetailed));
             return menu;
         }
     }
