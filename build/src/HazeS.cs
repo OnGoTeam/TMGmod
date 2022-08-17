@@ -114,8 +114,14 @@ namespace TMGmod
                 case true when _heatval < 1f:
                     _heatval += 4f;
                     break;
-                case true:
+                case true when _heatval < 1.3f:
+                    _heatval += .3f;
+                    break;
+                case true when _heatval > 1.7f:
                     _heatval += .7f;
+                    break;
+                case true:
+                    _heatval += _heatval - 1f;
                     break;
                 default:
                     _heatval += 1.5f;
