@@ -76,7 +76,7 @@ namespace TMGmod
             if (_heatval > 8f)
             {
                 _heatval = 8f;
-                for (var i = 0; i < 4; i++) Level.Add(SmallSmoke.New(x, y));
+                for (var i = 0; i < 4; i++) Level.Add(SmallSmoke.New(barrelPosition.x, barrelPosition.y));
             }
 
             _heatval -= 0.07f;
