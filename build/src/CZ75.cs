@@ -52,21 +52,23 @@ namespace TMGmod
                         if (ldd)
                         {
                             DoAmmoClick();
-                            ldd = false;
+                            var magpos = Offset(new Vec2(-5f, 0f));
+                            Level.Add(
+                                new Czmag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
+                            );
                             _wait += 5f;
+                            ldd = false;
                             return;
                         }
 
                         load(
                             mags =>
                             {
-                                var magpos = Offset(new Vec2(-5f, 0f));
-                                Level.Add(
-                                    new Czmag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
-                                );
                                 DoAmmoClick();
                                 if (mags <= 0)
                                     NonSkin = 1;
+                                _wait += _fireWait;
+                                ldd = true;
                             }
                         );
                     }
