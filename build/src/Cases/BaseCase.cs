@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DuckGame;
 using TMGmod.Core.SkinLogic;
+using TMGmod.Core.WClasses;
 
 namespace TMGmod.Cases
 {
@@ -40,20 +41,26 @@ namespace TMGmod.Cases
 
         public Holdable Spawn() => Rando.Float(0f, 1f) < _chance ? _thing() : null;
 
-        public static implicit operator SpawnSpec<Holdable>(SpawnSpec<T> spec) => new SpawnSpec<Holdable>(() => spec._thing(), spec._chance);
+        public static implicit operator SpawnSpec<Holdable>(SpawnSpec<T> spec) =>
+            new SpawnSpec<Holdable>(() => spec._thing(), spec._chance);
+
+        public T Thing() => _thing();
+        public float Chance() => _chance;
     }
 
     public static class CaseExtensions
     {
-        private static T WithSkin<T>(T h, int skin) where T: IHaveSkin
+        private static T WithSkin<T>(T h, int skin) where T : IHaveSkin
         {
             h.SkinValue = skin;
             return h;
         }
 
-        private static SpawnSpec<T> Skin<T>(this SpawnSpec<T> f, int skin) where T : Holdable, IHaveSkin => f.Decorate(h => WithSkin(h, skin));
+        private static SpawnSpec<T> Skin<T>(this SpawnSpec<T> f, int skin) where T : Holdable, IHaveSkin =>
+            f.Decorate(h => WithSkin(h, skin));
 
-        public static SpawnSpec<T> Skin<T>(this SpawnSpec<T> f, CaseColor skin) where T : Holdable, IHaveSkin => f.Skin((int) skin);
+        public static SpawnSpec<T> Skin<T>(this SpawnSpec<T> f, CaseColor skin) where T : Holdable, IHaveSkin =>
+            f.Skin((int)skin);
     }
 
     public abstract class BaseCase : Holdable, IPlatform
@@ -73,7 +80,7 @@ namespace TMGmod.Cases
 
         protected List<SpawnSpec<Holdable>> ThingsDetailed { private get; set; }
 
-        protected int CaseId { private get; set; }
+        protected CaseColor CaseId { private get; set; } = CaseColor.No;
 
         private Holdable Contained()
         {
@@ -119,19 +126,46 @@ namespace TMGmod.Cases
             HandleDuckIfNecessary(contained);
         }
 
-        private T Decorated<T>(T thing) where T: Holdable
+        private T Decorated<T>(T thing) where T : Holdable
         {
             Spawned(thing);
             return thing;
         }
+
         protected virtual void Spawned(Holdable thing)
         {
             switch (thing)
             {
                 case IHaveSkin skinThing:
-                    skinThing.SkinValue = CaseId;
+                    skinThing.SkinValue = (int)CaseId;
                     break;
             }
+        }
+
+        private static ContextMenu SpecContext(SpawnSpec<Holdable> spec)
+        {
+            var details = $"{spec.Chance()}";
+            var thing = spec.Thing();
+            switch (thing)
+            {
+                case IHaveAllowedSkins target when thing.graphic is SpriteMap sprite:
+                    return new ContextDetailsRender(new BaseGun.SkinMix(target, sprite), details);
+                case Holdable target when thing.graphic != null:
+                    return new ContextDetailsRender(target, details);
+                default:
+                    return null;
+            }
+        }
+
+        public override ContextMenu GetContextMenu()
+        {
+            var menu = base.GetContextMenu();
+            var sub = new EditorGroupMenu(menu) { text = "Drops" };
+            foreach (var ctx in ThingsDetailed.Select(SpecContext).Where(ctx => ctx != null))
+                sub.AddItem(ctx);
+            sub.greyOut = false;
+            menu.AddItem(sub);
+            return menu;
         }
     }
 }

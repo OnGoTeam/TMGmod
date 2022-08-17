@@ -72,7 +72,7 @@ namespace TMGmod.NY
                 typeof(CandyCaneOrange),
                 typeof(PPLMG),
             };
-            CaseId = 6;
+            CaseId = CaseColor.Prismarine;
         }
     }
 }

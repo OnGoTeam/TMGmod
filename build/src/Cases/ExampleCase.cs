@@ -40,7 +40,7 @@ namespace TMGmod.Cases
                 typeof(CZC2),
                 typeof(DaewooK1),
             };
-            CaseId = 1;
+            CaseId = CaseColor.Red;
         }
     }
 }

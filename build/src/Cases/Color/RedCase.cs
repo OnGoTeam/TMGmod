@@ -47,7 +47,7 @@ namespace TMGmod.Cases.Color
                 typeof(PP19),
                 typeof(RemingtonTac),
             };
-            CaseId = 1;
+            CaseId = CaseColor.Red;
         }
     }
 }

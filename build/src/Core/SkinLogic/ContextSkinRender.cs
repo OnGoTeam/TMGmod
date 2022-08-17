@@ -147,7 +147,7 @@ namespace TMGmod.Core.SkinLogic
             return MonoMain.timeInEditor;
         }
 
-        private static Sprite GetSprite(IShowSkins target)
+        public static Sprite GetSprite(IShowSkins target)
         {
             return new Sprite(GetTex(target.AllowedSkins.ToArray(), target.SpriteBase, Time()));
         }

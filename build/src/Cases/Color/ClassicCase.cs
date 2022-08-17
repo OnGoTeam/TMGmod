@@ -44,7 +44,7 @@ namespace TMGmod.Cases.Color
                 B<PPSh41>(),
 #endif
             };
-            CaseId = 0;
+            CaseId = (int)CaseColor.No;
         }
 
         public override void Update()

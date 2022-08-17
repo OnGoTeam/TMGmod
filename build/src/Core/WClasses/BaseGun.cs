@@ -459,6 +459,7 @@ namespace TMGmod.Core.WClasses
                         itemSize = new Vec2(Graphics.GetStringWidth(characteristic) + 8f, 16f),
                     }
                 );
+            subMenu.greyOut = false;
             contextMenu.AddItem(subMenu);
             return contextMenu;
         }
@@ -507,7 +508,7 @@ namespace TMGmod.Core.WClasses
             return base.Deserialize(node);
         }
 
-        private class SkinMix : IShowSkins
+        public class SkinMix : IShowSkins
         {
             private readonly IHaveAllowedSkins _target;
 

@@ -41,7 +41,7 @@ namespace TMGmod.Cases.Color
                 typeof(Glock18),
                 typeof(RemingtonTac),
             };
-            CaseId = 3;
+            CaseId = CaseColor.Cyan;
         }
     }
 }
