@@ -9,19 +9,17 @@ namespace TMGmod.Core
     {
         private readonly T _gun;
         private readonly Type _magType;
-        private bool _loaded;
 
-        public MagBuddy(T gun, Type magType = null, bool loaded = true)
+        public MagBuddy(T gun, Type magType = null)
         {
             _gun = gun;
             _magType = magType;
-            _loaded = loaded;
         }
 
         [UsedImplicitly]
         public bool Disload()
         {
-            if (!_loaded || _magType == null) return true;
+            if (!_gun.Loaded || _magType == null) return true;
             //else
             if (!_magType.IsSubclassOf(typeof(Thing))) return false;
             //else
@@ -32,7 +30,7 @@ namespace TMGmod.Core
             Level.Add(mag0);
             if (_gun.DropMag(mag0))
             {
-                _loaded = false;
+                _gun.Loaded = false;
                 return true;
             }
 
@@ -44,12 +42,14 @@ namespace TMGmod.Core
         [UsedImplicitly]
         public bool Doload()
         {
-            return !_loaded && _gun is ISupportReload gun && (_loaded = gun.SetMag());
+            return !_gun.Loaded && _gun is ISupportReload gun && (_gun.Loaded = gun.SetMag());
         }
 
         [UsedImplicitly]
         public interface ISupportReload
         {
+            bool Loaded { get; set; }
+            StateBinding MagLoadedBinding { get; }
             Vec2 SpawnPos { get; }
             bool SetMag();
 

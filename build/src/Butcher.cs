@@ -54,16 +54,15 @@ namespace TMGmod
         public bool SetMag()
         {
             if (Mags <= 0) return false;
-            if (_wait > 1f) return false;
+            if (_wait > _fireWait) return false;
             if (_onemoreclick)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
                 //NonSkin = 3;
                 _wait += 5f;
-                return _onemoreclick = false;
+                _onemoreclick = false;
+                return false;
             }
-
-            _onemoreclick = true;
             Mags -= 1;
             return true;
         }
@@ -85,16 +84,18 @@ namespace TMGmod
             //}
 
             _wait += 7f;
+            _onemoreclick = true;
             return true;
         }
 
+        public bool Loaded { get; set; } = true;
+        public StateBinding MagLoadedBinding { get; } = new StateBinding(nameof(Loaded));
         public Vec2 SpawnPos => new Vec2(0, -1);
 
         public override void Update()
         {
             if (ammoType.barrelAngleDegrees > 5f) _debris = -1f;
             if (ammoType.barrelAngleDegrees < -5f) _debris = 1f;
-            if (RealAmmo <= 0) _magBuddy.Disload();
             //if (RealAmmo <= 0 && Mags <= 0) NonSkin = 2;
             base.Update();
         }
@@ -115,7 +116,13 @@ namespace TMGmod
         private int RealAmmo => ammo - 60 * Mags;
         public override void OnPressAction()
         {
-            if (RealAmmo <= 0) _magBuddy.Doload();
+            if (RealAmmo <= 0)
+            {
+                if (Loaded)
+                    _magBuddy.Disload();
+                else
+                    _magBuddy.Doload();
+            }
             base.OnPressAction();
         }
     }

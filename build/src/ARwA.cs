@@ -93,6 +93,8 @@ namespace TMGmod
             return true;
         }
 
+        public bool Loaded { get; set; } = true;
+        public StateBinding MagLoadedBinding { get; } = new StateBinding(nameof(Loaded));
         public Vec2 SpawnPos => new Vec2(0, -1);
         private int RealAmmo => ammo - 30 * Mags;
 
