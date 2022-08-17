@@ -28,7 +28,9 @@ namespace TMGmod.Cases
             var withchance = drops.Select(SpecTuple).Where(ValidGraphic).ToList();
             var totalchance = withchance.Select(tuple => tuple.Item2).Sum();
             totalchance = Math.Max(totalchance, 1f);
-            _drops = withchance.Select(tuple => new Tuple<Holdable, string>(tuple.Item1, $"{tuple.Item2 / totalchance:0.###}")).ToList();
+            _drops = withchance.Select(
+                tuple => new Tuple<Holdable, string>(tuple.Item1, $"{tuple.Item2 / totalchance:P1}")
+            ).ToList();
             var details = _drops.Select(drop => drop.Item2).ToList();
             var holdables = _drops.Select(drop => drop.Item1).ToList();
             _dropwidth = holdables.Select(
@@ -45,7 +47,7 @@ namespace TMGmod.Cases
             var dropheights = holdables.Select(holdable => (float)holdable.graphic.height);
             var detailheights = details.Select(Graphics.GetStringHeight);
             _itemheight = dropheights.Concat(detailheights).Max() + 4f;
-            itemSize.y = _itemheight * 5 + 2f;
+            itemSize.y = _itemheight * 5 + 4f;
             itemSize.x = _itemwidth + 4f;
         }
 
@@ -66,7 +68,7 @@ namespace TMGmod.Cases
         {
             var offsety = time / (float)FramesPerItem + offsetix;
             var x0 = x + 2f;
-            var y0 = y + 2f;
+            var y0 = y + 3f;
             var basey = y0 + offsety * _itemheight + 1f;
             Graphics.DrawRect(
                 new Rectangle(x0, basey, _dropwidth + ExtraWidth(), _itemheight - 2f),
@@ -123,48 +125,48 @@ namespace TMGmod.Cases
             for (var ix = 0; ix < 4; ix++)
                 DrawNo(-startix + ix, ix, startoffset);
             Graphics.DrawRect(
-                new Rectangle(x + 1f, y + 1f, itemSize.x - 2f, _itemheight + 2f), DuckGame.Color.Gray,
+                new Rectangle(x + 1f, y + 2f, itemSize.x - 2f, _itemheight + 2f), DuckGame.Color.Gray,
                 depth: depth + 5
             );
             Graphics.DrawRect(
-                new Rectangle(x + 2f, y + 2f, itemSize.x - 4f, _itemheight), DuckGame.Color.Black,
+                new Rectangle(x + 2f, y + 3f, itemSize.x - 4f, _itemheight), DuckGame.Color.Black,
                 depth: depth + 6
             );
             Graphics.DrawString(
                 "Drops",
                 new Vec2(
                     x + 4f,
-                    y + 2f + (_itemheight - Graphics.GetStringHeight("Drops")) / 2f
+                    y + 3f + (_itemheight - Graphics.GetStringHeight("Drops")) / 2f
                 ),
                 DuckGame.Color.White,
                 depth: depth + 7
             );
             Graphics.DrawRect(
-                new Rectangle(x + 1f, y + 1f + 4 * _itemheight, itemSize.x - 2f, _itemheight + 2f
+                new Rectangle(x + 1f, y + 2f + 4 * _itemheight, itemSize.x - 2f, _itemheight + 2f
                 ),
                 DuckGame.Color.Gray, depth: depth + 5);
             Graphics.DrawRect(
-                new Rectangle(x + 2f, y + 2f + 4 * _itemheight, _dropwidth + ExtraWidth(), _itemheight),
+                new Rectangle(x + 2f, y + 3f + 4 * _itemheight, _dropwidth + ExtraWidth(), _itemheight),
                 DuckGame.Color.Black, depth: depth + 6
             );
             Graphics.DrawString(
                 "Drop",
                 new Vec2(
                     x + 4f,
-                    y + 2f + 4 * _itemheight + (_itemheight - Graphics.GetStringHeight("Drop")) / 2f
+                    y + 3f + 4 * _itemheight + (_itemheight - Graphics.GetStringHeight("Drop")) / 2f
                 ),
                 DuckGame.Color.White,
                 depth: depth + 7
             );
             Graphics.DrawRect(
-                new Rectangle(x - 2f + itemSize.x - _detailwidth, y + 2f + 4 * _itemheight, _detailwidth, _itemheight),
+                new Rectangle(x - 2f + itemSize.x - _detailwidth, y + 3f + 4 * _itemheight, _detailwidth, _itemheight),
                 DuckGame.Color.Black, depth: depth + 6
             );
             Graphics.DrawString(
                 "Chance",
                 new Vec2(
                     x + itemSize.x - _detailwidth,
-                    y + 2f + 4 * _itemheight + (_itemheight - Graphics.GetStringHeight("Chance")) / 2f
+                    y + 3f + 4 * _itemheight + (_itemheight - Graphics.GetStringHeight("Chance")) / 2f
                 ),
                 DuckGame.Color.White,
                 depth: depth + 7
@@ -173,7 +175,8 @@ namespace TMGmod.Cases
 
         public override void Update()
         {
-            if (Editor.inputMode == EditorInput.Mouse && Mouse.x >= x && Mouse.x <= x + itemSize.x && Mouse.y >= y + 1.0 && Mouse.y <= y + itemSize.y - 1.0)
+            if (Editor.inputMode == EditorInput.Mouse && Mouse.x >= x && Mouse.x <= x + itemSize.x &&
+                Mouse.y >= y + 1.0 && Mouse.y <= y + itemSize.y - 1.0)
             {
                 var delta = (int)(.11f * Mouse.scroll);
                 _timeoffset += delta;
@@ -183,6 +186,7 @@ namespace TMGmod.Cases
                     _direction *= -1;
                 }
             }
+
             base.Update();
         }
     }
