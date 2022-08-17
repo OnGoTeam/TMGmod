@@ -41,7 +41,7 @@ namespace TMGmod
             _kickForce = 1.67f;
             _weight = 1f;
 
-            var fireSoundm = new[] { GetPath("sounds/1.wav"), "littleGun" };
+            var fireSoundm = new[] { GetPath("sounds/new/Alep30.wav"), "littleGun" };
 
             Compose(
                 new SwitchingModes(

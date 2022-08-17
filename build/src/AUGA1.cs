@@ -33,7 +33,7 @@ namespace TMGmod
             };
             _holdOffset = new Vec2(-2f, 1f);
             ShellOffset = new Vec2(-10f, -1f);
-            _fireSound = GetPath("sounds/new/AutomaticRifle-1.wav");
+            _fireSound = GetPath("sounds/new/AutomaticRifle-2.wav");
             _fullAuto = true;
             _fireWait = 0.8f;
             loseAccuracy = 0.1f;
