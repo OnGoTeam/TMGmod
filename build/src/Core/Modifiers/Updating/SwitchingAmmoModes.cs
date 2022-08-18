@@ -58,7 +58,7 @@ namespace TMGmod.Core.Modifiers.Updating
             if (_target.infiniteAmmoVal) _ammo[0] = 99;
             if (_target.duck is null)
                 Reset();
-            else if (_target.duck.inputProfile.Pressed("QUACK"))
+            else if (_target.Quacked())
                 SwitchMode();
         }
 

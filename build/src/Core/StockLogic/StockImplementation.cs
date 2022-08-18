@@ -27,7 +27,7 @@ namespace TMGmod.Core.StockLogic
         public static void UpdateStock(this IHaveStock target)
         {
             var gun = target.AsAGun();
-            if (gun.SwitchStockQ() && (target.Stock || gun.duck.grounded) && gun.duck.inputProfile.Pressed("QUACK"))
+            if (gun.SwitchStockQ() && (target.Stock || gun.duck.grounded) && gun.Quacked())
             {
                 target.Stock = !target.Stock;
 

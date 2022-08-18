@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Firing;
@@ -13,6 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ARwA : BaseAr, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public ARwA(float xval, float yval)
             : base(xval, yval)
         {

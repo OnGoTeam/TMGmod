@@ -45,7 +45,7 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
+            if (Quacked())
             {
                 if (laserSight)
                 {

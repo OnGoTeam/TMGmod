@@ -437,6 +437,13 @@ namespace TMGmod.Core.WClasses
             }
         }
 
+        public bool Quacked() => duck?.inputProfile.Pressed("QUACK") == true;
+
+        protected void UnQuack()
+        {
+            if (Quacked()) SFX.Play("quack", -1, duck.quackPitch);
+        }
+
         public override ContextMenu GetContextMenu()
         {
             var contextMenu = base.GetContextMenu();

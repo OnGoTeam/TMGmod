@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Firing;
@@ -15,6 +16,7 @@ namespace TMGmod
     {
         private float _debris = 1f;
 
+        [UsedImplicitly]
         public Butcher(float xval, float yval)
             : base(xval, yval)
         {
