@@ -56,10 +56,7 @@ namespace TMGmod
         public bool Bipods
         {
             get => BipodsQ();
-            set
-            {
-                laserSight = value;
-            }
+            set => laserSight = value;
         }
         public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
         public bool BipodsDisabled => false;

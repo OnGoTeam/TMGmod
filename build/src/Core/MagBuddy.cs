@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core
 {
-    public class MagBuddy<T> where T: BaseGun, MagBuddy<T>.ISupportReload
+    public class MagBuddy<T> where T : BaseGun, MagBuddy<T>.ISupportReload
     {
         private readonly T _gun;
         private readonly Type _magType;
@@ -49,7 +49,7 @@ namespace TMGmod.Core
         public interface ISupportReload
         {
             bool Loaded { get; set; }
-            StateBinding MagLoadedBinding { get; }
+            [UsedImplicitly] StateBinding MagLoadedBinding { get; }
             Vec2 SpawnPos { get; }
             bool SetMag();
 

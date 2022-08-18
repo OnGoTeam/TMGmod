@@ -1,10 +1,12 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 
 namespace TMGmod.Core.Bullets
 {
     public class BaseBullet : Bullet
     {
         private float _damagePortion = 1f;
+        [UsedImplicitly]
         public BaseBullet(
             float xval, float yval, AmmoType type, float ang = -1, Thing owner = null, bool rbound = false,
             float distance = -1, bool tracer = false, bool network = true

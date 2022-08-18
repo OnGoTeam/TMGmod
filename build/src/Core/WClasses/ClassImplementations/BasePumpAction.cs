@@ -86,7 +86,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
 
         private static readonly Dictionary<SpriteMap, SpriteMap> Rendered = new Dictionary<SpriteMap, SpriteMap>();
 
-        private SpriteMap Render(SpriteMap smap)
+        private SpriteMap Render(Sprite smap)
         {
             var tbase = smap.texture;
             var tloader = LoaderSprite.texture;

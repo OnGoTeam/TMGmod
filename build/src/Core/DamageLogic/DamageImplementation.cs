@@ -137,7 +137,7 @@ namespace TMGmod.Core.DamageLogic
             }
         }
 
-        public static float CalculateFull(Bullet bullet)
+        private static float CalculateFull(Bullet bullet)
         {
             return CalculateBase(bullet.ammo) * CalculateCoeff(bullet) * CalculatePortion(bullet);
         }
