@@ -127,6 +127,7 @@ namespace TMGmod.Core.WClasses
         private float Accuracy => ClipAccuracy(ActiveModifier.ModifyAccuracy(BaseAccuracy));
 
         protected virtual float BaseKforce => _kickForce;
+        protected virtual float StatsKforce => BaseKforce;
 
         private float Kforce => Math.Max(0f, ActiveModifier.ModifyKforce(BaseKforce));
 
@@ -469,7 +470,7 @@ namespace TMGmod.Core.WClasses
             if (_ammoType != null) yield return $"Range: {_ammoType.range / 16f}";
             if (_ammoType != null) yield return $"Bullet Speed: {_ammoType.bulletSpeed / 16f * 60f}";
             if (_ammoType != null) yield return $"Penetration: {_ammoType.penetration}";
-            yield return $"Kickforce: {_kickForce}";
+            yield return $"Kickforce: {StatsKforce}";
             if (_fireWait > 0 && !_manualLoad && _fullAuto)
                 yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
         }
@@ -491,7 +492,7 @@ namespace TMGmod.Core.WClasses
             yield return $"{MaxAccuracy}";
             yield return $"{Accuracy}";
             yield return $"{MinAccuracy}";
-            yield return $"{Kforce}";
+            yield return $"{StatsKforce}";
             yield return _ammoType is null ? "" : $"{_ammoType.range}";
         }
 
