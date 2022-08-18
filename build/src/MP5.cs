@@ -21,7 +21,7 @@ namespace TMGmod
         public MP5(float xval, float yval)
             : base(xval, yval)
         {
-            _editorName = "MP5A3";
+            _editorName = "MP5A4";
             ammo = 30;
             IncreasedAccuracy = .9f;
             DecreasedAccuracy = .7f;
