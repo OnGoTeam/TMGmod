@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Firing;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -39,8 +40,9 @@ namespace TMGmod
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             _weight = 1f;
-            var ldd = true;
+            var ldd = new SynchronizedValue<bool>(true);
             Compose(
+                ldd,
                 new Reloading(
                     this,
                     12,
@@ -49,7 +51,7 @@ namespace TMGmod
                         load, _
                     ) =>
                     {
-                        if (ldd)
+                        if (ldd.Value)
                         {
                             DoAmmoClick();
                             var magpos = Offset(new Vec2(-5f, 0f));
@@ -57,7 +59,7 @@ namespace TMGmod
                                 new Czmag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
                             );
                             _wait += 5f;
-                            ldd = false;
+                            ldd.Value = false;
                             return;
                         }
 
@@ -68,7 +70,7 @@ namespace TMGmod
                                 if (mags <= 0)
                                     NonSkin = 1;
                                 _wait += _fireWait;
-                                ldd = true;
+                                ldd.Value = true;
                             }
                         );
                     }
