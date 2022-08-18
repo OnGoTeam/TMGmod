@@ -53,7 +53,7 @@ namespace TMGmod
                         if (magInserted.Value)
                         {
                             SFX.Play(GetPath("sounds/tuduc.wav"));
-                            var magpos = Offset(new Vec2(5f, 0f));
+                            var magpos = Offset(new Vec2(3f, 3f));
                             Level.Add(
                                 new ArwaMag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
                             );
