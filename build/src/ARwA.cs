@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
-using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
+using TMGmod.Core.Modifiers.Firing;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -10,21 +11,14 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class ARwA : BaseAr, IHaveAllowedSkins, MagBuddy<ARwA>.ISupportReload
+    public class ARwA : BaseAr, IHaveAllowedSkins
     {
-        private readonly MagBuddy<ARwA> _magBuddy;
-        private bool _onemoreclick = true;
-
-        [UsedImplicitly] public byte Mags = 1;
-
-        [UsedImplicitly] public StateBinding MagsBinding = new StateBinding(nameof(Mags));
-
         public ARwA(float xval, float yval)
             : base(xval, yval)
         {
             _editorName = "ARwA";
-            ammo = (1 + Mags) * 30;
             SetAmmoType<AT556NATO>(.85f);
+            ammo = 60;
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("ARW-A"), 27, 9);
             _center = new Vec2(13f, 5f);
@@ -43,9 +37,50 @@ namespace TMGmod
             loseAccuracy = 0.11f;
             maxAccuracyLost = 0.2f;
             _weight = 5f;
-            _magBuddy = new MagBuddy<ARwA>(this, typeof(ArwaMag));
             _kickForce = 1f;
             KforceDelta = .2f;
+            var magInserted = new SynchronizedValue<bool>(true);
+            Compose(
+                magInserted,
+                new Reloading(
+                    this,
+                    30,
+                    (
+                        load, magsBefore
+                    ) =>
+                    {
+                        loaded = false;
+                        if (magInserted.Value)
+                        {
+                            SFX.Play(GetPath("sounds/tuduc.wav"));
+                            var magpos = Offset(new Vec2(5f, 0f));
+                            Level.Add(
+                                new ArwaMag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
+                            );
+                            NonSkin = magsBefore > 0 ? 1 : 2;
+                            _wait += 5f;
+                            magInserted.Value = false;
+                            return;
+                        }
+
+                        load(
+                            magsAfter =>
+                            {
+                                SFX.Play(GetPath("sounds/tuduc.wav"));
+                                NonSkin = magsAfter > 0 ? 0 : 3;
+                                _wait += _fireWait;
+                                magInserted.Value = true;
+                            },
+                            () => loaded = true
+                        );
+                    }
+                )
+            );
+        }
+
+        public override void OnReleaseAction()
+        {
+            loaded = true;
         }
 
         protected override void OnInitialize()
@@ -55,67 +90,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public bool SetMag()
-        {
-            if (Mags <= 0) return false;
-            if (_wait > 1f) return false;
-            if (_onemoreclick)
-            {
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-                NonSkin = 3;
-                _wait += 5f;
-                return _onemoreclick = false;
-            }
-
-            _onemoreclick = true;
-            Mags -= 1;
-            return true;
-        }
-
-        public bool DropMag(Thing mag)
-        {
-            SFX.Play(GetPath("sounds/tuduc.wav"));
-            switch (NonSkin)
-            {
-                case 0:
-                    NonSkin = 1;
-                    break;
-                case 3:
-                    NonSkin = 2;
-                    break;
-                default:
-                    NonSkin = 1;
-                    break;
-            }
-
-            _wait += 7f;
-            return true;
-        }
-
-        public bool Loaded { get; set; } = true;
-        public StateBinding MagLoadedBinding { get; } = new StateBinding(nameof(Loaded));
-        public Vec2 SpawnPos => new Vec2(0, -1);
-        private int RealAmmo => ammo - 30 * Mags;
-
-        public override void OnPressAction()
-        {
-            if (RealAmmo <= 0) _magBuddy.Doload();
-            base.OnPressAction();
-        }
-
-        protected override void RealFire()
-        {
-            ammo -= 30 * Mags; // ammo = RealAmmo
-            base.RealFire();
-            ammo += 30 * Mags;
-        }
-
-        public override void Update()
-        {
-            if (RealAmmo <= 0) _magBuddy.Disload();
-            if (RealAmmo <= 0 && Mags <= 0) NonSkin = 2;
-            base.Update();
-        }
     }
 }

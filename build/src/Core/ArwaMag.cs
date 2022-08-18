@@ -2,13 +2,17 @@
 
 namespace TMGmod.Core
 {
-    public class ArwaMag : PhysicsObject
+    public class ArwaMag : PhysicsParticle
     {
-        public ArwaMag()
+        public ArwaMag(float xpos, float ypos) : base(xpos, ypos)
         {
+            _hSpeed = 0f;
+            _vSpeed = 0f;
             _graphic = new Sprite(GetPath("armag.png"));
+            depth = 0.3f + Rando.Float(0f, 0.1f);
             _collisionSize = new Vec2(4, 7);
-            physicsMaterial = PhysicsMaterial.Plastic;
+            _collisionOffset = new Vec2(-2f, -3.5f);
+            _center = new Vec2(2f, 3.5f);
         }
     }
 }

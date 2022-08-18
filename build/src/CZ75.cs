@@ -20,8 +20,8 @@ namespace TMGmod
             : base(xval, yval)
         {
             _editorName = "CZ-75";
-            ammo = 24;
             SetAmmoType<ATCZ75>();
+            ammo = 24;
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("CZ75"), 12, 8);
             _center = new Vec2(6f, 4f);
@@ -46,7 +46,6 @@ namespace TMGmod
                 new Reloading(
                     this,
                     12,
-                    1,
                     (
                         load, _
                     ) =>
@@ -71,7 +70,8 @@ namespace TMGmod
                                     NonSkin = 1;
                                 _wait += _fireWait;
                                 magInserted.Value = true;
-                            }
+                            },
+                            () => {}
                         );
                     }
                 )
