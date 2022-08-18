@@ -40,9 +40,9 @@ namespace TMGmod
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             _weight = 1f;
-            var ldd = new SynchronizedValue<bool>(true);
+            var magInserted = new SynchronizedValue<bool>(true);
             Compose(
-                ldd,
+                magInserted,
                 new Reloading(
                     this,
                     12,
@@ -51,7 +51,7 @@ namespace TMGmod
                         load, _
                     ) =>
                     {
-                        if (ldd.Value)
+                        if (magInserted.Value)
                         {
                             DoAmmoClick();
                             var magpos = Offset(new Vec2(-5f, 0f));
@@ -59,7 +59,7 @@ namespace TMGmod
                                 new Czmag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
                             );
                             _wait += 5f;
-                            ldd.Value = false;
+                            magInserted.Value = false;
                             return;
                         }
 
@@ -70,7 +70,7 @@ namespace TMGmod
                                 if (mags <= 0)
                                     NonSkin = 1;
                                 _wait += _fireWait;
-                                ldd.Value = true;
+                                magInserted.Value = true;
                             }
                         );
                     }
