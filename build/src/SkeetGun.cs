@@ -9,7 +9,6 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [EditorGroup("TMG|Shotgun|Break-Action")]
-    [BaggedProperty("canSpawn", false)]
     public class SkeetGun : BaseGun, IHaveAllowedSkins, IAmSg
     {
         private float _handleAngleOff;
