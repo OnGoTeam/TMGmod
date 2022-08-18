@@ -14,6 +14,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
         }
 
         protected override float BaseKforce => Rando.Float(KickForce1Lmg, KickForce2Lmg);
+        protected override float StatsKforce => (KickForce1Lmg + KickForce2Lmg) / 2f;
 
         protected float KickForce1Lmg { get; set; }
 
