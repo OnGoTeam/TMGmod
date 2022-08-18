@@ -44,7 +44,7 @@ namespace TMGmod
             var fireSoundm = new[] { GetPath("sounds/new/Alep30.wav"), "littleGun" };
 
             Compose(
-                new SwitchingModes(
+                new SwitchingAmmoModes(
                     this,
                     ammom,
                     mode =>

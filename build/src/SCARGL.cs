@@ -58,7 +58,7 @@ namespace TMGmod
             var fireSoundm = new[] { GetPath("sounds/new/scar.wav"), "deepMachineGun" };
 
             Compose(
-                new SwitchingModes(
+                new SwitchingAmmoModes(
                     this,
                     ammom,
                     mode =>

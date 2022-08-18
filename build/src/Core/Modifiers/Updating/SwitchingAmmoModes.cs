@@ -5,7 +5,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Updating
 {
-    public class SwitchingModes: Modifier
+    public class SwitchingAmmoModes: Modifier
     {
         private readonly BaseGun _target;
         private readonly int[] _ammo;
@@ -14,7 +14,7 @@ namespace TMGmod.Core.Modifiers.Updating
         private readonly Action _reset;
         private int _mode;
         
-        public SwitchingModes(BaseGun target, int[] ammo, Action<int> update, Action reset)
+        public SwitchingAmmoModes(BaseGun target, int[] ammo, Action<int> update, Action reset)
         {
             _target = target;
             _ammo = ammo;
