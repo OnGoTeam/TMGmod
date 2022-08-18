@@ -481,15 +481,18 @@ namespace TMGmod.Core.WClasses
             yield return "Accuracy";
             yield return "MinAccuracy";
             yield return "KickForce";
+            yield return "Range";
         }
 
         public IEnumerable<string> StatsLine()
         {
+            Initialize();
             yield return editorName;
             yield return $"{MaxAccuracy}";
             yield return $"{Accuracy}";
             yield return $"{MinAccuracy}";
             yield return $"{Kforce}";
+            yield return _ammoType is null ? "" : $"{_ammoType.range}";
         }
 
         public override BinaryClassChunk Serialize()
