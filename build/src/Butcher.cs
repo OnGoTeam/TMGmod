@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.Modifiers.Firing;
@@ -14,7 +15,9 @@ namespace TMGmod
     public class Butcher : BaseLmg, IHaveAllowedSkins
     {
         private float _debris = 1f;
+        private readonly SynchronizedValue<bool> _magInserted = new SynchronizedValue<bool>(true);
 
+        [UsedImplicitly]
         public Butcher(float xval, float yval)
             : base(xval, yval)
         {
@@ -43,9 +46,8 @@ namespace TMGmod
             KickForce1Lmg = 0.33f;
             KickForce2Lmg = 0.67f;
             var magOffset = new Vec2(1f, 3f);
-            var magInserted = new SynchronizedValue<bool>(true);
             Compose(
-                magInserted,
+                _magInserted,
                 new Reloading(
                     this,
                     60,
@@ -55,7 +57,7 @@ namespace TMGmod
                     ) =>
                     {
                         loaded = false;
-                        if (magInserted.Value)
+                        if (_magInserted.Value)
                         {
                             SFX.Play(GetPath("sounds/tuduc.wav"));
                             var magpos = Offset(magOffset);
@@ -64,7 +66,7 @@ namespace TMGmod
                             );
                             // NonSkin = magsBefore > 0 ? 1 : 2;
                             _wait += 5f;
-                            magInserted.Value = false;
+                            _magInserted.Value = false;
                             return;
                         }
 
@@ -74,7 +76,7 @@ namespace TMGmod
                                 SFX.Play(GetPath("sounds/tuduc.wav"));
                                 // NonSkin = magsAfter > 0 ? 0 : 3;
                                 _wait += _fireWait;
-                                magInserted.Value = true;
+                                _magInserted.Value = true;
                             },
                             () => loaded = true
                         );
@@ -102,7 +104,8 @@ namespace TMGmod
         {
             base.OnReleaseAction();
             ammoType.barrelAngleDegrees = -5f;
-            loaded = true;
+            if (_magInserted.Value)
+                loaded = true;
         }
     }
 }

@@ -33,9 +33,12 @@ namespace TMGmod.Core.BipodsLogic
         public static void UpdateSwitchableBipods(this ICanDisableBipods target)
         {
             var gun = target.AsAGun();
-            if (gun.duck == null) target.SetBipodsDisabled(false);
-            else if (!gun.BipodsQ(true)) target.SetBipodsDisabled(false);
-            else if (gun.duck.inputProfile.Pressed("QUACK")) target.SetBipodsDisabled(!target.BipodsDisabled);
+            if (gun.duck == null)
+                target.SetBipodsDisabled(false);
+            else if (!gun.BipodsQ(true))
+                target.SetBipodsDisabled(false);
+            else if (gun.Quacked())
+                target.SetBipodsDisabled(!target.BipodsDisabled);
             target.UpdateBipods();
         }
 

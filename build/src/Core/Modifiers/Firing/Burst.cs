@@ -69,7 +69,7 @@ namespace TMGmod.Core.Modifiers.Firing
             if (_shotsLeft > 0 && _target._wait <= 0f) ShootLeft();
         }
 
-        private bool NeedSwitch() => _target.duck?.inputProfile.Pressed("QUACK") == true;
+        private bool NeedSwitch() => _target.Quacked();
 
         private void DoSwitch()
         {

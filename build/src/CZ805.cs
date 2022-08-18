@@ -79,11 +79,11 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (duck?.inputProfile.Pressed("QUACK") == true)
+            if (Quacked())
             {
                 SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
                 Silencer = !Silencer;
-                SFX.Play("quack", -1);
+                UnQuack();
             }
 
             if (ammo > 26) NonSkin = 5 * (NonSkin / 5) + 0;

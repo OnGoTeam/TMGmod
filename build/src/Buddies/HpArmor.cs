@@ -95,13 +95,18 @@ namespace TMGmod.Buddies
                        RayIntersectsThing(origin, direction, ragdoll.part3);
             }
 
-            return RayIntersectsSegment(origin, direction, thing.topLeft, thing.topRight)
+            var topLeft = thing.topLeft + new Vec2(-.5f, -.5f);
+            var topRight = thing.topRight + new Vec2(+.5f, -.5f);
+            var bottomRight = thing.bottomRight + new Vec2(+.5f, +.5f);
+            var bottomLeft = thing.bottomLeft + new Vec2(-.5f, +.5f);
+
+            return RayIntersectsSegment(origin, direction, topLeft, topRight)
                    ||
-                   RayIntersectsSegment(origin, direction, thing.topRight, thing.bottomRight)
+                   RayIntersectsSegment(origin, direction, topRight, bottomRight)
                    ||
-                   RayIntersectsSegment(origin, direction, thing.bottomRight, thing.bottomLeft)
+                   RayIntersectsSegment(origin, direction, bottomRight, bottomLeft)
                    ||
-                   RayIntersectsSegment(origin, direction, thing.bottomLeft, thing.topLeft);
+                   RayIntersectsSegment(origin, direction, bottomLeft, topLeft);
         }
 
         private bool QHit(Vec2 hitPos, Vec2 travelDirNormalized)

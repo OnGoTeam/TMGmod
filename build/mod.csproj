@@ -103,6 +103,7 @@
     <Compile Include="src\Core\Modifiers\Firing\IModifyFire.cs" />
     <Compile Include="src\Core\Modifiers\Firing\Reloading.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />
+    <Compile Include="src\Core\Modifiers\Updating\Animating.cs" />
     <Compile Include="src\Core\Modifiers\Updating\SwitchingAmmoModes.cs" />
     <Compile Include="src\Cases\ContextChanceRender.cs" />
     <Compile Include="src\Core\Modifiers\Updating\SynchronizedValue.cs" />
