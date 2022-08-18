@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATSVU()
         {
-            range = 600f;
+            range = 730f;
             accuracy = 0.95f;
             penetration = 0.5f;
             bulletSpeed = 32f;

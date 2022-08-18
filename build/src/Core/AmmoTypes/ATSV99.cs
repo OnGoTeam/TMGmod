@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATSV99()
         {
-            range = 800f;
+            range = 500f;
             accuracy = 0.9f;
             penetration = 1.5f;
             bulletSpeed = 50f;
