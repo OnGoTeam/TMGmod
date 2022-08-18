@@ -39,12 +39,14 @@ namespace TMGmod
             _weight = 5f;
             _kickForce = 1f;
             KforceDelta = .2f;
+            var magOffset = new Vec2(3f, 3f);
             var magInserted = new SynchronizedValue<bool>(true);
             Compose(
                 magInserted,
                 new Reloading(
                     this,
                     30,
+                    magOffset,
                     (
                         load, magsBefore
                     ) =>
@@ -53,7 +55,7 @@ namespace TMGmod
                         if (magInserted.Value)
                         {
                             SFX.Play(GetPath("sounds/tuduc.wav"));
-                            var magpos = Offset(new Vec2(3f, 3f));
+                            var magpos = Offset(magOffset);
                             Level.Add(
                                 new ArwaMag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
                             );

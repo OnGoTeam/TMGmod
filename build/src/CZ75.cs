@@ -40,12 +40,14 @@ namespace TMGmod
             loseAccuracy = 0.3f;
             maxAccuracyLost = 0.5f;
             _weight = 1f;
+            var magOffset = new Vec2(-5f, 0f);
             var magInserted = new SynchronizedValue<bool>(true);
             Compose(
                 magInserted,
                 new Reloading(
                     this,
                     12,
+                    magOffset,
                     (
                         load, _
                     ) =>
@@ -53,7 +55,7 @@ namespace TMGmod
                         if (magInserted.Value)
                         {
                             DoAmmoClick();
-                            var magpos = Offset(new Vec2(-5f, 0f));
+                            var magpos = Offset(magOffset);
                             Level.Add(
                                 new Czmag(magpos.x, magpos.y) { graphic = { flipH = offDir < 0 } }
                             );

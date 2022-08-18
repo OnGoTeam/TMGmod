@@ -8,16 +8,18 @@ namespace TMGmod.Core.Modifiers.Firing
     {
         private readonly BaseGun _target;
         private readonly int _magSize;
-        private int _mags;
+        private readonly Vec2 _magOffset;
         private readonly Action<Action<Action<int>, Action>, int> _reload;
+        private int _mags;
         private bool _triggerHeld;
 
-        public Reloading(BaseGun target, int magSize, Action<Action<Action<int>, Action>, int> reload)
+        public Reloading(BaseGun target, int magSize, Vec2 magOffset, Action<Action<Action<int>, Action>, int> reload)
         {
             _target = target;
             _magSize = magSize;
-            _mags = (_target.ammo - 1) / magSize;
             _reload = reload;
+            _magOffset = magOffset;
+            _mags = (_target.ammo - 1) / magSize;
         }
 
         private void Load(Action<int> success, Action fail)
@@ -28,12 +30,6 @@ namespace TMGmod.Core.Modifiers.Firing
                 fail();
         }
 
-        private void TryReload()
-        {
-            _target.Hint("reload", () => _target.barrelOffset, "SHOOT");
-            _reload(Load, _mags);
-        }
-
         public override void ModifyFire(Action fire)
         {
             _target.ammo -= _mags * _magSize;
@@ -41,12 +37,29 @@ namespace TMGmod.Core.Modifiers.Firing
             _target.ammo += _mags * _magSize;
         }
 
+        private void TryReload()
+        {
+            _reload(Load, _mags);
+        }
+
+        private void Hint()
+        {
+            _target.Hint("reload", () => _magOffset, "SHOOT");
+        }
+
+        private void OnEmpty()
+        {
+            Hint();
+            if (_target._wait <= 0f && _target.action && !_triggerHeld)
+                TryReload();
+        }
+
         protected override void ModifyUpdate()
         {
             if (
-                _target.ammo <= _mags * _magSize && _target._wait <= 0f && _target.action && !_triggerHeld
+                _target.ammo <= _mags * _magSize
             )
-                TryReload();
+                OnEmpty();
             _triggerHeld = _target.action;
         }
 
