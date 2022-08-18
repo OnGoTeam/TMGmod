@@ -14,6 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ARwA : BaseAr, IHaveAllowedSkins
     {
+        private readonly SynchronizedValue<bool> _magInserted = new SynchronizedValue<bool>(true);
         [UsedImplicitly]
         public ARwA(float xval, float yval)
             : base(xval, yval)
@@ -42,9 +43,8 @@ namespace TMGmod
             _kickForce = 1f;
             KforceDelta = .2f;
             var magOffset = new Vec2(3f, 3f);
-            var magInserted = new SynchronizedValue<bool>(true);
             Compose(
-                magInserted,
+                _magInserted,
                 new Reloading(
                     this,
                     30,
@@ -54,7 +54,7 @@ namespace TMGmod
                     ) =>
                     {
                         loaded = false;
-                        if (magInserted.Value)
+                        if (_magInserted.Value)
                         {
                             SFX.Play(GetPath("sounds/tuduc.wav"));
                             var magpos = Offset(magOffset);
@@ -63,7 +63,7 @@ namespace TMGmod
                             );
                             NonSkin = magsBefore > 0 ? 1 : 2;
                             _wait += 5f;
-                            magInserted.Value = false;
+                            _magInserted.Value = false;
                             return;
                         }
 
@@ -73,7 +73,7 @@ namespace TMGmod
                                 SFX.Play(GetPath("sounds/tuduc.wav"));
                                 NonSkin = magsAfter > 0 ? 0 : 3;
                                 _wait += _fireWait;
-                                magInserted.Value = true;
+                                _magInserted.Value = true;
                             },
                             () => loaded = true
                         );
@@ -84,7 +84,8 @@ namespace TMGmod
 
         public override void OnReleaseAction()
         {
-            loaded = true;
+            if (_magInserted.Value)
+                loaded = true;
         }
 
         protected override void OnInitialize()
