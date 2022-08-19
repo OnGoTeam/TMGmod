@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATANP73()
         {
-            range = 195f;
+            range = 153f;
             accuracy = 0.81f;
             penetration = 1f;
             bulletSpeed = 12f;

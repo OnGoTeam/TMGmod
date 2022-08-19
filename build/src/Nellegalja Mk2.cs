@@ -42,7 +42,7 @@ namespace TMGmod
 
         protected override void OnInitialize()
         {
-            _ammoType.range = 800f;
+            _ammoType.range = 450f;
             base.OnInitialize();
         }
 

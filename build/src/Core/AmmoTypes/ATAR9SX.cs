@@ -10,7 +10,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATAR9SX()
         {
-            range = 224f;
+            range = 274f;
             accuracy = 0.78f;
             penetration = 0.4f;
             bulletSpeed = 44f;

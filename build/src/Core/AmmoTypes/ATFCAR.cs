@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATFCAR()
         {
-            range = 600f;
+            range = 530f;
             accuracy = 0.94f;
             penetration = 2.1f;
             bulletSpeed = 34f;

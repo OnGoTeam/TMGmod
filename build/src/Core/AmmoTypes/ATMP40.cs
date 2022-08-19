@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATMP40()
         {
-            range = 215f;
+            range = 200f;
             accuracy = 0.7f;
             penetration = 0.7f;
             bulletSpeed = 28f;

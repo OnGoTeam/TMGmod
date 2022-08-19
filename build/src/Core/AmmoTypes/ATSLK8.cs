@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATSLK8()
         {
-            range = 520f;
+            range = 600f;
             accuracy = 1f;
             penetration = 1f;
             bulletSpeed = 90f;

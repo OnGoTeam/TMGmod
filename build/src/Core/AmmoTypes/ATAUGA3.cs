@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATAUGA3()
         {
-            range = 370f;
+            range = 350f;
             accuracy = 0.9f;
             penetration = 2.1f;
             bulletSpeed = 34f;
