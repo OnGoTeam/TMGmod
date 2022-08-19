@@ -34,7 +34,6 @@ namespace TMGmod
             ShellOffset = new Vec2(-6f, -3f);
             _weight = 2.3f;
         }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
     }
 }
