@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATM76()
         {
-            range = 410f;
+            range = 300f;
             accuracy = 0.89f;
             penetration = 1f;
             bulletSpeed = 34f;

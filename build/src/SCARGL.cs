@@ -41,7 +41,7 @@ namespace TMGmod
             {
                 new AT556NATO
                 {
-                    range = 400f,
+                    range = 340f,
                     accuracy = 0.9f,
                     penetration = 1f,
                     bulletSpeed = 35f,

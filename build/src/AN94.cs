@@ -50,7 +50,7 @@ namespace TMGmod
 
         protected override void OnInitialize()
         {
-            _ammoType.range = 260f;
+            _ammoType.range = 280f;
             _ammoType.bulletSpeed = 60f;
             base.OnInitialize();
         }

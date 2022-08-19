@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATBersaMagnum()
         {
-            range = 190f;
+            range = 150f;
             accuracy = 0.76f;
             penetration = 2.1f;
             bulletSpeed = 48f;

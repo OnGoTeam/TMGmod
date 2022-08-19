@@ -65,7 +65,7 @@ namespace TMGmod
                 _kickForce = value ? 0f : 2f;
                 MaxAccuracy = value ? 1f : 0.91f;
                 MinAccuracy = value ? 1f : 0.35f;
-                _ammoType.range = value ? 666f : 333f;
+                _ammoType.range = value ? 700f : 320f;
                 _ammoType.bulletSpeed = value ? 69f : 37f;
                 loseAccuracy = value ? 0 : 0.15f;
                 maxAccuracyLost = value ? 0 : 0.15f;

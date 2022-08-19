@@ -16,7 +16,7 @@ namespace TMGmod
             : base(xval, yval)
         {
             _editorName = "Bersa Magnum";
-            ammo = 7;
+            ammo = 8;
             SetAmmoType<ATBersaMagnum>();
             
             Smap = new SpriteMap(GetPath("BersaMagnum"), 13, 8);

@@ -9,7 +9,7 @@ namespace TMGmod.Core.AmmoTypes
     {
         public ATHk417()
         {
-            range = 375f;
+            range = 350f;
             accuracy = 0.93f;
             penetration = 2.1f;
             bulletSpeed = 34f;

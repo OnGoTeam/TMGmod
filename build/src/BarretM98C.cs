@@ -35,7 +35,7 @@ namespace TMGmod
         protected override void OnInitialize()
         {
             _ammoType.penetration = 4f;
-            _ammoType.range = 500f;
+            _ammoType.range = 700f;
             base.OnInitialize();
         }
 
