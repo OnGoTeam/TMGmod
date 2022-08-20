@@ -701,5 +701,58 @@ namespace TMGmod.Core.WClasses
                 Graphics.DrawStringOutline(_hint, pos, Color.White, depth: newDepth, outline: Color.Black);
             }
         }
+
+        private Tex2D _laserTex;
+        protected Color LaserColor = Color.Red;
+
+        public override void DoUpdate()
+        {
+            if (laserSight && _laserTex == null)
+                _laserTex = Content.Load<Tex2D>("pointerLaser");
+
+            var ls = laserSight;
+            laserSight = false;
+            base.DoUpdate();
+            laserSight = ls;
+        }
+
+        public override void DrawGlow()
+        {
+            if (laserSight && held && _laserTex != null && _wallPoint != Vec2.Zero)
+            {
+                var num = 1f;
+                if (!Options.Data.fireGlow)
+                    num = 0.4f;
+                var p1 = Offset(laserOffset);
+                var length = (p1 - _wallPoint).length;
+                var val1 = 100f;
+                if (ammoType != null)
+                    val1 = ammoType.range;
+                var normalized = (_wallPoint - p1).normalized;
+                var vec2 = p1 + normalized * Math.Min(val1, length);
+                Graphics.DrawTexturedLine(_laserTex, p1, vec2, LaserColor * num, 0.5f, depth - 1);
+                if ((double)length > val1)
+                {
+                    for (var index = 1; index < 4; ++index)
+                    {
+                        Graphics.DrawTexturedLine(_laserTex, vec2, vec2 + normalized * 2f,
+                            LaserColor * (float)(1.0 - index * 0.20000000298023224) * num, 0.5f, depth - 1);
+                        vec2 += normalized * 2f;
+                    }
+                }
+
+                if (_sightHit != null && (double)length < val1)
+                {
+                    _sightHit.alpha = num;
+                    _sightHit.color = LaserColor * num;
+                    Graphics.Draw(_sightHit, _wallPoint.x, _wallPoint.y);
+                }
+            }
+
+            var ls = laserSight;
+            laserSight = false;
+            base.DrawGlow();
+            laserSight = ls;
+        }
     }
 }
