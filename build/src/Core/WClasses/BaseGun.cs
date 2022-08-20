@@ -492,7 +492,7 @@ namespace TMGmod.Core.WClasses
             if (_fireWait > 0 && !_manualLoad && _fullAuto)
                 yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
         }
-
+#if DEBUG
         public static IEnumerable<string> StatsHeader()
         {
             yield return "editor name";
@@ -513,7 +513,7 @@ namespace TMGmod.Core.WClasses
             yield return $"{StatsKforce}";
             yield return _ammoType is null ? "" : $"{_ammoType.range}";
         }
-
+#endif
         public override BinaryClassChunk Serialize()
         {
             var node = base.Serialize();

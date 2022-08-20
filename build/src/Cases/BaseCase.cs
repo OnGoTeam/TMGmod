@@ -18,7 +18,9 @@ namespace TMGmod.Cases
             _chance = chance;
         }
 
+#if FEATURES_1_2
         public SpawnSpec<T> Chance(float chance) => new SpawnSpec<T>(_thing, chance * _chance);
+#endif
 
         public SpawnSpec<T> Decorate(Func<T, T> f) => new SpawnSpec<T>(() => f(_thing()), _chance);
         public static SpawnSpec<T> Base(Type t) => new SpawnSpec<T>(() => Editor.CreateThing(t) as T, 1f);
