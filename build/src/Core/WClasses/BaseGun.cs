@@ -736,26 +736,26 @@ namespace TMGmod.Core.WClasses
                 var num = 1f;
                 if (!Options.Data.fireGlow)
                     num = 0.4f;
-                var p1 = Offset(laserOffset);
+                var p1 = Offset(laserOffset + new Vec2(0f, 0f));
                 var length = (p1 - _wallPoint).length;
-                var val1 = 100f;
+                var laserRange = 100f;
                 if (ammoType != null)
-                    val1 = ammoType.range;
+                    laserRange = ammoType.range + (_barrelOffsetTL - _laserOffsetTL).x + ammoType.bulletSpeed / 2;
                 var normalized = (_wallPoint - p1).normalized;
                 p1 -= normalized.Rotate(Maths.PI / 2, Vec2.Zero) * .25f;
-                var vec2 = p1 + normalized * Math.Min(val1, length);
+                var vec2 = p1 + normalized * Math.Min(laserRange, length);
                 Graphics.DrawTexturedLine(_laserTex, p1, vec2, LaserColor * num, .5f, depth - 1);
-                if ((double)length > val1)
+                if ((double)length > laserRange)
                 {
                     for (var index = 1; index < 4; ++index)
                     {
                         Graphics.DrawTexturedLine(_laserTex, vec2, vec2 + normalized * 2f,
-                            LaserColor * (float)(1.0 - index * 0.20000000298023224) * num, .5f, depth - 1);
+                            LaserColor * ((float)(1.0 - index * 0.20000000298023224) * num), .5f, depth - 1);
                         vec2 += normalized * 2f;
                     }
                 }
 
-                if (_sightHit != null && (double)length < val1)
+                if (_sightHit != null && (double)length < laserRange)
                 {
                     _sightHit.alpha = num;
                     _sightHit.color = LaserColor * num;
