@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
@@ -16,6 +17,7 @@ namespace TMGmod
 
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
 
+        [UsedImplicitly]
         public AWS(float xval, float yval)
             : base(xval, yval)
 

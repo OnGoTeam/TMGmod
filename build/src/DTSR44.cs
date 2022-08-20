@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -10,6 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class DTSR44 : BaseBolt, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public DTSR44(float xval, float yval)
             : base(xval, yval)
         {

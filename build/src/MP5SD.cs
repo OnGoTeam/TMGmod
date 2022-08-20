@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 
 namespace TMGmod
@@ -8,6 +9,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP5SD : MP5
     {
+        [UsedImplicitly]
         public MP5SD(float xval, float yval)
             : base(xval, yval)
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
@@ -11,6 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Vista : BaseGun, IHaveAllowedSkins, I5
     {
+        [UsedImplicitly]
         public Vista(float xval, float yval)
             : base(xval, yval)
         {

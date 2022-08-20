@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -9,6 +10,7 @@ namespace TMGmod
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     public class Type89 : BaseAr, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public Type89(float xval, float yval)
             : base(xval, yval)
         {

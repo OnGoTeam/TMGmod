@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core;
 
 namespace TMGmod.Cases.Color
@@ -8,6 +8,7 @@ namespace TMGmod.Cases.Color
     [EditorGroup("TMG|Misc|Cases")]
     public class PodarokColorY : BaseCase
     {
+        [UsedImplicitly]
         public PodarokColorY(float xval, float yval) : base(xval, yval)
         {
             var sprite = new SpriteMap(GetPath("CaseColor"), 14, 8);

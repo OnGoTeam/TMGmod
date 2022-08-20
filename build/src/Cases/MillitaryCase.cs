@@ -1,4 +1,5 @@
-﻿using DuckGame;
+﻿using System.Linq;
+using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
 using TMGmod.NY;
@@ -35,7 +36,7 @@ namespace TMGmod.Cases
                     t.Namespace != typeof(CandyCane).Namespace
                 )
             );
-            Things = physicsObjects;
+            ThingsDetailed = physicsObjects.Select(B).ToList();
             base.Initialize();
         }
 

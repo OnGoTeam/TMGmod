@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
@@ -53,16 +52,11 @@ namespace TMGmod.Cases
     public abstract class BaseCase : Holdable, IPlatform
     {
         protected SpawnSpec<T> B<T>() where T : Holdable => SpawnSpec<T>.Base().Decorate(Decorated);
-        private SpawnSpec<Holdable> B(Type t) => SpawnSpec<Holdable>.Base(t).Decorate(Decorated);
+        protected SpawnSpec<Holdable> B(Type t) => SpawnSpec<Holdable>.Base(t).Decorate(Decorated);
 
         protected BaseCase(float xval, float yval) : base(xval, yval)
         {
             physicsMaterial = PhysicsMaterial.Metal;
-        }
-
-        protected List<Type> Things
-        {
-            set => ThingsDetailed = value.Select(B).ToList();
         }
 
         protected List<SpawnSpec<Holdable>> ThingsDetailed { private get; set; }

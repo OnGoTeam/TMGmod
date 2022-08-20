@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -9,6 +10,7 @@ namespace TMGmod
     [EditorGroup("TMG|Shotgun|Pump-Action")]
     public class Remington : BasePumpAction, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public Remington(float xval, float yval) : base(xval, yval)
         {
             _editorName = "Fabarm FP-6";

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
@@ -12,6 +13,7 @@ namespace TMGmod
     {
         private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
 
+        [UsedImplicitly]
         public FnFcar(float xval, float yval)
             : base(xval, yval)
         {

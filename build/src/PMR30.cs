@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -11,6 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class PMRC : BaseGun, IAmHg, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public PMRC(float xval, float yval)
             : base(xval, yval)
         {

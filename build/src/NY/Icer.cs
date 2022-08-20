@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod.NY
@@ -7,6 +8,7 @@ namespace TMGmod.NY
     // ReSharper disable once InconsistentNaming
     public class Icer : BaseBolt
     {
+        [UsedImplicitly]
         public Icer(float xval, float yval) : base(xval, yval)
         {
             SkinFrames = 1;

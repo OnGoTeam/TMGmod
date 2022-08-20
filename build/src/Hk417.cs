@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -10,6 +11,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class HK417 : BaseDmr, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public HK417(float xval, float yval)
             : base(xval, yval)
         {

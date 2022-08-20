@@ -1,5 +1,6 @@
 ﻿using System;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod.NY
@@ -8,6 +9,7 @@ namespace TMGmod.NY
     // ReSharper disable once InconsistentNaming
     public class Popcal : BaseAr
     {
+        [UsedImplicitly]
         public Popcal(float xval, float yval)
             : base(xval, yval)
         {

@@ -1,4 +1,5 @@
 ﻿using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod.NY
@@ -6,6 +7,7 @@ namespace TMGmod.NY
     [EditorGroup("TMG|Misc|Holiday")]
     public class SnowMgun : BaseSmg
     {
+        [UsedImplicitly]
         public SnowMgun(float xval, float yval) : base(xval, yval)
         {
             ammo = 40;

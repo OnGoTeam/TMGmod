@@ -1,5 +1,4 @@
 ﻿#if DEBUG
-using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;

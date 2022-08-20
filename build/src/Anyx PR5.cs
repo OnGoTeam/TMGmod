@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -10,6 +11,7 @@ namespace TMGmod
     [EditorGroup("TMG|Handgun|Burst")]
     public class Glock18 : BaseGun, IAmHg, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public Glock18(float xval, float yval)
             : base(xval, yval)
         {

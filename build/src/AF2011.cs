@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.Modifiers.Accuracy;
@@ -13,6 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AF2011 : BaseGun, IAmHg, IHaveAllowedSkins, I5
     {
+        [UsedImplicitly]
         public AF2011(float xval, float yval)
             : base(xval, yval)
         {

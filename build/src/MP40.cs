@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.Modifiers.Firing;
@@ -13,6 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class MP40 : BaseSmg, IHaveAllowedSkins, I5
     {
+        [UsedImplicitly]
         public MP40(float xval, float yval)
             : base(xval, yval)
         {
