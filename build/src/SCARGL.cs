@@ -1,6 +1,6 @@
 ﻿using DuckGame;
 using JetBrains.Annotations;
-using TMGmod.Core.AmmoTypes;
+using TMGmod.AmmoTypes;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;

@@ -1,8 +1,8 @@
 ﻿#if DEBUG
 using System.Collections.Generic;
 using DuckGame;
+using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;

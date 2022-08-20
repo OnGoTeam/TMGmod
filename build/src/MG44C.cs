@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using TMGmod.AmmoTypes;
 using TMGmod.Cases;
-using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;

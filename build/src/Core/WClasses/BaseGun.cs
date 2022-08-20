@@ -37,7 +37,7 @@ namespace TMGmod.Core.WClasses
 
         private void SetSkin(int skin)
         {
-            FrameId = (FrameId / SkinFrames) * SkinFrames + skin % SkinFrames;
+            FrameId = FrameId / SkinFrames * SkinFrames + skin % SkinFrames;
         }
 
         protected int NonSkin
