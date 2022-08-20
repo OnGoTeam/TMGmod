@@ -1,4 +1,4 @@
-﻿namespace TMGmod.Cases
+﻿namespace TMGmod.Core
 {
     public enum BaseColor
     {

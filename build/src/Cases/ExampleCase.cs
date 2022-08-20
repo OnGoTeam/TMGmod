@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
+using TMGmod.Core;
 
 namespace TMGmod.Cases
 {
