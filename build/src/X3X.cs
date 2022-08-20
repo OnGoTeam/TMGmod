@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 
@@ -12,6 +14,8 @@ namespace TMGmod
     [UsedImplicitly]
     public sealed class X3X : BaseGun, IHaveAllowedSkins
     {
+        private readonly Animating<object> _animating;
+
         public X3X(float xval, float yval)
             : base(xval, yval)
         {
@@ -34,26 +38,46 @@ namespace TMGmod
             _holdOffset = new Vec2(0f, 2f);
             ShellOffset = new Vec2(-5f, -2f);
             _weight = 5.5f;
+            _animating = Anime.Simple(
+                frames =>
+                {
+                    if (frames > 0 && owner is null)
+                    {
+                        _animating?.Cancel();
+                        handOffset = new Vec2(0, 0f);
+                        return;
+                    }
+
+                    handOffset = new Vec2(0, -3f) + new Vec2(-7f, 0f) * (
+                        frames > 45 ? (50 - frames) / 5f : frames / 45f
+                    );
+                },
+                () =>
+                {
+                    NonSkin = 0;
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
+                    handOffset = new Vec2(0, 0f);
+                }
+            );
+            Compose(_animating);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 5, 6, 7, 9 });
 
         public override void OnPressAction()
         {
-            if ((ammo > 0) & (NonSkin == 0))
-            {
-                Fire();
-                NonSkin += ammo < 1 ? 2 : 1;
-            }
-            else if (NonSkin == 1)
-            {
-                NonSkin -= 1;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
-
-            if (!(ammo < 1 && NonSkin == 0)) return;
-            SFX.Play(GetPath("sounds/tuduc.wav"));
+            if (_animating.Active()) return;
+            if (NonSkin == 1)
+                _animating.Set(50);
+            else
+                base.OnPressAction();
         }
+
+        protected override void BaseOnSpent()
+        {
+            NonSkin = ammo > 0 ? 1 : 2;
+        }
+
         protected override void PopBaseShell()
         {
             ATx3x.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, offDir, FrameId, AddShell);
