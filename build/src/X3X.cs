@@ -51,7 +51,7 @@ namespace TMGmod
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
 
-            if (!((ammo < 1) & (NonSkin == 0))) return;
+            if (!(ammo < 1 && NonSkin == 0)) return;
             SFX.Play(GetPath("sounds/tuduc.wav"));
         }
         protected override void PopBaseShell()
