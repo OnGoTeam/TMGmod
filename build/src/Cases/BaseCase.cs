@@ -18,7 +18,7 @@ namespace TMGmod.Cases
             _chance = chance;
         }
 
-#if FEATURES_1_2
+#if DEBUG
         public SpawnSpec<T> Chance(float chance) => new SpawnSpec<T>(_thing, chance * _chance);
 #endif
 
