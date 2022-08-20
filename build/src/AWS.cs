@@ -98,30 +98,15 @@ namespace TMGmod
             _ammoType.bulletSpeed = this.BipodsDeployed() ? 100f : 35f;
         }
 
-        private void UpdateFrames()
-        {
-            NonSkin = this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1;
-        }
+        private void UpdateFrames() => NonSkin = this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1;
 
 
-        protected override bool HasLaser()
-        {
-            return false;
-        }
+        protected override bool HasLaser() => false;
 
-        protected override float MaxAngle()
-        {
-            return Bipods ? .05f : .25f;
-        }
+        protected override float MaxAngle() => Bipods ? .05f : .25f;
 
-        protected override float MaxOffset()
-        {
-            return 3.0f;
-        }
+        protected override float MaxOffset() => 3.0f;
 
-        protected override float ReloadSpeed()
-        {
-            return Bipods ? 1.5f : 1f;
-        }
+        protected override float ReloadSpeed() => Bipods ? 1.5f : 1f;
     }
 }
