@@ -489,7 +489,7 @@ namespace TMGmod.Core.WClasses
             if (_ammoType != null) yield return $"Bullet Speed: {_ammoType.bulletSpeed / 16f * 60f}";
             if (_ammoType != null) yield return $"Penetration: {_ammoType.penetration}";
             yield return $"Kickforce: {StatsKforce}";
-            if (_fireWait > 0 && !_manualLoad && _fullAuto)
+            if (_fireWait > 0 && !_manualLoad)
                 yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
         }
 #if DEBUG
