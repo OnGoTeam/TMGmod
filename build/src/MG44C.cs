@@ -67,6 +67,6 @@ namespace TMGmod
             ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, offDir, FrameId, AddShell);
         }
 
-        protected override Color LaserColor => Skin == (int)CaseColor.Prismarine ? Color.Green : Color.Red;
+        protected override Color LaserColor => Skin == (int)BaseColor.Prismarine ? Color.Green : Color.Red;
     }
 }

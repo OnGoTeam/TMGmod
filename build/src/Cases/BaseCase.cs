@@ -6,21 +6,6 @@ using TMGmod.Core.SkinLogic;
 
 namespace TMGmod.Cases
 {
-    public enum CaseColor
-    {
-        Random = -1,
-        No = 0,
-        Red = 1,
-        Blue = 2,
-        Cyan = 3,
-        Yellow = 4,
-        Fifth = 5,
-        Prismarine = 6,
-        Nitro = 7,
-        Green = 8,
-        Alt = 9,
-    }
-
     public class SpawnSpec<T> where T : Holdable
     {
         private readonly Func<T> _thing;
@@ -58,7 +43,7 @@ namespace TMGmod.Cases
         private static SpawnSpec<T> Skin<T>(this SpawnSpec<T> f, int skin) where T : Holdable, IHaveSkin =>
             f.Decorate(h => WithSkin(h, skin));
 
-        public static SpawnSpec<T> Skin<T>(this SpawnSpec<T> f, CaseColor skin) where T : Holdable, IHaveSkin =>
+        public static SpawnSpec<T> Skin<T>(this SpawnSpec<T> f, BaseColor skin) where T : Holdable, IHaveSkin =>
             f.Skin((int)skin);
     }
 
@@ -79,7 +64,7 @@ namespace TMGmod.Cases
 
         protected List<SpawnSpec<Holdable>> ThingsDetailed { private get; set; }
 
-        protected CaseColor CaseId { private get; set; } = CaseColor.No;
+        protected BaseColor CaseColor { private get; set; } = BaseColor.No;
 
         private Holdable Contained()
         {
@@ -136,7 +121,7 @@ namespace TMGmod.Cases
             switch (thing)
             {
                 case IHaveSkin skinThing:
-                    skinThing.SkinValue = (int)CaseId;
+                    skinThing.SkinValue = (int)CaseColor;
                     break;
             }
         }

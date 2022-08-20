@@ -60,7 +60,7 @@ namespace TMGmod.Cases.Color
                 typeof(HK417),
                 typeof(Foucus),
             };
-            CaseId = CaseColor.Nitro;
+            CaseColor = BaseColor.Nitro;
         }
     }
 }

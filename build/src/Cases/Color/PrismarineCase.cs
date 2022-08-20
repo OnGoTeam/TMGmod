@@ -47,7 +47,7 @@ namespace TMGmod.Cases.Color
                 typeof(SpectreM4),
                 typeof(SKS),
             };
-            CaseId = CaseColor.Prismarine;
+            CaseColor = BaseColor.Prismarine;
         }
     }
 }

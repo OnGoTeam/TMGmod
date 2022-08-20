@@ -28,14 +28,14 @@ namespace TMGmod.Cases.Color
             _editorName = "Classic Case";
             ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                B<NellegaljaMk2>().Skin(CaseColor.Green),
-                B<Alep30>().Skin(CaseColor.Alt),
-                B<BigShot>().Skin(CaseColor.Red),
+                B<NellegaljaMk2>().Skin(BaseColor.Green),
+                B<Alep30>().Skin(BaseColor.Alt),
+                B<BigShot>().Skin(BaseColor.Red),
                 B<AF2011>(),
-                B<AKALFA>().Skin(CaseColor.Fifth),
+                B<AKALFA>().Skin(BaseColor.Fifth),
                 B<AN94>(),
                 B<BarretM98>(),
-                B<X3X>().Skin(CaseColor.Random),
+                B<X3X>().Skin(BaseColor.Random),
                 B<SVU>(),
 #if DEBUG
                 B<PPSh41>().Chance(.5f),
@@ -44,7 +44,7 @@ namespace TMGmod.Cases.Color
                 B<PPSh41>(),
 #endif
             };
-            CaseId = (int)CaseColor.No;
+            CaseColor = (int)BaseColor.No;
         }
 
         public override void Update()

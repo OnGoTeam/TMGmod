@@ -22,7 +22,7 @@ namespace TMGmod.Cases
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Millitary Case";
-            CaseId = 0;
+            CaseColor = 0;
         }
 
         public override void Initialize()
