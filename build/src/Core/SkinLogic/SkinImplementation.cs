@@ -14,7 +14,7 @@ namespace TMGmod.Core.SkinLogic
 
         public static void UpdateSkin(this IHaveAllowedSkins target)
         {
-            target.FrameId = target.FilterSkin(target.SkinValue);
+            target.Skin = target.FilterSkin(target.SkinValue);
         }
     }
 }
