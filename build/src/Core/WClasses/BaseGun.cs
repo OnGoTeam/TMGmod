@@ -726,11 +726,7 @@ namespace TMGmod.Core.WClasses
         {
             if (laserSight && _laserTex == null)
                 _laserTex = Content.Load<Tex2D>("pointerLaser");
-
-            var ls = laserSight;
-            laserSight = false;
             base.DoUpdate();
-            laserSight = ls;
         }
 
         public override void DrawGlow()
