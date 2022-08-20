@@ -35,10 +35,21 @@ namespace TMGmod.Core.WClasses
             FrameId = FrameId % SkinFrames + SkinFrames * nonSkin;
         }
 
+        private void SetSkin(int skin)
+        {
+            FrameId = (FrameId / SkinFrames) * SkinFrames + skin % SkinFrames;
+        }
+
         protected int NonSkin
         {
             get => FrameId / SkinFrames;
             set => SetNonSkin(value);
+        }
+
+        public int Skin
+        {
+            get => FrameId % SkinFrames;
+            set => SetSkin(value);
         }
 
         public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
@@ -543,6 +554,12 @@ namespace TMGmod.Core.WClasses
                 get => _target.SkinValue;
                 set => _target.SkinValue = value;
             }
+
+            public int Skin
+            {
+                get => _target.Skin;
+                set => _target.Skin = value;
+            }
         }
 
 #if DEBUG
@@ -703,7 +720,7 @@ namespace TMGmod.Core.WClasses
         }
 
         private Tex2D _laserTex;
-        protected Color LaserColor = Color.Red;
+        protected virtual Color LaserColor => Color.Red;
 
         public override void DoUpdate()
         {
