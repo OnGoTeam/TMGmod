@@ -21,29 +21,29 @@ namespace TMGmod.Cases.Color
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Blue Case";
-            Things = new List<Type>
+            ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                typeof(SIX12S),
-                typeof(SIX12),
-                typeof(DaewooK1),
-                typeof(UziPro),
-                typeof(MP5),
-                typeof(MP5SD),
-                typeof(AWS),
-                typeof(USP),
-                typeof(BigShot),
-                typeof(Vista),
-                typeof(DragoShot),
-                typeof(AUGA1),
-                typeof(PPSh41),
-                typeof(PPK42),
-                typeof(SKS),
-                typeof(SRM1208),
-                typeof(M14),
-                typeof(AR15Proto),
-                typeof(Remington),
-                typeof(RemingtonTac),
-                typeof(DTSR44),
+                B<SIX12S>(),
+                B<SIX12>(),
+                B<DaewooK1>(),
+                B<UziPro>(),
+                B<MP5>(),
+                B<MP5SD>(),
+                B<AWS>(),
+                B<USP>(),
+                B<BigShot>(),
+                B<Vista>(),
+                B<DragoShot>(),
+                B<AUGA1>(),
+                B<PPSh41>(),
+                B<PPK42>(),
+                B<SKS>(),
+                B<SRM1208>(),
+                B<M14>(),
+                B<AR15Proto>(),
+                B<Remington>(),
+                B<RemingtonTac>(),
+                B<DTSR44>(),
             };
             CaseColor = BaseColor.Blue;
         }

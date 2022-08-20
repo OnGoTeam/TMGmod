@@ -24,22 +24,22 @@ namespace TMGmod.Cases
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Example Case";
-            Things = new List<Type>
+            ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                typeof(CZ75),
-                typeof(AF2011),
-                typeof(M93R),
-                typeof(SMG9),
-                typeof(Vista),
-                typeof(BigShot),
-                typeof(TC12),
-                typeof(Rfb),
-                typeof(Arx200),
-                typeof(SV98),
-                typeof(USP),
-                typeof(UziPro),
-                typeof(CZC2),
-                typeof(DaewooK1),
+                B<CZ75>(),
+                B<AF2011>(),
+                B<M93R>(),
+                B<SMG9>(),
+                B<Vista>(),
+                B<BigShot>(),
+                B<TC12>(),
+                B<Rfb>(),
+                B<Arx200>(),
+                B<SV98>(),
+                B<USP>(),
+                B<UziPro>(),
+                B<CZC2>(),
+                B<DaewooK1>(),
             };
             CaseColor = BaseColor.Red;
         }

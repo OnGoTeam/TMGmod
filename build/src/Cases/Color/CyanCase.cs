@@ -21,26 +21,26 @@ namespace TMGmod.Cases.Color
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Cyan Case";
-            Things = new List<Type>
+            ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                typeof(SIX12S),
-                typeof(SIX12),
-                typeof(DaewooK1),
-                typeof(MP5),
-                typeof(MP5SD),
-                typeof(TC12),
-                typeof(USP),
-                typeof(CZ805),
-                typeof(AF2011),
-                typeof(MG44),
-                typeof(MG44C),
-                typeof(SV99),
-                typeof(Lynx),
-                typeof(PPSh41),
-                typeof(PPK42),
-                typeof(SKS),
-                typeof(Glock18),
-                typeof(RemingtonTac),
+                B<SIX12S>(),
+                B<SIX12>(),
+                B<DaewooK1>(),
+                B<MP5>(),
+                B<MP5SD>(),
+                B<TC12>(),
+                B<USP>(),
+                B<CZ805>(),
+                B<AF2011>(),
+                B<MG44>(),
+                B<MG44C>(),
+                B<SV99>(),
+                B<Lynx>(),
+                B<PPSh41>(),
+                B<PPK42>(),
+                B<SKS>(),
+                B<Glock18>(),
+                B<RemingtonTac>(),
             };
             CaseColor = BaseColor.Cyan;
         }

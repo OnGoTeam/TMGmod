@@ -24,29 +24,29 @@ namespace TMGmod.Cases.Color
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Prismarine Case";
-            Things = new List<Type>
+            ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                typeof(SIX12S),
-                typeof(SIX12),
-                typeof(Arx200),
-                typeof(UziPro),
+                B<SIX12S>(),
+                B<SIX12>(),
+                B<Arx200>(),
+                B<UziPro>(),
 #if DEBUG
-                typeof(PPSh),
-                typeof(PPShC),
+                B<PPSh>(),
+                B<PPShC>(),
 #endif
-                typeof(PPSh41),
-                typeof(PPK42),
-                typeof(MG44),
-                typeof(MG44C),
-                typeof(SkeetGun),
-                typeof(MP5),
-                typeof(MP5SD),
-                typeof(AWS),
-                typeof(AUGA1),
-                typeof(AN94),
-                typeof(Vixr),
-                typeof(SpectreM4),
-                typeof(SKS),
+                B<PPSh41>(),
+                B<PPK42>(),
+                B<MG44>(),
+                B<MG44C>(),
+                B<SkeetGun>(),
+                B<MP5>(),
+                B<MP5SD>(),
+                B<AWS>(),
+                B<AUGA1>(),
+                B<AN94>(),
+                B<Vixr>(),
+                B<SpectreM4>(),
+                B<SKS>(),
             };
             CaseColor = BaseColor.Prismarine;
         }

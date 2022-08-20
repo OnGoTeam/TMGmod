@@ -26,33 +26,33 @@ namespace TMGmod.Cases.Color
             _weight = 3f;
             collideSounds.Add("presentLand");
             _editorName = "Green Case";
-            Things = new List<Type>
+            ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                typeof(AUGA1),
-                typeof(AUGA3),
-                typeof(AA12),
-                typeof(DragoShot),
-                typeof(MP40),
+                B<AUGA1>(),
+                B<AUGA3>(),
+                B<AA12>(),
+                B<DragoShot>(),
+                B<MP40>(),
 #if DEBUG
-                typeof(PPSh),
-                typeof(PPShC),
+                B<PPSh>(),
+                B<PPShC>(),
 #endif
-                typeof(PPSh41),
-                typeof(PPK42),
-                typeof(SV98),
-                typeof(SV99),
-                typeof(SRM1208),
-                typeof(SKS),
-                typeof(AWS),
-                typeof(PP19),
-                typeof(G9M),
-                typeof(AR15Proto),
-                typeof(Vixr),
-                typeof(VSK94),
-                typeof(BarretM98),
-                typeof(BarretM98C),
-                typeof(RemingtonTac),
-                typeof(DTSR44),
+                B<PPSh41>(),
+                B<PPK42>(),
+                B<SV98>(),
+                B<SV99>(),
+                B<SRM1208>(),
+                B<SKS>(),
+                B<AWS>(),
+                B<PP19>(),
+                B<G9M>(),
+                B<AR15Proto>(),
+                B<Vixr>(),
+                B<VSK94>(),
+                B<BarretM98>(),
+                B<BarretM98C>(),
+                B<RemingtonTac>(),
+                B<DTSR44>(),
             };
             CaseColor = BaseColor.Green;
         }
