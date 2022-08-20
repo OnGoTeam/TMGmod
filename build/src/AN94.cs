@@ -41,7 +41,7 @@ namespace TMGmod
             maxAccuracyLost = 0.45f;
             _weight = 4.5f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(24f, 1.33f);
+            _laserOffsetTL = new Vec2(24f, 1.5f);
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f)
             );

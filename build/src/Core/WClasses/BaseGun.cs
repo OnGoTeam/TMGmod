@@ -742,14 +742,15 @@ namespace TMGmod.Core.WClasses
                 if (ammoType != null)
                     val1 = ammoType.range;
                 var normalized = (_wallPoint - p1).normalized;
+                p1 -= normalized.Rotate(Maths.PI / 2, Vec2.Zero) * .25f;
                 var vec2 = p1 + normalized * Math.Min(val1, length);
-                Graphics.DrawTexturedLine(_laserTex, p1, vec2, LaserColor * num, 0.5f, depth - 1);
+                Graphics.DrawTexturedLine(_laserTex, p1, vec2, LaserColor * num, .5f, depth - 1);
                 if ((double)length > val1)
                 {
                     for (var index = 1; index < 4; ++index)
                     {
                         Graphics.DrawTexturedLine(_laserTex, vec2, vec2 + normalized * 2f,
-                            LaserColor * (float)(1.0 - index * 0.20000000298023224) * num, 0.5f, depth - 1);
+                            LaserColor * (float)(1.0 - index * 0.20000000298023224) * num, .5f, depth - 1);
                         vec2 += normalized * 2f;
                     }
                 }

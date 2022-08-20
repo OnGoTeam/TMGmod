@@ -40,7 +40,7 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 1f);
             ShellOffset = new Vec2(-4f, -2f);
             laserSight = true;
-            _laserOffsetTL = new Vec2(8f, 5.33f);
+            _laserOffsetTL = new Vec2(8f, 5.5f);
             _weight = 2.5f;
         }
 

@@ -39,7 +39,7 @@ namespace TMGmod
             _weight = 5f;
             _kickForce = .07f;
             laserSight = false;
-            _laserOffsetTL = new Vec2(15f, 0.33f);
+            _laserOffsetTL = new Vec2(15f, 0.5f);
             KforceDelta = .63f;
         }
         public float HandAngleOff
