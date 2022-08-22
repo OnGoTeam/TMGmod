@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.Modifiers.Kforce;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -43,7 +44,8 @@ namespace TMGmod
             laserSight = false;
             _laserOffsetTL = new Vec2(24f, 1.5f);
             Compose(
-                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f)
+                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f),
+                new Quacking(this, () => Laserrod = !Laserrod)
             );
             ComposeSimpleBurst(2, .07f);
         }
@@ -58,39 +60,19 @@ namespace TMGmod
         [UsedImplicitly]
         public bool Laserrod
         {
-            get => NonSkin == 0;
+            get => !laserSight;
             set
             {
-                if (value)
-                {
-                    loseAccuracy = 0.15f;
-                    _fireWait = 1.5f;
-                    maxAccuracyLost = 0.45f;
-                    NonSkin = 0;
-                    laserSight = false;
-                }
-                else
-                {
-                    loseAccuracy = 0.1f;
-                    _fireWait = 2.5f;
-                    maxAccuracyLost = 0.1f;
-                    NonSkin = 1;
-                    laserSight = true;
-                }
+                if (value == laserSight)
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
+                loseAccuracy = value ? .15f : .1f;
+                _fireWait = value ? 1.5f : 2.5f;
+                maxAccuracyLost = value ? .45f : .1f;
+                NonSkin = value ? 0 : 1;
+                laserSight = !value;
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });
-
-        public override void Update()
-        {
-            if (Quacked())
-            {
-                Laserrod = !Laserrod;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
-
-            base.Update();
-        }
     }
 }
