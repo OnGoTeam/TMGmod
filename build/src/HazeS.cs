@@ -104,7 +104,7 @@ namespace TMGmod
 
         protected override bool CanFire()
         {
-            return Sighted || duck?.inputProfile.Down("QUACK") != true;
+            return (Sighted || duck?.inputProfile.Down("QUACK") != true) && base.CanFire();
         }
 
         protected override void BaseOnSpent()

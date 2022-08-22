@@ -1,4 +1,6 @@
-﻿using DuckGame;
+﻿using System;
+using System.Linq;
+using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.Modifiers.Updating;
@@ -70,10 +72,17 @@ namespace TMGmod
                         loseAccuracy = loseAccuracym[mode];
                         maxAccuracyLost = maxAccuracyLostm[mode];
                         _flare = flarem[mode];
+                        handOffset = mode * new Vec2(6f, 0f);
                     },
                     () => NonSkin = 0
-                ).SwitchingOnQuack()
+                ).Animated(
+                    (frames, mode) =>
+                        handOffset = Math.Abs(mode - frames / (float)FramesToSwitchTo(mode)) * new Vec2(6f, 0f),
+                    FramesToSwitchTo
+                )
             );
         }
+
+        private static int FramesToSwitchTo(int mode) => 10;
     }
 }

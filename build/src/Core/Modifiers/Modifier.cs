@@ -64,5 +64,10 @@ namespace TMGmod.Core.Modifiers
         {
             fire();
         }
+
+        public virtual bool CanFire()
+        {
+            return true;
+        }
     }
 }

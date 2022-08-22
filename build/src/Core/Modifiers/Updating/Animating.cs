@@ -10,12 +10,14 @@ namespace TMGmod.Core.Modifiers.Updating
         private int _frames;
         private T _data;
         private readonly bool _nodata;
+        private readonly bool _block;
 
-        public Animating(Action<int, T> update, Action<T> end, bool nodata=false)
+        public Animating(Action<int, T> update, Action<T> end, bool nodata = false, bool block = false)
         {
             _update = update;
             _end = end;
             _nodata = nodata;
+            _block = block;
         }
 
         public void Set(int frames, T data)
@@ -84,15 +86,21 @@ namespace TMGmod.Core.Modifiers.Updating
             if (_frames > 0)
                 Set(_frames - 1);
         }
+
+        public override bool CanFire()
+        {
+            return !_block || !Active();
+        }
     }
 
-    public static class Anime {
+    public static class Anime
+    {
         public static Animating<object> Simple(Action<int> update, Action end)
         {
             return new Animating<object>(
                 (frame, _) => update(frame),
                 _ => end(),
-                true
+                nodata: true
             );
         }
     }

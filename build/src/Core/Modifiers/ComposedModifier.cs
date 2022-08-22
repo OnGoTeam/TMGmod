@@ -57,6 +57,11 @@ namespace TMGmod.Core.Modifiers
         {
             _left.ModifyFire(() => _right.ModifyFire(fire));
         }
+
+        public bool CanFire()
+        {
+            return _left.CanFire() && _right.CanFire();
+        }
     }
 
     public static class ModifierComposition

@@ -224,7 +224,7 @@ namespace TMGmod.Core.WClasses
                 case IHaveStock target when !target.StockDeployed() && !target.StockFolded():
                     return false;
                 default:
-                    return true;
+                    return ActiveModifier.CanFire();
             }
         }
 
