@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -36,22 +37,25 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             _weight = 2f;
+            Compose(new Quacking(this, () => Mode += 1));
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
-        public override void Update()
+        public int Mode
         {
-            if (Quacked())
+            get => NonSkin % 4;
+            set
             {
-                NonSkin += 1;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                value = value.Modulo(4);
+                if (value != Mode)
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
+                NonSkin = value;
+                _fireWait = new[] { 1.5f, 1.2f, .9f, .6f }[value];
+                loseAccuracy = new[] { .15f, .15f, .2f, .3f }[value];
+                maxAccuracyLost = new[] { .3f, .5f, .6f, .7f }[value];
             }
-
-            _fireWait = new[] { 1.5f, 1.2f, .9f, .6f }[NonSkin.Modulo(4)];
-            loseAccuracy = new[] { .15f, .15f, .2f, .3f }[NonSkin.Modulo(4)];
-            maxAccuracyLost = new[] { .3f, .5f, .6f, .7f }[NonSkin.Modulo(4)];
-
-            base.Update();
         }
+
+        [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
     }
 }
