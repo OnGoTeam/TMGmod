@@ -27,8 +27,8 @@ namespace TMGmod.Core.Modifiers.Updating
 
         private void SetMode(int mode)
         {
-            _mode = mode;
-            _update(mode);
+            _mode = mode % _modes;
+            _update(_mode);
         }
 
         private void Reset()
@@ -49,7 +49,7 @@ namespace TMGmod.Core.Modifiers.Updating
 
         private void SwitchMode()
         {
-            SetMode((_mode + 1) % _modes);
+            SetMode(_mode + 1);
             SFX.Play(Mod.GetPath<TMGmod>("sounds/tuduc.wav"));
         }
 
