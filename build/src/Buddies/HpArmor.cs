@@ -325,6 +325,15 @@ namespace TMGmod.Buddies
                 rc = Bounding(rc, _equippedDuck.ragdoll.part1.TrueRectangle());
                 rc = Bounding(rc, _equippedDuck.ragdoll.part2.TrueRectangle());
                 rc = Bounding(rc, _equippedDuck.ragdoll.part3.TrueRectangle());
+                rc = Bounding(rc, _equippedDuck.ragdoll.TrueRectangle());
+                var rc1 = rc.Move(_equippedDuck.ragdoll.part1.velocity);
+                var rc2 = rc.Move(_equippedDuck.ragdoll.part2.velocity);
+                var rc3 = rc.Move(_equippedDuck.ragdoll.part3.velocity);
+                var rcd = rc.Move(_equippedDuck.velocity);
+                rc = Bounding(rc, rc1);
+                rc = Bounding(rc, rc2);
+                rc = Bounding(rc, rc3);
+                rc = Bounding(rc, rcd);
             }
             else
                 rc = Bounding(rc, _equippedDuck.TrueRectangle());
@@ -335,12 +344,14 @@ namespace TMGmod.Buddies
             );*/
             rc.Top -= .5f;
             rc.Left -= .5f;
-            rc.height += 2f;
-            rc.width += 2f;
+            rc.height += 1f;
+            rc.width += 1f;
             if (_equippedDuck.ragdoll != null)
             {
-                rc.height += 1f;
-                rc.width += 1f;
+                rc.Top -= 1f;
+                rc.Left -= 1f;
+                rc.height += 2f;
+                rc.width += 2f;
             }
 
             _collisionSize = _equippedCollisionSize = rc.br - rc.tl;
@@ -401,8 +412,12 @@ namespace TMGmod.Buddies
         }
     }
 
-    public static class VecUtils {
-    public static Rectangle TrueRectangle(this Thing thing) => new Rectangle(thing.topLeft, thing.bottomRight);
+    public static class VecUtils
+    {
+        public static Rectangle TrueRectangle(this Thing thing) => new Rectangle(thing.topLeft, thing.bottomRight);
+
+        public static Rectangle Move(this Rectangle rectangle, Vec2 vec) =>
+            new Rectangle(rectangle.tl + vec, rectangle.br + 2 * vec);
     }
 }
 #endif
