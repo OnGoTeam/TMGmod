@@ -86,27 +86,23 @@ namespace TMGmod.Buddies
             Thing thing
         )
         {
-            if (thing is Ragdoll ragdoll)
-            {
-                return RayIntersectsThing(origin, direction, ragdoll.part1)
-                       ||
-                       RayIntersectsThing(origin, direction, ragdoll.part2)
-                       ||
-                       RayIntersectsThing(origin, direction, ragdoll.part3);
-            }
-
             var topLeft = thing.topLeft + new Vec2(-.5f, -.5f);
             var topRight = thing.topRight + new Vec2(+.5f, -.5f);
             var bottomRight = thing.bottomRight + new Vec2(+.5f, +.5f);
             var bottomLeft = thing.bottomLeft + new Vec2(-.5f, +.5f);
 
-            return RayIntersectsSegment(origin, direction, topLeft, topRight)
+            var result = RayIntersectsSegment(origin, direction, topLeft, topRight)
                    ||
                    RayIntersectsSegment(origin, direction, topRight, bottomRight)
                    ||
                    RayIntersectsSegment(origin, direction, bottomRight, bottomLeft)
                    ||
                    RayIntersectsSegment(origin, direction, bottomLeft, topLeft);
+            if (!(thing is FeatherVolume fv) || !(fv.duckOwner?.ragdoll is Ragdoll ragdoll)) return result;
+            result = result || RayIntersectsThing(origin, direction, ragdoll.part1);
+            result = result || RayIntersectsThing(origin, direction, ragdoll.part2);
+            result = result || RayIntersectsThing(origin, direction, ragdoll.part3);
+            return result;
         }
 
         private bool QHit(Vec2 hitPos, Vec2 travelDirNormalized)
@@ -208,19 +204,26 @@ namespace TMGmod.Buddies
             return QHit(bullet, hitPos) && RealHit(bullet, hitPos);
         }
 
+        private Thing Volume()
+        {
+            var result = Level
+                .CheckCircleAll<FeatherVolume>(
+                    _equippedDuck.ragdoll?.position ?? _equippedDuck.position,
+                    100f
+                )
+                .SingleOrDefault(volume => volume.duckOwner == _equippedDuck);
+            return result ?? (Thing)_equippedDuck;
+        }
+
         private Thing EquippedDuck()
         {
-            return _equippedDuck is null
-                ? null
-                : _equippedDuck.ragdoll != null
-                    ? (Thing)_equippedDuck.ragdoll
-                    : _equippedDuck;
+            return _equippedDuck is null ? null : Volume();
         }
 
         public override void Draw()
         {
 #if DEBUG
-            Graphics.DrawRect(rectangle, new Color(255, 0, 0, 128), filled: false);
+            // Graphics.DrawRect(rectangle, new Color(255, 0, 0, 128), filled: false);
 #endif
             if (EquippedDuck() == null) return;
             var start = (EquippedDuck().topLeft + EquippedDuck().topRight) / 2 + new Vec2(-32, 0);
@@ -236,7 +239,8 @@ namespace TMGmod.Buddies
                 start + new Vec2(64, -8),
                 Color.GreenYellow
             );
-            Graphics.DrawRect(EquippedDuck().rectangle, new Color(0, 0, 255, 128));
+            base.Draw();
+            // Graphics.DrawRect(EquippedDuck().rectangle, new Color(0, 0, 255, 128));
 #endif
         }
 
@@ -299,28 +303,32 @@ namespace TMGmod.Buddies
                 ) _hitPoints = HpMax;
             }
 #endif
-            if (_equippedDuck?.ragdoll != null)
+            if (_equippedDuck?.skeleton != null)
             {
-                var r = Bounding(
-                    _equippedDuck.ragdoll.part1.rectangle,
-                    Bounding(
-                        _equippedDuck.ragdoll.part2.rectangle,
-                        _equippedDuck.ragdoll.part3.rectangle
-                    )
+                var rc = EquippedDuck().rectangle;
+                if (_equippedDuck.ragdoll != null)
+                {
+                    rc = Bounding(rc, _equippedDuck.ragdoll.part1.rectangle);
+                    rc = Bounding(rc, _equippedDuck.ragdoll.part2.rectangle);
+                    rc = Bounding(rc, _equippedDuck.ragdoll.part3.rectangle);
+                }
+                else
+                    rc = Bounding(rc, _equippedDuck.rectangle);
+
+                rc = Bounding(
+                    new Rectangle(rc.tl - velocity, rc.br - velocity),
+                    new Rectangle(rc.tl + 3 * velocity, rc.br + 3 * velocity)
                 );
-                var v = _equippedDuck.ragdoll.velocity * 2;
-                var r2 = new Rectangle(r.tl + v, r.br + v);
-                r = Bounding(r, r2);
-                _equippedCollisionSize = new Vec2(r.width, r.height);
-                _equippedCollisionOffset = r.tl - _equippedDuck.skeleton.upperTorso.position;
-            }
-            else if (_equippedDuck?.skeleton != null)
-            {
-                _equippedCollisionSize = _equippedDuck.collisionSize;
-                _equippedCollisionOffset = _equippedDuck.topLeft - _equippedDuck.skeleton.upperTorso.position;
+                rc.Top -= 3f;
+                rc.Left -= 3f;
+                rc.height += 6f;
+                rc.width += 6f;
+                _collisionSize = _equippedCollisionSize = rc.br - rc.tl;
+                _collisionOffset = _equippedCollisionOffset = rc.tl - _equippedDuck.skeleton.upperTorso.position;
             }
 
             base.Update();
+            PositionOnOwner();
             if (_equippedDuck is null || _equippedDuck.dead)
             {
                 Level.Remove(this);
