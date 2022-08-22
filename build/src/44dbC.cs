@@ -60,7 +60,7 @@ namespace TMGmod
             if (ammo > 1)
             {
                 SFX.Play(GetPath("sounds/tuduc.wav"));
-                FrameId = FrameId % 10 + 10;
+                NonSkin = 1;
             }
 
             base.Reload(ammo > 1);
