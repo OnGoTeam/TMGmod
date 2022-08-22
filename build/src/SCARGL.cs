@@ -72,7 +72,7 @@ namespace TMGmod
                         _flare = flarem[mode];
                     },
                     () => NonSkin = 0
-                )
+                ).SwitchingOnQuack()
             );
         }
     }

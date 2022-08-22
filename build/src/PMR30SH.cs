@@ -58,7 +58,7 @@ namespace TMGmod
                         _numBulletsPerFire = numBulletsPerFirem[mode];
                     },
                     () => NonSkin = 0
-                )
+                ).SwitchingOnQuack()
             );
         }
 

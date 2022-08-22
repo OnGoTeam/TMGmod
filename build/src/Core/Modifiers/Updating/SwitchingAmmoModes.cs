@@ -58,8 +58,6 @@ namespace TMGmod.Core.Modifiers.Updating
             if (_target.infiniteAmmoVal) _ammo[0] = 99;
             if (_target.duck is null)
                 Reset();
-            else if (_target.Quacked())
-                SwitchMode();
         }
 
         protected override void Read(BitBuffer buffer)
@@ -72,6 +70,11 @@ namespace TMGmod.Core.Modifiers.Updating
         {
             buffer.Write(_mode);
             for (var i = 0; i < _modes; i++) buffer.Write(_ammo[_mode]);
+        }
+
+        public IModifyEverything SwitchingOnQuack()
+        {
+            return ComposedModifier.Compose(this, new Quacking(_target, SwitchMode));
         }
     }
 }
