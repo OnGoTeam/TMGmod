@@ -92,12 +92,12 @@ namespace TMGmod.Buddies
             var bottomLeft = thing.bottomLeft + new Vec2(-.5f, +.5f);
 
             var result = RayIntersectsSegment(origin, direction, topLeft, topRight)
-                   ||
-                   RayIntersectsSegment(origin, direction, topRight, bottomRight)
-                   ||
-                   RayIntersectsSegment(origin, direction, bottomRight, bottomLeft)
-                   ||
-                   RayIntersectsSegment(origin, direction, bottomLeft, topLeft);
+                         ||
+                         RayIntersectsSegment(origin, direction, topRight, bottomRight)
+                         ||
+                         RayIntersectsSegment(origin, direction, bottomRight, bottomLeft)
+                         ||
+                         RayIntersectsSegment(origin, direction, bottomLeft, topLeft);
             if (!(thing is FeatherVolume fv) || !(fv.duckOwner?.ragdoll is Ragdoll ragdoll)) return result;
             result = result || RayIntersectsThing(origin, direction, ragdoll.part1);
             result = result || RayIntersectsThing(origin, direction, ragdoll.part2);
@@ -319,22 +319,22 @@ namespace TMGmod.Buddies
         {
             if (_equippedDuck?.skeleton == null) return;
             // else
-            var rc = EquippedDuck().rectangle;
+            var rc = EquippedDuck().TrueRectangle();
             if (_equippedDuck.ragdoll != null)
             {
-                rc = Bounding(rc, _equippedDuck.ragdoll.part1.rectangle);
-                rc = Bounding(rc, _equippedDuck.ragdoll.part2.rectangle);
-                rc = Bounding(rc, _equippedDuck.ragdoll.part3.rectangle);
+                rc = Bounding(rc, _equippedDuck.ragdoll.part1.TrueRectangle());
+                rc = Bounding(rc, _equippedDuck.ragdoll.part2.TrueRectangle());
+                rc = Bounding(rc, _equippedDuck.ragdoll.part3.TrueRectangle());
             }
             else
-                rc = Bounding(rc, _equippedDuck.rectangle);
+                rc = Bounding(rc, _equippedDuck.TrueRectangle());
 
-            rc = Bounding(
-                new Rectangle(rc.tl - velocity, rc.br - velocity),
-                new Rectangle(rc.tl + 3 * velocity, rc.br + 3 * velocity)
-            );
-            rc.Top -= 1f;
-            rc.Left -= 1f;
+            /*rc = Bounding(
+                new Rectangle(rc.tl, rc.br),
+                new Rectangle(rc.tl + 2 * _equippedDuck.velocity, rc.br + 2 * _equippedDuck.velocity)
+            );*/
+            rc.Top -= .5f;
+            rc.Left -= .5f;
             rc.height += 2f;
             rc.width += 2f;
             if (_equippedDuck.ragdoll != null)
@@ -342,6 +342,7 @@ namespace TMGmod.Buddies
                 rc.height += 1f;
                 rc.width += 1f;
             }
+
             _collisionSize = _equippedCollisionSize = rc.br - rc.tl;
             _collisionOffset = _equippedCollisionOffset = rc.tl - _equippedDuck.skeleton.upperTorso.position;
         }
@@ -398,6 +399,10 @@ namespace TMGmod.Buddies
             if (Hp.isServerForObject && Hp is HpArmor hp)
                 hp.NetworkHit(Amount);
         }
+    }
+
+    public static class VecUtils {
+    public static Rectangle TrueRectangle(this Thing thing) => new Rectangle(thing.topLeft, thing.bottomRight);
     }
 }
 #endif
