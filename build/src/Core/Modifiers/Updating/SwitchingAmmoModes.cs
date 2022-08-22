@@ -27,7 +27,7 @@ namespace TMGmod.Core.Modifiers.Updating
 
         private void SetMode(int mode)
         {
-            _mode = mode % _modes;
+            _mode = mode.Modulo(_modes);
             _update(_mode);
         }
 

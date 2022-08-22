@@ -88,7 +88,7 @@ namespace TMGmod.Core.SkinLogic
         private static int SkinNo(IReadOnlyList<int> skins, int skin)
         {
             var total = skins.Count;
-            return skins[(skin % total + total) % total];
+            return skins[skin.Modulo(total)];
         }
 
         private static void PutData(IReadOnlyList<int> skins, IList<Color> data, Sprite sprite, int time)

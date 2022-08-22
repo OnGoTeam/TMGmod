@@ -37,7 +37,7 @@ namespace TMGmod.Core.WClasses
 
         private void SetSkin(int skin)
         {
-            FrameId = FrameId / SkinFrames * SkinFrames + skin % SkinFrames;
+            FrameId = FrameId / SkinFrames * SkinFrames + skin.Modulo(SkinFrames);
         }
 
         protected int NonSkin
@@ -346,7 +346,7 @@ namespace TMGmod.Core.WClasses
         [PublicAPI]
         public static void SetSpriteMapFrameId(SpriteMap sm, int value, int m)
         {
-            sm.frame = (value % m + m) % m;
+            sm.frame = value.Modulo(m);
         }
 
         public override void Draw()

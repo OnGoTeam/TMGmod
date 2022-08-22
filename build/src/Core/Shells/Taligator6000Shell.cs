@@ -22,7 +22,7 @@ namespace TMGmod.Core.Shells
         public int FrameId
         {
             get => _sprite.frame;
-            set => _sprite.frame = value % 10;
+            set => _sprite.frame = value.Modulo(10);
         }
 
         [UsedImplicitly] public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -42,37 +43,13 @@ namespace TMGmod
         {
             if (Quacked())
             {
-                if (NonSkin < 1) //1
-                {
-                    NonSkin += 1;
-                    _fireWait = 1.2f;
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.5f;
-                }
-                else if (NonSkin < 2) //2
-                {
-                    NonSkin += 1;
-                    _fireWait = 0.9f;
-                    loseAccuracy = 0.2f;
-                    maxAccuracyLost = 0.6f;
-                }
-                else if (NonSkin < 3) //3
-                {
-                    NonSkin += 1;
-                    _fireWait = 0.6f;
-                    loseAccuracy = 0.3f;
-                    maxAccuracyLost = 0.7f;
-                }
-                else if (NonSkin < 4) //0
-                {
-                    NonSkin -= 3;
-                    _fireWait = 1.5f;
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.3f;
-                }
-
+                NonSkin += 1;
                 SFX.Play(GetPath("sounds/tuduc.wav"));
             }
+
+            _fireWait = new[] { 1.5f, 1.2f, .9f, .6f }[NonSkin.Modulo(4)];
+            loseAccuracy = new[] { .15f, .15f, .2f, .3f }[NonSkin.Modulo(4)];
+            maxAccuracyLost = new[] { .3f, .5f, .6f, .7f }[NonSkin.Modulo(4)];
 
             base.Update();
         }
