@@ -52,15 +52,9 @@ namespace TMGmod.Core.Modifiers.Updating
             return data;
         }
 
-        public bool Active()
-        {
-            return _frames > 0;
-        }
+        public bool Active() => _frames > 0;
 
-        public T Data()
-        {
-            return _data;
-        }
+        public T Data() => _data;
 
         protected override void Write(BitBuffer buffer)
         {
