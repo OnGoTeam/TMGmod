@@ -328,7 +328,6 @@ namespace TMGmod.Buddies
             }
 
             base.Update();
-            PositionOnOwner();
             if (_equippedDuck is null || _equippedDuck.dead)
             {
                 Level.Remove(this);
