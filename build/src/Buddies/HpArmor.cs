@@ -333,10 +333,15 @@ namespace TMGmod.Buddies
                 new Rectangle(rc.tl - velocity, rc.br - velocity),
                 new Rectangle(rc.tl + 3 * velocity, rc.br + 3 * velocity)
             );
-            rc.Top -= 3f;
-            rc.Left -= 3f;
-            rc.height += 6f;
-            rc.width += 6f;
+            rc.Top -= 1f;
+            rc.Left -= 1f;
+            rc.height += 2f;
+            rc.width += 2f;
+            if (_equippedDuck.ragdoll != null)
+            {
+                rc.height += 1f;
+                rc.width += 1f;
+            }
             _collisionSize = _equippedCollisionSize = rc.br - rc.tl;
             _collisionOffset = _equippedCollisionOffset = rc.tl - _equippedDuck.skeleton.upperTorso.position;
         }
@@ -348,6 +353,7 @@ namespace TMGmod.Buddies
             {
                 UpdateCollision();
                 offDir = 1;
+                if (_equippedDuck?.skeleton != null) position = _equippedDuck.skeleton.upperTorso.position;
                 base.angle = value;
             }
         }
