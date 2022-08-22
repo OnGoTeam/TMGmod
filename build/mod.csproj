@@ -95,6 +95,7 @@
     <Compile Include="src\Core\DamageLogic\DotMarker.cs" />
     <Compile Include="src\Core\DamageLogic\StringMarker.cs" />
     <Compile Include="src\Core\DamageLogic\StrokeMarker.cs" />
+    <Compile Include="src\Core\FrameUtils.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\FirstAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\FocusingAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\LoseAccuracy.cs" />
