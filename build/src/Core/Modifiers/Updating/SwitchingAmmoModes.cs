@@ -31,12 +31,6 @@ namespace TMGmod.Core.Modifiers.Updating
             _update(_mode);
         }
 
-        private void Reset()
-        {
-            SetMode(0);
-            _reset();
-        }
-
         private void ResetAmmo() => _target.ammo = _ammo.Sum();
 
         public override void ModifyFire(Action fire)
@@ -45,6 +39,12 @@ namespace TMGmod.Core.Modifiers.Updating
             fire();
             _ammo[_mode] = _target.ammo;
             ResetAmmo();
+        }
+
+        private void Reset()
+        {
+            SetMode(0);
+            _reset();
         }
 
         private void SwitchMode()
