@@ -303,29 +303,7 @@ namespace TMGmod.Buddies
                 ) _hitPoints = HpMax;
             }
 #endif
-            if (_equippedDuck?.skeleton != null)
-            {
-                var rc = EquippedDuck().rectangle;
-                if (_equippedDuck.ragdoll != null)
-                {
-                    rc = Bounding(rc, _equippedDuck.ragdoll.part1.rectangle);
-                    rc = Bounding(rc, _equippedDuck.ragdoll.part2.rectangle);
-                    rc = Bounding(rc, _equippedDuck.ragdoll.part3.rectangle);
-                }
-                else
-                    rc = Bounding(rc, _equippedDuck.rectangle);
-
-                rc = Bounding(
-                    new Rectangle(rc.tl - velocity, rc.br - velocity),
-                    new Rectangle(rc.tl + 3 * velocity, rc.br + 3 * velocity)
-                );
-                rc.Top -= 3f;
-                rc.Left -= 3f;
-                rc.height += 6f;
-                rc.width += 6f;
-                _collisionSize = _equippedCollisionSize = rc.br - rc.tl;
-                _collisionOffset = _equippedCollisionOffset = rc.tl - _equippedDuck.skeleton.upperTorso.position;
-            }
+            UpdateCollision();
 
             base.Update();
             if (_equippedDuck is null || _equippedDuck.dead)
@@ -335,6 +313,43 @@ namespace TMGmod.Buddies
             }
 
             _hitPoints = Math.Min(_hitPoints, Math.Max(.1f * HpMax, _hitPoints - _equippedDuck.burnt));
+        }
+
+        private void UpdateCollision()
+        {
+            if (_equippedDuck?.skeleton == null) return;
+            // else
+            var rc = EquippedDuck().rectangle;
+            if (_equippedDuck.ragdoll != null)
+            {
+                rc = Bounding(rc, _equippedDuck.ragdoll.part1.rectangle);
+                rc = Bounding(rc, _equippedDuck.ragdoll.part2.rectangle);
+                rc = Bounding(rc, _equippedDuck.ragdoll.part3.rectangle);
+            }
+            else
+                rc = Bounding(rc, _equippedDuck.rectangle);
+
+            rc = Bounding(
+                new Rectangle(rc.tl - velocity, rc.br - velocity),
+                new Rectangle(rc.tl + 3 * velocity, rc.br + 3 * velocity)
+            );
+            rc.Top -= 3f;
+            rc.Left -= 3f;
+            rc.height += 6f;
+            rc.width += 6f;
+            _collisionSize = _equippedCollisionSize = rc.br - rc.tl;
+            _collisionOffset = _equippedCollisionOffset = rc.tl - _equippedDuck.skeleton.upperTorso.position;
+        }
+
+        public override float angle
+        {
+            get => base.angle;
+            set
+            {
+                UpdateCollision();
+                offDir = 1;
+                base.angle = value;
+            }
         }
 
         private static Rectangle Bounding(Rectangle r0, Rectangle r1)
