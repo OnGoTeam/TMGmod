@@ -8,7 +8,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|Fully-Automatic|Custom")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class ScarGL : BaseGun, IAmAr

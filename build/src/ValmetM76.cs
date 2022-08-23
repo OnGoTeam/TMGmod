@@ -10,7 +10,7 @@ using TMGmod.Core.WClasses;
 namespace TMGmod
 {
     [UsedImplicitly]
-    [EditorGroup("TMG|Rifle|Combined")]
+    [EditorGroup("TMG|Rifle|Burst")]
     public class ValmetM76 : BaseGun, IHaveAllowedSkins
     {
         public ValmetM76(float xval, float yval)

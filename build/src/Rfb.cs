@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Rifle|Combined")]
+    [EditorGroup("TMG|Rifle|Fully-Automatic")]
     public class Rfb : BaseAr, IHaveAllowedSkins
     {
         [UsedImplicitly]

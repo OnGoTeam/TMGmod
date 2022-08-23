@@ -8,7 +8,7 @@ using TMGmod.Core.WClasses;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Handgun|Bolt-Action")]
+    [EditorGroup("TMG|Handgun|Other")]
     [BaggedProperty("isSuperWeapon", true)]
     [UsedImplicitly]
     public sealed class X3X : BaseGun, IHaveAllowedSkins

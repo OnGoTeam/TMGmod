@@ -9,7 +9,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|Handgun|Custom")]
+    [EditorGroup("TMG|Handgun|Semi-Automatic")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
     public class PMR : BaseGun, IAmHg, IHaveAllowedSkins

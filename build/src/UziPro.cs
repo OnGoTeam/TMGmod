@@ -7,7 +7,7 @@ using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
-    [EditorGroup("TMG|SMG|MP")]
+    [EditorGroup("TMG|SMG|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
     public class UziPro : BaseSmg, IHaveAllowedSkins
     {

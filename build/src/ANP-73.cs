@@ -11,7 +11,7 @@ using TMGmod.Core.WClasses.ClassMarkers;
 namespace TMGmod
 {
     [UsedImplicitly]
-    [EditorGroup("TMG|SMG|MP")]
+    [EditorGroup("TMG|SMG|Other")]
     // ReSharper disable once InconsistentNaming
     public class ANP73 : BaseGun, IAmHg, IHaveAllowedSkins
     {
