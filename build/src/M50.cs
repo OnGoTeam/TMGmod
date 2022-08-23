@@ -66,6 +66,7 @@ namespace TMGmod
         public bool BipodsDisabled => false;
     }
 
+#if DEBUG
     [EditorGroup("TMG|DEBUG")]
     [UsedImplicitly]
     public class Super50: M50
@@ -77,4 +78,5 @@ namespace TMGmod
             ComposeSimpleBurst(5, 1f);
         }
     }
+#endif
 }
