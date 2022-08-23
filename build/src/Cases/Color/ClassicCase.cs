@@ -38,6 +38,8 @@ namespace TMGmod.Cases.Color
                 B<BarretM98>(),
                 B<X3X>().Skin(BaseColor.Random),
                 B<SVU>(),
+                B<Deadly44>(),
+                B<MP40>(),
 #if DEBUG
                 B<PPSh41>().Chance(.5f),
                 B<PPSh>().Chance(.5f),
