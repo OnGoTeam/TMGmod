@@ -1,5 +1,6 @@
 ﻿using System;
 using DuckGame;
+using TMGmod.Core.Modifiers.Pipelining;
 
 namespace TMGmod.Core.Modifiers
 {
@@ -68,6 +69,11 @@ namespace TMGmod.Core.Modifiers
         public virtual bool CanFire()
         {
             return true;
+        }
+
+        public T ModifyPipeline<T>(T pipeline) where T : IPipeline
+        {
+            return pipeline;
         }
     }
 }

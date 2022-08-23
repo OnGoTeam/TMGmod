@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DuckGame;
+using TMGmod.Core.Modifiers.Pipelining;
 
 namespace TMGmod.Core.Modifiers
 {
@@ -61,6 +62,11 @@ namespace TMGmod.Core.Modifiers
         public bool CanFire()
         {
             return _left.CanFire() && _right.CanFire();
+        }
+
+        public T ModifyPipeline<T>(T pipeline) where T : IPipeline
+        {
+            return _left.ModifyPipeline(_right.ModifyPipeline(pipeline));
         }
     }
 
