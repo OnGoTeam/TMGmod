@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if DEBUG
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
@@ -52,3 +53,4 @@ namespace TMGmod
         protected override float ReloadSpeed() => .5f;
     }
 }
+#endif
