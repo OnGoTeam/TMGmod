@@ -4,9 +4,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
-#if DEBUG
-using TMGmod.Core.DamageLogic;
-#endif
 using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Firing;
@@ -15,6 +12,7 @@ using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
 using System.Linq;
+using TMGmod.Core.DamageLogic;
 using TMGmod.Core.Modifiers.Pipelining;
 
 namespace TMGmod.Core.WClasses

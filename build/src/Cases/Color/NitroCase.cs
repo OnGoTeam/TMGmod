@@ -58,7 +58,9 @@ namespace TMGmod.Cases.Color
                 B<MP7>(),
                 B<CZ805>(),
                 B<HK417>(),
+#if FEATURES_1_2_X
                 B<Foucus>(),
+#endif
             };
             CaseColor = BaseColor.Nitro;
         }
