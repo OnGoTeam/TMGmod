@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Updating
@@ -17,6 +18,11 @@ namespace TMGmod.Core.Modifiers.Updating
         protected override void ModifyUpdate()
         {
             if (_target.Quacked()) _quacked();
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "Has Quack Action";
         }
     }
 }

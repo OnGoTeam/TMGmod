@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.Modifiers.Firing;
-using TMGmod.Core.Modifiers.Updating;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;

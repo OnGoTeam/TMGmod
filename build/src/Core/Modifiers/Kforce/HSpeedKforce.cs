@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Kforce
@@ -23,6 +24,11 @@ namespace TMGmod.Core.Modifiers.Kforce
             return _target.duck != null && _predicate(Math.Abs(_target.duck.hSpeed))
                 ? Math.Max(0f, _modify(kforce))
                 : kforce;
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "Increases Kickforce When Moving";
         }
     }
 }

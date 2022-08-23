@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.WClasses;
 
@@ -71,6 +72,11 @@ namespace TMGmod.Core.Modifiers.Firing
         protected override void Write(BitBuffer buffer)
         {
             buffer.Write(_mags);
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return $"Extra Mags: {_mags}";
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using DuckGame;
 
-namespace TMGmod.Core.Modifiers.Updating
+namespace TMGmod.Core.Modifiers.Syncing
 {
     public class SynchronizedValue<T> : Modifier
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 
 namespace TMGmod.Core.Modifiers.Kforce
@@ -38,6 +39,12 @@ namespace TMGmod.Core.Modifiers.Kforce
         protected override void Write(BitBuffer buffer)
         {
             buffer.Write(_currentDelay);
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "First Shot Has Different Kickforce";
+            yield return $"First Shot Delay: {MaxDelay / 60f:0.##}s";
         }
     }
 }

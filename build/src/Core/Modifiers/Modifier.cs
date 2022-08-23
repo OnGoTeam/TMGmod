@@ -87,5 +87,7 @@ namespace TMGmod.Core.Modifiers
                     return pipeline;
             }
         }
+
+        protected static float SafeDiv(float a, float b) => a / Math.Max(.001f, b);
     }
 }

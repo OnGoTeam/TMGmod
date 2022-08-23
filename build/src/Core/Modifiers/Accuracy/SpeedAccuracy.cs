@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Accuracy
@@ -34,6 +35,11 @@ namespace TMGmod.Core.Modifiers.Accuracy
                       _threshold
                   )
                 : accuracy;
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "Decreases Accuracy When Moving";
         }
     }
 }

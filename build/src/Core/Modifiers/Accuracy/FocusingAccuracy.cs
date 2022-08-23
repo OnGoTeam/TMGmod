@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.WClasses;
 
@@ -39,7 +38,7 @@ namespace TMGmod.Core.Modifiers.Accuracy
         protected override IEnumerable<string> Characteristics()
         {
             yield return "Focuses When Standing Still";
-            yield return $"Focusing Delay: {_max / Math.Max(.001f, _rate) / 60f:0.##}s";
+            yield return $"Focusing Delay: {SafeDiv(_max, _rate) / 60f:0.##}s";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 
 namespace TMGmod.Core.Modifiers.Accuracy
@@ -42,6 +43,12 @@ namespace TMGmod.Core.Modifiers.Accuracy
         protected override void Write(BitBuffer buffer)
         {
             buffer.Write(_drained);
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "Loses Accuracy After Each Shot";
+            yield return $"Time To Regenerate: {SafeDiv(Max, Regen) / 60f:0.##}s";
         }
     }
 }

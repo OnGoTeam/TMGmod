@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.WClasses;
 
@@ -104,6 +105,11 @@ namespace TMGmod.Core.Modifiers.Firing
         {
             buffer.Write(_enabled);
             buffer.Write(_shotsLeft);
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return $"Burst: {_num}";
         }
     }
 }

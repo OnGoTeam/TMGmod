@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DuckGame;
 using TMGmod.Core.WClasses;
@@ -121,6 +122,11 @@ namespace TMGmod.Core.Modifiers.Updating
                     }
                 )
             );
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "Switches Ammo";
         }
     }
 }

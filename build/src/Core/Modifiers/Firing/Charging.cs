@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 
 namespace TMGmod.Core.Modifiers.Firing
@@ -48,5 +49,10 @@ namespace TMGmod.Core.Modifiers.Firing
         }
 
         protected override void Write(BitBuffer buffer) => buffer.Write(_counter);
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "Charges By Holding Action";
+        }
     }
 }
