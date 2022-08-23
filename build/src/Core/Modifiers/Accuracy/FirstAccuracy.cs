@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
+using TMGmod.Core.Modifiers.Pipelining;
 
 namespace TMGmod.Core.Modifiers.Accuracy
 {
@@ -38,6 +40,12 @@ namespace TMGmod.Core.Modifiers.Accuracy
         protected override void Write(BitBuffer buffer)
         {
             buffer.Write(_currentDelay);
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "First Shot Has Different Accuracy";
+            yield return $"First Shot Delay: {_maxDelay / 60f:0.##}s";
         }
     }
 }

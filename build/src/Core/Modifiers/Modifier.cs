@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.Modifiers.Pipelining;
 
@@ -71,9 +72,20 @@ namespace TMGmod.Core.Modifiers
             return true;
         }
 
-        public T ModifyPipeline<T>(T pipeline) where T : IPipeline
+        protected virtual IEnumerable<string> Characteristics()
         {
-            return pipeline;
+            yield break;
+        }
+
+        public virtual T ModifyPipeline<T>(T pipeline) where T : IPipeline
+        {
+            switch (pipeline)
+            {
+                case ICharacteristicsPipeline<T> characteristics:
+                    return characteristics.With(Characteristics());
+                default:
+                    return pipeline;
+            }
         }
     }
 }

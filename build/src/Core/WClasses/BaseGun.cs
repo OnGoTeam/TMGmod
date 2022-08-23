@@ -15,6 +15,7 @@ using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
 using System.Linq;
+using TMGmod.Core.Modifiers.Pipelining;
 
 namespace TMGmod.Core.WClasses
 {
@@ -482,7 +483,7 @@ namespace TMGmod.Core.WClasses
             return contextMenu;
         }
 
-        private IEnumerable<string> Characteristics()
+        private IEnumerable<string> BaseCharacteristics()
         {
             if (_ammoType != null) yield return $"Accuracy: {100 * _ammoType.accuracy}";
             if (_ammoType != null) yield return $"Range: {_ammoType.range / 16f}";
@@ -492,6 +493,12 @@ namespace TMGmod.Core.WClasses
             if (_fireWait > 0 && !_manualLoad)
                 yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
         }
+
+        private IEnumerable<string> Characteristics()
+        {
+            return ActiveModifier.ModifyPipeline(new CharacteristicsPipeline(BaseCharacteristics()));
+        }
+
 #if DEBUG
         public static IEnumerable<string> StatsHeader()
         {

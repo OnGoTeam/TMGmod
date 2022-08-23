@@ -1,4 +1,6 @@
-﻿using DuckGame;
+﻿using System;
+using System.Collections.Generic;
+using DuckGame;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Accuracy
@@ -32,6 +34,12 @@ namespace TMGmod.Core.Modifiers.Accuracy
         {
             if (LossShouldBeMax) _loss = _max;
             return _target.duck is null ? accuracy : accuracy - _loss;
+        }
+
+        protected override IEnumerable<string> Characteristics()
+        {
+            yield return "Focuses When Standing Still";
+            yield return $"Focusing Delay: {_max / Math.Max(.001f, _rate) / 60f:0.##}s";
         }
     }
 }
