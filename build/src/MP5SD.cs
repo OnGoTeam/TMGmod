@@ -5,7 +5,7 @@ using TMGmod.AmmoTypes;
 
 namespace TMGmod
 {
-    [EditorGroup("TTMG|SMG|Burst")]
+    [EditorGroup("TMG|SMG|Burst")]
     // ReSharper disable once InconsistentNaming
     public class MP5SD : MP5
     {
