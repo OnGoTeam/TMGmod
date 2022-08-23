@@ -51,8 +51,6 @@ namespace TMGmod.Core.WClasses
             set => SetSkin(value);
         }
 
-        public StateBinding FrameIdBinding { get; } = new StateBinding(nameof(FrameId));
-
         public int FrameId
         {
             get => Smap.frame;
@@ -144,8 +142,8 @@ namespace TMGmod.Core.WClasses
         [UsedImplicitly]
         public BitBuffer ModifierBuffer
         {
-            get => GetBuffer(ActiveModifier, () => { });
-            set => ActiveModifier.Read(value, () => { });
+            get => GetBuffer(ActiveModifier, b => b.Write(FrameId));
+            set => ActiveModifier.Read(value, () => FrameId = value.ReadInt());
         }
 
         [UsedImplicitly] public StateBinding MbBinding { get; } = new StateBinding(nameof(ModifierBuffer));
@@ -249,7 +247,8 @@ namespace TMGmod.Core.WClasses
 
         public override void Fire()
         {
-            if (CanFire()) DoFire();
+            if (CanFire() || hasFireEvents)
+                DoFire();
         }
 
         private float ClipAccuracy(float accuracy)
@@ -422,13 +421,14 @@ namespace TMGmod.Core.WClasses
         public override void Initialize()
         {
             OnInitialize();
+            SkinValue = SkinValue;
             base.Initialize();
         }
 
-        private static BitBuffer GetBuffer(ISync modifier, Action write)
+        private static BitBuffer GetBuffer(ISync modifier, Action<BitBuffer> write)
         {
             var buffer = new BitBuffer();
-            modifier.Write(buffer, write);
+            modifier.Write(buffer, () => write(buffer));
             return buffer;
         }
 
@@ -564,7 +564,6 @@ namespace TMGmod.Core.WClasses
                 set => _target.FrameId = value;
             }
 
-            public StateBinding FrameIdBinding => _target.FrameIdBinding;
             public ICollection<int> AllowedSkins => _target.AllowedSkins;
             public SpriteMap SpriteBase { get; }
 

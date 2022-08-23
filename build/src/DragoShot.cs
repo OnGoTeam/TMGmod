@@ -80,6 +80,7 @@ namespace TMGmod
 
         public override void OnPressAction()
         {
+            if (hasFireEvents) base.OnPressAction();
         }
     }
 }

@@ -36,11 +36,11 @@ namespace TMGmod.Core.Modifiers.Firing
 
         public override void ModifyFire(Action fire)
         {
-            /*if (!_target.isServerForObject)
+            if (_target.hasFireEvents)
             {
                 fire();
                 return;
-            }*/
+            }
             if (_shotsLeft <= 0 && _target._wait <= 0)
             {
                 fire();

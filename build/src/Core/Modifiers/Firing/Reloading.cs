@@ -67,11 +67,13 @@ namespace TMGmod.Core.Modifiers.Firing
         protected override void Read(BitBuffer buffer)
         {
             _mags = buffer.ReadInt();
+            _triggerHeld = buffer.ReadBool();
         }
 
         protected override void Write(BitBuffer buffer)
         {
             buffer.Write(_mags);
+            buffer.Write(_triggerHeld);
         }
 
         protected override IEnumerable<string> Characteristics()
