@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TMGmod")]
 #if WORKSHOP
 [assembly: AssemblyDescription("[1.2] Fifth Anniversary Update")]
-#elif FEATURES_1_2
-[assembly: AssemblyDescription("[1.2] Fifth Anniversary Update")]
+#elif FEATURES_1_2_X
+[assembly: AssemblyDescription("[1.2.X] Fifth Anniversary Update Patch X")]
 #elif FEATURES_1_3
 [assembly: AssemblyDescription("[1.3] HP")]
 #elif FEATURES_1_4

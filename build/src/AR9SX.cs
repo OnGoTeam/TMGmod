@@ -1,5 +1,4 @@
-﻿#if FEATURES_1_2
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
@@ -46,4 +45,3 @@ namespace TMGmod
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6 });
     }
 }
-#endif
