@@ -483,12 +483,26 @@ namespace TMGmod.Core.WClasses
             return contextMenu;
         }
 
-        private IEnumerable<string> BaseCharacteristics()
+        private static IEnumerable<string> DamageCharacteristics(IDamage damage)
         {
-            if (_ammoType != null) yield return $"Accuracy: {100 * _ammoType.accuracy}";
-            if (_ammoType != null) yield return $"Range: {_ammoType.range / 16f}";
-            if (_ammoType != null) yield return $"Bullet Speed: {_ammoType.bulletSpeed / 16f * 60f}";
-            if (_ammoType != null) yield return $"Penetration: {_ammoType.penetration}";
+            yield return $"Damage: {damage.DamageMean}";
+        }
+        private static IEnumerable<string> AmmoTypeCharacteristics(AmmoType ammoType)
+        {
+            yield return $"Accuracy: {100 * ammoType.accuracy}";
+            yield return $"Range: {ammoType.range / 16f}";
+            yield return $"Bullet Speed: {ammoType.bulletSpeed / 16f * 60f}";
+            yield return $"Penetration: {ammoType.penetration}";
+            if (!(ammoType is IDamage damage)) yield break;
+            // else
+            foreach (var characteristic in DamageCharacteristics(damage))
+                yield return characteristic;
+        }
+        protected virtual IEnumerable<string> BaseCharacteristics()
+        {
+            if (_ammoType != null)
+                foreach (var characteristic in AmmoTypeCharacteristics(_ammoType))
+                    yield return characteristic;
             yield return $"Kickforce: {StatsKforce}";
             if (_fireWait > 0 && !_manualLoad)
                 yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
