@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DuckGame;
-using TMGmod.Core.Modifiers.Pipelining;
 
 namespace TMGmod.Core.Modifiers.Accuracy
 {
