@@ -33,6 +33,8 @@ namespace TMGmod.Core.Modifiers.Firing
 
         public override void ModifyFire(Action fire)
         {
+            if (_target.ammo <= _mags * _magSize && !_triggerHeld && _target.ammo > 0)
+                return;
             _target.ammo -= _mags * _magSize;
             fire();
             _target.ammo += _mags * _magSize;
@@ -58,7 +60,7 @@ namespace TMGmod.Core.Modifiers.Firing
         protected override void ModifyUpdate()
         {
             if (
-                _target.ammo <= _mags * _magSize
+                _target.ammo <= _mags * _magSize && _target.isServerForObject
             )
                 OnEmpty();
             _triggerHeld = _target.action;
