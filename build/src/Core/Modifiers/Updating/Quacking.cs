@@ -27,9 +27,9 @@ namespace TMGmod.Core.Modifiers.Updating
         protected override void ModifyUpdate()
         {
             if (!_target.Quacked()) return;
+            // else
             if (_hint != null)
                 _target.Hint(_hint, _hintOffset, "QUACK");
-            // else
             if (!_serverOnly || _target.isServerForObject)
                 _quacked();
             if (_unQuack)
