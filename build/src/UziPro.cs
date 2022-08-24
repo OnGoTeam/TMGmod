@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -26,7 +28,7 @@ namespace TMGmod
             _center = new Vec2(8f, 5f);
             _collisionOffset = new Vec2(-8f, -5f);
             _collisionSize = new Vec2(16f, 10f);
-            _barrelOffsetTL = new Vec2(10f, 2f);
+            _barrelOffsetTL = new Vec2(10f, 2.5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
@@ -42,6 +44,7 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(8f, 5.5f);
             _weight = 2.5f;
+            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
         public override string HintMessage => "silencer";
@@ -51,40 +54,19 @@ namespace TMGmod
             get => _fireSound == GetPath("sounds/new/SMG-Silenced.wav");
             set
             {
+                if (value != Silencer)
+                    FrameUtils.SwitchedSilencer(Silencer);
+                NonSkin = value ? 1 : 0;
                 if (value)
-                {
-                    NonSkin = 1;
                     SetAmmoType<ATUziS>();
-                    _barrelOffsetTL = new Vec2(16f, 2f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    _fireSound = GetPath("sounds/new/SMG-Silenced.wav");
-                }
                 else
-                {
-                    NonSkin = 0;
                     SetAmmoType<ATUzi>();
-                    _barrelOffsetTL = new Vec2(10f, 2f);
-                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
-                    _fireSound = GetPath("sounds/new/UziPro.wav");
-                }
+                _barrelOffsetTL = value ? new Vec2(16f, 2.5f) : new Vec2(10f, 2.5f);
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel0();
+                _fireSound = value ? GetPath("sounds/new/SMG-Silenced.wav") : GetPath("sounds/new/UziPro.wav");
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 6, 9 });
-
-        public override void Update()
-        {
-            if (Quacked())
-            {
-                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
-                Silencer = !Silencer;
-                UnQuack();
-            }
-
-            base.Update();
-        }
     }
 }
