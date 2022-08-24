@@ -30,8 +30,7 @@ namespace TMGmod.Core.StockLogic
             if (gun.SwitchStockQ() && (target.Stock || gun.duck.grounded) && gun.Quacked())
             {
                 target.Stock = !target.Stock;
-
-                SFX.Play("quack", -1, gun.duck.quackPitch);
+                gun.UnQuack();
             }
             else if (gun.duck != null)
             {
