@@ -96,7 +96,7 @@ namespace TMGmod
         private void OnQuackPress()
         {
             Bayonet = true;
-            Fire();
+            ForeignFire();
         }
 
         private void OnQuackHold()
