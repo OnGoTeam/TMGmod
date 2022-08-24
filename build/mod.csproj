@@ -80,6 +80,7 @@
     <Compile Include="src\Buddies\HpGiver.cs" />
     <Compile Include="src\Buddies\PiercingBazooka.cs" />
     <Compile Include="src\Butcher.cs" />
+    <Compile Include="src\Cases\Color\Nitro2Case.cs" />
     <Compile Include="src\Core\BaseColor.cs" />
     <Compile Include="src\Cases\Color\ClassicCase.cs" />
     <Compile Include="src\AmmoTypes\ATButcher.cs" />

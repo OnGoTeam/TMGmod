@@ -32,6 +32,8 @@ namespace TMGmod.NY
                 B<Popcal>().Chance(.75f),
                 B<Icer>().Chance(.75f),
                 B<SnowMgun>().Chance(.75f),
+                B<PodarokNitro>().Chance(.75f),
+                B<PodarokNitro2>().Chance(.75f),
                 //x2
                 B<CandyCaneLime>().Chance(.5f),
                 //B<SkeetGun>().Chance(.5f),
@@ -40,10 +42,10 @@ namespace TMGmod.NY
                 B<PodarokColorY>().Chance(.5f),
                 B<PodarokColorR>().Chance(.5f),
                 B<PodarokColorG>().Chance(.5f),
-                B<PodarokMillitary>().Chance(.5f),
                 //x1.67
                 B<Helmet>().Chance(.33f),
                 B<ChestPlate>().Chance(.33f),
+                B<PodarokMillitary>().Chance(.33f),
                 //x1
                 B<SpruceGun>().Chance(.25f),
                 B<CandyCaneOrange>().Chance(.25f),

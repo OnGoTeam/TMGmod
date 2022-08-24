@@ -27,12 +27,12 @@ namespace TMGmod.Cases.Color
             _editorName = "Red Case";
             ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                B<SIX12S>(),
-                B<SIX12>(),
+                B<SIX12S>().Chance(2f),
+                B<SIX12>().Chance(2f),
                 B<DaewooK1>(),
                 B<AUGA1>(),
                 B<AUGA3>(),
-                B<SkeetGun>(),
+                B<SkeetGun>().Chance(2f),
                 B<Bersa45>(),
 #if DEBUG
                 B<PPSh>(),
@@ -43,17 +43,17 @@ namespace TMGmod.Cases.Color
                 B<HK417>(),
                 B<Vintorez>(),
                 B<VSK94>(),
-                B<PMR>(),
+                B<PMR>().Chance(2f),
                 B<PMRC>(),
                 B<BigShot>(),
                 //B<SKS>(),
-                B<SRM1208>(),
+                B<SRM1208>().Chance(2f),
                 B<PP19>(),
-                B<RemingtonTac>(),
+                B<RemingtonTac>().Chance(2f),
                 B<M4A1>(),
                 B<NellegaljaMk2>(),
                 B<SVU>(),
-                B<Taligator6000>(),
+                B<Taligator6000>().Chance(2f),
             };
             CaseColor = BaseColor.Red;
         }
