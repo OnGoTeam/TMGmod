@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -23,7 +25,7 @@ namespace TMGmod
             _center = new Vec2(10f, 5f);
             _collisionOffset = new Vec2(-10f, -5f);
             _collisionSize = new Vec2(19f, 10f);
-            _barrelOffsetTL = new Vec2(13f, 1f);
+            _barrelOffsetTL = new Vec2(13f, 2f);
             _fireSound = GetPath("sounds/new/LightCaliber-Pistol.wav");
             _flare = new SpriteMap("smallFlare", 11, 10)
             {
@@ -39,6 +41,7 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, 3f);
             ShellOffset = new Vec2(-3f, -3f);
             _weight = 3.3f;
+            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
         public override string HintMessage => "silencer";
@@ -48,43 +51,24 @@ namespace TMGmod
             get => _fireSound == GetPath("sounds/SilencedPistol.wav");
             set
             {
+                if (value != Silencer)
+                    FrameUtils.SwitchedSilencer(Silencer);
+                NonSkin = value ? 1 : 0;
                 if (value)
-                {
-                    NonSkin = 1;
                     SetAmmoType<ATSpectreM4S>();
-                    _barrelOffsetTL = new Vec2(16f, 1f);
-                    loseAccuracy = 0.07f;
-                    maxAccuracyLost = 0.3f;
-                    weight = 3.8f;
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                }
                 else
-                {
-                    NonSkin = 0;
                     SetAmmoType<ATSpectreM4>();
-                    _barrelOffsetTL = new Vec2(13f, 1f);
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.34f;
-                    _weight = 3.3f;
-                    _fireSound = GetPath("sounds/new/LightCaliber-Pistol.wav");
-                    _flare = new SpriteMap("smallFlare", 11, 10) { center = new Vec2(0.0f, 5f) };
-                }
+                _barrelOffsetTL = value ? new Vec2(16f, 2f) : new Vec2(13f, 2f);
+                loseAccuracy = value ? .07f : .1f;
+                maxAccuracyLost = value ? .3f : .34f;
+                _weight = value ? 3.8f : 3.3f;
+                _fireSound = value
+                    ? GetPath("sounds/SilencedPistol.wav")
+                    : GetPath("sounds/new/LightCaliber-Pistol.wav");
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.SmallFlare();
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6 });
-
-        public override void Update()
-        {
-            if (Quacked())
-            {
-                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
-                Silencer = !Silencer;
-                UnQuack();
-            }
-
-            base.Update();
-        }
     }
 }
