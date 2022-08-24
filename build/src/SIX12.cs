@@ -81,8 +81,7 @@ namespace TMGmod
 
         public override void Reload(bool shell = true)
         {
-            if (ammo != 0) --ammo;
-            loaded = true;
+            base.Reload(false);
         }
     }
 }
