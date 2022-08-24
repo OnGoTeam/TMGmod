@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
@@ -63,16 +64,11 @@ namespace TMGmod
             set
             {
                 if (value != Silencer)
-                    SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
+                    FrameUtils.SwitchedSilencer(Silencer);
                 _fireSound = value
                     ? GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav")
                     : GetPath("sounds/new/HighCaliber-LessImpact.wav");
-                _flare = value
-                    ? new SpriteMap(GetPath("takezis"), 4, 4)
-                    : new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel();
                 if (value)
                     SetAmmoType<ATCZS>();
                 else

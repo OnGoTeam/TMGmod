@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -39,6 +41,7 @@ namespace TMGmod
             _weight = 5f;
             _kickForce = 1.5f;
             KforceDelta = 1.26f;
+            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
         protected override string HintMessage => "silencer";
@@ -48,30 +51,17 @@ namespace TMGmod
             get => _fireSound == GetPath("sounds/new/CZ-Silenced.wav");
             set
             {
+                if (value != Silencer)
+                    FrameUtils.SwitchedSilencer(Silencer);
+                NonSkin = NonSkin % 5 + 5 * (value ? 1 : 0);
+                _fireSound = value ? GetPath("sounds/new/CZ-Silenced.wav") : "deepMachineGun2";
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel();
                 if (value)
-                {
-                    NonSkin %= 5;
-                    NonSkin += 5;
-                    _fireSound = GetPath("sounds/new/CZ-Silenced.wav");
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     SetAmmoType<ATCZS>();
-                    _barrelOffsetTL = new Vec2(41f, 3f);
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.35f;
-                }
                 else
-                {
-                    NonSkin %= 5;
-                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
-                    _fireSound = "deepMachineGun2";
                     SetAmmoType<ATCZ>();
-                    _barrelOffsetTL = new Vec2(39f, 3f);
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.25f;
-                }
+                _barrelOffsetTL = value ? new Vec2(41f, 3f) : new Vec2(39f, 3f);
+                maxAccuracyLost = value ? .35f : .25f;
             }
         }
 
@@ -79,19 +69,12 @@ namespace TMGmod
 
         public override void Update()
         {
-            if (Quacked())
-            {
-                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
-                Silencer = !Silencer;
-                UnQuack();
-            }
-
+            base.Update();
             if (ammo > 26) NonSkin = 5 * (NonSkin / 5) + 0;
             else if (ammo > 20) NonSkin = 5 * (NonSkin / 5) + 1;
             else if (ammo > 12) NonSkin = 5 * (NonSkin / 5) + 2;
             else if (ammo > 5) NonSkin = 5 * (NonSkin / 5) + 3;
             else NonSkin = 5 * (NonSkin / 5) + 4;
-            base.Update();
         }
     }
 }
