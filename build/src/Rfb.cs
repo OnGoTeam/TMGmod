@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -37,6 +38,7 @@ namespace TMGmod
             _weight = 5.5f;
             _kickForce = 0.07f;
             KforceDelta = 0.63f;
+            Compose(new Quacking(this, true, true, () => FullAuto = !FullAuto));
         }
 
         protected override void OnInitialize()
@@ -47,31 +49,26 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
 
-        public override void Update()
+        public override string HintMessage => "full auto";
+
+        protected override Vec2 HintOffset() => new Vec2(5.5f, -2.5f);
+
+        public bool FullAuto
         {
-            if (Quacked())
+            get => _fullAuto;
+            set
             {
-                if (_fullAuto)
-                {
-                    _fullAuto = false;
-                    NonSkin = 0;
-                    _fireWait = 0.46f;
-                    maxAccuracyLost = 0.3f;
-                    _ammoType.accuracy = 0.9f;
-                }
-                else
-                {
-                    _fullAuto = true;
-                    NonSkin = 1;
-                    _fireWait = 0.79f;
-                    maxAccuracyLost = 0.45f;
-                    _ammoType.accuracy = 0.6f;
-                }
-
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                if (value != FullAuto)
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
+                _fullAuto = value;
+                NonSkin = value ? 1 : 0;
+                _fireWait = value ? .79f : .46f;
+                maxAccuracyLost = value ? .45f : .3f;
             }
-
-            base.Update();
         }
+
+        protected override float BaseAccuracy => FullAuto ? .6f : .9f;
+
+        [UsedImplicitly] public StateBinding FullAutoBinding = new StateBinding(nameof(FullAuto));
     }
 }
