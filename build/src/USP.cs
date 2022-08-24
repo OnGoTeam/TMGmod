@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -39,6 +41,7 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 0f);
             ShellOffset = new Vec2(-5f, 0f);
             _weight = 1f;
+            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
         public override string HintMessage => "silencer";
@@ -48,39 +51,19 @@ namespace TMGmod
             get => _fireSound == GetPath("sounds/SilencedPistol.wav");
             set
             {
+                if (value != Silencer)
+                    FrameUtils.SwitchedSilencer(Silencer);
+                NonSkin = value ? 1 : 0;
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel0();
+                _fireSound = value ? GetPath("sounds/SilencedPistol.wav") : GetPath("sounds/new/USP.wav");
                 if (value)
-                {
-                    NonSkin = 1;
-                    _fireSound = GetPath("sounds/SilencedPistol.wav");
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
                     SetAmmoType<ATUSPS>();
-                    _barrelOffsetTL = new Vec2(23f, 2f);
-                }
                 else
-                {
-                    NonSkin = 0;
-                    _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-                    {
-                        center = new Vec2(0f, 5f),
-                    };
-                    _fireSound = GetPath("sounds/new/USP.wav");
                     SetAmmoType<ATUSP>();
-                    _barrelOffsetTL = new Vec2(14f, 2f);
-                }
+                _barrelOffsetTL = value ? new Vec2(23f, 2f) : new Vec2(14f, 2f);
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 3, 4, 7 });
-        public override void Update()
-        {
-            if (Quacked())
-            {
-                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
-                Silencer = !Silencer;
-                UnQuack();
-            }
-
-            base.Update();
-        }
     }
 }

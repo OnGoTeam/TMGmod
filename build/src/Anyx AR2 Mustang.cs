@@ -68,7 +68,7 @@ namespace TMGmod
                 _fireSound = value
                     ? GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav")
                     : GetPath("sounds/new/HighCaliber-LessImpact.wav");
-                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel();
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
                 if (value)
                     SetAmmoType<ATCZS>();
                 else

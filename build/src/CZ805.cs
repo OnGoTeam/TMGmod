@@ -55,7 +55,7 @@ namespace TMGmod
                     FrameUtils.SwitchedSilencer(Silencer);
                 NonSkin = NonSkin % 5 + 5 * (value ? 1 : 0);
                 _fireSound = value ? GetPath("sounds/new/CZ-Silenced.wav") : "deepMachineGun2";
-                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel();
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
                 if (value)
                     SetAmmoType<ATCZS>();
                 else

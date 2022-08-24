@@ -62,7 +62,7 @@ namespace TMGmod
                 loseAccuracy = value ? .15f : .1f;
                 maxAccuracyLost = value ? .28f : .3f;
                 _barrelOffsetTL = value ? new Vec2(41f, 3f) : new Vec2(37f, 3f);
-                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel();
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
             }
         }
 
