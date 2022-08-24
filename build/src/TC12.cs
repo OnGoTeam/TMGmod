@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -44,6 +46,7 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(26f, 5.5f);
             _weight = 4.5f;
+            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
         public override string HintMessage => "silencer";
@@ -53,49 +56,24 @@ namespace TMGmod
             get => _fireSound == GetPath("sounds/new/TC12-Silenced.wav");
             set
             {
+                if (value != Silencer)
+                    FrameUtils.SwitchedSilencer(Silencer);
+                NonSkin = value ? 1 : 0;
+                _fireSound = value ? GetPath("sounds/new/TC12-Silenced.wav") : GetPath("sounds/new/HighCaliber.wav");
                 if (value)
-                {
-                    NonSkin = 1;
-                    _fireSound = GetPath("sounds/new/TC12-Silenced.wav");
                     SetAmmoType<ATTC12S>();
-                    _kickForce = 4.5f;
-                    loseAccuracy = 0f;
-                    _weight = 6.3f;
-                    _barrelOffsetTL = new Vec2(39f, 3f);
-                    _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
-                }
                 else
-                {
-                    NonSkin = 0;
-                    _fireSound = GetPath("sounds/new/HighCaliber.wav");
                     SetAmmoType<ATTC12>();
-                    _kickForce = 5.3f;
-                    loseAccuracy = 0.1f;
-                    _weight = 4.5f;
-                    _barrelOffsetTL = new Vec2(28f, 3f);
-                    _flare = new SpriteMap(GetPath("FlareTC12"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
-                }
+                _kickForce = value ? 4.5f : 5.3f;
+                loseAccuracy = value ? 0f : .1f;
+                _weight = value ? 6.3f : 4.5f;
+                _barrelOffsetTL = value ? new Vec2(39f, 3f) : new Vec2(28f, 3f);
+                _flare = value
+                    ? new SpriteMap(GetPath("FlareSilencer"), 13, 10) { center = new Vec2(0.0f, 5f) }
+                    : new SpriteMap(GetPath("FlareTC12"), 13, 10) { center = new Vec2(0.0f, 5f) };
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3 });
-
-        public override void Update()
-        {
-            if (Quacked())
-            {
-                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
-                Silencer = !Silencer;
-                UnQuack();
-            }
-
-            base.Update();
-        }
     }
 }
