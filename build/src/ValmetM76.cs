@@ -25,7 +25,7 @@ namespace TMGmod
             _center = new Vec2(17f, 5f);
             _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 10f);
-            _barrelOffsetTL = new Vec2(33f, 3f);
+            _barrelOffsetTL = new Vec2(33f, 3.5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
