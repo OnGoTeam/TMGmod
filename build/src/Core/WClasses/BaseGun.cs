@@ -506,14 +506,13 @@ namespace TMGmod.Core.WClasses
         }
         private static IEnumerable<string> AmmoTypeCharacteristics(AmmoType ammoType)
         {
+            if (ammoType is IDamage damage)
+                foreach (var characteristic in DamageCharacteristics(damage))
+                    yield return characteristic;
             yield return $"Accuracy: {100 * ammoType.accuracy}";
             yield return $"Range: {ammoType.range / 16f}";
             yield return $"Bullet Speed: {ammoType.bulletSpeed / 16f * 60f}";
             yield return $"Penetration: {ammoType.penetration}";
-            if (!(ammoType is IDamage damage)) yield break;
-            // else
-            foreach (var characteristic in DamageCharacteristics(damage))
-                yield return characteristic;
         }
 #if DEBUG
         protected virtual IEnumerable<string> BaseCharacteristics()
