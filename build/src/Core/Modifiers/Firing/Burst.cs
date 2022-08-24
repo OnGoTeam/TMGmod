@@ -66,6 +66,7 @@ namespace TMGmod.Core.Modifiers.Firing
             _withinContext = true;
             _target.UpdateAction();
             _target.Fire();
+            _target.FireActivated = true;
             _target.UpdateAction();
             _withinContext = false;
         }
