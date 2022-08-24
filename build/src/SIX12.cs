@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -13,8 +14,6 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SIX12 : BaseGun, IHaveAllowedSkins, IAmSg, I5
     {
-        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(laserSight));
-
         public SIX12(float xval, float yval)
             : base(xval, yval)
         {
@@ -42,7 +41,12 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(24f, 7.5f);
             _holdOffset = new Vec2(1f, 0f);
             _weight = 4f;
+            Compose(new Quacking(this, true, true, () => LaserSight = !LaserSight));
         }
+
+        protected override Vec2 HintOffset() => laserOffset;
+
+        public override string HintMessage => "laser";
 
         protected override void OnInitialize()
         {
@@ -54,34 +58,21 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7 });
 
-        public override void Update()
+        public bool LaserSight
         {
-            if (Quacked())
+            get => laserSight;
+            set
             {
-                if (laserSight)
-                {
-                    NonSkin = 0;
-                    loseAccuracy = 0.3f;
-                    maxAccuracyLost = 0.4f;
-                    laserSight = false;
-                }
-                else
-                {
-                    NonSkin = 1;
-                    loseAccuracy = 0.5f;
-                    maxAccuracyLost = 0.5f;
-                    laserSight = true;
-                }
-
-                SFX.Play(GetPath("sounds/tuduc.wav"));
+                if (value != LaserSight)
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
+                laserSight = value;
+                NonSkin = value ? 1 : 0;
+                loseAccuracy = value ? .5f : .3f;
+                maxAccuracyLost = value ? .5f : .4f;
             }
-
-            base.Update();
         }
+        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(LaserSight));
 
-        public override void Reload(bool shell = true)
-        {
-            base.Reload(false);
-        }
+        public override void Reload(bool shell = true) => base.Reload(false);
     }
 }
