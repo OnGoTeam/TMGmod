@@ -319,6 +319,10 @@ namespace TMGmod.Core.WClasses
             UpdateInternals();
             OnUpdate();
             base.Update();
+#if DEBUG
+            if (duck != null && duck.inputProfile.Down("UP") && duck.inputProfile.Down("STRAFE"))
+                _flareAlpha = 100f;
+#endif
         }
 
         protected virtual void PopBaseShell()
