@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
@@ -56,11 +57,18 @@ namespace TMGmod
                         loseAccuracy = loseAccuracym[mode];
                         maxAccuracyLost = maxAccuracyLostm[mode];
                         _numBulletsPerFire = numBulletsPerFirem[mode];
+                        handOffset = mode * new Vec2(3f, 2f);
                     },
                     () => NonSkin = 0
-                ).SwitchingOnQuack()
+                ).Animated(
+                    (frames, mode) =>
+                        handOffset = Math.Abs(mode - frames / (float)FramesToSwitchTo(mode)) * new Vec2(3f, 2f),
+                    FramesToSwitchTo
+                )
             );
         }
+
+        private static int FramesToSwitchTo(int mode) => 6;
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 5, 9 });
     }
