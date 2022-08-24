@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -30,10 +31,7 @@ namespace TMGmod
             _collisionSize = new Vec2(29f, 11f);
             _barrelOffsetTL = new Vec2(29f, 2.5f);
             _fireSound = GetPath("sounds/new/DragoShot.wav");
-            _flare = new SpriteMap(GetPath("FlareBase3"), 13, 10)
-            {
-                center = new Vec2(0f, 4.5f),
-            };
+            _flare = FrameUtils.FlareBase3();
             _fireWait = 1.5f;
             _kickForce = 5.5f;
             loseAccuracy = 0.1f;

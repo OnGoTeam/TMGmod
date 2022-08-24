@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -28,10 +29,7 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(-6f, -3f);
             _fireSound = GetPath("sounds/new/HeavyAss-1.wav");
-            _flare = new SpriteMap(GetPath("FlareBase3"), 13, 10)
-            {
-                center = new Vec2(0f, 4.5f),
-            };
+            _flare = FrameUtils.FlareBase3();
             _manualLoad = true;
             _fireWait = 4f;
             _kickForce = 9f;

@@ -20,6 +20,9 @@ namespace TMGmod.Core
         public static SpriteMap SmallFlare() =>
             new SpriteMap("smallFlare", 11, 10) { center = new Vec2(0.0f, 5f) };
 
+        public static SpriteMap FlareBase3() =>
+            new SpriteMap(Mod.GetPath<TMGmod>("FlareBase3"), 13, 10) { center = new Vec2(0f, 4.5f) };
+
         public static void SwitchedSilencer(bool previous)
         {
             SFX.Play(
