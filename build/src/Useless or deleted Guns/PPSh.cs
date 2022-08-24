@@ -24,7 +24,7 @@ namespace TMGmod.Useless_or_deleted_Guns
             _center = new Vec2(23f, 5.5f);
             _collisionOffset = new Vec2(-23f, -4.5f);
             _collisionSize = new Vec2(46f, 11f);
-            _barrelOffsetTL = new Vec2(47f, 4f);
+            _barrelOffsetTL = new Vec2(44f, 4.5f);
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.25f;

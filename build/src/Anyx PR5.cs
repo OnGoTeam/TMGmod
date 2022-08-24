@@ -23,7 +23,7 @@ namespace TMGmod
             ammo = 21;
             SetAmmoType<ATPR5>();
             
-            _barrelOffsetTL = new Vec2(12f, 1f);
+            _barrelOffsetTL = new Vec2(12f, 2f);
             _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
