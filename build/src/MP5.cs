@@ -56,9 +56,8 @@ namespace TMGmod
                         _fireWait = burst ? 1.8f : 0.5f;
                         NonSkin = burst ? 1 : 0;
                         MaxAccuracy = burst ? IncreasedAccuracy : DecreasedAccuracy;
-                    },
-                    true
-                )
+                    }
+                ).SwichingOnQuack()
             );
         }
 
