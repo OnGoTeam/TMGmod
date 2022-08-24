@@ -30,7 +30,7 @@ namespace TMGmod
             _center = new Vec2(17f, 6f);
             _collisionOffset = new Vec2(-17f, -6f);
             _collisionSize = new Vec2(33f, 11f);
-            _barrelOffsetTL = new Vec2(33f, 3.5f);
+            _barrelOffsetTL = new Vec2(33f, 4f);
             ammo = 6;
             _flare = FrameUtils.FlareSilencer();
             _fireSound = GetPath("sounds/new/AWS.wav");

@@ -24,7 +24,7 @@ namespace TMGmod
             ammo = 21;
             SetAmmoType<ATPR5>();
             
-            _barrelOffsetTL = new Vec2(12f, 2f);
+            _barrelOffsetTL = new Vec2(12f, 1.5f);
             _flare = FrameUtils.FlareOnePixel0();
             _fireSound = GetPath("sounds/new/HighCaliber-Pistol.wav");
             _fullAuto = false;

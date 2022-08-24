@@ -26,7 +26,7 @@ namespace TMGmod
             _center = new Vec2(17f, 7f);
             _collisionOffset = new Vec2(-17f, -7f);
             _collisionSize = new Vec2(33f, 14f);
-            _barrelOffsetTL = new Vec2(33f, 6f);
+            _barrelOffsetTL = new Vec2(33f, 6.5f);
             _flare = FrameUtils.FlareOnePixel2();
             _holdOffset = new Vec2(2f, -1f);
             ShellOffset = new Vec2(-4f, -2f);

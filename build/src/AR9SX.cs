@@ -25,7 +25,7 @@ namespace TMGmod
             _center = new Vec2(18f, 5f);
             _collisionOffset = new Vec2(-18f, -5f);
             _collisionSize = new Vec2(36f, 10f);
-            _barrelOffsetTL = new Vec2(36f, 3f);
+            _barrelOffsetTL = new Vec2(36f, 3.5f);
             _fireSound = GetPath("sounds/new/AR9SX.wav");
             _flare = FrameUtils.FlareOnePixel0();
             _fullAuto = true;

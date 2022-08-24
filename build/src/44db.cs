@@ -24,7 +24,7 @@ namespace TMGmod
             _center = new Vec2(17f, 5f);
             _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 10f);
-            _barrelOffsetTL = new Vec2(33f, 1.5f);
+            _barrelOffsetTL = new Vec2(33f, 2f);
             _holdOffset = new Vec2(2f, 1f);
             _fireSound = GetPath("sounds/new/HeavyAss-1.wav");
             _flare = FrameUtils.FlareBase3();

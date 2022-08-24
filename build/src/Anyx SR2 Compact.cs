@@ -34,7 +34,7 @@ namespace TMGmod
             _center = new Vec2(11f, 5f);
             _collisionOffset = -_center;
             _collisionSize = new Vec2(32f, 10f);
-            _barrelOffsetTL = new Vec2(32f, 3f);
+            _barrelOffsetTL = new Vec2(32f, 3.5f);
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(-2f, -1f);
             _fireSound = GetPath("sounds/new/HighCaliber-Sniper.wav");
