@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
@@ -13,7 +14,7 @@ namespace TMGmod
     {
         private const int FramesToCharge = 50;
         private bool _charged;
-
+        [UsedImplicitly]
         public DragoShot(float xval, float yval)
             : base(xval, yval)
         {
@@ -72,10 +73,7 @@ namespace TMGmod
                         // else
                         if (owner is null) return;
                         // else
-                        UpdateAction();
-                        Fire();
-                        _fireActivated = true;
-                        UpdateAction();
+                        ForeignFire();
                     }
                 )
             );

@@ -1,4 +1,5 @@
-﻿using TMGmod.Core.AmmoTypes;
+﻿#if FEATURES_1_2_X
+using TMGmod.Core.AmmoTypes;
 
 namespace TMGmod.AmmoTypes
 {
@@ -22,3 +23,4 @@ namespace TMGmod.AmmoTypes
         }
     }
 }
+#endif

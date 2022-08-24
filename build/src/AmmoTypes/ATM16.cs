@@ -1,3 +1,4 @@
+#if FEATURES_1_2_X
 using System;
 using DuckGame;
 using TMGmod.Core.AmmoTypes;
@@ -21,9 +22,10 @@ namespace TMGmod.AmmoTypes
 
         public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
-            var difficultToSee = new X3XShell(x, y, 0)
-                { hSpeed = dir * (5f + Rando.Float(1f)) }; //должна быть кастомная shell
+            var difficultToSee = new X3XShell(x, y)
+                { hSpeed = dir * (5f + Rando.Float(1f)), FrameId = 0 }; // должна быть кастомная shell
             add(difficultToSee);
         }
     }
 }
+#endif

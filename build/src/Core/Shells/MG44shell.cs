@@ -9,11 +9,10 @@ namespace TMGmod.Core.Shells
     {
         private readonly SpriteMap _sprite;
 
-        public MG44Shell(float xpos, float ypos, int frameid)
+        public MG44Shell(float xpos, float ypos)
             : base(xpos, ypos, Mod.GetPath<TMGmod>("MG44Shell"))
         {
             _sprite = new SpriteMap(GetPath("MG44Shell"), 16, 16);
-            FrameId = frameid;
             _graphic = _sprite;
         }
 

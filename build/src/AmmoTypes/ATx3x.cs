@@ -29,9 +29,10 @@ namespace TMGmod.AmmoTypes
 
         public static void PopShellSkin(float x, float y, int dir, int frameid, Action<EjectedShell> add)
         {
-            var flyingtoilet = new X3XShell(x, y, frameid)
+            var flyingtoilet = new X3XShell(x, y)
             {
                 hSpeed = (7f + Rando.Float(1f)) * -dir,
+                FrameId = frameid,
             };
             add(flyingtoilet);
         }

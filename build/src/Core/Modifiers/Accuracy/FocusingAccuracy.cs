@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if FEATURES_1_2_X
+using System.Collections.Generic;
 using DuckGame;
 using TMGmod.Core.WClasses;
 
@@ -42,3 +43,4 @@ namespace TMGmod.Core.Modifiers.Accuracy
         }
     }
 }
+#endif

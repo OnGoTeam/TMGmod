@@ -1,3 +1,4 @@
+#if FEATURES_1_2_X
 using System;
 using DuckGame;
 using TMGmod.Core.AmmoTypes;
@@ -45,3 +46,4 @@ namespace TMGmod.AmmoTypes
         }
     }
 }
+#endif

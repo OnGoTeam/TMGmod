@@ -64,10 +64,7 @@ namespace TMGmod.Core.Modifiers.Firing
         private void ShootLeft()
         {
             _withinContext = true;
-            _target.UpdateAction();
-            _target.Fire();
-            _target.FireActivated = true;
-            _target.UpdateAction();
+            _target.ForeignFire();
             _withinContext = false;
         }
 

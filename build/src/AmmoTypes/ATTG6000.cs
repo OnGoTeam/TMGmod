@@ -27,11 +27,12 @@ namespace TMGmod.AmmoTypes
 
         public static void PopShellSkin(float x, float y, int dir, int frameid, Action<EjectedShell> add)
         {
-            var shell = new Taligator6000Shell(x, y, frameid)
+            var shell = new Taligator6000Shell(x, y)
             {
                 hSpeed = (0.5f + Rando.Float(-0.1f, 0.1f)) * dir,
                 vSpeed = -4.5f + Rando.Float(-0.8f, 0.8f),
                 depth = 0.2f - Rando.Float(0.0f, 0.1f),
+                FrameId = frameid,
             };
             add(shell);
         }

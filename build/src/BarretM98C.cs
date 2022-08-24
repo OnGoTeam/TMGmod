@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -9,6 +10,7 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     public class BarretM98C : BaseBolt, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public BarretM98C(float xval, float yval) : base(xval, yval)
         {
             _editorName = "Barrett M98 Shorty";

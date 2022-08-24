@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
@@ -18,6 +19,7 @@ namespace TMGmod
 
         private readonly LoseAccuracy _loseAccuracy = new LoseAccuracy(0.6f, 0.01f, 1f);
 
+        [UsedImplicitly]
         public Lynx(float xval, float yval)
             : base(xval, yval)
         {

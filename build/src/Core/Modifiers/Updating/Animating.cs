@@ -39,24 +39,35 @@ namespace TMGmod.Core.Modifiers.Updating
             _end(_data);
             _data = default;
         }
-
+#if DEBUG
         public void Complete()
+#else
+        private void Complete()
+#endif
         {
             if (_frames > 0)
                 Set(0);
         }
-
+#if DEBUG
         public T Cancel()
+#else
+        public void Cancel()
+#endif
         {
             _frames = 0;
+#if DEBUG
             var data = _data;
+#endif
             _data = default;
+#if DEBUG
             return data;
+#endif
         }
 
         public bool Active() => _frames > 0;
-
+#if DEBUG
         public T Data() => _data;
+#endif
 
         protected override void Write(BitBuffer buffer)
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers.Accuracy;
@@ -11,6 +12,7 @@ namespace TMGmod
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     public class Vintorez : BaseAr, IHaveAllowedSkins, IHaveBipods
     {
+        [UsedImplicitly]
         public Vintorez(float xval, float yval)
             : base(xval, yval)
         {

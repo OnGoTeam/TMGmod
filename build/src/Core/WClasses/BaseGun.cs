@@ -261,10 +261,12 @@ namespace TMGmod.Core.WClasses
                 DoFire();
         }
 
-        public bool FireActivated
+        public void ForeignFire()
         {
-            get => _fireActivated;
-            set => _fireActivated = value;
+            UpdateAction();
+            Fire();
+            _fireActivated = true;
+            UpdateAction();
         }
 
         private float ClipAccuracy(float accuracy)
@@ -327,7 +329,11 @@ namespace TMGmod.Core.WClasses
                 _ammoType.PopShell(Offset(ShellOffset).x, Offset(ShellOffset).y, -offDir);
         }
 
+#if DEBUG
         protected virtual void AddShell(EjectedShell shell)
+#else
+        protected void AddShell(EjectedShell shell)
+#endif
         {
             shell.velocity = shell.velocity.Rotate(angle, Vec2.Zero);
             shell.graphic.flipH = offDir < 0;
@@ -505,7 +511,11 @@ namespace TMGmod.Core.WClasses
             foreach (var characteristic in DamageCharacteristics(damage))
                 yield return characteristic;
         }
+#if DEBUG
         protected virtual IEnumerable<string> BaseCharacteristics()
+#else
+        private IEnumerable<string> BaseCharacteristics()
+#endif
         {
             if (_ammoType != null)
                 foreach (var characteristic in AmmoTypeCharacteristics(_ammoType))

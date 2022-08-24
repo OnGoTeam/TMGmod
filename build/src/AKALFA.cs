@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
@@ -14,7 +15,7 @@ namespace TMGmod
         private bool _stock = true;
 
         private float _stockstate = 1f;
-
+        [UsedImplicitly]
         public AKALFA(float xval, float yval)
             : base(xval, yval)
         {
