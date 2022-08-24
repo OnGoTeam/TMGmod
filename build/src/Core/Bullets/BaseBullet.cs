@@ -17,5 +17,13 @@ namespace TMGmod.Core.Bullets
         public void LoseDamage() => _damagePortion *= .5f;
 
         public float DamagePortion() => _damagePortion;
+
+        protected override void Rebound(Vec2 pos, float dir, float rng)
+        {
+            var accuracy = ammo.accuracy;
+            ammo.accuracy = 1f;
+            base.Rebound(pos, dir, rng);
+            ammo.accuracy = accuracy;
+        }
     }
 }
