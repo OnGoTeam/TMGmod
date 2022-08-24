@@ -37,7 +37,7 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             _weight = 2f;
-            Compose(new Quacking(this, () => Mode += 1));
+            Compose(new Quacking(this, true, () => Mode += 1));
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 

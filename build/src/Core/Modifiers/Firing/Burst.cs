@@ -36,11 +36,14 @@ namespace TMGmod.Core.Modifiers.Firing
 
         public override void ModifyFire(Action fire)
         {
-            if (_target.hasFireEvents)
+            if (_target.receivingPress)
             {
-                fire();
+                if (_target.loaded)
+                    fire();
                 return;
             }
+            if (!_target.isServerForObject)
+                return;
             if (_shotsLeft <= 0 && _target._wait <= 0)
             {
                 fire();
@@ -61,13 +64,15 @@ namespace TMGmod.Core.Modifiers.Firing
         private void ShootLeft()
         {
             _withinContext = true;
+            _target.UpdateAction();
             _target.Fire();
+            _target.UpdateAction();
             _withinContext = false;
         }
 
         private void UpdateShotsLeft()
         {
-            if (_shotsLeft > 0 && _target._wait <= 0f) ShootLeft();
+            if (_shotsLeft > 0 && _target._wait <= 0f && _target.isServerForObject) ShootLeft();
         }
 
         private bool NeedSwitch() => _target.Quacked();

@@ -75,7 +75,7 @@ namespace TMGmod.Core.Modifiers.Updating
 
         public IModifyEverything SwitchingOnQuack()
         {
-            return ComposedModifier.Compose(this, new Quacking(_target, SwitchMode));
+            return ComposedModifier.Compose(this, new Quacking(_target, true, SwitchMode));
         }
 
         private class Proxy<T>
@@ -112,7 +112,9 @@ namespace TMGmod.Core.Modifiers.Updating
                 this,
                 animating.Value,
                 new Quacking(
-                    _target, () =>
+                    _target,
+                    true,
+                    () =>
                     {
                         if (!animating.Value.Active())
                             animating.Value.Set(

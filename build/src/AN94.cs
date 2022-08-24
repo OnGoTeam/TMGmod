@@ -45,7 +45,7 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(24f, 1.5f);
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f),
-                new Quacking(this, () => Laserrod = !Laserrod)
+                new Quacking(this, true, () => Laserrod = !Laserrod)
             );
             ComposeSimpleBurst(2, .07f);
         }

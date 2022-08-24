@@ -7,7 +7,6 @@ using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Firing;
-using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.NY;
@@ -98,6 +97,7 @@ namespace TMGmod.Core.WClasses
         {
             _ammoType = at;
             MaxAccuracy = _ammoType.accuracy;
+            _bulletColor = _ammoType.bulletColor;
         }
 
         protected void SetAmmoType<T>(float maxAccuracy) where T : AmmoType, new()
@@ -142,11 +142,21 @@ namespace TMGmod.Core.WClasses
         [UsedImplicitly]
         public BitBuffer ModifierBuffer
         {
-            get => GetBuffer(ActiveModifier, b => b.Write(FrameId));
-            set => ActiveModifier.Read(value, () => FrameId = value.ReadInt());
+            get
+            {
+                var buffer = new BitBuffer();
+                buffer.Write(true);
+                ActiveModifier.Write(buffer, () => buffer.Write(FrameId));
+                return buffer;
+            }
+            set
+            {
+                if (value.ReadBool())
+                    ActiveModifier.Read(value, () => FrameId = value.ReadInt());
+            }
         }
 
-        [UsedImplicitly] public StateBinding MbBinding { get; } = new StateBinding(nameof(ModifierBuffer));
+        [UsedImplicitly] public StateBinding MbBinding = new StateBinding(nameof(ModifierBuffer));
 
         public int SkinValue
         {
@@ -247,8 +257,14 @@ namespace TMGmod.Core.WClasses
 
         public override void Fire()
         {
-            if (CanFire() || hasFireEvents)
+            if (CanFire() || receivingPress)
                 DoFire();
+        }
+
+        public bool FireActivated
+        {
+            get => _fireActivated;
+            set => _fireActivated = value;
         }
 
         private float ClipAccuracy(float accuracy)
@@ -423,13 +439,6 @@ namespace TMGmod.Core.WClasses
             OnInitialize();
             SkinValue = SkinValue;
             base.Initialize();
-        }
-
-        private static BitBuffer GetBuffer(ISync modifier, Action<BitBuffer> write)
-        {
-            var buffer = new BitBuffer();
-            modifier.Write(buffer, () => write(buffer));
-            return buffer;
         }
 
         private class BaseModifier : Modifier

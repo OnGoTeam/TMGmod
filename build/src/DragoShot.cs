@@ -68,7 +68,14 @@ namespace TMGmod
                     },
                     _ =>
                     {
-                        if (owner != null) Fire();
+                        if (!isServerForObject) return;
+                        // else
+                        if (owner is null) return;
+                        // else
+                        UpdateAction();
+                        Fire();
+                        _fireActivated = true;
+                        UpdateAction();
                     }
                 )
             );
@@ -80,7 +87,8 @@ namespace TMGmod
 
         public override void OnPressAction()
         {
-            if (hasFireEvents) base.OnPressAction();
+            if (receivingPress)
+                base.OnPressAction();
         }
     }
 }
