@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -41,6 +42,7 @@ namespace TMGmod
             _weight = 5.5f;
             _kickForce = .07f;
             KforceDelta = .63f;
+            Compose(new Quacking(this, true, true, () => Grip = !Grip));
         }
 
         protected override string HintMessage => "foregrip";
@@ -48,9 +50,11 @@ namespace TMGmod
         [UsedImplicitly]
         public bool Grip
         {
-            get => maxAccuracyLost < 0.2f;
+            get => maxAccuracyLost < 0.15f;
             set
             {
+                if (value != Grip)
+                    SFX.Play(GetPath("sounds/tuduc.wav"));
                 NonSkin = value ? 1 : 0;
                 maxAccuracyLost = value ? .1f : .2f;
                 MaxAccuracy = value ? .97f : .80f;
@@ -58,16 +62,5 @@ namespace TMGmod
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 4, 5, 6, 8 });
-
-        public override void Update()
-        {
-            if (isServerForObject && Quacked())
-            {
-                Grip = !Grip;
-                SFX.Play(GetPath("sounds/tuduc.wav"));
-            }
-
-            base.Update();
-        }
     }
 }
