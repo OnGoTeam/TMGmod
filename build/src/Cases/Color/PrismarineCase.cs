@@ -29,10 +29,6 @@ namespace TMGmod.Cases.Color
                 B<SIX12>(),
                 B<Arx200>(),
                 B<UziPro>(),
-#if DEBUG
-                B<PPSh>(),
-                B<PPShC>(),
-#endif
                 B<PPSh41>(),
                 B<PPK42>(),
                 B<MG44>(),

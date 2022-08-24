@@ -27,42 +27,46 @@ namespace TMGmod.Cases.Color
             _editorName = "Nitro Case";
             ThingsDetailed = new List<SpawnSpec<Holdable>>
             {
-                B<SIX12S>(),
-                B<SIX12>(),
-                B<AWS>(),
-#if DEBUG
-                B<PPSh>(),
-                B<PPShC>(),
-#endif
-                B<PPSh41>(),
-                B<PPK42>(),
-                B<MG44>(),
-                B<MG44C>(),
-                B<SkeetGun>(),
-                B<MP5>(),
+                //B<MP5>(),
                 B<MP5SD>(),
+                //B<PPSh41>(),
+                B<PPK42>(),
                 B<DaewooK1>(),
-                B<USP>(),
-                B<Vintorez>(),
-                B<VSK94>(),
+                //B<M4A1>(),
                 B<BigShot>(),
-                B<Arx200>(),
+                //B<VSK94>(),
                 B<AN94>(),
-                B<Type89>(),
-                B<Rfb>(),
-                B<FnFcar>(),
-                B<HazeS>(),
-                B<AA12>(),
-                //B<SKS>(),
-                B<MP7>(),
+                //B<USP>(),
+                //B<Type89>(),
+
+
                 B<CZ805>(),
                 B<HK417>(),
-                B<AN94C>(),
-                B<AR9SX>(),
-                B<M4A1>(),
-                B<SVU>(),
+                //B<MP7>(),
+                B<MG44>(),
+                //B<MG44C>(),
+                B<Arx200>(),
+                //B<AN94C>(),
+                //B<AR9SX>(),
+
+
+                B<SIX12S>(),
+                //B<SIX12>(),
+                //B<SKS>(), return after fix
+                B<Vintorez>(),
+                //B<SkeetGun>(),
+                //B<FnFcar>(),
+                B<AA12>(),
+
+
+                //B<SVU>(),
+                B<Rfb>(),
+                B<AWS>(),
+                //B<HazeS>(),
+
+
 #if FEATURES_1_2_X
-                B<Foucus>(),
+                //B<Foucus>(),
 #endif
             };
             CaseColor = BaseColor.Nitro;
