@@ -28,7 +28,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(25f, 1f);
             _flare = new SpriteMap(GetPath("FlarePPK42"), 13, 10)
             {
-                center = new Vec2(0.0f, 5f),
+                center = new Vec2(0.0f, 5.5f),
             };
             _fireSound = GetPath("sounds/new/SMG-2.wav");
             _fullAuto = true;

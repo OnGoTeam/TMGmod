@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -27,14 +28,8 @@ namespace TMGmod
             var barrelOffsetTLm = new[] { new Vec2(33f, 3f), new Vec2(30f, 6.5f) };
             var flarem = new[]
             {
-                new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
-                {
-                    center = new Vec2(0.0f, 5f),
-                },
-                new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-                {
-                    center = new Vec2(0.0f, 5f),
-                },
+                FrameUtils.FlareOnePixel2(),
+                FrameUtils.FlareOnePixel1(),
             };
 
             var ammom = new[] { 20, 1 };

@@ -21,7 +21,7 @@ namespace TMGmod
             ammo = 6;
             SetAmmoType<ATSIX12S>();
             _numBulletsPerFire = 14;
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = FrameUtils.TakeZis();
             NonSkinFrames = 2;
             Smap = new SpriteMap(GetPath("SIX12S"), 29, 10);
             _center = new Vec2(19f, 5f);

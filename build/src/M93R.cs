@@ -24,10 +24,7 @@ namespace TMGmod
             ammo = 15;
             SetAmmoType<ATM93R>();
             _barrelOffsetTL = new Vec2(12f, 1.5f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 12, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel0();
             _holdOffset = new Vec2(-1f, 0f);
             _fireSound = GetPath("sounds/new/SMG-1.wav");
             _fullAuto = false;

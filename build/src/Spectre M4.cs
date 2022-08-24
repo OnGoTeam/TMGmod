@@ -27,10 +27,7 @@ namespace TMGmod
             _collisionSize = new Vec2(19f, 10f);
             _barrelOffsetTL = new Vec2(13f, 2f);
             _fireSound = GetPath("sounds/new/LightCaliber-Pistol.wav");
-            _flare = new SpriteMap("smallFlare", 11, 10)
-            {
-                center = new Vec2(0.0f, 4f),
-            };
+            _flare = FrameUtils.SmallFlare();
             _fullAuto = true;
             _fireWait = 0.31f;
             _kickForce = 0.8f;

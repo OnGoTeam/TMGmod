@@ -26,10 +26,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-17f, -6f);
             _collisionSize = new Vec2(33f, 11f);
             _barrelOffsetTL = new Vec2(33f, 4f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel3();
             ammo = 5;
             _fireSound = GetPath("sounds/new/SV98.wav");
             _kickForce = 4.25f;

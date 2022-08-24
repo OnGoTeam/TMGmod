@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -28,10 +29,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-13f, -4f);
             _collisionSize = new Vec2(26f, 8f);
             _barrelOffsetTL = new Vec2(26f, 2f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel1();
             _holdOffset = new Vec2(0f, 1f);
             _fireSound = "shotgunFire2";
             _kickForce = 2.8f;

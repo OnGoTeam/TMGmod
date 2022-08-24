@@ -29,10 +29,7 @@ namespace TMGmod
             _collisionSize = new Vec2(23f, 9f);
             _barrelOffsetTL = new Vec2(14f, 2.5f);
             _fireSound = GetPath("sounds/new/USP.wav");
-            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 12, 10)
-            {
-                center = new Vec2(0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel0();
             _fullAuto = false;
             _fireWait = 0.75f;
             _kickForce = 1f;

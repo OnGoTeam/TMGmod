@@ -35,10 +35,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-15f, -6f);
             _collisionSize = new Vec2(31f, 11f);
             _barrelOffsetTL = new Vec2(31f, 4f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel3();
             _fireSound = GetPath("sounds/new/HeavySniper.wav");
             _fullAuto = false;
             _fireWait = 4f;

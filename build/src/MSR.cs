@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -20,10 +21,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-24f, -6f);
             _collisionSize = new Vec2(47f, 12f);
             _barrelOffsetTL = new Vec2(47f, 4f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel3();
             ammo = 5;
             _fireSound = GetPath("sounds/new/HeavySniper.wav");
             _kickForce = 5.5f;

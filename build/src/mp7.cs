@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -25,7 +26,7 @@ namespace TMGmod
             ammo = 35;
             SetAmmoType<ATMP7>();
             Smap = new SpriteMap(GetPath("MP7"), 20, 10);
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = FrameUtils.TakeZis();
             _center = new Vec2(12f, 4f);
             _collisionOffset = new Vec2(-12f, -4f);
             _collisionSize = new Vec2(20f, 10f);

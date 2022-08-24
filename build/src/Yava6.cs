@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -28,10 +29,7 @@ namespace TMGmod
             ammo = 15;
             _numBulletsPerFire = 3;
             _barrelOffsetTL = new Vec2(37f, 4.5f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel2();
             _fireSound = GetPath("sounds/new/MarksmanRifle-1.wav");
             _fullAuto = true;
             _fireWait = 3.2f;

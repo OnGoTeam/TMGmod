@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -22,10 +23,7 @@ namespace TMGmod
             SetAmmoType<ATSVU>();
             MinAccuracy = 0.2f;
             Smap = new SpriteMap(GetPath("SVU"), 37, 11);
-            _flare = new SpriteMap(GetPath("FlareSilencer"), 13, 10)
-            {
-                center = new Vec2(0.0f, 4f),
-            };
+            _flare = FrameUtils.FlareSilencer();
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);

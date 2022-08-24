@@ -27,10 +27,7 @@ namespace TMGmod
                     ammo = 20;
                     _fireSound = "swipe";
                     _honeTarget = new Vec2(12f, 0f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4)
-                    {
-                        center = new Vec2(0f, 0f),
-                    };
+                    _flare = FrameUtils.TakeZis();
                     _ammoType = new ATNB();
                     _fireWait = 10f;
                     _barrelOffsetTL = new Vec2(0f, 6f);
@@ -55,10 +52,7 @@ namespace TMGmod
                     loseAccuracy = 0.2f;
                     maxAccuracyLost = 0.4f;
                     _kickForce = 4.8f;
-                    _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
+                    _flare = FrameUtils.FlareOnePixel3();
                 }
             }
         }
@@ -84,14 +78,10 @@ namespace TMGmod
             _collisionOffset = new Vec2(-23f, -6f);
             _collisionSize = new Vec2(46f, 11f);
             _barrelOffsetTL = new Vec2(42f, 4f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel3();
             _honeTarget = _holdOffset = new Vec2(8f, 0f);
             ShellOffset = new Vec2(-9f, -2f);
             _fireSound = GetPath("sounds/new/MarksmanRifle-WithBoltNoise.wav");
-            _flare.center = new Vec2(0f, 5f);
             _fullAuto = false;
             _fireWait = 1.55f;
             _kickForce = 3.8f;

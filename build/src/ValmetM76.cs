@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
@@ -26,10 +27,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 10f);
             _barrelOffsetTL = new Vec2(33f, 3.5f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel2();
             _holdOffset = new Vec2(4f, 1f);
             ShellOffset = new Vec2(-5f, -1f);
             _fireSound = GetPath("sounds/new/DaewooK1.wav");

@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 
 namespace TMGmod
 {
@@ -19,7 +20,7 @@ namespace TMGmod
             DecreasedAccuracy = .77f;
             SetAmmoType<ATMP5SD>(DecreasedAccuracy);
             Smap = new SpriteMap(GetPath("MP5SD"), 31, 12);
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = FrameUtils.TakeZis();
             _center = new Vec2(16f, 6f);
             _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(31f, 12f);

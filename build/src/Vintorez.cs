@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
@@ -30,7 +31,7 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 0f);
             ShellOffset = new Vec2(0f, 0f);
             _fireSound = GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav");
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = FrameUtils.TakeZis();
             _fullAuto = true;
             _fireWait = 0.7f;
             loseAccuracy = 0f;
