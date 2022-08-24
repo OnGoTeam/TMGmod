@@ -93,6 +93,6 @@ namespace TMGmod
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
-        protected override float BaseKforce => NonSkin < 2 ? _kickForce : _kickForce * 2f;
+        protected override float BaseKforce => NonSkin < 2 ? _kickForce : _kickForce * 1.5f;
     }
 }
