@@ -32,7 +32,7 @@ namespace TMGmod
             _center = new Vec2(16f, 6f);
             _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(31f, 11f);
-            _barrelOffsetTL = new Vec2(31f, 3f);
+            _barrelOffsetTL = new Vec2(31f, 3.5f);
             _flare = FrameUtils.FlareOnePixel2();
             _fireSound = GetPath("sounds/new/MarksmanRifle-WithBoltNoise.wav");
             _fullAuto = true;

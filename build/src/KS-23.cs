@@ -33,7 +33,7 @@ namespace TMGmod
             _center = new Vec2(18f, 4f);
             _collisionOffset = new Vec2(-18f, -4f);
             _collisionSize = new Vec2(35f, 8f);
-            _barrelOffsetTL = new Vec2(35f, 2f);
+            _barrelOffsetTL = new Vec2(35f, 2.5f);
             _flare = FrameUtils.FlareOnePixel3Silenced();
             _holdOffset = new Vec2(8f, 1f);
             _fireSound = GetPath("sounds/new/KS-23.wav");
