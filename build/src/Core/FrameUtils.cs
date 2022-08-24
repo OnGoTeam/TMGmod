@@ -12,10 +12,10 @@ namespace TMGmod.Core
             new SpriteMap(Mod.GetPath<TMGmod>("takezis"), 4, 4);
 
         public static SpriteMap FlareOnePixel0() =>
-            new SpriteMap(Mod.GetPath<TMGmod>("FlareOnePixel0"), 13, 10) { center = new Vec2(0f, 5f) };
+            new SpriteMap(Mod.GetPath<TMGmod>("FlareOnePixel0"), 13, 10) { center = new Vec2(0f, 5.5f) };
 
         public static SpriteMap FlareOnePixel1() =>
-            new SpriteMap(Mod.GetPath<TMGmod>("FlareOnePixel1"), 13, 10) { center = new Vec2(0f, 5f) };
+            new SpriteMap(Mod.GetPath<TMGmod>("FlareOnePixel1"), 13, 10) { center = new Vec2(0f, 5.5f) };
 
         public static SpriteMap SmallFlare() =>
             new SpriteMap("smallFlare", 11, 10) { center = new Vec2(0.0f, 5f) };
