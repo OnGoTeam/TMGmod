@@ -26,7 +26,7 @@ namespace TMGmod.AmmoTypes
         {
             var shell = new DB44Shell(x, y)
             {
-                hSpeed = (-1f + Rando.Float(-0.2f, 0.2f)) * dir,
+                hSpeed = Rando.Float(-0.2f, 0.2f) * dir,
                 vSpeed = 1f + Rando.Float(-0.5f, 0.5f),
             };
             add(shell);
