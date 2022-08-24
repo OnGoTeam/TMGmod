@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DuckGame;
 using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
@@ -49,6 +50,7 @@ namespace TMGmod.Cases
 
     public abstract class BaseCase : Holdable, IPlatform
     {
+        private List<SpawnSpec<Holdable>> _thingsDetailed;
         protected SpawnSpec<T> B<T>() where T : Holdable => SpawnSpec<T>.Base().Decorate(Decorated);
         protected SpawnSpec<Holdable> B(Type t) => SpawnSpec<Holdable>.Base(t).Decorate(Decorated);
 
@@ -57,7 +59,14 @@ namespace TMGmod.Cases
             physicsMaterial = PhysicsMaterial.Metal;
         }
 
-        protected List<SpawnSpec<Holdable>> ThingsDetailed { private get; set; }
+        protected List<SpawnSpec<Holdable>> ThingsDetailed
+        {
+            set
+            {
+                var max = Math.Max(value.Select(spec => spec.Chance()).Max(), 1f);
+                _thingsDetailed = value.Select(spec => spec.Chance(1f / max)).ToList();
+            }
+        }
 
         protected BaseColor CaseColor { private get; set; } = BaseColor.No;
 
@@ -65,7 +74,7 @@ namespace TMGmod.Cases
         {
             Holdable contained = null;
             while (contained == null)
-                contained = ThingsDetailed[Rando.Int(ThingsDetailed.Count - 1)].Spawn();
+                contained = _thingsDetailed[Rando.Int(_thingsDetailed.Count - 1)].Spawn();
             return contained;
         }
 
@@ -124,7 +133,7 @@ namespace TMGmod.Cases
         public override ContextMenu GetContextMenu()
         {
             var menu = base.GetContextMenu();
-            menu.AddItem(new ContextChanceRender(ThingsDetailed));
+            menu.AddItem(new ContextChanceRender(_thingsDetailed));
             return menu;
         }
     }
