@@ -41,7 +41,7 @@ namespace TMGmod
             _weight = 3.3f;
         }
 
-        protected override string HintMessage => "silencer";
+        public override string HintMessage => "silencer";
 
         public bool Silencer
         {

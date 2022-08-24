@@ -56,7 +56,7 @@ namespace TMGmod
             base.OnInitialize();
         }
 
-        protected override string HintMessage => "silencer";
+        public override string HintMessage => "silencer";
 
         public bool Silencer
         {

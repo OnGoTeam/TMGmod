@@ -38,7 +38,10 @@ namespace TMGmod.Core.Modifiers.Updating
 
         protected override IEnumerable<string> Characteristics()
         {
-            yield return "Has Quack Action";
+            if (_target.HintMessage is null)
+                yield return "Has Quack Action";
+            else
+                yield return $"Quack: {_target.HintMessage}";
         }
     }
 }

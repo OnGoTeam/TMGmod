@@ -50,6 +50,10 @@ namespace TMGmod
             ComposeSimpleBurst(2, .07f);
         }
 
+        protected override Vec2 HintOffset() => laserOffset;
+
+        public override string HintMessage => "laser";
+
         protected override void OnInitialize()
         {
             _ammoType.range = 280f;

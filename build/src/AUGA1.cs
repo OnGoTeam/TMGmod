@@ -45,7 +45,7 @@ namespace TMGmod
             Compose(new Quacking(this, true, true, () => Grip = !Grip));
         }
 
-        protected override string HintMessage => "foregrip";
+        public override string HintMessage => "foregrip";
 
         [UsedImplicitly]
         public bool Grip

@@ -665,7 +665,7 @@ namespace TMGmod.Core.WClasses
             if (NeedHint()) Hint(HintMessage, HintOffset, HintTrigger);
         }
 
-        protected virtual string HintMessage
+        public virtual string HintMessage
         {
             get
             {
@@ -681,7 +681,7 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-        private Vec2 HintOffset()
+        protected virtual Vec2 HintOffset()
         {
             switch (this)
             {

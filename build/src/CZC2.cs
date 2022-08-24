@@ -2,6 +2,8 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -39,53 +41,31 @@ namespace TMGmod
             _weight = 4.4f;
             _kickForce = 1.5f;
             KforceDelta = 1.6f;
+            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
-        protected override string HintMessage => "silencer";
+        public override string HintMessage => "silencer";
 
         public bool Silencer
         {
             get => _fireSound == GetPath("sounds/new/CZ-Silenced.wav");
             set
             {
+                if (value != Silencer)
+                    FrameUtils.SwitchedSilencer(Silencer);
+                NonSkin = value ? 1 : 0;
+                _fireSound = value ? GetPath("sounds/new/CZ-Silenced.wav") : "deepMachineGun2";
                 if (value)
-                {
-                    NonSkin = 1;
-                    _fireSound = GetPath("sounds/new/CZ-Silenced.wav");
                     SetAmmoType<ATCZS2>();
-                    loseAccuracy = 0.15f;
-                    maxAccuracyLost = 0.28f;
-                    _barrelOffsetTL = new Vec2(41f, 3f);
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                }
                 else
-                {
-                    NonSkin = 0;
-                    _fireSound = "deepMachineGun2";
                     SetAmmoType<ATCZ2>();
-                    loseAccuracy = 0.1f;
-                    maxAccuracyLost = 0.3f;
-                    _barrelOffsetTL = new Vec2(37f, 3f);
-                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-                    {
-                        center = new Vec2(0.0f, 5f),
-                    };
-                }
+                loseAccuracy = value ? .15f : .1f;
+                maxAccuracyLost = value ? .28f : .3f;
+                _barrelOffsetTL = value ? new Vec2(41f, 3f) : new Vec2(37f, 3f);
+                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel();
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public override void Update()
-        {
-            if (Quacked())
-            {
-                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
-                Silencer = !Silencer;
-                UnQuack();
-            }
-
-            base.Update();
-        }
     }
 }

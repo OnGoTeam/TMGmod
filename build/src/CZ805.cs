@@ -44,7 +44,7 @@ namespace TMGmod
             Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
-        protected override string HintMessage => "silencer";
+        public override string HintMessage => "silencer";
 
         public bool Silencer
         {
