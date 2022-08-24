@@ -20,11 +20,11 @@ namespace TMGmod
             SetAmmoType<ATTG6000>();
             _numBulletsPerFire = 13;
             Smap = new SpriteMap(GetPath("Taligator 6000 SX"), 31, 12);
-            FrameId = 2;
+            SkinValue = 2;
             _center = new Vec2(16f, 6f);
             _collisionOffset = new Vec2(-16f, -6f);
             _collisionSize = new Vec2(31f, 12f);
-            _barrelOffsetTL = new Vec2(31f, 3f);
+            _barrelOffsetTL = new Vec2(31f, 3.5f);
             _flare = FrameUtils.FlareOnePixel2();
             _holdOffset = new Vec2(3f, 2f);
             _fireSound = "shotgunFire2";

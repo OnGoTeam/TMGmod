@@ -32,7 +32,7 @@ namespace TMGmod
             _center = new Vec2(13f, 6f);
             _collisionOffset = new Vec2(-13f, -6f);
             _collisionSize = new Vec2(27f, 12f);
-            _barrelOffsetTL = new Vec2(27f, 2f);
+            _barrelOffsetTL = new Vec2(27f, 2.5f);
             _flare = FrameUtils.FlareOnePixel1();
             _fireSound = "deepMachineGun";
             _fullAuto = false;

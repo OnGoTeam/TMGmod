@@ -25,7 +25,7 @@ namespace TMGmod
             _center = new Vec2(27f, 8f);
             _collisionOffset = new Vec2(-27f, -8f);
             _collisionSize = new Vec2(53f, 15f);
-            _barrelOffsetTL = new Vec2(53f, 5f);
+            _barrelOffsetTL = new Vec2(53f, 5.5f);
             _flare = FrameUtils.FlareOnePixel3();
             ammo = 6;
             _fireSound = GetPath("sounds/new/HeavySniper.wav");

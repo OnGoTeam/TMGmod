@@ -30,7 +30,7 @@ namespace TMGmod
             _center = new Vec2(12f, 4f);
             _collisionOffset = new Vec2(-12f, -4f);
             _collisionSize = new Vec2(20f, 10f);
-            _barrelOffsetTL = new Vec2(20f, 2f);
+            _barrelOffsetTL = new Vec2(20f, 3f);
             _fireSound = GetPath("sounds/new/SMG-Silenced.wav");
             _fullAuto = true;
             _fireWait = 0.5f;

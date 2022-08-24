@@ -46,7 +46,7 @@ namespace TMGmod
                         bulletThickness = 1.5f,
                     };
                     _fireWait = 1.55f;
-                    _barrelOffsetTL = new Vec2(42f, 4f);
+                    _barrelOffsetTL = new Vec2(42f, 4.5f);
                     _fireSound = GetPath("sounds/new/MarksmanRifle-WithBoltNoise.wav");
                     _honeTarget = new Vec2(8f, 0f);
                     loseAccuracy = 0.2f;
@@ -77,7 +77,7 @@ namespace TMGmod
             _center = new Vec2(23f, 6f);
             _collisionOffset = new Vec2(-23f, -6f);
             _collisionSize = new Vec2(46f, 11f);
-            _barrelOffsetTL = new Vec2(42f, 4f);
+            _barrelOffsetTL = new Vec2(42f, 4.5f);
             _flare = FrameUtils.FlareOnePixel3();
             _honeTarget = _holdOffset = new Vec2(8f, 0f);
             ShellOffset = new Vec2(-9f, -2f);
