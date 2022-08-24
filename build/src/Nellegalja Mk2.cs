@@ -46,6 +46,6 @@ namespace TMGmod
             base.OnInitialize();
         }
 
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 5, 6, 8, 9 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 4, 5, 8, 9 });
     }
 }

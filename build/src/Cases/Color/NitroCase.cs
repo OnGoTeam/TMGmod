@@ -53,11 +53,14 @@ namespace TMGmod.Cases.Color
                 B<FnFcar>(),
                 B<HazeS>(),
                 B<AA12>(),
-                B<MP40>(),
-                B<SKS>(),
+                //B<SKS>(),
                 B<MP7>(),
                 B<CZ805>(),
                 B<HK417>(),
+                B<AN94C>(),
+                B<AR9SX>(),
+                B<M4A1>(),
+                B<SVU>(),
 #if FEATURES_1_2_X
                 B<Foucus>(),
 #endif

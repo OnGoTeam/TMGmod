@@ -39,9 +39,14 @@ namespace TMGmod.Cases.Color
                 B<AUGA1>(),
                 B<PPSh41>(),
                 B<PPK42>(),
-                B<SKS>(),
+                //B<SKS>(),
                 B<Glock18>(),
                 B<Remington>(),
+                B<AN94C>(),
+                B<Bersa45>(),
+                B<CZ75>(),
+                B<NellegaljaMk2>(),
+                B<RemingtonTac>(),
             };
             CaseColor = BaseColor.Yellow;
         }

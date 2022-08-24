@@ -45,7 +45,8 @@ namespace TMGmod.Cases.Color
                 B<AN94>(),
                 B<Vixr>(),
                 B<SpectreM4>(),
-                B<SKS>(),
+                B<Bersa45>(),
+                //B<SKS>(),
             };
             CaseColor = BaseColor.Prismarine;
         }

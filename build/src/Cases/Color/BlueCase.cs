@@ -35,16 +35,20 @@ namespace TMGmod.Cases.Color
                 B<BigShot>(),
                 B<Vista>(),
                 B<DragoShot>(),
+                B<AF2011>(),
                 B<AUGA1>(),
                 B<PPSh41>(),
                 B<PPK42>(),
-                B<SKS>(),
+                //B<SKS>(),
                 B<SRM1208>(),
                 B<M14>(),
-                B<AR15Proto>(),
                 B<Remington>(),
                 B<RemingtonTac>(),
                 B<DTSR44>(),
+                B<M16LMG>(),
+                B<NellegaljaMk2>(),
+                B<SVU>(),
+                B<Taligator6000>(),
             };
             CaseColor = BaseColor.Blue;
         }

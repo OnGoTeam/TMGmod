@@ -52,7 +52,7 @@ namespace TMGmod
         private static float Rmax => 3.506401f;
 
         protected override float BaseKforce => this.StockDeployed() ? 1.1f : 2.8f;
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 5, 8, 9 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 8, 9 });
 
 
         protected override void UpdateFrameId(int frameId)

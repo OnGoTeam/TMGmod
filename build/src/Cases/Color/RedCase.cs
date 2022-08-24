@@ -33,6 +33,7 @@ namespace TMGmod.Cases.Color
                 B<AUGA1>(),
                 B<AUGA3>(),
                 B<SkeetGun>(),
+                B<Bersa45>(),
 #if DEBUG
                 B<PPSh>(),
                 B<PPShC>(),
@@ -42,12 +43,17 @@ namespace TMGmod.Cases.Color
                 B<HK417>(),
                 B<Vintorez>(),
                 B<VSK94>(),
+                B<PMR>(),
                 B<PMRC>(),
                 B<BigShot>(),
-                B<SKS>(),
+                //B<SKS>(),
                 B<SRM1208>(),
                 B<PP19>(),
                 B<RemingtonTac>(),
+                B<M4A1>(),
+                B<NellegaljaMk2>(),
+                B<SVU>(),
+                B<Taligator6000>(),
             };
             CaseColor = BaseColor.Red;
         }

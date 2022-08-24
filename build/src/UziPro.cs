@@ -73,7 +73,7 @@ namespace TMGmod
             }
         }
 
-        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 6, 8 });
+        public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 6, 9 });
 
         public override void Update()
         {

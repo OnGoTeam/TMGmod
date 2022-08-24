@@ -39,9 +39,11 @@ namespace TMGmod.Cases.Color
                 B<Lynx>(),
                 B<PPSh41>(),
                 B<PPK42>(),
-                B<SKS>(),
+                //B<SKS>(),
                 B<Glock18>(),
                 B<RemingtonTac>(),
+                B<Bersa45>(),
+                B<SLK8>(),
             };
             CaseColor = BaseColor.Cyan;
         }

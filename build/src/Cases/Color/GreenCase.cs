@@ -41,17 +41,19 @@ namespace TMGmod.Cases.Color
                 B<SV98>(),
                 B<SV99>(),
                 B<SRM1208>(),
-                B<SKS>(),
+                //B<SKS>(),
                 B<AWS>(),
                 B<PP19>(),
-                B<G9M>(),
-                B<AR15Proto>(),
                 B<Vixr>(),
                 B<VSK94>(),
                 B<BarretM98>(),
                 B<BarretM98C>(),
                 B<RemingtonTac>(),
                 B<DTSR44>(),
+                B<Bersa45>(),
+                B<M16LMG>(),
+                B<NellegaljaMk2>(),
+                B<SVU>(),
             };
             CaseColor = BaseColor.Green;
         }
