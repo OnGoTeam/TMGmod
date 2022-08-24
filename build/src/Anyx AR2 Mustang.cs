@@ -13,7 +13,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseGun, IAmAr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding StockBinding = new StateBinding(nameof(Silencer));
+        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
 
         public AN94C(float xval, float yval)
             : base(xval, yval)
