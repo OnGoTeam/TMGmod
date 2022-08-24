@@ -30,10 +30,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(27f, 2.5f);
             _holdOffset = new Vec2(-1f, 1f);
             ShellOffset = new Vec2(1f, -2f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel1();
             _fireSound = "deepMachineGun2";
             _fullAuto = true;
             _fireWait = 0.85f;

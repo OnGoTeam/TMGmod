@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -37,10 +38,7 @@ namespace TMGmod
             _holdOffset = new Vec2(2f, 1f);
             ShellOffset = new Vec2(-2f, -1f);
             _fireSound = GetPath("sounds/new/HighCaliber-Sniper.wav");
-            _flare = new SpriteMap(GetPath("FlareOnePixel3"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel3();
             _fullAuto = true;
             _fireWait = 1f;
             loseAccuracy = 0.25f;

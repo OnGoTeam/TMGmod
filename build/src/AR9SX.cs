@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -26,10 +27,7 @@ namespace TMGmod
             _collisionSize = new Vec2(36f, 10f);
             _barrelOffsetTL = new Vec2(36f, 3f);
             _fireSound = GetPath("sounds/new/AR9SX.wav");
-            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel0();
             _fullAuto = true;
             _fireWait = 0.45f;
             _kickForce = 1.3f;

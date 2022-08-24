@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -25,7 +26,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-7f, -4f);
             _collisionSize = new Vec2(13f, 8f);
             _barrelOffsetTL = new Vec2(13f, 1.5f);
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = FrameUtils.TakeZis();
             _fireSound = GetPath("sounds/new/USP.wav");
             _fullAuto = false;
             _fireWait = 1.2f;

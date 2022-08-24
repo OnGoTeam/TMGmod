@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -24,10 +25,7 @@ namespace TMGmod
             SetAmmoType<ATPR5>();
             
             _barrelOffsetTL = new Vec2(12f, 2f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel0"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel0();
             _fireSound = GetPath("sounds/new/HighCaliber-Pistol.wav");
             _fullAuto = false;
             _fireWait = 0.5f;

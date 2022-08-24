@@ -30,7 +30,7 @@ namespace TMGmod
             ammo = 21;
             SetAmmoType<ATARS>();
             
-            //THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends
+            // THIS FILE HAS REBORN TREE TIMES SQUARES!! send this massage to your friends or not to friends
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("Anyx ARS Elite"), 33, 9);
             _center = new Vec2(17f, 5f);

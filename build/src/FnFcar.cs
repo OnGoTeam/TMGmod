@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -31,10 +32,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-18f, -8f);
             _collisionSize = new Vec2(36f, 15f);
             _barrelOffsetTL = new Vec2(36f, 5f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel2();
             _holdOffset = new Vec2(3f, 1f);
             ShellOffset = new Vec2(-3f, -3f);
             _fireSound = GetPath("sounds/new/scar.wav");

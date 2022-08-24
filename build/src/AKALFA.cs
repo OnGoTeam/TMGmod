@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.StockLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -30,10 +31,7 @@ namespace TMGmod
             _barrelOffsetTL = new Vec2(38f, 2.5f);
             _holdOffset = new Vec2(4f, 1f);
             ShellOffset = new Vec2(-3f, -2f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel1();
             _fireSound = GetPath("sounds/new/ALFA.wav");
             _fullAuto = true;
             _fireWait = 0.75f;

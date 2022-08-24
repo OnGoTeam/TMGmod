@@ -23,7 +23,7 @@ namespace TMGmod
             SetAmmoType<ATANP73>();
             NonSkinFrames = 4;
             Smap = new SpriteMap(GetPath("Experimental ANP-73"), 19, 14);
-            _flare = new SpriteMap(GetPath("takezis"), 4, 4);
+            _flare = FrameUtils.TakeZis();
             _center = new Vec2(10f, 7f);
             _collisionOffset = new Vec2(-10f, -7f);
             _collisionSize = new Vec2(19f, 14f);

@@ -2,6 +2,7 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
+using TMGmod.Core;
 using TMGmod.Core.Modifiers.Kforce;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
@@ -26,10 +27,7 @@ namespace TMGmod
             _collisionOffset = new Vec2(-15f, -5f);
             _collisionSize = new Vec2(33f, 9f);
             _barrelOffsetTL = new Vec2(33f, 2.5f);
-            _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
-            {
-                center = new Vec2(0.0f, 5f),
-            };
+            _flare = FrameUtils.FlareOnePixel1();
             _holdOffset = new Vec2(2f, 2f);
             ShellOffset = new Vec2(0f, -3f);
             ammo = 30;
