@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core.Modifiers.Kforce;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -44,6 +45,7 @@ namespace TMGmod
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f)
             );
             ComposeSimpleBurst(2, .4f);
+            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
         }
 
         protected override void OnInitialize()
@@ -60,40 +62,26 @@ namespace TMGmod
             get => _fireSound == GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav");
             set
             {
-                if (value)
-                {
-                    _fireSound = GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav");
-                    _flare = new SpriteMap(GetPath("takezis"), 4, 4);
-                    SetAmmoType<ATCZS>();
-                    _barrelOffsetTL = new Vec2(33f, 2f);
-                    NonSkin = 1;
-                }
-                else
-                {
-                    _fireSound = GetPath("sounds/new/HighCaliber-LessImpact.wav");
-                    _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
+                if (value != Silencer)
+                    SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
+                _fireSound = value
+                    ? GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav")
+                    : GetPath("sounds/new/HighCaliber-LessImpact.wav");
+                _flare = value
+                    ? new SpriteMap(GetPath("takezis"), 4, 4)
+                    : new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
                     {
                         center = new Vec2(0.0f, 5f),
                     };
+                if (value)
+                    SetAmmoType<ATCZS>();
+                else
                     SetAmmoType<ATCZ>();
-                    _barrelOffsetTL = new Vec2(28f, 2f);
-                    NonSkin = 0;
-                }
+                _barrelOffsetTL = value ? new Vec2(33f, 2f) : new Vec2(28f, 2f);
+                NonSkin = value ? 1 : 0;
             }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 7 });
-
-        public override void Update()
-        {
-            if (Quacked())
-            {
-                SFX.Play(Silencer ? GetPath("sounds/silencer_off.wav") : GetPath("sounds/silencer_on.wav"));
-                Silencer = !Silencer;
-                SFX.Play("quack", -1);
-            }
-
-            base.Update();
-        }
     }
 }

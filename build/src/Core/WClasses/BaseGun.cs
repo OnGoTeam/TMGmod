@@ -464,7 +464,7 @@ namespace TMGmod.Core.WClasses
 
         public bool Quacked() => duck?.inputProfile.Pressed("QUACK") == true;
 
-        protected void UnQuack()
+        public void UnQuack()
         {
             if (Quacked()) SFX.Play("quack", -1, duck.quackPitch);
         }
