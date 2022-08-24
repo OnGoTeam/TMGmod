@@ -26,7 +26,7 @@ namespace TMGmod
             _center = new Vec2(21f, 6f);
             _collisionOffset = new Vec2(-21f, -6f);
             _collisionSize = new Vec2(41f, 11f);
-            _barrelOffsetTL = new Vec2(39f, 3f);
+            _barrelOffsetTL = new Vec2(39f, 3.5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),
@@ -60,7 +60,7 @@ namespace TMGmod
                     SetAmmoType<ATCZS>();
                 else
                     SetAmmoType<ATCZ>();
-                _barrelOffsetTL = value ? new Vec2(41f, 3f) : new Vec2(39f, 3f);
+                _barrelOffsetTL = value ? new Vec2(41f, 3.5f) : new Vec2(39f, 3.5f);
                 maxAccuracyLost = value ? .35f : .25f;
             }
         }

@@ -25,7 +25,7 @@ namespace TMGmod
             _center = new Vec2(17f, 6f);
             _collisionOffset = new Vec2(-17f, -6f);
             _collisionSize = new Vec2(33f, 12f);
-            _barrelOffsetTL = new Vec2(33f, 4f);
+            _barrelOffsetTL = new Vec2(33f, 4.5f);
             _flare = new SpriteMap(GetPath("takezis"), 4, 4);
             _holdOffset = new Vec2(1f, 1f);
             ShellOffset = new Vec2(-1f, -2f);

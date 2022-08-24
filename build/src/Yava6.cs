@@ -27,7 +27,7 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, 1f);
             ammo = 15;
             _numBulletsPerFire = 3;
-            _barrelOffsetTL = new Vec2(37f, 4f);
+            _barrelOffsetTL = new Vec2(37f, 4.5f);
             _flare = new SpriteMap(GetPath("FlareOnePixel2"), 13, 10)
             {
                 center = new Vec2(0.0f, 5f),

@@ -30,7 +30,7 @@ namespace TMGmod
             _center = new Vec2(18f, 6f);
             _collisionOffset = new Vec2(-18f, -6f);
             _collisionSize = new Vec2(37f, 11f);
-            _barrelOffsetTL = new Vec2(37f, 2f);
+            _barrelOffsetTL = new Vec2(37f, 2.5f);
             _fireSound = GetPath("sounds/new/AutomaticRifle-1.wav");
             _flare = new SpriteMap(GetPath("FlareOnePixel1"), 13, 10)
             {
