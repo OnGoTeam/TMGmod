@@ -3,7 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -11,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class VSK94 : BaseAr, IHaveAllowedSkins, IHaveBipods
+    public class VSK94 : BaseAr, IHaveAllowedSkins
     {
         private float _floatingKickforce;
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
@@ -53,35 +52,18 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 7, 8 });
-
-        public bool Bipods
-        {
-            get => HandleQ();
-            set
-            {
-                _kickForce = value ? _floatingKickforce : 5.4f;
-                KforceDelta = value ? 0 : 1.45f;
-                _kickForce = value ? _floatingKickforce : 5.2f;
-                loseAccuracy = value ? 0f : 0.2f;
-                maxAccuracyLost = value ? 0f : 0.6f;
-            }
-        }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
 
         public override void Update()
         {
+            _floatingKickforce = Psevdotimer < 16f ? 0.5f : 3f;
+            _kickForce = HandleQ() ? _floatingKickforce : 5.4f;
+            KforceDelta = HandleQ() ? 0 : 1.45f;
+            _kickForce = HandleQ() ? _floatingKickforce : 5.2f;
+            loseAccuracy = HandleQ() ? 0f : 0.2f;
+            maxAccuracyLost = HandleQ() ? 0f : 0.6f;
             HandAngleOff = HandAngleOffState;
             base.Update();
-            _floatingKickforce = Psevdotimer < 16f ? 0.5f : 3f;
         }
 
         public override void OnHoldAction()
