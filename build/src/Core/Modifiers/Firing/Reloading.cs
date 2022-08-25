@@ -80,7 +80,7 @@ namespace TMGmod.Core.Modifiers.Firing
 
         protected override IEnumerable<string> Characteristics()
         {
-            yield return $"Extra Mags: {_mags}";
+            yield return $"Additional Mags: {_mags}";
         }
     }
 }
