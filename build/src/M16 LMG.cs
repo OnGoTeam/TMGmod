@@ -3,7 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -12,7 +11,7 @@ namespace TMGmod
     [EditorGroup("TMG|LMG")]
     [UsedImplicitly]
     // ReSharper disable once InconsistentNaming
-    public class M16LMG : BaseLmg, IHaveAllowedSkins, IHaveBipods
+    public class M16LMG : BaseLmg, IHaveAllowedSkins
     {
         public M16LMG(float xval, float yval)
             : base(xval, yval)
@@ -47,27 +46,15 @@ namespace TMGmod
             base.OnInitialize();
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
 
-        public bool Bipods
+        public override void Update()
         {
-            get => BipodsQ();
-            set
-            {
-                _kickForce = value ? 0 : 2.33f;
-                KickForce1Lmg = value ? 0 : 0.23f;
-                KickForce2Lmg = value ? 0 : 0.43f;
-                loseAccuracy = value ? 0 : 0.15f;
-            }
+            _kickForce = BipodsQ() ? 0 : 2.33f;
+            KickForce1Lmg = BipodsQ() ? 0 : 0.23f;
+            KickForce2Lmg = BipodsQ() ? 0 : 0.43f;
+            loseAccuracy = BipodsQ() ? 0 : 0.15f;
+            base.Update();
         }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
     }
 }
