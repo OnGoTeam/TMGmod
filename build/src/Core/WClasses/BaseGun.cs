@@ -651,8 +651,7 @@ namespace TMGmod.Core.WClasses
 
         private void Hint(string hint, Func<Vec2> offset, Func<Sprite> image)
         {
-            if (!isServerForObject) return;
-            if (hint is null) return;
+            if (!isServerForObject || hint is null) return;
             var tuple = new Tuple<Type, string>(GetType(), hint);
 #if DEBUG
             if (duck.inputProfile.Pressed("STRAFE"))

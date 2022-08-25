@@ -33,8 +33,7 @@ namespace TMGmod.Core.Modifiers.Updating
         {
             if (!_active())
                 return;
-            if (_hint != null)
-                _target.Hint(_hint, _hintOffset, "QUACK");
+            _target.Hint(_hint, _hintOffset, "QUACK");
             if (!_target.Quacked()) return;
             // else
             if (!_serverOnly || _target.isServerForObject)
