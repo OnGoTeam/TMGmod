@@ -335,16 +335,13 @@ ASALocalRun/
 
 build/dglink.csproj
 *.dll
-content/Thumbs.db
+Thumbs.db
 TMGmod.dll.config
 TMGmodRepo_compiled.hash
 JetBrains.Annotations.dll
 JetBrains.Annotations.xml
 build/Resources/BuildDate.txt
-content/deleteco/Thumbs.db
-content/Holiday/Thumbs.db
 ogtdglib.xml
-content/deleteco/Thumbs.db
 build/ILMerge.exe
 *.exe
 content/stats/guns.csv
