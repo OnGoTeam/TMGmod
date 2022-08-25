@@ -322,11 +322,18 @@ namespace TMGmod.Core.WClasses
             OnUpdate();
             _waitReturn = Maths.Clamp(_waitReturn, 0f, .15f);
             if (_wait > _waitReturn)
+            {
                 _wait -= _waitReturn;
-            if (_wait < .15f)
-                _waitReturn = .15f - _wait;
+                if (_wait < .15f)
+                    _waitReturn = .15f - _wait;
+                else
+                    _waitReturn = 0f;
+            }
             else
-                _waitReturn = 0f;
+            {
+                _waitReturn -= _wait;
+                _wait = 0f;
+            }
             _waitReturn = Maths.Clamp(_waitReturn, 0f, .15f);
             base.Update();
 #if DEBUG
