@@ -8,7 +8,6 @@ using TMGmod.Core.Modifiers;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.Modifiers.Firing;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.StockLogic;
 using TMGmod.NY;
 using System.Linq;
 using TMGmod.Core.DamageLogic;
@@ -224,13 +223,7 @@ namespace TMGmod.Core.WClasses
 
         protected virtual bool CanFire()
         {
-            switch (this)
-            {
-                case IHaveStock target when !target.StockDeployed() && !target.StockFolded():
-                    return false;
-                default:
-                    return ActiveModifier.CanFire();
-            }
+            return ActiveModifier.CanFire();
         }
 
         private void SetKforceAndFire()
@@ -298,12 +291,6 @@ namespace TMGmod.Core.WClasses
         private void UpdateFeatures()
         {
             Hint();
-            switch (this)
-            {
-                case IHaveStock target:
-                    target.UpdateStock();
-                    break;
-            }
         }
 
         private float _waitReturn;  // intentionally not synchronized
@@ -687,30 +674,9 @@ namespace TMGmod.Core.WClasses
             if (NeedHint()) Hint(HintMessage, HintOffset, HintTrigger);
         }
 
-        public virtual string HintMessage
-        {
-            get
-            {
-                switch (this)
-                {
-                    case IHaveStock _:
-                        return "stock";
-                    default:
-                        return null;
-                }
-            }
-        }
+        public virtual string HintMessage => null;
 
-        protected virtual Vec2 HintOffset()
-        {
-            switch (this)
-            {
-                case IHaveStock _:
-                    return new Vec2(-8f, 0f) - _holdOffset;
-                default:
-                    return barrelOffset;
-            }
-        }
+        protected virtual Vec2 HintOffset() => barrelOffset;
 
         private const string HintTrigger = "QUACK";
 

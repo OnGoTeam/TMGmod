@@ -196,7 +196,6 @@
     <Compile Include="src\Core\Modifiers\Kforce\HSpeedKforce.cs" />
     <Compile Include="src\Core\Modifiers\Firing\IModifySpent.cs" />
     <Compile Include="src\Core\Modifiers\Modifier.cs" />
-    <Compile Include="src\Core\IAmAGun.cs" />
     <Compile Include="src\Core\Shells\AT40ACPshell.cs" />
     <Compile Include="src\Core\Shells\ATSP6shell.cs" />
     <Compile Include="src\Core\Shells\AT9mmshell.cs" />
@@ -231,7 +230,6 @@
     <Compile Include="src\Core\AmmoTypes\IHeavyAmmoType.cs" />
     <Compile Include="src\Core\SkinLogic\ContextSkinRender.cs" />
     <Compile Include="src\Core\I5.cs" />
-    <Compile Include="src\Core\StockLogic\IHaveStock.cs" />
     <Compile Include="src\Core\Shells\AT556NATOshell.cs" />
     <Compile Include="src\Core\Shells\AT762NATOshell.cs" />
     <Compile Include="src\Core\Shells\AT545NATOshell.cs" />

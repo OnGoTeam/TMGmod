@@ -27,9 +27,9 @@ namespace TMGmod.Core.Modifiers.Updating
             _update = (_, full) => update(full);
         }
 
-        private bool Folded() => _state < .01f;
+        public bool Folded() => _state < .01f;
 
-        public bool Deployed() => _state > .99f;
+        private bool Deployed() => _state > .99f;
 
         private void Toggle()
         {
