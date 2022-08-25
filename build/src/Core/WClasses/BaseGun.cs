@@ -66,7 +66,7 @@ namespace TMGmod.Core.WClasses
 
         private const float
             PresentChancePercentage =
-                0.5f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
+                2f; //значение указано в процентах. Вне праздников - 0,1%, во время праздников - 2%, до 1.2 оставить 0,5%
 
         private bool _currHoneInit;
         private int _skinValue;
