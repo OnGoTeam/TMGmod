@@ -60,6 +60,7 @@ namespace TMGmod
                     mode =>
                     {
                         NonSkin = 1 + mode;
+                        _fullAuto = mode == 0;
                         SetAmmoType(ammoTypem[mode]);
                         _barrelOffsetTL = barrelOffsetTLm[mode];
                         _fireSound = fireSoundm[mode];
