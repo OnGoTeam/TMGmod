@@ -1,7 +1,6 @@
 ﻿#if FEATURES_1_3
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using DuckGame;
 using JetBrains.Annotations;
@@ -17,6 +16,10 @@ namespace TMGmod.Buddies
 
         [UsedImplicitly] public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
         [UsedImplicitly] public StateBinding HpMaxBinding = new StateBinding(nameof(HpMax));
+#if DEBUG
+        private readonly Stack<Tuple<float, int>> _damageLog = new Stack<Tuple<float, int>>();
+        private int _frames;
+#endif
 
         public HpArmor(float xpos, float ypos, float hpMax = 99f) : base(xpos, ypos)
         {
@@ -152,7 +155,7 @@ namespace TMGmod.Buddies
         {
             _hitPoints -= damage;
 #if DEBUG
-            StringMarker.Show(position, damage.ToString(CultureInfo.InvariantCulture));
+            _damageLog.Push(new Tuple<float, int>(damage, _frames));
 #endif
         }
 
@@ -235,10 +238,40 @@ namespace TMGmod.Buddies
             );
 #if DEBUG
             Graphics.DrawString(
-                _hitPoints.ToString(CultureInfo.InvariantCulture),
+                $"{_hitPoints:0.###}",
                 start + new Vec2(64, -8),
                 Color.GreenYellow
             );
+            var off = -16f;
+            var latest = _damageLog.TakeWhile(t => t.Item2 > _frames - 120).ToList();
+            foreach (var damage in latest.Take(5))
+            {
+                var c = Maths.Clamp(2f - (_frames - damage.Item2) / 60f, 0f, 1f);
+                c *= c;
+                var color = Color.Salmon;
+                color.a = (byte)(byte.MaxValue * c);
+                Graphics.DrawString(
+                    $"{damage.Item1:0.###}",
+                    start + new Vec2(64, -8 + off),
+                    color
+                );
+                off -= 16f;
+            }
+
+            
+            if (latest.Count > 5)
+            {
+                latest.RemoveRange(0, 5);
+                var rest = latest.Sum(t => t.Item1);
+                var c = Maths.Clamp(2f - (_frames - latest.Max(t => t.Item2)) / 60f, 0f, 1f);
+                var color = Color.Gray;
+                color.a = (byte)(byte.MaxValue * c);
+                Graphics.DrawString(
+                    $"{rest:0.###}",
+                    start + new Vec2(64, -8 + off),
+                    color
+                );
+            }
             base.Draw();
             // Graphics.DrawRect(EquippedDuck().rectangle, new Color(0, 0, 255, 128));
 #endif
@@ -257,6 +290,7 @@ namespace TMGmod.Buddies
         public override void Update()
         {
 #if DEBUG
+            ++_frames;
             if (duck != null)
             {
                 foreach (var key in new[] { "UP", "DOWN", "LEFT", "RIGHT", "QUACK", "RAGDOLL" })
