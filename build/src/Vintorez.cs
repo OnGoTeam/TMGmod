@@ -3,7 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -11,7 +10,7 @@ using TMGmod.Core.WClasses.ClassImplementations;
 namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Fully-Automatic")]
-    public class Vintorez : BaseAr, IHaveAllowedSkins, IHaveBipods
+    public class Vintorez : BaseAr, IHaveAllowedSkins
     {
         [UsedImplicitly]
         public Vintorez(float xval, float yval)
@@ -21,7 +20,7 @@ namespace TMGmod
             ammo = 16;
             SetAmmoType<ATVintorez>();
             MinAccuracy = 0f;
-            _kickForce = 0.4f;
+            _kickForce = 2.85f;
             KforceDelta = 0.45f;
             Smap = new SpriteMap(GetPath("Vintorez"), 33, 11);
             _center = new Vec2(16f, 6f);
@@ -40,21 +39,8 @@ namespace TMGmod
             Compose(new SpeedAccuracy(this, 1f, 1f, 0.5f));
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
+        protected override float BaseKforce => HandleQ() ? Rando.Float(0.5f, 1f) : 2.85f;
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 7 });
-
-        public bool Bipods
-        {
-            get => HandleQ();
-            set => _kickForce = value ? Rando.Float(0.5f, 1f) : 2.85f;
-        }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
     }
 }
