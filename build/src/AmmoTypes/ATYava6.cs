@@ -27,7 +27,7 @@ namespace TMGmod.AmmoTypes
         {
             var shell = new Gauge12Shell(x, y)
             {
-                hSpeed = (2f + Rando.Float(-0.2f, 0.2f)) * dir,
+                hSpeed = Rando.Float(-0.2f, 0.2f) * dir,
                 vSpeed = -1.2f + Rando.Float(-0.5f, 0.5f),
                 depth = 0.2f - Rando.Float(0.0f, 0.1f),
             };

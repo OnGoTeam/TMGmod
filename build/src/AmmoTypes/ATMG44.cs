@@ -32,7 +32,7 @@ namespace TMGmod.AmmoTypes
         {
             var shalker = new MG44Shell(x, y)
             {
-                hSpeed = (0f + Rando.Float(-0.2f, 0.2f)) * dir,
+                hSpeed = Rando.Float(-0.2f, 0.2f) * dir,
                 vSpeed = 1f + Rando.Float(-0.5f, 0.5f),
                 depth = -0.2f - Rando.Float(0.0f, 0.1f),
                 FrameId = frameid,

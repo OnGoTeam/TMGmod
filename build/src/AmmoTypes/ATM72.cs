@@ -27,7 +27,10 @@ namespace TMGmod.AmmoTypes
 
         public override void PopShell(float x, float y, int dir, Action<EjectedShell> add)
         {
-            var shalker = new M72Shell(x, y) { hSpeed = dir * (3.5f + Rando.Float(1f)) };
+            var shalker = new M72Shell(x, y)
+            {
+                hSpeed = Rando.Float(-.5f, .5f),
+            };
             add(shalker);
         }
     }
