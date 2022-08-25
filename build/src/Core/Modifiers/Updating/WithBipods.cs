@@ -38,7 +38,7 @@ namespace TMGmod.Core.Modifiers.Updating
 
         private void Toggle()
         {
-            if (_disabled || Deployed())
+            if (_disabled || Deployable())
                 _disabled = !_disabled;
         }
 
