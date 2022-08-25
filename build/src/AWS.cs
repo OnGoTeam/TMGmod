@@ -3,7 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.BipodsLogic;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -11,11 +11,9 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class AWS : BaseBolt, IHaveAllowedSkins, I5, ISwitchBipods
+    public class AWS : BaseBolt, IHaveAllowedSkins, I5
     {
         // Amazon Web Services
-
-        private readonly BipodStateContainer _bipodsState = new BipodStateContainer();
 
         [UsedImplicitly]
         public AWS(float xval, float yval)
@@ -25,8 +23,6 @@ namespace TMGmod
             _editorName = "AWS";
             NonSkinFrames = 3;
             Smap = new SpriteMap(GetPath("AWS"), 33, 11);
-            BipOff = GetPath("sounds/beepods2");
-            BipOn = GetPath("sounds/beepods1");
             _center = new Vec2(17f, 6f);
             _collisionOffset = new Vec2(-17f, -6f);
             _collisionSize = new Vec2(33f, 11f);
@@ -39,50 +35,27 @@ namespace TMGmod
             _weight = 5f;
             ShellOffset = new Vec2(-2f, -2f);
             SetAmmoType<AT50SniperS>();
+            _bipods = new WithBipods(
+                this,
+                GetPath("sounds/beepods1"),
+                GetPath("sounds/beepods2"),
+                1f / 10f,
+                state =>
+                {
+                    _kickForce = state.Deployed ? 0f : 4.75f;
+                    MaxAccuracy = state.Deployed ? 1f : .97f;
+                    _ammoType.range = state.Deployed ? 1100f : 550f;
+                    _ammoType.bulletSpeed = state.Deployed ? 100f : 35f;
+                    NonSkin = state.Deployed ? 2 : state.Folded ? 0 : 1;
+                }
+            );
+            Compose(
+                _bipods.Disablable()
+            );
         }
 
-        protected override float BaseKforce => this.BipodsDeployed() ? 0 : 4.75f;
-        protected override float BaseAccuracy => this.BipodsDeployed() ? 1f : 0.97f;
+        private readonly WithBipods _bipods;
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
-        public bool Bipods
-        {
-            get => BipodsQ();
-            set => this.SetBipods(value);
-        }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled { get; private set; }
-
-        public void SetBipodsDisabled(bool disabled)
-        {
-            BipodsDisabled = disabled;
-        }
-
-        public string BipOn { get; }
-        public string BipOff { get; }
-
-        public float BipodsState
-        {
-            get => _bipodsState.Get(this);
-            set => _bipodsState.Set(value);
-        }
-
-        public StateBinding BsBinding { get; } = new StateBinding(nameof(BipodsState));
-
-        public void UpdateBipodsStats(float old)
-        {
-            UpdateStats();
-            UpdateFrames();
-            this.UpdateBipodsSounds(old);
-        }
-
-        public float BipodSpeed => 1f / 10f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 5, 6, 7, 8, 9 });
 
         protected override void OnInitialize()
@@ -91,21 +64,13 @@ namespace TMGmod
             base.OnInitialize();
         }
 
-        private void UpdateStats()
-        {
-            _ammoType.range = this.BipodsDeployed() ? 1100f : 550f;
-            _ammoType.bulletSpeed = this.BipodsDeployed() ? 100f : 35f;
-        }
-
-        private void UpdateFrames() => NonSkin = this.BipodsDeployed() ? 2 : this.BipodsFolded() ? 0 : 1;
-
 
         protected override bool HasLaser() => false;
 
-        protected override float MaxAngle() => Bipods ? .05f : .25f;
+        protected override float MaxAngle() => _bipods.Deployed() ? .05f : .25f;
 
         protected override float MaxOffset() => 3.0f;
 
-        protected override float ReloadSpeed() => Bipods ? 1.5f : 1f;
+        protected override float ReloadSpeed() => _bipods.Deployed() ? 1.5f : 1f;
     }
 }

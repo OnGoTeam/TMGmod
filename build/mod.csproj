@@ -114,6 +114,7 @@
     <Compile Include="src\Core\Modifiers\Updating\SwitchingAmmoModes.cs" />
     <Compile Include="src\Cases\ContextChanceRender.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\SynchronizedValue.cs" />
+    <Compile Include="src\Core\Modifiers\Updating\WithBipods.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveAllowedSkins.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveFrameId.cs" />
     <Compile Include="src\Core\SkinLogic\IHaveSpriteBase.cs" />
