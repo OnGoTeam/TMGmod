@@ -334,13 +334,12 @@ ASALocalRun/
 .localhistory/
 
 build/dglink.csproj
-TMGmod.dll
+*.dll
 content/Thumbs.db
 TMGmod.dll.config
 TMGmodRepo_compiled.hash
 JetBrains.Annotations.dll
 JetBrains.Annotations.xml
-ogtdglib.dll
 build/Resources/BuildDate.txt
 content/deleteco/Thumbs.db
 content/Holiday/Thumbs.db
