@@ -226,8 +226,6 @@ namespace TMGmod.Core.WClasses
         {
             switch (this)
             {
-                case IHaveBipodState target when !target.BipodsDeployed() && !target.BipodsFolded():
-                    return false;
                 case IHaveStock target when !target.StockDeployed() && !target.StockFolded():
                     return false;
                 default:
@@ -302,12 +300,6 @@ namespace TMGmod.Core.WClasses
             Hint();
             switch (this)
             {
-                case ICanDisableBipods target:
-                    target.UpdateSwitchableBipods();
-                    break;
-                case IHaveBipods target:
-                    target.UpdateBipods();
-                    break;
                 case IHaveStock target:
                     target.UpdateStock();
                     break;
@@ -375,9 +367,9 @@ namespace TMGmod.Core.WClasses
             loaded = true;
         }
 
-        protected bool BipodsQ(bool bypassihb = false)
+        protected bool BipodsQ()
         {
-            return BipodsImplementation.BipodsQ(this, bypassihb);
+            return BipodsImplementation.BipodsQ(this);
         }
 
         protected bool HandleQ()
@@ -701,8 +693,6 @@ namespace TMGmod.Core.WClasses
             {
                 switch (this)
                 {
-                    case IDeployBipods target when target.BipodsDeployed():
-                        return "bipods";
                     case IHaveStock _:
                         return "stock";
                     default:
@@ -726,13 +716,7 @@ namespace TMGmod.Core.WClasses
 
         private bool NeedHint()
         {
-            switch (this)
-            {
-                case IDeployBipods target when !target.BipodsDeployed():
-                    return false;
-                default:
-                    return true;
-            }
+            return true;
         }
 
         private class HintThing : Thing

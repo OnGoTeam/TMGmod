@@ -3,7 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -11,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class MG44C : BaseLmg, IHaveAllowedSkins, IHaveBipods
+    public class MG44C : BaseLmg, IHaveAllowedSkins
     {
         [UsedImplicitly]
         public MG44C(float xval, float yval)
@@ -39,28 +38,17 @@ namespace TMGmod
             _weight = 6f;
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3, 6, 7 });
 
-        public bool Bipods
+        public override void Update()
         {
-            get => HandleQ();
-            set
-            {
-                KickForce1Lmg = value ? .9f : 1.8f;
-                KickForce2Lmg = value ? 1.5f : 1.8f;
-                loseAccuracy = value ? 0f : 0.1f;
-                maxAccuracyLost = value ? 0f : 0.3f;
-            }
+            KickForce1Lmg = HandleQ() ? .9f : 1.8f;
+            KickForce2Lmg = HandleQ() ? 1.5f : 1.8f;
+            loseAccuracy = HandleQ() ? 0f : 0.1f;
+            maxAccuracyLost = HandleQ() ? 0f : 0.3f;
+            base.Update();
         }
 
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
         protected override void PopBaseShell()
         {
             ATMG44.PopShellSkin(Offset(ShellOffset).x, Offset(ShellOffset).y, offDir, FrameId, AddShell);

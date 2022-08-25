@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
-using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -11,7 +10,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|DMR")]
     // ReSharper disable once InconsistentNaming
-    public class OracleAR10 : BaseDmr, IHaveAllowedSkins, IHaveBipods
+    public class OracleAR10 : BaseDmr, IHaveAllowedSkins
     {
         [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
 
@@ -52,36 +51,25 @@ namespace TMGmod
             set => handAngle = value * offDir;
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
-        public bool Bipods
-        {
-            get => BipodsQ();
-            set
-            {
-                _kickForce = value ? 0f : 2f;
-                MaxAccuracy = value ? 1f : 0.91f;
-                MinAccuracy = value ? 1f : 0.35f;
-                _ammoType.range = value ? 700f : 320f;
-                _ammoType.bulletSpeed = value ? 69f : 37f;
-                loseAccuracy = value ? 0 : 0.15f;
-                maxAccuracyLost = value ? 0 : 0.15f;
-                laserSight = value;
-            }
-        }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
-
         protected override void OnInitialize()
         {
             _ammoType.range = 333f;
             base.OnInitialize();
         }
+
+        public override void Update()
+        {
+            _kickForce = BipodsQ() ? 0f : 2f;
+            MaxAccuracy = BipodsQ() ? 1f : 0.91f;
+            MinAccuracy = BipodsQ() ? 1f : 0.35f;
+            _ammoType.range = BipodsQ() ? 700f : 320f;
+            _ammoType.bulletSpeed = BipodsQ() ? 69f : 37f;
+            loseAccuracy = BipodsQ() ? 0 : 0.15f;
+            maxAccuracyLost = BipodsQ() ? 0 : 0.15f;
+            laserSight = BipodsQ();
+            base.Update();
+        }
+
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
     }
 }

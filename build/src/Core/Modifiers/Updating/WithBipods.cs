@@ -42,7 +42,7 @@ namespace TMGmod.Core.Modifiers.Updating
                 _disabled = !_disabled;
         }
 
-        public IModifyEverything Disablable()
+        public IModifyEverything Disableable()
         {
             return ComposedModifier.Compose(
                 this,

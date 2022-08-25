@@ -3,7 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -11,8 +10,9 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Bolt-Action")]
     // ReSharper disable once InconsistentNaming
-    public class MSR : BaseBolt, IHaveAllowedSkins, IHaveBipods
+    public class MSR : BaseBolt, IHaveAllowedSkins
     {
+        [UsedImplicitly]
         public MSR(float xval, float yval) : base(xval, yval)
         {
             _editorName = "MSR";
@@ -39,36 +39,20 @@ namespace TMGmod
             base.OnInitialize();
         }
 
-        [UsedImplicitly]
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 9 });
 
-        public bool Bipods
+        public override void Update()
         {
-            get => HandleQ();
-            set => _kickForce = value ? 1f : 5.5f;
+            _kickForce = HandleQ() ? 1f : 5.5f;
+            base.Update();
         }
 
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
+        protected override bool HasLaser() => false;
 
-        protected override bool HasLaser()
-        {
-            return false;
-        }
+        protected override float MaxAngle() => HandleQ() ? .067f : .1f;
 
-        protected override float MaxAngle() => Bipods ? .067f : .1f;
+        protected override float MaxOffset() => 4.0f;
 
-        protected override float MaxOffset()
-        {
-            return 4.0f;
-        }
-
-        protected override float ReloadSpeed() => Bipods ? .5f : .67f;
+        protected override float ReloadSpeed() => HandleQ() ? .5f : .67f;
     }
 }

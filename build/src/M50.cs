@@ -2,7 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.Core;
-using TMGmod.Core.BipodsLogic;
 using TMGmod.Core.Modifiers.Accuracy;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -12,7 +11,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|Sniper|Semi-Automatic")]
     [UsedImplicitly]
-    public class M50 : BaseGun, IAmSr, IHaveAllowedSkins, IHaveBipods
+    public class M50 : BaseGun, IAmSr, IHaveAllowedSkins
     {
         public M50(float xval, float yval)
             : base(xval, yval)
@@ -40,27 +39,15 @@ namespace TMGmod
             Compose(new SpeedAccuracy(this, 1f, 1f, 1f));
         }
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
 
-        public bool Bipods
+        public override void Update()
         {
-            get => HandleQ();
-            set
-            {
-                _kickForce = value ? 1f : 8f;
-                loseAccuracy = value ? 0f : 0.1f;
-                maxAccuracyLost = value ? 0f : 0.3f;
-            }
+            _kickForce = HandleQ() ? 1f : 8f;
+            loseAccuracy = HandleQ() ? 0f : 0.1f;
+            maxAccuracyLost = HandleQ() ? 0f : 0.3f;
+            base.Update();
         }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
     }
 
 #if DEBUG

@@ -89,7 +89,6 @@
     <Compile Include="src\AmmoTypes\ATScarGrenade.cs" />
     <Compile Include="src\AmmoTypes\ATYava6.cs" />
     <Compile Include="src\Core\BipodsLogic\BipodsImplementation.cs" />
-    <Compile Include="src\Core\BipodsLogic\ISwitchBipods.cs" />
     <Compile Include="src\Core\Bullets\AntiProp.cs" />
     <Compile Include="src\Core\Bullets\BaseBullet.cs" />
     <Compile Include="src\Core\DamageLogic\DamageImplementation.cs" />
@@ -183,10 +182,7 @@
     <Compile Include="src\AmmoTypes\ATVista.cs" />
     <Compile Include="src\AmmoTypes\AT9mmParabellum.cs" />
     <Compile Include="src\Core\DamageLogic\IDamage.cs" />
-    <Compile Include="src\Core\BipodsLogic\BipodStateContainer.cs" />
     <Compile Include="src\Core\Bullets\BulletStoppedByProps.cs" />
-    <Compile Include="src\Core\BipodsLogic\ICanDisableBipods.cs" />
-    <Compile Include="src\Core\BipodsLogic\IDeployBipods.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\IModifyAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\Accuracy\SpeedAccuracy.cs" />
     <Compile Include="src\Core\Modifiers\ComposedModifier.cs" />
@@ -198,7 +194,6 @@
     <Compile Include="src\Core\Modifiers\Firing\IModifySpent.cs" />
     <Compile Include="src\Core\Modifiers\Modifier.cs" />
     <Compile Include="src\Core\IAmAGun.cs" />
-    <Compile Include="src\Core\BipodsLogic\IHaveBipodState.cs" />
     <Compile Include="src\Core\Shells\AT40ACPshell.cs" />
     <Compile Include="src\Core\Shells\ATSP6shell.cs" />
     <Compile Include="src\Core\Shells\AT9mmshell.cs" />
@@ -233,7 +228,6 @@
     <Compile Include="src\Core\AmmoTypes\IHeavyAmmoType.cs" />
     <Compile Include="src\Core\SkinLogic\ContextSkinRender.cs" />
     <Compile Include="src\Core\I5.cs" />
-    <Compile Include="src\Core\BipodsLogic\IHaveBipods.cs" />
     <Compile Include="src\Core\StockLogic\IHaveStock.cs" />
     <Compile Include="src\Core\Shells\AT556NATOshell.cs" />
     <Compile Include="src\Core\Shells\AT762NATOshell.cs" />

@@ -50,7 +50,7 @@ namespace TMGmod
                 }
             );
             Compose(
-                _bipods.Disablable()
+                _bipods.Disableable()
             );
         }
 
