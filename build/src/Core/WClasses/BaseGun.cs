@@ -541,6 +541,9 @@ namespace TMGmod.Core.WClasses
             if (_ammoType != null)
                 foreach (var characteristic in AmmoTypeCharacteristics(_ammoType))
                     yield return characteristic;
+            yield return $"Total Ammo: {ammo}";
+            if (_fullAuto)
+                yield return "Full-Auto";
             yield return $"Kickforce: {StatsKforce}";
             if (_fireWait > 0 && !_manualLoad)
                 yield return $"RPM: {Math.Round(3600 / (_fireWait / .15f))}";
@@ -555,6 +558,7 @@ namespace TMGmod.Core.WClasses
         public static IEnumerable<string> StatsHeader()
         {
             yield return "editor name";
+            yield return "Ammo";
             yield return "MaxAccuracy";
             yield return "Accuracy";
             yield return "MinAccuracy";
@@ -567,6 +571,7 @@ namespace TMGmod.Core.WClasses
         {
             Initialize();
             yield return editorName;
+            yield return $"{ammo}";
             yield return $"{MaxAccuracy}";
             yield return $"{Accuracy}";
             yield return $"{MinAccuracy}";
