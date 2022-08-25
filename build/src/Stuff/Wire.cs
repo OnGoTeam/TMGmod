@@ -34,7 +34,7 @@ namespace TMGmod.Stuff
             Length = new EditorProperty<int>(3, this, 1, 5);
             UpdateLength();
             throwSpeedMultiplier = 0f;
-            thickness = 5f;
+            thickness = 2.1f;
         }
 
         private void UpdateLength()
@@ -100,7 +100,7 @@ namespace TMGmod.Stuff
             if (bullet.ammo.penetration < 10f)
                 Damage(bullet.ammo);
             Level.Add(Spark.New(hitPos.x, hitPos.y, bullet.travelDirNormalized * Rando.Float(-1f, 1f)));
-            return Hit(bullet, hitPos) && bullet.ammo.penetration < 2.1f;
+            return Hit(bullet, hitPos);
         }
 
         private void Damage(AmmoType at)
