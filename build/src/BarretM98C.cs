@@ -44,19 +44,13 @@ namespace TMGmod
             return false;
         }
 
-        protected override float MaxAngle()
-        {
-            return 0.1f;
-        }
+        protected override float MaxAngle() => 0.1f;
 
         protected override float MaxOffset()
         {
             return 4.0f;
         }
 
-        protected override float ReloadSpeed()
-        {
-            return .5f;
-        }
+        protected override float ReloadSpeed() => .5f;
     }
 }

@@ -105,19 +105,13 @@ namespace TMGmod
             return true;
         }
 
-        protected override float MaxAngle()
-        {
-            return Bipods ? .05f : .15f;
-        }
+        protected override float MaxAngle() => Bipods ? .05f : .15f;
 
         protected override float MaxOffset()
         {
             return 4.0f;
         }
 
-        protected override float ReloadSpeed()
-        {
-            return Bipods ? 1.5f : 1f;
-        }
+        protected override float ReloadSpeed() => Bipods ? 1.5f : 1f;
     }
 }
