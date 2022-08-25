@@ -1,12 +1,18 @@
-Check out The Guide!
+[EN] The guide will guide you through TMG but you always can read this little description below:
+The TMG contains guns. Some guns have attachments, which you can apply by quacking at gun.
+And TMG contains maps, which have new guns on it.
+Enjoy your experience with TMG.
 
-Send bugs here: https://github.com/OnGoTeam/TMGmod/issues
-[RU]: Добрый день, дорогие утята и утки постарше!
-Вы всегда мечтали подержать в своих крылышках крутое оружие! (это не вопрос) Так вот. Мы - OnGoTeam - предоставляем эту возможность!
-Тут реально много оружия, и мы не собираемся на это останавливаться!
+[RU] Зе гайд уил гайд ю тхру ТИЭМЖИ бат ю олвейс кен рид зыс литл дескрипшн бэлоу:
+TMG содержит в себе новое огнестрельное оружие. Некоторое огнестрельное оружие имеет модули, которые можно активировать, крякнув.
+Ещё TMG содержит новые карты, на которых есть это новое оружие.
+Наслаждайтесь опытом, полученым через TMG.
 
 Developers/разработчики:
-"GamerPTA" - codemaker
-Exel "EXsess" Shustrov - art-director, a bit codemaker
+GamerPTA - Codemaker
+EXsess - Art-Director
 
-[i]50ae.Pistol, Haze S, Alfa, CZ C2, SMG-9, Vista, 44db, DragoShot, FN FCAR, M72, MG44Req, MG44 Mark2H, MG44 Mark2T ARW-A, Experimental ANP-73, Experimental X3X, G9M, IB-8mm Sniper, Anyx SR2 Compact, Anyx ARS Elite, Anyx PR5 [/i] © 2017-2020 OnGoTeam
+Send bugs here/Книга жалоб:
+https://github.com/OnGoTeam/TMGmod/issues
+
+[i]50ae.Pistol, Haze S, Alfa, CZ C2, SMG-9, Vista, 44db, DragoShot, FN FCAR, M72, MG44Req, MG44 Mark2, ARW-A, Experimental ANP-73, Experimental X3X, G9M, IB-8mm Sniper, Anyx SR2 Compact, Anyx ARS Elite, Anyx PR5, Anyx AR2 Mustang, Urbana, Nellegalja, Nellegalja Mk.2[/i] © 2017-2022 OnGoTeam
