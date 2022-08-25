@@ -3,19 +3,16 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
-using TMGmod.Core.StockLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
 namespace TMGmod
 {
     [EditorGroup("TMG|Rifle|Fully-Automatic")]
     // ReSharper disable once InconsistentNaming
-    public class AKALFA : BaseAr, IHaveAllowedSkins, IHaveStock
+    public class AKALFA : BaseAr, IHaveAllowedSkins
     {
-        private bool _stock = true;
-
-        private float _stockstate = 1f;
         [UsedImplicitly]
         public AKALFA(float xval, float yval)
             : base(xval, yval)
@@ -40,6 +37,22 @@ namespace TMGmod
             loseAccuracy = 0f;
             maxAccuracyLost = 0.25f;
             _weight = 5.5f;
+            Compose(
+                new WithStock(
+                    this,
+                    true,
+                    GetPath("sounds/tuduc"),
+                    GetPath("sounds/tuduc"),
+                    1f / 10f,
+                    state =>
+                    {
+                        _kickForce = state.Deployed ? .65f : 1.2f;
+                        loseAccuracy = state.Deployed ? 0f : 0.1f;
+                        _weight = state.Deployed ? 5.5f : 3.5f;
+                        NonSkin = state.Deployed ? 0 : state.Folded ? 2 : 1;
+                    }
+                ).Switching()
+            );
         }
 
         protected override void OnInitialize()
@@ -50,56 +63,6 @@ namespace TMGmod
             base.OnInitialize();
         }
 
-        protected override float BaseKforce => this.StockDeployed() ? 0.65f : 1.2f;
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 5 });
-
-        public float StockSpeed => 1f / 10f;
-
-        public bool Stock
-        {
-            get => _stock;
-            set
-            {
-                _stock = value;
-                this.SetStock(value);
-            }
-        }
-
-        public float StockState
-        {
-            get => _stockstate;
-            set => _stockstate = Maths.Clamp(value, 0f, 1f);
-        }
-
-        public void UpdateStockStats(float old)
-        {
-            UpdateStats();
-            UpdateFrames();
-            this.UpdateStockSounds(old);
-        }
-
-        public StateBinding StockStateBinding { get; } = new StateBinding(nameof(StockState));
-
-        public StateBinding StockBinding { get; } = new StateBinding(nameof(StockBuffer));
-
-        public BitBuffer StockBuffer
-        {
-            get => this.GetStockBuffer();
-            set => this.SetStockBuffer(value);
-        }
-
-        public string StockOn => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
-        public string StockOff => Mod.GetPath<Core.TMGmod>("sounds/tuduc");
-
-        private void UpdateStats()
-        {
-            loseAccuracy = this.StockDeployed() ? 0f : 0.1f;
-            _weight = this.StockDeployed() ? 5.5f : 3.5f;
-        }
-
-        private void UpdateFrames()
-        {
-            NonSkin = this.StockDeployed() ? 0 : this.StockFolded() ? 2 : 1;
-        }
     }
 }

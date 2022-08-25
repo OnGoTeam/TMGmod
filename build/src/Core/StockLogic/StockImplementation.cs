@@ -50,7 +50,7 @@ namespace TMGmod.Core.StockLogic
                 SFX.Play(target.StockOff);
         }
 
-        private static bool SwitchStockQ(this Holdable gun)
+        public static bool SwitchStockQ(this Holdable gun)
         {
             var duck = gun.duck;
             return !(duck is null) && !duck.sliding;

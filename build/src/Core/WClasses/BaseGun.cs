@@ -714,10 +714,7 @@ namespace TMGmod.Core.WClasses
 
         private const string HintTrigger = "QUACK";
 
-        private bool NeedHint()
-        {
-            return true;
-        }
+        private static bool NeedHint() => true;
 
         private class HintThing : Thing
         {

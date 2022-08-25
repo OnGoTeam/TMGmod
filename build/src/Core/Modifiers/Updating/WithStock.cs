@@ -1,26 +1,29 @@
 ﻿using System;
 using DuckGame;
-using TMGmod.Core.BipodsLogic;
+using TMGmod.Core.StockLogic;
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Updating
 {
-    public class WithBipods : Modifier
+    public class WithStock : Modifier
     {
         private readonly BaseGun _target;
-        private readonly string _bipOn;
-        private readonly string _bipOff;
+        private bool _deploying;
+        private readonly string _stockOn;
+        private readonly string _stockOff;
         private readonly float _speed;
         private readonly Action<DeploymentState, DeploymentState> _update;
-        private bool _disabled;
         private float _state;
 
-        public WithBipods(BaseGun target, string bipOn, string bipOff, float speed, Action<DeploymentState> update)
+        public WithStock(BaseGun target, bool preDeployed, string stockOn, string stockOff, float speed, Action<DeploymentState> update)
         {
             _target = target;
-            _bipOn = bipOn;
-            _bipOff = bipOff;
+            _stockOn = stockOn;
+            _stockOff = stockOff;
             _speed = speed;
+            _deploying = preDeployed;
+            if (_deploying)
+                _state = 1f;
             _update = (_, full) => update(full);
         }
 
@@ -30,19 +33,15 @@ namespace TMGmod.Core.Modifiers.Updating
 
         private void Toggle()
         {
-            if (_disabled || Deployable())
-                _disabled = !_disabled;
+            if (_target.SwitchStockQ() && (_deploying || _target.duck?.grounded == true))
+                _deploying = !_deploying;
         }
 
-        public IModifyEverything Disableable() =>
+        public IModifyEverything Switching() =>
             ComposedModifier.Compose(
                 this,
-                new Quacking(_target, true, false, Toggle, "bipods", () => _target.barrelOffset, active: Deployable)
+                new Quacking(_target, true, true, Toggle, "stock", () => new Vec2(-8f, 0f) - _target._holdOffset)
             );
-
-        private bool Deployable() => _target.BipodsQ();
-
-        private bool Deploying() => Deployable() && !_disabled;
 
         private DeploymentState FullState() => new DeploymentState(deployed: Deployed(), folded: Folded(), state: _state);
 
@@ -51,9 +50,9 @@ namespace TMGmod.Core.Modifiers.Updating
             var old = FullState();
             _state = Maths.Clamp(state, 0f, 1f);
             if (Deployed() && !old.Deployed)
-                SFX.Play(_bipOn);
+                SFX.Play(_stockOn);
             if (Folded() && !old.Folded)
-                SFX.Play(_bipOff);
+                SFX.Play(_stockOff);
             _update(old, FullState());
         }
 
@@ -63,20 +62,18 @@ namespace TMGmod.Core.Modifiers.Updating
         {
             if (!_target.isServerForObject)
                 return;
-            if (!Deployable())
-                _disabled = false;
-            Delta(Deploying() ? +_speed : -_speed);
+            Delta(_deploying ? +_speed : -_speed);
         }
 
         protected override void Write(BitBuffer buffer)
         {
-            buffer.Write(_disabled);
+            buffer.Write(_deploying);
             buffer.Write(_state);
         }
 
         protected override void Read(BitBuffer buffer)
         {
-            _disabled = buffer.ReadBool();
+            _deploying = buffer.ReadBool();
             SetState(buffer.ReadFloat());
         }
 

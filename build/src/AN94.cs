@@ -15,7 +15,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseGun, IAmAr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding StockBinding = new StateBinding(nameof(Laserrod));
+        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(Laserrod));
 
         public AN94(float xval, float yval)
             : base(xval, yval)
