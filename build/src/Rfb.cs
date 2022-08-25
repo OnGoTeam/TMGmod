@@ -65,7 +65,7 @@ namespace TMGmod
             }
         }
 
-        protected override float BaseAccuracy => FullAuto ? .6f : .9f;
+        protected override float BaseAccuracy => FullAuto ? .8f : .9f;
 
         [UsedImplicitly] public StateBinding FullAutoBinding = new StateBinding(nameof(FullAuto));
     }
