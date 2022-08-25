@@ -552,6 +552,7 @@ namespace TMGmod.Core.WClasses
             yield return "Accuracy";
             yield return "MinAccuracy";
             yield return "KickForce";
+            yield return "FireWait";
             yield return "Range";
         }
 
@@ -563,6 +564,7 @@ namespace TMGmod.Core.WClasses
             yield return $"{Accuracy}";
             yield return $"{MinAccuracy}";
             yield return $"{StatsKforce}";
+            yield return $"{_fireWait}";
             yield return _ammoType is null ? "" : $"{_ammoType.range}";
         }
 #endif
