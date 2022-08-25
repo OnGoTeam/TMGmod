@@ -12,7 +12,7 @@ namespace TMGmod
 {
     [EditorGroup("TMG|LMG")]
     // ReSharper disable once InconsistentNaming
-    public class G9M : BaseLmg, IHaveAllowedSkins, IHaveBipods
+    public class G9M : BaseLmg, IHaveAllowedSkins
     {
         private const double Explodechance = 0.005;
 
@@ -51,28 +51,7 @@ namespace TMGmod
 
         [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
 
-        public BitBuffer BipodsBuffer
-        {
-            get => this.GetBipodBuffer();
-            set => this.SetBipodBuffer(value);
-        }
-
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
-
-        public bool Bipods
-        {
-            get => BipodsQ();
-            set
-            {
-                _kickForce = value ? 0 : 2.33f;
-                KickForce1Lmg = value ? 0 : 0.23f;
-                KickForce2Lmg = value ? 0 : 0.43f;
-                loseAccuracy = value ? 0 : 0.2f;
-            }
-        }
-
-        public StateBinding BipodsBinding { get; } = new StateBinding(nameof(BipodsBuffer));
-        public bool BipodsDisabled => false;
 
         public override void OnPressAction()
         {
@@ -121,6 +100,15 @@ namespace TMGmod
 
             SFX.Play("explode");
             Level.Remove(this);
+        }
+
+        public override void Update()
+        {
+            _kickForce = BipodsQ() ? 0 : 2.33f;
+            KickForce1Lmg = BipodsQ() ? 0 : 0.23f;
+            KickForce2Lmg = BipodsQ() ? 0 : 0.43f;
+            loseAccuracy = BipodsQ() ? 0 : 0.2f;
+            base.Update();
         }
     }
 }
