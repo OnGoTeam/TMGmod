@@ -26,7 +26,7 @@ namespace TMGmod.AmmoTypes
         {
             var shell = new AT9mmShell(x, y)
             {
-                hSpeed = (3f + Rando.Float(-0.3f, 0.3f)) * dir,
+                hSpeed = (1f + Rando.Float(-0.3f, 0.3f)) * dir,
                 vSpeed = -1.5f + Rando.Float(-0.2f, 0.2f),
             };
             add(shell);
