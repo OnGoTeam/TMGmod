@@ -34,10 +34,10 @@ namespace TMGmod.Core.Modifiers.Updating
                 _disabled = !_disabled;
         }
 
-        public IModifyEverything Disableable() =>
+        public IModifyEverything Disableable(Vec2 offset) =>
             ComposedModifier.Compose(
                 this,
-                new Quacking(_target, true, false, Toggle, "bipods", () => _target.barrelOffset, active: Deployable)
+                new Quacking(_target, true, false, Toggle, "bipods", () => offset, active: Deployable)
             );
 
         private bool Deployable() => _target.BipodsQ();

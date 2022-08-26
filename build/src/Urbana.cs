@@ -48,7 +48,7 @@ namespace TMGmod
                 }
             );
             Compose(
-                _bipods.Disableable()
+                _bipods.Disableable(new Vec2(18.5f, 0f))
             );
         }
 

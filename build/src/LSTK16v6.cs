@@ -48,7 +48,7 @@ namespace TMGmod
                         _kickForce = state.Deployed ? 0f : 5.5f;
                         NonSkin = NonSkin % 3 + 3 * (state.Deployed ? 2 : state.Folded ? 0 : 1);
                     }
-                ).Disableable()
+                ).Disableable(new Vec2(11.5f, 0))
             );
         }
 

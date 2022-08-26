@@ -64,7 +64,7 @@ namespace TMGmod
                         _loseAccuracy.Max = state.Deployed ? .5f : 1.0f;
                         NonSkin = state.Deployed ? 3 : state.Folded ? 0 : state.State < 0.5f ? 1 : 2;
                     }
-                ).Disableable()
+                ).Disableable(new Vec2(6.5f, 0f))
             );
         }
 

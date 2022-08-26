@@ -59,7 +59,7 @@ namespace TMGmod
                             state.State < 0.67f ? 2 :
                             3;
                     }
-                ).Disableable()
+                ).Disableable(new Vec2(8.5f, -1f))
             );
         }
 
