@@ -185,6 +185,9 @@ namespace TMGmod.Core.WClasses
                     if (value != old)
                         FrameUtils.SwitchedSilencer(old);
                     update(value);
+#if DEBUG
+                    _wait = Math.Max(_wait, _fireWait);
+#endif
                 }
             );
             Compose(
