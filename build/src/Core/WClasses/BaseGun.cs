@@ -630,15 +630,27 @@ namespace TMGmod.Core.WClasses
         private static readonly Dictionary<Tuple<Type, string>, bool> Hints =
             new Dictionary<Tuple<Type, string>, bool>();
 
+        private int _framesToHint;
+
         private void Hint(string hint, Func<Vec2> offset, Func<IEnumerable<Sprite>> image)
         {
             if (!isServerForObject || hint is null) return;
             var tuple = new Tuple<Type, string>(GetType(), hint);
 #if DEBUG
             if (duck.inputProfile.Pressed("STRAFE"))
+            {
                 Hints.Clear();
+                _framesToHint = 0;
+            }
 #endif
             if (Hints.ContainsKey(tuple)) return;
+            if (_framesToHint > 0)
+            {
+                --_framesToHint;
+                return;
+            }
+
+            _framesToHint = 300;
             Hints[tuple] = true;
             Level.Add(new HintThing(this, offset, hint, image()));
         }
@@ -700,6 +712,7 @@ namespace TMGmod.Core.WClasses
                     Graphics.Draw(image, pos.x, pos.y);
                     pos.x += image.width;
                 }
+
                 pos.y += Graphics.GetStringHeight(_hint) / 2f;
                 Graphics.DrawStringOutline(_hint, pos, Color.White, depth: newDepth, outline: Color.Black);
             }

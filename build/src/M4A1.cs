@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -35,6 +36,27 @@ namespace TMGmod
             _weight = 4f;
             _kickForce = .5f;
             KforceDelta = .5f;
+#if DEBUG
+            var animating = Anime.Simple(
+                frames => _fireWait = frames > 0 ? .55f : .75f,
+                () => _fireWait = .75f
+            );
+            Compose(
+                animating,
+                new Combo(
+                    this,
+                    "faster fire (1)",
+                    () => animating.Set(60),
+                    "DOWN", "DOWN", "DOWN"
+                ),
+                new Combo(
+                    this,
+                    "faster fire",
+                    () => animating.Set(60),
+                    "UP", "UP", "UP"
+                )
+            );
+#endif
         }
 
         protected override void OnInitialize()

@@ -114,6 +114,7 @@
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\SynchronizedProperty.cs" />
     <Compile Include="src\Core\Modifiers\Updating\Animating.cs" />
+    <Compile Include="src\Core\Modifiers\Updating\Combo.cs" />
     <Compile Include="src\Core\Modifiers\Updating\DeploymentState.cs" />
     <Compile Include="src\Core\Modifiers\Updating\DynamicModifier.cs" />
     <Compile Include="src\Core\Modifiers\Updating\Quacking.cs" />
