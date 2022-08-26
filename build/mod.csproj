@@ -108,6 +108,7 @@
     <Compile Include="src\Core\Modifiers\Pipelining\IModifyPipeline.cs" />
     <Compile Include="src\Core\Modifiers\Pipelining\IPipeline.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />
+    <Compile Include="src\Core\Modifiers\Syncing\SynchronizedProperty.cs" />
     <Compile Include="src\Core\Modifiers\Updating\Animating.cs" />
     <Compile Include="src\Core\Modifiers\Updating\DeploymentState.cs" />
     <Compile Include="src\Core\Modifiers\Updating\Quacking.cs" />

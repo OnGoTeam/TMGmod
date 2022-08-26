@@ -44,10 +44,10 @@ namespace TMGmod.Core.Modifiers.Updating
 
         protected override IEnumerable<string> Characteristics()
         {
-            if (_target.HintMessage is null)
+            if (_hint is null)
                 yield return "Has Quack Action";
             else
-                yield return $"Quack: {_target.HintMessage}";
+                yield return $"Quack: {_hint}";
         }
     }
 }

@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -13,8 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class CZC2 : BaseAr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-
+        [UsedImplicitly]
         public CZC2(float xval, float yval)
             : base(xval, yval)
         {
@@ -38,29 +38,28 @@ namespace TMGmod
             _weight = 4.4f;
             _kickForce = 1.5f;
             KforceDelta = 1.6f;
-            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
-        }
-
-        public override string HintMessage => "silencer";
-
-        public bool Silencer
-        {
-            get => _fireSound == GetPath("sounds/new/CZ-Silenced.wav");
-            set
-            {
-                if (value != Silencer)
-                    FrameUtils.SwitchedSilencer(Silencer);
-                NonSkin = value ? 1 : 0;
-                _fireSound = value ? GetPath("sounds/new/CZ-Silenced.wav") : "deepMachineGun2";
-                if (value)
-                    SetAmmoType<ATCZS2>();
-                else
-                    SetAmmoType<ATCZ2>();
-                loseAccuracy = value ? .15f : .1f;
-                maxAccuracyLost = value ? .28f : .3f;
-                _barrelOffsetTL = value ? new Vec2(41f, 3.5f) : new Vec2(37f, 3.5f);
-                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
-            }
+            var silencerProperty = new SynchronizedProperty<bool>(
+                () => _fireSound == GetPath("sounds/new/CZ-Silenced.wav"),
+                (old, value) =>
+                {
+                    if (value != old)
+                        FrameUtils.SwitchedSilencer(old);
+                    NonSkin = value ? 1 : 0;
+                    _fireSound = value ? GetPath("sounds/new/CZ-Silenced.wav") : "deepMachineGun2";
+                    if (value)
+                        SetAmmoType<ATCZS2>();
+                    else
+                        SetAmmoType<ATCZ2>();
+                    loseAccuracy = value ? .15f : .1f;
+                    maxAccuracyLost = value ? .28f : .3f;
+                    _barrelOffsetTL = value ? new Vec2(41f, 3.5f) : new Vec2(37f, 3.5f);
+                    _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
+                }
+            );
+            Compose(
+                silencerProperty,
+                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });

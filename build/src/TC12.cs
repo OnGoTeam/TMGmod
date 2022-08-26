@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -13,8 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class TC12 : BaseDmr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-
+        [UsedImplicitly]
         public TC12(float xval, float yval)
             : base(xval, yval)
         {
@@ -46,32 +46,31 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(26f, 5.5f);
             _weight = 4.5f;
-            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
-        }
-
-        public override string HintMessage => "silencer";
-
-        public bool Silencer
-        {
-            get => _fireSound == GetPath("sounds/new/TC12-Silenced.wav");
-            set
-            {
-                if (value != Silencer)
-                    FrameUtils.SwitchedSilencer(Silencer);
-                NonSkin = value ? 1 : 0;
-                _fireSound = value ? GetPath("sounds/new/TC12-Silenced.wav") : GetPath("sounds/new/HighCaliber.wav");
-                if (value)
-                    SetAmmoType<ATTC12S>();
-                else
-                    SetAmmoType<ATTC12>();
-                _kickForce = value ? 4.5f : 5.3f;
-                loseAccuracy = value ? 0f : .1f;
-                _weight = value ? 6.3f : 4.5f;
-                _barrelOffsetTL = value ? new Vec2(39f, 3f) : new Vec2(28f, 3f);
-                _flare = value
-                    ? new SpriteMap(GetPath("FlareSilencer"), 13, 10) { center = new Vec2(0.0f, 5f) }
-                    : new SpriteMap(GetPath("FlareTC12"), 13, 10) { center = new Vec2(0.0f, 5f) };
-            }
+            var silencerProperty = new SynchronizedProperty<bool>(
+                () => _fireSound == GetPath("sounds/new/TC12-Silenced.wav"),
+                (old, value) =>
+                {
+                    if (value != old)
+                        FrameUtils.SwitchedSilencer(old);
+                    NonSkin = value ? 1 : 0;
+                    _fireSound = value ? GetPath("sounds/new/TC12-Silenced.wav") : GetPath("sounds/new/HighCaliber.wav");
+                    if (value)
+                        SetAmmoType<ATTC12S>();
+                    else
+                        SetAmmoType<ATTC12>();
+                    _kickForce = value ? 4.5f : 5.3f;
+                    loseAccuracy = value ? 0f : .1f;
+                    _weight = value ? 6.3f : 4.5f;
+                    _barrelOffsetTL = value ? new Vec2(39f, 3f) : new Vec2(28f, 3f);
+                    _flare = value
+                        ? new SpriteMap(GetPath("FlareSilencer"), 13, 10) { center = new Vec2(0.0f, 5f) }
+                        : new SpriteMap(GetPath("FlareTC12"), 13, 10) { center = new Vec2(0.0f, 5f) };
+                }
+            );
+            Compose(
+                silencerProperty,
+                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 3 });

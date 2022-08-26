@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -37,25 +38,25 @@ namespace TMGmod
             loseAccuracy = 0.1f;
             maxAccuracyLost = 0.4f;
             _weight = 2f;
-            Compose(new Quacking(this, true, true, () => Mode += 1));
+            var modeProperty = new SynchronizedProperty<int>(
+                () => NonSkin % 4,
+                (old, value) =>
+                {
+                    if (value != old)
+                        SFX.Play(GetPath("sounds/tuduc.wav"));
+                    NonSkin = value;
+                    _fireWait = new[] { 1.5f, 1.2f, .9f, .6f }[value];
+                    loseAccuracy = new[] { .15f, .15f, .2f, .3f }[value];
+                    maxAccuracyLost = new[] { .3f, .5f, .6f, .7f }[value];
+                },
+                value => value.Modulo(4)
+            );
+            Compose(
+                modeProperty,
+                new Quacking(this, true, true, modeProperty.Increment, "mode", () => new Vec2(-3.5f, -3.5f))
+            );
         }
+
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });
-
-        public int Mode
-        {
-            get => NonSkin % 4;
-            set
-            {
-                value = value.Modulo(4);
-                if (value != Mode)
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
-                NonSkin = value;
-                _fireWait = new[] { 1.5f, 1.2f, .9f, .6f }[value];
-                loseAccuracy = new[] { .15f, .15f, .2f, .3f }[value];
-                maxAccuracyLost = new[] { .3f, .5f, .6f, .7f }[value];
-            }
-        }
-
-        [UsedImplicitly] public StateBinding ModeBinding = new StateBinding(nameof(Mode));
     }
 }

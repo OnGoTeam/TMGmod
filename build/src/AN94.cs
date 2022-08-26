@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.Modifiers.Kforce;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -15,8 +16,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94 : BaseGun, IAmAr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(Laserrod));
-
+        [UsedImplicitly]
         public AN94(float xval, float yval)
             : base(xval, yval)
         {
@@ -41,38 +41,32 @@ namespace TMGmod
             _weight = 4.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(24f, 1.5f);
+            var laserProperty = new SynchronizedProperty<bool>(
+                () => laserSight,
+                (old, value) =>
+                {
+                    if (value != old)
+                        SFX.Play(GetPath("sounds/tuduc.wav"));
+                    loseAccuracy = value ? .1f : .15f;
+                    _fireWait = value ? 2.5f : 1.5f;
+                    maxAccuracyLost = value ? .1f : .45f;
+                    NonSkin = value ? 1 : 0;
+                    laserSight = value;
+                }
+            );
             Compose(
                 new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f),
-                new Quacking(this, true, true, () => Laserrod = !Laserrod)
+                laserProperty,
+                new Quacking(this, true, true, laserProperty.Flip, "laser", () => laserOffset)
             );
             ComposeSimpleBurst(2, .07f);
         }
-
-        protected override Vec2 HintOffset() => laserOffset;
-
-        public override string HintMessage => "laser";
 
         protected override void OnInitialize()
         {
             _ammoType.range = 280f;
             _ammoType.bulletSpeed = 60f;
             base.OnInitialize();
-        }
-
-        [UsedImplicitly]
-        public bool Laserrod
-        {
-            get => !laserSight;
-            set
-            {
-                if (value == laserSight)
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
-                loseAccuracy = value ? .15f : .1f;
-                _fireWait = value ? 1.5f : 2.5f;
-                maxAccuracyLost = value ? .45f : .1f;
-                NonSkin = value ? 0 : 1;
-                laserSight = !value;
-            }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6, 7 });

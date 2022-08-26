@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -12,8 +13,7 @@ namespace TMGmod
     [EditorGroup("TMG|SMG|Fully-Automatic")]
     public class SpectreM4 : BaseSmg, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-
+        [UsedImplicitly]
         public SpectreM4(float xval, float yval)
             : base(xval, yval)
         {
@@ -38,32 +38,31 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, 3f);
             ShellOffset = new Vec2(-3f, -3f);
             _weight = 3.3f;
-            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
-        }
-
-        public override string HintMessage => "silencer";
-
-        public bool Silencer
-        {
-            get => _fireSound == GetPath("sounds/SilencedPistol.wav");
-            set
-            {
-                if (value != Silencer)
-                    FrameUtils.SwitchedSilencer(Silencer);
-                NonSkin = value ? 1 : 0;
-                if (value)
-                    SetAmmoType<ATSpectreM4S>();
-                else
-                    SetAmmoType<ATSpectreM4>();
-                _barrelOffsetTL = value ? new Vec2(16f, 2f) : new Vec2(13f, 2f);
-                loseAccuracy = value ? .07f : .1f;
-                maxAccuracyLost = value ? .3f : .34f;
-                _weight = value ? 3.8f : 3.3f;
-                _fireSound = value
-                    ? GetPath("sounds/SilencedPistol.wav")
-                    : GetPath("sounds/new/LightCaliber-Pistol.wav");
-                _flare = value ? FrameUtils.TakeZis() : FrameUtils.SmallFlare();
-            }
+            var silencerProperty = new SynchronizedProperty<bool>(
+                () => _fireSound == GetPath("sounds/SilencedPistol.wav"),
+                (old, value) =>
+                {
+                    if (value != old)
+                        FrameUtils.SwitchedSilencer(old);
+                    NonSkin = value ? 1 : 0;
+                    if (value)
+                        SetAmmoType<ATSpectreM4S>();
+                    else
+                        SetAmmoType<ATSpectreM4>();
+                    _barrelOffsetTL = value ? new Vec2(16f, 2f) : new Vec2(13f, 2f);
+                    loseAccuracy = value ? .07f : .1f;
+                    maxAccuracyLost = value ? .3f : .34f;
+                    _weight = value ? 3.8f : 3.3f;
+                    _fireSound = value
+                        ? GetPath("sounds/SilencedPistol.wav")
+                        : GetPath("sounds/new/LightCaliber-Pistol.wav");
+                    _flare = value ? FrameUtils.TakeZis() : FrameUtils.SmallFlare();
+                }
+            );
+            Compose(
+                silencerProperty,
+                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 6 });

@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -13,8 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AUGA1 : BaseAr, IHaveAllowedSkins, I5
     {
-        [UsedImplicitly] public StateBinding GripBinding = new StateBinding(nameof(Grip));
-
+        [UsedImplicitly]
         public AUGA1(float xval, float yval)
             : base(xval, yval)
         {
@@ -39,23 +39,21 @@ namespace TMGmod
             _weight = 5.5f;
             _kickForce = .07f;
             KforceDelta = .63f;
-            Compose(new Quacking(this, true, true, () => Grip = !Grip));
-        }
-
-        public override string HintMessage => "foregrip";
-
-        [UsedImplicitly]
-        public bool Grip
-        {
-            get => maxAccuracyLost < 0.15f;
-            set
-            {
-                if (value != Grip)
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
-                NonSkin = value ? 1 : 0;
-                maxAccuracyLost = value ? .1f : .2f;
-                MaxAccuracy = value ? .97f : .80f;
-            }
+            var gripProperty = new SynchronizedProperty<bool>(
+                () => maxAccuracyLost < 0.15f,
+                (old, value) =>
+                {
+                    if (value != old)
+                        SFX.Play(GetPath("sounds/tuduc.wav"));
+                    NonSkin = value ? 1 : 0;
+                    maxAccuracyLost = value ? .1f : .2f;
+                    MaxAccuracy = value ? .97f : .80f;
+                }
+            );
+            Compose(
+                gripProperty,
+                new Quacking(this, true, true, gripProperty.Flip, "foregrip", () => new Vec2(6.5f, 0f))
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 4, 5, 6, 8 });

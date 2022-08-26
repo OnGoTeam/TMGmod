@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -14,6 +15,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SIX12S : BaseGun, IHaveAllowedSkins, IAmSg, I5
     {
+        [UsedImplicitly]
         public SIX12S(float xval, float yval)
             : base(xval, yval)
         {
@@ -38,24 +40,24 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(24f, 7.5f);
             _holdOffset = new Vec2(1f, 0f);
             _weight = 4f;
-            Compose(new Quacking(this, true, true, () => LaserSight = !LaserSight));
+            var laserProperty = new SynchronizedProperty<bool>(
+                () => laserSight,
+                (old, value) =>
+                {
+                    if (value != old)
+                        SFX.Play(GetPath("sounds/tuduc.wav"));
+                    laserSight = value;
+                    NonSkin = value ? 1 : 0;
+                    loseAccuracy = value ? .45f : .3f;
+                }
+            );
+            Compose(
+                laserProperty,
+                new Quacking(this, true, true, laserProperty.Flip, "laser", () => laserOffset)
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 9 });
-
-        public bool LaserSight
-        {
-            get => laserSight;
-            set
-            {
-                if (value != LaserSight)
-                    SFX.Play(GetPath("sounds/tuduc.wav"));
-                laserSight = value;
-                NonSkin = value ? 1 : 0;
-                loseAccuracy = value ? .45f : .3f;
-            }
-        }
-        [UsedImplicitly] public StateBinding LaserBinding = new StateBinding(nameof(LaserSight));
 
         public override void Reload(bool shell = true) => base.Reload(false);
     }

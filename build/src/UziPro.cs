@@ -3,6 +3,7 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
@@ -13,8 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class UziPro : BaseSmg, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-
+        [UsedImplicitly]
         public UziPro(float xval, float yval)
             : base(xval, yval)
         {
@@ -41,27 +41,26 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(8f, 5.5f);
             _weight = 2.5f;
-            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
-        }
-
-        public override string HintMessage => "silencer";
-
-        public bool Silencer
-        {
-            get => _fireSound == GetPath("sounds/new/SMG-Silenced.wav");
-            set
-            {
-                if (value != Silencer)
-                    FrameUtils.SwitchedSilencer(Silencer);
-                NonSkin = value ? 1 : 0;
-                if (value)
-                    SetAmmoType<ATUziS>();
-                else
-                    SetAmmoType<ATUzi>();
-                _barrelOffsetTL = value ? new Vec2(16f, 2.5f) : new Vec2(10f, 2.5f);
-                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel0();
-                _fireSound = value ? GetPath("sounds/new/SMG-Silenced.wav") : GetPath("sounds/new/UziPro.wav");
-            }
+            var silencerProperty = new SynchronizedProperty<bool>(
+                () => _fireSound == GetPath("sounds/new/SMG-Silenced.wav"),
+                (old, value) =>
+                {
+                    if (value != old)
+                        FrameUtils.SwitchedSilencer(old);
+                    NonSkin = value ? 1 : 0;
+                    if (value)
+                        SetAmmoType<ATUziS>();
+                    else
+                        SetAmmoType<ATUzi>();
+                    _barrelOffsetTL = value ? new Vec2(16f, 2.5f) : new Vec2(10f, 2.5f);
+                    _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel0();
+                    _fireSound = value ? GetPath("sounds/new/SMG-Silenced.wav") : GetPath("sounds/new/UziPro.wav");
+                }
+            );
+            Compose(
+                silencerProperty,
+                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
+            );
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 4, 6, 9 });

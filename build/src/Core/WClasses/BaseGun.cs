@@ -167,30 +167,15 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-        private IModifyEverything DefaultModifier()
-        {
-            return new BaseModifier(this);
-        }
+        private static IModifyEverything DefaultModifier() => Modifier.Identity();
 
-        protected void ResetModifier()
-        {
-            ActiveModifier = Modifier.Identity();
-        }
+        protected void ResetModifier() => ActiveModifier = Modifier.Identity();
 
-        protected void Compose(params IModifyEverything[] modifiers)
-        {
-            ActiveModifier = ActiveModifier.Compose(modifiers);
-        }
+        protected void Compose(params IModifyEverything[] modifiers) => ActiveModifier = ActiveModifier.Compose(modifiers);
 
-        private void SetKforce()
-        {
-            _kickForce = Kforce;
-        }
+        private void SetKforce() => _kickForce = Kforce;
 
-        private void AddNyCase()
-        {
-            Level.Add(new NewYearCase(x, y));
-        }
+        private void AddNyCase() => Level.Add(new NewYearCase(x, y));
 
         private void MaybeAddNyCase()
         {
@@ -203,15 +188,9 @@ namespace TMGmod.Core.WClasses
             MaybeAddNyCase();
         }
 
-        protected virtual void RealFire()
-        {
-            base.Fire();
-        }
+        protected virtual void RealFire() => base.Fire();
 
-        private void ModifiedFire()
-        {
-            ActiveModifier.ModifyFire(RealFire);
-        }
+        private void ModifiedFire() => ActiveModifier.ModifyFire(RealFire);
 
         private void FireWithKforce()
         {
@@ -221,10 +200,7 @@ namespace TMGmod.Core.WClasses
                 OnAmmoSpent();
         }
 
-        protected virtual bool CanFire()
-        {
-            return ActiveModifier.CanFire();
-        }
+        protected virtual bool CanFire() => ActiveModifier.CanFire();
 
         private void SetKforceAndFire()
         {
@@ -260,10 +236,7 @@ namespace TMGmod.Core.WClasses
             UpdateAction();
         }
 
-        private float ClipAccuracy(float accuracy)
-        {
-            return Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
-        }
+        private float ClipAccuracy(float accuracy) => Maths.Clamp(accuracy, MinAccuracy, BaseAccuracy);
 
         private void SetAccuracy()
         {
@@ -286,11 +259,6 @@ namespace TMGmod.Core.WClasses
         {
             SetAccuracy();
             UpdateHone();
-        }
-
-        private void UpdateFeatures()
-        {
-            Hint();
         }
 
         private float _waitReturn;  // intentionally not synchronized
@@ -354,21 +322,11 @@ namespace TMGmod.Core.WClasses
             loaded = true;
         }
 
-        protected bool BipodsQ()
-        {
-            return BipodsImplementation.BipodsQ(this);
-        }
+        protected bool BipodsQ() => BipodsImplementation.BipodsQ(this);
 
-        protected bool HandleQ()
-        {
-            return HandleImplementation.HandleQ(this);
-        }
+        protected bool HandleQ() => HandleImplementation.HandleQ(this);
 
-        [PublicAPI]
-        public static void SetSpriteMapFrameId(SpriteMap sm, int value, int m)
-        {
-            sm.frame = value.Modulo(m);
-        }
+        protected static void SetSpriteMapFrameId(SpriteMap sm, int value, int m) => sm.frame = value.Modulo(m);
 
         public override void Draw()
         {
@@ -412,11 +370,6 @@ namespace TMGmod.Core.WClasses
             base.EditorPropertyChanged(property);
         }
 
-        public BaseGun AsAGun()
-        {
-            return this;
-        }
-
         protected virtual void BaseOnSpent()
         {
         }
@@ -446,21 +399,6 @@ namespace TMGmod.Core.WClasses
             OnInitialize();
             SkinValue = SkinValue;
             base.Initialize();
-        }
-
-        private class BaseModifier : Modifier
-        {
-            private readonly BaseGun _target;
-
-            public BaseModifier(BaseGun target)
-            {
-                _target = target;
-            }
-
-            protected override void ModifyUpdate()
-            {
-                _target.UpdateFeatures();
-            }
         }
 
         public bool Quacked() => duck?.inputProfile.Pressed("QUACK") == true;
@@ -667,19 +605,6 @@ namespace TMGmod.Core.WClasses
             if (duck != null)
                 Hint(hint, offset, () => duck.inputProfile.GetTriggerImage(trigger));
         }
-
-        private void Hint()
-        {
-            if (NeedHint()) Hint(HintMessage, HintOffset, HintTrigger);
-        }
-
-        public virtual string HintMessage => null;
-
-        protected virtual Vec2 HintOffset() => barrelOffset;
-
-        private const string HintTrigger = "QUACK";
-
-        private static bool NeedHint() => true;
 
         private class HintThing : Thing
         {

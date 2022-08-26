@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.Modifiers.Kforce;
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
@@ -15,8 +16,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AN94C : BaseGun, IAmAr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding SilencerBinding = new StateBinding(nameof(Silencer));
-
+        [UsedImplicitly]
         public AN94C(float xval, float yval)
             : base(xval, yval)
         {
@@ -39,11 +39,30 @@ namespace TMGmod
             loseAccuracy = 0.15f;
             maxAccuracyLost = 0.25f;
             _weight = 4f;
-            Compose(
-                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f)
-            );
             ComposeSimpleBurst(2, .4f);
-            Compose(new Quacking(this, true, true, () => Silencer = !Silencer));
+            var silencerProperty = new SynchronizedProperty<bool>(
+                () => _fireSound == GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav"),
+                (old, value) =>
+                {
+                    if (value != old)
+                        FrameUtils.SwitchedSilencer(old);
+                    _fireSound = value
+                        ? GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav")
+                        : GetPath("sounds/new/HighCaliber-LessImpact.wav");
+                    _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
+                    if (value)
+                        SetAmmoType<ATCZS>();
+                    else
+                        SetAmmoType<ATCZ>();
+                    _barrelOffsetTL = value ? new Vec2(33f, 2f) : new Vec2(28f, 2f);
+                    NonSkin = value ? 1 : 0;
+                }
+            );
+            Compose(
+                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f),
+                silencerProperty,
+                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
+            );
         }
 
         protected override void OnInitialize()
@@ -51,28 +70,6 @@ namespace TMGmod
             _ammoType.range = 260f;
             _ammoType.bulletSpeed = 60f;
             base.OnInitialize();
-        }
-
-        public override string HintMessage => "silencer";
-
-        public bool Silencer
-        {
-            get => _fireSound == GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav");
-            set
-            {
-                if (value != Silencer)
-                    FrameUtils.SwitchedSilencer(Silencer);
-                _fireSound = value
-                    ? GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav")
-                    : GetPath("sounds/new/HighCaliber-LessImpact.wav");
-                _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
-                if (value)
-                    SetAmmoType<ATCZS>();
-                else
-                    SetAmmoType<ATCZ>();
-                _barrelOffsetTL = value ? new Vec2(33f, 2f) : new Vec2(28f, 2f);
-                NonSkin = value ? 1 : 0;
-            }
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 4, 7 });
