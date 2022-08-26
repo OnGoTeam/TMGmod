@@ -53,6 +53,7 @@ namespace TMGmod
 
         public override void Update()
         {
+            Hint("change angle", () => barrelOffset, "QUACK", "UP");
             HandAngleOff = _handleAngleOff;
             base.Update();
             if (duck is null)

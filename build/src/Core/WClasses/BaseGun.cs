@@ -630,7 +630,7 @@ namespace TMGmod.Core.WClasses
         private static readonly Dictionary<Tuple<Type, string>, bool> Hints =
             new Dictionary<Tuple<Type, string>, bool>();
 
-        private void Hint(string hint, Func<Vec2> offset, Func<Sprite> image)
+        private void Hint(string hint, Func<Vec2> offset, Func<IEnumerable<Sprite>> image)
         {
             if (!isServerForObject || hint is null) return;
             var tuple = new Tuple<Type, string>(GetType(), hint);
@@ -643,10 +643,10 @@ namespace TMGmod.Core.WClasses
             Level.Add(new HintThing(this, offset, hint, image()));
         }
 
-        public void Hint(string hint, Func<Vec2> offset, string trigger)
+        public void Hint(string hint, Func<Vec2> offset, params string[] trigger)
         {
             if (duck != null)
-                Hint(hint, offset, () => duck.inputProfile.GetTriggerImage(trigger));
+                Hint(hint, offset, () => trigger.Select(duck.inputProfile.GetTriggerImage));
         }
 
         private class HintThing : Thing
@@ -654,15 +654,15 @@ namespace TMGmod.Core.WClasses
             private readonly Thing _target;
             private readonly Func<Vec2> _offset;
             private readonly string _hint;
-            private readonly Sprite _image;
+            private readonly IEnumerable<Sprite> _images;
             private int _ticks;
 
-            public HintThing(Thing target, Func<Vec2> offset, string hint, Sprite image)
+            public HintThing(Thing target, Func<Vec2> offset, string hint, IEnumerable<Sprite> images)
             {
                 _target = target;
                 _offset = offset;
                 _hint = hint;
-                _image = image;
+                _images = images.ToArray();
             }
 
             public override void Update()
@@ -693,9 +693,14 @@ namespace TMGmod.Core.WClasses
 
                 pos.x += 16f;
                 pos.y -= 8f;
-                _image.depth = newDepth;
-                Graphics.Draw(_image, pos.x, pos.y - _image.height / 2f);
-                pos.y += _image.height / 2f;
+
+                foreach (var image in _images)
+                {
+                    image.depth = newDepth;
+                    Graphics.Draw(image, pos.x, pos.y);
+                    pos.x += image.width;
+                }
+                pos.y += Graphics.GetStringHeight(_hint) / 2f;
                 Graphics.DrawStringOutline(_hint, pos, Color.White, depth: newDepth, outline: Color.Black);
             }
         }
