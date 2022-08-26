@@ -106,6 +106,9 @@
     <Compile Include="src\Core\Modifiers\Firing\Pressing.cs" />
     <Compile Include="src\Core\Modifiers\Firing\Reloading.cs" />
     <Compile Include="src\Core\Modifiers\Pipelining\CharacteristicsPipeline.cs" />
+    <Compile Include="src\Core\Modifiers\Pipelining\EnumerablePipeline.cs" />
+    <Compile Include="src\Core\Modifiers\Pipelining\EnumerablePipelineImplementation.cs" />
+    <Compile Include="src\Core\Modifiers\Pipelining\IEnumerablePipeline.cs" />
     <Compile Include="src\Core\Modifiers\Pipelining\IModifyPipeline.cs" />
     <Compile Include="src\Core\Modifiers\Pipelining\IPipeline.cs" />
     <Compile Include="src\Core\Modifiers\Syncing\ISync.cs" />

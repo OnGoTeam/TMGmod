@@ -1,48 +1,19 @@
-﻿#if DEBUG
-using System;
-#endif
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace TMGmod.Core.Modifiers.Pipelining
 {
-    public class CharacteristicsPipeline : IPipeline, ICharacteristicsPipeline<CharacteristicsPipeline>
+    public class CharacteristicsPipeline :
+        EnumerablePipeline<CharacteristicsPipeline, string>, ICharacteristicsPipeline<CharacteristicsPipeline>
     {
-        private readonly IEnumerable<string> _characteristics;
-
-        public CharacteristicsPipeline(IEnumerable<string> characteristics)
+        public CharacteristicsPipeline(IEnumerable<string> elements) : base(elements)
         {
-            _characteristics = characteristics;
         }
 
-        public CharacteristicsPipeline New(IEnumerable<string> characteristics) =>
-            new CharacteristicsPipeline(characteristics);
-
-        public IEnumerator<string> GetEnumerator() => _characteristics.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        public override CharacteristicsPipeline New(IEnumerable<string> elements) =>
+            new CharacteristicsPipeline(elements);
     }
 
-    public interface ICharacteristicsPipeline<out T> : IEnumerable<string>
+    public interface ICharacteristicsPipeline<out T> : IEnumerablePipeline<T, string>
     {
-        T New(IEnumerable<string> characteristics);
-    }
-
-    public static class CharacteristicsPipelineImplementation
-    {
-#if DEBUG
-        public static T With<T>(this ICharacteristicsPipeline<T> pipeline, string characteristic) =>
-            pipeline.New(pipeline.Concat(new[] { characteristic }));
-#endif
-
-        public static T With<T>(this ICharacteristicsPipeline<T> pipeline, IEnumerable<string> characteristics) =>
-            pipeline.New(pipeline.Concat(characteristics));
-#if DEBUG
-        public static T Map<T>(
-            this ICharacteristicsPipeline<T> pipeline, Func<IEnumerable<string>, IEnumerable<string>> map
-        ) =>
-            pipeline.New(map(pipeline));
-#endif
     }
 }
