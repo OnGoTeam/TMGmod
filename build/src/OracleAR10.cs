@@ -12,8 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class OracleAR10 : BaseDmr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
-
+        [UsedImplicitly]
         public OracleAR10(float xval, float yval)
             : base(xval, yval)
         {
@@ -43,12 +42,6 @@ namespace TMGmod
             laserSight = false;
             _laserOffsetTL = new Vec2(17f, 1.5f);
             _weight = 5f;
-        }
-
-        public float HandAngleOff
-        {
-            get => handAngle * offDir;
-            set => handAngle = value * offDir;
         }
 
         protected override void OnInitialize()
