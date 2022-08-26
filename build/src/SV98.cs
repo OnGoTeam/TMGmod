@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DuckGame;
+using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.Modifiers.Updating;
@@ -12,6 +13,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class SV98 : BaseBolt, IHaveAllowedSkins, I5
     {
+        [UsedImplicitly]
         public SV98(float xval, float yval) : base(xval, yval)
         {
             _editorName = "SV-98";

@@ -21,11 +21,12 @@ namespace TMGmod.Core.Modifiers.Syncing
             var old = Value;
             _update(old, _filter(value));
         }
-
+#if DEBUG
         public void Transact(Func<T, T> transact)
         {
             Value = transact(Value);
         }
+#endif
 
         public T Value
         {
