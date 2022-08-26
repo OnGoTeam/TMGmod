@@ -23,7 +23,6 @@ namespace TMGmod
             {
                 center = new Vec2(5f, 2f),
             };
-            FrameId = 0;
             _center = new Vec2(17f, 5f);
             _collisionOffset = new Vec2(-17f, -5f);
             _collisionSize = new Vec2(33f, 9f);

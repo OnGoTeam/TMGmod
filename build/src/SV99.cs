@@ -17,7 +17,7 @@ namespace TMGmod
         {
             _editorName = "SV-99";
             Smap = new SpriteMap(GetPath("SV99"), 27, 9);
-            FrameId = 8;
+            SkinValue = 8;
             _center = new Vec2(13f, 5f);
             _collisionOffset = new Vec2(-13f, -5f);
             _collisionSize = new Vec2(27f, 9f);

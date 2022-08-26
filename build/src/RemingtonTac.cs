@@ -37,7 +37,6 @@ namespace TMGmod
             {
                 center = new Vec2(3f, 1f),
             };
-            FrameId = 20;
             ShellOffset = new Vec2(2f, -2f);
             LoaderVec2 = new Vec2(8f, 0f);
             Loaddx = 3f;
