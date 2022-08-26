@@ -39,7 +39,11 @@ namespace TMGmod
             ShellOffset = new Vec2(-11f, 0f);
             _weight = 5.7f;
             Compose(
+#if DEBUG
+                new LoseAccuracy(.35f, .01f, .7f),
+#else
                 new LoseAccuracy(.02f, .017f, 1f),
+#endif
                 new SpeedAccuracy(this, 0f, 1f, 0f)
             );
         }
