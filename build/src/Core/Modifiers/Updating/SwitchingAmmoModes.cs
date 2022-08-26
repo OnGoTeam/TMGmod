@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using DuckGame;
+#if DEBUG
+using TMGmod.Core.Modifiers.Firing;
+#endif
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Updating
@@ -48,11 +51,13 @@ namespace TMGmod.Core.Modifiers.Updating
             _reset();
         }
 
+#if DEBUG
         private void SwitchMode()
         {
             SetMode(_mode + 1);
             SFX.Play(Mod.GetPath<TMGmod>("sounds/tuduc.wav"));
         }
+#endif
 
         protected override void ModifyUpdate()
         {
@@ -73,10 +78,12 @@ namespace TMGmod.Core.Modifiers.Updating
             for (var i = 0; i < _modes; i++) buffer.Write(_ammo[_mode]);
         }
 
+#if DEBUG
         public IModifyEverything SwitchingOnQuack()
         {
             return ComposedModifier.Compose(this, new Quacking(_target, true, true, SwitchMode, "mode"));
         }
+#endif
 
         private class Proxy<T>
         {
@@ -87,6 +94,9 @@ namespace TMGmod.Core.Modifiers.Updating
         public IModifyEverything Animated(
             Action<int, int> update,
             Func<int, int> trigger
+#if DEBUG
+            , int acceleration = 0
+#endif
         )
         {
             var animating = new Proxy<Animating<int>>(null);
@@ -111,6 +121,9 @@ namespace TMGmod.Core.Modifiers.Updating
             return ComposedModifier.Compose(
                 this,
                 animating.Value,
+#if DEBUG
+                new Pressing(_target, () => animating.Value.Decrement(acceleration)),
+#endif
                 new Quacking(
                     _target,
                     true,

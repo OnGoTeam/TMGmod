@@ -103,6 +103,7 @@
     <Compile Include="src\Core\Modifiers\Firing\Burst.cs" />
     <Compile Include="src\Core\Modifiers\Firing\Charging.cs" />
     <Compile Include="src\Core\Modifiers\Firing\IModifyFire.cs" />
+    <Compile Include="src\Core\Modifiers\Firing\Pressing.cs" />
     <Compile Include="src\Core\Modifiers\Firing\Reloading.cs" />
     <Compile Include="src\Core\Modifiers\Pipelining\CharacteristicsPipeline.cs" />
     <Compile Include="src\Core\Modifiers\Pipelining\IModifyPipeline.cs" />

@@ -64,6 +64,9 @@ namespace TMGmod
                     (frames, mode) =>
                         handOffset = Math.Abs(mode - frames / (float)FramesToSwitchTo(mode)) * new Vec2(3f, 2f),
                     FramesToSwitchTo
+#if DEBUG
+                    , 1
+#endif
                 )
             );
         }

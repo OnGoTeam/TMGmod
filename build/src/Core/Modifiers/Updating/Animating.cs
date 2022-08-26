@@ -92,10 +92,23 @@ namespace TMGmod.Core.Modifiers.Updating
                 Complete();
         }
 
-        protected override void ModifyUpdate()
+        private void Decrement()
         {
             if (_frames > 0)
                 Set(_frames - 1);
+        }
+
+#if DEBUG
+        public void Decrement(int n)
+        {
+            if (_frames > 0 && n > 0)
+                Set(Math.Max(_frames - n, 0));
+        }
+#endif
+
+        protected override void ModifyUpdate()
+        {
+            Decrement();
         }
 
         public override bool CanFire()

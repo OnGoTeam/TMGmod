@@ -42,7 +42,14 @@ namespace TMGmod
                 {
                     if (frames > 0 && owner is null)
                     {
+#if DEBUG
+                        if (frames < 10)
+                            _animating?.Complete();
+                        else
+                            _animating?.Cancel();
+#else
                         _animating?.Cancel();
+#endif
                         handOffset = new Vec2(0, 0f);
                         return;
                     }
