@@ -265,7 +265,6 @@
     <Compile Include="src\AWS.cs" />
     <Compile Include="src\BarretM98.cs" />
     <Compile Include="src\Core\ArwaMag.cs" />
-    <Compile Include="src\Core\MagBuddy.cs" />
     <Compile Include="src\ARwA.cs" />
     <Compile Include="src\Buddies\HpArmor.cs" />
     <Compile Include="src\Cases\Color\NitroCase.cs" />
