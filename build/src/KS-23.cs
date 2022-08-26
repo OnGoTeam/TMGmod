@@ -14,13 +14,13 @@ namespace TMGmod
     {
         private bool _shootwasyes;
 
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
 
         [UsedImplicitly] public float HandAngleOffState;
 
-        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
+        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new(nameof(HandAngleOffState));
 
-        [UsedImplicitly] public StateBinding ShootwasyesBinding = new StateBinding(nameof(_shootwasyes));
+        [UsedImplicitly] public StateBinding ShootwasyesBinding = new(nameof(_shootwasyes));
 
         [UsedImplicitly]
         public KS23(float xval, float yval) : base(xval, yval)

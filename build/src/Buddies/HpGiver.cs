@@ -9,7 +9,7 @@ namespace TMGmod.Buddies
     [EditorGroup("TMG|Misc")]
     public class HpGiver : Thing
     {
-        private readonly HashSet<Duck> _given = new HashSet<Duck>();
+        private readonly HashSet<Duck> _given = new();
 
         [UsedImplicitly] public EditorProperty<float> Hp;
 
@@ -31,8 +31,7 @@ namespace TMGmod.Buddies
             if (!isServerForObject) return;
             foreach (var thing in Level.current.things[typeof(Duck)])
             {
-                if (!(thing is Duck duck)) continue;
-                if (!duck.isServerForObject) continue;
+                if (thing is not Duck { isServerForObject: true } duck) continue;
                 if (_given.Contains(duck)) continue;
                 var hp = new HpArmor(duck.x, duck.y, Hp.value);
                 Level.Add(hp);

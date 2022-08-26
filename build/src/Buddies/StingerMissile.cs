@@ -14,26 +14,26 @@ namespace TMGmod.Buddies
     {
         private const float A = 0.22f;
         private const float HomingRange = 8192;
-        private readonly List<Vec2> _pList = new List<Vec2>();
+        private readonly List<Vec2> _pList = new();
         private bool _activated;
         private MaterialThing _target;
         private int _ticks;
 
         [UsedImplicitly] public Vec2 Av;
 
-        [UsedImplicitly] public StateBinding AvBinding = new StateBinding(nameof(Av));
+        [UsedImplicitly] public StateBinding AvBinding = new(nameof(Av));
 
         [UsedImplicitly] public Vec2 G;
 
-        [UsedImplicitly] public StateBinding GBinding = new StateBinding(nameof(G));
+        [UsedImplicitly] public StateBinding GBinding = new(nameof(G));
 
         [UsedImplicitly] public Vec2 Ta;
 
-        [UsedImplicitly] public StateBinding TaBinding = new StateBinding(nameof(Ta));
+        [UsedImplicitly] public StateBinding TaBinding = new(nameof(Ta));
 
         [UsedImplicitly] public Vec2 Tlv;
 
-        [UsedImplicitly] public StateBinding TlvBinding = new StateBinding(nameof(Tlv));
+        [UsedImplicitly] public StateBinding TlvBinding = new(nameof(Tlv));
 
         public StingerMissile(float xval, float yval) : base(xval, yval)
         {
@@ -75,7 +75,7 @@ namespace TMGmod.Buddies
         {
             if (_target != null)
                 if (Level.CheckLine<IPlatform>(position, _target.position) != null ||
-                    (_target is Duck duck0 && duck0.dead) || _target == owner)
+                    _target is Duck { dead: true } || _target == owner)
                     _target = null;
             if (_target != null) return;
             //else
@@ -167,8 +167,8 @@ namespace TMGmod.Buddies
                         autoBlock.shouldWreck = true;
                         varBlocks.Add(autoBlock.blockIndex);
                         break;
-                    case Door _:
-                    case VerticalDoor _:
+                    case Door:
+                    case VerticalDoor:
                         Level.Remove(block);
                         block.Destroy(new DTRocketExplosion(null));
                         break;

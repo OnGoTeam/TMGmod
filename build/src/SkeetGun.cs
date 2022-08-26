@@ -14,7 +14,7 @@ namespace TMGmod
     {
         private float _handleAngleOff;
 
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
 
         public SkeetGun(float xval, float yval) : base(xval, yval)
         {
@@ -44,15 +44,12 @@ namespace TMGmod
 
         protected override void RealFire()
         {
-            switch (ammo)
+            _barrelOffsetTL.y = ammo switch
             {
-                case 2:
-                    _barrelOffsetTL.y = .5f;
-                    break;
-                case 1:
-                    _barrelOffsetTL.y = 2.5f;
-                    break;
-            }
+                2 => .5f,
+                1 => 2.5f,
+                _ => _barrelOffsetTL.y,
+            };
 
             base.RealFire();
         }
@@ -73,8 +70,15 @@ namespace TMGmod
                 return;
             }
 
-            if (_handleAngleOff > 0f) _handleAngleOff -= 0.025f;
-            else if (_handleAngleOff < 0f) _handleAngleOff += 0.025f;
+            switch (_handleAngleOff)
+            {
+                case > 0f:
+                    _handleAngleOff -= 0.025f;
+                    break;
+                case < 0f:
+                    _handleAngleOff += 0.025f;
+                    break;
+            }
             if ((_handleAngleOff > -0.025f) & (_handleAngleOff < 0.025f)) _handleAngleOff = 0f;
         }
     }

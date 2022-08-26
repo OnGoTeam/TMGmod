@@ -13,11 +13,11 @@ namespace TMGmod
     [UsedImplicitly]
     public class Vixr : BaseGun, IAmAr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
 
         [UsedImplicitly] public float HandAngleOffState;
 
-        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
+        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new(nameof(HandAngleOffState));
 
         public Vixr(float xval, float yval)
             : base(xval, yval)
@@ -83,8 +83,10 @@ namespace TMGmod
 
         public override void OnHoldAction()
         {
-            if (ammo > 0) HandAngleOff -= 0.01f;
-            else if (ammo < 1) HandAngleOff = 0f;
+            if (ammo > 0)
+                HandAngleOff -= 0.01f;
+            else
+                HandAngleOff = 0f;
             HandAngleOffState = HandAngleOff;
             base.OnHoldAction();
         }

@@ -16,7 +16,7 @@ namespace TMGmod
     public class Butcher : BaseLmg, IHaveAllowedSkins
     {
         private float _debris = 1f;
-        private readonly SynchronizedValue<bool> _magInserted = new SynchronizedValue<bool>(true);
+        private readonly SynchronizedValue<bool> _magInserted = new(true);
 
         [UsedImplicitly]
         public Butcher(float xval, float yval)
@@ -51,7 +51,7 @@ namespace TMGmod
                     60,
                     magOffset,
                     (
-                        load, magsBefore
+                        load, _
                     ) =>
                     {
                         loaded = false;
@@ -69,7 +69,7 @@ namespace TMGmod
                         }
 
                         load(
-                            magsAfter =>
+                            _ =>
                             {
                                 SFX.Play(GetPath("sounds/tuduc.wav"));
                                 // NonSkin = magsAfter > 0 ? 0 : 3;

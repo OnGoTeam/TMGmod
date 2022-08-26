@@ -18,7 +18,7 @@ namespace TMGmod.Useless_or_deleted_Guns
     public class RaidGun : Gun
     {
         private float _dwait;
-        private List<string> _log = new List<string>();
+        private List<string> _log = new();
 
         public RaidGun(float xval, float yval)
             : base(xval, yval)

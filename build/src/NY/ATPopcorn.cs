@@ -36,7 +36,7 @@ namespace TMGmod.NY
         {
             base.OnHit(destroyed, b);
             if (!destroyed) return;
-            if (!(b.firedFrom is Gun gun)) return;
+            if (b.firedFrom is not Gun gun) return;
             for (var index = 0; index < 20; ++index)
             {
                 var num2 = (float)(index * 18.0 - 5.0) + Rando.Float(10f);

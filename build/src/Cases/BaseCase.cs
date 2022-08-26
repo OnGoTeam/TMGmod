@@ -18,16 +18,16 @@ namespace TMGmod.Cases
             _chance = chance;
         }
         
-        public SpawnSpec<T> Chance(float chance) => new SpawnSpec<T>(_thing, chance * _chance);
+        public SpawnSpec<T> Chance(float chance) => new(_thing, chance * _chance);
 
-        public SpawnSpec<T> Decorate(Func<T, T> f) => new SpawnSpec<T>(() => f(_thing()), _chance);
-        public static SpawnSpec<T> Base(Type t) => new SpawnSpec<T>(() => Editor.CreateThing(t) as T, 1f);
+        public SpawnSpec<T> Decorate(Func<T, T> f) => new(() => f(_thing()), _chance);
+        public static SpawnSpec<T> Base(Type t) => new(() => Editor.CreateThing(t) as T, 1f);
         public static SpawnSpec<T> Base() => Base(typeof(T));
 
         public Holdable Spawn() => Rando.Float(0f, 1f) < _chance ? _thing() : null;
 
         public static implicit operator SpawnSpec<Holdable>(SpawnSpec<T> spec) =>
-            new SpawnSpec<Holdable>(() => spec._thing(), spec._chance);
+            new(() => spec._thing(), spec._chance);
 
         public T Thing() => _thing();
         public float Chance() => _chance;
@@ -107,7 +107,7 @@ namespace TMGmod.Cases
 
         public override void OnPressAction()
         {
-            if (owner == null || owner is MagnetGun) return;
+            if (owner is null or MagnetGun) return;
             //else
             Level.Remove(this);
             var contained = Spawn();

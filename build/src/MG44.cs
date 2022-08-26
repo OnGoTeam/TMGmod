@@ -47,15 +47,12 @@ namespace TMGmod
             maxAccuracyLost = HandleQ() ? 0f : 0.3f;
             base.Update();
             // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (ammo)
+            NonSkin = ammo switch
             {
-                case 1:
-                    NonSkin = 1;
-                    break;
-                case 0:
-                    NonSkin = 2;
-                    break;
-            }
+                1 => 1,
+                0 => 2,
+                _ => NonSkin,
+            };
         }
 
         protected override void PopBaseShell()

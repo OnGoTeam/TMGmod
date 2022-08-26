@@ -7,7 +7,7 @@ namespace TMGmod.Core.StockLogic
         public static bool SwitchStockQ(this Holdable gun)
         {
             var duck = gun.duck;
-            return !(duck is null) && !duck.sliding;
+            return duck is not null && !duck.sliding;
         }
     }
 }

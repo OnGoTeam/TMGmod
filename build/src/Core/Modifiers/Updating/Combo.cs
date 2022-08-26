@@ -12,7 +12,7 @@ namespace TMGmod.Core.Modifiers.Updating
         private readonly string _hint;
         private readonly string[] _combo;
         private readonly Action _action;
-        private readonly Queue<string> _log = new Queue<string>();
+        private readonly Queue<string> _log = new();
 
         public Combo(BaseGun target, string hint, Action action, params string[] combo)
         {

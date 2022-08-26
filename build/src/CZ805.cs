@@ -58,11 +58,14 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            if (ammo > 26) NonSkin = 5 * (NonSkin / 5) + 0;
-            else if (ammo > 20) NonSkin = 5 * (NonSkin / 5) + 1;
-            else if (ammo > 12) NonSkin = 5 * (NonSkin / 5) + 2;
-            else if (ammo > 5) NonSkin = 5 * (NonSkin / 5) + 3;
-            else NonSkin = 5 * (NonSkin / 5) + 4;
+            NonSkin = ammo switch
+            {
+                > 26 => 5 * (NonSkin / 5) + 0,
+                > 20 => 5 * (NonSkin / 5) + 1,
+                > 12 => 5 * (NonSkin / 5) + 2,
+                > 5 => 5 * (NonSkin / 5) + 3,
+                _ => 5 * (NonSkin / 5) + 4,
+            };
         }
     }
 }

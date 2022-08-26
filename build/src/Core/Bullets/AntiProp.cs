@@ -19,11 +19,11 @@ namespace TMGmod.Core.Bullets
             //else
             switch (t)
             {
-                case MaterialThing thing when thing is IPlatform:
+                case MaterialThing thing and IPlatform:
                     thing._hitPoints = 1;
                     thing.Hit(this, pos);
                     break;
-                case MaterialThing thing when thing._hitPoints > 0f:
+                case MaterialThing { _hitPoints: > 0f } thing:
                     thing._hitPoints -= 8;
                     break;
             }

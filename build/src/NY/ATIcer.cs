@@ -35,7 +35,7 @@ namespace TMGmod.NY
             {
                 base.OnCollide(pos, t, willBeStopped);
                 if (!willBeStopped) return;
-                if (!(t is MaterialThing mt)) return;
+                if (t is not MaterialThing mt) return;
                 var pos0 = pos - travelDirNormalized * 10;
                 Level.Add(Icicle.FromStick(pos0, ammo.sprite.angle, travelDirNormalized * bulletSpeed, mt));
             }
@@ -45,13 +45,13 @@ namespace TMGmod.NY
         {
             private MaterialThing _stick;
 
-            [UsedImplicitly] public StateBinding OdoBinding = new StateBinding(nameof(OffDirOffset));
+            [UsedImplicitly] public StateBinding OdoBinding = new(nameof(OffDirOffset));
 
             [UsedImplicitly] public sbyte OffDirOffset = 1;
 
-            [UsedImplicitly] public StateBinding SaoBinding = new StateBinding(nameof(StickAngleOffset));
+            [UsedImplicitly] public StateBinding SaoBinding = new(nameof(StickAngleOffset));
 
-            [UsedImplicitly] public StateBinding SoBinding = new StateBinding(nameof(StickOffset));
+            [UsedImplicitly] public StateBinding SoBinding = new(nameof(StickOffset));
 
             [UsedImplicitly] public float StickAngleOffset;
 
@@ -77,7 +77,7 @@ namespace TMGmod.NY
             {
                 base.Touch(with);
                 UpdateStickable();
-                if (!(_stick is null)) return;
+                if (_stick is not null) return;
                 if (with is Duck d)
                 {
                     d.Kill(new DTImpact(this));
@@ -97,7 +97,7 @@ namespace TMGmod.NY
                     return;
                 }
 
-                if (_stick is FeatherVolume || _stick is Duck) _stick = null;
+                if (_stick is FeatherVolume or Duck) _stick = null;
             }
 
             public override void Update()

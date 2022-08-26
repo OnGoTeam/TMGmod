@@ -16,8 +16,7 @@ namespace TMGmod.Cases
         private readonly float _itemheight;
         private int _timeoffset;
 
-        private static Tuple<Holdable, float> SpecTuple(SpawnSpec<Holdable> drop) =>
-            new Tuple<Holdable, float>(drop.Thing(), drop.Chance());
+        private static Tuple<Holdable, float> SpecTuple(SpawnSpec<Holdable> drop) => new(drop.Thing(), drop.Chance());
 
         private static bool ValidGraphic(Tuple<Holdable, float> tuple) => tuple.Item1?.graphic != null;
 

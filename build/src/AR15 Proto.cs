@@ -17,11 +17,11 @@ namespace TMGmod
 
         [UsedImplicitly] public int Ammobefore = 21;
 
-        [UsedImplicitly] public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
+        [UsedImplicitly] public StateBinding AmmobeforeBinding = new(nameof(Ammobefore));
 
         [UsedImplicitly] public float Explode;
 
-        [UsedImplicitly] public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
+        [UsedImplicitly] public StateBinding UselessBinding = new(nameof(Uselessinteger));
 
         [UsedImplicitly] public int Uselessinteger = 3;
 
@@ -50,7 +50,7 @@ namespace TMGmod
             KforceDelta = 0.43f;
         }
 
-        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
+        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new(nameof(Explode));
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
 
         protected override void OnInitialize()

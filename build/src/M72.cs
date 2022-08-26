@@ -35,12 +35,15 @@ namespace TMGmod
         }
         public override void Update()
         {
-            if (ammo > 4) NonSkin = 0;
-            else if (ammo > 3) NonSkin = 1;
-            else if (ammo > 2) NonSkin = 2;
-            else if (ammo > 1) NonSkin = 3;
-            else if (ammo > 0) NonSkin = 4;
-            else NonSkin = 5;
+            NonSkin = ammo switch
+            {
+                > 4 => 0,
+                > 3 => 1,
+                > 2 => 2,
+                > 1 => 3,
+                > 0 => 4,
+                _ => 5,
+            };
             base.Update();
         }
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0 });

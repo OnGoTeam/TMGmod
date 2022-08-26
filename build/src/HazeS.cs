@@ -17,7 +17,7 @@ namespace TMGmod
 
         private bool _sighted;
 
-        [UsedImplicitly] public StateBinding HeatvalBinding = new StateBinding(nameof(Heatval));
+        [UsedImplicitly] public StateBinding HeatvalBinding = new(nameof(Heatval));
 
         public HazeS(float xval, float yval) :
             base(xval, yval)
@@ -109,24 +109,14 @@ namespace TMGmod
 
         protected override void BaseOnSpent()
         {
-            switch (Sighted)
+            _heatval += Sighted switch
             {
-                case true when _heatval < 1f:
-                    _heatval += 4f;
-                    break;
-                case true when _heatval < 1.3f:
-                    _heatval += .3f;
-                    break;
-                case true when _heatval > 1.7f:
-                    _heatval += .7f;
-                    break;
-                case true:
-                    _heatval += _heatval - 1f;
-                    break;
-                default:
-                    _heatval += 1.5f;
-                    break;
-            }
+                true when _heatval < 1f => 4f,
+                true when _heatval < 1.3f => .3f,
+                true when _heatval > 1.7f => .7f,
+                true => _heatval - 1f,
+                _ => 1.5f,
+            };
 
             Heatval = Heatval;
         }

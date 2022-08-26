@@ -9,7 +9,7 @@ namespace TMGmod.NY
     {
         [UsedImplicitly] public bool Dropped;
 
-        [UsedImplicitly] public StateBinding DroppedBinding = new StateBinding(nameof(Dropped));
+        [UsedImplicitly] public StateBinding DroppedBinding = new(nameof(Dropped));
 
         public CandyCane(float xval, float yval) : base(xval, yval)
         {
@@ -61,7 +61,7 @@ namespace TMGmod.NY
             var ctor = GetType().GetConstructor(new[] { typeof(float), typeof(float) });
             if (ctor == null) return;
             //else
-            if (!(ctor.Invoke(new object[] { pos.x, pos.y }) is Thing t)) return;
+            if (ctor.Invoke(new object[] { pos.x, pos.y }) is not Thing t) return;
             //else
             Level.Add(t);
         }

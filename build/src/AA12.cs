@@ -51,10 +51,7 @@ namespace TMGmod
         {
             if (duck?.sliding == true) _accuracyLost = 0;
             base.Fire();
-            if (duck == null) return;
-            if (duck.ragdoll != null) return;
-            if (!duck.sliding) return;
-            if (!duck.grounded) return;
+            if (duck is not { ragdoll: null, sliding: true, grounded: true }) return;
             duck.vSpeed = 0f;
         }
     }

@@ -14,7 +14,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class ARwA : BaseAr, IHaveAllowedSkins
     {
-        private readonly SynchronizedValue<bool> _magInserted = new SynchronizedValue<bool>(true);
+        private readonly SynchronizedValue<bool> _magInserted = new(true);
         [UsedImplicitly]
         public ARwA(float xval, float yval)
             : base(xval, yval)

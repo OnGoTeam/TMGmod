@@ -14,11 +14,11 @@ namespace TMGmod.Stuff
 
         [UsedImplicitly] public float Hp;
 
-        [UsedImplicitly] public StateBinding HpBinding = new StateBinding(nameof(Hp));
+        [UsedImplicitly] public StateBinding HpBinding = new(nameof(Hp));
 
         [UsedImplicitly] public int Teksturka;
 
-        [UsedImplicitly] public StateBinding TexBinding = new StateBinding(nameof(Teksturka));
+        [UsedImplicitly] public StateBinding TexBinding = new(nameof(Teksturka));
         private int TotalFrames() => _sprite.texture.width * _sprite.texture.height / (_sprite.width * _sprite.height);
 
         [UsedImplicitly] public readonly EditorProperty<int> Length;
@@ -66,7 +66,7 @@ namespace TMGmod.Stuff
                 );
                 foreach (var realyduck in probablyduck)
                 {
-                    if (!(realyduck is Thing r1)) continue;
+                    if (realyduck is not Thing r1) continue;
                     //else
                     r1.hSpeed *= 1f / (Hp / 26f + 1f);
                     r1.vSpeed *= 1f / (Hp / 10f + 1f);

@@ -9,8 +9,7 @@ namespace TMGmod.Core.Modifiers.Pipelining
         {
         }
 
-        public override CharacteristicsPipeline New(IEnumerable<string> elements) =>
-            new CharacteristicsPipeline(elements);
+        public override CharacteristicsPipeline New(IEnumerable<string> elements) => new(elements);
     }
 
     public interface ICharacteristicsPipeline<out T> : IEnumerablePipeline<T, string>

@@ -71,7 +71,7 @@ namespace TMGmod.Cases
             {
                 Initialize();
             }
-            if (!(Editor.CreateThing(_contains) is Holdable newThing)) return;
+            if (Editor.CreateThing(_contains) is not Holdable newThing) return;
             if (Rando.Int(500) == 1 && newThing is Gun gun1 && gun1.CanSpawnInfinite())
             {
                 gun1.infiniteAmmoVal = true;

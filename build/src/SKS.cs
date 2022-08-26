@@ -57,7 +57,7 @@ namespace TMGmod
             }
         }
 
-        [UsedImplicitly] public StateBinding BayonetBinding = new StateBinding(nameof(Bayonet));
+        [UsedImplicitly] public StateBinding BayonetBinding = new(nameof(Bayonet));
 
         public SKS(float xval, float yval)
             : base(xval, yval)

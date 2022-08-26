@@ -16,9 +16,9 @@ namespace TMGmod
         private const double Explodechance = 0.005;
 
         public int Ammobefore = 71;
-        [UsedImplicitly] public StateBinding AmmobeforeBinding = new StateBinding(nameof(Ammobefore));
+        [UsedImplicitly] public StateBinding AmmobeforeBinding = new(nameof(Ammobefore));
         public float Explode;
-        [UsedImplicitly] public StateBinding UselessBinding = new StateBinding(nameof(Uselessinteger));
+        [UsedImplicitly] public StateBinding UselessBinding = new(nameof(Uselessinteger));
         public int Uselessinteger = 3;
 
         public G9M(float xval, float yval)
@@ -48,7 +48,7 @@ namespace TMGmod
             KickForce2Lmg = 0.43f;
         }
 
-        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new StateBinding(nameof(Explode));
+        [UsedImplicitly] public StateBinding ExplodeBinding { get; } = new(nameof(Explode));
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 8 });
 

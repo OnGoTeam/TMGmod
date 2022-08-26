@@ -9,9 +9,9 @@ namespace TMGmod.Core.WClasses.ClassImplementations
     public abstract class BaseBolt : BaseGun, IAmSr
     {
         [UsedImplicitly] public float AngleOffset;
-        [UsedImplicitly] public StateBinding AngleOffsetBinding = new StateBinding(nameof(AngleOffset));
+        [UsedImplicitly] public StateBinding AngleOffsetBinding = new(nameof(AngleOffset));
         [UsedImplicitly] public int LoadState = -1;
-        [UsedImplicitly] public StateBinding LoadStateBinding = new StateBinding(nameof(LoadState));
+        [UsedImplicitly] public StateBinding LoadStateBinding = new(nameof(LoadState));
         [UsedImplicitly] public NetSoundEffect NetLoad;
         [UsedImplicitly] public StateBinding NetLoadBinding = new NetSoundBinding(nameof(NetLoad));
 

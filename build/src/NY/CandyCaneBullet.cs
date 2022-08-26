@@ -19,7 +19,7 @@ namespace TMGmod.NY
         public override void Update()
         {
             base.Update();
-            if (!(firedFrom is CandyCaneOrange)) return;
+            if (firedFrom is not CandyCaneOrange) return;
             //else
             var v = travelDirNormalized * bulletSpeed;
             v *= 0.3f;

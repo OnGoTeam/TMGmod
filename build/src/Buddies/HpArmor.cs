@@ -14,10 +14,10 @@ namespace TMGmod.Buddies
     {
         public float HpMax;
 
-        [UsedImplicitly] public StateBinding HitPointsBinding = new StateBinding(nameof(_hitPoints));
-        [UsedImplicitly] public StateBinding HpMaxBinding = new StateBinding(nameof(HpMax));
+        [UsedImplicitly] public StateBinding HitPointsBinding = new(nameof(_hitPoints));
+        [UsedImplicitly] public StateBinding HpMaxBinding = new(nameof(HpMax));
 #if DEBUG
-        private readonly Stack<Tuple<float, int>> _damageLog = new Stack<Tuple<float, int>>();
+        private readonly Stack<Tuple<float, int>> _damageLog = new();
         private int _frames;
 #endif
 
@@ -101,7 +101,7 @@ namespace TMGmod.Buddies
                          RayIntersectsSegment(origin, direction, bottomRight, bottomLeft)
                          ||
                          RayIntersectsSegment(origin, direction, bottomLeft, topLeft);
-            if (!(thing is FeatherVolume fv) || !(fv.duckOwner?.ragdoll is Ragdoll ragdoll)) return result;
+            if (thing is not FeatherVolume { duckOwner: { ragdoll: { } ragdoll } }) return result;
             result = result || RayIntersectsThing(origin, direction, ragdoll.part1);
             result = result || RayIntersectsThing(origin, direction, ragdoll.part2);
             result = result || RayIntersectsThing(origin, direction, ragdoll.part3);
@@ -283,7 +283,7 @@ namespace TMGmod.Buddies
         }
 
 #if DEBUG
-        private readonly List<string> _log = new List<string>();
+        private readonly List<string> _log = new();
         private const int MaxLogLen = 10;
 #endif
 
@@ -448,10 +448,10 @@ namespace TMGmod.Buddies
 
     public static class VecUtils
     {
-        public static Rectangle TrueRectangle(this Thing thing) => new Rectangle(thing.topLeft, thing.bottomRight);
+        public static Rectangle TrueRectangle(this Thing thing) => new(thing.topLeft, thing.bottomRight);
 
         public static Rectangle Move(this Rectangle rectangle, Vec2 vec) =>
-            new Rectangle(rectangle.tl + vec, rectangle.br + 2 * vec);
+            new(rectangle.tl + vec, rectangle.br + 2 * vec);
     }
 }
 #endif

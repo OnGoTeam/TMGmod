@@ -15,7 +15,7 @@ namespace TMGmod.SolvePoly
         Infinite,
     }
 
-    internal struct Solution
+    internal readonly struct Solution
     {
         private readonly uint _j;
         private readonly double[] _solution;

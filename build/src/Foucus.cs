@@ -42,15 +42,14 @@ namespace TMGmod
             _weight = 8f;
         }
 
-        [UsedImplicitly] public StateBinding LegacyBinding { get; } = new StateBinding(nameof(Legacy));
+        [UsedImplicitly] public StateBinding LegacyBinding { get; } = new(nameof(Legacy));
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 7 });
 
         public override void Fire()
         {
             base.Fire();
             if (ammo < 1) return;
-            if (duck == null) return;
-            if (duck.ragdoll != null) return;
+            if (duck is not { ragdoll: null }) return;
             if ((Legacy == 0) & (duck.vSpeed > -1f) & (duck.vSpeed < 1f)) duck.vSpeed += Rando.Float(-0.7f, -0.2f);
             else duck.vSpeed += Rando.Float(0.2f, 0.6f);
             Legacy = Rando.ChooseInt(0, 1);

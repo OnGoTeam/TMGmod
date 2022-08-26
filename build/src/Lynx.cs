@@ -15,7 +15,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class Lynx : BaseGun, IAmDmr, IHaveAllowedSkins, I5
     {
-        private readonly LoseAccuracy _loseAccuracy = new LoseAccuracy(0.6f, 0.01f, 1f);
+        private readonly LoseAccuracy _loseAccuracy = new(0.6f, 0.01f, 1f);
 
         [UsedImplicitly]
         public Lynx(float xval, float yval)

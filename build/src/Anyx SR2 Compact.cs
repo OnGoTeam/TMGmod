@@ -13,11 +13,11 @@ namespace TMGmod
     public class VSK94 : BaseAr, IHaveAllowedSkins
     {
         private float _floatingKickforce;
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
         [UsedImplicitly] public float HandAngleOffState;
-        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new StateBinding(nameof(HandAngleOffState));
+        [UsedImplicitly] public StateBinding HandAngleOffStateBinding = new(nameof(HandAngleOffState));
         [UsedImplicitly] public float Psevdotimer;
-        [UsedImplicitly] public StateBinding PsevdotimerBinding = new StateBinding(nameof(Psevdotimer));
+        [UsedImplicitly] public StateBinding PsevdotimerBinding = new(nameof(Psevdotimer));
 
         public VSK94(float xval, float yval)
             : base(xval, yval)
@@ -68,8 +68,10 @@ namespace TMGmod
 
         public override void OnHoldAction()
         {
-            if (ammo > 0) HandAngleOff -= 0.0067f;
-            else if (ammo < 1) HandAngleOff = 0f;
+            if (ammo > 0)
+                HandAngleOff -= 0.0067f;
+            else
+                HandAngleOff = 0f;
             HandAngleOffState = HandAngleOff;
             Psevdotimer += 1f;
             base.OnHoldAction();

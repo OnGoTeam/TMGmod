@@ -12,7 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class AUGA3 : BaseAr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
 
         public AUGA3(float xval, float yval)
             : base(xval, yval)

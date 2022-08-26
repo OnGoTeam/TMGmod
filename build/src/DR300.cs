@@ -47,7 +47,7 @@ namespace TMGmod
 
         [UsedImplicitly] public int PostRounds { get; private set; }
 
-        [UsedImplicitly] public StateBinding PostRoundsBinding { get; } = new StateBinding(nameof(PostRounds));
+        [UsedImplicitly] public StateBinding PostRoundsBinding { get; } = new(nameof(PostRounds));
 
         // ReSharper disable once InconsistentNaming
 
@@ -57,15 +57,12 @@ namespace TMGmod
 
         public override void Update()
         {
-            switch (PostRounds)
+            NonSkin = PostRounds switch
             {
-                case 20:
-                    NonSkin = 1;
-                    break;
-                case 30:
-                    NonSkin = 2;
-                    break;
-            }
+                20 => 1,
+                30 => 2,
+                _ => NonSkin,
+            };
 
             base.Update();
         }
@@ -73,18 +70,13 @@ namespace TMGmod
         public override void EditorPropertyChanged(object property)
         {
             // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (Rounds.value)
+            PostRounds = Rounds.value switch
             {
-                case 0:
-                    PostRounds = Rando.ChooseInt(20, 30);
-                    break;
-                case 1:
-                    PostRounds = 20;
-                    break;
-                case 2:
-                    PostRounds = 30;
-                    break;
-            }
+                0 => Rando.ChooseInt(20, 30),
+                1 => 20,
+                2 => 30,
+                _ => PostRounds,
+            };
 
             ammo = PostRounds;
             NonSkin = Rounds.value;

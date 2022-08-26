@@ -157,7 +157,7 @@ namespace TMGmod.Core.WClasses
             }
         }
 
-        [UsedImplicitly] public StateBinding MbBinding = new StateBinding(nameof(ModifierBuffer));
+        [UsedImplicitly] public StateBinding MbBinding = new(nameof(ModifierBuffer));
 
         public int SkinValue
         {
@@ -385,7 +385,7 @@ namespace TMGmod.Core.WClasses
             if (
                 Level.activeLevel is Editor
                 && this is IHaveAllowedSkins target
-                && EditorSpriteMap() is SpriteMap sprite
+                && EditorSpriteMap() is { } sprite
                 && target.SkinValue == -1
             )
             {
@@ -455,7 +455,7 @@ namespace TMGmod.Core.WClasses
             var contextMenu = base.GetContextMenu();
             switch (this)
             {
-                case IHaveAllowedSkins target when EditorSpriteMap() is SpriteMap sprite:
+                case IHaveAllowedSkins target when EditorSpriteMap() is { } sprite:
                 {
                     foreach (var skin in target.AllowedSkins.Concat(new[] { -1 }))
                         contextMenu.AddItem(new ContextSkinRender(new SkinMix(target, sprite), skin));
@@ -627,8 +627,7 @@ namespace TMGmod.Core.WClasses
         }
 #endif
 
-        private static readonly Dictionary<Tuple<Type, string>, bool> Hints =
-            new Dictionary<Tuple<Type, string>, bool>();
+        private static readonly Dictionary<Tuple<Type, string>, bool> Hints = new();
 
         private int _framesToHint;
 

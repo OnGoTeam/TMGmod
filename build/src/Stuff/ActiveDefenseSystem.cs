@@ -10,17 +10,17 @@ namespace TMGmod.Stuff
     [EditorGroup("TMG|Misc")]
     public class ActiveDefenseSystem : Holdable
     {
-        private readonly List<Grenade> _grenades = new List<Grenade>();
-        private readonly List<AdsHit> _hitPosList = new List<AdsHit>();
+        private readonly List<Grenade> _grenades = new();
+        private readonly List<AdsHit> _hitPosList = new();
         private readonly float _range;
         private readonly int _simTracked;
-        private readonly List<Tracked> _trackeds = new List<Tracked>();
+        private readonly List<Tracked> _trackeds = new();
         private readonly int _trackTicks;
         private int _ticks;
 
         public int Ammo = 5;
 
-        [UsedImplicitly] public StateBinding AmmoBinding = new StateBinding(nameof(Ammo));
+        [UsedImplicitly] public StateBinding AmmoBinding = new(nameof(Ammo));
 
         public ActiveDefenseSystem(float xpos, float ypos) : base(xpos, ypos)
         {
@@ -106,8 +106,7 @@ namespace TMGmod.Stuff
 
         private void HitTracked(Tracked tracked)
         {
-            if (Ammo == 0) return;
-            if (Ammo < -1) return;
+            if (Ammo is 0 or < -1) return;
             SFX.Play("click");
             if (Ammo != -1) Ammo -= 1;
             var grenade = tracked.Inst;

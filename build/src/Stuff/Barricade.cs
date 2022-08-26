@@ -11,13 +11,13 @@ namespace TMGmod.Stuff
     public class Barricade : Block
     {
         public bool Anchored;
-        public StateBinding AnchoredBinding = new StateBinding(nameof(Anchored));
-        public StateBinding DcdBinding = new StateBinding(nameof(Duckcooldown));
+        public StateBinding AnchoredBinding = new(nameof(Anchored));
+        public StateBinding DcdBinding = new(nameof(Duckcooldown));
         public float Duckcooldown;
         public float Hp;
-        public StateBinding HpBinding = new StateBinding(nameof(Hp));
+        public StateBinding HpBinding = new(nameof(Hp));
         public float ImpactSpeed;
-        public StateBinding ImpactSpeedBinding = new StateBinding(nameof(ImpactSpeed));
+        public StateBinding ImpactSpeedBinding = new(nameof(ImpactSpeed));
 
         public Barricade(float x, float y) : base(x, y)
         {
@@ -39,7 +39,7 @@ namespace TMGmod.Stuff
             Anchored = false;
             foreach (var block in blocks)
             {
-                if (block is Barricade barricade && !barricade.Anchored) continue;
+                if (block is Barricade { Anchored: false }) continue;
                 //else
                 Anchored = true;
             }
@@ -102,7 +102,7 @@ namespace TMGmod.Stuff
 
         protected override bool OnDestroy(DestroyType type0 = null)
         {
-            if (!(Level.activeLevel is Editor))
+            if (Level.activeLevel is not Editor)
             {
                 SFX.Play("woodHit");
                 if (isServerForObject)

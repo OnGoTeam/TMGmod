@@ -12,7 +12,7 @@ namespace TMGmod
     // ReSharper disable once InconsistentNaming
     public class OracleAR10 : BaseDmr, IHaveAllowedSkins
     {
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
 
         public OracleAR10(float xval, float yval)
             : base(xval, yval)

@@ -43,7 +43,7 @@ namespace TMGmod.Core.Modifiers.Updating
                 new Quacking(_target, true, true, Toggle, "stock", () => new Vec2(-8f, 0f) - _target._holdOffset)
             );
 
-        private DeploymentState FullState() => new DeploymentState(deployed: Deployed(), folded: Folded(), state: _state);
+        private DeploymentState FullState() => new(deployed: Deployed(), folded: Folded(), state: _state);
 
         private void SetState(float state)
         {

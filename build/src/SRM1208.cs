@@ -14,19 +14,19 @@ namespace TMGmod
     {
         [UsedImplicitly] public bool Loaded = true;
 
-        [UsedImplicitly] public StateBinding LddBinding = new StateBinding(nameof(Loaded));
+        [UsedImplicitly] public StateBinding LddBinding = new(nameof(Loaded));
 
         [UsedImplicitly] public bool Shootwasyes;
 
-        [UsedImplicitly] public StateBinding SwyBinding = new StateBinding(nameof(Shootwasyes));
+        [UsedImplicitly] public StateBinding SwyBinding = new(nameof(Shootwasyes));
 
         [UsedImplicitly] public int Yee = 20;
 
-        [UsedImplicitly] public StateBinding YeeBinding = new StateBinding(nameof(Yee));
+        [UsedImplicitly] public StateBinding YeeBinding = new(nameof(Yee));
 
         [UsedImplicitly] public bool Yeeenabled;
 
-        [UsedImplicitly] public StateBinding YeeeBinding = new StateBinding(nameof(Yeeenabled));
+        [UsedImplicitly] public StateBinding YeeeBinding = new(nameof(Yeeenabled));
 
         public SRM1208(float xval, float yval)
             : base(xval, yval)

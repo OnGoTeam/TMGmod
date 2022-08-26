@@ -14,25 +14,25 @@ namespace TMGmod.Stuff
 
         [UsedImplicitly] public bool Activated;
 
-        [UsedImplicitly] public StateBinding ActivatedBinding = new StateBinding(nameof(Activated));
+        [UsedImplicitly] public StateBinding ActivatedBinding = new(nameof(Activated));
 
         [UsedImplicitly] public MaterialThing Activator;
 
-        [UsedImplicitly] public StateBinding ActivatorBinding = new StateBinding(nameof(Activator));
+        [UsedImplicitly] public StateBinding ActivatorBinding = new(nameof(Activator));
 
         [UsedImplicitly] public bool Didboom;
 
-        [UsedImplicitly] public StateBinding DidboomBinding = new StateBinding(nameof(Didboom));
+        [UsedImplicitly] public StateBinding DidboomBinding = new(nameof(Didboom));
 
         [UsedImplicitly] public MaterialThing StickThing;
 
         [UsedImplicitly] public float ToExplode = -1f;
 
-        [UsedImplicitly] public StateBinding ToExplodeBinding = new StateBinding(nameof(ToExplode));
+        [UsedImplicitly] public StateBinding ToExplodeBinding = new(nameof(ToExplode));
 
         [UsedImplicitly] public bool WasThrown;
 
-        [UsedImplicitly] public StateBinding WasThrownBinding = new StateBinding(nameof(WasThrown));
+        [UsedImplicitly] public StateBinding WasThrownBinding = new(nameof(WasThrown));
 
         [UsedImplicitly] public bool Weak;
 
@@ -126,21 +126,14 @@ namespace TMGmod.Stuff
             _stickyVec2.x *= with.offDir;
             //enablePhysics = false;
             // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (from)
+            angleDegrees = from switch
             {
-                case ImpactedFrom.Right:
-                    angleDegrees = -90f;
-                    break;
-                case ImpactedFrom.Bottom:
-                    angleDegrees = 0f;
-                    break;
-                case ImpactedFrom.Left:
-                    angleDegrees = 90f;
-                    break;
-                case ImpactedFrom.Top:
-                    angleDegrees = 180f;
-                    break;
-            }
+                ImpactedFrom.Right => -90f,
+                ImpactedFrom.Bottom => 0f,
+                ImpactedFrom.Left => 90f,
+                ImpactedFrom.Top => 180f,
+                _ => angleDegrees,
+            };
         }
 
         public override void Thrown()
@@ -152,7 +145,7 @@ namespace TMGmod.Stuff
         public override void Update()
         {
             if (_destroyed) return;
-            if (StickThing != null && StickThing._destroyed) StickThing = null;
+            if (StickThing is { _destroyed: true }) StickThing = null;
 
             ToExplode -= 0.1f;
             if (duck != null && duck.holdObject == this)
@@ -173,7 +166,7 @@ namespace TMGmod.Stuff
                 sleeping = false;
             }
 
-            if (Activator is Duck duck1 && !duck1.dead && duck1.IsQuacking()) ToExplode = Rando.Float(0f, 0.5f);
+            if (Activator is Duck { dead: false } duck1 && duck1.IsQuacking()) ToExplode = Rando.Float(0f, 0.5f);
 
             if (grounded) angle = 0f;
             else if ((duck == null || duck.holdObject != this) && WasThrown && StickThing == null)

@@ -44,7 +44,7 @@ namespace TMGmod.Core.Modifiers.Updating
 
         private bool Deploying() => Deployable() && !_disabled;
 
-        private DeploymentState FullState() => new DeploymentState(deployed: Deployed(), folded: Folded(), state: _state);
+        private DeploymentState FullState() => new(deployed: Deployed(), folded: Folded(), state: _state);
 
         private void SetState(float state)
         {

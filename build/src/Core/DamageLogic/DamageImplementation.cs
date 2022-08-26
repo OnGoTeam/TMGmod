@@ -8,60 +8,45 @@ namespace TMGmod.Core.DamageLogic
     {
         private static float GetMean(AmmoType ammo)
         {
-            switch (ammo)
+            return ammo switch
             {
-                case IDamage damage:
-                    return damage.DamageMean;
-                case ATShrapnel _:
-                    return 30f;
-                case ATSniper _:
-                    return 110f;
-                default:
-                    return 50f;
-            }
+                IDamage damage => damage.DamageMean,
+                ATShrapnel => 30f,
+                ATSniper => 110f,
+                _ => 50f,
+            };
         }
 
         private static float GetVariation(AmmoType ammo)
         {
-            switch (ammo)
+            return ammo switch
             {
-                case IDamage damage:
-                    return damage.DamageVariation;
-                case ATShrapnel _:
-                    return 1f;
-                case ATSniper _:
-                    return .05f;
-                default:
-                    return 0.5f;
-            }
+                IDamage damage => damage.DamageVariation,
+                ATShrapnel => 1f,
+                ATSniper => .05f,
+                _ => 0.5f,
+            };
         }
 
         private static float GetConvexity(AmmoType ammo)
         {
-            switch (ammo)
+            return ammo switch
             {
-                case IDamage damage:
-                    return damage.DistanceConvexity;
-                case ATShrapnel _:
-                    return 1f;
-                default:
-                    return 0f;
-            }
+                IDamage damage => damage.DistanceConvexity,
+                ATShrapnel => 1f,
+                _ => 0f,
+            };
         }
 
         private static float GetAlpha(AmmoType ammo)
         {
-            switch (ammo)
+            return ammo switch
             {
-                case IDamage damage:
-                    return damage.AlphaDamage;
-                case ATShrapnel _:
-                    return 0.8f;
-                case ATSniper _:
-                    return 1f;
-                default:
-                    return 0.01f;
-            }
+                IDamage damage => damage.AlphaDamage,
+                ATShrapnel => 0.8f,
+                ATSniper => 1f,
+                _ => 0.01f,
+            };
         }
 
         private static float CalculateBase(AmmoType ammo)
@@ -128,13 +113,11 @@ namespace TMGmod.Core.DamageLogic
 
         private static float CalculatePortion(Bullet bullet)
         {
-            switch (bullet)
+            return bullet switch
             {
-                case BaseBullet b:
-                    return b.DamagePortion();
-                default:
-                    return 1f;
-            }
+                BaseBullet b => b.DamagePortion(),
+                _ => 1f,
+            };
         }
 
         private static float CalculateFull(Bullet bullet)

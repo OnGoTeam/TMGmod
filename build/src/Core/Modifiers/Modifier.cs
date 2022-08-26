@@ -79,13 +79,11 @@ namespace TMGmod.Core.Modifiers
 
         public virtual T ModifyPipeline<T>(T pipeline) where T : IPipeline
         {
-            switch (pipeline)
+            return pipeline switch
             {
-                case ICharacteristicsPipeline<T> characteristics:
-                    return characteristics.With(Characteristics());
-                default:
-                    return pipeline;
-            }
+                ICharacteristicsPipeline<T> characteristics => characteristics.With(Characteristics()),
+                _ => pipeline,
+            };
         }
 
         protected static float SafeDiv(float a, float b) => a / Math.Max(.001f, b);

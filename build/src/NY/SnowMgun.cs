@@ -33,9 +33,13 @@ namespace TMGmod.NY
 
         public override void Update()
         {
-            if (ammo > 20 && ammo <= 30) NonSkin = 1;
-            if (ammo > 10 && ammo <= 20) NonSkin = 2;
-            if (ammo > 0 && ammo <= 10) NonSkin = 3;
+            NonSkin = ammo switch
+            {
+                > 30 => 0,
+                > 20 => 1,
+                > 10 => 2,
+                _ => 3,
+            };
             base.Update();
         }
     }

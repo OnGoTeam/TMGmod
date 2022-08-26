@@ -17,7 +17,7 @@ namespace TMGmod
     {
         private float _handleAngleOff;
 
-        [UsedImplicitly] public StateBinding HandAngleOffBinding = new StateBinding(nameof(HandAngleOff));
+        [UsedImplicitly] public StateBinding HandAngleOffBinding = new(nameof(HandAngleOff));
 
         public MP7(float xval, float yval)
             : base(xval, yval)
@@ -76,8 +76,15 @@ namespace TMGmod
                 return;
             }
 
-            if (_handleAngleOff > 0f) _handleAngleOff -= 0.1f;
-            else if (_handleAngleOff < 0f) _handleAngleOff += 0.1f;
+            switch (_handleAngleOff)
+            {
+                case > 0f:
+                    _handleAngleOff -= 0.1f;
+                    break;
+                case < 0f:
+                    _handleAngleOff += 0.1f;
+                    break;
+            }
             if ((_handleAngleOff > -0.1f) & (_handleAngleOff < 0.1f)) _handleAngleOff = 0f;
         }
     }

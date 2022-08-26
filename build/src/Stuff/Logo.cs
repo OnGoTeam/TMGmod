@@ -26,15 +26,11 @@ namespace TMGmod.Stuff
 
         public override void Draw()
         {
-            switch (Square)
+            _collisionSize = Square switch
             {
-                case true:
-                    _collisionSize = new Vec2(48f, 48f);
-                    break;
-                case false:
-                    _collisionSize = new Vec2(64f, 36f);
-                    break;
-            }
+                true => new Vec2(48f, 48f),
+                false => new Vec2(64f, 36f),
+            };
 
             _center = _collisionSize / 2;
             _collisionOffset = -_center;

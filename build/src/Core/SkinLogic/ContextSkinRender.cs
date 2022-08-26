@@ -7,10 +7,9 @@ namespace TMGmod.Core.SkinLogic
 {
     public class ContextSkinRender : ContextMenu
     {
-        private static readonly Dictionary<Tex2D, Color[]> Data = new Dictionary<Tex2D, Color[]>();
+        private static readonly Dictionary<Tex2D, Color[]> Data = new();
 
-        private static readonly Dictionary<Tex2D, Tuple<Tex2D, Color[], int>> Rendered =
-            new Dictionary<Tex2D, Tuple<Tex2D, Color[], int>>();
+        private static readonly Dictionary<Tex2D, Tuple<Tex2D, Color[], int>> Rendered = new();
 
         private readonly SpriteMap _imag;
         private readonly int _skin;
@@ -68,15 +67,12 @@ namespace TMGmod.Core.SkinLogic
             }
             private float FloatNo()
             {
-                switch (Mode)
+                return Mode switch
                 {
-                    case var _ when Mode < 1f:
-                        return _x / _sprite.width / 2 + _time * .0151379f;
-                    case var _ when Mode < 2f:
-                        return (Off() + _time * .00951379f) * _total;
-                    default:
-                        return Rando.Int(0, _total - 1);
-                }
+                    < 1f => _x / _sprite.width / 2 + _time * .0151379f,
+                    < 2f => (Off() + _time * .00951379f) * _total,
+                    _ => Rando.Int(0, _total - 1),
+                };
             }
 
             public int SkinNo()

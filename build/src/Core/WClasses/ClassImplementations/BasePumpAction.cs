@@ -19,7 +19,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
 
         [UsedImplicitly] public int LoadProgress;
 
-        [UsedImplicitly] public StateBinding LoadProgressBinding = new StateBinding(nameof(LoadProgress));
+        [UsedImplicitly] public StateBinding LoadProgressBinding = new(nameof(LoadProgress));
 
         protected sbyte LoadSpeed = 10;
 
@@ -84,7 +84,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
                 Draw(LoaderSprite, new Vec2(LoaderVec2.x - num, LoaderVec2.y));
         }
 
-        private static readonly Dictionary<SpriteMap, SpriteMap> Rendered = new Dictionary<SpriteMap, SpriteMap>();
+        private static readonly Dictionary<SpriteMap, SpriteMap> Rendered = new();
 
         private SpriteMap Render(Sprite smap)
         {

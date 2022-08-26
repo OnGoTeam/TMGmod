@@ -9,7 +9,7 @@ namespace TMGmod.NY
     {
         private float _sprwait;
 
-        [UsedImplicitly] public StateBinding FrameBinding = new StateBinding(nameof(FrameId));
+        [UsedImplicitly] public StateBinding FrameBinding = new(nameof(FrameId));
 
         [UsedImplicitly] public int FrameId;
 

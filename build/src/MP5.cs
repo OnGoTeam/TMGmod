@@ -43,7 +43,7 @@ namespace TMGmod
             _weight = 3f;
             Compose(
                 new FirstKforce(20, kforce => kforce + 1.2f),
-                new FirstAccuracy(10, accuracy => DecreasedAccuracy),
+                new FirstAccuracy(10, _ => DecreasedAccuracy),
                 new Burst(
                     this,
                     false,
