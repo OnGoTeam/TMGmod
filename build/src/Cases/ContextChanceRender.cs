@@ -9,7 +9,7 @@ namespace TMGmod.Cases
 {
     public class ContextChanceRender : ContextMenu
     {
-        private readonly List<Tuple<Holdable, string>> _drops;
+        private readonly List<(Holdable, string)> _drops;
         private readonly float _dropwidth;
         private readonly float _detailwidth;
         private readonly float _itemwidth;
@@ -28,7 +28,7 @@ namespace TMGmod.Cases
             var totalchance = withchance.Select(tuple => tuple.Item2).Sum();
             totalchance = Math.Max(totalchance, 1f);
             _drops = withchance.Select(
-                tuple => new Tuple<Holdable, string>(tuple.Item1, $"{tuple.Item2 / totalchance:P1}")
+                tuple => (tuple.Item1, $"{tuple.Item2 / totalchance:P1}")
             ).ToList();
             var details = _drops.Select(drop => drop.Item2).ToList();
             var holdables = _drops.Select(drop => drop.Item1).ToList();
@@ -50,7 +50,7 @@ namespace TMGmod.Cases
             itemSize.x = _itemwidth + 4f;
         }
 
-        private Tuple<Holdable, string> TupleNo(int ix)
+        private (Holdable, string) TupleNo(int ix)
         {
             ix %= _drops.Count;
             ix += _drops.Count;
