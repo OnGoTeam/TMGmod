@@ -41,6 +41,10 @@ namespace TMGmod
 
         protected override float MaxOffset() => 2.0f;
 
+#if DEBUG
+        protected override float ReloadSpeed() => duck?._hovering == true ? 3.1f : 1.8f;
+#else
         protected override float ReloadSpeed() => 2f;
+#endif
     }
 }
