@@ -12,6 +12,8 @@ using TMGmod.NY;
 using System.Linq;
 using TMGmod.Core.DamageLogic;
 using TMGmod.Core.Modifiers.Pipelining;
+using TMGmod.Core.Modifiers.Syncing;
+using TMGmod.Core.Modifiers.Updating;
 
 namespace TMGmod.Core.WClasses
 {
@@ -171,7 +173,25 @@ namespace TMGmod.Core.WClasses
 
         protected void ResetModifier() => ActiveModifier = Modifier.Identity();
 
-        protected void Compose(params IModifyEverything[] modifiers) => ActiveModifier = ActiveModifier.Compose(modifiers);
+        protected void Compose(params IModifyEverything[] modifiers) =>
+            ActiveModifier = ActiveModifier.Compose(modifiers);
+
+        protected void ComposeSilencer(Func<bool> get, Action<bool> update)
+        {
+            var silencerProperty = new SynchronizedProperty<bool>(
+                get,
+                (old, value) =>
+                {
+                    if (value != old)
+                        FrameUtils.SwitchedSilencer(old);
+                    update(value);
+                }
+            );
+            Compose(
+                silencerProperty,
+                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
+            );
+        }
 
         private void SetKforce() => _kickForce = Kforce;
 
@@ -261,7 +281,7 @@ namespace TMGmod.Core.WClasses
             UpdateHone();
         }
 
-        private float _waitReturn;  // intentionally not synchronized
+        private float _waitReturn; // intentionally not synchronized
 
         public override void Update()
         {
@@ -281,6 +301,7 @@ namespace TMGmod.Core.WClasses
                 _waitReturn -= _wait;
                 _wait = 0f;
             }
+
             _waitReturn = Maths.Clamp(_waitReturn, 0f, .15f);
             base.Update();
 #if DEBUG
@@ -439,6 +460,7 @@ namespace TMGmod.Core.WClasses
         {
             yield return $"Damage: {damage.DamageMean}";
         }
+
         private static IEnumerable<string> AmmoTypeCharacteristics(AmmoType ammoType)
         {
             if (ammoType is IDamage damage)

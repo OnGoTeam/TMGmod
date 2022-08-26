@@ -3,8 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.Modifiers.Syncing;
-using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -38,12 +36,10 @@ namespace TMGmod
             _holdOffset = new Vec2(1f, 0f);
             ShellOffset = new Vec2(-5f, 0f);
             _weight = 1f;
-            var silencerProperty = new SynchronizedProperty<bool>(
+            ComposeSilencer(
                 () => _fireSound == GetPath("sounds/SilencedPistol.wav"),
-                (old, value) =>
+                value =>
                 {
-                    if (value != old)
-                        FrameUtils.SwitchedSilencer(old);
                     NonSkin = value ? 1 : 0;
                     _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel0();
                     _fireSound = value ? GetPath("sounds/SilencedPistol.wav") : GetPath("sounds/new/USP.wav");
@@ -53,10 +49,6 @@ namespace TMGmod
                         SetAmmoType<ATUSP>();
                     _barrelOffsetTL = value ? new Vec2(23f, 2.5f) : new Vec2(14f, 2.5f);
                 }
-            );
-            Compose(
-                silencerProperty,
-                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
             );
         }
 

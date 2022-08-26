@@ -41,12 +41,10 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(8f, 5.5f);
             _weight = 2.5f;
-            var silencerProperty = new SynchronizedProperty<bool>(
+            ComposeSilencer(
                 () => _fireSound == GetPath("sounds/new/SMG-Silenced.wav"),
-                (old, value) =>
+                value =>
                 {
-                    if (value != old)
-                        FrameUtils.SwitchedSilencer(old);
                     NonSkin = value ? 1 : 0;
                     if (value)
                         SetAmmoType<ATUziS>();
@@ -56,10 +54,6 @@ namespace TMGmod
                     _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel0();
                     _fireSound = value ? GetPath("sounds/new/SMG-Silenced.wav") : GetPath("sounds/new/UziPro.wav");
                 }
-            );
-            Compose(
-                silencerProperty,
-                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
             );
         }
 

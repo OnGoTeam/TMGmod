@@ -2,9 +2,6 @@
 using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
-using TMGmod.Core;
-using TMGmod.Core.Modifiers.Syncing;
-using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -46,14 +43,13 @@ namespace TMGmod
             laserSight = true;
             _laserOffsetTL = new Vec2(26f, 5.5f);
             _weight = 4.5f;
-            var silencerProperty = new SynchronizedProperty<bool>(
+            ComposeSilencer(
                 () => _fireSound == GetPath("sounds/new/TC12-Silenced.wav"),
-                (old, value) =>
+                value =>
                 {
-                    if (value != old)
-                        FrameUtils.SwitchedSilencer(old);
                     NonSkin = value ? 1 : 0;
-                    _fireSound = value ? GetPath("sounds/new/TC12-Silenced.wav") : GetPath("sounds/new/HighCaliber.wav");
+                    _fireSound =
+                        value ? GetPath("sounds/new/TC12-Silenced.wav") : GetPath("sounds/new/HighCaliber.wav");
                     if (value)
                         SetAmmoType<ATTC12S>();
                     else
@@ -66,10 +62,6 @@ namespace TMGmod
                         ? new SpriteMap(GetPath("FlareSilencer"), 13, 10) { center = new Vec2(0.0f, 5f) }
                         : new SpriteMap(GetPath("FlareTC12"), 13, 10) { center = new Vec2(0.0f, 5f) };
                 }
-            );
-            Compose(
-                silencerProperty,
-                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
             );
         }
 

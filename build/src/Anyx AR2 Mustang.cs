@@ -4,8 +4,6 @@ using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 using TMGmod.Core.Modifiers.Kforce;
-using TMGmod.Core.Modifiers.Syncing;
-using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses;
 using TMGmod.Core.WClasses.ClassMarkers;
@@ -40,12 +38,11 @@ namespace TMGmod
             maxAccuracyLost = 0.25f;
             _weight = 4f;
             ComposeSimpleBurst(2, .4f);
-            var silencerProperty = new SynchronizedProperty<bool>(
+            Compose(new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f));
+            ComposeSilencer(
                 () => _fireSound == GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav"),
-                (old, value) =>
+                value =>
                 {
-                    if (value != old)
-                        FrameUtils.SwitchedSilencer(old);
                     _fireSound = value
                         ? GetPath("sounds/new/HighCaliber-LessImpact-Silenced.wav")
                         : GetPath("sounds/new/HighCaliber-LessImpact.wav");
@@ -57,11 +54,6 @@ namespace TMGmod
                     _barrelOffsetTL = value ? new Vec2(33f, 2f) : new Vec2(28f, 2f);
                     NonSkin = value ? 1 : 0;
                 }
-            );
-            Compose(
-                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + .83f),
-                silencerProperty,
-                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
             );
         }
 

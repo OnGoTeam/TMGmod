@@ -3,8 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.Modifiers.Syncing;
-using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -38,12 +36,10 @@ namespace TMGmod
             _holdOffset = new Vec2(3f, 3f);
             ShellOffset = new Vec2(-3f, -3f);
             _weight = 3.3f;
-            var silencerProperty = new SynchronizedProperty<bool>(
+            ComposeSilencer(
                 () => _fireSound == GetPath("sounds/SilencedPistol.wav"),
-                (old, value) =>
+                value =>
                 {
-                    if (value != old)
-                        FrameUtils.SwitchedSilencer(old);
                     NonSkin = value ? 1 : 0;
                     if (value)
                         SetAmmoType<ATSpectreM4S>();
@@ -58,10 +54,6 @@ namespace TMGmod
                         : GetPath("sounds/new/LightCaliber-Pistol.wav");
                     _flare = value ? FrameUtils.TakeZis() : FrameUtils.SmallFlare();
                 }
-            );
-            Compose(
-                silencerProperty,
-                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
             );
         }
 

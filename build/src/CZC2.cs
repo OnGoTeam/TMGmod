@@ -3,8 +3,6 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
-using TMGmod.Core.Modifiers.Syncing;
-using TMGmod.Core.Modifiers.Updating;
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 
@@ -38,12 +36,10 @@ namespace TMGmod
             _weight = 4.4f;
             _kickForce = 1.5f;
             KforceDelta = 1.6f;
-            var silencerProperty = new SynchronizedProperty<bool>(
+            ComposeSilencer(
                 () => _fireSound == GetPath("sounds/new/CZ-Silenced.wav"),
-                (old, value) =>
+                value =>
                 {
-                    if (value != old)
-                        FrameUtils.SwitchedSilencer(old);
                     NonSkin = value ? 1 : 0;
                     _fireSound = value ? GetPath("sounds/new/CZ-Silenced.wav") : "deepMachineGun2";
                     if (value)
@@ -55,10 +51,6 @@ namespace TMGmod
                     _barrelOffsetTL = value ? new Vec2(41f, 3.5f) : new Vec2(37f, 3.5f);
                     _flare = value ? FrameUtils.TakeZis() : FrameUtils.FlareOnePixel1();
                 }
-            );
-            Compose(
-                silencerProperty,
-                new Quacking(this, true, true, silencerProperty.Flip, "silencer", () => barrelOffset)
             );
         }
 
