@@ -40,20 +40,12 @@ namespace TMGmod
             _laserOffsetTL = new Vec2(24f, 7.5f);
             _holdOffset = new Vec2(1f, 0f);
             _weight = 4f;
-            var laserProperty = new SynchronizedProperty<bool>(
-                () => laserSight,
-                (old, value) =>
+            ComposeLaser(
+                value =>
                 {
-                    if (value != old)
-                        SFX.Play(GetPath("sounds/tuduc.wav"));
-                    laserSight = value;
                     NonSkin = value ? 1 : 0;
                     loseAccuracy = value ? .45f : .3f;
                 }
-            );
-            Compose(
-                laserProperty,
-                new Quacking(this, true, true, laserProperty.Flip, "laser", () => laserOffset)
             );
         }
 

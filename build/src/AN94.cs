@@ -41,23 +41,15 @@ namespace TMGmod
             _weight = 4.5f;
             laserSight = false;
             _laserOffsetTL = new Vec2(24f, 1.5f);
-            var laserProperty = new SynchronizedProperty<bool>(
-                () => laserSight,
-                (old, value) =>
+            Compose(new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f));
+            ComposeLaser(
+                value =>
                 {
-                    if (value != old)
-                        SFX.Play(GetPath("sounds/tuduc.wav"));
                     loseAccuracy = value ? .1f : .15f;
                     _fireWait = value ? 2.5f : 1.5f;
                     maxAccuracyLost = value ? .1f : .45f;
                     NonSkin = value ? 1 : 0;
-                    laserSight = value;
                 }
-            );
-            Compose(
-                new HSpeedKforce(this, hspeed => hspeed > .1f, kforce => kforce + 1.5f),
-                laserProperty,
-                new Quacking(this, true, true, laserProperty.Flip, "laser", () => laserOffset)
             );
             ComposeSimpleBurst(2, .07f);
         }

@@ -193,6 +193,24 @@ namespace TMGmod.Core.WClasses
             );
         }
 
+        protected void ComposeLaser(Action<bool> update)
+        {
+            var laserProperty = new SynchronizedProperty<bool>(
+                () => laserSight,
+                (old, value) =>
+                {
+                    if (value != old)
+                        SFX.Play(GetPath("sounds/tuduc.wav"));
+                    laserSight = value;
+                    update(laserSight);
+                }
+            );
+            Compose(
+                laserProperty,
+                new Quacking(this, true, true, laserProperty.Flip, "laser", () => laserOffset)
+            );
+        }
+
         private void SetKforce() => _kickForce = Kforce;
 
         private void AddNyCase() => Level.Add(new NewYearCase(x, y));
