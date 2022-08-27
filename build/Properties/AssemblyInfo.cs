@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: Guid("190a2e48-c24a-4075-89ae-2e60aea4c0f1")]
 
 #if WORKSHOP
-[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.2.0.1")]
 #else
 [assembly: AssemblyVersion("1.200.*")]
 #endif
