@@ -451,7 +451,18 @@ namespace TMGmod.Core.WClasses
 
         public void UnQuack()
         {
-            if (Quacked()) SFX.Play("quack", -1, duck.quackPitch);
+            if (
+                duck is not { isServerForObject: true, dead: false, inputProfile: { } } ||
+                !duck.inputProfile.Pressed("QUACK") || Level.current is null
+            ) return;
+            // else
+            var leftTrigger = duck.inputProfile.leftTrigger;
+            if (duck.inputProfile.hasMotionAxis)
+                leftTrigger += duck.inputProfile.motionAxis;
+            if (Network.isActive && duck.GetEquipment(typeof(Hat)) is Hat { quacks: true } equipment)
+                equipment.Quack(volume: -1f, pitch: leftTrigger);
+            else
+                duck._netQuack.Play(vol: -1f, pit: leftTrigger);
         }
 
         public override ContextMenu GetContextMenu()
