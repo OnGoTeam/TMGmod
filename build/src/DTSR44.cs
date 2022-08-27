@@ -29,7 +29,7 @@ namespace TMGmod
             _holdOffset = new Vec2(-2f, 0f);
             _weight = 3.5f;
             ShellOffset = new Vec2(-7f, 0f);
-            SetAmmoType<AT50SniperS>(.92f);
+            SetAmmoType<AT50SniperS>(.96f);
         }
 
         public ICollection<int> AllowedSkins { get; } = new List<int>(new[] { 0, 2, 8 });
