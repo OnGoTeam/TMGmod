@@ -73,7 +73,7 @@ namespace TMGmod.Cases
         private Holdable Contained()
         {
             Holdable contained = null;
-            while (contained == null)
+            while (contained is null)
                 contained = _thingsDetailed[Rando.Int(_thingsDetailed.Count - 1)].Spawn();
             return contained;
         }
@@ -96,7 +96,7 @@ namespace TMGmod.Cases
         private void HandleDuckIfNecessary(Holdable contained)
         {
             var d = duck;
-            if (d == null) return;
+            if (d is null) return;
             // else
             d.profile.stats.presentsOpened++;
             duck.ThrowItem();
