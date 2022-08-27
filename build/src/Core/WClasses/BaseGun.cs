@@ -302,12 +302,15 @@ namespace TMGmod.Core.WClasses
             UpdateHone();
         }
 
+#if DEBUG
         private float _waitReturn; // intentionally not synchronized
+#endif
 
         public override void Update()
         {
             UpdateInternals();
             OnUpdate();
+#if DEBUG
             _waitReturn = Maths.Clamp(_waitReturn, 0f, .15f);
             if (_wait > _waitReturn)
             {
@@ -324,6 +327,7 @@ namespace TMGmod.Core.WClasses
             }
 
             _waitReturn = Maths.Clamp(_waitReturn, 0f, .15f);
+#endif
             base.Update();
 #if DEBUG
             if (duck is { } && duck.inputProfile.Down("UP") && duck.inputProfile.Down("STRAFE"))

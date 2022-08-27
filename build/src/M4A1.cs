@@ -3,7 +3,9 @@ using DuckGame;
 using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
+#if DEBUG
 using TMGmod.Core.Modifiers.Updating;
+#endif
 using TMGmod.Core.SkinLogic;
 using TMGmod.Core.WClasses.ClassImplementations;
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using DuckGame;
 using TMGmod.Core.Modifiers.Pipelining;
 
@@ -82,3 +83,4 @@ namespace TMGmod.Core.Modifiers.Updating
         }
     }
 }
+#endif
