@@ -82,12 +82,6 @@ namespace TMGmod.Core.Modifiers.Updating
         }
 #endif
 
-        private class Proxy<T>
-        {
-            public T Value;
-            public Proxy(T value) => Value = value;
-        }
-
         public IModifyEverything Animated(
             Action<int, int> update,
             Func<int, int> trigger
@@ -96,7 +90,7 @@ namespace TMGmod.Core.Modifiers.Updating
 #endif
         )
         {
-            var animating = new Proxy<Animating<int>>(null);
+            var animating = new ValueProxy<Animating<int>>(null);
             animating.Value = new Animating<int>(
                 (frames, mode) =>
                 {

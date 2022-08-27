@@ -106,15 +106,12 @@ namespace TMGmod.Core.Modifiers.Updating
         }
 #endif
 
-        protected override void ModifyUpdate()
-        {
-            Decrement();
-        }
+        protected override void ModifyUpdate() => Decrement();
 
-        public override bool CanFire()
-        {
-            return !_block || !Active();
-        }
+        public override bool CanFire() => !_block || !Active();
+#nullable enable
+        public Animating<T>? AsInactive() => !Active() ? this : null;
+#nullable restore
     }
 
     public static class Anime

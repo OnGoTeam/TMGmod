@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using TMGmod.AmmoTypes;
 using TMGmod.Core;
 #if DEBUG
+using TMGmod.Core.Modifiers.Syncing;
 using TMGmod.Core.Modifiers.Updating;
 #endif
 using TMGmod.Core.SkinLogic;
@@ -39,22 +40,33 @@ namespace TMGmod
             _kickForce = .5f;
             KforceDelta = .5f;
 #if DEBUG
+            var acceleratedProxy = new ValueProxy<bool>(false);
+            var acceleratedProperty = new SynchronizedProperty<bool>(
+                () => acceleratedProxy.Value,
+                (old, value) =>
+                {
+                    if (value != old)
+                        SFX.Play(GetPath("sounds/tuduc.wav"), pitch: value ? .1f : -.1f);
+                    _fireWait = value ? .55f : .75f;
+                    acceleratedProxy.Value = value;
+                }
+                );
             var animating = Anime.Simple(
-                frames => _fireWait = frames > 0 ? .55f : .75f,
-                () => _fireWait = .75f
+                frames => acceleratedProperty.Value = frames > 0,
+                () => acceleratedProperty.Value = false
             );
             Compose(
                 animating,
                 new Combo(
                     this,
                     "faster fire (1)",
-                    () => animating.Set(60),
+                    () => animating.AsInactive()?.Set(60),
                     "DOWN", "DOWN", "DOWN"
                 ),
                 new Combo(
                     this,
                     "faster fire",
-                    () => animating.Set(60),
+                    () => animating.AsInactive()?.Set(60),
                     "UP", "UP", "UP"
                 )
             );
