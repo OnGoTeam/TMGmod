@@ -31,7 +31,6 @@ namespace TMGmod.NY
             penetration = 0.4f;
             speedVariation = 0f;
             bulletType = typeof(GarlandBullet);
-            combustable = true;
             SpriteY = new SpriteMap(Mod.GetPath<Core.TMGmod>("Holiday/Garland_2"), 16, 9);
             SpriteY.CenterOrigin();
             sprite = SpriteY;

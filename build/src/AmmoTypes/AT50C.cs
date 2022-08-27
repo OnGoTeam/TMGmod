@@ -11,7 +11,6 @@ namespace TMGmod.AmmoTypes
             accuracy = 1f;
             range = 200f;
             penetration = 2f;
-            combustable = true;
             bulletSpeed = 45f;
             bulletType = typeof(AntiProp);
             bulletThickness = 3.5f;

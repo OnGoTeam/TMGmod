@@ -12,7 +12,6 @@ namespace TMGmod.Core
             accuracy = 1f;
             range = 1100f;
             penetration = 1f;
-            combustable = true;
             bulletThickness = 2.5f;
             bulletSpeed = 55f;
             bulletType = typeof(ExplosiveBullet);

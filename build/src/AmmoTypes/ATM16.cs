@@ -12,7 +12,6 @@ namespace TMGmod.AmmoTypes
         public ATM16()
         {
             bulletLength = 30f;
-            combustable = true;
             bulletSpeed = 110f;
             range = 450f;
             accuracy = 0.91f;

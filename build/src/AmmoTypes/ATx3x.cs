@@ -11,7 +11,6 @@ namespace TMGmod.AmmoTypes
         public ATx3x()
         {
             bulletLength = 45f;
-            combustable = true;
             bulletSpeed = 15f;
             range = 800f;
             accuracy = 1f;

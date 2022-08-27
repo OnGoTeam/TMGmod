@@ -10,7 +10,6 @@ namespace TMGmod.AmmoTypes
             range = 120f;
             accuracy = 0.6f;
             bulletThickness = 0.7f;
-            combustable = true;
             bulletSpeed = 71f;
             penetration = 1f;
             barrelAngleDegrees = -6.5f;
