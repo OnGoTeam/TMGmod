@@ -115,7 +115,7 @@ namespace TMGmod.Buddies
 
         private bool QLocalHit(Thing bullet)
         {
-            return _equippedDuck != null && bullet.owner != _equippedDuck && bullet.isLocal;
+            return _equippedDuck is not null && bullet.owner != _equippedDuck && bullet.isLocal;
         }
 
         private bool QHit(Bullet bullet, Vec2 hitPos)
@@ -161,7 +161,7 @@ namespace TMGmod.Buddies
 
         private void Slowdown()
         {
-            if (EquippedDuck() != null)
+            if (EquippedDuck() is not null)
                 EquippedDuck().hSpeed *= 0.25f;
         }
 
@@ -185,7 +185,7 @@ namespace TMGmod.Buddies
         public void NetworkHit(float damage)
         {
             DoDamage(damage);
-            if (Broken() && EquippedDuck() != null)
+            if (Broken() && EquippedDuck() is not null)
                 NetworkKill(new DTCrush(this));
         }
 
@@ -228,7 +228,7 @@ namespace TMGmod.Buddies
 #if DEBUG
             // Graphics.DrawRect(rectangle, new Color(255, 0, 0, 128), filled: false);
 #endif
-            if (EquippedDuck() == null) return;
+            if (EquippedDuck() is null) return;
             var start = (EquippedDuck().topLeft + EquippedDuck().topRight) / 2 + new Vec2(-32, 0);
             Graphics.DrawRect(start, start + new Vec2(64, -8), Color.Red, 0.0f);
             Graphics.DrawRect(
@@ -291,7 +291,7 @@ namespace TMGmod.Buddies
         {
 #if DEBUG
             ++_frames;
-            if (duck != null)
+            if (duck is not null)
             {
                 foreach (var key in new[] { "UP", "DOWN", "LEFT", "RIGHT", "QUACK", "RAGDOLL" })
                 {
@@ -351,10 +351,10 @@ namespace TMGmod.Buddies
 
         private void UpdateCollision()
         {
-            if (_equippedDuck?.skeleton == null) return;
+            if (_equippedDuck?.skeleton is null) return;
             // else
             var rc = EquippedDuck().TrueRectangle();
-            if (_equippedDuck.ragdoll != null)
+            if (_equippedDuck.ragdoll is not null)
             {
                 rc = Bounding(rc, _equippedDuck.ragdoll.part1.TrueRectangle());
                 rc = Bounding(rc, _equippedDuck.ragdoll.part2.TrueRectangle());
@@ -380,7 +380,7 @@ namespace TMGmod.Buddies
             rc.Left -= .5f;
             rc.height += 1f;
             rc.width += 1f;
-            if (_equippedDuck.ragdoll != null)
+            if (_equippedDuck.ragdoll is not null)
             {
                 rc.Top -= 1f;
                 rc.Left -= 1f;
@@ -399,7 +399,7 @@ namespace TMGmod.Buddies
             {
                 UpdateCollision();
                 offDir = 1;
-                if (_equippedDuck?.skeleton != null) position = _equippedDuck.skeleton.upperTorso.position;
+                if (_equippedDuck?.skeleton is not null) position = _equippedDuck.skeleton.upperTorso.position;
                 base.angle = value;
             }
         }
@@ -414,7 +414,7 @@ namespace TMGmod.Buddies
 
         public override void UnEquip()
         {
-            if (_equippedDuck != null)
+            if (_equippedDuck is not null)
             {
                 _equippedDuck.invincible = false;
                 _equippedDuck.Destroy(new DTCrush(this));
