@@ -45,7 +45,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
 
             if (LoadProgress < 0) return;
             UpdateAtPopReload();
-            LoadProgress = Math.Min(LoadProgress + LoadSpeed, LoadFin);
+            LoadProgress = Math.Min(LoadProgress + LoadSpeed * (duck?._hovering == true ? 2 : 1), LoadFin);
         }
 
         public override void Update()
