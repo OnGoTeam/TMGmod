@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using DuckGame;
-#if DEBUG
-using TMGmod.Core.Modifiers.Firing;
-#endif
 using TMGmod.Core.WClasses;
 
 namespace TMGmod.Core.Modifiers.Updating
@@ -121,9 +118,6 @@ namespace TMGmod.Core.Modifiers.Updating
             return ComposedModifier.Compose(
                 this,
                 animating.Value,
-#if DEBUG
-                new Pressing(_target, () => animating.Value.Decrement(acceleration)),
-#endif
                 new Quacking(
                     _target,
                     true,
@@ -135,6 +129,10 @@ namespace TMGmod.Core.Modifiers.Updating
                                 trigger(_mode),
                                 (_mode + 1).Modulo(_modes)
                             );
+#if DEBUG
+                        else
+                            animating.Value.Decrement(acceleration);
+#endif
                     },
                     "mode"
                 )
