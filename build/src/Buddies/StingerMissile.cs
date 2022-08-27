@@ -74,19 +74,25 @@ namespace TMGmod.Buddies
         private void UpdateTarget()
         {
             if (_target != null)
-                if (Level.CheckLine<IPlatform>(position, _target.position) != null ||
-                    _target is Duck { dead: true } || _target == owner)
+                if (
+                    Level.CheckLine<IPlatform>(position, _target.position) is not null ||
+                    _target is Duck { dead: true } || _target == owner
+                )
                     _target = null;
-            if (_target != null) return;
+            if (_target is not null) return;
             //else
             foreach (var d in Level.CheckCircleAll<Duck>(position, HomingRange))
-                if (Level.CheckLine<IPlatform>(position, d.position) == null && !d.dead &&
-                    (owner == null || owner.owner != d))
+                if (
+                    Level.CheckLine<IPlatform>(position, d.position) is null && !d.dead &&
+                    (owner is null || owner.owner != d)
+                )
                     _target = d;
 
             foreach (var d in Level.CheckCircleAll<StingerMissile>(position, HomingRange))
-                if (Level.CheckLine<IPlatform>(position, d.position) == null && d._activated && d != this &&
-                    !d._destroyed && (owner == null || d._target == owner.owner))
+                if (
+                    Level.CheckLine<IPlatform>(position, d.position) is null && d._activated && d != this &&
+                    !d._destroyed && (owner is null || d._target == owner.owner)
+                )
                     _target = d;
         }
 
@@ -130,13 +136,13 @@ namespace TMGmod.Buddies
             {
                 if (isLocal)
                     Fondle(window, DuckNetwork.localConnection);
-                if (Level.CheckLine<Block>(position, window.position, window) == null)
+                if (Level.CheckLine<Block>(position, window.position, window) is null)
                     window.Destroy(new DTImpact(this));
             }
 
             foreach (var physicsObject in Level.CheckCircleAll<PhysicsObject>(position, 70f))
             {
-                if (isLocal && owner == null)
+                if (isLocal && owner is null)
                     Fondle(physicsObject, DuckNetwork.localConnection);
                 if ((physicsObject.position - position).length < 30.0)
                     physicsObject.Destroy(new DTImpact(this));
@@ -147,7 +153,7 @@ namespace TMGmod.Buddies
             var varBlocks = new HashSet<ushort>();
             foreach (var blockGroup1 in Level.CheckCircleAll<BlockGroup>(position, 50f))
             {
-                if (blockGroup1 == null) continue;
+                if (blockGroup1 is null) continue;
                 foreach (var block in blockGroup1.blocks.Where(
                     block => Collision.Circle(position, 28f, block.rectangle)))
                 {
@@ -218,7 +224,7 @@ namespace TMGmod.Buddies
 
         private void DrawDebug()
         {
-            if (_target != null)
+            if (_target is not null)
                 Graphics.DrawCircle(_target.position, 16, Color.Red, depth: _target.depth.value + 3f);
             base.Draw();
             var p0 = position;
