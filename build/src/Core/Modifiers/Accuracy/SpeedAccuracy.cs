@@ -23,7 +23,7 @@ namespace TMGmod.Core.Modifiers.Accuracy
 
         public override float ModifyAccuracy(float accuracy)
         {
-            return _target.duck != null
+            return _target.duck is not null
                 ? accuracy
                   -
                   Math.Max(

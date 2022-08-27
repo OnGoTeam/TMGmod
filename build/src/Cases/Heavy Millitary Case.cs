@@ -58,10 +58,10 @@ namespace TMGmod.Cases
 
         public override void OnPressAction()
         {
-            if (owner == null) return;
+            if (owner is null) return;
             var o = owner;
             var d = duck;
-            if (d != null)
+            if (d is not null)
             {
                 d.profile.stats.presentsOpened++;
                 duck.ThrowItem();
@@ -81,7 +81,7 @@ namespace TMGmod.Cases
             newThing.x = o.x;
             newThing.y = o.y;
             Level.Add(newThing);
-            if (d == null) return;
+            if (d is null) return;
             d.GiveHoldable(newThing);
             d.resetAction = true;
         }
