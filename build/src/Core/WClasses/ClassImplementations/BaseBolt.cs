@@ -23,7 +23,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
             _manualLoad = true;
             _fullAuto = false;
             laserSight = false;
-            Compose(new SpeedAccuracy(this, 0f, 1f, 0f));
+            Compose(new SpeedAccuracy(this, .5f, .5f, 0f));
         }
 
         protected virtual bool HasLaser()
