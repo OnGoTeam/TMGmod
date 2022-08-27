@@ -449,6 +449,8 @@ IF NOT $(SolutionDir)  == %25outdir%25\build\ (
             ECHO Deleted TMGmod.pdb
         )
     )
+    CD %25outdir%25
+    echo $(ConfigurationName) | python $(SolutionDir)\..\fix_staging.py
 )
 CD %25outdir%25\..
 IF EXIST TMGmod.zip (
