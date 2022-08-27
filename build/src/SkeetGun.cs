@@ -32,6 +32,13 @@ namespace TMGmod
             _fireWait = 0.5f;
             _kickForce = 6.55f;
             _holdOffset = new Vec2(8f, 2f);
+#if DEBUG
+            var field = typeof(Gun).GetField(
+                "_barrelSmoke",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance
+            );
+            field?.SetValue(this, FrameUtils.TakeZis());
+#endif
         }
 
         public float HandAngleOff
@@ -80,6 +87,7 @@ namespace TMGmod
                     _handleAngleOff += 0.025f;
                     break;
             }
+
             if ((_handleAngleOff > -0.025f) & (_handleAngleOff < 0.025f)) _handleAngleOff = 0f;
         }
     }
