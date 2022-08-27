@@ -81,7 +81,7 @@ namespace TMGmod
         public override void Update()
         {
             base.Update();
-            if (_stock.Folded() && duck != null && ammo > 0 && (ammo > 1 || loaded)) GottaGoFast();
+            if (_stock.Folded() && duck is { } && ammo > 0 && (ammo > 1 || loaded)) GottaGoFast();
         }
     }
 }

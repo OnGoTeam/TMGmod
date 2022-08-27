@@ -30,7 +30,7 @@ namespace TMGmod.Core
             ).Select(
                 gun => gun as BaseGun
             ).Where(
-                based => based is not null
+                based => based is { }
             );
             var lines = guns.Select(
                 gun => gun.StatsLine().Select(s => s.Replace(".", ","))

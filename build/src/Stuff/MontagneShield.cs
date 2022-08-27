@@ -44,9 +44,7 @@ namespace TMGmod.Stuff
 
         public override void Thrown()
         {
-            if (duck == null) return;
-            //else
-            if (duck.inputProfile.Down("QUACK")) return;
+            if (duck?.inputProfile.Down("QUACK") != false) return;
             //else
             angleDegrees = 90f * offDir;
             collisionOffset = new Vec2(-11.5f, -2f);
@@ -71,7 +69,7 @@ namespace TMGmod.Stuff
                 _sprite.frame = 2;
             if (Hp <= HpMax * 0.25f)
                 _sprite.frame = 3;
-            if (duck != null && duck.holdObject == this) return;
+            if (duck is { } && duck.holdObject == this) return;
             if (Rando.Float(0, 1) > (at is IHeavyAmmoType ? 0.5f : 0.1f)) return;
             angleDegrees = 90f * offDir;
             collisionOffset = new Vec2(-11.5f, -2f);
@@ -81,11 +79,11 @@ namespace TMGmod.Stuff
 
         public override void Impact(MaterialThing with, ImpactedFrom from, bool solidImpact)
         {
-            var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
+            var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) is { };
             if ((collisionSize.x < 5f && (doblock || with is IAmADuck) && with is not (IDontMove or Block) &&
                  from == ImpactedFrom.Left) || from == ImpactedFrom.Right)
             {
-                if (duck == null && Math.Abs(with.hSpeed) * with.weight > 40f)
+                if (duck is null && Math.Abs(with.hSpeed) * with.weight > 40f)
                 {
                     angleDegrees = 90f * offDir;
                     collisionOffset = new Vec2(-11.5f, -2f);
@@ -106,7 +104,7 @@ namespace TMGmod.Stuff
             var hit1 = topLeft + new Vec2(Math.Min(dvecx, 0), 0);
             var hit2 = bottomRight + new Vec2(Math.Max(dvecx, 0), 0);
             foreach (var fire in Level.CheckRectAll<SmallFire>(hit1, hit2)) fire.hSpeed = hspd;
-            var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) != null;
+            var doblock = Level.CheckRect<ShieldBlockAll>(new Vec2(-1000, -1000), new Vec2(1000, 1000)) is { };
             if (collisionSize.x < 5f)
                 foreach (var thing in Level.CheckRectAll<MaterialThing>(hit1, hit2))
                 {
@@ -119,11 +117,11 @@ namespace TMGmod.Stuff
                     //else
                     var hvk = Math.Abs(thing.x - x) / 2f;
                     hvk = Math.Min(hvk, 1);
-                    if (duck != null) duck.hSpeed *= hvk;
+                    if (duck is { }) duck.hSpeed *= hvk;
                     else hSpeed *= hvk;
                 }
 
-            if (duck != null) Reset();
+            if (duck is { }) Reset();
 
             base.Update();
         }

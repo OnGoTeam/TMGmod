@@ -73,13 +73,13 @@ namespace TMGmod.Buddies
 
         private void UpdateTarget()
         {
-            if (_target != null)
+            if (_target is { })
                 if (
-                    Level.CheckLine<IPlatform>(position, _target.position) is not null ||
+                    Level.CheckLine<IPlatform>(position, _target.position) is { } ||
                     _target is Duck { dead: true } || _target == owner
                 )
                     _target = null;
-            if (_target is not null) return;
+            if (_target is { }) return;
             //else
             foreach (var d in Level.CheckCircleAll<Duck>(position, HomingRange))
                 if (
@@ -224,7 +224,7 @@ namespace TMGmod.Buddies
 
         private void DrawDebug()
         {
-            if (_target is not null)
+            if (_target is { })
                 Graphics.DrawCircle(_target.position, 16, Color.Red, depth: _target.depth.value + 3f);
             base.Draw();
             var p0 = position;

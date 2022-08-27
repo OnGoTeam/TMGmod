@@ -51,7 +51,7 @@ namespace TMGmod.Useless_or_deleted_Guns
 
         public override void Update()
         {
-            if (duck != null)
+            if (duck is { })
             {
                 foreach (var key in new[] { "UP", "DOWN", "LEFT", "RIGHT", "QUACK", "RAGDOLL" })
                 {

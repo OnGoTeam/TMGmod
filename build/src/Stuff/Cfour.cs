@@ -85,11 +85,11 @@ namespace TMGmod.Stuff
             }
 
             foreach (var window in Level.CheckCircleAll<Window>(position, 40f))
-                if (Level.CheckLine<Block>(position, window.position, window) == null)
+                if (Level.CheckLine<Block>(position, window.position, window) is null)
                     window.Destroy(new DTImpact(this));
             foreach (var thing in Level.CheckCircleAll<Thing>(position, 500f))
             {
-                if (Level.CheckLine<Block>(position, thing.position, thing) != null) continue;
+                if (Level.CheckLine<Block>(position, thing.position, thing) is { }) continue;
                 //else
                 var dVec2 = thing.position - position + new Vec2(Rando.Float(-6f, 6f), Rando.Float(-6f, 6f));
                 var l = dVec2.length + 0.1f;
@@ -118,7 +118,7 @@ namespace TMGmod.Stuff
         public override void OnImpact(MaterialThing with, ImpactedFrom from)
         {
             base.OnImpact(with, from);
-            if (StickThing != null) return;
+            if (StickThing is { }) return;
             if (!Activated) return;
             StickThing = with;
             StickThing.Fondle(this);
@@ -148,13 +148,13 @@ namespace TMGmod.Stuff
             if (StickThing is { _destroyed: true }) StickThing = null;
 
             ToExplode -= 0.1f;
-            if (duck != null && duck.holdObject == this)
+            if (duck is { } && duck.holdObject == this)
             {
                 StickThing = null;
                 if (duck != Activator) Activated = false;
             }
 
-            if (StickThing != null)
+            if (StickThing is { })
             {
                 sleeping = true;
                 position = StickThing.Offset(_stickyVec2);
@@ -169,7 +169,7 @@ namespace TMGmod.Stuff
             if (Activator is Duck { dead: false } duck1 && duck1.IsQuacking()) ToExplode = Rando.Float(0f, 0.5f);
 
             if (grounded) angle = 0f;
-            else if ((duck == null || duck.holdObject != this) && WasThrown && StickThing == null)
+            else if (duck?.holdObject != this && WasThrown && StickThing is null)
                 angle += 0.3f * offDir;
 
             if (-0.5 < ToExplode && ToExplode < 0f && !_destroyed) Destroy();
@@ -179,7 +179,7 @@ namespace TMGmod.Stuff
 
         public override void OnPressAction()
         {
-            if (duck == null) return;
+            if (duck is null) return;
             //else
             Activated = true;
             Activator = duck;

@@ -123,7 +123,7 @@ namespace TMGmod
 
         private void CustomUpdate()
         {
-            if (duck != null) UpdateWithDuck();
+            if (duck is { }) UpdateWithDuck();
             UpdateHone();
         }
 

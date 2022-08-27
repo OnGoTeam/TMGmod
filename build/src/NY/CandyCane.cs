@@ -59,9 +59,8 @@ namespace TMGmod.NY
             if (!force && !(Rando.Float(1) < p)) return;
             //else
             var ctor = GetType().GetConstructor(new[] { typeof(float), typeof(float) });
-            if (ctor == null) return;
             //else
-            if (ctor.Invoke(new object[] { pos.x, pos.y }) is not Thing t) return;
+            if (ctor?.Invoke(new object[] { pos.x, pos.y }) is not Thing t) return;
             //else
             Level.Add(t);
         }

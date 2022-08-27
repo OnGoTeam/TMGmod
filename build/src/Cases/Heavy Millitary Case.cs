@@ -61,7 +61,7 @@ namespace TMGmod.Cases
             if (owner is null) return;
             var o = owner;
             var d = duck;
-            if (d is not null)
+            if (d is { })
             {
                 d.profile.stats.presentsOpened++;
                 duck.ThrowItem();

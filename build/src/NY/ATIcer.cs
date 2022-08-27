@@ -77,7 +77,7 @@ namespace TMGmod.NY
             {
                 base.Touch(with);
                 UpdateStickable();
-                if (_stick is not null) return;
+                if (_stick is { }) return;
                 if (with is Duck d)
                 {
                     d.Kill(new DTImpact(this));
@@ -90,8 +90,7 @@ namespace TMGmod.NY
 
             private void UpdateStickable()
             {
-                if (_stick == null) return;
-                if (_stick._destroyed)
+                if (_stick?._destroyed == true)
                 {
                     _stick = null;
                     return;
@@ -110,8 +109,7 @@ namespace TMGmod.NY
             private void UpdateStick()
             {
                 UpdateStickable();
-                if (_stick == null) return;
-                if (_stick.destroyed) return;
+                if (_stick?.destroyed != false) return;
                 angle = _stick.angle + StickAngleOffset * OffDirOffset * _stick.offDir;
                 position = _stick.Offset(StickOffset);
                 offDir = (sbyte)(OffDirOffset * _stick.offDir);
@@ -121,8 +119,7 @@ namespace TMGmod.NY
 
             private void InitiateStick()
             {
-                if (_stick == null) return;
-                if (_stick.destroyed) return;
+                if (_stick?.destroyed != false) return;
                 StickAngleOffset = angle - _stick.angle;
                 StickOffset = _stick.ReverseOffset(position);
                 StickOffset.x *= _stick.offDir;

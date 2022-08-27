@@ -21,7 +21,7 @@ namespace TMGmod.Core.Modifiers.Kforce
 
         public override float ModifyKforce(float kforce)
         {
-            return _target.duck is not null && _predicate(Math.Abs(_target.duck.hSpeed))
+            return _target.duck is { } && _predicate(Math.Abs(_target.duck.hSpeed))
                 ? Math.Max(0f, _modify(kforce))
                 : kforce;
         }

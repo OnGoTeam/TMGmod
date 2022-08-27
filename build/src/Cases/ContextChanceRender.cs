@@ -18,7 +18,7 @@ namespace TMGmod.Cases
 
         private static Tuple<Holdable, float> SpecTuple(SpawnSpec<Holdable> drop) => new(drop.Thing(), drop.Chance());
 
-        private static bool ValidGraphic(Tuple<Holdable, float> tuple) => tuple.Item1?.graphic is not null;
+        private static bool ValidGraphic(Tuple<Holdable, float> tuple) => tuple.Item1?.graphic is { };
 
         public ContextChanceRender(
             IEnumerable<SpawnSpec<Holdable>> drops

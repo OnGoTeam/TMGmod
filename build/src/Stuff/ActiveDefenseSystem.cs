@@ -81,7 +81,7 @@ namespace TMGmod.Stuff
 
         private bool InvalidGrenade(Grenade grenade)
         {
-            return Level.CheckLine<Block>(position, grenade.position) != null || grenade.destroyed ||
+            return Level.CheckLine<Block>(position, grenade.position) is { } || grenade.destroyed ||
                    (grenade.position - position).Length() > _range + 16f;
         }
 

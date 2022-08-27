@@ -8,7 +8,7 @@ namespace TMGmod.Core.BipodsLogic
         public static bool HandleQ(this Gun gun)
         {
             var duck = gun.duck;
-            return duck is not null && duck.sliding && duck.grounded && Math.Abs(duck.hSpeed) < 1f && !gun.raised;
+            return duck is { sliding: true, grounded: true } && Math.Abs(duck.hSpeed) < 1f && !gun.raised;
         }
     }
 }

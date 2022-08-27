@@ -82,7 +82,7 @@ namespace TMGmod
             _heatval -= 0.07f;
             if (_heatval < 0f) _heatval = 0f;
             Heatval = _heatval;
-            if (duck != null)
+            if (duck is { })
             {
                 if (duck.inputProfile.Down("QUACK") && _heatval < 2f && Math.Abs(duck.hSpeed) < 2.845f)
                 {

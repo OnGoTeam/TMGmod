@@ -72,7 +72,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
             base.Update();
             if (LoadState > -1)
             {
-                if (owner == null)
+                if (owner is null)
                 {
                     if (LoadState == 3)
                         loaded = true;
@@ -130,7 +130,7 @@ namespace TMGmod.Core.WClasses.ClassImplementations
                 }
             }
 
-            if (loaded && owner != null && LoadState == -1)
+            if (loaded && owner is { } && LoadState == -1)
                 laserSight = HasLaser();
             else
                 laserSight = false;

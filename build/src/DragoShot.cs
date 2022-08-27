@@ -67,11 +67,8 @@ namespace TMGmod
                     },
                     _ =>
                     {
-                        if (!isServerForObject) return;
-                        // else
-                        if (owner is null) return;
-                        // else
-                        ForeignFire();
+                        if (isServerForObject && owner is not null)
+                            ForeignFire();
                     }
                 )
             );

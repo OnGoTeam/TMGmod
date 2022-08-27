@@ -120,7 +120,7 @@ namespace TMGmod.Core.WClasses
 
         [UsedImplicitly]
         protected Vec2 ExtraHoldOffset =>
-            duck == null ? new Vec2(0, 0) : !(duck.sliding || duck.crouch) ? new Vec2(0, 0) : new Vec2(0, 1);
+            duck is null ? new Vec2(0, 0) : !(duck.sliding || duck.crouch) ? new Vec2(0, 0) : new Vec2(0, 1);
 
         [UsedImplicitly]
         protected Vec2 HoldOffsetNoExtra
@@ -281,7 +281,7 @@ namespace TMGmod.Core.WClasses
 
         private void SetAccuracy()
         {
-            if (_ammoType != null) _ammoType.accuracy = Accuracy;
+            if (_ammoType is { }) _ammoType.accuracy = Accuracy;
         }
 
         private void UpdateHone()
@@ -326,7 +326,7 @@ namespace TMGmod.Core.WClasses
             _waitReturn = Maths.Clamp(_waitReturn, 0f, .15f);
             base.Update();
 #if DEBUG
-            if (duck != null && duck.inputProfile.Down("UP") && duck.inputProfile.Down("STRAFE"))
+            if (duck is { } && duck.inputProfile.Down("UP") && duck.inputProfile.Down("STRAFE"))
                 _flareAlpha = 100f;
 #endif
         }
@@ -498,7 +498,7 @@ namespace TMGmod.Core.WClasses
         private IEnumerable<string> BaseCharacteristics()
 #endif
         {
-            if (_ammoType != null)
+            if (_ammoType is { })
                 foreach (var characteristic in AmmoTypeCharacteristics(_ammoType))
                     yield return characteristic;
             yield return $"Total Ammo: {ammo}";
@@ -600,8 +600,7 @@ namespace TMGmod.Core.WClasses
 
         private void DrawDamage()
         {
-            if (Network.isActive) return;
-            if (ammoType is null) return;
+            if (Network.isActive || ammoType is null) return;
             var start = barrelPosition + new Vec2(0, -64);
             var x1 = OffsetLocal(new Vec2(ammoType.range, 0));
             var y1 = new Vec2(0, -64);
@@ -656,7 +655,7 @@ namespace TMGmod.Core.WClasses
 
         public void Hint(string hint, Func<Vec2> offset, params string[] trigger)
         {
-            if (duck != null)
+            if (duck is { })
                 Hint(hint, offset, () => trigger.Select(duck.inputProfile.GetTriggerImage));
         }
 
@@ -722,14 +721,15 @@ namespace TMGmod.Core.WClasses
 
         public override void DoUpdate()
         {
-            if (laserSight && _laserTex == null)
-                _laserTex = Content.Load<Tex2D>("pointerLaser");
+            if (laserSight)
+                _laserTex ??= Content.Load<Tex2D>("pointerLaser");
+
             base.DoUpdate();
         }
 
         public override void DrawGlow()
         {
-            if (laserSight && held && _laserTex != null && _wallPoint != Vec2.Zero)
+            if (laserSight && held && _laserTex is { } && _wallPoint != Vec2.Zero)
             {
                 var num = 1f;
                 if (!Options.Data.fireGlow)
@@ -737,7 +737,7 @@ namespace TMGmod.Core.WClasses
                 var p1 = Offset(laserOffset + new Vec2(0f, 0f));
                 var length = (p1 - _wallPoint).length;
                 var laserRange = 100f;
-                if (ammoType != null)
+                if (ammoType is { })
                     laserRange = ammoType.range + (_barrelOffsetTL - _laserOffsetTL).x + ammoType.bulletSpeed / 2;
                 var normalized = (_wallPoint - p1).normalized;
                 p1 -= normalized.Rotate(Maths.PI / 2, Vec2.Zero) * .25f;
@@ -753,7 +753,7 @@ namespace TMGmod.Core.WClasses
                     }
                 }
 
-                if (_sightHit != null && (double)length < laserRange)
+                if (_sightHit is { } && (double)length < laserRange)
                 {
                     _sightHit.alpha = num;
                     _sightHit.color = LaserColor * num;
